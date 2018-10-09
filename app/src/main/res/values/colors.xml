@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="searchColor">#F5F5F5</color>
+
+
+    <color name="baise">#ffffff</color>
+
+    <color name="startcolor">#f26c27</color>
+    <color name="endcolor">#ee2788</color>
+
+    <color name="chunhongse">#ef3673</color>
+
+    <color name="biaoti">#000000</color>
+
+    <color name="putongwenben">#868686</color>
+    
+    <color name="erjibiaoti">#3C3C3C</color>
+
+    <color name="fengexian">#e5e5e5</color>
+
+
+
+
+</resources>

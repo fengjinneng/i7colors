@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_marginStart="@dimen/x13"
+    android:layout_marginEnd="@dimen/x13"
+    android:layout_height="wrap_content"
+    >
+<!--    android:background="@drawable/toast_newwork_setting_bg_shape"-->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y32"
+        android:background="@drawable/toast_newwork_setting_bg_shape">
+<!--        android:layout_marginBottom="@dimen/y40"
+        android:layout_marginStart="@dimen/x13"
+        android:layout_marginEnd="@dimen/x13"-->
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/x13"
+            android:drawablePadding="@dimen/x9"
+            android:drawableStart="@drawable/wifierror"
+            android:text="检查网络"
+            android:textColor="#ffffff" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/icon_more_right" />
+
+    </RelativeLayout>
+</LinearLayout>

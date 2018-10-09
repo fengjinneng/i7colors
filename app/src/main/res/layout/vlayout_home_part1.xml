@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+
+        android:id="@+id/vlayout_home_part1_banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+
+    </com.bigkoo.convenientbanner.ConvenientBanner>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="70dp">
+
+        <LinearLayout
+            android:id="@+id/vlayout_home_part1_chanpin"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/vlayout_home_part1_icon1"
+                android:layout_width="match_parent"
+                android:src="@mipmap/canpindating"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="4dp"
+                android:id="@+id/vlayout_home_part1_title1"
+                android:text="产品大厅"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/vlayout_home_part1_qiugou"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/vlayout_home_part1_icon2"
+                android:layout_width="match_parent"
+                android:src="@mipmap/qiugoudating"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/vlayout_home_part1_title2"
+                android:text="求购大厅"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/vlayout_home_part1_kaifang"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/vlayout_home_part1_icon3"
+                android:layout_width="match_parent"
+                android:src="@mipmap/kaifangshangcheng"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:text="开放商城"
+                android:layout_marginTop="4dp"
+                android:id="@+id/vlayout_home_part1_title3"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/vlayout_home_part1_chanye"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/vlayout_home_part1_icon4"
+                android:layout_width="match_parent"
+                android:src="@mipmap/canyezixun"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/vlayout_home_part1_title4"
+                android:text="产业资讯"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+        <View
+            android:id="@+id/vlayout_home_part1_view1"
+            android:layout_marginLeft="20dp"
+            android:background="@color/colorAccent"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            />
+
+        <TextView
+            android:layout_alignLeft="@+id/vlayout_home_part1_view1"
+            android:text="促销活动"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:text="查看更多" />
+
+    </RelativeLayout>
+
+
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/vlayout_home_part1_adv"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+    </com.bigkoo.convenientbanner.ConvenientBanner>
+    <TextView
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="夏季大促销，更多活动等你来，我是活动描述"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:background="@android:color/darker_gray"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+</LinearLayout>

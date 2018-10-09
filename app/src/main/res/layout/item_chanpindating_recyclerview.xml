@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x240">
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/x240"
+        app:srcCompat="@mipmap/kaifangshangcheng" />
+
+    <TextView
+
+        android:id="@+id/item_chanpindating_company"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/x22"
+        android:layout_marginTop="@dimen/x24"
+        android:layout_toEndOf="@+id/imageView6"
+        android:text="山东索玛德染料有限公司"
+        android:textColor="@color/biaoti"
+        android:textSize="@dimen/x30"
+        android:textStyle="bold" />
+
+
+    <co.lujun.androidtagview.TagContainerLayout
+        android:id="@+id/item_chanpindating_tagcontainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_chanpindating_company"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/textView14"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/x16"
+        app:container_max_lines ="1"
+        app:container_background_color="@color/baise"
+        app:container_border_color="@color/baise"
+        app:container_enable_drag="false"
+        app:horizontal_interval="@dimen/x12"
+        app:tag_background_color="@color/baise"
+        app:tag_border_color="@color/erjibiaoti"
+        app:tag_corner_radius="5dp"
+        app:tag_text_size="@dimen/x20"
+        app:tag_theme="none"
+        app:tag_vertical_padding="@dimen/x5"
+        app:vertical_interval="@dimen/x10">
+
+    </co.lujun.androidtagview.TagContainerLayout>
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/item_chanpindating_company"
+        android:layout_below="@+id/item_chanpindating_company"
+        android:layout_marginTop="@dimen/x4"
+        android:textSize="@dimen/x24"
+        android:text="分散染料 分散大红Gs(R153#)200% " />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView6"
+        android:layout_alignStart="@+id/item_chanpindating_company"
+        android:layout_marginBottom="@dimen/x34"
+        android:text="查看详情 "
+        android:textSize="@dimen/x20" />
+
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x45"
+        android:layout_alignBottom="@+id/imageView6"
+        android:layout_alignParentEnd="true"
+        app:srcCompat="@mipmap/yijianhujiao"
+        android:layout_marginEnd="@dimen/x20"
+        android:layout_marginBottom="@dimen/x36"
+         />
+</RelativeLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbars="none">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x150"
+        android:orientation="horizontal">
+
+        <com.company.qcy.widght.GridViewForScrollView
+            android:id="@+id/vlayout_home_store_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:horizontalSpacing="@dimen/x4"
+            android:numColumns="auto_fit"
+            android:stretchMode="spacingWidthUniform" />
+    </LinearLayout>
+</HorizontalScrollView>
