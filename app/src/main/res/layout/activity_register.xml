@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/baise"
     android:layout_height="match_parent">
 
     <include
@@ -13,95 +14,157 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="70dp">
+        android:layout_marginTop="50dp">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             tools:context=".ui.activity.user.RegisterActivity">
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginEnd="32dp"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginEnd="@dimen/x75"
+                android:layout_marginStart="@dimen/x75"
+                android:layout_marginTop="@dimen/x80"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请输入手机号(用于登陆/找回密码)"
                 android:inputType="textPersonName"
-                android:paddingLeft="16dp"
+                android:paddingLeft="@dimen/x36"
+                android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
 
-                android:id="@+id/editText2"
+            <LinearLayout
+                android:id="@+id/activity_register_linnear"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="16dp"
-
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="@dimen/x28"
                 android:background="@drawable/background_dengluwenbenkuang"
-
-                android:hint="用户名(3-16位数字，字母，汉字)"
-                android:inputType="textPersonName"
-                android:paddingLeft="16dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/editText"
                 app:layout_constraintStart_toStartOf="@+id/editText"
-                app:layout_constraintTop_toBottomOf="@+id/editText" />
+                app:layout_constraintTop_toBottomOf="@+id/editText">
 
-            <EditText
-                android:id="@+id/editText3"
+                <EditText
+                    android:id="@+id/login_verifycode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="输入图片验证码"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:paddingLeft="@dimen/x36"
+                    android:textSize="@dimen/x30" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/x20"
+                    android:layout_marginLeft="@dimen/x38"
+                    android:layout_marginTop="@dimen/x20"
+                    android:background="@color/fengexian" />
+
+                <ImageView
+                    android:id="@+id/imageView19"
+                    android:layout_width="@dimen/x130"
+                    android:layout_height="@dimen/x60"
+                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginTop="@dimen/x22"
+                    app:srcCompat="@mipmap/yanzhengmatupian" />
+
+                <TextView
+                    android:id="@+id/textView65"
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x14"
+                    android:layout_marginRight="@dimen/x28"
+                    android:text="换一张"
+                    android:textColor="@color/chunhongse"
+                    android:textSize="@dimen/x28" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/activity_register_linnear2"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="@dimen/x28"
                 android:background="@drawable/background_dengluwenbenkuang"
-                android:hint="请输入验证码"
-                android:inputType="textPersonName"
-                android:paddingLeft="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/editText2"
-                app:layout_constraintStart_toStartOf="@+id/editText2"
-                app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_linnear"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear">
+
+
+                <EditText
+                    android:id="@+id/editText3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:hint="输入短信验证码"
+                    android:background="@null"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="@dimen/x36"
+                    android:textSize="@dimen/x30" />
+                
+                
+                <View
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/x100"
+                    android:background="@color/fengexian"
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/x60"/>
+
+                <TextView
+                    android:id="@+id/textView72"
+                    android:layout_marginLeft="@dimen/x54"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/x28"
+                    android:layout_marginRight="@dimen/x56"
+                    android:text="发送验证码" />
+
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/editText4"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/background_dengluwenbenkuang"
-                android:hint="请输入验证码"
-                android:inputType="textPersonName"
-                android:paddingLeft="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/editText3"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/editText3"
-                app:layout_constraintTop_toBottomOf="@+id/editText3" />
-
-            <EditText
-                android:id="@+id/editText5"
-                android:layout_width="0dp"
-                android:layout_height="56dp"
+                android:layout_height="@dimen/x100"
                 android:layout_marginTop="16dp"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请输入密码"
                 android:inputType="textPersonName"
-                android:paddingLeft="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/editText4"
-                app:layout_constraintStart_toStartOf="@+id/editText4"
-                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+                android:paddingLeft="@dimen/x36"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_linnear2"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear2" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/editText5"
                 android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请再次输入密码"
                 android:inputType="textPersonName"
-                android:paddingLeft="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/editText5"
-                app:layout_constraintStart_toStartOf="@+id/editText5"
-                app:layout_constraintTop_toBottomOf="@+id/editText5" />
+                android:paddingLeft="@dimen/x36"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="@+id/editText4"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/editText4"
+                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+
+
 
             <Button
                 android:id="@+id/button"
@@ -111,23 +174,45 @@
                 android:background="@drawable/button_jianbianbeijing"
                 android:text="注册"
                 android:textColor="@color/baise"
-                app:layout_constraintEnd_toEndOf="@+id/editText6"
-                app:layout_constraintStart_toStartOf="@+id/editText6"
-                app:layout_constraintTop_toBottomOf="@+id/editText6" />
+                app:layout_constraintEnd_toEndOf="@+id/editText5"
+                app:layout_constraintStart_toStartOf="@+id/editText5"
+                app:layout_constraintTop_toBottomOf="@+id/editText5" />
 
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="阅读并接受七彩云协议"
+                android:layout_marginTop="@dimen/x36"
+                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
+                app:layout_constraintTop_toBottomOf="@+id/button">
+
+                <CheckBox
+                    android:checked="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="阅读并接受"
+                    android:textSize="@dimen/x30" />
+
+                <TextView
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="《七彩云协议》"
+                    android:textColor="@color/chunhongse"
+                    android:textSize="@dimen/x30" />
+
+
+            </LinearLayout>
+
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

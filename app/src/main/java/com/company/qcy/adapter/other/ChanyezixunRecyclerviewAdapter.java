@@ -1,7 +1,6 @@
 package com.company.qcy.adapter.other;
 
 import android.support.annotation.Nullable;
-
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
@@ -17,6 +16,9 @@ public class ChanyezixunRecyclerviewAdapter
 
     @Override
     protected void convert(BaseViewHolder helper, ChanpindatingBean item) {
+
         helper.setText(R.id.item_chanyexixun_title,item.getName());
     }
 }
+
+

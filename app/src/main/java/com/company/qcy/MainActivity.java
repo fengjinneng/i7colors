@@ -4,6 +4,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
@@ -15,6 +16,10 @@ import com.company.qcy.fragment.home.ToutiaoFragment;
 import com.company.qcy.fragment.home.WodeFragment;
 import com.company.qcy.fragment.home.XiaoxiFragment;
 import com.company.qcy.ui.activity.user.LoginActivity;
+import com.vector.update_app.HttpManager;
+import com.vector.update_app.UpdateAppManager;
+
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        update();
+    }
+
+    private void update() {
+
     }
 
     private void initView() {

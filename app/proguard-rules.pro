@@ -19,3 +19,9 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+
+-keepattributes InnerClasses,Signature
+-keepattributes *Annotation*
+
+-keep class cn.qqtheme.framework.entity.** { *;}

@@ -1,0 +1,75 @@
+
+网络请求
+//                OkGo.<Bitmap>get(Constant.TESTSERVER)
+//                        .tag(this)
+//                        .params("deviceNo", DeviceUtils.getAndroidID())
+//                        .execute(new BitmapCallback() {
+//
+//                            @Override
+//                            public void onSuccess(Response<Bitmap> response) {
+//                                try {
+//
+//                                   mCountdownView.setImageBitmap(response.body());
+//
+//
+//                                } catch (Exception e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//
+//                            @Override
+//                            public void onError(Response<Bitmap> response) {
+//                                super.onError(response);
+//                            }
+//                        });
+
+
+
+ aes编码
+
+//                jK)Nig8N40YkntYG  签名
+//                LnhtI(bt490B74Je  密码秘钥
+                //jK)Nig8N40YkntYG    LnhtI(bt490B74Je
+                                              //                byte[] bytes = EncryptUtils.encryptAES2Base64("aaa".getBytes(), "jK)Nig8N40YkntYG".getBytes(), "AES/ECB/PKCS5Padding", null);
+                                              //                String s = EncodeUtils.urlEncode(new String(bytes));
+                                              //                LogUtils.v("EncodeUtils",s);
+
+
+单项选择
+
+//                List<String> list = new ArrayList<>();
+//                for (int i = 0; i < 10; i++) {
+//                    list.add("这是第"+i+"项");
+//                }
+//                SinglePicker<String> picker = new SinglePicker<String>(this,list);
+//                picker.setTitleText("请选择");
+//                picker.setCanLoop(false);
+//                picker.show();
+//                picker.setOnItemPickListener(new OnItemPickListener<String>() {
+//                    @Override
+//                    public void onItemPicked(int i, String s) {
+//                        ToastUtils.showShort(s);
+//                    }
+//                });
+
+地址选择
+
+//                AddressPickTask task = new AddressPickTask(this);
+//                task.setHideProvince(false);
+//                task.setHideCounty(true);
+//                task.setCallback(new AddressPickTask.Callback() {
+//                    @Override
+//                    public void onAddressInitFailed() {
+//                        ToastUtils.showShort("数据初始化失败");
+//                    }
+//
+//                    @Override
+//                    public void onAddressPicked(Province province, City city, County county) {
+//                        if (county == null) {
+//                            ToastUtils.showShort(province.getAreaName() + city.getAreaName());
+//                        } else {
+//                            ToastUtils.showShort(province.getAreaName() + city.getAreaName() + county.getAreaName());
+//                        }
+//                    }
+//                });
+//                task.execute();

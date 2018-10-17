@@ -3,7 +3,9 @@
     package="com.company.qcy">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -27,11 +29,20 @@
         <activity android:name=".ui.activity.ChanyezixunActivity" />
         <activity android:name=".ui.activity.qiugoudating.QiugoudatingActivity" />
         <activity android:name=".ui.activity.KaifangshangchengActivity" />
-        <activity android:name=".ui.activity.user.LoginActivity" />
+        <activity android:name=".ui.activity.user.LoginActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.activity.user.ForgetPasswordActivity" />
         <activity android:name=".ui.activity.user.ResetPasswordActivity" />
         <activity android:name=".ui.activity.user.RegisterActivity" />
-        <activity android:name=".ui.activity.qiugoudating.FabuqiugouActivity"></activity>
+        <activity
+            android:name=".ui.activity.qiugoudating.FabuqiugouActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.qiugoudating.QiugouxiangqingActivity" />
+        <activity android:name=".ui.activity.qiugoudating.CanyubaojiaActivity"
+            android:windowSoftInputMode="adjustResize">
+
+
+
+        </activity>
     </application>
 
 </manifest>

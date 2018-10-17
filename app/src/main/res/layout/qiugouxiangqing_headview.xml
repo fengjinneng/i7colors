@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/fengexian"
+        tools:context=".ui.activity.qiugoudating.QiugouxiangqingActivity">
+
+
+
+        <TextView
+            android:id="@+id/activity_qiugouxiangqing_daojishi"
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/x100"
+            android:background="@drawable/background_shuruwenbenkuang"
+            android:gravity="center"
+            android:text="19天18小时"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include7" />
+
+    <TextView
+        android:id="@+id/activity_qiugouxiangqing_shangpinming"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/baise"
+        android:gravity="center_vertical"
+        android:paddingLeft="16dp"
+        android:text="防紫外线整理剂"
+        android:textColor="@color/biaoti"
+        android:textSize="@dimen/x30"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_qiugouxiangqing_daojishi"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/activity_qiugouxiangqing_daojishi"
+        app:layout_constraintTop_toTopOf="@+id/activity_qiugouxiangqing_daojishi" />
+
+        <View
+            android:id="@+id/view5"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x20"
+            android:background="@color/fengexian"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_qiugouxiangqing_shangpinming" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="266dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/baise"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view6">
+
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x56"
+                android:layout_marginTop="8dp"
+                android:text="产品名称:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView41"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="产品分类:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView39"
+                app:layout_constraintTop_toBottomOf="@+id/textView39" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="包装形式:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView41"
+                app:layout_constraintTop_toBottomOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/textView43"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="采购数量:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView42"
+                app:layout_constraintTop_toBottomOf="@+id/textView42" />
+
+            <TextView
+                android:id="@+id/textView44"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="交货日期:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView43"
+                app:layout_constraintTop_toBottomOf="@+id/textView43" />
+
+            <TextView
+                android:id="@+id/textView45"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="付款方式:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView44"
+                app:layout_constraintTop_toBottomOf="@+id/textView44" />
+
+            <TextView
+                android:id="@+id/textView46"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="所在地区:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView45"
+                app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+            <TextView
+                android:id="@+id/textView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="账期:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView46"
+                app:layout_constraintTop_toBottomOf="@+id/textView46" />
+
+            <TextView
+                android:id="@+id/textView49"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="采购说明:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView48"
+                app:layout_constraintTop_toBottomOf="@+id/textView48" />
+
+            <TextView
+                android:id="@+id/textView50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x20"
+                android:text="供应商:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView49"
+                app:layout_constraintTop_toBottomOf="@+id/textView49" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_spm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x144"
+                android:text="防紫外线整理剂"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toEndOf="@+id/textView39"
+                app:layout_constraintTop_toTopOf="@+id/textView39" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_fenlei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="助剂 功能性"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_spm"
+                app:layout_constraintTop_toTopOf="@+id/textView41" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_baozhuang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50KG/桶"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_fenlei"
+                app:layout_constraintTop_toTopOf="@+id/textView42" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_shuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_baozhuang"
+                app:layout_constraintTop_toTopOf="@+id/textView43" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_jiaohuoshijian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018-08-04"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_shuliang"
+                app:layout_constraintTop_toTopOf="@+id/textView44" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_fukuanfangshi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="银行承兑"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_jiaohuoshijian"
+                app:layout_constraintTop_toTopOf="@+id/textView45" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_diqu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="上海市 上海市"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_fukuanfangshi"
+                app:layout_constraintTop_toTopOf="@+id/textView46" />
+
+            <TextView
+                android:id="@+id/activity_qiugouxiangqing_zhangqi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="款到发货"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_diqu"
+                app:layout_constraintTop_toTopOf="@+id/textView48" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+        <View
+            android:id="@+id/view6"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/chunhongse"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView59" />
+
+        <TextView
+            android:id="@+id/textView59"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x80"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/baise"
+            android:gravity="center"
+            android:text="求购信息"
+            android:textColor="@color/erjibiaoti"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+        <TextView
+            android:id="@+id/textView60"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x80"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/baise"
+            android:gravity="center"
+            android:text="收到的报价"
+            android:textColor="@color/erjibiaoti"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@color/chunhongse"
+            app:layout_constraintEnd_toEndOf="@+id/textView60"
+            app:layout_constraintStart_toStartOf="@+id/textView60"
+            app:layout_constraintTop_toBottomOf="@+id/textView60" />
+
+
+    </android.support.constraint.ConstraintLayout>

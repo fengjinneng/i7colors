@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise"
+    android:orientation="vertical">
+
+
+    <include
+        android:id="@+id/include9"
+        layout="@layout/toolbar"></include>
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView62"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/x14"
+                android:layout_marginStart="@dimen/x14"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/biankuang_canyubaojia_tishi"
+                android:padding="5dp"
+                android:text="【提醒】报价将会第一时间通过短信的方式告知求购方，您的报价 被接受后系统将生成后续的交易订单，帮助你完成该笔交易。"
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/activity_canyubaojia_chanpinming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x210"
+                android:layout_marginTop="@dimen/x20"
+                android:text="分散染料 七彩云 分散红FB 200%"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView62" />
+
+            <TextView
+                android:id="@+id/textView64"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x40"
+                android:layout_marginTop="@dimen/x44"
+                android:text="报价方:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_canyubaojia_chanpinming" />
+
+            <TextView
+                android:id="@+id/activity_canyubaojia_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="绍兴百丽恒印染有限公司"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_chanpinming"
+                app:layout_constraintTop_toTopOf="@+id/textView64" />
+
+            <TextView
+                android:id="@+id/textView66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:text="联系电话:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView64"
+                app:layout_constraintTop_toBottomOf="@+id/textView64" />
+
+            <TextView
+                android:id="@+id/textView67"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:text="价格:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView66"
+                app:layout_constraintTop_toBottomOf="@+id/textView66" />
+
+            <TextView
+                android:id="@+id/textView68"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:text="价格单位:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView67"
+                app:layout_constraintTop_toBottomOf="@+id/textView67" />
+
+            <TextView
+                android:id="@+id/textView69"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:text="是否包含运费:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView68"
+                app:layout_constraintTop_toBottomOf="@+id/textView68" />
+
+            <TextView
+                android:id="@+id/textView70"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:text="有效时间:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView69"
+                app:layout_constraintTop_toBottomOf="@+id/textView69" />
+
+            <EditText
+                android:id="@+id/activity_canyubaojia_phone"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView66"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_company"
+                app:layout_constraintTop_toTopOf="@+id/textView66" />
+
+            <EditText
+                android:id="@+id/activity_canyubaojia_price"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView67"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_phone"
+                app:layout_constraintTop_toTopOf="@+id/textView67" />
+
+            <TextView
+                android:id="@+id/textView71"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KG"
+                app:layout_constraintBottom_toBottomOf="@+id/textView68"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_price"
+                app:layout_constraintTop_toTopOf="@+id/textView68" />
+
+            <TextView
+                android:id="@+id/activity_canyubaojia_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击选取时间"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView70"
+                app:layout_constraintStart_toStartOf="@+id/textView71"
+                app:layout_constraintTop_toTopOf="@+id/textView70" />
+
+            <TextView
+                android:id="@+id/textView73"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/x90"
+                android:text="报价说明"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_canyubaojia_time" />
+
+            <EditText
+                android:id="@+id/editText9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="top"
+                android:hint="填写50字以内的报价说明..."
+                android:maxLength="50"
+                android:minLines="5"
+                android:padding="5dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView73" />
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView69"
+                app:layout_constraintStart_toStartOf="@+id/textView71"
+                app:layout_constraintTop_toTopOf="@+id/textView69">
+
+                <RadioButton
+                    android:textSize="@dimen/x24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="是" />
+
+                <RadioButton
+                    android:textSize="@dimen/x24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="否" />
+            </RadioGroup>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/baise"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x98"
+        android:background="@drawable/button_jianbianbeijing"
+        android:text="提交报价"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x30" />
+
+</LinearLayout>

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
-    android:focusableInTouchMode="true"
     android:background="@color/baise"
-    tools:context=".ui.activity.user.LoginActivity">
+    android:orientation="vertical">
 
     <include
         android:id="@+id/include3"
@@ -16,94 +18,263 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include3"
-        app:srcCompat="@mipmap/morentouxiang" />
 
-    <EditText
-        android:id="@+id/login_username"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/background_dengluwenbenkuang_quexia"
-        android:drawableLeft="@mipmap/denglutouxiang"
-        android:drawablePadding="5dp"
-        android:hint="请输入用户名"
-        android:inputType="textPersonName"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
-        android:padding="10dp"
-        android:drawablePadding="5dp"
-        android:background="@drawable/background_dengluwenbenkuang"
-        android:id="@+id/login_password"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:drawableLeft="@mipmap/mimasuo"
-        android:ems="12"
-        android:inputType="textPassword"
-        android:hint="请输入密码"
-        app:layout_constraintEnd_toEndOf="@+id/login_username"
-        app:layout_constraintStart_toStartOf="@+id/login_username"
-        app:layout_constraintTop_toBottomOf="@+id/login_username" />
 
-    <EditText
-        android:padding="10dp"
-        android:drawablePadding="5dp"
-        android:background="@drawable/background_dengluwenbenkuang_queshang"
-        android:id="@+id/login_verifycode"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:drawableLeft="@mipmap/yanzhengmatouxiang"
-        android:ems="12"
-        android:inputType="number"
-        android:hint="请输入验证码"
-        app:layout_constraintEnd_toEndOf="@+id/login_password"
-        app:layout_constraintStart_toStartOf="@+id/login_password"
-        app:layout_constraintTop_toBottomOf="@+id/login_password" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:context=".ui.activity.user.LoginActivity">
 
-    <Button
-        android:id="@+id/login_denglu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="登录"
-        android:textColor="@color/baise"
-        android:textSize="18sp"
-        android:background="@drawable/button_jianbianbeijing"
-        app:layout_constraintEnd_toEndOf="@+id/login_verifycode"
-        app:layout_constraintStart_toStartOf="@+id/login_verifycode"
-        app:layout_constraintTop_toBottomOf="@+id/login_verifycode" />
 
-    <TextView
-        android:id="@+id/login_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="立即注册"
-        app:layout_constraintStart_toStartOf="@+id/login_denglu"
-        app:layout_constraintTop_toBottomOf="@+id/login_denglu" />
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="@dimen/x178"
+                android:layout_height="@dimen/x178"
+                android:layout_marginTop="@dimen/x36"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/morentouxiang" />
 
-    <TextView
-        android:id="@+id/login_forgetpassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="忘记密码？"
-        app:layout_constraintEnd_toEndOf="@+id/login_denglu"
-        app:layout_constraintTop_toTopOf="@+id/login_register" />
 
-</android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/activity_login_linnear2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x106"
+                android:layout_marginEnd="@dimen/x74"
+                android:layout_marginStart="@dimen/x74"
+                android:layout_marginTop="@dimen/x70"
+                android:background="@drawable/background_dengluwenbenkuang_quexia"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.503"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@+id/imageView8">
+
+                <EditText
+                    android:id="@+id/login_username"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/denglutouxiang"
+                    android:drawablePadding="@dimen/x30"
+                    android:hint="请输入用户名"
+                    android:inputType="textPersonName"
+                    android:paddingLeft="@dimen/x30"
+                    android:textSize="@dimen/x30" />
+
+                <ImageView
+                    android:visibility="gone"
+                    android:id="@+id/activity_login_delete_username"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/banner_choiced" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                app:layout_constraintEnd_toEndOf="@+id/activity_login_linnear2"
+                app:layout_constraintStart_toStartOf="@+id/activity_login_linnear2"
+                app:layout_constraintTop_toBottomOf="@+id/activity_login_linnear2"
+                android:id="@+id/activity_login_linnear3"
+                android:background="@drawable/background_dengluwenbenkuang"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x106">
+                <EditText
+                    android:id="@+id/login_password"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/mimasuo"
+                    android:drawablePadding="@dimen/x30"
+                    android:hint="请输入密码"
+                    android:inputType="textPassword"
+                    android:maxLength="16"
+                    android:paddingLeft="@dimen/x36"
+                    android:textSize="@dimen/x30"
+                    />
+
+                <ImageView
+                    android:id="@+id/activity_login_delete_password"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/x50"
+                    android:visibility="gone"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/banner_choiced" />
+
+
+                <ImageView
+                    android:id="@+id/activity_login_show_password"
+                    android:layout_marginRight="8dp"
+                    android:layout_gravity="center"
+                    android:layout_width="@dimen/x50"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/zhengyan" />
+
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:id="@+id/activity_login_linnear"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x106"
+                android:background="@drawable/background_dengluwenbenkuang_queshang"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@+id/activity_login_linnear3"
+                app:layout_constraintStart_toStartOf="@+id/activity_login_linnear3"
+                app:layout_constraintTop_toBottomOf="@+id/activity_login_linnear3">
+
+                <EditText
+                    android:id="@+id/login_verifycode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawableLeft="@mipmap/yanzhengmatouxiang"
+                    android:drawablePadding="@dimen/x30"
+                    android:hint="请输入验证码"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingLeft="@dimen/x36"
+                    android:textSize="@dimen/x30" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/x20"
+                    android:layout_marginLeft="@dimen/x38"
+                    android:layout_marginTop="@dimen/x20"
+                    android:background="@color/fengexian" />
+
+                <ImageView
+                    android:id="@+id/login_verifycode_img"
+                    android:layout_width="@dimen/x130"
+                    android:layout_height="@dimen/x60"
+                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginTop="@dimen/x22"
+                    android:visibility="gone"
+                    app:srcCompat="@mipmap/yanzhengmatupian" />
+
+                <TextView
+                    android:id="@+id/login_change_img"
+                    android:layout_width="@dimen/x90"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x14"
+                    android:layout_marginRight="@dimen/x28"
+                    android:text="换一张"
+                    android:textColor="@color/chunhongse"
+                    android:textSize="@dimen/x28"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/login_huoquyanzhengma"
+                    android:layout_width="@dimen/x200"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x28"
+                    android:gravity="center"
+                    android:text="获取验证码"
+                    android:textColor="@color/chunhongse"
+                    android:textSize="@dimen/x28" />
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/login_denglu"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x98"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/button_jianbianbeijing"
+                android:text="登录"
+                android:textColor="@color/baise"
+                android:textSize="@dimen/x36"
+                app:layout_constraintEnd_toEndOf="@+id/activity_login_linnear"
+                app:layout_constraintStart_toStartOf="@+id/activity_login_linnear"
+                app:layout_constraintTop_toBottomOf="@+id/activity_login_linnear" />
+
+            <TextView
+                android:id="@+id/login_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="立即注册"
+                app:layout_constraintStart_toStartOf="@+id/login_denglu"
+                app:layout_constraintTop_toBottomOf="@+id/login_denglu" />
+
+            <TextView
+                android:id="@+id/login_forgetpassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="忘记密码？"
+                app:layout_constraintEnd_toEndOf="@+id/login_denglu"
+                app:layout_constraintTop_toTopOf="@+id/login_register" />
+
+            <TextView
+                android:id="@+id/textView63"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="快速登录"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/login_register" />
+
+            <View
+
+                android:layout_width="100dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:background="@color/fengexian"
+                app:layout_constraintBottom_toBottomOf="@+id/textView63"
+                app:layout_constraintEnd_toEndOf="@+id/login_forgetpassword"
+                app:layout_constraintStart_toEndOf="@+id/textView63"
+                app:layout_constraintTop_toTopOf="@+id/textView63" />
+
+            <View
+
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/fengexian"
+                app:layout_constraintBottom_toBottomOf="@+id/textView63"
+                app:layout_constraintEnd_toStartOf="@+id/textView63"
+                app:layout_constraintStart_toStartOf="@+id/login_register"
+                app:layout_constraintTop_toTopOf="@+id/textView63" />
+
+            <ImageView
+                android:id="@+id/login_weixin"
+                android:layout_width="@dimen/x88"
+                android:layout_height="@dimen/x88"
+                android:layout_marginTop="@dimen/x36"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView63"
+                app:srcCompat="@mipmap/weixin_hui" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+</LinearLayout>

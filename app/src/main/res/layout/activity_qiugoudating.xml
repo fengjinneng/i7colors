@@ -15,7 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
+        android:layout_marginTop="12px"
         android:id="@+id/qiugoudating_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,17 +37,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/qiugoudating_recyclerview"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/activity_qiugoudating_swipe"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/qiugoudating_search" />
+        app:layout_constraintTop_toBottomOf="@+id/qiugoudating_search">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/qiugoudating_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+    </android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <Button
+        android:id="@+id/qiugoudating_fabuqiugou"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/button_jianbianbeijing2"
+        android:text="发布\n求购"
+        android:textColor="@color/baise"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_qiugoudating_swipe"
+        app:layout_constraintEnd_toEndOf="@+id/activity_qiugoudating_swipe" />
 
 </android.support.constraint.ConstraintLayout>

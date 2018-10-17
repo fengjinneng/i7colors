@@ -74,6 +74,7 @@ public class ChanyezixunFragment extends Fragment {
         //创建适配器
         adapter = new ChanyezixunRecyclerviewAdapter(R.layout.item_chanyezixun_fragment, datas);
 
+
         //给RecyclerView设置适配器
         recyclerView.setAdapter(adapter);
 
