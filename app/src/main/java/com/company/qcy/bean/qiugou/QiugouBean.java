@@ -1,8 +1,8 @@
-package com.company.qcy.bean;
+package com.company.qcy.bean.qiugou;
 
 import java.math.BigDecimal;
 
-public class QiugoudatingBean {
+public class QiugouBean {
 
     private Long id;
     private String companyName;
@@ -35,6 +35,15 @@ public class QiugoudatingBean {
     private String surplusHour;
     private String surplusMin;
     private String surplusSec;
+    private String isCharger;
+
+    public String getIsCharger() {
+        return isCharger;
+    }
+
+    public void setIsCharger(String isCharger) {
+        this.isCharger = isCharger;
+    }
 
     public String getSurplusMin() {
         return surplusMin;

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.qiugoudating.WodeqiugouActivity">
+
+
+    <include
+        android:id="@+id/include11"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.flyco.tablayout.CommonTabLayout
+        android:id="@+id/activity_wode_qiugou_slideingtablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x70"
+        app:tl_tab_space_equal="true"
+        app:tl_textSelectColor="@color/chunhongse"
+        app:tl_underline_color="@color/chunhongse"
+        app:tl_underline_gravity="BOTTOM"
+        app:tl_iconVisible = "false"
+        app:tl_textUnselectColor="#66000000"
+        app:tl_underline_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include11">
+
+    </com.flyco.tablayout.CommonTabLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_wodeqiugouxiangqing_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_wode_qiugou_slideingtablayout">
+
+    </android.support.v7.widget.RecyclerView>
+
+</android.support.constraint.ConstraintLayout>

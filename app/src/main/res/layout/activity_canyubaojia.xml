@@ -50,87 +50,111 @@
                 android:text="分散染料 七彩云 分散红FB 200%"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView62" />
 
             <TextView
-                android:id="@+id/textView64"
+                android:id="@+id/activity_canyubaojia_company_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x40"
-                android:layout_marginTop="@dimen/x44"
+                android:layout_marginStart="@dimen/x40"
+                android:layout_marginTop="@dimen/x40"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="报价方:"
-                android:textSize="@dimen/x24"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x28"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_canyubaojia_chanpinming" />
 
-            <TextView
+            <EditText
                 android:id="@+id/activity_canyubaojia_company"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="绍兴百丽恒印染有限公司"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x64"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
                 android:textSize="@dimen/x24"
+                android:maxLength="30"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_canyubaojia_company_text"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_chanpinming"
-                app:layout_constraintTop_toTopOf="@+id/textView64" />
+                app:layout_constraintTop_toTopOf="@+id/activity_canyubaojia_company_text" />
 
             <TextView
+                android:drawablePadding="@dimen/x8"
+                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView66"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x40"
                 android:text="联系电话:"
-                android:textSize="@dimen/x24"
-                app:layout_constraintStart_toStartOf="@+id/textView64"
-                app:layout_constraintTop_toBottomOf="@+id/textView64" />
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_company_text"
+                app:layout_constraintTop_toBottomOf="@+id/activity_canyubaojia_company_text" />
 
             <TextView
+                android:drawablePadding="@dimen/x8"
+                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView67"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x40"
                 android:text="价格:"
-                android:textSize="@dimen/x24"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x28"
                 app:layout_constraintStart_toStartOf="@+id/textView66"
                 app:layout_constraintTop_toBottomOf="@+id/textView66" />
 
             <TextView
+                android:drawablePadding="@dimen/x8"
+                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView68"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x40"
                 android:text="价格单位:"
-                android:textSize="@dimen/x24"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x28"
                 app:layout_constraintStart_toStartOf="@+id/textView67"
                 app:layout_constraintTop_toBottomOf="@+id/textView67" />
 
             <TextView
+                android:drawablePadding="@dimen/x8"
+                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView69"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x40"
                 android:text="是否包含运费:"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/erjibiaoti"
                 app:layout_constraintStart_toStartOf="@+id/textView68"
                 app:layout_constraintTop_toBottomOf="@+id/textView68" />
 
             <TextView
+                android:drawablePadding="@dimen/x8"
+                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView70"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x40"
                 android:text="有效时间:"
-                android:textSize="@dimen/x24"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x28"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
                 app:layout_constraintTop_toBottomOf="@+id/textView69" />
 
             <EditText
                 android:id="@+id/activity_canyubaojia_phone"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/x40"
+                android:layout_height="@dimen/x64"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:inputType="number"
                 android:paddingLeft="5dp"
+                android:maxLength="11"
                 android:textSize="@dimen/x24"
                 app:layout_constraintBottom_toBottomOf="@+id/textView66"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,11 +164,12 @@
             <EditText
                 android:id="@+id/activity_canyubaojia_price"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/x40"
+                android:layout_height="@dimen/x64"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:inputType="number"
                 android:paddingLeft="5dp"
+                android:maxLength="8"
                 android:textSize="@dimen/x24"
                 app:layout_constraintBottom_toBottomOf="@+id/textView67"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -162,10 +187,16 @@
 
             <TextView
                 android:id="@+id/activity_canyubaojia_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="点击选取时间"
+                android:layout_width="@dimen/x230"
+                android:layout_height="@dimen/x64"
+                android:text="请选择"
+                android:background="@drawable/background_dengluwenbenkuang"
+                android:drawableRight="@mipmap/xialajiantou"
                 android:textSize="@dimen/x24"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:drawablePadding="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView70"
                 app:layout_constraintStart_toStartOf="@+id/textView71"
                 app:layout_constraintTop_toTopOf="@+id/textView70" />
@@ -185,7 +216,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/activity_canyubaojia_time" />
 
             <EditText
-                android:id="@+id/editText9"
+                android:id="@+id/activity_canyubaojia_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -193,8 +224,8 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:gravity="top"
-                android:hint="填写50字以内的报价说明..."
-                android:maxLength="50"
+                android:hint="填写200字以内的报价说明..."
+                android:maxLength="200"
                 android:minLines="5"
                 android:padding="5dp"
                 android:textSize="@dimen/x24"
@@ -203,25 +234,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView73" />
 
             <RadioGroup
+                android:id="@+id/activity_canyubaojia_radio_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@+id/textView69"
                 app:layout_constraintStart_toStartOf="@+id/textView71"
                 app:layout_constraintTop_toTopOf="@+id/textView69">
 
                 <RadioButton
-                    android:textSize="@dimen/x24"
+                    android:id="@+id/activity_canyubaojia_radio_yes"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="是" />
+                    android:layout_height="wrap_content"
+                    android:text="是"
+                    android:textSize="@dimen/x24" />
 
                 <RadioButton
-                    android:textSize="@dimen/x24"
+                    android:id="@+id/activity_canyubaojia_radio_no"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="否" />
+                    android:text="否"
+                    android:textSize="@dimen/x24" />
             </RadioGroup>
 
 
@@ -237,7 +270,7 @@
         android:layout_weight="1"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/activity_canyubaojia_fabubaojia"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x98"
         android:background="@drawable/button_jianbianbeijing"

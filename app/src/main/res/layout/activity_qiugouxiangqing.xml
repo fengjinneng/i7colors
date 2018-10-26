@@ -3,8 +3,10 @@
 
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <include
         android:id="@+id/include7"
         layout="@layout/toolbar"
@@ -17,11 +19,52 @@
         android:id="@+id/activity_qiugouxiangqing_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/activity_qiugouxiangqing_relative"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include7">
 
     </android.support.v7.widget.RecyclerView>
+
+
+    <RelativeLayout
+        android:id="@+id/activity_qiugouxiangqing_relative"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+        <Button
+            android:id="@+id/activity_qiugouxiangqing_canyubaojia"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x98"
+            android:background="@drawable/button_jianbianbeijing"
+            android:text="参与报价"
+            android:visibility="gone"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/activity_qiugouxiangqing_guanbiqiugo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x98"
+            android:background="@drawable/button_jianbianbeijing"
+            android:text="关闭求购"
+            android:visibility="gone"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </RelativeLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

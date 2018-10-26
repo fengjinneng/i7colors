@@ -6,11 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -18,23 +16,21 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.R;
-import com.company.qcy.Utils.CustomLoadMoreView;
-import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
-import com.company.qcy.adapter.other.QiugoudatingRecyclerviewAdapter;
-import com.company.qcy.bean.ChanpindatingBean;
-import com.company.qcy.bean.QiugoudatingBean;
+import com.company.qcy.adapter.qiugou.QiugoudatingRecyclerviewAdapter;
+import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.bean.qiugou.QiugouBean;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -42,7 +38,7 @@ import com.lzy.okgo.model.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QiugoudatingActivity extends AppCompatActivity implements View.OnClickListener {
+public class QiugoudatingActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 搜索您想要的商品
@@ -63,16 +59,16 @@ public class QiugoudatingActivity extends AppCompatActivity implements View.OnCl
     }
 
 
-    private List<QiugoudatingBean> datas;
-    private SwipeRefreshLayout refreshLayout;
 
+    private List<QiugouBean> datas;
+    private SwipeRefreshLayout refreshLayout;
+    private SwipeRefreshLayout.OnRefreshListener refreshListener;
     private void initView() {
         mQiugoudatingSearch = (TextView) findViewById(R.id.qiugoudating_search);
         mQiugoudatingRecyclerview = (RecyclerView) findViewById(R.id.qiugoudating_recyclerview);
 
         datas = new ArrayList<>();
         refreshLayout = findViewById(R.id.activity_qiugoudating_swipe);
-
         //创建布局管理
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -80,7 +76,7 @@ public class QiugoudatingActivity extends AppCompatActivity implements View.OnCl
 
         //创建适配器
         adapter = new QiugoudatingRecyclerviewAdapter(R.layout.item_qiugoudating_recyclerview, datas);
-
+        adapter.setEnableLoadMore(false);
         //给RecyclerView设置适配器
         mQiugoudatingRecyclerview.setAdapter(adapter);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -101,24 +97,44 @@ public class QiugoudatingActivity extends AppCompatActivity implements View.OnCl
 //        adapter.setPreLoadNumber(3);
 //        adapter.setLoadMoreView(new CustomLoadMoreView());
 //        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout, null));
+
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
                 addData();
 
-
             }
         }, mQiugoudatingRecyclerview);
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                Intent intent = new Intent(QiugoudatingActivity.this, QiugouxiangqingActivity.class);
+                QiugouBean item = (QiugouBean) adapter.getItem(position);
+                intent.putExtra("enquiryId", item.getId());
+                intent.putExtra("isCharger",item.getIsCharger());
+                intent.putExtra("status",item.getStatus());
+                ActivityUtils.startActivity(intent);
+            }
+        });
+
+         refreshListener  = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                //下拉业务
                 isReflash = true;
                 page = 0;
                 addData();
             }
+        };
+        refreshLayout.setOnRefreshListener(refreshListener);
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+            }
         });
-
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -136,19 +152,40 @@ public class QiugoudatingActivity extends AppCompatActivity implements View.OnCl
                             // for ActivityCompat#requestPermissions for more details.
                             return;
                         }
-                        PhoneUtils.call("");
+                        PhoneUtils.call(getResources().getString(R.string.PHONE));
 
                         break;
                 }
             }
         });
+    }
 
-        addData();
 
+    @Override
+    public void onReciveMessage(MessageBean msg) {
+        super.onReciveMessage(msg);
+        switch (msg.getCode()){
+            case MessageBean.Code.BAOJIACHENGGONG:
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+            case MessageBean.Code.GUANBIQIUGOU:
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+            case MessageBean.Code.FABUQIUGOUCHENGGONG:
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+            case MessageBean.Code.CAINABAOJIACHENGGONG:
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+        }
     }
 
     private int page = 0;
-    private boolean isReflash ;
+    private boolean isReflash;
 
     private void addData() {
         page++;
@@ -157,8 +194,8 @@ public class QiugoudatingActivity extends AppCompatActivity implements View.OnCl
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", page)
-                .params("pageSize", 10)
-
+                .params("pageSize", 20)
+                .params("token",SPUtils.getInstance().getString("token"))
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -167,35 +204,34 @@ public class QiugoudatingActivity extends AppCompatActivity implements View.OnCl
                             if (response.code() == 200) {
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                JSONArray data = jsonObject.getJSONArray("data");
-                                List<QiugoudatingBean> qiugoudatingBeans = JSONObject.parseArray(data.toJSONString(), QiugoudatingBean.class);
+
                                 if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
-                                    if(isReflash){
+                                    JSONArray data = jsonObject.getJSONArray("data");
+                                    LogUtils.v("QIUGOULIEBIAO", data);
+                                    List<QiugouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
+                                    if (isReflash) {
                                         datas.clear();
-                                        adapter.addData(qiugoudatingBeans);
-                                        isReflash =false;
+                                        adapter.addData(qiugouBeans);
+                                        isReflash = false;
                                         refreshLayout.setRefreshing(false);
+                                        adapter.loadMoreComplete();
+
                                         return;
                                     }
-
-
-                                    if(ObjectUtils.isEmpty(qiugoudatingBeans)){
+                                    if (ObjectUtils.isEmpty(qiugouBeans)) {
                                         adapter.loadMoreEnd();
                                         return;
                                     }
-                                    adapter.addData(qiugoudatingBeans);
+                                    adapter.addData(qiugouBeans);
                                     adapter.loadMoreComplete();
+                                    adapter.disableLoadMoreIfNotFullPage();
                                     return;
 
-                                } else if (StringUtils.equals(jsonObject.getString("code"), "INVALID_SIGN")) {
-                                    SignAndTokenUtil.getSign(QiugoudatingActivity.this);
-                                    return;
-                                } else if (StringUtils.equals(jsonObject.getString("code"), "token失效")) {
-                                    return;
-                                } else ToastUtils.showShort(jsonObject.getString("msg"));
+                                } else
+                                    SignAndTokenUtil.checkSignAndToken(QiugoudatingActivity.this, jsonObject);
 
                             } else {
-
+                                refreshLayout.setRefreshing(false);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -217,7 +253,11 @@ public class QiugoudatingActivity extends AppCompatActivity implements View.OnCl
             default:
                 break;
             case R.id.qiugoudating_fabuqiugou:
-                ActivityUtils.startActivity(new Intent(this,FabuqiugouActivity.class));
+                if (StringUtils.isEmpty(SPUtils.getInstance().getString("isLogin"))) {
+                    ActivityUtils.startActivity(LoginActivity.class);
+
+                } else ActivityUtils.startActivity(FabuqiugouActivity.class);
+
                 break;
             case R.id.qiugoudating_search:
                 break;

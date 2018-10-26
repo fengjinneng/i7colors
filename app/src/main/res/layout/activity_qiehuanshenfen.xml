@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/translucent_background"
+    tools:context=".ui.activity.user.QiehuanshenfenActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_qiehuanshenfen_layout1"
+        android:layout_width="@dimen/x500"
+        android:layout_height="@dimen/x280"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/shape_change_shenfen_bg"
+        android:layout_marginTop="@dimen/x350"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/activity_qiehuanshenfen_img_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x128"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.505"
+            android:src="@mipmap/buy"
+             />
+
+        <TextView
+            android:id="@+id/activity_qiehuanshenfen_text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x20"
+            android:text="买家中心"
+            android:textSize="@dimen/x36"
+            android:textColor="@color/biaoti"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_qiehuanshenfen_img_1"
+            app:layout_constraintStart_toEndOf="@+id/activity_qiehuanshenfen_img_1"
+            app:layout_constraintTop_toTopOf="@+id/activity_qiehuanshenfen_img_1" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:id="@+id/activity_qiehuanshenfen_layout2"
+        android:layout_height="@dimen/x280"
+        android:background="@drawable/shape_change_shenfen_bg_uncheck"
+        android:layout_marginTop="@dimen/x50"
+        app:layout_constraintEnd_toEndOf="@+id/activity_qiehuanshenfen_layout1"
+        app:layout_constraintStart_toStartOf="@+id/activity_qiehuanshenfen_layout1"
+        app:layout_constraintTop_toBottomOf="@+id/activity_qiehuanshenfen_layout1">
+
+        <ImageView
+            android:id="@+id/activity_qiehuanshenfen_img_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x128"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.505"
+
+            android:src="@mipmap/sell" />
+
+        <TextView
+            android:id="@+id/activity_qiehuanshenfen_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x20"
+            android:text="卖家中心"
+            android:textColor="@color/biaoti"
+            android:textSize="@dimen/x36"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_qiehuanshenfen_img_2"
+            app:layout_constraintStart_toEndOf="@+id/activity_qiehuanshenfen_img_2"
+            app:layout_constraintTop_toTopOf="@+id/activity_qiehuanshenfen_img_2"
+            app:layout_constraintVertical_bias="0.51" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

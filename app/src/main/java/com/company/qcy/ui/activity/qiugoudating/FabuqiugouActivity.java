@@ -3,18 +3,41 @@ package com.company.qcy.ui.activity.qiugoudating;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.AddressPickTask;
 import com.company.qcy.Utils.CalendarUtil;
+import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.bean.qiugou.QiugoufenleiBean;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.qqtheme.framework.entity.City;
 import cn.qqtheme.framework.entity.County;
@@ -78,6 +101,28 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
      * 发布求购
      */
     private Button mActivityFabuqiugouFabuqiugou;
+    /**
+     * 其它时间
+     */
+    private CheckBox mActivityFabuqiugouQitashijian;
+    /**
+     * 选择其它时间手动输入账期
+     */
+    private EditText mActivityFabuqiugouShoudongzhangqi;
+    /**
+     * ,总数量为
+     */
+    private TextView mActivityFabuqiugouZongliangwei;
+    /**
+     * 10000
+     */
+    private TextView mActivityFabuqiugouZongliang;
+    /**
+     * KG
+     */
+    private TextView mActivityFabuqiugouZongliangkg;
+    /**  */
+    private TextView mActivityFabuqiugouDanweiText;
 
     /**
      * 发布求购
@@ -106,6 +151,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         mActivityFabuqiugouJiaohuoriqi = (TextView) findViewById(R.id.activity_fabuqiugou_jiaohuoriqi);
         mActivityFabuqiugouXiangxishuoming = (EditText) findViewById(R.id.activity_fabuqiugou_xiangxishuoming);
         mActivityFabuqiugouFabuqiugou = (Button) findViewById(R.id.activity_fabuqiugou_fabuqiugou);
+        mActivityFabuqiugouQitashijian = findViewById(R.id.activity_fabuqiugou_qitashijian);
 
         mActivityFabuqiugouFabuqiugou.setOnClickListener(this);
         mActivityFabuqiugouJiaohuoriqi.setOnClickListener(this);
@@ -116,7 +162,78 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         mActivityFabuqiugouAddress.setOnClickListener(this);
         mActivityFabuqiugouDanwei.setOnClickListener(this);
         mActivityFabuqiugouJieshuriqi.setOnClickListener(this);
+        mActivityFabuqiugouQitashijian.setOnClickListener(this);
+        mActivityFabuqiugouQitashijian = (CheckBox) findViewById(R.id.activity_fabuqiugou_qitashijian);
+        mActivityFabuqiugouShoudongzhangqi = (EditText) findViewById(R.id.activity_fabuqiugou_shoudongzhangqi);
+        mActivityFabuqiugouZongliangwei = (TextView) findViewById(R.id.activity_fabuqiugou_zongliangwei);
+        mActivityFabuqiugouZongliang = (TextView) findViewById(R.id.activity_fabuqiugou_zongliang);
+        mActivityFabuqiugouZongliangkg = (TextView) findViewById(R.id.activity_fabuqiugou_zongliangkg);
+        mActivityFabuqiugouDanweiText = (TextView) findViewById(R.id.activity_fabuqiugou_danwei_text);
+        mActivityFabuqiugouShoudongzhangqi.setEnabled(false);
+
+        mActivityFabuqiugouWeight.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                jisuanzongliang();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mActivityFabuqiugouQiugoushuliang.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                jisuanzongliang();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        if (StringUtils.isEmpty(SPUtils.getInstance().getString("companyName"))) {
+
+        } else {
+            mActivityFabuqiugouCompanyName.setText(SPUtils.getInstance().getString("companyName"));
+            mActivityFabuqiugouCompanyName.setEnabled(false);
+        }
     }
+
+
+    private void jisuanzongliang() {
+        if (StringUtils.isTrimEmpty(mActivityFabuqiugouWeight.getText().toString())
+                || StringUtils.isTrimEmpty(mActivityFabuqiugouQiugoushuliang.getText().toString())) {
+            mActivityFabuqiugouZongliangwei.setText("");
+            mActivityFabuqiugouZongliang.setText("");
+            mActivityFabuqiugouZongliangkg.setText("");
+        } else {
+            mActivityFabuqiugouZongliangwei.setText(" 总数量为");
+            mActivityFabuqiugouZongliang.setText(String.valueOf(Integer.parseInt(mActivityFabuqiugouWeight.getText().toString())
+                    * Integer.parseInt(mActivityFabuqiugouQiugoushuliang.getText().toString())));
+            mActivityFabuqiugouZongliangkg.setText("KG");
+        }
+    }
+
+
+    //账期是否选择其他时间
+    private boolean checkedQitashijan;
+
+    //是否是选择单位
+    private boolean checkedDanwei;
 
     @Override
     public void onClick(View v) {
@@ -125,18 +242,27 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
                 break;
             //发布求购
             case R.id.activity_fabuqiugou_fabuqiugou:
-
-
+                if (checkIsNull()) {
+                    fabuqiugou();
+                }
                 break;
             //选择交货日期
             case R.id.activity_fabuqiugou_jiaohuoriqi:
-                onYearMonthDayPicker();
+                if (ischoiceEndtime) {
+                    onYearMonthDayPicker(mActivityFabuqiugouJiaohuoriqi, 2);
+                } else ToastUtils.showShort("请先选择结束时间");
                 break;
             //选择分类
             case R.id.activity_fabuqiugou_fenlei:
+                choiceFenlei(mActivityFabuqiugouFenlei, 1);
                 break;
             //选择耳二级分类
             case R.id.activity_fabuqiugou_erjifenlei:
+                if (fenleiID == 0) {
+                    ToastUtils.showShort("请先选择一级分类");
+                    return;
+                }
+                choiceFenlei(mActivityFabuqiugouErjifenlei, 2);
                 break;
             //选择付款方式
             case R.id.activity_fabuqiugou_fukuanfangshi:
@@ -144,7 +270,8 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
                 List<String> fkfs = new ArrayList<>();
                 fkfs.add("现汇");
                 fkfs.add("银行承兑");
-                String fukuanfangsh = choiceString(fkfs);
+                choiceString(fkfs, mActivityFabuqiugouFukuanfangshi);
+
 
                 break;
             //账期
@@ -154,32 +281,223 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
                 zq.add("货到发款");
                 zq.add("货到付款");
                 zq.add("货到30天付款");
-                zq.add("货到45天付款");zq.add("货到60天付款");
+                zq.add("货到45天付款");
+                zq.add("货到60天付款");
 
-                String zhangqi = choiceString(zq);
+                choiceString(zq, mActivityFabuqiugouZhangqi);
+
+
                 break;
             //选择地址
             case R.id.activity_fabuqiugou_address:
-                choiceAddress();
+                choiceAddress(mActivityFabuqiugouAddress);
                 break;
             //选择单位
             case R.id.activity_fabuqiugou_danwei:
+                checkedDanwei = true;
                 List<String> dw = new ArrayList<>();
                 dw.add("箱");
                 dw.add("桶");
                 dw.add("袋");
-                String danwei = choiceString(dw);
+                choiceString(dw, mActivityFabuqiugouDanwei);
                 break;
             //结束日期
             case R.id.activity_fabuqiugou_jieshuriqi:
-                onYearMonthDayPicker();
+                onYearMonthDayPicker(mActivityFabuqiugouJieshuriqi, 1);
+                break;
+
+            //点击checkbox
+            case R.id.activity_fabuqiugou_qitashijian:
+                if (checkedQitashijan) {
+                    mActivityFabuqiugouZhangqi.setEnabled(true);
+                    mActivityFabuqiugouShoudongzhangqi.setEnabled(false);
+                    mActivityFabuqiugouQitashijian.setChecked(false);
+                    checkedQitashijan = false;
+
+
+                } else {
+                    mActivityFabuqiugouShoudongzhangqi.requestFocus();
+                    mActivityFabuqiugouZhangqi.setText("请选择");
+                    mActivityFabuqiugouZhangqi.setEnabled(false);
+                    mActivityFabuqiugouShoudongzhangqi.setEnabled(true);
+                    mActivityFabuqiugouQitashijian.setChecked(true);
+                    checkedQitashijan = true;
+                }
+
                 break;
         }
     }
 
-    private String string;
-    private  String choiceString(List data){
-        string =null;
+
+    //请求参数
+
+    //一级分类ID
+    private String paramYijiID;
+
+    //二级分类ID
+    private String paramErjiID;
+
+    //省
+    private String locationProvince;
+
+    //市
+    private String locationCity;
+
+    //账期
+    private String paramZhangqi;
+
+    private void fabuqiugou() {
+
+        HttpParams paras = new HttpParams();
+        paras.put("sign", SPUtils.getInstance().getString("sign"));
+        paras.put("token", SPUtils.getInstance().getString("token"));
+        paras.put("productName", mActivityFabuqiugouChanpinmingchen.getText().toString());
+
+        if (StringUtils.isEmpty(SPUtils.getInstance().getString("companyName"))) {
+            paras.put("companyName2", mActivityFabuqiugouCompanyName.getText().toString());
+        }
+        paras.put("productCli1", paramYijiID);
+        paras.put("productCli2", paramErjiID);
+        paras.put("pack", mActivityFabuqiugouDanwei.getText().toString());
+        paras.put("num", Integer.parseInt(mActivityFabuqiugouWeight.getText().toString()) *
+                Integer.parseInt(mActivityFabuqiugouQiugoushuliang.getText().toString()) + "");
+        paras.put("numUnit", "KG");
+        paras.put("locationProvince", locationProvince);
+        paras.put("locationCity", locationCity);
+        if (checkedQitashijan) {
+            if (StringUtils.isTrimEmpty(mActivityFabuqiugouShoudongzhangqi.getText().toString())) {
+                ToastUtils.showShort("请填写账期");
+                return;
+            } else paramZhangqi = mActivityFabuqiugouShoudongzhangqi.getText().toString();
+        } else paramZhangqi = mActivityFabuqiugouZhangqi.getText().toString();
+        paras.put("paymentPeriod", paramZhangqi);
+        paras.put("deliveryDate", mActivityFabuqiugouJiaohuoriqi.getText().toString());
+        paras.put("endTime", mActivityFabuqiugouJieshuriqi.getText().toString());
+        paras.put("paymentType", mActivityFabuqiugouFukuanfangshi.getText().toString());
+        paras.put("description", mActivityFabuqiugouXiangxishuoming.getText().toString());
+
+
+        OkGo.<String>post(ServerInfo.TESTSERVER + InterfaceInfo.FABUQIUGOU)
+                .tag(this)
+                .params(paras)
+                .execute(new DialogStringCallback(FabuqiugouActivity.this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("FABUQIUGOU", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                    String data = jsonObject.getString("data");
+                                    String msg = jsonObject.getString("msg");
+                                    if(StringUtils.equals("true",data)){
+                                        ToastUtils.showShort("您的发布已成功");
+                                        EventBus.getDefault().post(new MessageBean(MessageBean.Code.FABUQIUGOUCHENGGONG));
+                                        ActivityUtils.finishActivity(FabuqiugouActivity.class);
+                                    }else ToastUtils.showShort(msg);
+
+                                    return;
+
+                                }
+                                SignAndTokenUtil.checkSignAndToken(FabuqiugouActivity.this, jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+
+    }
+
+
+    private void choiceFenlei(final TextView tv, final int level) {
+
+        if (level == 1) {
+            fenleiID = 0;
+        }
+        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.QIUGOUFENLEI)
+                .tag(this)
+
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("parentId", fenleiID)
+                .execute(new DialogStringCallback(FabuqiugouActivity.this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("choiceFenlei", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                    JSONArray data = jsonObject.getJSONArray("data");
+                                    List<QiugoufenleiBean> qiugoufenleiBean = JSONObject.parseArray(data.toJSONString(), QiugoufenleiBean.class);
+
+                                    List<String> names = new ArrayList<>();
+                                    for (int i = 0; i < qiugoufenleiBean.size(); i++) {
+                                        names.add(qiugoufenleiBean.get(i).getName());
+                                    }
+
+                                    choiceFenleiName(qiugoufenleiBean, names, tv, level);
+
+                                    return;
+
+                                }
+                                SignAndTokenUtil.checkSignAndToken(FabuqiugouActivity.this, jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+
+
+    }
+
+    private int fenleiID;
+
+    //单选分类
+    private void choiceFenleiName(final List<QiugoufenleiBean> data, List<String> names, final TextView tv, final int level) {//是第几级分类
+        SinglePicker<String> picker = new SinglePicker<String>(this, names);
+        picker.setTitleText("请选择");
+        picker.setCycleDisable(true);
+        picker.show();
+        picker.setOnItemPickListener(new SinglePicker.OnItemPickListener<String>() {
+            @Override
+            public void onItemPicked(int i, String s) {
+                tv.setText(s);
+                if (1 == level) {
+                    fenleiID = data.get(i).getId();
+                    paramYijiID = fenleiID + "";
+                    mActivityFabuqiugouErjifenlei.setText("产品二级分类");
+                }
+                if (2 == level) {
+                    paramErjiID = data.get(i).getId() + "";
+                }
+            }
+        });
+    }
+
+    //单选
+    private void choiceString(final List data, final TextView tv) {
         SinglePicker<String> picker = new SinglePicker<String>(this, data);
         picker.setTitleText("请选择");
         picker.setCycleDisable(true);
@@ -187,26 +505,89 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         picker.setOnItemPickListener(new SinglePicker.OnItemPickListener<String>() {
             @Override
             public void onItemPicked(int i, String s) {
-                string = s;
+                tv.setText(s);
+                if (checkedDanwei) {
+                    mActivityFabuqiugouDanweiText.setText(s);
+                    checkedDanwei = false;
+                }
+
             }
         });
-        return string;
     }
 
 
+    private boolean checkIsNull() {
+        if (StringUtils.isTrimEmpty(mActivityFabuqiugouCompanyName.getText().toString())) {
+            ToastUtils.showShort("公司名称不能为空");
+            return false;
+        } else if (StringUtils.equals("请选择分类", mActivityFabuqiugouFenlei.getText().toString())) {
+            ToastUtils.showShort("您还没有选择分类");
+            return false;
+        } else if (StringUtils.equals("产品二级分类", mActivityFabuqiugouErjifenlei.getText().toString())) {
+            ToastUtils.showShort("您还没有选择二级分类");
+            return false;
+        } else if (StringUtils.isTrimEmpty(mActivityFabuqiugouChanpinmingchen.getText().toString())) {
+            ToastUtils.showShort("产品名称不能为空");
+            return false;
+        } else if (StringUtils.isTrimEmpty(mActivityFabuqiugouQiugoushuliang.getText().toString())) {
+            ToastUtils.showShort("请填写求购数量");
+            return false;
+        } else if (StringUtils.isTrimEmpty(mActivityFabuqiugouWeight.getText().toString())) {
+            ToastUtils.showShort("您还没有填写重量");
+            return false;
+        } else if (StringUtils.equals("请选择单位", mActivityFabuqiugouDanwei.getText().toString())) {
+            ToastUtils.showShort("您还没有选择单位");
+            return false;
+        } else if (StringUtils.equals("请选择", mActivityFabuqiugouFukuanfangshi.getText().toString())) {
+            ToastUtils.showShort("您还没有选择付款方式");
+            return false;
+        } else if (StringUtils.equals("请选择", mActivityFabuqiugouZhangqi.getText().toString())) {
+            ToastUtils.showShort("您还没有选择账期");
+            return false;
+        } else if (StringUtils.equals("请选择", mActivityFabuqiugouAddress.getText().toString())) {
+            ToastUtils.showShort("您还没有选择地址");
+            return false;
+        } else if (StringUtils.equals("选择结束日期", mActivityFabuqiugouJieshuriqi.getText().toString())) {
+            ToastUtils.showShort("您还没有选择结束日期");
+            return false;
+        } else if (StringUtils.equals("选择交货日期", mActivityFabuqiugouJiaohuoriqi.getText().toString())) {
+            ToastUtils.showShort("您还没有选择交货日期");
+            return false;
+        }
+        return true;
+    }
 
-    //选择年月
-    private void onYearMonthDayPicker() {
+    private int endtime_year;
+    private int endtime_month;
+    private int endtime_day;
+    private boolean ischoiceEndtime;
+
+    //选择年月   i = 1为选择结束时间  2  为交货日期
+    private void onYearMonthDayPicker(final TextView time, final int i) {
         final DatePicker picker = new DatePicker(this);
         picker.setCycleDisable(true);
         picker.setTopPadding(15);
-        picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
-        picker.setRangeEnd(2020, 1, 1);
+        if (i == 1) {
+            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay());
+        }
+        if (i == 2) {
+            picker.setRangeStart(endtime_year, endtime_month, endtime_day);
+        }
+
         picker.setLineColor(Color.BLACK);
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
-                ToastUtils.showShort(year + "-" + month + "-" + day);
+                time.setText(year + "-" + month + "-" + day);
+                if (i == 1) {
+                    ischoiceEndtime = true;
+                    endtime_year = Integer.parseInt(year);
+                    endtime_month = Integer.parseInt(month);
+                    endtime_day = Integer.parseInt(day);
+                    mActivityFabuqiugouJiaohuoriqi.setText("选择交货日期");
+                }
+
             }
         });
         picker.setOnWheelListener(new DatePicker.OnWheelListener() {
@@ -230,7 +611,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
 
 
     //选择地址
-    private void choiceAddress() {
+    private void choiceAddress(final TextView address) {
         AddressPickTask task = new AddressPickTask(this);
         task.setHideProvince(false);
         task.setHideCounty(true);
@@ -244,9 +625,11 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
             @Override
             public void onAddressPicked(Province province, City city, County county) {
                 if (county == null) {
-                    ToastUtils.showShort(province.getAreaName() + city.getAreaName());
+                    address.setText(province.getAreaName() + " " + city.getAreaName());
+                    locationProvince = province.getAreaName();
+                    locationCity = city.getAreaName();
                 } else {
-                    ToastUtils.showShort(province.getAreaName() + city.getAreaName() + county.getAreaName());
+                    address.setText(province.getAreaName() + city.getAreaName() + county.getAreaName());
                 }
             }
         });

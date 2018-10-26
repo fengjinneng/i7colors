@@ -1,4 +1,4 @@
-package com.company.qcy.adapter.other;
+package com.company.qcy.adapter.chanpindating;
 
 import android.support.annotation.Nullable;
 

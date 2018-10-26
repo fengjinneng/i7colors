@@ -1,7 +1,6 @@
-package com.company.qcy.adapter.other;
+package com.company.qcy.adapter.kaifangshangcheng;
 
 import android.support.annotation.Nullable;
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;

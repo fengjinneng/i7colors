@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:gravity="center_vertical"
     android:background="@color/baise"
+    android:id="@+id/toolbar_layout"
     android:layout_height="51dp">
 
 
@@ -21,10 +22,11 @@
         android:visibility="gone"
         android:id="@+id/toolbar_back"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="28dp"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
         app:srcCompat="@mipmap/back" />
 
     <View
@@ -33,5 +35,18 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:background="@color/fengexian" />
+
+    <TextView
+        android:visibility="gone"
+        android:paddingRight="28dp"
+        android:gravity="center"
+        android:textSize="@dimen/x30"
+        android:paddingLeft="28dp"
+        android:id="@+id/toolbar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:text="设置" />
 
 </RelativeLayout>

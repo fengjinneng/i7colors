@@ -11,6 +11,9 @@ import android.widget.FrameLayout;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.fragment.home.HomeFragment;
 import com.company.qcy.fragment.home.ToutiaoFragment;
 import com.company.qcy.fragment.home.WodeFragment;
@@ -18,6 +21,10 @@ import com.company.qcy.fragment.home.XiaoxiFragment;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.vector.update_app.HttpManager;
 import com.vector.update_app.UpdateAppManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
 
@@ -33,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         initView();
         update();
     }
+
 
     private void update() {
 
@@ -59,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    private int choicedWhitchFragment;
+
     //初始化底部导航栏
     private void initBottomNavigation() {
         mBottomnavigation = findViewById(R.id.bottomnavigation);
@@ -79,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 switch (position) {
                     case 0:
+                        choicedWhitchFragment = 0;
                         if (homeFragment == null) {
 
                             homeFragment = new HomeFragment();
@@ -88,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.show(homeFragment);
                         break;
                     case 1:
+                        choicedWhitchFragment = 1;
                         if (toutiaoFragment == null) {
                             toutiaoFragment = new ToutiaoFragment();
                             fragmentTransaction.add(R.id.home_container, toutiaoFragment);
@@ -96,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.show(toutiaoFragment);
                         break;
                     case 2:
+                        choicedWhitchFragment = 2;
                         if (xiaoxiFragment == null) {
 
                             xiaoxiFragment = new XiaoxiFragment();
@@ -105,14 +118,19 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.show(xiaoxiFragment);
                         break;
                     case 3:
-                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-//                        if (wodeFragment == null) {
+                        if (!StringUtils.equals(SPUtils.getInstance().getString("isLogin"), "true")) {
+
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+
+                        }
+                        if (wodeFragment == null) {
+                            wodeFragment = new WodeFragment();
+                            fragmentTransaction.add(R.id.home_container, wodeFragment);
+                        }
+                        hideFragment(fragmentTransaction);
+                        fragmentTransaction.show(wodeFragment);
+
 //
-//                            wodeFragment = new WodeFragment();
-//                            fragmentTransaction.add(R.id.home_container, wodeFragment);
-//                        }
-//                        hideFragment(fragmentTransaction);
-//                        fragmentTransaction.show(wodeFragment);
                         break;
                 }
                 fragmentTransaction.commit();
@@ -131,6 +149,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (StringUtils.isEmpty(SPUtils.getInstance().getString("isLogin"))) {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            switch (choicedWhitchFragment) {
+                case 0:
+                    hideFragment(fragmentTransaction);
+                    fragmentTransaction.show(homeFragment);
+                    mBottomnavigation.selectTab(choicedWhitchFragment);
+                    break;
+                case 1:
+                    hideFragment(fragmentTransaction);
+                    fragmentTransaction.show(toutiaoFragment);
+                    mBottomnavigation.selectTab(choicedWhitchFragment);
+                    break;
+                case 2:
+                    hideFragment(fragmentTransaction);
+                    fragmentTransaction.show(xiaoxiFragment);
+                    mBottomnavigation.selectTab(choicedWhitchFragment);
+                    break;
+            }
+            fragmentTransaction.commit();
+        }
+    }
     //隐藏所有的fragment
 
     private void hideFragment(android.support.v4.app.FragmentTransaction transaction) {
@@ -159,4 +203,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
     }
+
+
 }

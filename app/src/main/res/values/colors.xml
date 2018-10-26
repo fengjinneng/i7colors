@@ -23,7 +23,10 @@
 
     <color name="fengexian">#e5e5e5</color>
 
+    <color name="lanse">#386fed</color>
 
+
+    <color name="translucent_background">#80000000</color>
 
 
 </resources>

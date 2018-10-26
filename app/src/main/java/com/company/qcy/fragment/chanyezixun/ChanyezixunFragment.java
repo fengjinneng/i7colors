@@ -12,8 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.company.qcy.R;
-import com.company.qcy.adapter.other.ChanpindatingRecyclerViewAdapter;
-import com.company.qcy.adapter.other.ChanyezixunRecyclerviewAdapter;
+import com.company.qcy.adapter.chanpindating.ChanyezixunRecyclerviewAdapter;
 import com.company.qcy.bean.ChanpindatingBean;
 
 import java.util.ArrayList;

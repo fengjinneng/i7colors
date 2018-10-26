@@ -38,7 +38,7 @@ public class I7colorsApplication extends Application {
         //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//
         HttpHeaders headers = new HttpHeaders();
 //        headers.put("Authorization", "Basic NjAxMTAwMDE6TlRBMVFVRXpSVEZEUWpJMVJUWXlPRU0xTXpZME56a3dSVEU0TTBaQ1JFVT0=");
-        headers.put("Content-Type", "application/json;charset=UTF-8");
+          headers.put("Content-Type", "application/json;charset=UTF-8");
 //        headers.put("app_id", "6016011000110001");
 //        headers.put("app_key", "NTA1QUEzRTFDQjI1RTYyOEM1MzY0NzkwRTE4M0ZCREU=");
 //        headers.put("token", CacheLoginUtil.getToken());

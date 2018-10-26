@@ -16,20 +16,17 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     /**
      * Button
      */
-    private Button mButton3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.item_wode_qiugouliebiao);
         initView();
     }
 
     private void initView() {
 
 
-        mButton3 = (Button) findViewById(R.id.button3);
-        mButton3.setOnClickListener(this);
 
 
 
@@ -41,21 +38,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
             default:
                 break;
             case R.id.button3:
-                Calendar c= Calendar.getInstance();
-                //直接创建一个DatePickerDialog对话框实例，并显示出来
-                new DatePickerDialog(this,
-                        //绑定监听器
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                String text="您选择了:"+year+"年"+(month+1)
-                                        +"月"+dayOfMonth+"日";
-                            }
-                        }
-                        //设置初始日期
-                        ,c.get(Calendar.YEAR)
-                        ,c.get(Calendar.MONTH)
-                        ,c.get(Calendar.DAY_OF_MONTH)).show();
+
                 break;
         }
     }

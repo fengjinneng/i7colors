@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 
 import com.company.qcy.R;
-import com.company.qcy.adapter.other.KaifangshangchengRecyclerviewAdapter;
+import com.company.qcy.adapter.kaifangshangcheng.KaifangshangchengRecyclerviewAdapter;
 import com.company.qcy.bean.ChanpindatingBean;
 
 import java.util.ArrayList;

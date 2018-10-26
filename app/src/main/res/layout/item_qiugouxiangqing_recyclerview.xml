@@ -10,20 +10,21 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x240"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:background="@color/baise">
 
         <TextView
-            android:id="@+id/textView37"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_company"
             android:layout_width="0dp"
             android:layout_height="@dimen/x80"
             android:gravity="center"
-            android:text="浙江加基森公司"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="莫某公司"
+            android:singleLine="true"
+            app:layout_constraintEnd_toStartOf="@+id/item_qiugouxiangqing_recyclerview_cainabaojia"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/item_qiugouxiangqing_recyclerview_shenfen" />
 
 
         <View
@@ -33,10 +34,10 @@
             android:background="@color/fengexian"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView37" />
+            app:layout_constraintTop_toBottomOf="@+id/item_qiugouxiangqing_recyclerview_company" />
 
         <TextView
-            android:id="@+id/textView38"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_price_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x50"
@@ -52,8 +53,8 @@
             android:layout_height="wrap_content"
             android:text="联系方式:"
             android:textSize="@dimen/x24"
-            app:layout_constraintStart_toStartOf="@+id/textView38"
-            app:layout_constraintTop_toBottomOf="@+id/textView38" />
+            app:layout_constraintStart_toStartOf="@+id/item_qiugouxiangqing_recyclerview_price_text"
+            app:layout_constraintTop_toBottomOf="@+id/item_qiugouxiangqing_recyclerview_price_text" />
 
         <TextView
             android:id="@+id/textView52"
@@ -65,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView51" />
 
         <TextView
-            android:id="@+id/textView53"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_postage_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="含运费:"
@@ -74,64 +75,92 @@
             app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
         <TextView
-            android:id="@+id/textView54"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="110元/吨"
+            android:layout_marginStart="@dimen/x80"
             android:textSize="@dimen/x24"
+            android:text="123"
             app:layout_constraintStart_toEndOf="@+id/textView51"
-            app:layout_constraintTop_toTopOf="@+id/textView38" />
+            app:layout_constraintTop_toTopOf="@+id/item_qiugouxiangqing_recyclerview_price_text" />
 
         <TextView
-            android:id="@+id/textView55"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="15580804456"
             android:textSize="@dimen/x24"
-            app:layout_constraintStart_toStartOf="@+id/textView54"
+            android:text="phone"
+            app:layout_constraintStart_toStartOf="@+id/item_qiugouxiangqing_recyclerview_price"
             app:layout_constraintTop_toTopOf="@+id/textView51" />
 
         <TextView
-            android:id="@+id/textView56"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2018-07-09 16:55:22"
             android:textSize="@dimen/x24"
-            app:layout_constraintStart_toStartOf="@+id/textView55"
+            android:text="time"
+            app:layout_constraintStart_toStartOf="@+id/item_qiugouxiangqing_recyclerview_phone"
             app:layout_constraintTop_toTopOf="@+id/textView52" />
 
         <TextView
-            android:id="@+id/textView57"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_is_postage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="是"
             android:textSize="@dimen/x24"
-            app:layout_constraintStart_toStartOf="@+id/textView56"
+            android:text="youfei"
+            app:layout_constraintStart_toStartOf="@+id/item_qiugouxiangqing_recyclerview_time"
             app:layout_constraintTop_toBottomOf="@+id/textView52" />
 
         <TextView
-            android:id="@+id/textView58"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_beizhu_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:text="报价说明:"
             android:textSize="@dimen/x24"
-            app:layout_constraintStart_toEndOf="@+id/textView56"
-            app:layout_constraintTop_toTopOf="@+id/textView54" />
+            app:layout_constraintStart_toStartOf="@+id/item_qiugouxiangqing_recyclerview_postage_text"
+            app:layout_constraintTop_toBottomOf="@+id/item_qiugouxiangqing_recyclerview_postage_text" />
 
         <TextView
-            android:id="@+id/textView61"
+            android:id="@+id/item_qiugouxiangqing_recyclerview_beizhu"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:text="需要确认样品需要确认样品需要确认样品."
+            android:minLines="2"
+            android:text="说明"
             android:textSize="@dimen/x24"
-            app:layout_constraintBottom_toBottomOf="@+id/textView57"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView58"
-            app:layout_constraintTop_toTopOf="@+id/textView58" />
+            app:layout_constraintStart_toStartOf="@+id/item_qiugouxiangqing_recyclerview_is_postage"
+            app:layout_constraintTop_toBottomOf="@+id/item_qiugouxiangqing_recyclerview_is_postage" />
+
+        <TextView
+            android:id="@+id/item_qiugouxiangqing_recyclerview_shenfen"
+            android:layout_width="@dimen/x120"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x60"
+            android:background="@mipmap/qiyeyonghu"
+            android:gravity="center"
+            android:text="shenfen"
+            android:textSize="@dimen/x24"
+            android:textColor="@color/baise"
+            app:layout_constraintStart_toStartOf="@+id/item_qiugouxiangqing_recyclerview_company"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_qiugouxiangqing_recyclerview_cainabaojia"
+            android:layout_marginRight="@dimen/x30"
+            android:layout_width="@dimen/x98"
+            android:layout_height="@dimen/x36"
+            android:gravity="center"
+            android:visibility="gone"
+            android:background="@drawable/background_qiugouxiangqing_caina"
+            android:text="采纳"
+            android:textColor="@color/chunhongse"
+            android:paddingLeft="@dimen/x10"
+            android:paddingRight="@dimen/x10"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toTopOf="@+id/view8"
+            app:layout_constraintEnd_toEndOf="@+id/view8"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 

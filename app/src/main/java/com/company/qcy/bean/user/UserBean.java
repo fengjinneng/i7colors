@@ -1,6 +1,6 @@
 package com.company.qcy.bean.user;
 
-public class User {
+public class UserBean {
 
 
     /**
@@ -18,6 +18,18 @@ public class User {
     private Boolean isCompany;
     private String photo;
     private String loginName;
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Boolean getCompany() {
+        return isCompany;
+    }
+
+    public void setCompany(Boolean company) {
+        isCompany = company;
+    }
 
     public String getToken() {
         return token;

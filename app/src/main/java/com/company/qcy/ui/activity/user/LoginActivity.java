@@ -13,8 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.DeviceUtils;
-import com.blankj.utilcode.util.EncodeUtils;
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -25,9 +25,12 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
-import com.company.qcy.bean.user.User;
+import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.bean.user.UserBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -143,7 +146,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -251,13 +253,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                         if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
                                             JSONObject data = jsonObject.getJSONObject("data");
-                                            User user = data.toJavaObject(User.class);
+                                            UserBean user = data.toJavaObject(UserBean.class);
                                             SPUtils.getInstance().put("companyName", user.getCompanyName());
                                             SPUtils.getInstance().put("token", user.getToken());
                                             SPUtils.getInstance().put("userId", user.getUserId());
                                             SPUtils.getInstance().put("loginName", user.getLoginName());
                                             SPUtils.getInstance().put("photo", user.getPhoto());
-                                            SPUtils.getInstance().put("isLogin","true");
+                                            SPUtils.getInstance().put("isCompany", user.getCompany());
+                                            SPUtils.getInstance().put("isLogin", "true");
+                                            SPUtils.getInstance().put("identity", "1");//1为买家 2为卖家
+                                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.DELU, ""));
+                                            ActivityUtils.finishActivity(LoginActivity.this);
                                             return;
 
                                         } else if (StringUtils.equals(jsonObject.getString("code"), "INVALID_SIGN")) {
@@ -280,7 +286,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 super.onError(response);
                             }
                         });
-
 
                 break;
 
