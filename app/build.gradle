@@ -82,4 +82,13 @@ dependencies {
 
     implementation 'com.alibaba:fastjson:1.1.55.android'
 
+    //查看更多
+    implementation 'com.timqi.collapsibletextview:library:1.1.2'
+    // app:collapsedLines="2"
+    //    app:collapsedText="(查看全部)"
+    //    app:expandedText=" 隐藏"
+    //    app:suffixColor="@color/chunhongse"
+   //    app:suffixTrigger="true"
+
+
 }

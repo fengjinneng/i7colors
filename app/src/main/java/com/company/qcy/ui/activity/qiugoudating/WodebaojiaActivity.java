@@ -138,7 +138,7 @@ public class WodebaojiaActivity extends AppCompatActivity {
 
     private void addData() {
         pageNo++;
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.MYBAOJIA)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.MYBAOJIA)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
@@ -155,7 +155,7 @@ public class WodebaojiaActivity extends AppCompatActivity {
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     JSONArray data = jsonObject.getJSONArray("data");
                                     LogUtils.v("MYBAOJIA", data);
 

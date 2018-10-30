@@ -51,7 +51,7 @@ public class SignAndTokenUtil {
 
         LogUtils.v("getsign", code);
 
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.SIGN)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.SIGN)
                 .tag(activity)
                 .params("code", code)
                 .execute(new DialogStringCallback(activity) {

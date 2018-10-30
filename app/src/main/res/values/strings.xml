@@ -9,4 +9,12 @@
     <string name="qianmingshixiao">INVALID_SIGN</string>
 
     <string name="PHONE">4009208599</string>
+
+
+    <string name="qiyefabu">企业发布</string>
+    <string name="gerenfabu">个人发布</string>
+
+    <string name="success">SUCCESS</string>
+
+
 </resources>

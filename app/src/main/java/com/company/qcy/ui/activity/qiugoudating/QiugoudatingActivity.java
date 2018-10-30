@@ -189,7 +189,7 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
 
     private void addData() {
         page++;
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.QIUGOULIEBIAO)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOULIEBIAO)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
@@ -205,7 +205,7 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     JSONArray data = jsonObject.getJSONArray("data");
                                     LogUtils.v("QIUGOULIEBIAO", data);
                                     List<QiugouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);

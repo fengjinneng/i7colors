@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusable="true"
-    android:background="@color/baise"
+    android:background="@color/fengexian"
     android:focusableInTouchMode="true"
-    tools:context=".ui.activity.KaifangshangchengActivity">
+    tools:context=".ui.activity.kaifangshangcheng.KaifangshangchengActivity">
 
 
     <include
@@ -18,8 +18,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <EditText
-        android:id="@+id/kaifangshangcheng_search"
+    <TextView
+        android:layout_marginTop="12px"
+        android:id="@+id/kaifangshengcheng_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -35,7 +36,7 @@
         android:paddingTop="5dp"
         android:singleLine="true"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
@@ -50,6 +51,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kaifangshangcheng_search" />
+        app:layout_constraintTop_toBottomOf="@+id/kaifangshengcheng_search" />
 
 </android.support.constraint.ConstraintLayout>

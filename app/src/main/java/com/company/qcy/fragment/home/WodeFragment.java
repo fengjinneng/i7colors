@@ -268,7 +268,7 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void getAllCount() {
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.GETALLCOUNT)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETALLCOUNT)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))

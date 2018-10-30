@@ -117,7 +117,7 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
 
     private void addData() {
         pageNo++;
-        OkGo.<String>get(ServerInfo.TESTSERVER+ InterfaceInfo.MAIJIAYIJIESHOULIST)
+        OkGo.<String>get(ServerInfo.SERVER+ InterfaceInfo.MAIJIAYIJIESHOULIST)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
@@ -133,7 +133,7 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     JSONArray data = jsonObject.getJSONArray("data");
 
                                     List<BaojiaBean> baojiaBeans = JSONObject.parseArray(data.toJSONString(), BaojiaBean.class);

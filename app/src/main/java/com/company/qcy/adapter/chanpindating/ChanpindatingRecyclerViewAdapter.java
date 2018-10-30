@@ -21,12 +21,12 @@ public class ChanpindatingRecyclerViewAdapter extends
 
     @Override
     protected void convert(BaseViewHolder helper, ChanpindatingBean item) {
-            helper.setText(R.id.item_chanpindating_company,item.getName());
-        TagContainerLayout layout = helper.getView(R.id.item_chanpindating_tagcontainer);
-        List<String> tags = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            tags.add("染料"+i);
-        }
-        layout.setTags(tags);
+//        helper.setText(R.id.item_chanpindating_company,item.getName());
+//        TagContainerLayout layout = helper.getView(R.id.item_chanpindating_tagcontainer);
+//        List<String> tags = new ArrayList<>();
+//        for (int i = 0; i < 5; i++) {
+//            tags.add("染料"+i);
+//        }
+//        layout.setTags(tags);
     }
 }

@@ -18,7 +18,7 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.ui.activity.ChanpindatingActivity;
 import com.company.qcy.ui.activity.ChanyezixunActivity;
-import com.company.qcy.ui.activity.KaifangshangchengActivity;
+import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 
 import java.util.List;

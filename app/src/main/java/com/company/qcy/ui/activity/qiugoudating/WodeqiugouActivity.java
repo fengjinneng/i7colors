@@ -143,7 +143,7 @@ public class WodeqiugouActivity extends AppCompatActivity {
 
     private void addData() {
         pageNo++;
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.MYQIUGOU)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.MYQIUGOU)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
@@ -160,7 +160,7 @@ public class WodeqiugouActivity extends AppCompatActivity {
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     JSONArray data = jsonObject.getJSONArray("data");
 
                                     List<QiugouBean> QiugouxiangqingBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);

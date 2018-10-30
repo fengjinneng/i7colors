@@ -71,15 +71,15 @@ public class DaichuliqiugouActivity extends BaseActivity implements View.OnClick
         mudi = getIntent().getIntExtra("mudi", 0);
         switch (mudi) {
             case 1:
-                url = ServerInfo.TESTSERVER + InterfaceInfo.XUNPANZHONGLIST;
+                url = ServerInfo.SERVER + InterfaceInfo.XUNPANZHONGLIST;
                 mActivityDaichuliqiugouStatus.setText("(暂无人报价)");
                 break;
             case 2:
-                url = ServerInfo.TESTSERVER + InterfaceInfo.DAIQUERENBAOJIALIST;
+                url = ServerInfo.SERVER + InterfaceInfo.DAIQUERENBAOJIALIST;
                 mActivityDaichuliqiugouStatus.setText("(待确认报价)");
                 break;
             case 3:
-                url = ServerInfo.TESTSERVER + InterfaceInfo.JIJIANGGUOQILIST;
+                url = ServerInfo.SERVER + InterfaceInfo.JIJIANGGUOQILIST;
                 mActivityDaichuliqiugouStatus.setText("(即将过期)");
                 break;
         }
@@ -143,7 +143,7 @@ public class DaichuliqiugouActivity extends BaseActivity implements View.OnClick
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     JSONArray data = jsonObject.getJSONArray("data");
 
                                     List<QiugouBean> QiugouxiangqingBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);

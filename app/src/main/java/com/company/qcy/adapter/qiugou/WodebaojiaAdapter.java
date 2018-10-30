@@ -41,11 +41,11 @@ public class WodebaojiaAdapter extends BaseQuickAdapter<BaojiaBean, BaseViewHold
 
         TextView shenfen = (TextView) helper.getView(R.id.item_wode_baojia_shenfen);
         shenfen.setVisibility(View.VISIBLE);
-        if (StringUtils.equals("企业发布", item.getEnquiryDomain().getPublishType())) {
+        if (StringUtils.equals(mContext.getResources().getString(R.string.qiyefabu), item.getEnquiryDomain().getPublishType())) {
 
             shenfen.setText(item.getEnquiryDomain().getPublishType());
             shenfen.setBackground(mContext.getResources().getDrawable(R.mipmap.qiyeyonghu));
-        } else if (StringUtils.equals("个人发布", item.getEnquiryDomain().getPublishType())) {
+        } else if (StringUtils.equals(mContext.getResources().getString(R.string.gerenfabu), item.getEnquiryDomain().getPublishType())) {
             shenfen.setText(item.getEnquiryDomain().getPublishType());
             shenfen.setBackground(mContext.getResources().getDrawable(R.mipmap.gerenfabu));
         }

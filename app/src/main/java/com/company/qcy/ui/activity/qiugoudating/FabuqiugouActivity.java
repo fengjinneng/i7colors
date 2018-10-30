@@ -377,7 +377,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         paras.put("description", mActivityFabuqiugouXiangxishuoming.getText().toString());
 
 
-        OkGo.<String>post(ServerInfo.TESTSERVER + InterfaceInfo.FABUQIUGOU)
+        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUQIUGOU)
                 .tag(this)
                 .params(paras)
                 .execute(new DialogStringCallback(FabuqiugouActivity.this) {
@@ -389,7 +389,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
                             if (response.code() == 200) {
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     String data = jsonObject.getString("data");
                                     String msg = jsonObject.getString("msg");
                                     if(StringUtils.equals("true",data)){
@@ -425,7 +425,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         if (level == 1) {
             fenleiID = 0;
         }
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.QIUGOUFENLEI)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOUFENLEI)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
@@ -568,7 +568,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         picker.setCycleDisable(true);
         picker.setTopPadding(15);
         if (i == 1) {
-            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() );
             picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay());
         }
         if (i == 2) {

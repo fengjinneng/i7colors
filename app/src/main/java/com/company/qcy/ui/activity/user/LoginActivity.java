@@ -143,7 +143,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
-
     }
 
     @Override
@@ -155,7 +154,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //获取新的图片验证码
             case R.id.login_change_img:
 
-                OkGo.<Bitmap>get(ServerInfo.TESTSERVER + InterfaceInfo.CAPTCHA)
+                OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
                         .tag(this)
                         .params("deviceNo", DeviceUtils.getAndroidID())
                         .execute(new DialogBitmapcallback(this) {
@@ -183,7 +182,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             //获取验证码
             case R.id.login_huoquyanzhengma:
 
-                OkGo.<Bitmap>get(ServerInfo.TESTSERVER + InterfaceInfo.CAPTCHA)
+                OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
                         .tag(this)
                         .params("deviceNo", DeviceUtils.getAndroidID())
                         .execute(new DialogBitmapcallback(this) {
@@ -231,7 +230,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     return;
                 }
 
-                OkGo.<String>post(ServerInfo.TESTSERVER + InterfaceInfo.LOGIN)
+                OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.LOGIN)
                         .tag(this)
 
                         .params("sign", SPUtils.getInstance().getString("sign"))
@@ -251,7 +250,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                         JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                        if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                             JSONObject data = jsonObject.getJSONObject("data");
                                             UserBean user = data.toJavaObject(UserBean.class);
                                             SPUtils.getInstance().put("companyName", user.getCompanyName());

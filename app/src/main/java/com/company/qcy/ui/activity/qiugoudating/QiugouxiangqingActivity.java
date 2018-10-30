@@ -34,6 +34,7 @@ import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.timqi.collapsibletextview.CollapsibleTextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -218,7 +219,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
 
     private void cainabaojia() {
-        OkGo.<String>post(ServerInfo.TESTSERVER + InterfaceInfo.CAINABAOJIA)
+        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CAINABAOJIA)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("enquiryOfferId", enquiryOfferId)
@@ -232,7 +233,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                             if (response.code() == 200) {
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
                                     String data = jsonObject.getString("data");
                                     if (StringUtils.equals(data, "true")) {
@@ -267,7 +268,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
     private void addQiugouxiangqingData() {
 
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.QIUGOUXIANGQING)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOUXIANGQING)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("enquiryId", enquiryId)
@@ -281,7 +282,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                             if (response.code() == 200) {
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
                                     JSONObject data = jsonObject.getJSONObject("data");
 
@@ -361,7 +362,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         //判断是本人吗？是
         if (StringUtils.equals("1", qiugouBean.getIsCharger())) {
             mActivityQiugouxiangqingWodefabu.setVisibility(View.VISIBLE);
-            if (StringUtils.equals("企业发布", qiugouBean.getPublishType())) {
+            if (StringUtils.equals(getResources().getString(R.string.qiyefabu), qiugouBean.getPublishType())) {
                 mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
                 mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.qiyeyonghu));
                 mActivityQiugouxiangqingWodefabu.setBackground(getResources().getDrawable(R.drawable.background_wodefabu_qiye));
@@ -387,7 +388,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
         if (StringUtils.equals("0", qiugouBean.getIsCharger())) {
             mActivityQiugouxiangqingWodefabu.setVisibility(View.GONE);
-            if (StringUtils.equals("企业发布", qiugouBean.getPublishType())) {
+            if (StringUtils.equals(getResources().getString(R.string.qiyefabu), qiugouBean.getPublishType())) {
                 mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
                 mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.qiyeyonghu));
                 mActivityQiugouxiangqingCompany.setText("********公司");
@@ -478,7 +479,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
     private void addBaojialiebiaoData() {
 
-        OkGo.<String>get(ServerInfo.TESTSERVER + InterfaceInfo.BAOJIALIEBIAO)
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.BAOJIALIEBIAO)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("enquiryId", enquiryId)
@@ -493,7 +494,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                             if (response.code() == 200) {
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
                                     JSONArray data = jsonObject.getJSONArray("data");
 
@@ -528,7 +529,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
     //关闭求购
     private void guanbiqiugou() {
 
-        OkGo.<String>post(ServerInfo.TESTSERVER + InterfaceInfo.GUANBIQIUGOU)
+        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.GUANBIQIUGOU)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
@@ -542,7 +543,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     String data = jsonObject.getString("data");
                                     String msg = jsonObject.getString("msg");
                                     LogUtils.v("GUANBIQIUGOU", data);
@@ -632,7 +633,6 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
             //关闭求购
             case R.id.activity_qiugouxiangqing_guanbiqiugo:
-
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("提示！");

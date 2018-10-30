@@ -189,7 +189,7 @@ public class CanyubaojiaActivity extends AppCompatActivity implements View.OnCli
         paras.put("phone", mActivityCanyubaojiaPhone.getText().toString());
         paras.put("validTime", mActivityCanyubaojiaTime.getText().toString());
         paras.put("description", mActivityCanyubaojiaDescription.getText().toString());
-        OkGo.<String>post(ServerInfo.TESTSERVER + InterfaceInfo.FABUBAOJIA)
+        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUBAOJIA)
                 .tag(this)
                 .params(paras)
                 .execute(new DialogStringCallback(CanyubaojiaActivity.this) {
@@ -201,7 +201,7 @@ public class CanyubaojiaActivity extends AppCompatActivity implements View.OnCli
                             if (response.code() == 200) {
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     ToastUtils.showShort("您已经报价成功");
                                     ActivityUtils.finishActivity(CanyubaojiaActivity.class);
                                     EventBus.getDefault().post(new MessageBean(MessageBean.Code.BAOJIACHENGGONG));

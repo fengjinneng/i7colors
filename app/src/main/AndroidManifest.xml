@@ -28,7 +28,7 @@
         <activity android:name=".ui.activity.ChanpindatingActivity" />
         <activity android:name=".ui.activity.ChanyezixunActivity" />
         <activity android:name=".ui.activity.qiugoudating.QiugoudatingActivity" />
-        <activity android:name=".ui.activity.KaifangshangchengActivity" />
+        <activity android:name=".ui.activity.kaifangshangcheng.KaifangshangchengActivity" />
         <activity
             android:name=".ui.activity.user.LoginActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -47,12 +47,12 @@
         <activity android:name=".ui.activity.user.QiehuanshenfenActivity" />
         <activity android:name=".ui.activity.qiugoudating.WodebaojiaActivity" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".base.SearchActivity" >
-
+        <activity android:name=".base.SearchActivity"></activity>
+        <activity android:name=".ui.activity.qiugoudating.DaichuliqiugouActivity" />
+        <activity android:name=".ui.activity.qiugoudating.DaichulibaojiaActivity" />
+        <activity android:name=".ui.activity.kaifangshangcheng.KFSCXiangqingActivity">
 
         </activity>
-        <activity android:name=".ui.activity.qiugoudating.DaichuliqiugouActivity" />
-        <activity android:name=".ui.activity.qiugoudating.DaichulibaojiaActivity"></activity>
     </application>
 
 </manifest>
