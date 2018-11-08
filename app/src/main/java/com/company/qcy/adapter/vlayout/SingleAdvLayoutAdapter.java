@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -14,12 +15,14 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.NetworkImageHolderView;
-import com.company.qcy.ui.activity.ChanpindatingActivity;
-import com.company.qcy.ui.activity.ChanyezixunActivity;
+import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
+import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
+import com.company.qcy.ui.activity.tuangou.TuangouliebiaoActivity;
 
 import java.util.List;
 
@@ -64,7 +67,6 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
     @Override
     public void onBindViewHolder(SingleAdvLayoutViewHolder holder, int position) {
         setBanner(holder);
-        setAdv(holder);
         holder.chanpindating.setOnClickListener(this);
         holder.qiugoudating.setOnClickListener(this);
         holder.kaifangshangcheng.setOnClickListener(this);
@@ -88,27 +90,6 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
 
 
         holder.convenientBanner.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-            }
-        });
-    }
-    private void setAdv(SingleAdvLayoutViewHolder holder){
-        holder.adv.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-            @Override
-            public NetworkImageHolderView createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, datas);
-        holder.adv.setPageIndicator(new int[]{R.mipmap.banner_unchoiced, R.mipmap.banner_choiced});
-        holder.adv.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
-        //设置如果只有一组数据时不能滑动
-        holder.adv.setPointViewVisible(datas.size() == 1 ? false : true); // 指示器
-        holder.adv.setManualPageable(datas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
-        holder.adv.setCanLoop(datas.size() == 1 ? false : true); // 是否循环
-
-
-        holder.adv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
             }
@@ -140,13 +121,11 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
 
     static class SingleAdvLayoutViewHolder extends RecyclerView.ViewHolder {
         public ConvenientBanner convenientBanner;
-        public ConvenientBanner adv;
         public LinearLayout chanpindating,qiugoudating,kaifangshangcheng,chanyezixun;
 
         public SingleAdvLayoutViewHolder(View root) {
             super(root);
             convenientBanner = root.findViewById(R.id.vlayout_home_part1_banner);
-            adv = root.findViewById(R.id.vlayout_home_part1_adv);
             chanpindating = root.findViewById(R.id.vlayout_home_part1_chanpin);
             qiugoudating = root.findViewById(R.id.vlayout_home_part1_qiugou);
             kaifangshangcheng = root.findViewById(R.id.vlayout_home_part1_kaifang);

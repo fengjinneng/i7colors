@@ -3,6 +3,7 @@
     package="com.company.qcy">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
@@ -25,8 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity" />
-        <activity android:name=".ui.activity.ChanpindatingActivity" />
-        <activity android:name=".ui.activity.ChanyezixunActivity" />
+        <activity android:name=".ui.activity.chanpindating.ChanpindatingActivity" />
+        <activity android:name=".ui.activity.chanyezixun.ChanyezixunActivity" />
         <activity android:name=".ui.activity.qiugoudating.QiugoudatingActivity" />
         <activity android:name=".ui.activity.kaifangshangcheng.KaifangshangchengActivity" />
         <activity
@@ -37,22 +38,44 @@
         <activity android:name=".ui.activity.user.RegisterActivity" />
         <activity
             android:name=".ui.activity.qiugoudating.FabuqiugouActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden">
+
+            <!-- Schame -->
+            <intent-filter>
+                <data
+                    android:host="m.i7colors.com"
+                    android:scheme="arouter" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.activity.qiugoudating.QiugouxiangqingActivity" />
         <activity
             android:name=".ui.activity.qiugoudating.CanyubaojiaActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.activity.qiugoudating.WodeqiugouActivity" />
-        <activity android:name=".ui.activity.SettingActivity" />
+        <activity android:name=".ui.activity.user.SettingActivity" />
         <activity android:name=".ui.activity.user.QiehuanshenfenActivity" />
         <activity android:name=".ui.activity.qiugoudating.WodebaojiaActivity" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".base.SearchActivity"></activity>
+        <activity
+            android:name=".base.SearchActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".ui.activity.qiugoudating.DaichuliqiugouActivity" />
         <activity android:name=".ui.activity.qiugoudating.DaichulibaojiaActivity" />
-        <activity android:name=".ui.activity.kaifangshangcheng.KFSCXiangqingActivity">
-
-        </activity>
+        <activity android:name=".ui.activity.kaifangshangcheng.KFSCXiangqingActivity" />
+        <activity android:name=".ui.activity.chanpindating.ChanpinxiangqingActivity" />
+        <activity android:name=".ui.activity.chanyezixun.ZixunxiangqingActivity" />
+        <activity android:name=".ui.activity.tuangou.TuangouliebiaoActivity" />
+        <activity android:name=".ui.activity.tuangou.TuangouxiangqingActivity" />
+        <activity android:name=".ui.activity.tuangou.WoyaotuangouActivity" />
+        <activity
+            android:name=".base.SearchTypeActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name=".ui.activity.user.LianxikefuActivity"></activity>
     </application>
 
 </manifest>

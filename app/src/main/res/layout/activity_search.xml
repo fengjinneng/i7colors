@@ -7,20 +7,56 @@
     tools:context=".base.SearchActivity">
 
 
-    <com.mancj.materialsearchbar.MaterialSearchBar
-        android:id="@+id/materialsearchbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
+    <EditText
+        android:id="@+id/homepage_search"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x50"
         android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/search_oval"
+        android:drawableLeft="@mipmap/search"
+        android:drawablePadding="10dp"
+        android:hint="搜索产品/店铺/求购信息"
+        android:imeOptions="actionSearch"
+        android:paddingLeft="10dp"
+        android:singleLine="true"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/homepage_search_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/homepage_search_back"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/homepage_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/homepage_search"
+        app:srcCompat="@mipmap/back" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/homepage_search_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView133" />
+
+    <TextView
+        android:id="@+id/textView133"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        app:mt_roundedSearchBarEnabled = "true"
-        app:mt_speechMode="true"
-        app:mt_hint="Custom hint"
-        app:mt_maxSuggestionsCount="10"
+        android:background="@color/fengexian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/homepage_search" />
 
-    </com.mancj.materialsearchbar.MaterialSearchBar>
+
 </android.support.constraint.ConstraintLayout>

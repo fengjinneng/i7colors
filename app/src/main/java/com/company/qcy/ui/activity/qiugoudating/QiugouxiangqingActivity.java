@@ -34,7 +34,6 @@ import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
-import com.timqi.collapsibletextview.CollapsibleTextView;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -149,6 +148,11 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
     private String qiugouStatus;
     private TextView mActivityQiugouxiangqingLishiqiugou;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -213,6 +217,10 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
             }
         });
 
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("求购详情");
     }
 
     private Long enquiryOfferId;
@@ -653,6 +661,9 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                 builder.show();
 
 
+                break;
+            case R.id.toolbar_back:
+                finish();
                 break;
         }
     }

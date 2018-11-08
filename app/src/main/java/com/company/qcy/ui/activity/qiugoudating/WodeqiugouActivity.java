@@ -8,6 +8,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -34,13 +36,18 @@ import com.lzy.okgo.model.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WodeqiugouActivity extends AppCompatActivity {
+public class WodeqiugouActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CommonTabLayout commonTabLayout;
     private ViewPager mActivityWodeQiugouViewpger;
     private RecyclerView recyclerView;
     private WodeqiugouxiangqingAdapter adapter;
     private List<QiugouBean> datas;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,11 +81,11 @@ public class WodeqiugouActivity extends AppCompatActivity {
         commonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                pageNo=0;
+                pageNo = 0;
 
                 switch (position) {
                     case 0:
-                        status="";
+                        status = "";
                         break;
                     case 1:
                         status = "1";//求购中
@@ -100,7 +107,7 @@ public class WodeqiugouActivity extends AppCompatActivity {
 
             }
         });
-        if(!StringUtils.isEmpty(status)){
+        if (!StringUtils.isEmpty(status)) {
             commonTabLayout.setCurrentTab(Integer.parseInt(status));
         }
 
@@ -128,17 +135,22 @@ public class WodeqiugouActivity extends AppCompatActivity {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
 
-                Intent intent = new Intent(WodeqiugouActivity.this,QiugouxiangqingActivity.class);
+                Intent intent = new Intent(WodeqiugouActivity.this, QiugouxiangqingActivity.class);
                 QiugouBean qiugouliebiaoBean = (QiugouBean) adapter.getData().get(position);
-                intent.putExtra("enquiryId",qiugouliebiaoBean.getId());
+                intent.putExtra("enquiryId", qiugouliebiaoBean.getId());
                 intent.putExtra("wode", 1);
-                intent.putExtra("status",qiugouliebiaoBean.getStatus());
+                intent.putExtra("status", qiugouliebiaoBean.getStatus());
                 ActivityUtils.startActivity(intent);
             }
         });
 
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("我的求购");
     }
-    private int pageNo ;
+
+    private int pageNo;
     private String status;
 
     private void addData() {
@@ -200,5 +212,15 @@ public class WodeqiugouActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.toolbar_back:
+                finish();
+                break;
+        }
+    }
 }
 

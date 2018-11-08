@@ -12,8 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.company.qcy.R;
-import com.company.qcy.adapter.other.ToutiaoViewpagerRecyclerviewAdapter;
+import com.company.qcy.adapter.tuangou.TuangouRecyclerviewAdapter;
 import com.company.qcy.bean.ChanpindatingBean;
+import com.company.qcy.bean.tuangou.TuangouBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class ToutiaoViewpagerFragment extends Fragment {
 
     private RecyclerView recyclerview;
     private Context context;
-    private ToutiaoViewpagerRecyclerviewAdapter adapter;
+    private TuangouRecyclerviewAdapter adapter;
 
 
     @Override
@@ -67,14 +68,10 @@ public class ToutiaoViewpagerFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerview.setLayoutManager(layoutManager);
 
-        List<ChanpindatingBean> datas = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-
-            datas.add(new ChanpindatingBean("2018-09-14"+i));
-        }
+        List<TuangouBean> datas = new ArrayList<>();
 
         //创建适配器
-        adapter = new ToutiaoViewpagerRecyclerviewAdapter(R.layout.item_toutiao_recyclerview, datas);
+        adapter = new TuangouRecyclerviewAdapter(R.layout.item_toutiao_recyclerview, datas);
 
         //给RecyclerView设置适配器
         recyclerview.setAdapter(adapter);

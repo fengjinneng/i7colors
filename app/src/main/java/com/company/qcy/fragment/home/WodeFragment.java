@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
@@ -25,12 +24,13 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.NumberBean;
-import com.company.qcy.ui.activity.SettingActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichulibaojiaActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichuliqiugouActivity;
 import com.company.qcy.ui.activity.qiugoudating.WodebaojiaActivity;
 import com.company.qcy.ui.activity.qiugoudating.WodeqiugouActivity;
+import com.company.qcy.ui.activity.user.LianxikefuActivity;
 import com.company.qcy.ui.activity.user.QiehuanshenfenActivity;
+import com.company.qcy.ui.activity.user.SettingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -105,7 +105,7 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
      * 我的求购
      */
     private TextView mFragmentWodeWodeqiugou;
-    private RelativeLayout mToolbarLayout;
+    private ConstraintLayout mToolbarLayout;
 
     private Activity activity;
     private ImageView mFragmentWodeMaijiajieshouImg;
@@ -121,6 +121,11 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
     private TextView mFragmentWodeAllQiugouSell;
 
     private TextView textView90;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     public WodeFragment() {
     }
@@ -188,8 +193,7 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
         mFragmentWodeExchangeShenfen = (TextView) inflater.findViewById(R.id.fragment_wode_exchange_shenfen);
         mFragmentWodeExchangeShenfen.setOnClickListener(this);
         mFragmentWodeWodeqiugou = (TextView) inflater.findViewById(R.id.fragment_wode_wodeqiugou);
-        mToolbarLayout = (RelativeLayout) inflater.findViewById(R.id.include8);
-        mToolbarLayout.setBackground(getResources().getDrawable(R.drawable.button_jianbianbeijing));
+        mToolbarLayout = (ConstraintLayout) inflater.findViewById(R.id.include8);
         mFragmentWodeMaijiajieshouImg = (ImageView) inflater.findViewById(R.id.fragment_wode_maijiajieshou_img);
         mFragmentWodeMaijiajieshouText = (TextView) inflater.findViewById(R.id.fragment_wode_maijiajieshou_text);
         mFragmentWodeMaijiajieshouImg.setOnClickListener(this);
@@ -209,6 +213,13 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
         mFragmentWodeConstraintlayoutBuyer = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_constraintlayout_buyer);
         mFragmentWodeAllQiugouSell = (TextView) inflater.findViewById(R.id.fragment_wode_all_qiugou_sell);
         mFragmentWodeAllQiugouSell.setOnClickListener(this);
+        mFragmentWodeLixikefu = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_lixikefu);
+        mFragmentWodeLixikefu.setOnClickListener(this);
+        mToolbarTitle = (TextView) inflater.findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) inflater.findViewById(R.id.toolbar_back);
+        mToolbarBack.setVisibility(View.INVISIBLE);
+        mToolbarText = (TextView) inflater.findViewById(R.id.toolbar_text);
+        mToolbarText.setOnClickListener(this);
     }
 
     @Override
@@ -257,10 +268,12 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
             if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "1")) {
                 mFragmentWodeConstraintlayoutBuyer.setVisibility(View.VISIBLE);
                 mFragmentWodeConstraintlayoutSeller.setVisibility(View.INVISIBLE);
+                mToolbarTitle.setText("买家中心");
                 //卖家
             } else if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "2")) {
                 mFragmentWodeConstraintlayoutSeller.setVisibility(View.VISIBLE);
                 mFragmentWodeConstraintlayoutBuyer.setVisibility(View.INVISIBLE);
+                mToolbarTitle.setText("卖家中心");
             }
 
         }
@@ -286,8 +299,8 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
                                     daiquerenbaojia.setBadgeNumber(numberBean.getWaitSureCount());
                                     jijiangguoqi.setBadgeNumber(numberBean.getMyExpireCount());
                                     maijiajieshou.setBadgeNumber(numberBean.getMyAcceptOfferCount());
-                                    mFragmentWodeLishibaojia.setText(numberBean.getOfferTimes()+"");
-                                    mFragmentWodeLishiqiugou.setText(numberBean.getEnquiryTimes()+"");
+                                    mFragmentWodeLishibaojia.setText(numberBean.getOfferTimes() + "");
+                                    mFragmentWodeLishiqiugou.setText(numberBean.getEnquiryTimes() + "");
                                     return;
 
                                 } else
@@ -380,6 +393,9 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.textView90:
                 ActivityUtils.startActivity(QiehuanshenfenActivity.class);
+                break;
+            case R.id.fragment_wode_lixikefu:
+                ActivityUtils.startActivity(LianxikefuActivity.class);
                 break;
         }
     }

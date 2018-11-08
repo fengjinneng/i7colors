@@ -3,10 +3,10 @@ package com.company.qcy.ui.activity.kaifangshangcheng;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -23,18 +23,15 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.kaifangshangcheng.KaifangshangchengRecyclerviewAdapter;
-import com.company.qcy.bean.ChanpindatingBean;
+import com.company.qcy.base.SearchTypeActivity;
 import com.company.qcy.bean.kaifangshangcheng.DianpuliebiaoBean;
-import com.company.qcy.bean.qiugou.QiugouBean;
-import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class KaifangshangchengActivity extends AppCompatActivity {
+public class KaifangshangchengActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * 搜索您想要的商品
@@ -46,6 +43,12 @@ public class KaifangshangchengActivity extends AppCompatActivity {
      */
     private TextView mKaifangshengchengSearch;
     private List<DianpuliebiaoBean> datas;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,14 +76,20 @@ public class KaifangshangchengActivity extends AppCompatActivity {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 DianpuliebiaoBean dianpuliebiaoBean = (DianpuliebiaoBean) adapter.getData().get(position);
-                Intent intent = new Intent(KaifangshangchengActivity.this,KFSCXiangqingActivity.class);
-                intent.putExtra("id",dianpuliebiaoBean.getId());
+                Intent intent = new Intent(KaifangshangchengActivity.this, KFSCXiangqingActivity.class);
+                intent.putExtra("id", dianpuliebiaoBean.getId());
                 ActivityUtils.startActivity(intent);
             }
         });
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("开放商城");
+        mKaifangshengchengSearch.setOnClickListener(this);
     }
 
     private int pageNo;
+
     private void addData() {
         pageNo++;
         OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.DIANPULIEBIAO)
@@ -139,4 +148,21 @@ public class KaifangshangchengActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.toolbar_back:
+                finish();
+                break;
+            case R.id.kaifangshengcheng_search:
+
+                Intent intent = new Intent(KaifangshangchengActivity.this, SearchTypeActivity.class);
+                intent.putExtra("isFrom", 3);
+                intent.putExtra("keyword", "");
+                ActivityUtils.startActivity(intent);
+                break;
+        }
+    }
 }

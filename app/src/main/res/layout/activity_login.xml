@@ -201,7 +201,7 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x98"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/button_jianbianbeijing"
+                android:background="@mipmap/anniujianbian_round"
                 android:text="登录"
                 android:textColor="@color/baise"
                 android:textSize="@dimen/x36"

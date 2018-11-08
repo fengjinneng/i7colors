@@ -98,112 +98,173 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <include
-        android:id="@+id/include8"
-        layout="@layout/toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout3"
+        android:id="@+id/constraintLayout13"
         android:layout_width="0dp"
-        android:layout_height="@dimen/x300"
-        android:background="@drawable/button_jianbianbeijing"
+        android:background="@mipmap/anniujianbian"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include8">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/fragment_wode_image"
-            android:layout_width="@dimen/x122"
-            android:layout_height="@dimen/x122"
-            android:layout_marginStart="@dimen/x54"
-            android:layout_marginTop="@dimen/x54"
-            android:src="@mipmap/morentouxiang"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/include8"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x102"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/fragment_wode_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x12"
-            android:layout_marginTop="@dimen/x20"
-            android:text="信息部测试"
-            android:textColor="@color/baise"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/fragment_wode_image"
-            app:layout_constraintTop_toTopOf="@+id/fragment_wode_image" />
-
-        <View
-            android:id="@+id/textView64"
-            android:layout_width="1dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="@dimen/x14"
-            android:background="@color/baise"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_name"
-            app:layout_constraintStart_toEndOf="@+id/fragment_wode_name"
-            app:layout_constraintTop_toTopOf="@+id/fragment_wode_name" />
-
-        <TextView
-            android:id="@+id/fragment_wode_shenfen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x14"
-            android:text="个人用户"
-            android:textColor="@color/baise"
-            android:textSize="@dimen/x24"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_name"
-            app:layout_constraintStart_toEndOf="@+id/textView64"
-            app:layout_constraintTop_toTopOf="@+id/fragment_wode_name" />
-
-        <LinearLayout
-
-            android:layout_width="@dimen/x336"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-
-            app:layout_constraintStart_toStartOf="@+id/fragment_wode_name"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_wode_name">
 
             <TextView
-                android:id="@+id/textView84"
+                android:id="@+id/toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_centerInParent="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="标题"
+                android:textColor="@color/baise"
+                android:textSize="@dimen/x36"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/toolbar_text"
+                app:layout_constraintStart_toEndOf="@+id/toolbar_back"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/toolbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="28dp"
+                android:paddingRight="28dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/back" />
+
+            <TextView
+                android:id="@+id/toolbar_text"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:paddingLeft="28dp"
+                android:paddingRight="28dp"
+                android:text="设置"
+                android:textColor="@color/baise"
+                android:textSize="@dimen/x30"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/constraintLayout3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x300"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include8">
+
+            <ImageView
+                android:id="@+id/fragment_wode_image"
+                android:layout_width="@dimen/x122"
+                android:layout_height="@dimen/x122"
+                android:layout_marginStart="@dimen/x54"
+                android:layout_marginTop="@dimen/x54"
+                android:src="@mipmap/morentouxiang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_wode_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="历史求购:"
+                android:layout_marginLeft="@dimen/x12"
+                android:layout_marginTop="@dimen/x20"
+                android:text="信息部测试"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x24" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/fragment_wode_image"
+                app:layout_constraintTop_toTopOf="@+id/fragment_wode_image" />
+
+            <View
+                android:id="@+id/textView64"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginLeft="@dimen/x14"
+                android:background="@color/baise"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_name"
+                app:layout_constraintStart_toEndOf="@+id/fragment_wode_name"
+                app:layout_constraintTop_toTopOf="@+id/fragment_wode_name" />
 
             <TextView
-                android:id="@+id/fragment_wode_lishiqiugou"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/baise"
-                android:textSize="@dimen/x24" />
-
-            <TextView
-                android:id="@+id/textView85"
+                android:id="@+id/fragment_wode_shenfen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="历史报价:"
+                android:layout_marginStart="@dimen/x14"
+                android:text="个人用户"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x24" />
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_name"
+                app:layout_constraintStart_toEndOf="@+id/textView64"
+                app:layout_constraintTop_toTopOf="@+id/fragment_wode_name" />
 
-            <TextView
-                android:id="@+id/fragment_wode_lishibaojia"
-                android:layout_width="0dp"
+            <LinearLayout
+
+                android:layout_width="@dimen/x336"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@color/baise"
-                android:textSize="@dimen/x24" />
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+
+                app:layout_constraintStart_toStartOf="@+id/fragment_wode_name"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_wode_name">
+
+                <TextView
+                    android:id="@+id/textView84"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史求购:"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x24" />
+
+                <TextView
+                    android:id="@+id/fragment_wode_lishiqiugou"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x24" />
+
+                <TextView
+                    android:id="@+id/textView85"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="历史报价:"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x24" />
+
+                <TextView
+                    android:id="@+id/fragment_wode_lishibaojia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x24" />
 
 
-        </LinearLayout>
+            </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
+
     </android.support.constraint.ConstraintLayout>
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout5"
@@ -211,12 +272,12 @@
         android:layout_height="@dimen/x140"
         android:layout_marginLeft="@dimen/x22"
         android:layout_marginRight="@dimen/x22"
-        android:layout_marginTop="@dimen/x220"
+        android:layout_marginTop="@dimen/x330"
         android:background="@color/baise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout3">
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout13">
 
         <ImageView
             android:id="@+id/fragment_wode_zhongxin_image"

@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/rl_parent"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_parent"
     android:layout_width="match_parent"
-    android:layout_marginStart="@dimen/x13"
-    android:layout_marginEnd="@dimen/x13"
     android:layout_height="wrap_content"
-    >
-<!--    android:background="@drawable/toast_newwork_setting_bg_shape"-->
+    android:layout_marginEnd="@dimen/x26"
+    android:layout_marginStart="@dimen/x26"
+    android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y32"
+        android:layout_height="@dimen/x100"
         android:background="@drawable/toast_newwork_setting_bg_shape">
-<!--        android:layout_marginBottom="@dimen/y40"
-        android:layout_marginStart="@dimen/x13"
-        android:layout_marginEnd="@dimen/x13"-->
 
 
         <TextView
@@ -26,11 +19,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/x13"
-            android:drawablePadding="@dimen/x9"
+            android:layout_marginStart="@dimen/x36"
+            android:drawablePadding="@dimen/x18"
             android:drawableStart="@drawable/wifierror"
-            android:text="检查网络"
-            android:textColor="#ffffff" />
+            android:text="网络请求失败，请检查您的网络设置"
+            android:textColor="@color/baise" />
 
         <ImageView
             android:id="@+id/imageView"

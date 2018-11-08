@@ -1,6 +1,7 @@
 package com.company.qcy.bean.kaifangshangcheng;
 
 import java.util.List;
+import java.util.Map;
 
 public class ProductBean {
 
@@ -18,12 +19,48 @@ public class ProductBean {
 
     private String id;
     private String pic;
-    private Object supplierShotName;
+    private String supplierShotName;
     private String productName;
     private boolean displayPrice;
     private String price;
     private String phone;
     private List<String> tagList;
+    private String pack;
+    private List<String> detailPicList;
+    private List<PropMapBean> propMap;
+    private Long shopId;
+
+    public Long getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Long shopId) {
+        this.shopId = shopId;
+    }
+
+    public List<PropMapBean> getPropMap() {
+        return propMap;
+    }
+
+    public void setPropMap(List<PropMapBean> propMap) {
+        this.propMap = propMap;
+    }
+
+    public List<String> getDetailPicList() {
+        return detailPicList;
+    }
+
+    public void setDetailPicList(List<String> detailPicList) {
+        this.detailPicList = detailPicList;
+    }
+
+    public String getPack() {
+        return pack;
+    }
+
+    public void setPack(String pack) {
+        this.pack = pack;
+    }
 
     public String getId() {
         return id;
@@ -41,11 +78,11 @@ public class ProductBean {
         this.pic = pic;
     }
 
-    public Object getSupplierShotName() {
+    public String getSupplierShotName() {
         return supplierShotName;
     }
 
-    public void setSupplierShotName(Object supplierShotName) {
+    public void setSupplierShotName(String supplierShotName) {
         this.supplierShotName = supplierShotName;
     }
 
@@ -87,5 +124,33 @@ public class ProductBean {
 
     public void setTagList(List<String> tagList) {
         this.tagList = tagList;
+    }
+
+
+
+    public static class PropMapBean {
+        /**
+         * key : 产品2的属性1
+         * value : 产品2 属性值
+         */
+
+        private String key;
+        private String value;
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
     }
 }

@@ -6,11 +6,11 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -22,14 +22,16 @@ import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.company.qcy.base.BaseActivity;
 import com.company.qcy.R;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.qiugou.QiugoudatingRecyclerviewAdapter;
+import com.company.qcy.base.BaseActivity;
+import com.company.qcy.base.SearchTypeActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
+import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -50,6 +52,11 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
      * 发布求购
      */
     private Button mQiugoudatingFabuqiugou;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +66,10 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
     }
 
 
-
     private List<QiugouBean> datas;
     private SwipeRefreshLayout refreshLayout;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
+
     private void initView() {
         mQiugoudatingSearch = (TextView) findViewById(R.id.qiugoudating_search);
         mQiugoudatingRecyclerview = (RecyclerView) findViewById(R.id.qiugoudating_recyclerview);
@@ -86,9 +93,9 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_fengexian));
-        mQiugoudatingRecyclerview.addItemDecoration(itemDecoration);
+//        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_fengexian));
+//        mQiugoudatingRecyclerview.addItemDecoration(itemDecoration);
 
         mQiugoudatingFabuqiugou = (Button) findViewById(R.id.qiugoudating_fabuqiugou);
         mQiugoudatingFabuqiugou.setOnClickListener(this);
@@ -112,13 +119,13 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
                 Intent intent = new Intent(QiugoudatingActivity.this, QiugouxiangqingActivity.class);
                 QiugouBean item = (QiugouBean) adapter.getItem(position);
                 intent.putExtra("enquiryId", item.getId());
-                intent.putExtra("isCharger",item.getIsCharger());
-                intent.putExtra("status",item.getStatus());
+                intent.putExtra("isCharger", item.getIsCharger());
+                intent.putExtra("status", item.getStatus());
                 ActivityUtils.startActivity(intent);
             }
         });
 
-         refreshListener  = new SwipeRefreshLayout.OnRefreshListener() {
+        refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 //下拉业务
@@ -158,13 +165,17 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
                 }
             }
         });
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("求购大厅");
     }
 
 
     @Override
     public void onReciveMessage(MessageBean msg) {
         super.onReciveMessage(msg);
-        switch (msg.getCode()){
+        switch (msg.getCode()) {
             case MessageBean.Code.BAOJIACHENGGONG:
                 refreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
@@ -195,7 +206,7 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", page)
                 .params("pageSize", 20)
-                .params("token",SPUtils.getInstance().getString("token"))
+                .params("token", SPUtils.getInstance().getString("token"))
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -215,7 +226,6 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
                                         isReflash = false;
                                         refreshLayout.setRefreshing(false);
                                         adapter.loadMoreComplete();
-
                                         return;
                                     }
                                     if (ObjectUtils.isEmpty(qiugouBeans)) {
@@ -260,6 +270,15 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
 
                 break;
             case R.id.qiugoudating_search:
+
+                Intent intent = new Intent(QiugoudatingActivity.this, SearchTypeActivity.class);
+                intent.putExtra("isFrom", 1);
+                intent.putExtra("keyword", "");
+                ActivityUtils.startActivity(intent);
+
+                break;
+            case R.id.toolbar_back:
+                finish();
                 break;
         }
     }

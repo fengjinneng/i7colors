@@ -29,7 +29,7 @@
         android:background="@drawable/search_oval"
         android:drawableLeft="@mipmap/search"
         android:drawablePadding="10dp"
-        android:hint="搜索您想要的商品"
+        android:hint="搜索"
         android:imeOptions="actionSearch"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"

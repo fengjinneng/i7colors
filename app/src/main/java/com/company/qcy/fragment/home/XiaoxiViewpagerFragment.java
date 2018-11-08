@@ -1,7 +1,6 @@
 package com.company.qcy.fragment.home;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,10 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.company.qcy.R;
-import com.company.qcy.adapter.other.BaseViewpageAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class XiaoxiViewpagerFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";

@@ -7,6 +7,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -33,12 +35,17 @@ import com.lzy.okgo.model.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WodebaojiaActivity extends AppCompatActivity {
+public class WodebaojiaActivity extends AppCompatActivity implements View.OnClickListener {
 
     private CommonTabLayout commonTabLayout;
     private RecyclerView recyclerView;
     private List<BaojiaBean> datas;
     private WodebaojiaAdapter adapter;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,8 +105,8 @@ public class WodebaojiaActivity extends AppCompatActivity {
             }
         });
 
-        if(!StringUtils.isEmpty(status)){
-            commonTabLayout.setCurrentTab(Integer.parseInt(status)+1);
+        if (!StringUtils.isEmpty(status)) {
+            commonTabLayout.setCurrentTab(Integer.parseInt(status) + 1);
         }
         //创建适配器
         adapter = new WodebaojiaAdapter(R.layout.item_wode_qiugouliebiao, datas);
@@ -131,6 +138,10 @@ public class WodebaojiaActivity extends AppCompatActivity {
                 ActivityUtils.startActivity(i);
             }
         });
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("我的报价");
     }
 
     private int pageNo;
@@ -194,5 +205,15 @@ public class WodebaojiaActivity extends AppCompatActivity {
                 });
 
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.toolbar_back:
+                break;
+        }
     }
 }

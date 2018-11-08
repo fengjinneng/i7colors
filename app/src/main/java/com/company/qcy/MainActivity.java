@@ -3,16 +3,20 @@ package com.company.qcy;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.fragment.home.HomeFragment;
 import com.company.qcy.fragment.home.ToutiaoFragment;
@@ -28,7 +32,8 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+
+public class MainActivity extends BaseActivity {
 
     private BottomNavigationBar mBottomnavigation;
 
@@ -39,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initView();
         update();
+
+//        Uri uri = getIntent().getData();
+//        ARouter.getInstance().build(uri).navigation();
+//        finish();
+
     }
 
 
@@ -89,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 switch (position) {
                     case 0:
+                        isNetWork();
+
                         choicedWhitchFragment = 0;
                         if (homeFragment == null) {
 
@@ -99,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.show(homeFragment);
                         break;
                     case 1:
+                        isNetWork();
+
                         choicedWhitchFragment = 1;
                         if (toutiaoFragment == null) {
                             toutiaoFragment = new ToutiaoFragment();
@@ -108,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.show(toutiaoFragment);
                         break;
                     case 2:
+                        isNetWork();
+
                         choicedWhitchFragment = 2;
                         if (xiaoxiFragment == null) {
 
@@ -118,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.show(xiaoxiFragment);
                         break;
                     case 3:
+                        isNetWork();
+
                         if (!StringUtils.equals(SPUtils.getInstance().getString("isLogin"), "true")) {
 
                             startActivity(new Intent(MainActivity.this, LoginActivity.class));

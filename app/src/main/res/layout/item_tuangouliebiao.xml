@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/baise"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_tuangouliebiao_img"
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/x240"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/morentouxiang" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_tuangouliebiao_price_layout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x104"
+        android:background="@mipmap/anniujianbian"
+        app:layout_constraintEnd_toEndOf="@+id/item_tuangouliebiao_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_tuangouliebiao_img">
+
+
+        <TextView
+            android:id="@+id/textView118"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x18"
+            android:text="原价:¥"
+            android:textSize="@dimen/x21"
+            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_yuanjia"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_tuangouliebiao_yuanjia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/textView118"
+            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_yuanjia_danwei"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView118"
+            app:layout_constraintTop_toTopOf="@+id/textView118" />
+
+        <TextView
+            android:id="@+id/item_tuangouliebiao_yuanjia_danwei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_yuanjia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_yuanjia" />
+
+        <TextView
+            android:id="@+id/textView121"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/erjibiaoti"
+            app:layout_constraintBottom_toBottomOf="@+id/textView118"
+            app:layout_constraintEnd_toEndOf="@+id/item_tuangouliebiao_yuanjia_danwei"
+            app:layout_constraintStart_toStartOf="@+id/textView118"
+            app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_yuanjia" />
+
+        <TextView
+            android:id="@+id/textView122"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="团购价:¥"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x21"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_tuangoujia"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/item_tuangouliebiao_tuangoujia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/baise"
+            app:layout_constraintBottom_toBottomOf="@+id/textView122"
+            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_tuangoujia_danwei"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView122" />
+
+        <TextView
+            android:id="@+id/item_tuangouliebiao_tuangoujia_danwei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x21"
+
+            app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_tuangoujia"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_tuangoujia" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_productname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/x16"
+        android:text="活性黑 WNN "
+        android:textColor="@color/erjibiaoti"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView79"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="总量:"
+        app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_productname"
+        app:layout_constraintTop_toBottomOf="@+id/item_tuangouliebiao_productname" />
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView79"
+        app:layout_constraintStart_toEndOf="@+id/textView79" />
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_total_danwei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_total"
+        app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_total" />
+
+    <TextView
+        android:id="@+id/textView97"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="剩余量:"
+        app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_total_danwei"
+        app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_total_danwei" />
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_shengyu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/textView97"
+        app:layout_constraintStart_toEndOf="@+id/textView97" />
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_shengyu_danwei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_shengyu"
+        app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_shengyu" />
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_zuixiaorenling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="最小认领量 "
+        android:textSize="@dimen/x24"
+        app:layout_constraintStart_toStartOf="@+id/textView79"
+        app:layout_constraintTop_toBottomOf="@+id/textView79" />
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_zuidarenling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="最大认领量 "
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_zuixiaorenling"
+        app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_zuixiaorenling" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_tuangouliebiao_status_time_layout"
+        android:layout_width="229dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_price_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_productname"
+        app:layout_constraintTop_toBottomOf="@+id/item_tuangouliebiao_zuixiaorenling">
+
+        <TextView
+            android:id="@+id/item_tuangouliebiao_time_from"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="2018-09-21"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_to"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/item_tuangouliebiao_time_to"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:src="@mipmap/tuangou_riqi"
+            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_end"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_time_from"
+            app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_time_from" />
+
+        <TextView
+            android:id="@+id/item_tuangouliebiao_time_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2018-10-27"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_time_to"
+            app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_time_from" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_tuangouliebiao_status_layout"
+        android:layout_width="229dp"
+        android:layout_height="0dp"
+        android:visibility="invisible"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_price_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_productname"
+        app:layout_constraintTop_toBottomOf="@+id/item_tuangouliebiao_zuixiaorenling">
+
+        <TextView
+            android:id="@+id/item_tuangouliebiao_status_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="团购成功!"
+            android:textColor="@color/chunhongse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_status_text_img"
+            app:layout_constraintHorizontal_bias="0.3"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/item_tuangouliebiao_status_text_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_status_text"
+            app:layout_constraintTop_toTopOf="parent"
+             />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_yirenling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:text="已认领总量 "
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_seekbar"
+        app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_seekbar" />
+
+    <TextView
+        android:id="@+id/item_tuangouliebiao_baifenbi"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_tuangouliebiao_status_img"
+        android:layout_width="@dimen/x110"
+        android:layout_height="@dimen/x110"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <SeekBar
+        android:id="@+id/item_tuangouliebiao_seekbar"
+        style="@style/custom_seekbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_baifenbi"
+        app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_baifenbi"
+        app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_price_layout"
+        app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_baifenbi" />
+</android.support.constraint.ConstraintLayout>

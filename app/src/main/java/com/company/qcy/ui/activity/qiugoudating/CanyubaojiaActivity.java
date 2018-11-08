@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -13,7 +14,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -75,6 +75,11 @@ public class CanyubaojiaActivity extends AppCompatActivity implements View.OnCli
      * 填写50字以内的报价说明...
      */
     private EditText mActivityCanyubaojiaDescription;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +116,10 @@ public class CanyubaojiaActivity extends AppCompatActivity implements View.OnCli
         mActivityCanyubaojiaFabubaojia = (Button) findViewById(R.id.activity_canyubaojia_fabubaojia);
         mActivityCanyubaojiaFabubaojia.setOnClickListener(this);
         mActivityCanyubaojiaDescription = (EditText) findViewById(R.id.activity_canyubaojia_description);
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("参与报价");
     }
 
 
@@ -133,6 +142,9 @@ public class CanyubaojiaActivity extends AppCompatActivity implements View.OnCli
             case R.id.activity_canyubaojia_time:
 
                 onYearMonthDayPicker(mActivityCanyubaojiaTime);
+                break;
+            case R.id.toolbar_back:
+                finish();
                 break;
         }
     }
@@ -178,7 +190,7 @@ public class CanyubaojiaActivity extends AppCompatActivity implements View.OnCli
         HttpParams paras = new HttpParams();
         paras.put("sign", SPUtils.getInstance().getString("sign"));
         paras.put("token", SPUtils.getInstance().getString("token"));
-        if(StringUtils.isEmpty(SPUtils.getInstance().getString("companyName"))){
+        if (StringUtils.isEmpty(SPUtils.getInstance().getString("companyName"))) {
             paras.put("companyName2", mActivityCanyubaojiaCompany.getText().toString());
         }
         paras.put("enquiryId", enquiryId);

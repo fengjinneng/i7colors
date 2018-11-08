@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -33,18 +34,14 @@ import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import cn.qqtheme.framework.entity.City;
 import cn.qqtheme.framework.entity.County;
 import cn.qqtheme.framework.entity.Province;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.SinglePicker;
-
 
 public class FabuqiugouActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -123,6 +120,11 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
     private TextView mActivityFabuqiugouZongliangkg;
     /**  */
     private TextView mActivityFabuqiugouDanweiText;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     /**
      * 发布求购
@@ -211,6 +213,10 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
             mActivityFabuqiugouCompanyName.setText(SPUtils.getInstance().getString("companyName"));
             mActivityFabuqiugouCompanyName.setEnabled(false);
         }
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("发布求购");
     }
 
 
@@ -325,6 +331,9 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
                 }
 
                 break;
+            case R.id.toolbar_back:
+                finish();
+                break;
         }
     }
 
@@ -392,11 +401,11 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
                                 if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     String data = jsonObject.getString("data");
                                     String msg = jsonObject.getString("msg");
-                                    if(StringUtils.equals("true",data)){
+                                    if (StringUtils.equals("true", data)) {
                                         ToastUtils.showShort("您的发布已成功");
                                         EventBus.getDefault().post(new MessageBean(MessageBean.Code.FABUQIUGOUCHENGGONG));
                                         ActivityUtils.finishActivity(FabuqiugouActivity.class);
-                                    }else ToastUtils.showShort(msg);
+                                    } else ToastUtils.showShort(msg);
 
                                     return;
 
@@ -568,7 +577,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         picker.setCycleDisable(true);
         picker.setTopPadding(15);
         if (i == 1) {
-            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() );
+            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
             picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay());
         }
         if (i == 2) {

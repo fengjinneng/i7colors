@@ -51,6 +51,8 @@ public class MessageBean {
 
         //采纳报价成功
         public static final int CAINABAOJIACHENGGONG = 1005;
+
+
     }
 
 

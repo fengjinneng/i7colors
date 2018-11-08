@@ -1,45 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x240">
+    android:layout_height="@dimen/x250"
+    android:background="@color/baise"
+    tools:layout_editor_absoluteY="25dp">
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/item_chanpindating_img"
         android:layout_width="@dimen/x240"
-        android:layout_height="@dimen/x240"
+        android:layout_height="115dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/kaifangshangcheng" />
 
     <TextView
 
         android:id="@+id/item_chanpindating_company"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/x22"
-        android:layout_marginTop="@dimen/x24"
-        android:layout_toEndOf="@+id/imageView6"
-        android:text="山东索玛德染料有限公司"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:textColor="@color/biaoti"
         android:textSize="@dimen/x30"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_chanpindating_img"
+        app:layout_constraintTop_toTopOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/item_chanpindating_yijianhujiao"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x45"
+        android:layout_alignBottom="@+id/item_chanpindating_img"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView124"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@mipmap/yijianhujiao" />
+
+
+    <TextView
+        android:id="@+id/item_chanpindating_detail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/item_chanpindating_company"
+        android:layout_below="@+id/item_chanpindating_company"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/x8"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_company"
+        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_company" />
 
     <co.lujun.androidtagview.TagContainerLayout
         android:id="@+id/item_chanpindating_tagcontainer"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/item_chanpindating_company"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/textView14"
+        android:layout_below="@+id/item_chanpindating_detail"
         android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/x16"
-        app:container_max_lines ="1"
+        android:layout_marginTop="@dimen/x14"
         app:container_background_color="@color/baise"
         app:container_border_color="@color/baise"
         app:container_enable_drag="false"
+        app:container_max_lines="1"
         app:horizontal_interval="@dimen/x12"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_detail"
+        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_detail"
         app:tag_background_color="@color/baise"
         app:tag_border_color="@color/erjibiaoti"
         app:tag_corner_radius="5dp"
@@ -49,34 +90,92 @@
         app:vertical_interval="@dimen/x10">
 
     </co.lujun.androidtagview.TagContainerLayout>
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/item_chanpindating_company"
-        android:layout_below="@+id/item_chanpindating_company"
-        android:layout_marginTop="@dimen/x4"
-        android:textSize="@dimen/x24"
-        android:text="分散染料 分散大红Gs(R153#)200% " />
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_chanpindating_jiage_layout"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_chanpindating_yijianhujiao"
+        app:layout_constraintEnd_toStartOf="@+id/item_chanpindating_yijianhujiao"
+        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_tagcontainer"
+        app:layout_constraintTop_toTopOf="@+id/item_chanpindating_yijianhujiao">
+
+        <TextView
+
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="¥ "
+            android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_chanpindating_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView15"
+            android:layout_toEndOf="@+id/textView15"
+            android:text="13213"
+            android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x36"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView15"
+            app:layout_constraintStart_toEndOf="@+id/textView15" />
+
+
+        <TextView
+            android:id="@+id/textView125"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="元/KG"
+            android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBaseline_toBaselineOf="@+id/item_chanpindating_price"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/item_chanpindating_price" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_chanpindating_yijia_layout"
+        android:layout_width="0dp"
+        android:layout_height="26dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/item_chanpindating_yijianhujiao"
+        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_tagcontainer"
+        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_tagcontainer">
+
+        <TextView
+
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="议价"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView6"
-        android:layout_alignStart="@+id/item_chanpindating_company"
-        android:layout_marginBottom="@dimen/x34"
-        android:text="查看详情 "
-        android:textSize="@dimen/x20" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/x45"
-        android:layout_alignBottom="@+id/imageView6"
-        android:layout_alignParentEnd="true"
-        app:srcCompat="@mipmap/yijianhujiao"
-        android:layout_marginEnd="@dimen/x20"
-        android:layout_marginBottom="@dimen/x36"
-         />
-</RelativeLayout>
+        android:id="@+id/textView124"
+        android:layout_width="0dp"
+        android:background="@color/fengexian"
+        android:layout_height="@dimen/x10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>

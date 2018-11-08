@@ -1,17 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Main2Activity"
     android:orientation="vertical"
+    tools:context=".Main2Activity"
     tools:layout_editor_absoluteY="25dp">
 
 
-    <Button
+    <TextView
         android:id="@+id/button3"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="352dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/chunhongse"
+        android:gravity="center"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <com.lijiankun24.shadowlayout.ShadowLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x20"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button3"
+        app:shadowColor="#66292525"
+        app:shadowDx="0dp"
+        app:shadowDy="3dp"
+        app:shadowRadius="5dp"
+        app:shadowSide="bottom">
+
+    </com.lijiankun24.shadowlayout.ShadowLayout>
+
+
+    <com.lijiankun24.shadowlayout.ShadowLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button" />
-</LinearLayout>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shadowColor="#66000000"
+        app:shadowDx="0dp"
+        app:shadowDy="3dp"
+        app:shadowRadius="10dp"
+        app:shadowSide="all">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@android:color/white"
+            android:contentDescription="@null"
+            android:src="@mipmap/qiugoudating" />
+    </com.lijiankun24.shadowlayout.ShadowLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,34 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/baise"
     tools:context=".fragment.chanyezixun.ChanyezixunFragment">
 
 
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x10"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/item_chanyexixun_img"
         android:layout_width="116dp"
         android:layout_height="114dp"
-        android:src="@mipmap/qiugoudating" />
+        android:src="@mipmap/qiugoudating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
         android:id="@+id/item_chanyexixun_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="15dp"
-        android:text="TextView" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:text="喜报 | 七彩云荣获纺织行业,人工智能和纺织工业深度融合"
+        android:textColor="@color/erjibiaoti"
+        android:textSize="@dimen/x30"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_chanyexixun_img"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_chanyexixun_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/item_chanyexixun_title"
-        android:layout_marginTop="54dp"
-        android:text="TextView" />
-</RelativeLayout>
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/x10"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:text="为了促进纺织行业高质量发展，推动互联网、大数据、人工智能和纺织工业深度融合，加快工业互联网在纺织行业的创新应用，中国纺织工业联"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_chanyexixun_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_chanyexixun_title" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="产看详情 >>"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_chanyexixun_content" />
+
+    <TextView
+        android:id="@+id/item_chanyexixun_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x20"
+        android:layout_marginEnd="8dp"
+        android:text="2018-09-18"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="新闻日期:"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/item_chanyexixun_time"
+        app:layout_constraintEnd_toStartOf="@+id/item_chanyexixun_time" />
+</android.support.constraint.ConstraintLayout>

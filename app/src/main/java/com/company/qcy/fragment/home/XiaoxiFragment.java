@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.company.qcy.R;
-import com.company.qcy.adapter.other.BaseViewpageAdapter;
+import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.flyco.tablayout.SlidingTabLayout;
 
 import java.util.ArrayList;

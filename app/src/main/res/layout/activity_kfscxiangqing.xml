@@ -7,12 +7,8 @@
     tools:context=".ui.activity.kaifangshangcheng.KFSCXiangqingActivity">
 
 
-
-
-
-
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/nestedScrollView"
+        android:id="@+id/activity_kfscxiangqing_nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:focusableInTouchMode="true"
@@ -37,6 +33,7 @@
 
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_kfscxiangqing_constrainlayout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x100"
                 android:background="@color/baise">
@@ -58,7 +55,6 @@
                     android:layout_marginStart="@dimen/x20"
                     android:ellipsize="end"
                     android:singleLine="true"
-                    android:text="山东索玛德染料有限公司"
                     android:textColor="@color/erjibiaoti"
                     android:textSize="@dimen/x24"
                     android:textStyle="bold"
@@ -78,29 +74,29 @@
                     app:layout_constraintTop_toBottomOf="@+id/activity_kfscxiangqing_companyname" />
 
                 <ImageView
+
                     android:id="@+id/activity_kfscxiangqing_firststar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView54"
                     app:layout_constraintStart_toEndOf="@+id/textView54"
-                    app:layout_constraintTop_toTopOf="@+id/textView54"
-                    app:srcCompat="@mipmap/wujiaoxing_kongxin" />
+                    app:layout_constraintTop_toTopOf="@+id/textView54" />
 
                 <ImageView
                     android:id="@+id/activity_kfscxiangqing_secondstar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_firststar"
                     app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_firststar"
-                    app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_firststar"
-                    app:srcCompat="@mipmap/wujiaoxing_kongxin" />
+                    app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_firststar" />
 
                 <ImageView
                     android:id="@+id/activity_kfscxiangqing_thirdstar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_secondstar"
                     app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_secondstar"
-                    app:srcCompat="@mipmap/wujiaoxing_kongxin" />
+                    app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_secondstar" />
 
                 <ImageView
                     android:id="@+id/activity_kfscxiangqing_fourstar"
@@ -108,7 +104,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_thirdstar"
                     app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_thirdstar"
-                    app:srcCompat="@mipmap/wujiaoxing_kongxin" />
+                    app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_thirdstar" />
 
                 <ImageView
                     android:id="@+id/activity_kfscxiangqing_fivestar"
@@ -116,7 +112,7 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_fourstar"
                     app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_fourstar"
-                    app:srcCompat="@mipmap/wujiaoxing_kongxin" />
+                    app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_fourstar" />
 
                 <ImageView
                     android:id="@+id/activity_kfscxiangqing_yijianhujiao"
@@ -128,7 +124,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@mipmap/yijianhujiao" />
+                    app:srcCompat="@mipmap/hujiaoshangjia" />
             </android.support.constraint.ConstraintLayout>
 
             <View
@@ -136,7 +132,7 @@
                 android:layout_height="@dimen/x20"
                 android:background="@color/fengexian" />
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x80"
                 android:background="@color/baise">
@@ -145,23 +141,64 @@
                     android:id="@+id/activity_kfscxiangqing_all_products"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="全部商品"
                     android:textColor="@color/chunhongse"
-                    android:textSize="@dimen/x24" />
+                    android:textSize="@dimen/x24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/activity_kfscxiangqing_company_introduce"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/activity_kfscxiangqing_company_introduce"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="公司简介"
-                    android:textSize="@dimen/x24" />
+                    android:textSize="@dimen/x24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_all_products"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_kfscxiangqing_all_products_line"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/chunhongse"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/activity_kfscxiangqing_company_introduce"
+                    app:layout_constraintStart_toStartOf="@+id/activity_kfscxiangqing_all_products" />
+
+                <TextView
+                    android:id="@+id/activity_kfscxiangqing_company_introduce_line"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/chunhongse"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/activity_kfscxiangqing_company_introduce"
+                    app:layout_constraintStart_toStartOf="@+id/activity_kfscxiangqing_company_introduce" />
 
 
-            </LinearLayout>
+            </android.support.constraint.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x10"
+                android:background="@color/fengexian" />
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/activity_kfscxiangqing_recyclerview"
@@ -170,14 +207,23 @@
 
             </android.support.v7.widget.RecyclerView>
 
+
             <LinearLayout
-                android:id="@+id/linnear"
+                android:id="@+id/activity_kfscxiangqing_company_introduce_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/chunhongse"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@color/baise"
                 android:orientation="vertical"
                 android:visibility="gone">
 
+                <TextView
+                    android:id="@+id/activity_kfscxiangqing_company_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="暂无公司简介！"
+                    android:padding="32dp"
+                    android:textSize="@dimen/x26" />
             </LinearLayout>
 
 
@@ -185,17 +231,79 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_kfscxiangqing_title_layout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/chunhongse"
+        android:layout_height="@dimen/x98"
+        android:background="@color/trans"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/activity_kfscxiangqing_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/back_round" />
+
+        <TextView
+            android:id="@+id/activity_kfscxiangqing_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="朱芳庆的企业账户"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_back"
+            app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_back"
+            app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_back" />
+
+        <TextView
+            android:id="@+id/activity_kfscxiangqing_title_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/fengexian"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </android.support.constraint.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_kfscxiangqing_fenlei_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x80"
+        android:background="@color/baise"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_kfscxiangqing_title_layout">
+
+        <TextView
+            android:id="@+id/activity_kfscxiangqing_all_products_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="全部商品"
+            android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x24" />
+
+        <TextView
+            android:id="@+id/activity_kfscxiangqing_company_introduce_2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="公司简介"
+            android:textSize="@dimen/x24" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

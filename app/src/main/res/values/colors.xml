@@ -25,6 +25,11 @@
 
     <color name="lanse">#386fed</color>
 
+    <color name="trans">#00000000</color>
+
+    <color name="shenhui">#868686</color>
+    <color name="qianhui">#BCBCBC</color>
+
 
     <color name="translucent_background">#80000000</color>
 

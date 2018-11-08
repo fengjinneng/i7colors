@@ -2,6 +2,7 @@ package com.company.qcy.fragment.home;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,17 +12,40 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
-import com.company.qcy.adapter.vlayout.GridStoreLayoutAdapter;
+import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.adapter.vlayout.MarketLayoutAdapter;
 import com.company.qcy.adapter.vlayout.QiugouLayoutAdapter;
 import com.company.qcy.adapter.vlayout.SingleAdvLayoutAdapter;
+import com.company.qcy.adapter.vlayout.SingleAdvLayoutAdapter2;
 import com.company.qcy.adapter.vlayout.SingleTitleLayoutAdapter;
-import com.company.qcy.adapter.vlayout.TouTiaoLayoutAdapter;
+import com.company.qcy.base.SearchActivity;
+import com.company.qcy.bean.BannerBean;
+import com.company.qcy.bean.kaifangshangcheng.DianpuliebiaoBean;
+import com.company.qcy.bean.qiugou.QiugouBean;
+import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
+import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
+import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
+import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +53,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements View.OnClickListener {
 
 
     private RecyclerView mRecyclerview;
@@ -37,6 +61,16 @@ public class HomeFragment extends Fragment {
     private VirtualLayoutManager virtualLayoutManager;
     private Context context;
     private DelegateAdapter delegateAdapter;
+    private View view;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
+    /**
+     * 搜索产品/店铺/求购信息
+     */
+    private TextView mFragmentHomeSearch;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -53,6 +87,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        initView(inflater.inflate(R.layout.fragment_home, container, false));
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
@@ -62,86 +97,266 @@ public class HomeFragment extends Fragment {
         initView(view);
 
         setBannerData();
+        addbannerData();
 
-        addTitle();
+        setAdvData();
+        addAdvData();
 
-        addToutiao();
-
-        addTitle();
-
+        addTitle("求购大厅");
         addQiugou();
 
-        addTitle();
+        addTitle("开放商城");
+        addMarket();
 
-        addStore();
+        addData();
+    }
+
+    private MarketLayoutAdapter marketLayoutAdapter;
+    private List<DianpuliebiaoBean> marketDatas = new ArrayList<>();
+
+
+    private void addMarket() {
+        LinearLayoutHelper helper = new LinearLayoutHelper();
+        marketLayoutAdapter = new MarketLayoutAdapter(context, helper, marketDatas);
+        delegateAdapter.addAdapter(marketLayoutAdapter);
+
+        marketLayoutAdapter.setOnMarketItemClickListener(new MarketLayoutAdapter.OnMarketItemClickListener() {
+            @Override
+            public void onMarketItemClick(DianpuliebiaoBean bean) {
+                Intent intent = new Intent(context, KFSCXiangqingActivity.class);
+                intent.putExtra("id", bean.getId());
+                ActivityUtils.startActivity(intent);
+            }
+        });
+
+    }
+
+
+    private void addData() {
+
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXDATA)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("pageNo", 1)
+                .params("pageSize", 8)
+                .params("token", SPUtils.getInstance().getString("token"))
+                .execute(new DialogStringCallback(getActivity()) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("INDEXDATA", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    JSONObject data = jsonObject.getJSONObject("data");
+                                    if (ObjectUtils.isEmpty(data)) {
+                                        return;
+                                    }
+                                    if (isRefresh) {
+                                        qiugouDatas.clear();
+                                        marketDatas.clear();
+                                    }
+                                    JSONArray enquiryList = data.getJSONArray("enquiryList");
+                                    JSONArray marketList = data.getJSONArray("marketList");
+                                    List<QiugouBean> qiugouBeans = JSONObject.parseArray(enquiryList.toJSONString(), QiugouBean.class);
+                                    List<DianpuliebiaoBean> marketsBeans = JSONObject.parseArray(marketList.toJSONString(), DianpuliebiaoBean.class);
+                                    qiugouDatas.addAll(qiugouBeans);
+                                    qiugouLayoutAdapter.notifyDataSetChanged();
+                                    marketDatas.addAll(marketsBeans);
+                                    marketLayoutAdapter.notifyDataSetChanged();
+
+                                    return;
+
+                                }
+                                SignAndTokenUtil.checkSignAndToken(getActivity(), jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
 
 
     }
 
-    private void addStore() {
-        List<String> datas = new ArrayList<>();
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
+    private List<String> advDatas = new ArrayList<>();
+    SingleAdvLayoutAdapter2 advAdapter;
+
+    private void setAdvData() {
+
         SingleLayoutHelper helper = new SingleLayoutHelper();
-        GridStoreLayoutAdapter adapter = new GridStoreLayoutAdapter(context,datas,helper);
-        delegateAdapter.addAdapter(adapter);
+        advAdapter = new SingleAdvLayoutAdapter2(context, helper, 1, advDatas);
+        delegateAdapter.addAdapter(advAdapter);
+    }
+
+
+    private void addAdvData() {
+
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "XCX_Index_Banner")
+                .execute(new DialogStringCallback(getActivity()) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("INDEXBANNER2", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    JSONArray data = jsonObject.getJSONArray("data");
+                                    if (ObjectUtils.isEmpty(data)) {
+                                        return;
+                                    }
+                                    List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+                                    if (isRefresh) {
+                                        advDatas.clear();
+                                    }
+                                    for (int i = 0; i < bannerBeans.size(); i++) {
+                                        advDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
+                                    }
+
+                                    advAdapter.notifyDataSetChanged();
+                                    return;
+
+                                }
+                                SignAndTokenUtil.checkSignAndToken(getActivity(), jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
 
     }
+
+    private void addbannerData() {
+
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "XCX_Index_Banner")
+                .execute(new DialogStringCallback(getActivity()) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("INDEXBANNER", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    JSONArray data = jsonObject.getJSONArray("data");
+                                    if (ObjectUtils.isEmpty(data)) {
+                                        return;
+                                    }
+                                    List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+                                    if (isRefresh) {
+                                        bannerDatas.clear();
+                                    }
+
+                                    for (int i = 0; i < bannerBeans.size(); i++) {
+                                        bannerDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
+                                    }
+
+                                    bannerAdapter.notifyDataSetChanged();
+                                    return;
+
+                                }
+                                SignAndTokenUtil.checkSignAndToken(getActivity(), jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+
+    }
+
+
+    private List<QiugouBean> qiugouDatas = new ArrayList<>();
+    private QiugouLayoutAdapter qiugouLayoutAdapter;
 
     private void addQiugou() {
-        List<String> datas = new ArrayList<>();
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-
         LinearLayoutHelper helper = new LinearLayoutHelper();
-        QiugouLayoutAdapter adapter = new QiugouLayoutAdapter(context,helper,datas);
-        delegateAdapter.addAdapter(adapter);
+        qiugouLayoutAdapter = new QiugouLayoutAdapter(context, helper, qiugouDatas);
+        delegateAdapter.addAdapter(qiugouLayoutAdapter);
+        qiugouLayoutAdapter.setOnQiugouItemClickListener(new QiugouLayoutAdapter.OnQiugouItemClickListener() {
+            @Override
+            public void onQiugouItemClick(QiugouBean item) {
+                Intent intent = new Intent(context, QiugouxiangqingActivity.class);
+                intent.putExtra("enquiryId", item.getId());
+                intent.putExtra("isCharger", item.getIsCharger());
+                intent.putExtra("status", item.getStatus());
+                ActivityUtils.startActivity(intent);
+            }
+        });
 
 
     }
 
-    private void addToutiao() {
-        List<String> datas = new ArrayList<>();
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-        datas.add("这是一条很重要的新闻");
-
-        LinearLayoutHelper helper = new LinearLayoutHelper();
-        TouTiaoLayoutAdapter adapter = new TouTiaoLayoutAdapter(context,helper,datas);
-        delegateAdapter.addAdapter(adapter);
-
-    }
-
-    private void addTitle() {
-
+    private void addTitle(String title) {
         SingleLayoutHelper helper = new SingleLayoutHelper();
-        SingleTitleLayoutAdapter adapter = new SingleTitleLayoutAdapter(context,helper,1,"求购信息");
+        SingleTitleLayoutAdapter adapter = new SingleTitleLayoutAdapter(context, helper, 1, title, false);
         delegateAdapter.addAdapter(adapter);
+        if (StringUtils.equals("求购大厅", title)) {
+            adapter.setOnMoreClickListner(new SingleTitleLayoutAdapter.OnMoreClickListner() {
+                @Override
+                public void onMoreClick() {
+                    ActivityUtils.startActivity(QiugoudatingActivity.class);
+                }
+            });
+        } else {
+            adapter.setOnMoreClickListner(new SingleTitleLayoutAdapter.OnMoreClickListner() {
+                @Override
+                public void onMoreClick() {
+                    ActivityUtils.startActivity(KaifangshangchengActivity.class);
+                }
+            });
+        }
 
     }
+
+    //banner的adapter
+    private List<String> bannerDatas = new ArrayList<>();
+    private SingleAdvLayoutAdapter bannerAdapter;
 
     private void setBannerData() {
-
-        List<String> datas = new ArrayList<>();
-        datas.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1240469072,2191573380&fm=26&gp=0.jpg");
-        datas.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1240469072,2191573380&fm=26&gp=0.jpg");
-        datas.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1240469072,2191573380&fm=26&gp=0.jpg");
-        datas.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1240469072,2191573380&fm=26&gp=0.jpg");
-        datas.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1240469072,2191573380&fm=26&gp=0.jpg");
-
         SingleLayoutHelper helper = new SingleLayoutHelper();
-        SingleAdvLayoutAdapter adapter = new SingleAdvLayoutAdapter(context, helper, 1, datas);
-        delegateAdapter.addAdapter(adapter);
+        bannerAdapter = new SingleAdvLayoutAdapter(context, helper, 1, bannerDatas);
+        delegateAdapter.addAdapter(bannerAdapter);
     }
 
+
+    private boolean isRefresh;
 
     private void initView(View view) {
         mRecyclerview = view.findViewById(R.id.fragment_home_recyclerview);
@@ -153,5 +368,32 @@ public class HomeFragment extends Fragment {
         delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         mRecyclerview.setAdapter(delegateAdapter);
 
+        mToolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) view.findViewById(R.id.toolbar_back);
+        mToolbarBack.setVisibility(View.INVISIBLE);
+        mToolbarTitle.setText("首页");
+        mSwipeRefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                isRefresh = true;
+                addbannerData();
+                addAdvData();
+                addData();
+                mSwipeRefreshlayout.setRefreshing(false);
+            }
+        });
+        mFragmentHomeSearch = (TextView) view.findViewById(R.id.fragment_home_search);
+        mFragmentHomeSearch.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.fragment_home_search:
+                ActivityUtils.startActivity(SearchActivity.class);
+                break;
+        }
     }
 }

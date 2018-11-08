@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:gravity="center_vertical"
     android:background="@color/baise"
     android:id="@+id/toolbar_layout"
-    android:layout_height="51dp">
+    android:layout_height="@dimen/x102">
 
 
     <TextView
         android:id="@+id/toolbar_title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true"
-        android:gravity="center_vertical"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:singleLine="true"
         android:text="标题"
         android:textColor="@color/biaoti"
-        android:textSize="20sp" />
+        android:textSize="@dimen/x36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/toolbar_text"
+        app:layout_constraintStart_toEndOf="@+id/toolbar_back"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:visibility="gone"
         android:id="@+id/toolbar_back"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -27,26 +33,36 @@
         android:layout_centerVertical="true"
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/back" />
 
     <View
+        android:id="@+id/view9"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:background="@color/fengexian" />
+        android:background="@color/fengexian"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="parent" />
 
     <TextView
-        android:visibility="gone"
-        android:paddingRight="28dp"
-        android:gravity="center"
-        android:textSize="@dimen/x30"
-        android:paddingLeft="28dp"
+        android:visibility="invisible"
         android:id="@+id/toolbar_text"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:text="设置" />
+        android:gravity="center"
+        android:paddingLeft="28dp"
+        android:paddingRight="28dp"
+        android:text="设置"
+        android:textSize="@dimen/x30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -290,10 +290,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             //注册
             case R.id.login_register:
+                ActivityUtils.startActivity(RegisterActivity.class);
                 break;
 
             //忘记密码
             case R.id.login_forgetpassword:
+                ActivityUtils.startActivity(ForgetPasswordActivity.class);
                 break;
 
             //微信登录

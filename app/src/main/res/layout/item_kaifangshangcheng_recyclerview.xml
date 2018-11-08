@@ -22,7 +22,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView5"
+                android:id="@+id/item_kaifangshangcheng_img"
                 android:layout_width="@dimen/x240"
                 android:layout_height="match_parent"
                 android:padding="@dimen/x48"
@@ -55,7 +55,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toEndOf="@+id/item_kaifangshangcheng_img"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/item_kaifangshangcheng_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -87,11 +87,12 @@
                 app:container_background_color="@color/baise"
                 app:container_border_color="@color/baise"
                 app:container_enable_drag="false"
+                app:container_max_lines="1"
                 app:horizontal_interval="@dimen/x12"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView18"
+                app:layout_constraintTop_toBottomOf="@+id/textView17"
                 app:tag_background_color="@color/baise"
                 app:tag_border_color="@color/erjibiaoti"
                 app:tag_corner_radius="5dp"
@@ -112,12 +113,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/item_kaifangshangcheng_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="江苏省徐州市"
                 android:textSize="@dimen/x24"
-                app:layout_constraintStart_toStartOf="@+id/textView13"
+                app:layout_constraintStart_toStartOf="@+id/item_kaifangshangcheng_phone"
                 app:layout_constraintTop_toTopOf="@+id/textView17" />
 
             <TextView

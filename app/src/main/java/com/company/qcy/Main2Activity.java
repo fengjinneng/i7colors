@@ -20,16 +20,11 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_wode_qiugouliebiao);
+        setContentView(R.layout.activity_main2);
         initView();
     }
 
     private void initView() {
-
-
-
-
-
     }
 
     @Override
