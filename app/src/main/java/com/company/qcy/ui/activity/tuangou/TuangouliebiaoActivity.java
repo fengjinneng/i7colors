@@ -7,12 +7,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
@@ -20,10 +24,15 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.tuangou.TuangouRecyclerviewAdapter;
+import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.BannerBean;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.tuangou.TuangouBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -32,7 +41,7 @@ import com.lzy.okgo.model.Response;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TuangouliebiaoActivity extends AppCompatActivity implements View.OnClickListener {
+public class TuangouliebiaoActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -117,6 +126,101 @@ public class TuangouliebiaoActivity extends AppCompatActivity implements View.On
         });
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("七彩云团购惠");
+        addBannerData();
+
+    }
+
+    private List<String> advDatas = new ArrayList<>();
+
+    ConvenientBanner convenientBanner;
+
+    private void addHeadView() {
+
+        View inflate = LayoutInflater.from(this).inflate(R.layout.head_tuangouhui, null);
+        convenientBanner = (ConvenientBanner) inflate.findViewById(R.id.head_tuangouhui_convenientBanner);
+
+        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+            @Override
+            public NetworkImageHolderView createHolder() {
+                return new NetworkImageHolderView();
+            }
+        }, advDatas);
+        convenientBanner.setPageIndicator(new int[]{R.mipmap.banner_unchoiced, R.mipmap.banner_choiced});
+        convenientBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+        //设置如果只有一组数据时不能滑动
+        convenientBanner.setPointViewVisible(advDatas.size() == 1 ? false : true); // 指示器
+        convenientBanner.setManualPageable(advDatas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
+        convenientBanner.setCanLoop(advDatas.size() == 1 ? false : true); // 是否循环
+
+
+        convenientBanner.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+            }
+        });
+        adapter.addHeaderView(inflate);
+    }
+
+
+    @Override
+    public void onReciveMessage(MessageBean msg) {
+        super.onReciveMessage(msg);
+        switch (msg.getCode()) {
+            case MessageBean.Code.TUANGOUCHENGGONG:
+
+                isReflash = true;
+                addData();
+                break;
+        }
+
+    }
+
+
+    private void addBannerData() {
+
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "APP_Index_Banner")
+                .execute(new DialogStringCallback(this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("INDEXBANNER2", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    JSONArray data = jsonObject.getJSONArray("data");
+                                    if (ObjectUtils.isEmpty(data)) {
+                                        return;
+                                    }
+                                    List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+                                    for (int i = 0; i < bannerBeans.size(); i++) {
+                                        advDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
+                                    }
+                                    addHeadView();
+
+                                    return;
+
+                                }
+                                SignAndTokenUtil.checkSignAndToken(TuangouliebiaoActivity.this, jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+
     }
 
 

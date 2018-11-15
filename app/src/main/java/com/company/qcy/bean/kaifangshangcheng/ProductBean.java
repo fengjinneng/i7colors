@@ -29,6 +29,15 @@ public class ProductBean {
     private List<String> detailPicList;
     private List<PropMapBean> propMap;
     private Long shopId;
+    private String companyName;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public Long getShopId() {
         return shopId;

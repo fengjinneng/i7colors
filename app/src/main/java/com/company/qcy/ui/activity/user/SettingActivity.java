@@ -28,6 +28,10 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
     private ImageView mToolbarBack;
     private ConstraintLayout mActivitySettingAboutQcy;
     private ConstraintLayout mActivitySettingClearcache;
+    /**
+     * 账户中心
+     */
+    private TextView mActivitySettingZhanghuzhongxin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         mActivitySettingAboutQcy.setOnClickListener(this);
         mActivitySettingClearcache.setOnClickListener(this);
         mToolbarTitle.setText("设置");
+        mActivitySettingZhanghuzhongxin = (TextView) findViewById(R.id.activity_setting_zhanghuzhongxin);
+        mActivitySettingZhanghuzhongxin.setOnClickListener(this);
     }
 
     @Override
@@ -84,6 +90,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.activity_setting_clearcache:
                 ToastUtils.showShort("清理缓存");
+                break;
+            case R.id.activity_setting_zhanghuzhongxin:
+                ActivityUtils.startActivity(ZhanghaozhongxinActivity.class);
                 break;
         }
     }

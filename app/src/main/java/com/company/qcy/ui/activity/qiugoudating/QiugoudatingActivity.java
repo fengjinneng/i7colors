@@ -83,7 +83,6 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
 
         //创建适配器
         adapter = new QiugoudatingRecyclerviewAdapter(R.layout.item_qiugoudating_recyclerview, datas);
-        adapter.setEnableLoadMore(false);
         //给RecyclerView设置适配器
         mQiugoudatingRecyclerview.setAdapter(adapter);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {

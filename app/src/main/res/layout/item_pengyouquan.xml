@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/item_pengyouquan_headimg"
+        android:layout_width="@dimen/x108"
+        android:layout_height="@dimen/x108"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/x30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/morentouxiang" />
+
+    <ImageView
+        android:id="@+id/item_pengyouquan_bigv_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_pengyouquan_headimg"
+        app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_headimg"
+        app:srcCompat="@mipmap/bigv" />
+
+    <TextView
+        android:id="@+id/item_pengyouquan_renzheng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="已认证"
+        app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_headimg"
+        app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_headimg"
+        app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_headimg" />
+
+    <TextView
+        android:id="@+id/item_pengyouquan_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/x30"
+        android:text="中国印染行业协会会长 陈志华"
+        android:textColor="@color/chunhongse"
+        android:textSize="@dimen/x30"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_guanzhu"
+        app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_headimg"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_pengyouquan_guanzhu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="已关注"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_name" />
+
+    <TextView
+        android:id="@+id/item_pengyouquan_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text="值此辞旧迎新之际，我谨代表中国印染行业协会向所有为印染行业发展而兢兢业业、勤勤恳恳工作值此辞旧迎新之际"
+        android:textSize="@dimen/x26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_name"
+        app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_name" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout19"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_content"
+        app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_content"
+        app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_content">
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_img2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img2"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_img3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_img1"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img3"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_img2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img4"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_img5"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_img1"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img5"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_img6"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_img4"
+            app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_img4"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img6"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_img5"
+            app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_img5"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img7"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_img8"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_img4"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img8"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_img9"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_img7"
+            app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_img7"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+        <ImageView
+            android:id="@+id/item_pengyouquan_img9"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x120"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_img8"
+            app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_img8"
+            app:srcCompat="@mipmap/anniujianbian" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imageView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout19"
+        app:srcCompat="@mipmap/xiaoxi_unchecked" />
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="248dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_headimg"
+        app:layout_constraintTop_toBottomOf="@+id/imageView26">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/item_pengyouquan_touxiang_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="74dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/item_pengyouquan_message_recyclerview"
+            android:layout_width="0dp"
+            android:layout_height="123dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_touxiang_recyclerview" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

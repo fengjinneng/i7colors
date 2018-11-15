@@ -136,13 +136,13 @@ public class ChanpinLayoutAdapter extends DelegateAdapter.Adapter<ChanpinLayoutA
 
         public ChanpinLayoutViewHolder(View root) {
             super(root);
-            company = root.findViewById(R.id.item_chanpindating_company);
+            company = root.findViewById(R.id.item_chanpindating_companyName);
             img = root.findViewById(R.id.item_chanpindating_img);
             tagContainerLayout = root.findViewById(R.id.item_chanpindating_tagcontainer);
             price = root.findViewById(R.id.item_chanpindating_price);
             yijia = root.findViewById(R.id.item_chanpindating_yijia_layout);
             jiage = root.findViewById(R.id.item_chanpindating_jiage_layout);
-            detail = root.findViewById(R.id.item_chanpindating_detail);
+            detail = root.findViewById(R.id.item_chanpindating_productName);
             yijianhujiao = root.findViewById(R.id.item_chanpindating_yijianhujiao);
 
         }

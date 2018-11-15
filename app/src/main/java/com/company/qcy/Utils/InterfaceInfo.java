@@ -22,10 +22,17 @@ public class InterfaceInfo {
     //获取token
     public static final String TOKEN = "user/getRequestSign";
     //注册短信验证码
-    public static final String SENDSMS = "user/send_sms_code_register";
+    public static final String SENDSMSREGISTER = "user/send_sms_code_register";
     //注册
-    public static final String REGISTER = "user/send_sms_code_register";
+    public static final String REGISTER = "user/register";
 
+    //重置密码
+    public static final String RESETPASSWORD = "user/updatePassword";
+
+    //校验短信验证码
+    public static final String CHECKSMSCODE = "user/checkSmsCode";
+    //忘记密码短信验证码
+    public static final String SENDSMSCHECKPASSWORD = "user/send_sms_code_password";
 
     //求购列表
     public static final String QIUGOULIEBIAO = "enquiry/getEnquiryList";
@@ -57,9 +64,10 @@ public class InterfaceInfo {
     public static final String CAINABAOJIA = "enquiryOffer/acceptEnquiryOffer";
     //关闭求购
     public static final String GUANBIQIUGOU = "enquiry/cancelEnquiry";
-
         //求购搜索
     public static final String SEARCHENQUIRY = "enquiry/getEnquiryListByKeyword";
+            //报价消息已读
+   public static final String READMYACCEPTOFFER = "enquiryOffer/readMyAcceptOffer";
 
 
     //开放商城
@@ -99,4 +107,22 @@ public class InterfaceInfo {
 
     //团购记录
     public static final String GROUPBUYRECORD = "groupBuyMain/queryGroupBuyerList";
+
+    //我要团购
+    public static final String WOYAOTUANGOU = "groupBuyMain/addGroupBuyer";
+
+
+    //消息模块
+    //求购报价消息
+    public static final String GETENQUIRYINFORMLIST = "user/getMallEnquiryInformList";
+
+    //求购报价消息详情
+    public static final String GETENQUIRYINFORMDETAIL = "user/getMallEnquiryInformDetail";
+
+    //系统消息
+    public static final String SYSTEMINFORMLIST = "user/getSystemInformList";
+
+
+    //朋友圈模块
+    public static final String QUERYDYECOMMUNITYLIST = "dyeCommunity/queryDyeCommunityList";
 }

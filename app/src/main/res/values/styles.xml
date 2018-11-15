@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/chunhongse</item>
+        <item name="colorPrimaryDark">@color/chunhongse</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
@@ -35,6 +35,12 @@
 
         <item name="android:thumbOffset">0dp</item>
 
+    </style>
+
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="actionMenuTextColor">@color/baise</item> <!--  菜单字体颜色-->
+        <item name="android:textSize">@dimen/x30</item> <!-- 菜单字体大小-->
     </style>
 
 

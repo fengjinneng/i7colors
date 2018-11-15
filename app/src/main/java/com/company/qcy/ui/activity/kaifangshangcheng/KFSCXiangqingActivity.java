@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
@@ -16,6 +17,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -28,6 +34,7 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
@@ -36,34 +43,31 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.adapter.kaifangshangcheng.KFSCXiangqingRecyclerviewAdapter;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.kaifangshangcheng.DianpuxiangqingBean;
 import com.company.qcy.bean.kaifangshangcheng.ProductBean;
+import com.company.qcy.fragment.home.ToutiaoFragment;
+import com.company.qcy.fragment.kaifangshangcheng.KaifangshangchengxiangqingFragment;
+import com.company.qcy.fragment.kaifangshangcheng.KfscGongsijieshaoFragment;
+import com.company.qcy.fragment.tuangou.JibencanshuFragment;
+import com.company.qcy.fragment.tuangou.TuangouxuzhiFragment;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnClickListener, NestedScrollView.OnScrollChangeListener {
 
     private ConvenientBanner convenientBanner;
-    private RecyclerView recyclerView;
-    private KFSCXiangqingRecyclerviewAdapter adapter;
-    /**
-     * 全部商品
-     */
-    private TextView mQuanbushangpin;
-    /**
-     * 公司简介
-     */
-    private TextView mGongsijianjie;
-    private LinearLayout mLinnear;
-    List<ProductBean> products;
-
     private Long id;//店铺ID
     private ImageView mActivityKfscxiangqingCompanyLogo;
     /**
@@ -77,39 +81,13 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
     private ImageView mActivityKfscxiangqingFivestar;
     private ImageView mActivityKfscxiangqingYijianhujiao;
     /**
-     * 全部商品
-     */
-    private TextView mActivityKfscxiangqingAllProducts;
-    /**
-     * 公司简介
-     */
-    private TextView mActivityKfscxiangqingCompanyIntroduce;
-    private ConstraintLayout mActivityKfscxiangqingTitleLayout;
-    private NestedScrollView mActivityKfscxiangqingNestedScrollView;
-    private ImageView mActivityKfscxiangqingBack;
-    /**
-     * 朱芳庆的企业账户
-     */
-    private TextView mActivityKfscxiangqingTitle;
-    private ConstraintLayout mActivityKfscxiangqingConstrainlayout;
-    /**
-     * 全部商品
-     */
-    private TextView mActivityKfscxiangqingAllProducts2;
-    /**
-     * 公司简介
-     */
-    private TextView mActivityKfscxiangqingCompanyIntroduce2;
-    private LinearLayout mActivityKfscxiangqingFenleiLayout;
-    private TextView mActivityKfscxiangqingTitleLine;
-    private LinearLayout mActivityKfscxiangqingCompanyIntroduceLayout;
-    /**
      * 暂无公司简介！
      */
-    private TextView mActivityKfscxiangqingCompanyDescription;
-    private TextView mActivityKfscxiangqingAllProductsLine;
-    private TextView mActivityKfscxiangqingCompanyIntroduceLine;
-    private ImageView back;
+    private Toolbar mToolbar;
+    private CollapsingToolbarLayout mCollapsingToolbar;
+    private TabLayout mTabLayout;
+    private AppBarLayout mAppbar;
+    private ViewPager mViewpager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,25 +98,7 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
     }
 
     private void initView() {
-
         convenientBanner = (ConvenientBanner) findViewById(R.id.activity_kfscxiangqing_banner);
-        recyclerView = (RecyclerView) findViewById(R.id.activity_kfscxiangqing_recyclerview);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-
-        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_fengexian));
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setLayoutManager(layoutManager);
-
-        products = new ArrayList<>();
-        adapter = new KFSCXiangqingRecyclerviewAdapter(R.layout.item_kfsc_xiangqing, products);
-        recyclerView.setAdapter(adapter);
-        mQuanbushangpin = (TextView) findViewById(R.id.activity_kfscxiangqing_all_products);
-        mQuanbushangpin.setOnClickListener(this);
-        mGongsijianjie = (TextView) findViewById(R.id.activity_kfscxiangqing_company_introduce);
-        mGongsijianjie.setOnClickListener(this);
-        mLinnear = (LinearLayout) findViewById(R.id.activity_kfscxiangqing_company_introduce_layout);
 
         mActivityKfscxiangqingCompanyLogo = (ImageView) findViewById(R.id.activity_kfscxiangqing_company_logo);
         mActivityKfscxiangqingCompanyname = (TextView) findViewById(R.id.activity_kfscxiangqing_companyname);
@@ -148,105 +108,42 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
         mActivityKfscxiangqingFourstar = (ImageView) findViewById(R.id.activity_kfscxiangqing_fourstar);
         mActivityKfscxiangqingFivestar = (ImageView) findViewById(R.id.activity_kfscxiangqing_fivestar);
         mActivityKfscxiangqingYijianhujiao = (ImageView) findViewById(R.id.activity_kfscxiangqing_yijianhujiao);
-        mActivityKfscxiangqingAllProducts = (TextView) findViewById(R.id.activity_kfscxiangqing_all_products);
-        mActivityKfscxiangqingCompanyIntroduce = (TextView) findViewById(R.id.activity_kfscxiangqing_company_introduce);
         addDianpuData();
-        addShangpinData();
-        mActivityKfscxiangqingTitleLayout = (ConstraintLayout) findViewById(R.id.activity_kfscxiangqing_title_layout);
-        mActivityKfscxiangqingNestedScrollView = (NestedScrollView) findViewById(R.id.activity_kfscxiangqing_nestedScrollView);
-        mActivityKfscxiangqingNestedScrollView.setOnScrollChangeListener(this);
-        mActivityKfscxiangqingBack = (ImageView) findViewById(R.id.activity_kfscxiangqing_back);
-        mActivityKfscxiangqingBack.setOnClickListener(this);
-        mActivityKfscxiangqingTitle = (TextView) findViewById(R.id.activity_kfscxiangqing_title);
-        mActivityKfscxiangqingConstrainlayout = (ConstraintLayout) findViewById(R.id.activity_kfscxiangqing_constrainlayout);
-        mActivityKfscxiangqingAllProducts2 = (TextView) findViewById(R.id.activity_kfscxiangqing_all_products_2);
-        mActivityKfscxiangqingAllProducts2.setOnClickListener(this);
-        mActivityKfscxiangqingCompanyIntroduce2 = (TextView) findViewById(R.id.activity_kfscxiangqing_company_introduce_2);
-        mActivityKfscxiangqingCompanyIntroduce2.setOnClickListener(this);
-        mActivityKfscxiangqingFenleiLayout = (LinearLayout) findViewById(R.id.activity_kfscxiangqing_fenlei_layout);
-        mActivityKfscxiangqingTitleLine = (TextView) findViewById(R.id.activity_kfscxiangqing_title_line);
-        mActivityKfscxiangqingCompanyIntroduceLayout = (LinearLayout) findViewById(R.id.activity_kfscxiangqing_company_introduce_layout);
         mActivityKfscxiangqingYijianhujiao.setOnClickListener(this);
-        mActivityKfscxiangqingCompanyDescription = (TextView) findViewById(R.id.activity_kfscxiangqing_company_description);
 
-        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
+        mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        mAppbar = (AppBarLayout) findViewById(R.id.appbar);
+        mViewpager = (ViewPager) findViewById(R.id.viewpager);
+        initToolBarData();
+    }
+
+    BaseViewpageAdapter baseViewpageAdapter;
+
+    private void initToolBarData() {
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(KaifangshangchengxiangqingFragment.newInstance(String.valueOf(id)));
+        fragments.add(KfscGongsijieshaoFragment.newInstance(""));
+        List<String> datas = new ArrayList<>();
+        datas.add("产品详情");
+        datas.add("公司介绍");
+        setTitle("返回");
+        mCollapsingToolbar.setTitle("返回");
+        mCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
+        mCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
+        baseViewpageAdapter = new BaseViewpageAdapter(getSupportFragmentManager(), fragments, datas);
+        mViewpager.setAdapter(baseViewpageAdapter);
+        mTabLayout.setupWithViewPager(mViewpager);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onLoadMoreRequested() {
-                addShangpinData();
-            }
-        }, recyclerView);
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent = new Intent(KFSCXiangqingActivity.this, ChanpinxiangqingActivity.class);
-                ProductBean productBean = (ProductBean) adapter.getData().get(position);
-                intent.putExtra("id", productBean.getId());
-                ActivityUtils.startActivity(intent);
+            public void onClick(View v) {
+               finish();
             }
         });
 
-
-        mActivityKfscxiangqingAllProductsLine = (TextView) findViewById(R.id.activity_kfscxiangqing_all_products_line);
-        mActivityKfscxiangqingCompanyIntroduceLine = (TextView) findViewById(R.id.activity_kfscxiangqing_company_introduce_line);
-        back = findViewById(R.id.activity_kfscxiangqing_back);
-        back.setOnClickListener(this);
     }
-
-
-    private int pageNo;
-
-    private void addShangpinData() {
-
-        pageNo++;
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.KFSCSHANGPINLIEBIAO)
-                .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("pageNo", pageNo)
-                .params("pageSize", 10)
-                .params("marketId", id)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-
-                        try {
-                            if (response.code() == 200) {
-
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
-
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("addShangpinData", data);
-                                    List<ProductBean> productBeans = JSONObject.parseArray(data.toJSONString(), ProductBean.class);
-
-
-                                    if (ObjectUtils.isEmpty(productBeans)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    adapter.addData(productBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(KFSCXiangqingActivity.this, jsonObject);
-
-                            } else {
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
-
-
-    }
-
 
     private void addDianpuData() {
         OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.DIANPUXIANGQING)
@@ -269,7 +166,6 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
                                     DianpuxiangqingBean dianpuBean = data.toJavaObject(DianpuxiangqingBean.class);
                                     Glide.with(KFSCXiangqingActivity.this).load(ServerInfo.IMAGE + dianpuBean.getLogo()).into(mActivityKfscxiangqingCompanyLogo);
                                     mActivityKfscxiangqingCompanyname.setText(dianpuBean.getCompanyName());
-                                    mActivityKfscxiangqingCompanyDescription.setText(dianpuBean.getDescription());
                                     setStarLevel(dianpuBean.getCreditLevel());
                                     List<String> banners = new ArrayList<>();
                                     if (!StringUtils.isEmpty(dianpuBean.getBanner1())) {
@@ -288,8 +184,10 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
                                         banners.add(ServerInfo.IMAGE + dianpuBean.getBanner5());
                                     }
 
+                                    setTitle(dianpuBean.getCompanyName());
+                                    mCollapsingToolbar.setTitle(dianpuBean.getCompanyName());
                                     setBannerData(banners);
-
+                                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.KFSCGONGSIJIESHAO,dianpuBean.getDescription()));
 
                                     return;
 
@@ -390,50 +288,50 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             default:
                 break;
-            case R.id.activity_kfscxiangqing_all_products:
-                recyclerView.setVisibility(View.VISIBLE);
-                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.GONE);
-                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingAllProductsLine.setVisibility(View.VISIBLE);
-                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.GONE);
-                break;
-            case R.id.activity_kfscxiangqing_company_introduce:
-                recyclerView.setVisibility(View.GONE);
-                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.VISIBLE);
-                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingAllProductsLine.setVisibility(View.GONE);
-                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.VISIBLE);
-                break;
-            case R.id.activity_kfscxiangqing_back:
-                finish();
-
-                break;
-            case R.id.activity_kfscxiangqing_all_products_2:
-                recyclerView.setVisibility(View.VISIBLE);
-                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.GONE);
-                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingAllProductsLine.setVisibility(View.VISIBLE);
-                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.GONE);
-                break;
-            case R.id.activity_kfscxiangqing_company_introduce_2:
-                recyclerView.setVisibility(View.GONE);
-                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.VISIBLE);
-                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityKfscxiangqingAllProductsLine.setVisibility(View.GONE);
-                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.VISIBLE);
-                break;
+//            case R.id.activity_kfscxiangqing_all_products:
+//                recyclerView.setVisibility(View.VISIBLE);
+//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.GONE);
+//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.VISIBLE);
+//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.GONE);
+//                break;
+//            case R.id.activity_kfscxiangqing_company_introduce:
+//                recyclerView.setVisibility(View.GONE);
+//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.VISIBLE);
+//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.GONE);
+//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.VISIBLE);
+//                break;
+//            case R.id.activity_kfscxiangqing_back:
+//                finish();
+//
+//                break;
+//            case R.id.activity_kfscxiangqing_all_products_2:
+//                recyclerView.setVisibility(View.VISIBLE);
+//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.GONE);
+//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.VISIBLE);
+//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.GONE);
+//                break;
+//            case R.id.activity_kfscxiangqing_company_introduce_2:
+//                recyclerView.setVisibility(View.GONE);
+//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.VISIBLE);
+//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.chunhongse));
+//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.GONE);
+//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.VISIBLE);
+//                break;
             case R.id.activity_kfscxiangqing_yijianhujiao:
                 if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Consider calling
@@ -452,33 +350,33 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onScrollChange(NestedScrollView nestedScrollView, int i, int i1, int i2, int i3) {
-        LogUtils.v("onScrollChange", "scrollY == " + i1);
-        if (i1 < 80) {
-            mActivityKfscxiangqingTitleLayout.setBackgroundColor(getResources().getColor(R.color.trans));
-
-            mActivityKfscxiangqingTitleLine.setVisibility(View.INVISIBLE);
-            mActivityKfscxiangqingTitle.setVisibility(View.INVISIBLE);
-
-        } else {
-            mActivityKfscxiangqingTitle.setVisibility(View.VISIBLE);
-            mActivityKfscxiangqingTitleLine.setVisibility(View.VISIBLE);
-
-            float persent = i1 * 1f / 300;
-            int alpha = (int) (255 * persent);
-            if (alpha > 230) {
-                alpha = 255;  // 不透明
-                int color = Color.argb(alpha, 255, 255, 255);
-                mActivityKfscxiangqingTitleLayout.setBackgroundColor(color);
-            } else {
-                int color = Color.argb(alpha, 255, 255, 255);
-                mActivityKfscxiangqingTitleLayout.setBackgroundColor(color);
-            }
-        }
-        if (convenientBanner.getHeight() + mActivityKfscxiangqingConstrainlayout.getHeight() - 60 > i1) {
-            mActivityKfscxiangqingFenleiLayout.setVisibility(View.INVISIBLE);
-        } else {
-            mActivityKfscxiangqingFenleiLayout.setVisibility(View.VISIBLE);
-        }
+//        LogUtils.v("onScrollChange", "scrollY == " + i1);
+//        if (i1 < 80) {
+//            mActivityKfscxiangqingTitleLayout.setBackgroundColor(getResources().getColor(R.color.trans));
+//
+//            mActivityKfscxiangqingTitleLine.setVisibility(View.INVISIBLE);
+//            mActivityKfscxiangqingTitle.setVisibility(View.INVISIBLE);
+//
+//        } else {
+//            mActivityKfscxiangqingTitle.setVisibility(View.VISIBLE);
+//            mActivityKfscxiangqingTitleLine.setVisibility(View.VISIBLE);
+//
+//            float persent = i1 * 1f / 300;
+//            int alpha = (int) (255 * persent);
+//            if (alpha > 230) {
+//                alpha = 255;  // 不透明
+//                int color = Color.argb(alpha, 255, 255, 255);
+//                mActivityKfscxiangqingTitleLayout.setBackgroundColor(color);
+//            } else {
+//                int color = Color.argb(alpha, 255, 255, 255);
+//                mActivityKfscxiangqingTitleLayout.setBackgroundColor(color);
+//            }
+//        }
+//        if (convenientBanner.getHeight() + mActivityKfscxiangqingConstrainlayout.getHeight() - 60 > i1) {
+//            mActivityKfscxiangqingFenleiLayout.setVisibility(View.INVISIBLE);
+//        } else {
+//            mActivityKfscxiangqingFenleiLayout.setVisibility(View.VISIBLE);
+//        }
 
     }
 

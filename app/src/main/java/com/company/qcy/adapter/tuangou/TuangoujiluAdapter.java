@@ -23,7 +23,7 @@ public class TuangoujiluAdapter extends BaseQuickAdapter<TuangouRecordBean, Base
         helper.setText(R.id.item_tugoujiu_number,item.getNumber());
         helper.setText(R.id.item_tugoujiu_companyname,item.getCompanyName());
         helper.setText(R.id.item_tugoujiu_phone,item.getPhone());
-        helper.setText(R.id.item_tugoujiu_renlingliang,item.getNum());
+        helper.setText(R.id.item_tugoujiu_renlingliang,item.getNum()+item.getNumUnit());
 
     }
 }

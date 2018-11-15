@@ -1,6 +1,7 @@
 package com.company.qcy;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
@@ -26,6 +27,7 @@ public class I7colorsApplication extends Application {
 
 
     public static I7colorsApplication instance;
+    private static Context mContext;
 
     @Override
     public void onCreate() {
@@ -41,6 +43,10 @@ public class I7colorsApplication extends Application {
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
     }
 
+
+    public static Context getContext(){
+        return mContext;
+    }
 
     private static boolean isDebug(){
         return true;

@@ -1,8 +1,10 @@
 package com.company.qcy.bean.tuangou;
 
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class TuangouBean {
+public class TuangouBean implements Parcelable {
 
 
     /**
@@ -65,15 +67,14 @@ public class TuangouBean {
     private String numUnit;
     private String isValid;
     private String createdAt;
-    private Object createdBy;
     private String updatedAt;
-    private Object updatedBy;
     private String subscribedNum;
     private String remainNum;
     private String numPercent;
     private String description;
     private String sortNum;
     private String isConsiderStock;
+
 
     public Long getId() {
         return id;
@@ -267,28 +268,12 @@ public class TuangouBean {
         this.createdAt = createdAt;
     }
 
-    public Object getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Object createdBy) {
-        this.createdBy = createdBy;
-    }
-
     public String getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public Object getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Object updatedBy) {
-        this.updatedBy = updatedBy;
     }
 
     public String getSubscribedNum() {
@@ -338,4 +323,93 @@ public class TuangouBean {
     public void setIsConsiderStock(String isConsiderStock) {
         this.isConsiderStock = isConsiderStock;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.banner);
+        dest.writeString(this.startTime);
+        dest.writeString(this.startTimeStamp);
+        dest.writeString(this.endTime);
+        dest.writeString(this.endTimeStamp);
+        dest.writeString(this.status);
+        dest.writeString(this.endCode);
+        dest.writeString(this.productName);
+        dest.writeString(this.productPic);
+        dest.writeString(this.detailPcPic);
+        dest.writeString(this.detailMobilePic);
+        dest.writeString(this.notePcPic);
+        dest.writeString(this.noteMobilePic);
+        dest.writeString(this.oldPrice);
+        dest.writeString(this.newPrice);
+        dest.writeString(this.priceUnit);
+        dest.writeString(this.totalNum);
+        dest.writeString(this.minNum);
+        dest.writeString(this.maxNum);
+        dest.writeString(this.numUnit);
+        dest.writeString(this.isValid);
+        dest.writeString(this.createdAt);
+        dest.writeString(this.updatedAt);
+        dest.writeString(this.subscribedNum);
+        dest.writeString(this.remainNum);
+        dest.writeString(this.numPercent);
+        dest.writeString(this.description);
+        dest.writeString(this.sortNum);
+        dest.writeString(this.isConsiderStock);
+    }
+
+    public TuangouBean() {
+    }
+
+    protected TuangouBean(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.name = in.readString();
+        this.banner = in.readString();
+        this.startTime = in.readString();
+        this.startTimeStamp = in.readString();
+        this.endTime = in.readString();
+        this.endTimeStamp = in.readString();
+        this.status = in.readString();
+        this.endCode = in.readString();
+        this.productName = in.readString();
+        this.productPic = in.readString();
+        this.detailPcPic = in.readString();
+        this.detailMobilePic = in.readString();
+        this.notePcPic = in.readString();
+        this.noteMobilePic = in.readString();
+        this.oldPrice = in.readString();
+        this.newPrice = in.readString();
+        this.priceUnit = in.readString();
+        this.totalNum = in.readString();
+        this.minNum = in.readString();
+        this.maxNum = in.readString();
+        this.numUnit = in.readString();
+        this.isValid = in.readString();
+        this.createdAt = in.readString();
+        this.updatedAt = in.readString();
+        this.subscribedNum = in.readString();
+        this.remainNum = in.readString();
+        this.numPercent = in.readString();
+        this.description = in.readString();
+        this.sortNum = in.readString();
+        this.isConsiderStock = in.readString();
+    }
+
+    public static final Parcelable.Creator<TuangouBean> CREATOR = new Parcelable.Creator<TuangouBean>() {
+        @Override
+        public TuangouBean createFromParcel(Parcel source) {
+            return new TuangouBean(source);
+        }
+
+        @Override
+        public TuangouBean[] newArray(int size) {
+            return new TuangouBean[size];
+        }
+    };
 }

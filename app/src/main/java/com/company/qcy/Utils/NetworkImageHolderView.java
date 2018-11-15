@@ -24,10 +24,7 @@ public class NetworkImageHolderView implements Holder<String> {
 
     @Override
     public void UpdateUI(Context context, int position, String data) {
-        imageView.setImageResource(R.drawable.place_500x500);
-        RequestOptions option = new RequestOptions();
-        option.placeholder(R.drawable.place_500x500);
-        Glide.with(context).load(data).apply(option).into(imageView);
+        GlideUtils.loadImageRct(context,data,imageView);
 
     }
 }

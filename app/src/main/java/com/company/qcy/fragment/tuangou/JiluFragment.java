@@ -2,12 +2,37 @@ package com.company.qcy.fragment.tuangou;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.adapter.qiugou.QiugoudatingRecyclerviewAdapter;
+import com.company.qcy.adapter.tuangou.TuangoujiluAdapter;
+import com.company.qcy.bean.tuangou.TuangouRecordBean;
+import com.company.qcy.ui.activity.tuangou.TuangouxiangqingActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,11 +41,12 @@ public class JiluFragment extends Fragment {
 
     private String mParam1;
     private static final String ARG_PARAM1 = "param1";
+    private View view;
+    private RecyclerView recyclerView;
 
     public JiluFragment() {
         // Required empty public constructor
     }
-
 
     public static JiluFragment newInstance(String param1) {
         JiluFragment fragment = new JiluFragment();
@@ -42,7 +68,100 @@ public class JiluFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_jilu, container, false);
+        View inflate = inflater.inflate(R.layout.fragment_jilu, container, false);
+        initView(inflate);
+        return inflate;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        pageNo=1;
+    }
+
+    private int pageNo;
+
+    private TuangoujiluAdapter adapter;
+
+    private List<TuangouRecordBean> datas;
+
+    private void initView(View view) {
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.fragment_jilu_recyclerview);
+        datas = new ArrayList<>();
+        adapter = new TuangoujiluAdapter(R.layout.item_tugoujilu, datas);
+
+        //创建布局管理
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setAdapter(adapter);
+        getTuangouRecord();
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                getTuangouRecord();
+            }
+        }, recyclerView);
+        adapter.addHeaderView(getLayoutInflater().inflate(R.layout.item_tugoujilu,null));
+    }
+
+
+    private void getTuangouRecord() {
+        pageNo++;
+        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYRECORD)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("mainId", Long.parseLong(mParam1))
+                .params("pageNo", pageNo)
+                .params("pageSize", 20)
+                .execute(new DialogStringCallback(getActivity()) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            if (response.code() == 200) {
+
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    JSONArray data = jsonObject.getJSONArray("data");
+                                    LogUtils.v("GROUPBUYRECORD", data);
+                                    if (ObjectUtils.isEmpty(data)) {
+                                        adapter.loadMoreEnd();
+                                        return;
+                                    }
+                                    List<TuangouRecordBean> tuangouRecordBeans = JSONObject.parseArray(data.toJSONString(), TuangouRecordBean.class);
+
+                                    adapter.addData(tuangouRecordBeans);
+                                    adapter.loadMoreComplete();
+                                    adapter.disableLoadMoreIfNotFullPage();
+                                    return;
+
+                                } else
+                                    SignAndTokenUtil.checkSignAndToken(getActivity(), jsonObject);
+                            } else {
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+
+
     }
 
 }

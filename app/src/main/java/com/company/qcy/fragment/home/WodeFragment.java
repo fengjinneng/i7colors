@@ -18,7 +18,9 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.bumptech.glide.Glide;
 import com.company.qcy.R;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
@@ -262,7 +264,9 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
         super.onResume();
         if (StringUtils.equals(SPUtils.getInstance().getString("isLogin"), "true")) {
             tianxiexinxi();
-
+            if (!StringUtils.isEmpty(SPUtils.getInstance().getString("photo"))) {
+                GlideUtils.loadCircleImage(getContext(), SPUtils.getInstance().getString("photo"), mFragmentWodeImage);
+            }
             getAllCount();
             //买家
             if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "1")) {
@@ -320,7 +324,6 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-
     }
 
     private void tianxiexinxi() {
@@ -328,7 +331,7 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
             mFragmentWodeName.setText(SPUtils.getInstance().getString("loginName"));
             mFragmentWodeShenfen.setText("个人用户");
         } else {
-            mFragmentWodeName.setText(SPUtils.getInstance().getString("companyName"));
+            mFragmentWodeName.setText(SPUtils.getInstance().getString("loginName"));
             mFragmentWodeShenfen.setText("企业用户");
         }
 

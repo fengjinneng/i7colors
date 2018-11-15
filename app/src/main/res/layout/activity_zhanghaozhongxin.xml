@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.user.ZhanghaozhongxinActivity">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout15"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x330"
+        android:background="@mipmap/anniujianbian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/activity_zhanghaozhongxin_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:drawableLeft="@mipmap/back_white"
+            android:drawablePadding="8dp"
+            android:text="我的"
+            android:textColor="@color/baise"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView152"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="账号中心"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout16"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x300"
+        android:layout_marginEnd="@dimen/x30"
+        android:layout_marginStart="@dimen/x30"
+        android:layout_marginTop="@dimen/x165"
+        android:background="@drawable/background_yuanxingbiankuang"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout15">
+
+        <TextView
+            android:id="@+id/textView153"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/x40"
+            android:drawableLeft="@mipmap/xiaoshuxian"
+            android:drawablePadding="8dp"
+            android:text="更换头像"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_zhanghaozhongxin_shenfen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="@dimen/x40"
+            android:background="@drawable/background_gerenzhanghu_yuanxing_anniu"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x20"
+            android:text="个人用户"
+            android:textColor="@color/lanse"
+            android:textSize="@dimen/x24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_zhanghaozhongxin_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Y.C.Pixel"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x36"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.39999998" />
+
+        <TextView
+            android:id="@+id/textView156"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:singleLine="true"
+            android:text=".................................................................................................................................."
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_zhanghaozhongxin_name" />
+
+        <TextView
+            android:id="@+id/textView157"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="仅支持jpg、png、jpeg、bmp格式，文件小于2MB"
+            android:textSize="@dimen/x20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView156" />
+    </android.support.constraint.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/activity_zhanghaozhongxin_img"
+        android:layout_width="@dimen/x138"
+        android:layout_height="@dimen/x138"
+        android:layout_marginEnd="8dp"
+        android:scaleType="fitXY"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/x96"
+        android:src="@mipmap/morentouxiang"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout15" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout17"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x260"
+        android:layout_marginEnd="@dimen/x30"
+        android:layout_marginStart="@dimen/x30"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_yuanxingbiankuang"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout16">
+
+        <TextView
+            android:id="@+id/textView158"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/x32"
+            android:drawableLeft="@mipmap/xiaoshuxian"
+            android:drawablePadding="8dp"
+            android:text="账号信息"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x26"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView159"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/x30"
+            android:text="用户名称:"
+            android:textSize="@dimen/x24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView158" />
+
+        <TextView
+            android:id="@+id/textView160"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/x30"
+            android:background="@color/fengexian"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView159" />
+
+        <TextView
+            android:id="@+id/activity_zhanghaozhongxin_name2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="44dp"
+            android:text="Y.C.Pixel"
+            app:layout_constraintBottom_toBottomOf="@+id/textView159"
+            app:layout_constraintStart_toEndOf="@+id/textView159"
+            app:layout_constraintTop_toTopOf="@+id/textView159"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/activity_zhanghaozhongxin_changepawwsord"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView160">
+
+            <TextView
+                android:id="@+id/textView165"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="修改密码:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView166"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="44dp"
+                android:text="提高安全意识，建议您定期更改密码 以保护账号安全。"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView165"
+                app:layout_constraintEnd_toStartOf="@+id/imageView13"
+                app:layout_constraintStart_toEndOf="@+id/textView165"
+                app:layout_constraintTop_toTopOf="@+id/textView165" />
+
+            <ImageView
+                android:id="@+id/imageView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView166"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView166"
+                app:srcCompat="@mipmap/youjiantou" />
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x176"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_yuanxingbiankuang"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout17"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout17"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout17">
+
+        <TextView
+            android:id="@+id/textView167"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/x30"
+            android:drawableLeft="@mipmap/xiaoshuxian"
+            android:drawablePadding="8dp"
+            android:text="账号类型"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x26"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/activity_zhanghaozhongxin_shenfen_img"
+            android:layout_width="@dimen/x54"
+            android:layout_height="@dimen/x54"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView167"
+            app:layout_constraintTop_toBottomOf="@+id/textView167"
+            app:srcCompat="@mipmap/gerenzhanghu" />
+
+        <TextView
+            android:id="@+id/activity_zhanghaozhongxin_shenfen2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="个人账户"
+            android:textColor="@color/lanse"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_zhanghaozhongxin_shenfen_img"
+            app:layout_constraintStart_toEndOf="@+id/activity_zhanghaozhongxin_shenfen_img"
+            app:layout_constraintTop_toTopOf="@+id/activity_zhanghaozhongxin_shenfen_img" />
+
+        <TextView
+            android:id="@+id/activity_zhanghaozhongxin_shenqing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/background_qiyezhanghu_yuanxing_anniu"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x20"
+            android:text="申请成为企业账户"
+            android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_zhanghaozhongxin_shenfen2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/activity_zhanghaozhongxin_shenfen2" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

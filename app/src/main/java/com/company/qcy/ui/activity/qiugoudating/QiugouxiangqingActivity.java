@@ -153,6 +153,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
+    private Long wodeBaojiaID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -162,7 +163,52 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         isWode = getIntent().getIntExtra("wode", 0);
         isCharger = getIntent().getStringExtra("isCharger");
         qiugouStatus = getIntent().getStringExtra("status");
+        wodeBaojiaID = getIntent().getLongExtra("enquiryOfferId",0);
         initView();
+
+        if(wodeBaojiaID!=0){
+            //卖家消息已读
+            haveReadMessage();
+        }
+
+    }
+
+    private void haveReadMessage() {
+
+        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.READMYACCEPTOFFER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("enquiryOfferId", wodeBaojiaID)
+                .params("token", SPUtils.getInstance().getString("token"))
+                .execute(new DialogStringCallback(QiugouxiangqingActivity.this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("READMYACCEPTOFFER", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+
+                                    return;
+                                }
+                                SignAndTokenUtil.checkSignAndToken(QiugouxiangqingActivity.this, jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+
     }
 
     private List<BaojiaBean> datas;

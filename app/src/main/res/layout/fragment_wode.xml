@@ -87,7 +87,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/x30"
-
             android:text="买家已接受"
             android:textColor="@color/chunhongse"
             android:textSize="@dimen/x24"
@@ -101,7 +100,7 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout13"
         android:layout_width="0dp"
-        android:background="@mipmap/anniujianbian"
+        android:background="@mipmap/bg"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

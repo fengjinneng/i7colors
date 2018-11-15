@@ -73,6 +73,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ImageView mActivityLoginDeleteUsername;
     private ImageView mActivityLoginDeletePassword;
     private ImageView mActivityLoginShowPassword;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,6 +148,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("登录");
     }
 
     @Override
@@ -326,6 +335,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     xianshimima = true;
                 }
                 mLoginPassword.setSelection(mLoginPassword.getText().length());
+                break;
+            case R.id.toolbar_back:
+                finish();
                 break;
         }
     }

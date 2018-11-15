@@ -1,14 +1,18 @@
 package com.company.qcy.ui.activity.chanpindating;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -18,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -30,6 +35,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.chanpindating.ChanpinCanshuRecyclerviewAdapter;
 import com.company.qcy.bean.kaifangshangcheng.ProductBean;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
+import com.company.qcy.ui.activity.user.LianxikefuActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -49,7 +55,6 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
     /**
      * CTC DONGWU Disperse-Cationic Red SD-GRL 100%
      */
-    private TextView mActivityChanpinxiangqingNameEnglish;
     private RecyclerView recyclerview;
     private LinearLayout mActivityChanpinxiangqingDianpuLayout;
     private LinearLayout mActivityChanpinxiangqingKefuLayout;
@@ -80,6 +85,7 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
+    private ConstraintLayout yijianhujiao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +106,6 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
         mActivityChanpinxiangqingShare = (TextView) findViewById(R.id.activity_chanpinxiangqing_share);
         mActivityChanpinxiangqingShare.setOnClickListener(this);
         mActivityChanpinxiangqingImg = (ImageView) findViewById(R.id.activity_chanpinxiangqing_img);
-        mActivityChanpinxiangqingNameEnglish = (TextView) findViewById(R.id.activity_chanpinxiangqing_name_english);
         mActivityChanpinxiangqingDianpuLayout = (LinearLayout) findViewById(R.id.activity_chanpinxiangqing_dianpu_layout);
         mActivityChanpinxiangqingDianpuLayout.setOnClickListener(this);
         mActivityChanpinxiangqingKefuLayout = (LinearLayout) findViewById(R.id.activity_chanpinxiangqing_kefu_layout);
@@ -126,6 +131,8 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("产品详情");
+        yijianhujiao = findViewById(R.id.activity_chanpinxiangqing_yijianhujiao);
+        yijianhujiao.setOnClickListener(this);
     }
 
     private boolean isShoucang;
@@ -200,7 +207,9 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
                                     LogUtils.v("GETCHANPINDETAIL", data);
                                     productBean = data.toJavaObject(ProductBean.class);
                                     List<ProductBean.PropMapBean> propMap = productBean.getPropMap();
-                                    adapter.addData(propMap);
+                                    if(ObjectUtils.isEmpty(propMap)){
+                                        adapter.addHeaderView(LayoutInflater.from(ChanpinxiangqingActivity.this).inflate(R.layout.head_chanpin_noinfo,null));
+                                    }else adapter.addData(propMap);
                                     setData(productBean);
                                     return;
 
@@ -330,7 +339,7 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
             mActivityChanpinxiangqingYijiaLayout.setVisibility(View.VISIBLE);
 
         }
-        mActivityChanpinxiangqingCompanyname.setText(productBean.getSupplierShotName());
+        mActivityChanpinxiangqingCompanyname.setText(productBean.getCompanyName());
 
     }
 
@@ -350,6 +359,7 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
 
                 break;
             case R.id.activity_chanpinxiangqing_kefu_layout:
+                ActivityUtils.startActivity(LianxikefuActivity.class);
                 break;
             case R.id.activity_chanpinxiangqing_shoucang_img:
 
@@ -377,8 +387,6 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
                         shouCang();
                     }
                 }
-
-
                 break;
             case R.id.activity_chanpinxiangqing_shoucang_text:
                 if (!SPUtils.getInstance().getBoolean("isCompany")) {
@@ -410,6 +418,20 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
                 break;
             case R.id.toolbar_back:
                 finish();
+                break;
+
+            case R.id.activity_chanpinxiangqing_yijianhujiao:
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                PhoneUtils.call(getResources().getString(R.string.PHONE));
                 break;
         }
     }

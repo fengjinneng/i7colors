@@ -75,7 +75,11 @@
         <activity
             android:name=".base.SearchTypeActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity android:name=".ui.activity.user.LianxikefuActivity"></activity>
+        <activity android:name=".ui.activity.user.LianxikefuActivity" />
+        <activity android:name=".ui.activity.tuangou.YingxiongmashuomingActivity" />
+        <activity android:name=".ui.activity.user.ZhanghaozhongxinActivity" />
+        <activity android:name=".ui.activity.message.MessageDetailActivity" />
+        <activity android:name=".base.WebActivity"></activity>
     </application>
 
 </manifest>

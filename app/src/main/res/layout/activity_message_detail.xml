@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.message.MessageDetailActivity">
+
+    <include
+        android:id="@+id/include16"
+        layout="@layout/toolbar"></include>
+
+    <TextView
+        android:id="@+id/activity_message_detail_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:textColor="@color/erjibiaoti"
+        android:textSize="@dimen/x36"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include16" />
+
+    <TextView
+        android:textSize="@dimen/x24"
+        android:id="@+id/activity_message_detail_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/activity_message_detail_title"
+        app:layout_constraintTop_toBottomOf="@+id/activity_message_detail_title" />
+
+    <TextView
+        android:id="@+id/activity_message_detail_chakan"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@mipmap/anniujianbian"
+        android:text="查看详情"
+        android:gravity="center"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_message_detail_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_message_detail_content" />
+
+
+</android.support.constraint.ConstraintLayout>

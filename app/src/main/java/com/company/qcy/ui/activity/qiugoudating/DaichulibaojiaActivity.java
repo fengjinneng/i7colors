@@ -95,6 +95,7 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
                 BaojiaBean baojialiebiaoBean = (BaojiaBean) adapter.getData().get(position);
                 i.putExtra("enquiryId", baojialiebiaoBean.getEnquiryDomain().getId());
                 i.putExtra("wode", 1);
+                i.putExtra("enquiryOfferId",baojialiebiaoBean.getId());
                 ActivityUtils.startActivity(i);
             }
         });
@@ -106,8 +107,6 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
         super.onReciveMessage(msg);
         switch (msg.getCode()){
             case MessageBean.Code.CAINABAOJIACHENGGONG:
-
-
 
                 break;
         }

@@ -1,33 +1,41 @@
 package com.company.qcy.ui.activity.tuangou;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.bumptech.glide.Glide;
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.blankj.utilcode.util.TimeUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
-import com.company.qcy.adapter.tuangou.TuangoujiluAdapter;
+import com.company.qcy.adapter.BaseViewpageAdapter;
+import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.tuangou.TuangouBean;
-import com.company.qcy.bean.tuangou.TuangouRecordBean;
+import com.company.qcy.fragment.tuangou.JibencanshuFragment;
+import com.company.qcy.fragment.tuangou.JiluFragment;
+import com.company.qcy.fragment.tuangou.TuangouxuzhiFragment;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 
@@ -36,7 +44,7 @@ import java.util.List;
 
 import cn.iwgang.countdownview.CountdownView;
 
-public class TuangouxiangqingActivity extends AppCompatActivity implements View.OnClickListener {
+public class TuangouxiangqingActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView mActivityTuangouxiangqingImg;
     private ImageView mActivityTuangouxiangqingStatus;
@@ -65,24 +73,7 @@ public class TuangouxiangqingActivity extends AppCompatActivity implements View.
      */
     private TextView mActivityTuangouxiangqingYirenling;
     private Long id;
-    private ConstraintLayout mActivityTuangouxiangqingContainer;
-    private ImageView mActivityTuangouxiangqingContainerImg;
-    /**
-     * 基本参数
-     */
-    private TextView mActivityTuangouxiangqingJibencanshu;
-    /**
-     * 团购须知
-     */
-    private TextView mActivityTuangouxiangqingTuangouxuzhi;
-    /**
-     * 参与记录详情
-     */
-    private TextView mActivityTuangouxiangqingCanyujilu;
-    private RecyclerView recyclerview;
-    private TuangoujiluAdapter adapter;
 
-    private List<TuangouRecordBean> datas;
     private SeekBar mActivityTuangouxiangqingSeekBar;
     /**
      * 单个用户采购量\n0.5-1吨
@@ -101,13 +92,30 @@ public class TuangouxiangqingActivity extends AppCompatActivity implements View.
      * 元/吨
      */
     private TextView mActivityTuangouxiangqingTuangoujiaDanwei;
-    private TextView mActivityTuangouxiangqingJibencanshuLine;
-    private TextView mActivityTuangouxiangqingTuangouxuzhiLine;
-    private TextView mActivityTuangouxiangqingCanyujiluLine;
-    private ConstraintLayout mActivityTuangouxiangqingWoyaotuangou;
+    private Toolbar mToolbar;
+    private CollapsingToolbarLayout mCollapsingToolbar;
+    private TabLayout mTabLayout;
+    private AppBarLayout mAppbar;
+    private ViewPager mViewpager;
+    private BaseViewpageAdapter viewpageAdapter;
+    /**
+     * 团购剩余时间:
+     */
+    private TextView mActivityTuangouxiangqingShengyushijianText;
+    /**
+     * 我要团购
+     */
+    private Button mActivityTuangouxiangqingWoyaotuangou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //当系统版本为4.4或者4.4以上时可以使用沉浸式状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            //透明状态栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明导航栏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuangouxiangqing);
         id = getIntent().getLongExtra("id", 0);
@@ -123,28 +131,8 @@ public class TuangouxiangqingActivity extends AppCompatActivity implements View.
         mActivityTuangouxiangqingShengyu = (TextView) findViewById(R.id.activity_tuangouxiangqing_shengyu);
         mActivityTuangouxiangqingTotal = (TextView) findViewById(R.id.activity_tuangouxiangqing_total);
         mActivityTuangouxiangqingYirenling = (TextView) findViewById(R.id.activity_tuangouxiangqing_yirenling);
-        mActivityTuangouxiangqingContainer = (ConstraintLayout) findViewById(R.id.activity_tuangouxiangqing_container);
-        mActivityTuangouxiangqingContainerImg = (ImageView) findViewById(R.id.activity_tuangouxiangqing_container_img);
 
         addData();
-        datas = new ArrayList<>();
-
-        mActivityTuangouxiangqingJibencanshu = (TextView) findViewById(R.id.activity_tuangouxiangqing_jibencanshu);
-        mActivityTuangouxiangqingTuangouxuzhi = (TextView) findViewById(R.id.activity_tuangouxiangqing_tuangouxuzhi);
-        mActivityTuangouxiangqingCanyujilu = (TextView) findViewById(R.id.activity_tuangouxiangqing_canyujilu);
-        mActivityTuangouxiangqingJibencanshu.setOnClickListener(this);
-        mActivityTuangouxiangqingTuangouxuzhi.setOnClickListener(this);
-        mActivityTuangouxiangqingCanyujilu.setOnClickListener(this);
-        recyclerview = (RecyclerView) findViewById(R.id.activity_tuangouxiangqing_container_recyclerview);
-
-        //创建布局管理
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerview.setLayoutManager(layoutManager);
-        adapter = new TuangoujiluAdapter(R.layout.item_tugoujilu, datas);
-        recyclerview.setAdapter(adapter);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-        recyclerview.addItemDecoration(itemDecoration);
 
         mActivityTuangouxiangqingSeekBar = (SeekBar) findViewById(R.id.activity_tuangouxiangqing_seekBar);
         mActivityTuangouxiangqingDanyonghucaigou = (TextView) findViewById(R.id.activity_tuangouxiangqing_danyonghucaigou);
@@ -152,18 +140,38 @@ public class TuangouxiangqingActivity extends AppCompatActivity implements View.
         mActivityTuangouxiangqingDacheng = (TextView) findViewById(R.id.activity_tuangouxiangqing_dacheng);
         mActivityTuangouxiangqingYuanjiaDanwie = (TextView) findViewById(R.id.activity_tuangouxiangqing_yuanjia_danwie);
         mActivityTuangouxiangqingTuangoujiaDanwei = (TextView) findViewById(R.id.activity_tuangouxiangqing_tuangoujia_danwei);
-        mActivityTuangouxiangqingJibencanshuLine = (TextView) findViewById(R.id.activity_tuangouxiangqing_jibencanshu_line);
-        mActivityTuangouxiangqingTuangouxuzhiLine = (TextView) findViewById(R.id.activity_tuangouxiangqing_tuangouxuzhi_line);
-        mActivityTuangouxiangqingCanyujiluLine = (TextView) findViewById(R.id.activity_tuangouxiangqing_canyujilu_line);
-        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+
+        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
+        mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        mAppbar = (AppBarLayout) findViewById(R.id.appbar);
+        mViewpager = (ViewPager) findViewById(R.id.viewpager);
+        mViewpager.setOffscreenPageLimit(2);
+
+        setTitle("返回");
+
+        mCollapsingToolbar.setTitle("返回");
+        mCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
+        mCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
+
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onLoadMoreRequested() {
-                addData();
+            public void onClick(View v) {
+                finish();
             }
-        }, recyclerview);
-        mActivityTuangouxiangqingWoyaotuangou = (ConstraintLayout) findViewById(R.id.activity_tuangouxiangqing_woyaotuangou);
+        });
+        mToolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        mActivityTuangouxiangqingShengyushijianText = (TextView) findViewById(R.id.activity_tuangouxiangqing_shengyushijian_text);
+        mActivityTuangouxiangqingWoyaotuangou = (Button) findViewById(R.id.activity_tuangouxiangqing_woyaotuangou);
         mActivityTuangouxiangqingWoyaotuangou.setOnClickListener(this);
     }
+
 
     private TuangouBean bean;
 
@@ -172,75 +180,76 @@ public class TuangouxiangqingActivity extends AppCompatActivity implements View.
         if (ObjectUtils.isEmpty(bean)) {
             return;
         }
+        List<Fragment> fragments = new ArrayList<>();
+        fragments.add(JibencanshuFragment.newInstance(ServerInfo.IMAGE + bean.getDetailMobilePic()));
+        fragments.add(TuangouxuzhiFragment.newInstance(ServerInfo.IMAGE + bean.getNoteMobilePic()));
+        fragments.add(JiluFragment.newInstance(String.valueOf(id)));
+        List<String> datas = new ArrayList<>();
+        datas.add("基本参数");
+        datas.add("团购须知");
+        datas.add("团购记录");
+        viewpageAdapter = new BaseViewpageAdapter(getSupportFragmentManager(), fragments, datas);
+        mViewpager.setAdapter(viewpageAdapter);
+        mTabLayout.setupWithViewPager(mViewpager);
+        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
 
-        Glide.with(this).load(ServerInfo.IMAGE + bean.getDetailMobilePic()).into(mActivityTuangouxiangqingContainerImg);
         mActivityTuangouxiangqingDanyonghucaigou.setText("单个用户采购量:\n" + bean.getMinNum() + "-" + bean.getMaxNum() + bean.getNumUnit());
         mActivityTuangouxiangqingYuanjia.setText(bean.getOldPrice());
         mActivityTuangouxiangqingTuangoujia.setText(bean.getNewPrice());
         mActivityTuangouxiangqingProductname.setText(bean.getProductName());
         mActivityTuangouxiangqingTotal.setText(bean.getTotalNum());
         mActivityTuangouxiangqingShengyu.setText(bean.getRemainNum());
-        mCountdownView.start(Long.parseLong(bean.getEndTimeStamp()) - Long.parseLong(bean.getStartTimeStamp()));
+
         String[] split = bean.getNumPercent().split("%");
         mActivityTuangouxiangqingSeekBar.setProgress(Integer.parseInt(split[0]));
         mActivityTuangouxiangqingDacheng.setText("达成 " + bean.getNumPercent());
         mActivityTuangouxiangqingYirenling.setText("已认领总量:  " + bean.getSubscribedNum() + bean.getNumUnit());
         mActivityTuangouxiangqingYuanjiaDanwie.setText("元/" + bean.getNumUnit());
         mActivityTuangouxiangqingTuangoujiaDanwei.setText("元/" + bean.getNumUnit());
-        Glide.with(this).load(ServerInfo.IMAGE + bean.getProductPic()).into(mActivityTuangouxiangqingImg);
+
+
+        if (StringUtils.equals("00", bean.getEndCode())) {
+            //团购未开始
+            mActivityTuangouxiangqingShengyushijianText.setText("距离团购开始还有:");
+            mCountdownView.start(Long.parseLong(bean.getStartTimeStamp()) - TimeUtils.getNowMills());
+            mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_weikaishi));
+        } else if (StringUtils.equals("10", bean.getEndCode())) {
+            //已开始未领完
+            mCountdownView.start(Long.parseLong(bean.getEndTimeStamp()) - TimeUtils.getNowMills());
+            mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+            mActivityTuangouxiangqingWoyaotuangou.setVisibility(View.VISIBLE);
+        } else if (StringUtils.equals("11", bean.getEndCode())) {
+            //已开始已领完
+            if (StringUtils.equals("0", bean.getIsConsiderStock())) {
+                mCountdownView.start(Long.parseLong(bean.getEndTimeStamp()) - TimeUtils.getNowMills());
+                mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+                mActivityTuangouxiangqingWoyaotuangou.setVisibility(View.VISIBLE);
+            } else {
+                mCountdownView.start(0);
+                mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+            }
+        } else if (StringUtils.equals("20", bean.getEndCode())) {
+            //已结束未领完
+            mCountdownView.start(0);
+            mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+        } else if (StringUtils.equals("21", bean.getEndCode())) {
+            //已结束已领完
+            mCountdownView.start(0);
+            mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+        }
 
 
     }
 
-    private int pageNo;
 
-    private void getTuangouRecord() {
-        pageNo++;
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYRECORD)
-                .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("mainId", id)
-                .params("pageNo", pageNo)
-                .params("pageSize", 30)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+    @Override
+    public void onReciveMessage(MessageBean msg) {
+        super.onReciveMessage(msg);
+        switch (msg.getCode()) {
+            case MessageBean.Code.TUANGOUCHENGGONG:
 
-                        try {
-                            if (response.code() == 200) {
-
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
-
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("GROUPBUYRECORD", data);
-                                    if (ObjectUtils.isEmpty(data)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    List<TuangouRecordBean> tuangouRecordBeans = JSONObject.parseArray(data.toJSONString(), TuangouRecordBean.class);
-
-                                    adapter.addData(tuangouRecordBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(TuangouxiangqingActivity.this, jsonObject);
-                            } else {
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
-
+                break;
+        }
 
     }
 
@@ -287,49 +296,10 @@ public class TuangouxiangqingActivity extends AppCompatActivity implements View.
         switch (v.getId()) {
             default:
                 break;
-            case R.id.activity_tuangouxiangqing_jibencanshu:
-                recyclerview.setVisibility(View.GONE);
-                mActivityTuangouxiangqingContainerImg.setVisibility(View.VISIBLE);
-                Glide.with(this).load(ServerInfo.IMAGE + bean.getDetailMobilePic()).into(mActivityTuangouxiangqingContainerImg);
-                mActivityTuangouxiangqingJibencanshu.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityTuangouxiangqingTuangouxuzhi.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityTuangouxiangqingCanyujilu.setTextColor(getResources().getColor(R.color.erjibiaoti));
-
-                mActivityTuangouxiangqingJibencanshuLine.setVisibility(View.VISIBLE);
-                mActivityTuangouxiangqingTuangouxuzhiLine.setVisibility(View.INVISIBLE);
-                mActivityTuangouxiangqingCanyujiluLine.setVisibility(View.INVISIBLE);
-                break;
-            case R.id.activity_tuangouxiangqing_tuangouxuzhi:
-                recyclerview.setVisibility(View.GONE);
-                mActivityTuangouxiangqingContainerImg.setVisibility(View.VISIBLE);
-                Glide.with(this).load(ServerInfo.IMAGE + bean.getNoteMobilePic()).into(mActivityTuangouxiangqingContainerImg);
-                mActivityTuangouxiangqingTuangouxuzhi.setTextColor(getResources().getColor(R.color.chunhongse));
-                mActivityTuangouxiangqingJibencanshu.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityTuangouxiangqingCanyujilu.setTextColor(getResources().getColor(R.color.erjibiaoti));
-
-                mActivityTuangouxiangqingJibencanshuLine.setVisibility(View.INVISIBLE);
-                mActivityTuangouxiangqingTuangouxuzhiLine.setVisibility(View.VISIBLE);
-                mActivityTuangouxiangqingCanyujiluLine.setVisibility(View.INVISIBLE);
-
-                break;
-            case R.id.activity_tuangouxiangqing_canyujilu:
-                recyclerview.setVisibility(View.VISIBLE);
-                mActivityTuangouxiangqingContainerImg.setVisibility(View.GONE);
-                mActivityTuangouxiangqingJibencanshu.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityTuangouxiangqingTuangouxuzhi.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mActivityTuangouxiangqingCanyujilu.setTextColor(getResources().getColor(R.color.chunhongse));
-
-                mActivityTuangouxiangqingJibencanshuLine.setVisibility(View.INVISIBLE);
-                mActivityTuangouxiangqingTuangouxuzhiLine.setVisibility(View.INVISIBLE);
-                mActivityTuangouxiangqingCanyujiluLine.setVisibility(View.VISIBLE);
-                getTuangouRecord();
-
-                break;
-
             case R.id.activity_tuangouxiangqing_woyaotuangou:
-
-                ActivityUtils.startActivity(WoyaotuangouActivity.class);
-
+                Intent intent = new Intent(this, WoyaotuangouActivity.class);
+                intent.putExtra("bean", bean);
+                ActivityUtils.startActivity(intent);
                 break;
         }
     }

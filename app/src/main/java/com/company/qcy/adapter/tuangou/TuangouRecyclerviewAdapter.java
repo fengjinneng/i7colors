@@ -80,13 +80,20 @@ public class TuangouRecyclerviewAdapter extends
             statusImg.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_yikaishi));
         } else if (StringUtils.equals("11", item.getEndCode())) {
             //已开始已领完
-            weikaishi.setVisibility(View.INVISIBLE);
-            layout.setVisibility(View.VISIBLE);
-            helper.setText(R.id.item_tuangouliebiao_status_text, "团购成功！");
-            smile.setVisibility(View.VISIBLE);
-            smile.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_sucess));
-            statusImg.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_yijieshu));
-            priceLayout.setBackgroundColor(mContext.getResources().getColor(R.color.qianhui));
+            //不考虑库存
+            if(StringUtils.equals("0",item.getIsConsiderStock())){
+                layout.setVisibility(View.VISIBLE);
+                helper.setText(R.id.item_tuangouliebiao_status_text, "团购进行中...");
+                statusImg.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+            }else {
+                weikaishi.setVisibility(View.INVISIBLE);
+                layout.setVisibility(View.VISIBLE);
+                helper.setText(R.id.item_tuangouliebiao_status_text, "团购成功！");
+                smile.setVisibility(View.VISIBLE);
+                smile.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_sucess));
+                statusImg.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+                priceLayout.setBackgroundColor(mContext.getResources().getColor(R.color.qianhui));
+            }
         } else if (StringUtils.equals("20", item.getEndCode())) {
             //已结束未领完
             weikaishi.setVisibility(View.INVISIBLE);

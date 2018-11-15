@@ -20,6 +20,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.NetworkUtil;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.lzy.okgo.OkGo;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -118,6 +119,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        OkGo.getInstance().cancelTag(this);
+
     }
 
 

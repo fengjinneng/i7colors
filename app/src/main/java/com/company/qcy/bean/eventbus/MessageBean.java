@@ -53,6 +53,13 @@ public class MessageBean {
         public static final int CAINABAOJIACHENGGONG = 1005;
 
 
+        //开放商城 公司简介发送信息
+        public static final int KFSCGONGSIJIESHAO = 1006;
+
+        //团购成功
+        public static final int TUANGOUCHENGGONG = 1007;
+
+
     }
 
 

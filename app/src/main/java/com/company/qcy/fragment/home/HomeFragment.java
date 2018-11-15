@@ -205,7 +205,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("plate_code", "XCX_Index_Banner")
+                .params("plate_code", "APP_Group_Buy")
                 .execute(new DialogStringCallback(getActivity()) {
                     @Override
                     public void onSuccess(Response<String> response) {
@@ -255,7 +255,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("plate_code", "XCX_Index_Banner")
+                .params("plate_code", "APP_Index_Banner")
                 .execute(new DialogStringCallback(getActivity()) {
                     @Override
                     public void onSuccess(Response<String> response) {

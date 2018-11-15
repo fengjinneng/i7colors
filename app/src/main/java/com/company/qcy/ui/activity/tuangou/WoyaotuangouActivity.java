@@ -3,17 +3,37 @@ package com.company.qcy.ui.activity.tuangou;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ConvertUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.AddressPickTask;
+import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.bean.tuangou.TuangouBean;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.convert.Converter;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
+
+import org.greenrobot.eventbus.EventBus;
 
 import cn.qqtheme.framework.entity.City;
 import cn.qqtheme.framework.entity.County;
@@ -94,13 +114,26 @@ public class WoyaotuangouActivity extends AppCompatActivity implements View.OnCl
      * 请选择
      */
     private TextView mActivityWoyaotuangouChoiceAddress;
+    private TuangouBean bean;
+    /**
+     * 推荐人英雄码
+     */
+    private EditText mActivityWoyaotuangouYinxiongma;
+    /**
+     * 查看使用说明
+     */
+    private TextView mActivityWoyaotuangouYinxiongmaShuoming;
+    private RadioGroup mActivityWoyaotuangouYangpinGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_woyaotuangou);
+        bean = getIntent().getParcelableExtra("bean");
         initView();
     }
+
+    private int xuyaoyangpin = 1;
 
     private void initView() {
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
@@ -117,6 +150,51 @@ public class WoyaotuangouActivity extends AppCompatActivity implements View.OnCl
         mTextView115 = (TextView) findViewById(R.id.textView115);
         mTextView119 = (TextView) findViewById(R.id.textView119);
         mActivityWoyaotuangouRenlingliang = (EditText) findViewById(R.id.activity_woyaotuangou_renlingliang);
+        mActivityWoyaotuangouRenlingliang.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = s.toString();
+                if (text.contains(".")) {
+                    int index = text.indexOf(".");
+                    if (index + 1 == 6) {
+                        text = text.substring(0, index);
+                        mActivityWoyaotuangouRenlingliang.setText(text);
+                        mActivityWoyaotuangouRenlingliang.setSelection(text.length());
+                    } else if (index + 2 < text.length()) {
+                        text = text.substring(0, index + 2);
+                        mActivityWoyaotuangouRenlingliang.setText(text);
+                        mActivityWoyaotuangouRenlingliang.setSelection(text.length());
+                    }
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s == null) {
+                    return;
+                }
+                if(s.length()==2){
+                    if(s.toString().startsWith("0")&&!s.toString().substring(1).equals(".")){
+                        mActivityWoyaotuangouRenlingliang.setText(s.toString().substring(1));
+                        mActivityWoyaotuangouRenlingliang.setSelection(mActivityWoyaotuangouRenlingliang.getText().length());
+                    }
+                }
+
+                // 以小数点开头，前面自动加上 "0"
+                if (s.toString().startsWith(".")) {
+                    mActivityWoyaotuangouRenlingliang.setText("0" + s);
+                    mActivityWoyaotuangouRenlingliang.setSelection(mActivityWoyaotuangouRenlingliang.getText().length());
+                }
+
+            }
+        });
         mActivityWoyaotuangouLianxiren = (EditText) findViewById(R.id.activity_woyaotuangou_lianxiren);
         mActivityWoyaotuangouPhone = (EditText) findViewById(R.id.activity_woyaotuangou_phone);
         mActivityWoyaotuangouCompanyname = (EditText) findViewById(R.id.activity_woyaotuangou_companyname);
@@ -128,6 +206,25 @@ public class WoyaotuangouActivity extends AppCompatActivity implements View.OnCl
         mActivityWoyaotuangouCancel.setOnClickListener(this);
         mActivityWoyaotuangouChoiceAddress = (TextView) findViewById(R.id.activity_woyaotuangou_choiceAddress);
         mActivityWoyaotuangouChoiceAddress.setOnClickListener(this);
+        mActivityWoyaotuangouYinxiongma = (EditText) findViewById(R.id.activity_woyaotuangou_yinxiongma);
+        mActivityWoyaotuangouYinxiongmaShuoming = (TextView) findViewById(R.id.activity_woyaotuangou_yinxiongma_shuoming);
+        mActivityWoyaotuangouYinxiongmaShuoming.setOnClickListener(this);
+        mActivityWoyaotuangouYangpinGroup = (RadioGroup) findViewById(R.id.activity_woyaotuangou_yangpin_group);
+        mActivityWoyaotuangouYangpinGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.activity_woyaotuangou_radiobutton1:
+                        xuyaoyangpin = 1;
+                        break;
+                    case R.id.activity_woyaotuangou_radiobutton2:
+                        xuyaoyangpin = 0;
+                        break;
+                }
+            }
+        });
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("我要团购");
     }
 
     @Override
@@ -138,6 +235,9 @@ public class WoyaotuangouActivity extends AppCompatActivity implements View.OnCl
             case R.id.activity_woyaotuangou_submit:
                 if (StringUtils.isTrimEmpty(mActivityWoyaotuangouRenlingliang.getText().toString())) {
                     ToastUtils.showShort("请填写认领量");
+                    return;
+                } else if (Float.parseFloat(mActivityWoyaotuangouRenlingliang.getText().toString()) < Float.parseFloat(bean.getMinNum())) {
+                    ToastUtils.showShort("认领量不能小于最少认领量");
                     return;
                 } else if (StringUtils.isTrimEmpty(mActivityWoyaotuangouLianxiren.getText().toString())) {
                     ToastUtils.showShort("请填写联系人");
@@ -158,13 +258,19 @@ public class WoyaotuangouActivity extends AppCompatActivity implements View.OnCl
                     ToastUtils.showShort("请填写公司详细地址");
                     return;
                 }
-
+                fabutuangou();
 
                 break;
             case R.id.activity_woyaotuangou_cancel:
+                finish();
                 break;
             case R.id.activity_woyaotuangou_choiceAddress:
                 choiceAddress(mActivityWoyaotuangouChoiceAddress);
+                break;
+            case R.id.activity_woyaotuangou_yinxiongma_shuoming:
+                break;
+            case R.id.toolbar_back:
+                finish();
                 break;
         }
     }
@@ -174,6 +280,73 @@ public class WoyaotuangouActivity extends AppCompatActivity implements View.OnCl
 
     //市
     private String locationCity;
+
+
+    private void fabutuangou() {
+
+        HttpParams paras = new HttpParams();
+        paras.put("sign", SPUtils.getInstance().getString("sign"));
+
+        paras.put("mainId", bean.getId());
+
+        paras.put("phone", mActivityWoyaotuangouPhone.getText().toString());
+
+        paras.put("contact", mActivityWoyaotuangouLianxiren.getText().toString());
+
+        paras.put("companyName", mActivityWoyaotuangouCompanyname.getText().toString());
+
+        paras.put("num", mActivityWoyaotuangouRenlingliang.getText().toString());
+
+        paras.put("numUnit", bean.getNumUnit());
+
+        paras.put("province", locationProvince);
+
+        paras.put("city", locationCity);
+
+        paras.put("address", locationProvince + locationCity);
+
+        paras.put("isSendSample", xuyaoyangpin);
+
+        paras.put("invitationCode", mActivityWoyaotuangouYinxiongma.getText().toString());
+        paras.put("from", "app");
+
+        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.WOYAOTUANGOU)
+                .tag(this)
+                .params(paras)
+                .execute(new DialogStringCallback(WoyaotuangouActivity.this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            LogUtils.v("WOYAOTUANGOU", response.body());
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    String msg = jsonObject.getString("msg");
+                                    ToastUtils.showShort(msg);
+                                    finish();
+                                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.TUANGOUCHENGGONG));
+                                    return;
+
+                                }
+                                SignAndTokenUtil.checkSignAndToken(WoyaotuangouActivity.this, jsonObject);
+
+                            } else {
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                    }
+                });
+
+    }
 
 
     //选择地址

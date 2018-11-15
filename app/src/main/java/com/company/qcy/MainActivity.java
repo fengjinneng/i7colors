@@ -83,7 +83,7 @@ public class MainActivity extends BaseActivity {
     private void initBottomNavigation() {
         mBottomnavigation = findViewById(R.id.bottomnavigation);
         BottomNavigationItem homeItem = new BottomNavigationItem(R.mipmap.home_checked, "首页");
-        BottomNavigationItem toutiaoItem = new BottomNavigationItem(R.mipmap.toutiao_checked, "头条");
+        BottomNavigationItem toutiaoItem = new BottomNavigationItem(R.mipmap.toutiao_checked, "朋友圈");
         BottomNavigationItem xiaoxiItem = new BottomNavigationItem(R.mipmap.xiaoxi_checked, "消息");
         BottomNavigationItem wodeItem = new BottomNavigationItem(R.mipmap.wode_checked, "我的");
 
@@ -114,24 +114,24 @@ public class MainActivity extends BaseActivity {
                         isNetWork();
 
                         choicedWhitchFragment = 1;
-                        if (toutiaoFragment == null) {
-                            toutiaoFragment = new ToutiaoFragment();
-                            fragmentTransaction.add(R.id.home_container, toutiaoFragment);
-                        }
-                        hideFragment(fragmentTransaction);
-                        fragmentTransaction.show(toutiaoFragment);
-                        break;
-                    case 2:
-                        isNetWork();
-
-                        choicedWhitchFragment = 2;
                         if (xiaoxiFragment == null) {
-
                             xiaoxiFragment = new XiaoxiFragment();
                             fragmentTransaction.add(R.id.home_container, xiaoxiFragment);
                         }
                         hideFragment(fragmentTransaction);
                         fragmentTransaction.show(xiaoxiFragment);
+                        break;
+                    case 2:
+                        isNetWork();
+
+                        choicedWhitchFragment = 2;
+                        if (toutiaoFragment == null) {
+
+                            toutiaoFragment = new ToutiaoFragment();
+                            fragmentTransaction.add(R.id.home_container, toutiaoFragment);
+                        }
+                        hideFragment(fragmentTransaction);
+                        fragmentTransaction.show(toutiaoFragment);
                         break;
                     case 3:
                         isNetWork();
@@ -181,12 +181,12 @@ public class MainActivity extends BaseActivity {
                     break;
                 case 1:
                     hideFragment(fragmentTransaction);
-                    fragmentTransaction.show(toutiaoFragment);
+                    fragmentTransaction.show(xiaoxiFragment);
                     mBottomnavigation.selectTab(choicedWhitchFragment);
                     break;
                 case 2:
                     hideFragment(fragmentTransaction);
-                    fragmentTransaction.show(xiaoxiFragment);
+                    fragmentTransaction.show(toutiaoFragment);
                     mBottomnavigation.selectTab(choicedWhitchFragment);
                     break;
             }

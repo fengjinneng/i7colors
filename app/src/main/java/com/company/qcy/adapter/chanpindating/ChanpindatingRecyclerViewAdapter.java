@@ -38,11 +38,11 @@ public class ChanpindatingRecyclerViewAdapter extends
             layout.setTags(tags);
         }
 
-        helper.setText(R.id.item_chanpindating_company, item.getSupplierShotName()).addOnClickListener(R.id.item_chanpindating_yijianhujiao);
+        helper.setText(R.id.item_chanpindating_companyName, item.getCompanyName()).addOnClickListener(R.id.item_chanpindating_yijianhujiao);
 
         ImageView imageView = (ImageView) helper.getView(R.id.item_chanpindating_img);
         GlideUtils.loadImage(mContext,ServerInfo.IMAGE+item.getPic(),imageView);
-        helper.setText(R.id.item_chanpindating_detail, item.getProductName());
+        helper.setText(R.id.item_chanpindating_productName, item.getProductName());
 
         //价格为空
         if (item.isDisplayPrice()) {

@@ -20,7 +20,7 @@
 
     <TextView
 
-        android:id="@+id/item_chanpindating_company"
+        android:id="@+id/item_chanpindating_productName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -31,6 +31,8 @@
         android:textColor="@color/biaoti"
         android:textSize="@dimen/x30"
         android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_chanpindating_img"
         app:layout_constraintTop_toTopOf="parent" />
@@ -50,27 +52,27 @@
 
 
     <TextView
-        android:id="@+id/item_chanpindating_detail"
+        android:id="@+id/item_chanpindating_companyName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/item_chanpindating_company"
-        android:layout_below="@+id/item_chanpindating_company"
+        android:layout_alignStart="@+id/item_chanpindating_productName"
+        android:layout_below="@+id/item_chanpindating_productName"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="@dimen/x8"
         android:ellipsize="end"
         android:singleLine="true"
         android:textSize="@dimen/x24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_company"
-        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_company" />
+        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_productName"
+        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_productName" />
 
     <co.lujun.androidtagview.TagContainerLayout
         android:id="@+id/item_chanpindating_tagcontainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/item_chanpindating_company"
+        android:layout_alignLeft="@id/item_chanpindating_productName"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/item_chanpindating_detail"
+        android:layout_below="@+id/item_chanpindating_companyName"
         android:layout_centerVertical="true"
         android:layout_marginTop="@dimen/x14"
         app:container_background_color="@color/baise"
@@ -79,8 +81,8 @@
         app:container_max_lines="1"
         app:horizontal_interval="@dimen/x12"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_detail"
-        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_detail"
+        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_companyName"
+        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_companyName"
         app:tag_background_color="@color/baise"
         app:tag_border_color="@color/erjibiaoti"
         app:tag_corner_radius="5dp"

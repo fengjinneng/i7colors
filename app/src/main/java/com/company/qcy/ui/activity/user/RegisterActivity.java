@@ -27,6 +27,7 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -34,7 +35,7 @@ import com.lzy.okgo.model.Response;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -114,6 +115,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         mActivityRegisterSendsms.setOnClickListener(this);
         mActivityRegisterChange.setOnClickListener(this);
         getCaptcha();
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("欢迎注册");
     }
 
     private void getCaptcha() {
@@ -152,23 +155,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.activity_register_submit:
 
-                if(!StringUtils.isEmpty(mActivityRegisterPhone.getText().toString())|| !RegexUtils.isMobileSimple(mActivityRegisterPhone.getText().toString())){
+                if (StringUtils.isEmpty(mActivityRegisterPhone.getText().toString()) || !RegexUtils.isMobileSimple(mActivityRegisterPhone.getText().toString())) {
                     ToastUtils.showShort("请填写正确的手机号码");
                     return;
 
-                }else if(StringUtils.length(mActivityRegisterVerifycode.getText().toString().trim())!=4){
+                } else if (StringUtils.length(mActivityRegisterVerifycode.getText().toString().trim()) != 4) {
                     ToastUtils.showShort("请填写正确的图片验证码");
                     return;
-                }else if(StringUtils.length(mActivityRegisterSms.getText().toString().trim())!=6){
+                } else if (StringUtils.length(mActivityRegisterSms.getText().toString().trim()) != 6) {
                     ToastUtils.showShort("请填写正确的短信验证码");
                     return;
-                }else if(StringUtils.isEmpty(mActivityRegisterPassword1.getText().toString())){
+                } else if (StringUtils.isEmpty(mActivityRegisterPassword1.getText().toString())) {
                     ToastUtils.showShort("请填写密码");
                     return;
-                }else if(StringUtils.isEmpty(mActivityRegisterPassword2.getText().toString())){
+                } else if (StringUtils.isEmpty(mActivityRegisterPassword2.getText().toString())) {
                     ToastUtils.showShort("请再次填写密码");
                     return;
-                }else if(!StringUtils.equals(mActivityRegisterPassword1.getText().toString().trim(),mActivityRegisterPassword2.getText().toString().trim())){
+                } else if (!StringUtils.equals(mActivityRegisterPassword1.getText().toString().trim(), mActivityRegisterPassword2.getText().toString().trim())) {
                     ToastUtils.showShort("两次输入的密码不同");
                     return;
                 }
@@ -184,15 +187,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             public void onSuccess(Response<String> response) {
                                 try {
                                     if (response.code() == 200) {
-
+                                        LogUtils.e("REGISTER", response.body());
                                         JSONObject jsonObject = JSONObject.parseObject(response.body());
-
+                                        String msg = jsonObject.getString("msg");
                                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-
+                                            ToastUtils.showShort(msg);
+                                            finish();
                                             return;
 
-                                        } else
+                                        } else {
+                                            ToastUtils.showShort(msg);
                                             SignAndTokenUtil.checkSignAndToken(RegisterActivity.this, jsonObject);
+
+                                        }
 
                                     } else {
                                     }
@@ -212,16 +219,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
                 break;
             case R.id.activity_register_sendsms:
-                if(!RegexUtils.isMobileSimple(mActivityRegisterPhone.getText().toString().trim())){
+                if (!RegexUtils.isMobileSimple(mActivityRegisterPhone.getText().toString().trim())) {
                     ToastUtils.showShort("请输入正确的手机号！");
                     return;
                 }
-                if(mActivityRegisterVerifycode.getText().toString().trim().length()!=4){
+                if (mActivityRegisterVerifycode.getText().toString().trim().length() != 4) {
                     ToastUtils.showShort("请输入正确的图片验证码！");
                     return;
                 }
 
-                OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMS)
+                OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMSREGISTER)
                         .tag(this)
                         .params("deviceNo", DeviceUtils.getAndroidID())
                         .params("sign", SPUtils.getInstance().getString("sign"))
@@ -231,17 +238,17 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                             @Override
                             public void onSuccess(Response<String> response) {
                                 try {
-                                    LogUtils.v("SENDSMS",response.body());
+                                    LogUtils.v("SENDSMS", response.body());
 
                                     if (response.code() == 200) {
 
                                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                             String s = jsonObject.getString("data");
-                                            if(StringUtils.equals("true",s)){
+                                            if (StringUtils.equals("true", s)) {
                                                 ToastUtils.showShort("短信获取成功！");
 
-                                                timer = new CountDownTimer(59000,1000) {
+                                                timer = new CountDownTimer(59000, 1000) {
                                                     @Override
                                                     public void onTick(long millisUntilFinished) {
                                                         SimpleDateFormat sdf = new SimpleDateFormat("ss");
@@ -256,7 +263,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                                     }
                                                 }.start();
 
-                                            }else {
+                                            } else {
                                                 ToastUtils.showShort("短信获取失败！");
                                             }
                                             return;
@@ -284,8 +291,16 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             case R.id.activity_register_change:
                 getCaptcha();
                 break;
+            case R.id.toolbar_back:
+                finish();
+                break;
         }
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 }

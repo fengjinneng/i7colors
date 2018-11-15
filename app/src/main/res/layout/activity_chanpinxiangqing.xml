@@ -170,7 +170,7 @@
         <LinearLayout
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x120"
+            android:layout_height="@dimen/x80"
             android:background="@color/baise"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
@@ -182,19 +182,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="bottom"
-                android:paddingLeft="8dp"
-                android:singleLine="true" />
-
-
-            <TextView
-                android:id="@+id/activity_chanpinxiangqing_name_english"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
-                android:background="@color/baise"
                 android:gravity="center_vertical"
                 android:paddingLeft="8dp"
                 android:singleLine="true" />
+
         </LinearLayout>
     </com.lijiankun24.shadowlayout.ShadowLayout>
 
@@ -226,16 +217,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/textview152"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView57" />
+
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/activity_chanpinxiangqing_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:background="@color/baise"
                 app:layout_constraintEnd_toEndOf="@+id/textView57"
                 app:layout_constraintStart_toStartOf="@+id/textView57"
-                app:layout_constraintTop_toBottomOf="@+id/textView57" />
+                app:layout_constraintTop_toBottomOf="@+id/textview152" />
+
 
         </android.support.constraint.ConstraintLayout>
     </com.lijiankun24.shadowlayout.ShadowLayout>
@@ -320,6 +320,7 @@
         </LinearLayout>
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/activity_chanpinxiangqing_yijianhujiao"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@mipmap/anniujianbian"
