@@ -59,6 +59,9 @@ public class MessageBean {
         //团购成功
         public static final int TUANGOUCHENGGONG = 1007;
 
+        //发布朋友quan成功
+        public static final int FABUPENGYOUQUANCHENGGONG = 1008;
+
 
     }
 

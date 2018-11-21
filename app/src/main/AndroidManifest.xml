@@ -9,6 +9,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:name=".I7colorsApplication"
@@ -18,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustPan|stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -79,7 +81,13 @@
         <activity android:name=".ui.activity.tuangou.YingxiongmashuomingActivity" />
         <activity android:name=".ui.activity.user.ZhanghaozhongxinActivity" />
         <activity android:name=".ui.activity.message.MessageDetailActivity" />
-        <activity android:name=".base.WebActivity"></activity>
+        <activity android:name=".base.WebActivity" />
+        <activity android:name=".ui.activity.pengyouquan.PubulishPYQActivity" />
+        <activity android:name=".ui.activity.pengyouquan.DavrenzhengActivity" />
+        <activity
+            android:name=".ui.activity.pengyouquan.ShipinbofangActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

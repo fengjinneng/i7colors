@@ -16,5 +16,7 @@
 
     <string name="success">SUCCESS</string>
 
+    <string name="up_load_error">单个图片、视频文件最大10M</string>
+
 
 </resources>

@@ -125,4 +125,8 @@ public class InterfaceInfo {
 
     //朋友圈模块
     public static final String QUERYDYECOMMUNITYLIST = "dyeCommunity/queryDyeCommunityList";
+
+    //发朋友圈
+    public static final String FABUPENGYOUQUAN = "dyeCommunity/addDyeCommunity";
+
 }

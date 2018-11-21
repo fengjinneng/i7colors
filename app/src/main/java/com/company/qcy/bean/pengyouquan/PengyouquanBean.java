@@ -1,14 +1,12 @@
 package com.company.qcy.bean.pengyouquan;
 
-import android.content.Intent;
-
 import java.util.List;
 
 public class PengyouquanBean {
 
 
     /**
-     * id : 2
+     * id : 1
      * userId : null
      * loginUserId : null
      * loginCompanyId : null
@@ -25,20 +23,20 @@ public class PengyouquanBean {
      * pic8 : /dye_community/123456789JKL.jpg
      * pic9 : /dye_community/123456789JKL.jpg
      * isBan : null
-     * sortNum : 1
+     * sortNum : 2
      * isValid : null
-     * createdAt : 2018-10-23 14:34:06.0
-     * createdAtStamp : 1540276446
-     * isLike : 0
+     * createdAt : 2018-10-23 14:33:05.0
+     * createdAtStamp : 1540276385
+     * isLike : 1
      * updatedAt : null
-     * commentList : [{"id":4,"dyeId":null,"userId":null,"commentUser":"封金能","byCommentUser":null,"parentId":null,"content":"阿伦子公司来评论","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null},{"id":5,"dyeId":null,"userId":null,"commentUser":"15580804456","byCommentUser":null,"parentId":null,"content":"阿伦公司来评论","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null},{"id":6,"dyeId":null,"userId":null,"commentUser":"15580804456","byCommentUser":"封金能","parentId":null,"content":"阿伦公司来评论子公司","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null},{"id":8,"dyeId":null,"userId":null,"commentUser":"15580804456","byCommentUser":"15580804456","parentId":null,"content":"阿伦公司阿伦公司评论333333","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null}]
-     * likeList : []
+     * commentList : [{"id":1,"dyeId":null,"userId":null,"commentUser":"15580804456","byCommentUser":null,"parentId":null,"content":"阿伦公司来评论啦","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null},{"id":2,"dyeId":null,"userId":null,"commentUser":"封金能","byCommentUser":null,"parentId":null,"content":"阿伦子公司来评论啦","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null},{"id":3,"dyeId":null,"userId":null,"commentUser":"封金能","byCommentUser":"15580804456","parentId":null,"content":"阿伦子公司评论阿伦公司哎","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null}]
+     * likeList : [{"id":114842,"dyeId":null,"userId":null,"likeUserPhoto":null,"isValid":null,"createdAt":null,"updatedAt":null}]
      */
 
     private Long id;
     private Long userId;
-    private Object loginUserId;
-    private Object loginCompanyId;
+    private Long loginUserId;
+    private Long loginCompanyId;
     private String postUser;
     private String postUserPhoto;
     private String content;
@@ -52,14 +50,14 @@ public class PengyouquanBean {
     private String pic8;
     private String pic9;
     private Object isBan;
-    private Integer sortNum;
+    private int sortNum;
     private Object isValid;
     private String createdAt;
     private String createdAtStamp;
     private String isLike;
     private Object updatedAt;
     private List<CommentListBean> commentList;
-    private List<?> likeList;
+    private List<LikeListBean> likeList;
 
     public Long getId() {
         return id;
@@ -77,19 +75,19 @@ public class PengyouquanBean {
         this.userId = userId;
     }
 
-    public Object getLoginUserId() {
+    public Long getLoginUserId() {
         return loginUserId;
     }
 
-    public void setLoginUserId(Object loginUserId) {
+    public void setLoginUserId(Long loginUserId) {
         this.loginUserId = loginUserId;
     }
 
-    public Object getLoginCompanyId() {
+    public Long getLoginCompanyId() {
         return loginCompanyId;
     }
 
-    public void setLoginCompanyId(Object loginCompanyId) {
+    public void setLoginCompanyId(Long loginCompanyId) {
         this.loginCompanyId = loginCompanyId;
     }
 
@@ -107,10 +105,6 @@ public class PengyouquanBean {
 
     public void setPostUserPhoto(String postUserPhoto) {
         this.postUserPhoto = postUserPhoto;
-    }
-
-    public void setSortNum(Integer sortNum) {
-        this.sortNum = sortNum;
     }
 
     public String getContent() {
@@ -257,23 +251,23 @@ public class PengyouquanBean {
         this.commentList = commentList;
     }
 
-    public List<?> getLikeList() {
+    public List<LikeListBean> getLikeList() {
         return likeList;
     }
 
-    public void setLikeList(List<?> likeList) {
+    public void setLikeList(List<LikeListBean> likeList) {
         this.likeList = likeList;
     }
 
     public static class CommentListBean {
         /**
-         * id : 4
+         * id : 1
          * dyeId : null
          * userId : null
-         * commentUser : 封金能
+         * commentUser : 15580804456
          * byCommentUser : null
          * parentId : null
-         * content : 阿伦子公司来评论
+         * content : 阿伦公司来评论啦
          * isRead : null
          * isBan : null
          * isValid : null
@@ -283,10 +277,10 @@ public class PengyouquanBean {
          */
 
         private Long id;
-        private Object dyeId;
-        private Object userId;
+        private Long dyeId;
+        private Long userId;
         private String commentUser;
-        private Object byCommentUser;
+        private String byCommentUser;
         private Object parentId;
         private String content;
         private Object isRead;
@@ -296,28 +290,28 @@ public class PengyouquanBean {
         private Object createdAtStamp;
         private Object updatedAt;
 
-        public Long getId() {
-            return id;
-        }
-
         public void setId(Long id) {
             this.id = id;
         }
 
-        public Object getDyeId() {
-            return dyeId;
-        }
-
-        public void setDyeId(Object dyeId) {
+        public void setDyeId(Long dyeId) {
             this.dyeId = dyeId;
         }
 
-        public Object getUserId() {
-            return userId;
+        public void setUserId(Long userId) {
+            this.userId = userId;
         }
 
-        public void setUserId(Object userId) {
-            this.userId = userId;
+        public Long getId() {
+            return id;
+        }
+
+        public Long getDyeId() {
+            return dyeId;
+        }
+
+        public Long getUserId() {
+            return userId;
         }
 
         public String getCommentUser() {
@@ -328,11 +322,11 @@ public class PengyouquanBean {
             this.commentUser = commentUser;
         }
 
-        public Object getByCommentUser() {
+        public String getByCommentUser() {
             return byCommentUser;
         }
 
-        public void setByCommentUser(Object byCommentUser) {
+        public void setByCommentUser(String byCommentUser) {
             this.byCommentUser = byCommentUser;
         }
 
@@ -390,6 +384,82 @@ public class PengyouquanBean {
 
         public void setCreatedAtStamp(Object createdAtStamp) {
             this.createdAtStamp = createdAtStamp;
+        }
+
+        public Object getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(Object updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+    }
+
+    public static class LikeListBean {
+        /**
+         * id : 114842
+         * dyeId : null
+         * userId : null
+         * likeUserPhoto : null
+         * isValid : null
+         * createdAt : null
+         * updatedAt : null
+         */
+
+        private Long id;
+        private Long dyeId;
+        private Long userId;
+        private Object likeUserPhoto;
+        private Object isValid;
+        private Object createdAt;
+        private Object updatedAt;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public Long getDyeId() {
+            return dyeId;
+        }
+
+        public void setDyeId(Long dyeId) {
+            this.dyeId = dyeId;
+        }
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public void setUserId(Long userId) {
+            this.userId = userId;
+        }
+
+        public Object getLikeUserPhoto() {
+            return likeUserPhoto;
+        }
+
+        public void setLikeUserPhoto(Object likeUserPhoto) {
+            this.likeUserPhoto = likeUserPhoto;
+        }
+
+        public Object getIsValid() {
+            return isValid;
+        }
+
+        public void setIsValid(Object isValid) {
+            this.isValid = isValid;
+        }
+
+        public Object getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(Object createdAt) {
+            this.createdAt = createdAt;
         }
 
         public Object getUpdatedAt() {

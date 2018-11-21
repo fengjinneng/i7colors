@@ -1,28 +1,39 @@
 package com.company.qcy.adapter.pengyouquan;
 
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.bean.pengyouquan.DianzantouxiangBean;
+import com.company.qcy.bean.pengyouquan.CommentConfig;
+import com.company.qcy.bean.pengyouquan.CommentItem;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
+import com.company.qcy.bean.pengyouquan.PhotoInfo;
+import com.company.qcy.bean.pengyouquan.User;
+import com.company.qcy.fragment.home.XiaoxiFragment;
+import com.company.qcy.widght.pengyouquan.CommentListView;
+import com.company.qcy.widght.pengyouquan.ExpandTextView;
+import com.company.qcy.widght.pengyouquan.MultiImageView;
+import com.company.qcy.widght.pengyouquan.PileLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseViewHolder> {
 
+    XiaoxiFragment fragment;
 
-    public PengyouquanAdapter(int layoutResId, @Nullable List<PengyouquanBean> data) {
+    public PengyouquanAdapter(int layoutResId, @Nullable List<PengyouquanBean> data,XiaoxiFragment fragment) {
         super(layoutResId, data);
+        this.fragment =fragment;
     }
 
     @Override
@@ -30,115 +41,88 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
 
         ImageView headimg = (ImageView) helper.getView(R.id.item_pengyouquan_headimg);
-        GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getPostUserPhoto(), headimg);
-
-        helper.setText(R.id.item_pengyouquan_name, item.getPostUser());
-        helper.setText(R.id.item_pengyouquan_content, item.getContent());
-
-        setImage(helper, item);
-
-        RecyclerView touxiangRecyclerview = (RecyclerView) helper.getView(R.id.item_pengyouquan_touxiang_recyclerview);
-        RecyclerView messageRecyclerview = (RecyclerView) helper.getView(R.id.item_pengyouquan_message_recyclerview);
-
-        List<DianzantouxiangBean> datas = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            datas.add(new DianzantouxiangBean());
+        if (!StringUtils.isEmpty(item.getPostUserPhoto())) {
+            GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getPostUserPhoto(), headimg);
         }
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        touxiangRecyclerview.setLayoutManager(layoutManager);
-        DianzantouxiangAdapter adapter = new DianzantouxiangAdapter(R.layout.item_pengyouquan_touxiang, datas);
-        touxiangRecyclerview.setAdapter(adapter);
 
+        helper.setText(R.id.item_pengyouquan_name, item.getPostUser()).addOnClickListener(R.id.snsBtn);
+        ExpandTextView expandTextView = (ExpandTextView) helper.getView(R.id.item_pengyouquan_content);
+        CharSequence cs = item.getContent();
+        expandTextView.setText(cs);
 
+        MultiImageView multiImageView = (MultiImageView) helper.getView(R.id.item_pengyouquan_multiImageView);
 
-
-
-    }
-
-    private void setImage(BaseViewHolder helper, PengyouquanBean item) {
-        ImageView image1 = (ImageView) helper.getView(R.id.item_pengyouquan_img1);
-        ImageView image2 = (ImageView) helper.getView(R.id.item_pengyouquan_img2);
-        ImageView image3 = (ImageView) helper.getView(R.id.item_pengyouquan_img3);
-        ImageView image4 = (ImageView) helper.getView(R.id.item_pengyouquan_img4);
-        ImageView image5 = (ImageView) helper.getView(R.id.item_pengyouquan_img5);
-        ImageView image6 = (ImageView) helper.getView(R.id.item_pengyouquan_img6);
-        ImageView image7 = (ImageView) helper.getView(R.id.item_pengyouquan_img7);
-        ImageView image8 = (ImageView) helper.getView(R.id.item_pengyouquan_img8);
-        ImageView image9 = (ImageView) helper.getView(R.id.item_pengyouquan_img9);
-
+        List<PhotoInfo> photoInfos = new ArrayList<>();
         if (!StringUtils.isEmpty(item.getPic1())) {
-            image1.setVisibility(View.VISIBLE);
-            GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic1(), image1);
+            photoInfos.add(new PhotoInfo(item.getPic1()));
+        }
+        if (!StringUtils.isEmpty(item.getPic2())) {
+            photoInfos.add(new PhotoInfo(item.getPic2()));
+        }
+        if (!StringUtils.isEmpty(item.getPic3())) {
+            photoInfos.add(new PhotoInfo(item.getPic3()));
+        }
+        if (!StringUtils.isEmpty(item.getPic4())) {
+            photoInfos.add(new PhotoInfo(item.getPic4()));
+        }
+        if (!StringUtils.isEmpty(item.getPic5())) {
+            photoInfos.add(new PhotoInfo(item.getPic5()));
+        }
+        if (!StringUtils.isEmpty(item.getPic6())) {
+            photoInfos.add(new PhotoInfo(item.getPic6()));
+        }
+        if (!StringUtils.isEmpty(item.getPic7())) {
+            photoInfos.add(new PhotoInfo(item.getPic7()));
+        }
+        if (!StringUtils.isEmpty(item.getPic8())) {
+            photoInfos.add(new PhotoInfo(item.getPic8()));
+        }
+        if (!StringUtils.isEmpty(item.getPic9())) {
+            photoInfos.add(new PhotoInfo(item.getPic9()));
+        }
 
-            if (!StringUtils.isEmpty(item.getPic2())) {
-                image2.setVisibility(View.VISIBLE);
-                GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic2(), image2);
+        multiImageView.setList(photoInfos);
 
-                if (!StringUtils.isEmpty(item.getPic3())) {
-                    image3.setVisibility(View.VISIBLE);
-                    GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic3(), image3);
-
-                    if (!StringUtils.isEmpty(item.getPic4())) {
-                        image4.setVisibility(View.VISIBLE);
-                        GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic4(), image4);
-                        if (!StringUtils.isEmpty(item.getPic5())) {
-                            image5.setVisibility(View.VISIBLE);
-                            GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic5(), image5);
-
-                            if (!StringUtils.isEmpty(item.getPic6())) {
-                                image6.setVisibility(View.VISIBLE);
-                                GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic6(), image6);
-
-                                if (!StringUtils.isEmpty(item.getPic7())) {
-                                    image7.setVisibility(View.VISIBLE);
-                                    GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic7(), image7);
-
-                                    if (!StringUtils.isEmpty(item.getPic8())) {
-                                        image8.setVisibility(View.VISIBLE);
-                                        GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic8(), image8);
-
-                                        if (!StringUtils.isEmpty(item.getPic9())) {
-                                            image9.setVisibility(View.VISIBLE);
-                                            GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic9(), image9);
-                                        } else {
-                                            image9.setVisibility(View.INVISIBLE);
-                                        }
-
-                                    } else {
-                                        image8.setVisibility(View.INVISIBLE);
-                                        image9.setVisibility(View.INVISIBLE);
-                                    }
-
-                                } else {
-
-                                }
-
-                            } else {
-                                image6.setVisibility(View.INVISIBLE);
-                            }
-
-                        } else {
-                            image5.setVisibility(View.INVISIBLE);
-                            image6.setVisibility(View.INVISIBLE);
-                        }
-
-                    } else {
-
+        PileLayout pileLayout = (PileLayout) helper.getView(R.id.pileLayout);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        pileLayout.removeAllViews();
+        if (!ObjectUtils.isEmpty(item.getLikeList())) {
+            for (int i = 0; i < item.getLikeList().size(); i++) {
+                ImageView imageView = (ImageView) inflater.inflate(R.layout.item_pengyouquan_praise, pileLayout, false);
+                GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getLikeList().get(i).getLikeUserPhoto(), imageView);
+                pileLayout.addView(imageView);
+                int finalI = i;
+                imageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtils.showShort("点击了第" + finalI + "长图片");
                     }
-
-
-                } else {
-                    image3.setVisibility(View.INVISIBLE);
-                }
-
-
-            } else {
-                image2.setVisibility(View.INVISIBLE);
-                image3.setVisibility(View.INVISIBLE);
+                });
             }
 
         }
 
+        CommentListView commentListView = ((CommentListView) helper.getView(R.id.commentList));
+        List<PengyouquanBean.CommentListBean> datas = new ArrayList<>();
+
+
+        for (int i = 0; i < item.getCommentList().size(); i++) {
+            PengyouquanBean.CommentListBean commentItem = new PengyouquanBean.CommentListBean();
+            commentItem.setContent(item.getCommentList().get(i).getContent());
+            commentItem.setCommentUser(item.getCommentList().get(i).getCommentUser());
+            commentItem.setByCommentUser(item.getCommentList().get(i).getByCommentUser());
+            datas.add(commentItem);
+        }
+        commentListView.setDatas(datas);
+        commentListView.setOnItemClickListener(new CommentListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                fragment.doThing();
+
+            }
+        });
+
     }
+
 }

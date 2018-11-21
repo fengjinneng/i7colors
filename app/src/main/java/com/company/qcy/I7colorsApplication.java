@@ -33,6 +33,7 @@ public class I7colorsApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        mContext = getApplicationContext();
         initOkGo();
 
 

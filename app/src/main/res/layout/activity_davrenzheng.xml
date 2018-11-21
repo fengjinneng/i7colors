@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.pengyouquan.DavrenzhengActivity">
+
+    <include
+        android:id="@+id/include21"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView155"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="8dp"
+        android:text="姓名:"
+        android:textSize="@dimen/x28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include21" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x64"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_shuruwenbenkuang"
+        android:hint="请输入姓名"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView155"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editText2"
+        app:layout_constraintTop_toTopOf="@+id/textView155" />
+
+    <TextView
+        android:id="@+id/textView161"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="8dp"
+        android:text="公司名称:"
+        android:textSize="@dimen/x28"
+        app:layout_constraintStart_toStartOf="@+id/textView155"
+        app:layout_constraintTop_toBottomOf="@+id/textView155" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x64"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_shuruwenbenkuang"
+        android:hint="请输入公司名称"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView161"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/editText3"
+        app:layout_constraintTop_toTopOf="@+id/textView161" />
+
+    <TextView
+        android:id="@+id/textView163"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="8dp"
+        android:text="个人职务名称:"
+        android:textSize="@dimen/x28"
+        app:layout_constraintStart_toStartOf="@+id/textView161"
+        app:layout_constraintTop_toBottomOf="@+id/textView161" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x64"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/background_shuruwenbenkuang"
+        android:hint="请输入个人职务名称"
+        android:inputType="textPersonName"
+        android:paddingLeft="8dp"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView163"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView163"
+        app:layout_constraintTop_toTopOf="@+id/textView163" />
+
+    <TextView
+        android:id="@+id/textView164"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="8dp"
+        android:text="上传凭证:"
+        android:textSize="@dimen/x28"
+        app:layout_constraintStart_toStartOf="@+id/textView163"
+        app:layout_constraintTop_toBottomOf="@+id/textView163" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout19"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x300"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView164">
+
+        <ImageView
+            android:id="@+id/imageView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/davrenzheng_jiahao" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView168"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="1.上传您的职业身份证、名片、工牌等任一材料。 \n2.请确保照片的内容完整并清晰可见，仅支持jpg、png格式图。\n3.请上传彩色图像。"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="提交"
+        android:textColor="@color/baise"
+        android:background="@mipmap/anniujianbian"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/fengexian"
+        android:text="取消"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button" />
+
+</android.support.constraint.ConstraintLayout>

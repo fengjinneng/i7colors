@@ -209,12 +209,12 @@ public class XitongxiaoxiFragment extends Fragment {
 
                         try {
                             if (response.code() == 200) {
+                                LogUtils.v("SYSTEMINFORMLIST", response.body());
 
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
 
                                 if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                                     JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("SYSTEMINFORMLIST", data);
                                     List<SystemMeassageBean> messageBeans = JSONObject.parseArray(data.toJSONString(), SystemMeassageBean.class);
                                     if (ObjectUtils.isEmpty(messageBeans)) {
                                         adapter.loadMoreEnd();
