@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity {
     //初始化底部导航栏
     private void initBottomNavigation() {
         mBottomnavigation = findViewById(R.id.bottomnavigation);
+        mBottomnavigation.setActiveColor(R.color.chunhongse);
         BottomNavigationItem homeItem = new BottomNavigationItem(R.mipmap.home_checked, "首页");
         BottomNavigationItem toutiaoItem = new BottomNavigationItem(R.mipmap.toutiao_checked, "朋友圈");
         BottomNavigationItem xiaoxiItem = new BottomNavigationItem(R.mipmap.xiaoxi_checked, "消息");

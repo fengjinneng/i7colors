@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -64,6 +65,36 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/item_pengyouquan_shipin_layout"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="100dp" >
+
+                <ImageView
+                    android:id="@+id/item_pengyouquan_shipin_img"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/morentouxiang" />
+
+                <ImageView
+                    android:id="@+id/item_pengyouquan_shipin_start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/item_pengyouquan_shipin_img"
+                    app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_shipin_img"
+                    app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_shipin_img"
+                    app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_shipin_img"
+                    app:srcCompat="@drawable/ic_player_center_start"/>
+            </android.support.constraint.ConstraintLayout>
             <!-- 地址、时间 、删除 、点赞、 评论 -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -143,6 +174,23 @@
                     android:orientation="vertical"
                     app:item_color="@color/praise_item"
                     />
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/item_pengyouquan_chakangengduo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:text="点击查看更多.."
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
 
             </LinearLayout>
         </LinearLayout>

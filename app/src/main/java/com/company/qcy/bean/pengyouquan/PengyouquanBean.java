@@ -1,9 +1,12 @@
 package com.company.qcy.bean.pengyouquan;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class PengyouquanBean {
-
+public class PengyouquanBean implements Parcelable {
 
     /**
      * id : 1
@@ -33,6 +36,8 @@ public class PengyouquanBean {
      * likeList : [{"id":114842,"dyeId":null,"userId":null,"likeUserPhoto":null,"isValid":null,"createdAt":null,"updatedAt":null}]
      */
 
+
+
     private Long id;
     private Long userId;
     private Long loginUserId;
@@ -49,13 +54,20 @@ public class PengyouquanBean {
     private String pic7;
     private String pic8;
     private String pic9;
-    private Object isBan;
     private int sortNum;
-    private Object isValid;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     private String createdAt;
-    private String createdAtStamp;
+    private Long createdAtStamp;
     private String isLike;
-    private Object updatedAt;
     private List<CommentListBean> commentList;
     private List<LikeListBean> likeList;
 
@@ -187,13 +199,7 @@ public class PengyouquanBean {
         this.pic9 = pic9;
     }
 
-    public Object getIsBan() {
-        return isBan;
-    }
 
-    public void setIsBan(Object isBan) {
-        this.isBan = isBan;
-    }
 
     public int getSortNum() {
         return sortNum;
@@ -201,14 +207,6 @@ public class PengyouquanBean {
 
     public void setSortNum(int sortNum) {
         this.sortNum = sortNum;
-    }
-
-    public Object getIsValid() {
-        return isValid;
-    }
-
-    public void setIsValid(Object isValid) {
-        this.isValid = isValid;
     }
 
     public String getCreatedAt() {
@@ -219,11 +217,11 @@ public class PengyouquanBean {
         this.createdAt = createdAt;
     }
 
-    public String getCreatedAtStamp() {
+    public Long getCreatedAtStamp() {
         return createdAtStamp;
     }
 
-    public void setCreatedAtStamp(String createdAtStamp) {
+    public void setCreatedAtStamp(Long createdAtStamp) {
         this.createdAtStamp = createdAtStamp;
     }
 
@@ -235,13 +233,6 @@ public class PengyouquanBean {
         this.isLike = isLike;
     }
 
-    public Object getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Object updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
     public List<CommentListBean> getCommentList() {
         return commentList;
@@ -259,7 +250,9 @@ public class PengyouquanBean {
         this.likeList = likeList;
     }
 
-    public static class CommentListBean {
+
+
+    public static class CommentListBean implements Parcelable {
         /**
          * id : 1
          * dyeId : null
@@ -281,14 +274,24 @@ public class PengyouquanBean {
         private Long userId;
         private String commentUser;
         private String byCommentUser;
-        private Object parentId;
         private String content;
-        private Object isRead;
-        private Object isBan;
-        private Object isValid;
-        private Object createdAt;
-        private Object createdAtStamp;
-        private Object updatedAt;
+        private Long createdAtStamp;
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public Long getCreatedAtStamp() {
+            return createdAtStamp;
+        }
+
+        public void setCreatedAtStamp(Long createdAtStamp) {
+            this.createdAtStamp = createdAtStamp;
+        }
 
         public void setId(Long id) {
             this.id = id;
@@ -330,72 +333,50 @@ public class PengyouquanBean {
             this.byCommentUser = byCommentUser;
         }
 
-        public Object getParentId() {
-            return parentId;
+
+        @Override
+        public int describeContents() {
+            return 0;
         }
 
-        public void setParentId(Object parentId) {
-            this.parentId = parentId;
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeValue(this.id);
+            dest.writeValue(this.dyeId);
+            dest.writeValue(this.userId);
+            dest.writeString(this.commentUser);
+            dest.writeString(this.byCommentUser);
+            dest.writeString(this.content);
+            dest.writeValue(this.createdAtStamp);
         }
 
-        public String getContent() {
-            return content;
+        public CommentListBean() {
         }
 
-        public void setContent(String content) {
-            this.content = content;
+        protected CommentListBean(Parcel in) {
+            this.id = (Long) in.readValue(Long.class.getClassLoader());
+            this.dyeId = (Long) in.readValue(Long.class.getClassLoader());
+            this.userId = (Long) in.readValue(Long.class.getClassLoader());
+            this.commentUser = in.readString();
+            this.byCommentUser = in.readString();
+            this.content = in.readString();
+            this.createdAtStamp = (Long) in.readValue(Long.class.getClassLoader());
         }
 
-        public Object getIsRead() {
-            return isRead;
-        }
+        public static final Creator<CommentListBean> CREATOR = new Creator<CommentListBean>() {
+            @Override
+            public CommentListBean createFromParcel(Parcel source) {
+                return new CommentListBean(source);
+            }
 
-        public void setIsRead(Object isRead) {
-            this.isRead = isRead;
-        }
-
-        public Object getIsBan() {
-            return isBan;
-        }
-
-        public void setIsBan(Object isBan) {
-            this.isBan = isBan;
-        }
-
-        public Object getIsValid() {
-            return isValid;
-        }
-
-        public void setIsValid(Object isValid) {
-            this.isValid = isValid;
-        }
-
-        public Object getCreatedAt() {
-            return createdAt;
-        }
-
-        public void setCreatedAt(Object createdAt) {
-            this.createdAt = createdAt;
-        }
-
-        public Object getCreatedAtStamp() {
-            return createdAtStamp;
-        }
-
-        public void setCreatedAtStamp(Object createdAtStamp) {
-            this.createdAtStamp = createdAtStamp;
-        }
-
-        public Object getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(Object updatedAt) {
-            this.updatedAt = updatedAt;
-        }
+            @Override
+            public CommentListBean[] newArray(int size) {
+                return new CommentListBean[size];
+            }
+        };
     }
 
-    public static class LikeListBean {
+    public static class LikeListBean implements Parcelable {
         /**
          * id : 114842
          * dyeId : null
@@ -406,13 +387,38 @@ public class PengyouquanBean {
          * updatedAt : null
          */
 
+
+
         private Long id;
         private Long dyeId;
         private Long userId;
-        private Object likeUserPhoto;
-        private Object isValid;
-        private Object createdAt;
-        private Object updatedAt;
+        private Long createdAt;
+        private String likeUser;
+        private String likeUserPhoto;
+
+        public Long getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(Long createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public String getLikeUser() {
+            return likeUser;
+        }
+
+        public void setLikeUser(String likeUser) {
+            this.likeUser = likeUser;
+        }
+
+        public String getLikeUserPhoto() {
+            return likeUserPhoto;
+        }
+
+        public void setLikeUserPhoto(String likeUserPhoto) {
+            this.likeUserPhoto = likeUserPhoto;
+        }
 
         public Long getId() {
             return id;
@@ -438,36 +444,119 @@ public class PengyouquanBean {
             this.userId = userId;
         }
 
-        public Object getLikeUserPhoto() {
-            return likeUserPhoto;
+
+        @Override
+        public int describeContents() {
+            return 0;
         }
 
-        public void setLikeUserPhoto(Object likeUserPhoto) {
-            this.likeUserPhoto = likeUserPhoto;
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeValue(this.id);
+            dest.writeValue(this.dyeId);
+            dest.writeValue(this.userId);
+            dest.writeValue(this.createdAt);
+            dest.writeString(this.likeUser);
+            dest.writeString(this.likeUserPhoto);
         }
 
-        public Object getIsValid() {
-            return isValid;
+        public LikeListBean() {
         }
 
-        public void setIsValid(Object isValid) {
-            this.isValid = isValid;
+        protected LikeListBean(Parcel in) {
+            this.id = (Long) in.readValue(Long.class.getClassLoader());
+            this.dyeId = (Long) in.readValue(Long.class.getClassLoader());
+            this.userId = (Long) in.readValue(Long.class.getClassLoader());
+            this.createdAt = (Long) in.readValue(Long.class.getClassLoader());
+            this.likeUser = in.readString();
+            this.likeUserPhoto = in.readString();
         }
 
-        public Object getCreatedAt() {
-            return createdAt;
-        }
+        public static final Creator<LikeListBean> CREATOR = new Creator<LikeListBean>() {
+            @Override
+            public LikeListBean createFromParcel(Parcel source) {
+                return new LikeListBean(source);
+            }
 
-        public void setCreatedAt(Object createdAt) {
-            this.createdAt = createdAt;
-        }
-
-        public Object getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(Object updatedAt) {
-            this.updatedAt = updatedAt;
-        }
+            @Override
+            public LikeListBean[] newArray(int size) {
+                return new LikeListBean[size];
+            }
+        };
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeValue(this.userId);
+        dest.writeValue(this.loginUserId);
+        dest.writeValue(this.loginCompanyId);
+        dest.writeString(this.postUser);
+        dest.writeString(this.postUserPhoto);
+        dest.writeString(this.content);
+        dest.writeString(this.pic1);
+        dest.writeString(this.pic2);
+        dest.writeString(this.pic3);
+        dest.writeString(this.pic4);
+        dest.writeString(this.pic5);
+        dest.writeString(this.pic6);
+        dest.writeString(this.pic7);
+        dest.writeString(this.pic8);
+        dest.writeString(this.pic9);
+        dest.writeInt(this.sortNum);
+        dest.writeString(this.url);
+        dest.writeString(this.createdAt);
+        dest.writeValue(this.createdAtStamp);
+        dest.writeString(this.isLike);
+        dest.writeList(this.commentList);
+        dest.writeList(this.likeList);
+    }
+
+    public PengyouquanBean() {
+    }
+
+    protected PengyouquanBean(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.userId = (Long) in.readValue(Long.class.getClassLoader());
+        this.loginUserId = (Long) in.readValue(Long.class.getClassLoader());
+        this.loginCompanyId = (Long) in.readValue(Long.class.getClassLoader());
+        this.postUser = in.readString();
+        this.postUserPhoto = in.readString();
+        this.content = in.readString();
+        this.pic1 = in.readString();
+        this.pic2 = in.readString();
+        this.pic3 = in.readString();
+        this.pic4 = in.readString();
+        this.pic5 = in.readString();
+        this.pic6 = in.readString();
+        this.pic7 = in.readString();
+        this.pic8 = in.readString();
+        this.pic9 = in.readString();
+        this.sortNum = in.readInt();
+        this.url = in.readString();
+        this.createdAt = in.readString();
+        this.createdAtStamp = (Long) in.readValue(Long.class.getClassLoader());
+        this.isLike = in.readString();
+        this.commentList = new ArrayList<CommentListBean>();
+        in.readList(this.commentList, CommentListBean.class.getClassLoader());
+        this.likeList = new ArrayList<LikeListBean>();
+        in.readList(this.likeList, LikeListBean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<PengyouquanBean> CREATOR = new Parcelable.Creator<PengyouquanBean>() {
+        @Override
+        public PengyouquanBean createFromParcel(Parcel source) {
+            return new PengyouquanBean(source);
+        }
+
+        @Override
+        public PengyouquanBean[] newArray(int size) {
+            return new PengyouquanBean[size];
+        }
+    };
 }

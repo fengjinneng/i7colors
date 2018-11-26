@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -43,6 +44,7 @@ import com.lzy.okgo.model.Response;
 import java.util.ArrayList;
 import java.util.List;
 
+ @Route(path = "product/productDetail")
 public class ChanpinxiangqingActivity extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -349,6 +351,9 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
             default:
                 break;
             case R.id.activity_chanpinxiangqing_share:
+
+
+
                 break;
             case R.id.activity_chanpinxiangqing_dianpu_layout:
                 Intent intent = new Intent(this, KFSCXiangqingActivity.class);

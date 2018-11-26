@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:theme="@style/ToolbarTheme">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="@color/baise"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:navigationIcon="@mipmap/back_round">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:descendantFocusability="blocksDescendants"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/x102"
+                        android:background="@color/baise">
+
+                        <ImageView
+                            android:id="@+id/activity_pengyouquan_detail_img"
+                            android:layout_width="@dimen/x108"
+                            android:layout_height="@dimen/x108"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@mipmap/morentouxiang" />
+
+                        <TextView
+                            android:id="@+id/activity_pengyouquan_detail_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="中国印染行业协会会长 陈志华"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/activity_pengyouquan_detail_img"
+                            app:layout_constraintTop_toTopOf="@+id/activity_pengyouquan_detail_img" />
+
+                        <TextView
+                            android:id="@+id/activity_pengyouquan_detail_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:text="2018-02-15 10:52"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/activity_pengyouquan_detail_img"
+                            app:layout_constraintTop_toBottomOf="@+id/activity_pengyouquan_detail_name" />
+
+                        <TextView
+                            android:id="@+id/activity_pengyouquan_detail_content"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:textSize="@dimen/x30"
+                            android:layout_marginStart="16dp"
+                            android:lineSpacingExtra="1dp"
+                            android:layout_marginTop="@dimen/x150"
+                            android:text="1、四轮降息周期的背景分析。此前共有四轮降息周期：1996-1999年、2008年、2012年、2014-2015年，总结发现降息周期有以下几个特点：1)背景均是经济明显下行，并且大多伴随外部的冲击。其中仅有14-15年降息中没有来自外部危机的影响，其余的三轮降息分别处于亚洲金融危机、次贷危机和欧债危机的阶段。2)降息和降准往往一起出现，货币政策全面转向宽松；并且大多有积极财政政策的配合，形成宽货币+宽财政的政策组合。3)与全球货币政策周期有一定的同步性，大多处于美联储“非加息”的阶段。但在97年和99年，也曾在美联储短暂加息阶段进行过降息。4)对经济的拉动作用在逐渐减弱。如前三轮降息中，经济均在滞后2-3个季度左右见底回升。而14-15年的降息对经济的拉动作用已经有长达1年的时滞，并且只是结束了GDP下滑的趋势，并未出现经济的明显回升。5)对股市和房地产有明显利好，债市影响则不确定。此前四轮降息对股市的影响大多是利好(96-99、08年、14-15年股市均上涨，12年股市震荡走平)，债市的影响则不确定(08年、12年债市均下跌，14-15年债市上涨)。此外，08年以来的三轮降息中均伴随着房价的明显上涨和地产销售的大幅回升，降息对于地产的拉动作用最为明显。"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <com.company.qcy.widght.pengyouquan.MultiImageView
+                            android:id="@+id/activity_pengyouquan_detail_multiImageView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            app:layout_constraintEnd_toEndOf="@+id/activity_pengyouquan_detail_content"
+                            app:layout_constraintStart_toStartOf="@+id/activity_pengyouquan_detail_content"
+                            app:layout_constraintTop_toBottomOf="@+id/activity_pengyouquan_detail_content">
+
+                        </com.company.qcy.widght.pengyouquan.MultiImageView>
+
+                    </android.support.constraint.ConstraintLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x30"
+                        android:background="@color/fengexian" />
+
+                </LinearLayout>
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x102"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    app:layout_collapseMode="pin"
+                    app:navigationIcon="@mipmap/back_round"
+                    app:popupTheme="@style/AppTheme.PopupOverlay"
+                    app:theme="@style/ToolbarTheme"
+                    app:titleTextColor="#ffffff" />
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_list_item"
+                app:tabIndicatorColor="@color/chunhongse"
+                app:tabSelectedTextColor="@color/chunhongse"
+                app:tabTextColor="#A7A7A7" />
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <include layout="@layout/toolbar" />
+
+</FrameLayout>

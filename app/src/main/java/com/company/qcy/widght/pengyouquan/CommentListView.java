@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.company.qcy.I7colorsApplication;
 import com.company.qcy.R;
-import com.company.qcy.bean.pengyouquan.CommentItem;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 
 import java.util.ArrayList;

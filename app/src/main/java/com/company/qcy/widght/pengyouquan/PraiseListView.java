@@ -14,7 +14,8 @@ import android.widget.TextView;
 
 import com.company.qcy.I7colorsApplication;
 import com.company.qcy.R;
-import com.company.qcy.bean.pengyouquan.FavortItem;
+import com.company.qcy.bean.pengyouquan.PengyouquanBean;
+
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class PraiseListView extends TextView {
 
     private int itemColor;
     private int itemSelectorColor;
-    private List<FavortItem> datas;
+    private List<PengyouquanBean.LikeListBean> datas;
     private OnItemClickListener onItemClickListener;
 
     public OnItemClickListener getOnItemClickListener() {
@@ -62,10 +63,10 @@ public class PraiseListView extends TextView {
         }
     }
 
-    public List<FavortItem> getDatas() {
+    public List<PengyouquanBean.LikeListBean> getDatas() {
         return datas;
     }
-    public void setDatas(List<FavortItem> datas) {
+    public void setDatas(List<PengyouquanBean.LikeListBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }

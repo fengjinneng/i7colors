@@ -1,20 +1,19 @@
 package com.company.qcy.fragment.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
@@ -27,23 +26,16 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
-import com.company.qcy.Utils.CommonUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
-import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.adapter.pengyouquan.PengyouquanAdapter;
-import com.company.qcy.adapter.qiugou.QiugoudatingRecyclerviewAdapter;
 import com.company.qcy.bean.pengyouquan.ActionItem;
-import com.company.qcy.bean.pengyouquan.CircleItem;
-import com.company.qcy.bean.pengyouquan.CommentConfig;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
-import com.company.qcy.bean.qiugou.QiugouBean;
+import com.company.qcy.ui.activity.pengyouquan.PengyouquanDetailActivity;
+import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
-import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
-import com.company.qcy.widght.pengyouquan.CommentListView;
 import com.company.qcy.widght.pengyouquan.SnsPopupWindow;
-import com.flyco.tablayout.SlidingTabLayout;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -157,89 +149,38 @@ public class XiaoxiFragment extends Fragment {
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                PengyouquanBean bean = (PengyouquanBean) adapter.getData().get(position);
+
                 switch (view.getId()) {
                     case R.id.snsBtn:
 
                         SnsPopupWindow snsPopupWindow = new SnsPopupWindow(getContext());
                         snsPopupWindow.showPopupWindow(view);
-                        snsPopupWindow.setmItemClickListener(new PopupItemClickListener(2, new CircleItem(), "2"));
+                        snsPopupWindow.setmItemClickListener(new PopupItemClickListener(2, "2"));
 
+                        break;
+                    case R.id.item_pengyouquan_shipin_img:
+                        ToastUtils.showShort(bean.getUrl());
+                        break;
+                    case R.id.item_pengyouquan_headimg:
+                        ActivityUtils.startActivity(PersonInfoActivity.class);
                         break;
                 }
             }
         });
-    }
 
-    public void updateEditTextBodyVisible(int visibility,CommentConfig commentConfig) {
-        edittextbody.setVisibility(visibility);
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
-        measureCircleItemHighAndCommentItemOffset(commentConfig);
+                PengyouquanBean pengyouquanBean = (PengyouquanBean) adapter.getData().get(position);
+                Intent intent = new Intent(getActivity(),PengyouquanDetailActivity.class);
+                intent.putExtra("pengyouquanBean",pengyouquanBean);
+                ActivityUtils.startActivity(intent);
 
-        if(View.VISIBLE==visibility){
-            editText.requestFocus();
-            //弹出键盘
-            CommonUtils.showSoftInput( editText.getContext(),  editText);
-
-        }else if(View.GONE==visibility){
-            //隐藏键盘
-            CommonUtils.hideSoftInput( editText.getContext(),  editText);
-        }
-    }
-
-    private int screenHeight;
-    private int editTextBodyHeight;
-    private int currentKeyboardH;
-    private int selectCircleItemH;
-    private int selectCommentItemOffset;
-    private void measureCircleItemHighAndCommentItemOffset(CommentConfig commentConfig){
-        if(commentConfig == null)
-            return;
-
-        int firstPosition = layoutManager.findFirstVisibleItemPosition();
-        //只能返回当前可见区域（列表可滚动）的子项
-        View selectCircleItem = layoutManager.getChildAt(commentConfig.circlePosition + 1 - firstPosition);
-
-        if(selectCircleItem != null){
-            selectCircleItemH = selectCircleItem.getHeight();
-        }
-
-        if(commentConfig.commentType == CommentConfig.Type.REPLY){
-            //回复评论的情况
-            CommentListView commentLv = (CommentListView) selectCircleItem.findViewById(R.id.commentList);
-            if(commentLv!=null){
-                //找到要回复的评论view,计算出该view距离所属动态底部的距离
-                View selectCommentItem = commentLv.getChildAt(commentConfig.commentPosition);
-                if(selectCommentItem != null){
-                    //选择的commentItem距选择的CircleItem底部的距离
-                    selectCommentItemOffset = 0;
-                    View parentView = selectCommentItem;
-                    do {
-                        int subItemBottom = parentView.getBottom();
-                        parentView = (View) parentView.getParent();
-                        if(parentView != null){
-                            selectCommentItemOffset += (parentView.getHeight() - subItemBottom);
-                        }
-                    } while (parentView != null && parentView != selectCircleItem);
-                }
             }
-        }
+        });
     }
-
-    private LinearLayout edittextbody;
-    private EditText editText;
-
-
-    public void  doThing(){
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.layout_editview,null);
-        edittextbody = (LinearLayout) view.findViewById(R.id.editTextBodyLl);
-        editText = (EditText)view. findViewById(R.id.circleEt);
-        CommentConfig commentConfig = new CommentConfig();
-        commentConfig.commentType = CommentConfig.Type.PUBLIC;
-
-        updateEditTextBodyVisible(View.VISIBLE,commentConfig);
-    }
-
-
     private boolean isReflash;
     private int pageNo;
 
@@ -316,12 +257,10 @@ public class XiaoxiFragment extends Fragment {
         //动态在列表中的位置
         private int mCirclePosition;
         private long mLasttime = 0;
-        private CircleItem mCircleItem;
 
-        public PopupItemClickListener(int circlePosition, CircleItem circleItem, String favorId) {
+        public PopupItemClickListener(int circlePosition,  String favorId) {
             this.mFavorId = favorId;
             this.mCirclePosition = circlePosition;
-            this.mCircleItem = circleItem;
         }
 
         @Override
