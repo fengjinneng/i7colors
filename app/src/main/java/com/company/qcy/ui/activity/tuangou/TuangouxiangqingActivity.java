@@ -1,9 +1,13 @@
 package com.company.qcy.ui.activity.tuangou;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
@@ -11,7 +15,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,12 +27,15 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
@@ -38,6 +48,7 @@ import com.company.qcy.fragment.tuangou.JiluFragment;
 import com.company.qcy.fragment.tuangou.TuangouxuzhiFragment;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,12 +126,35 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuangouxiangqing);
         id = getIntent().getLongExtra("id", 0);
         initView();
     }
+
+    //是否有下方虚拟栏
+    private static boolean isNavigationBarAvailable() {
+        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+        boolean hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
+        return (!(hasBackKey && hasHomeKey));
+    }
+    //获取虚拟按键的高度
+    public static int getNavigationBarHeight(Context context) {
+        int result = 0;
+        if (isNavigationBarAvailable()) {
+            Resources res = context.getResources();
+            int resourceId = res.getIdentifier("navigation_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                result = res.getDimensionPixelSize(resourceId);
+            }
+        }
+        return result;
+    }
+
+
+
 
     private void initView() {
         mActivityTuangouxiangqingImg = (ImageView) findViewById(R.id.activity_tuangouxiangqing_img);
@@ -152,7 +186,7 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
 
         mCollapsingToolbar.setTitle("返回");
         mCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
-        mCollapsingToolbar.setCollapsedTitleTextColor(Color.WHITE);//设置收缩后Toolbar上字体的
+        mCollapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.chunhongse));//设置收缩后Toolbar上字体的
 
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -170,6 +204,18 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mActivityTuangouxiangqingShengyushijianText = (TextView) findViewById(R.id.activity_tuangouxiangqing_shengyushijian_text);
         mActivityTuangouxiangqingWoyaotuangou = (Button) findViewById(R.id.activity_tuangouxiangqing_woyaotuangou);
         mActivityTuangouxiangqingWoyaotuangou.setOnClickListener(this);
+        if(isNavigationBarAvailable()){
+//            ViewGroup.MarginLayoutParams margin=new ViewGroup.MarginLayoutParams(mActivityTuangouxiangqingWoyaotuangou.getLayoutParams());
+//            margin.setMargins(0,0, margin.topMargin, 0);
+//            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(margin);
+//            mActivityTuangouxiangqingWoyaotuangou.setLayoutParams(layoutParams);
+
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mActivityTuangouxiangqingWoyaotuangou.getLayoutParams();
+            //设置各个方向上的间距
+            params.setMargins(0,0,0,getNavigationBarHeight(this));
+            //改变控件的属性
+            mActivityTuangouxiangqingWoyaotuangou.setLayoutParams(params);
+        }
     }
 
 
@@ -199,7 +245,7 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mActivityTuangouxiangqingProductname.setText(bean.getProductName());
         mActivityTuangouxiangqingTotal.setText(bean.getTotalNum());
         mActivityTuangouxiangqingShengyu.setText(bean.getRemainNum());
-
+        GlideUtils.loadImage(TuangouxiangqingActivity.this,ServerInfo.IMAGE+bean.getProductPic(),mActivityTuangouxiangqingImg);
         String[] split = bean.getNumPercent().split("%");
         mActivityTuangouxiangqingSeekBar.setProgress(Integer.parseInt(split[0]));
         mActivityTuangouxiangqingDacheng.setText("达成 " + bean.getNumPercent());
@@ -254,41 +300,47 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
     }
 
     private void addData() {
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYDETAIL)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYDETAIL)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", id)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("id", id);
 
-                        try {
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("GROUPBUYDETAIL", response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            bean = data.toJavaObject(TuangouBean.class);
+                            setInfo(bean);
+                            return;
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONObject data = jsonObject.getJSONObject("data");
-                                    bean = data.toJavaObject(TuangouBean.class);
-                                    setInfo(bean);
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(TuangouxiangqingActivity.this, jsonObject);
-
-                            } else {
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(TuangouxiangqingActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
     }
 
     @Override

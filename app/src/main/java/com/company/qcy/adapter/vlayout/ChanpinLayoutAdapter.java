@@ -19,6 +19,7 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.kaifangshangcheng.ProductBean;
 
@@ -82,7 +83,7 @@ public class ChanpinLayoutAdapter extends DelegateAdapter.Adapter<ChanpinLayoutA
             holder.tagContainerLayout.setTags(tags);
         }
 
-        holder.company.setText(item.getSupplierShotName());
+        holder.company.setText(item.getCompanyName());
         GlideUtils.loadImage(context, ServerInfo.IMAGE + item.getPic(), holder.img);
         holder.detail.setText(item.getProductName());
 
@@ -101,17 +102,7 @@ public class ChanpinLayoutAdapter extends DelegateAdapter.Adapter<ChanpinLayoutA
         holder.yijianhujiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                PhoneUtils.call(context.getResources().getString(R.string.PHONE));
+                PermisionUtil.callPhone(context,item.getPhone());
             }
         });
 

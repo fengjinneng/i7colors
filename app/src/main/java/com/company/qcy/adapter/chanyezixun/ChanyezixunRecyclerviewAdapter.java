@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.ChanpindatingBean;
 import com.company.qcy.bean.chanyezixun.NewsBean;
@@ -25,7 +26,7 @@ public class ChanyezixunRecyclerviewAdapter
 
         helper.setText(R.id.item_chanyexixun_title,item.getTitle());
         ImageView imageView = (ImageView) helper.getView(R.id.item_chanyexixun_img);
-        Glide.with(mContext).load(ServerInfo.IMAGE+item.getImg_url()).into(imageView);
+        GlideUtils.loadImage(mContext,ServerInfo.IMAGE+item.getImg_url(),imageView);
         helper.setText(R.id.item_chanyexixun_content,item.getContent_summary());
         helper.setText(R.id.item_chanyexixun_time, new String(item.getNews_date()).substring(0,10));
     }

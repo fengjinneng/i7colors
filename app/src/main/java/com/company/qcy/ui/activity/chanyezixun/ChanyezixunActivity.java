@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.company.qcy.R;
 import com.company.qcy.adapter.BaseViewpageAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.fragment.chanyezixun.ChanyezixunFragment;
 import com.company.qcy.fragment.chanyezixun.HangyezixunFragment;
 import com.company.qcy.fragment.chanyezixun.RencaizhaopinFragment;
@@ -21,7 +22,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChanyezixunActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChanyezixunActivity extends BaseActivity implements View.OnClickListener {
 
     private ViewPager mChanyezixunViewpager;
     private SlidingTabLayout mChanyezixunSlidingTabLayout;

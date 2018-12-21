@@ -17,6 +17,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
@@ -31,6 +32,7 @@ import com.company.qcy.bean.qiugou.BaojiaBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +101,7 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
                 ActivityUtils.startActivity(i);
             }
         });
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
     }
 
 
@@ -116,26 +119,31 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
 
     private void addData() {
         pageNo++;
-        OkGo.<String>get(ServerInfo.SERVER+ InterfaceInfo.MAIJIAYIJIESHOULIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.MAIJIAYIJIESHOULIST)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
                 .params("pageNo", pageNo)
-                .params("pageSize", 20)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("pageSize", 20);
 
-                        try {
-                            LogUtils.v("MAIJIAYIJIESHOULIST", response.body());
-                            if (response.code() == 200) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("MAIJIAYIJIESHOULIST", response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
+                try {
+                    if (response.code() == 200) {
 
-                                    List<BaojiaBean> baojiaBeans = JSONObject.parseArray(data.toJSONString(), BaojiaBean.class);
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                adapter.loadMoreEnd();
+                                return;
+                            }
+                            List<BaojiaBean> baojiaBeans = JSONObject.parseArray(data.toJSONString(), BaojiaBean.class);
 //                                    if (isReflash) {
 //                                        datas.clear();
 //                                        adapter.addData(qiugoudatingBeans);
@@ -143,31 +151,36 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
 //                                        refreshLayout.setRefreshing(false);
 //                                        return;
 //                                    }
-                                    if (ObjectUtils.isEmpty(baojiaBeans)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    adapter.addData(baojiaBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(DaichulibaojiaActivity.this, jsonObject);
-
-                            } else {
-
+                            if (ObjectUtils.isEmpty(baojiaBeans)) {
+                                adapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                            adapter.addData(baojiaBeans);
+                            adapter.loadMoreComplete();
+                            adapter.disableLoadMoreIfNotFullPage();
+                            return;
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
+                        }  if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(DaichulibaojiaActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
     }
 

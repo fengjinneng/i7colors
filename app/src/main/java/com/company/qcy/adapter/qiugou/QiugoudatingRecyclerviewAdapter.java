@@ -92,7 +92,6 @@ public class QiugoudatingRecyclerviewAdapter
             helper.setText(R.id.item_qiugoudating_firsttime, item.getSurplusDay());
             helper.setText(R.id.item_qiugoudating_secondtime, item.getSurplusHour());
 
-
         }
 
 

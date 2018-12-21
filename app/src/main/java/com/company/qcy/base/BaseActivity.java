@@ -28,7 +28,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 public class BaseActivity extends AppCompatActivity {
 
-
+    public Context context;
     public Activity activity;
     private AlertDialog dialog;
     AlertDialog.Builder builder = null;
@@ -41,7 +41,7 @@ public class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         EventBus.getDefault().register(this);
         activity = this;
-
+        context = getApplicationContext();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

@@ -16,28 +16,36 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+
 import com.alibaba.fastjson.JSONObject;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.company.qcy.R;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.NetworkImageHolderView;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.kaifangshangcheng.DianpuxiangqingBean;
 import com.company.qcy.fragment.kaifangshangcheng.KaifangshangchengxiangqingFragment;
 import com.company.qcy.fragment.kaifangshangcheng.KfscGongsijieshaoFragment;
+import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
+import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -45,7 +53,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnClickListener, NestedScrollView.OnScrollChangeListener {
+public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickListener, NestedScrollView.OnScrollChangeListener {
 
     private ConvenientBanner convenientBanner;
     private Long id;//店铺ID
@@ -119,77 +127,81 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                finish();
             }
         });
 
     }
 
+    private DianpuxiangqingBean dianpuBean;
+
     private void addDianpuData() {
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.DIANPUXIANGQING)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.DIANPUXIANGQING)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", id)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("id", id);
 
-                        try {
-                            if (response.code() == 200) {
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("DIANPUXIANGQING", response.body());
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONObject data = jsonObject.getJSONObject("data");
-                                    LogUtils.v("DIANPUXIANGQING", data);
-
-                                    DianpuxiangqingBean dianpuBean = data.toJavaObject(DianpuxiangqingBean.class);
-                                    Glide.with(KFSCXiangqingActivity.this).load(ServerInfo.IMAGE + dianpuBean.getLogo()).into(mActivityKfscxiangqingCompanyLogo);
-                                    mActivityKfscxiangqingCompanyname.setText(dianpuBean.getCompanyName());
-                                    setStarLevel(dianpuBean.getCreditLevel());
-                                    List<String> banners = new ArrayList<>();
-                                    if (!StringUtils.isEmpty(dianpuBean.getBanner1())) {
-                                        banners.add(ServerInfo.IMAGE + dianpuBean.getBanner1());
-                                    }
-                                    if (!StringUtils.isEmpty(dianpuBean.getBanner2())) {
-                                        banners.add(ServerInfo.IMAGE + dianpuBean.getBanner2());
-                                    }
-                                    if (!StringUtils.isEmpty(dianpuBean.getBanner3())) {
-                                        banners.add(ServerInfo.IMAGE + dianpuBean.getBanner3());
-                                    }
-                                    if (!StringUtils.isEmpty(dianpuBean.getBanner4())) {
-                                        banners.add(ServerInfo.IMAGE + dianpuBean.getBanner4());
-                                    }
-                                    if (!StringUtils.isEmpty(dianpuBean.getBanner5())) {
-                                        banners.add(ServerInfo.IMAGE + dianpuBean.getBanner5());
-                                    }
-
-                                    setTitle(dianpuBean.getCompanyName());
-                                    mCollapsingToolbar.setTitle(dianpuBean.getCompanyName());
-                                    setBannerData(banners);
-                                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.KFSCGONGSIJIESHAO,dianpuBean.getDescription()));
-
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(KFSCXiangqingActivity.this, jsonObject);
-
-                            } else {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            dianpuBean = data.toJavaObject(DianpuxiangqingBean.class);
+                            Glide.with(KFSCXiangqingActivity.this).load(ServerInfo.IMAGE + dianpuBean.getLogo()).into(mActivityKfscxiangqingCompanyLogo);
+                            mActivityKfscxiangqingCompanyname.setText(dianpuBean.getCompanyName());
+                            setStarLevel(dianpuBean.getCreditLevel());
+                            List<String> banners = new ArrayList<>();
+                            if (!StringUtils.isEmpty(dianpuBean.getBanner1())) {
+                                banners.add(ServerInfo.IMAGE + dianpuBean.getBanner1());
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            if (!StringUtils.isEmpty(dianpuBean.getBanner2())) {
+                                banners.add(ServerInfo.IMAGE + dianpuBean.getBanner2());
+                            }
+                            if (!StringUtils.isEmpty(dianpuBean.getBanner3())) {
+                                banners.add(ServerInfo.IMAGE + dianpuBean.getBanner3());
+                            }
+                            if (!StringUtils.isEmpty(dianpuBean.getBanner4())) {
+                                banners.add(ServerInfo.IMAGE + dianpuBean.getBanner4());
+                            }
+                            if (!StringUtils.isEmpty(dianpuBean.getBanner5())) {
+                                banners.add(ServerInfo.IMAGE + dianpuBean.getBanner5());
+                            }
+                            setTitle(dianpuBean.getCompanyName());
+                            mCollapsingToolbar.setTitle(dianpuBean.getCompanyName());
+                            setBannerData(banners);
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.KFSCGONGSIJIESHAO, dianpuBean.getDescription()));
+
+                            return;
+
+
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(KFSCXiangqingActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
-
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+        request.execute(stringCallback);
 
     }
-
 
     //设置信用等级
     private void setStarLevel(String level) {
@@ -268,62 +280,15 @@ public class KFSCXiangqingActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             default:
                 break;
-//            case R.id.activity_kfscxiangqing_all_products:
-//                recyclerView.setVisibility(View.VISIBLE);
-//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.GONE);
-//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.VISIBLE);
-//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.GONE);
-//                break;
-//            case R.id.activity_kfscxiangqing_company_introduce:
-//                recyclerView.setVisibility(View.GONE);
-//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.VISIBLE);
-//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.GONE);
-//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.VISIBLE);
-//                break;
-//            case R.id.activity_kfscxiangqing_back:
-//                finish();
-//
-//                break;
-//            case R.id.activity_kfscxiangqing_all_products_2:
-//                recyclerView.setVisibility(View.VISIBLE);
-//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.GONE);
-//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.VISIBLE);
-//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.GONE);
-//                break;
-//            case R.id.activity_kfscxiangqing_company_introduce_2:
-//                recyclerView.setVisibility(View.GONE);
-//                mActivityKfscxiangqingCompanyIntroduceLayout.setVisibility(View.VISIBLE);
-//                mActivityKfscxiangqingAllProducts.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingCompanyIntroduce.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingAllProducts2.setTextColor(getResources().getColor(R.color.erjibiaoti));
-//                mActivityKfscxiangqingCompanyIntroduce2.setTextColor(getResources().getColor(R.color.chunhongse));
-//                mActivityKfscxiangqingAllProductsLine.setVisibility(View.GONE);
-//                mActivityKfscxiangqingCompanyIntroduceLine.setVisibility(View.VISIBLE);
-//                break;
             case R.id.activity_kfscxiangqing_yijianhujiao:
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+                if (ObjectUtils.isEmpty(dianpuBean)) {
                     return;
                 }
-                PhoneUtils.call(getResources().getString(R.string.PHONE));
+                if (StringUtils.isEmpty(dianpuBean.getPhone())) {
+                    ToastUtils.showShort("该企业没有留下电话号码哦！");
+                    return;
+                }
+                PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getPhone());
                 break;
         }
     }

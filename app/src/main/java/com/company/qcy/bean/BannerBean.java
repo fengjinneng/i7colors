@@ -30,7 +30,7 @@ public class BannerBean {
     private Object limit;
     private String plate_code;
     private String ad_name;
-    private Object ad_url;
+    private String ad_url;
     private String ad_image;
     private Integer ad_num;
     private Object ad_class;
@@ -115,11 +115,11 @@ public class BannerBean {
         this.ad_name = ad_name;
     }
 
-    public Object getAd_url() {
+    public String getAd_url() {
         return ad_url;
     }
 
-    public void setAd_url(Object ad_url) {
+    public void setAd_url(String ad_url) {
         this.ad_url = ad_url;
     }
 

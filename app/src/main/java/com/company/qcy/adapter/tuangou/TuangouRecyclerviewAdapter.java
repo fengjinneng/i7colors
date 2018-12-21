@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.ChanpindatingBean;
 import com.company.qcy.bean.tuangou.TuangouBean;
@@ -39,7 +40,8 @@ public class TuangouRecyclerviewAdapter extends
         helper.setText(R.id.item_tuangouliebiao_yuanjia, item.getOldPrice());
         helper.setText(R.id.item_tuangouliebiao_tuangoujia, item.getNewPrice());
         ImageView img = (ImageView) helper.getView(R.id.item_tuangouliebiao_img);
-        Glide.with(mContext).load(ServerInfo.IMAGE + item.getProductPic()).into(img);
+
+        GlideUtils.loadImage(mContext,ServerInfo.IMAGE + item.getProductPic(),img);
 
         ConstraintLayout weikaishi = (ConstraintLayout) helper.getView(R.id.item_tuangouliebiao_status_time_layout);
         TextView timeEnd = (TextView) helper.getView(R.id.item_tuangouliebiao_time_end);

@@ -32,7 +32,7 @@
         android:paddingTop="5dp"
         android:singleLine="true"
         app:layout_constraintBottom_toTopOf="@+id/chanpindating_SwipeRefreshLayout"
-        app:layout_constraintEnd_toStartOf="@+id/chanpindating_jiagepaixu"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include2" />
 
@@ -57,39 +57,39 @@
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/chanpindating_jiagepaixu"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/chanpindating_SwipeRefreshLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2">
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/chanpindating_jiagepaixu"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/chanpindating_SwipeRefreshLayout"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/include2">-->
 
-        <TextView
-            android:id="@+id/chanpindating_jiagepaixu_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="价格从\n低到高"
-            android:textSize="@dimen/x24"
-            app:layout_constraintBottom_toBottomOf="@+id/chanpindating_jiagepaixu_img"
-            app:layout_constraintEnd_toStartOf="@+id/chanpindating_jiagepaixu_img"
-            app:layout_constraintTop_toTopOf="@+id/chanpindating_jiagepaixu_img" />
+        <!--<TextView-->
+            <!--android:id="@+id/chanpindating_jiagepaixu_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:text="价格从\n低到高"-->
+            <!--android:textSize="@dimen/x24"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/chanpindating_jiagepaixu_img"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/chanpindating_jiagepaixu_img"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/chanpindating_jiagepaixu_img" />-->
 
-        <ImageView
-            android:id="@+id/chanpindating_jiagepaixu_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/congdidaogao" />
-    </android.support.constraint.ConstraintLayout>
+        <!--<ImageView-->
+            <!--android:id="@+id/chanpindating_jiagepaixu_img"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent"-->
+            <!--app:srcCompat="@mipmap/congdidaogao" />-->
+    <!--</android.support.constraint.ConstraintLayout>-->
 
 
 </android.support.constraint.ConstraintLayout>

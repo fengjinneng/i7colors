@@ -12,18 +12,22 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.chanyezixun.NewsBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
-public class ZixunxiangqingActivity extends AppCompatActivity implements View.OnClickListener {
+public class ZixunxiangqingActivity extends BaseActivity implements View.OnClickListener {
 
 
     private Long id;//资讯的ID
@@ -82,69 +86,91 @@ public class ZixunxiangqingActivity extends AppCompatActivity implements View.On
         });
     }
 
-    NewsBean newsBean;
-    NewsBean nextBean;
-    NewsBean prevBean;
+    private NewsBean newsBean;
+    private NewsBean nextBean;
+    private NewsBean prevBean;
+
+    private boolean haveNext = true;
+    private boolean havePrev = true;
 
     private void addData(Long id) {
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INFORMATIONDETAIL)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INFORMATIONDETAIL)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", id)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("id", id);
 
-                        try {
-                            LogUtils.v("INFORMATIONDETAIL", response.body());
 
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("INFORMATIONDETAIL", response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            JSONObject infoDetail = data.getJSONObject("infoDetail");
+                            JSONObject next = data.getJSONObject("next");
+                            JSONObject prev = data.getJSONObject("prev");
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONObject data = jsonObject.getJSONObject("data");
-                                    JSONObject infoDetail = data.getJSONObject("infoDetail");
-                                    JSONObject next = data.getJSONObject("next");
-                                    JSONObject prev = data.getJSONObject("prev");
+                            newsBean = infoDetail.toJavaObject(NewsBean.class);
 
-                                    newsBean = infoDetail.toJavaObject(NewsBean.class);
-                                    nextBean = next.toJavaObject(NewsBean.class);
-                                    prevBean = prev.toJavaObject(NewsBean.class);
-                                    mToolbarTitle.setText(newsBean.getTitle());
-                                    if (nextBean.getTitle().length() >= 10) {
-                                        mActivityZixunxiangqingNextTitle.setText(new String(nextBean.getTitle()).substring(0, 9) + "...");
-                                    } else {
-                                        mActivityZixunxiangqingNextTitle.setText(nextBean.getTitle());
-                                    }
-
-                                    if (prevBean.getTitle().length() >= 10) {
-                                        mActivityZixunxiangqingPrevTitle.setText(new String(prevBean.getTitle()).substring(0, 9) + "...");
-
-                                    } else {
-                                        mActivityZixunxiangqingPrevTitle.setText(prevBean.getTitle());
-
-                                    }
-                                    mWebview.loadData(newsBean.getContent(), "text/html;charset=UTF-8", null);
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(ZixunxiangqingActivity.this, jsonObject);
-
+                            if (ObjectUtils.isEmpty(next)) {
+                                haveNext = false;
+                                mActivityZixunxiangqingNextTitle.setText("没有下一篇了");
                             } else {
+                                haveNext = true;
+                                nextBean = next.toJavaObject(NewsBean.class);
+                                if (nextBean.getTitle().length() >= 10) {
+                                    mActivityZixunxiangqingNextTitle.setText(new String(nextBean.getTitle()).substring(0, 9) + "...");
+                                } else {
+                                    mActivityZixunxiangqingNextTitle.setText(nextBean.getTitle());
+                                }
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+
+                            if (ObjectUtils.isEmpty(prev)) {
+                                havePrev = false;
+                                mActivityZixunxiangqingNextTitle.setText("没有上一篇了");
+                            } else {
+                                havePrev = true;
+                                prevBean = prev.toJavaObject(NewsBean.class);
+                                if (prevBean.getTitle().length() >= 10) {
+                                    mActivityZixunxiangqingPrevTitle.setText(new String(prevBean.getTitle()).substring(0, 9) + "...");
+
+                                } else {
+                                    mActivityZixunxiangqingPrevTitle.setText(prevBean.getTitle());
+
+                                }
+                            }
+                            mToolbarTitle.setText(newsBean.getTitle());
+
+
+                            mWebview.loadData(newsBean.getContent(), "text/html;charset=UTF-8", null);
+                            return;
+
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(ZixunxiangqingActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
 
+        request.execute(stringCallback);
 
     }
 
@@ -171,10 +197,16 @@ public class ZixunxiangqingActivity extends AppCompatActivity implements View.On
 
         switch (v.getId()) {
             case R.id.activity_zixunxiangqing_next:
+                if (!haveNext) {
+                    return;
+                }
                 addData(nextBean.getId());
                 break;
 
             case R.id.activity_zixunxiangqing_prev:
+                if (!havePrev) {
+                    return;
+                }
                 addData(prevBean.getId());
                 break;
             case R.id.toolbar_back:

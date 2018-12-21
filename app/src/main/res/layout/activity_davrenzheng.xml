@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@+id/include21" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/activity_davrenzhen_name"
         android:layout_width="0dp"
         android:layout_height="@dimen/x64"
         android:layout_marginEnd="8dp"
@@ -38,7 +38,7 @@
         android:textSize="@dimen/x24"
         app:layout_constraintBottom_toBottomOf="@+id/textView155"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editText2"
+        app:layout_constraintStart_toStartOf="@+id/activity_davrenzhen_company"
         app:layout_constraintTop_toTopOf="@+id/textView155" />
 
     <TextView
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView155" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/activity_davrenzhen_company"
         android:layout_width="0dp"
         android:layout_height="@dimen/x64"
         android:layout_marginEnd="8dp"
@@ -65,7 +65,7 @@
         android:textSize="@dimen/x24"
         app:layout_constraintBottom_toBottomOf="@+id/textView161"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editText3"
+        app:layout_constraintStart_toStartOf="@+id/activity_davrenzhen_job"
         app:layout_constraintTop_toTopOf="@+id/textView161" />
 
     <TextView
@@ -81,7 +81,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView161" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/activity_davrenzhen_job"
         android:layout_width="0dp"
         android:layout_height="@dimen/x64"
         android:layout_marginEnd="8dp"
@@ -121,7 +121,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView164">
 
         <ImageView
-            android:id="@+id/imageView15"
+            android:id="@+id/activity_davrenzhen_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -149,19 +149,19 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/activity_davrenzhen_commit"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/x98"
         android:text="提交"
         android:textColor="@color/baise"
-        android:background="@mipmap/anniujianbian"
+        android:background="@mipmap/bg"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintEnd_toStartOf="@+id/activity_davrenzhen_cancle"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/activity_davrenzhen_cancle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/fengexian"
@@ -169,7 +169,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/activity_davrenzhen_commit"
+        app:layout_constraintTop_toTopOf="@+id/activity_davrenzhen_commit" />
 
 </android.support.constraint.ConstraintLayout>

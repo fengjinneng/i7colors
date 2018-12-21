@@ -74,7 +74,7 @@ public class JibencanshuFragment extends Fragment {
                         int height = resource.getHeight();
 
                         imageView.setLayoutParams(new FrameLayout.LayoutParams((FrameLayout.LayoutParams.MATCH_PARENT),height));
-                        GlideUtils.loadImage(getContext(), mParam1,imageView);
+                        GlideUtils.loadImageCenter(getContext(), mParam1,imageView);
                     }
 
 

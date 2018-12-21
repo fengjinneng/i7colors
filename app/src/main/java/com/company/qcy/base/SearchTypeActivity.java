@@ -44,6 +44,7 @@ import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +105,7 @@ public class SearchTypeActivity extends AppCompatActivity implements View.OnClic
 
             KeyboardUtils.showSoftInput(this);
 
-        }else {
+        } else {
             KeyboardUtils.hideSoftInput(SearchTypeActivity.this);
             mActivitySearchTypeSearch.setText(keyword);
             mActivitySearchTypeSearch.setSelection(keyword.length());
@@ -202,139 +203,152 @@ public class SearchTypeActivity extends AppCompatActivity implements View.OnClic
     private void getMarketData() {
         pageNo++;
         params.put("pageNo", pageNo);
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.DIANPULIEBIAO)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.DIANPULIEBIAO)
                 .tag(this)
-                .params(params)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params(this.params);
 
-                        try {
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("DIANPULIEBIAO", data);
-                                    List<DianpuliebiaoBean> dianpuliebiaoBeans = JSONObject.parseArray(data.toJSONString(), DianpuliebiaoBean.class);
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            LogUtils.v("DIANPULIEBIAO", data);
+                            List<DianpuliebiaoBean> dianpuliebiaoBeans = JSONObject.parseArray(data.toJSONString(), DianpuliebiaoBean.class);
 
-                                    if (ObjectUtils.isEmpty(dianpuliebiaoBeans)) {
-                                        marketAdapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    marketAdapter.addData(dianpuliebiaoBeans);
-                                    marketAdapter.loadMoreComplete();
-                                    marketAdapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(SearchTypeActivity.this, jsonObject);
-
-                            } else {
+                            if (ObjectUtils.isEmpty(dianpuliebiaoBeans)) {
+                                marketAdapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                            marketAdapter.addData(dianpuliebiaoBeans);
+                            marketAdapter.loadMoreComplete();
+                            marketAdapter.disableLoadMoreIfNotFullPage();
+                            return;
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
+                        } else if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(SearchTypeActivity.this, request, this);
+                        } else ToastUtils.showShort(msg);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
     }
 
     private void getChanpinData() {
         pageNo++;
         params.put("pageNo", pageNo);
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETCHANPINLIEBIAO)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETCHANPINLIEBIAO)
                 .tag(this)
-                .params(params)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
 
-                        try {
-                            if (response.code() == 200) {
+                .params(this.params);
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("GETCHANPINLIEBIAO", data);
-                                    List<ProductBean> productBeans = JSONObject.parseArray(data.toJSONString(), ProductBean.class);
+                try {
+                    if (response.code() == 200) {
 
-                                    if (ObjectUtils.isEmpty(productBeans)) {
-                                        chanpinAdapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    chanpinAdapter.addData(productBeans);
-                                    chanpinAdapter.loadMoreComplete();
-                                    chanpinAdapter.disableLoadMoreIfNotFullPage();
-                                    return;
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            LogUtils.v("GETCHANPINLIEBIAO", data);
+                            List<ProductBean> productBeans = JSONObject.parseArray(data.toJSONString(), ProductBean.class);
 
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(SearchTypeActivity.this, jsonObject);
-
-                            } else {
+                            if (ObjectUtils.isEmpty(productBeans)) {
+                                chanpinAdapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                            chanpinAdapter.addData(productBeans);
+                            chanpinAdapter.loadMoreComplete();
+                            chanpinAdapter.disableLoadMoreIfNotFullPage();
+                            return;
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(SearchTypeActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
     }
 
     private void getQiugouData() {
         pageNo++;
         params.put("pageNo", pageNo);
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.SEARCHENQUIRY)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.SEARCHENQUIRY)
                 .tag(this)
-                .params(params)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params(this.params);
 
-                        try {
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("QIUGOULIEBIAO", data);
-                                    List<QiugouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            LogUtils.v("QIUGOULIEBIAO", data);
+                            List<QiugouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
 
-                                    if (ObjectUtils.isEmpty(qiugouBeans)) {
-                                        qiugouAdapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    qiugouAdapter.addData(qiugouBeans);
-                                    qiugouAdapter.loadMoreComplete();
-                                    qiugouAdapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(SearchTypeActivity.this, jsonObject);
-
-                            } else {
+                            if (ObjectUtils.isEmpty(qiugouBeans)) {
+                                qiugouAdapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                            qiugouAdapter.addData(qiugouBeans);
+                            qiugouAdapter.loadMoreComplete();
+                            qiugouAdapter.disableLoadMoreIfNotFullPage();
+                            return;
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
+                        } else if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(SearchTypeActivity.this, request, this);
+                        } else ToastUtils.showShort(msg);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
     }
 
     @Override

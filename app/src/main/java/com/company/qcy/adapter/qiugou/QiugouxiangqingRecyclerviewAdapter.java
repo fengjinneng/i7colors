@@ -106,7 +106,7 @@ public class QiugouxiangqingRecyclerviewAdapter
 
         if (StringUtils.isTrimEmpty(item.getPrice())) {
             helper.setText(R.id.item_qiugouxiangqing_recyclerview_price, "保密");
-        } else helper.setText(R.id.item_qiugouxiangqing_recyclerview_price, item.getPrice());
+        } else helper.setText(R.id.item_qiugouxiangqing_recyclerview_price, item.getPrice()+"元/KG");
 
         helper.setText(R.id.item_qiugouxiangqing_recyclerview_phone, item.getPhone())
                 .setText(R.id.item_qiugouxiangqing_recyclerview_time, item.getCreatedAtString())

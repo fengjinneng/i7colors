@@ -26,7 +26,6 @@
         android:layout_marginTop="@dimen/x24"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="分散红FB(R60#)200% "
         android:textColor="@color/erjibiaoti"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +46,7 @@
         android:id="@+id/item_kfsc_xiangqing_baozhuang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="中性包装"
+        android:text="无"
         android:textSize="@dimen/x20"
         app:layout_constraintBottom_toBottomOf="@+id/textView78"
         app:layout_constraintStart_toEndOf="@+id/textView78" />
@@ -68,8 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="108"
-        android:textSize="@dimen/x36"
+        android:textSize="@dimen/x30"
         android:textColor="@color/chunhongse"
         app:layout_constraintBottom_toBottomOf="@+id/item_kfsc_xiangqing_price_fuhao"
         app:layout_constraintStart_toEndOf="@+id/item_kfsc_xiangqing_price_fuhao" />

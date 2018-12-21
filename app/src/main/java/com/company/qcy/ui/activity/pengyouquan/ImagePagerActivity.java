@@ -2,8 +2,11 @@ package com.company.qcy.ui.activity.pengyouquan;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
@@ -16,15 +19,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.LogUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.company.qcy.R;
-import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.eventbus.MessageBean;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.senab.photoview.PhotoView;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
  * Created by yiw on 2016/1/6.
@@ -110,15 +122,27 @@ public class ImagePagerActivity extends BaseActivity{
         }
     }
 
+
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        try{
-            return super.dispatchTouchEvent(ev);
-        }catch (Exception e){
-            e.printStackTrace();
+    public void onReciveMessage(MessageBean msg) {
+        super.onReciveMessage(msg);
+
+        switch (msg.getCode()) {
+            case MessageBean.Code.CLOSEIMAGEPAGERACTIVITY:
+                finish();
+                break;
         }
-        return false;
     }
+
+//    @Override
+//    public boolean dispatchTouchEvent(MotionEvent ev) {
+//        try{
+//            return super.dispatchTouchEvent(ev);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
 
     private static class ImageAdapter extends PagerAdapter {
 
@@ -152,7 +176,19 @@ public class ImagePagerActivity extends BaseActivity{
         public Object instantiateItem(ViewGroup container, final int position) {
             View view = inflater.inflate(R.layout.item_pager_image, container, false);
             if(view != null){
-                final ImageView imageView = (ImageView) view.findViewById(R.id.image);
+
+                final PhotoView imageView = (PhotoView) view.findViewById(R.id.photoView);
+                imageView.setOnPhotoTapListener(new PhotoViewAttacher.OnPhotoTapListener() {
+                    @Override
+                    public void onPhotoTap(View view, float x, float y) {
+                        EventBus.getDefault().post(new MessageBean(MessageBean.Code.CLOSEIMAGEPAGERACTIVITY));
+                    }
+
+                    @Override
+                    public void onOutsidePhotoTap() {
+
+                    }
+                });
 
                 if(imageSize!=null){
                     //预览imageView
@@ -164,52 +200,37 @@ public class ImagePagerActivity extends BaseActivity{
                     ((FrameLayout)view).addView(smallImageView);
                 }
 
-                //loading
-//                final ProgressBar loading = new ProgressBar(context);
-//                FrameLayout.LayoutParams loadingLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
-//                        ViewGroup.LayoutParams.WRAP_CONTENT);
-//                loadingLayoutParams.gravity = Gravity.CENTER;
-//                loading.setLayoutParams(loadingLayoutParams);
-//                ((FrameLayout)view).addView(loading);
+//                loading
+                final ProgressBar loading = new ProgressBar(context);
+                FrameLayout.LayoutParams loadingLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT);
+                loadingLayoutParams.gravity = Gravity.CENTER;
+                loading.setLayoutParams(loadingLayoutParams);
+                ((FrameLayout)view).addView(loading);
 
                 final String imgurl = datas.get(position);
 
-//                Glide.with(context)
-//                        .load(imgurl)
-//                        .diskCacheStrategy(DiskCacheStrategy.ALL)//缓存多个尺寸
-//                        .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
-//                        .error(R.drawable.ic_launcher)
-//                        .into(new GlideDrawableImageViewTarget(imageView){
-//                            @Override
-//                            public void onLoadStarted(Drawable placeholder) {
-//                                super.onLoadStarted(placeholder);
-//                               /* if(smallImageView!=null){
-//                                    smallImageView.setVisibility(View.VISIBLE);
-//                                    Glide.with(context).load(imgurl).into(smallImageView);
-//                                }*/
-//                                loading.setVisibility(View.VISIBLE);
-//                            }
-//
-//                            @Override
-//                            public void onLoadFailed(Exception e, Drawable errorDrawable) {
-//                                super.onLoadFailed(e, errorDrawable);
-//                                /*if(smallImageView!=null){
-//                                    smallImageView.setVisibility(View.GONE);
-//                                }*/
-//                                loading.setVisibility(View.GONE);
-//                            }
-//
-//                            @Override
-//                            public void onResourceReady(GlideDrawable resource, GlideAnimation<? super GlideDrawable> animation) {
-//                                super.onResourceReady(resource, animation);
-//                                loading.setVisibility(View.GONE);
-//                                /*if(smallImageView!=null){
-//                                    smallImageView.setVisibility(View.GONE);
-//                                }*/
-//                            }
-//                        });
-                GlideUtils.loadImage(context, ServerInfo.IMAGE+imgurl,imageView);
+                RequestOptions options  =new RequestOptions();
+                options.diskCacheStrategy(DiskCacheStrategy.ALL).error(R.drawable.place_500x500);
+
+                Glide.with(context)
+                        .asBitmap()
+                        .load(ServerInfo.IMAGE+imgurl)
+                        .thumbnail(0.1f)//先显示缩略图  缩略图为原图的1/10
+                        .apply(options)
+                        .into(new BitmapImageViewTarget(imageView){
+                            @Override
+                            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                                super.onResourceReady(resource, transition);
+                                imageView.setImageBitmap(resource);
+                                loading.setVisibility(View.GONE);
+                            }
+                        });
+
+
+//                GlideUtils.loadImage(context, ServerInfo.IMAGE+imgurl,imageView);
                 container.addView(view, 0);
+
             }
             return view;
         }

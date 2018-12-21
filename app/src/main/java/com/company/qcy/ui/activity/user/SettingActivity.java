@@ -2,20 +2,22 @@ package com.company.qcy.ui.activity.user;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.icu.util.VersionInfo;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.MainActivity;
 import com.company.qcy.R;
+import com.company.qcy.base.BaseActivity;
 
-public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
+public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 退出登录
@@ -32,6 +34,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
      * 账户中心
      */
     private TextView mActivitySettingZhanghuzhongxin;
+    private TextView mActivitySettingAboutVersioninfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,8 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
         mToolbarTitle.setText("设置");
         mActivitySettingZhanghuzhongxin = (TextView) findViewById(R.id.activity_setting_zhanghuzhongxin);
         mActivitySettingZhanghuzhongxin.setOnClickListener(this);
+        mActivitySettingAboutVersioninfo = (TextView) findViewById(R.id.activity_setting_about_versioninfo);
+        mActivitySettingAboutVersioninfo.setText("V"+AppUtils.getAppVersionName());
     }
 
     @Override
@@ -68,6 +73,7 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         SPUtils.getInstance().clear();
+                        SPUtils.getInstance().put("isFirstIn",  "1");
                         ActivityUtils.finishAllActivities();
                         ActivityUtils.startActivity(MainActivity.class);
                     }
@@ -86,10 +92,9 @@ public class SettingActivity extends AppCompatActivity implements View.OnClickLi
                 finish();
                 break;
             case R.id.activity_setting_about_qcy:
-                ToastUtils.showShort("关于七彩云");
+                ActivityUtils.startActivity(AboutQCYActivity.class);
                 break;
             case R.id.activity_setting_clearcache:
-                ToastUtils.showShort("清理缓存");
                 break;
             case R.id.activity_setting_zhanghuzhongxin:
                 ActivityUtils.startActivity(ZhanghaozhongxinActivity.class);

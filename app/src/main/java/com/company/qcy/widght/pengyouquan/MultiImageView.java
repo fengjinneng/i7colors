@@ -210,7 +210,7 @@ public class MultiImageView extends LinearLayout {
 		imageView.setOnClickListener(new ImageOnClickListener(position));
 		imageView.setBackgroundColor(getResources().getColor(R.color.fengexian));
 //		Glide.with(getContext()).load(photoInfo.url).diskCacheStrategy(DiskCacheStrategy.ALL).into(imageView);
-		GlideUtils.loadImage(getContext(), ServerInfo.IMAGE+photoInfo.url,imageView);
+		GlideUtils.loadImageFitCenter(getContext(), ServerInfo.IMAGE+photoInfo.url,imageView);
 
 		return imageView;
 	}

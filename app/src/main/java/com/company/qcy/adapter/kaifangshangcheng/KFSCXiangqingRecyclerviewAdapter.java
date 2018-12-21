@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.kaifangshangcheng.DianpuxiangqingBean;
 import com.company.qcy.bean.kaifangshangcheng.ProductBean;
@@ -29,15 +30,14 @@ public class KFSCXiangqingRecyclerviewAdapter extends
             helper.getView(R.id.item_kfsc_xiangqing_price_fuhao).setVisibility(View.VISIBLE);
             helper.getView(R.id.item_kfsc_xiangqing_price_danwei).setVisibility(View.VISIBLE);
         }else {
-            helper.setText(R.id.item_kfsc_xiangqing_price,"保密");
+            helper.setText(R.id.item_kfsc_xiangqing_price,"议价");
             helper.getView(R.id.item_kfsc_xiangqing_price_fuhao).setVisibility(View.INVISIBLE);
             helper.getView(R.id.item_kfsc_xiangqing_price_danwei).setVisibility(View.INVISIBLE);
         }
         helper.setText(R.id.item_kfsc_xiangqing_baozhuang,item.getPack());
 
         ImageView imageView = (ImageView) helper.getView(R.id.item_kfsc_xiangqing_img);
-        Glide.with(mContext).load(ServerInfo.IMAGE+item.getPic()).into(imageView);
-
+        GlideUtils.loadImage(mContext,ServerInfo.IMAGE+item.getPic(),imageView);
 
     }
 }

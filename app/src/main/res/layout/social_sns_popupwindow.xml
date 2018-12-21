@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/x200"
-    android:layout_height="@dimen/x55"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:background="@drawable/demo_social_sns_bg"
     android:orientation="horizontal" >
     
-    <TextView 
+    <TextView
+		android:drawableLeft="@mipmap/pengyouquan_dianzan"
         android:id="@+id/digBtn"
         android:layout_width="0dp"
     	android:layout_height="@dimen/x55"
     	android:layout_weight="1"
-    	android:text="赞"
+    	android:text="点赞"
+		android:paddingLeft="@dimen/x20"
 		android:textSize="@dimen/x24"
     	android:gravity="center"
     	android:textColor="#d2d2d2"/>
@@ -22,13 +24,36 @@
         android:layout_marginTop="2dp"
         android:background="#707070"
         />
-    <TextView 
-        android:id="@+id/commentBtn"
-        android:layout_width="0dp"
-    	android:layout_height="@dimen/x55"
-    	android:layout_weight="1"
-    	android:text="评论"
-		android:textSize="@dimen/x24"
-    	android:gravity="center"
-    	android:textColor="#d2d2d2"/>
+
+	<TextView
+		android:drawableLeft="@mipmap/pengyouquan_pinglun"
+		android:id="@+id/commentBtn"
+		android:layout_width="0dp"
+		android:layout_height="@dimen/x55"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:text="评论"
+		android:paddingLeft="@dimen/x20"
+		android:textColor="#d2d2d2"
+		android:textSize="@dimen/x24" />
+
+	<View
+		android:layout_width="1dp"
+		android:layout_height="@dimen/x55"
+		android:layout_marginBottom="2dp"
+		android:layout_marginTop="2dp"
+		android:background="#707070"
+		/>
+
+	<TextView
+		android:drawableLeft="@mipmap/pengyouquan_share"
+		android:id="@+id/share"
+		android:layout_width="0dp"
+		android:layout_height="@dimen/x55"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:text="分享"
+		android:paddingLeft="@dimen/x20"
+		android:textColor="#d2d2d2"
+		android:textSize="@dimen/x24" />
 </LinearLayout>

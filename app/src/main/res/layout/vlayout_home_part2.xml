@@ -50,14 +50,15 @@
     </ImageView>
 
     <TextView
-        android:id="@+id/textView13"
+        android:id="@+id/vlayout_home_part2_huodongmiaoshu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:padding="5dp"
-        android:text="夏季大促销，更多活动等你来，我是活动描述"
+        android:text="活动描述"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -70,6 +71,6 @@
         android:background="@color/fengexian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toBottomOf="@+id/vlayout_home_part2_huodongmiaoshu" />
 
 </android.support.constraint.ConstraintLayout>

@@ -25,14 +25,17 @@ public class InterfaceInfo {
     public static final String SENDSMSREGISTER = "user/send_sms_code_register";
     //注册
     public static final String REGISTER = "user/register";
-
     //重置密码
     public static final String RESETPASSWORD = "user/updatePassword";
-
     //校验短信验证码
     public static final String CHECKSMSCODE = "user/checkSmsCode";
     //忘记密码短信验证码
     public static final String SENDSMSCHECKPASSWORD = "user/send_sms_code_password";
+    //上传用户头像  uploadHeadPhoto
+    public static final String UPLOADHEADPHOTO = "user/updateUserHeadPhoto";
+    //修改密码
+    public static final String CHANGEPASSWORD = "user/updateUserPassword";
+
 
     //求购列表
     public static final String QIUGOULIEBIAO = "enquiry/getEnquiryList";
@@ -64,10 +67,10 @@ public class InterfaceInfo {
     public static final String CAINABAOJIA = "enquiryOffer/acceptEnquiryOffer";
     //关闭求购
     public static final String GUANBIQIUGOU = "enquiry/cancelEnquiry";
-        //求购搜索
+    //求购搜索
     public static final String SEARCHENQUIRY = "enquiry/getEnquiryListByKeyword";
-            //报价消息已读
-   public static final String READMYACCEPTOFFER = "enquiryOffer/readMyAcceptOffer";
+    //报价消息已读
+    public static final String READMYACCEPTOFFER = "enquiryOffer/readMyAcceptOffer";
 
 
     //开放商城
@@ -83,7 +86,6 @@ public class InterfaceInfo {
     public static final String GETCHANPINLIEBIAO = "product/getProductList";
     //获取产品详情
     public static final String GETCHANPINDETAIL = "product/getProductDetail";
-
     //是否收藏了给商品
     public static final String ISFAVORITEPRODUCT = "product/isFavoriteProduct";
     //取消收藏
@@ -104,10 +106,8 @@ public class InterfaceInfo {
     public static final String GROUPBUYLIST = "groupBuyMain/queryGroupBuyMainList";
     //团购详情
     public static final String GROUPBUYDETAIL = "groupBuyMain/getGroupBuyMainById";
-
     //团购记录
     public static final String GROUPBUYRECORD = "groupBuyMain/queryGroupBuyerList";
-
     //我要团购
     public static final String WOYAOTUANGOU = "groupBuyMain/addGroupBuyer";
 
@@ -115,18 +115,71 @@ public class InterfaceInfo {
     //消息模块
     //求购报价消息
     public static final String GETENQUIRYINFORMLIST = "user/getMallEnquiryInformList";
-
     //求购报价消息详情
     public static final String GETENQUIRYINFORMDETAIL = "user/getMallEnquiryInformDetail";
-
     //系统消息
     public static final String SYSTEMINFORMLIST = "user/getSystemInformList";
 
+    //未读消息
+    public static final String GETNOTREADMESSAGECOUNT = "user/getNotReadCount";
 
     //朋友圈模块
+    //查询朋友圈列表
     public static final String QUERYDYECOMMUNITYLIST = "dyeCommunity/queryDyeCommunityList";
-
     //发朋友圈
     public static final String FABUPENGYOUQUAN = "dyeCommunity/addDyeCommunity";
+    //发表评论
+    public static final String FABIAOPINGLUN = "dyeCommunity/addDyeComment";
+    //删除评论
+    public static final String DELETEPINGLUN = "dyeCommunity/cancelDyeComment";
+    //点赞
+    public static final String DIANZAN = "dyeCommunity/addDyeLike";
+    //获取朋友圈记录
+    public static final String QUERYMYDYECOMMUNITYLIST = "dyeCommunity/queryDyeCommunityListByUserId";
+    //获取粉丝列表
+    public static final String QUERYMYFOLLOWLIST = "dyeFollow/queryFollowListByUserId";
+    //根据userid获取用户信息
+    public static final String GETUSERINFOBYUSERID = "user/getUserInfoDetail";
 
+
+    //根据token获取用户信息
+    public static final String GETUSERINFOBYTOKEN = "user/getMyInfoDetail";
+    //根据token获取朋友圈记录
+    public static final String QUERYMYDYECOMMUNITYLISTBYTOKEN = "dyeCommunity/queryMyDyeCommunityList";
+    //根据tokendianzan
+    public static final String QUERYMYDYEFOLLOWLISTBYTOKEN = "dyeFollow/queryMyFollowList";
+
+
+    //根据帖子id获取评论列表（一期）
+    public static final String QUERYDYECOMMENTLISTBYID = "dyeCommunity/queryDyeCommentListByDyeId";
+    //根据帖子id获取帖子详情
+    public static final String QUERYDYECOMMENTDETAIL = "dyeCommunity/queryDyeCommunityDetail";
+    //根据用户id添加关注
+    public static final String ADDFOLLOWBYUSERID = "dyeFollow/addDyeFollowByUserId";
+    //根据用户id取消关注
+    public static final String CANCLEFOLLOWBYUSERID = "dyeFollow/cancelDyeFollowByUserId";
+    //删除帖子
+    public static final String CANCLEDYECOMMUNTY = "dyeCommunity/cancelDyeCommunity";
+    //修改朋友圈头像和昵称
+    public static final String UPDATEMYDYEINFO = "user/updateMyDyeInfo";
+    //点赞列表
+    public static final String QUERYPRAISELIST = "dyeCommunity/queryDyeLikeListByDyeId";
+    //获取我的未读评论个数
+    public static final String QUERYNOTREADCOMMENTCOUNT = "dyeCommunity/queryMyNotReadCommentCount";
+    //获取我的未读评论列表
+    public static final String QUERYNOTREADCOMMENTLIST = "dyeCommunity/queryMyNotReadCommentList";
+
+
+    //微信相关
+    //绑定手机号
+    public static final String WXBINDPHONE = "wx/bindPhone";
+    //发送验证码
+    public static final String WXSENDSMS = "wx/send_sms_code_password";
+    //微信登录
+    public static final String WXLOGIN = "wx/onWxLogin";
+
+
+    //大V
+    //申请打V认真
+    public static final String DAVRENZHEN = "user/CertV";
 }

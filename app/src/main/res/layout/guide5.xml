@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/daohang5" >
+
+        <!--距离底部，三分之一 -->
+        <Button
+            android:id="@+id/mBtn"
+            android:layout_width="@dimen/x200"
+            android:layout_height="@dimen/x100"
+            android:text="点击进入"
+            android:textColor="@color/baise"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:background="@null"/>
+    </RelativeLayout>
+
+</FrameLayout>

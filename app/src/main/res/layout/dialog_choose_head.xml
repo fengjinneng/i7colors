@@ -61,6 +61,20 @@
         android:gravity="center"
         android:textColor="@color/erjibiaoti"
         android:textSize="@dimen/x24"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:layout_marginLeft="@dimen/x9"
+        android:layout_marginRight="@dimen/x9"
+        android:background="@color/fengexian"/>
+    <TextView
+        android:id="@+id/tv_choose_video"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x90"
+        android:text="选取本地视频"
+        android:gravity="center"
+        android:textColor="@color/erjibiaoti"
+        android:textSize="@dimen/x24"/>
     <Button
         android:id="@+id/btn_cancel"
         android:layout_width="match_parent"

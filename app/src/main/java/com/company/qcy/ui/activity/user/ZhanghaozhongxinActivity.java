@@ -2,6 +2,7 @@ package com.company.qcy.ui.activity.user;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
@@ -10,19 +11,40 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
+import com.company.qcy.MainActivity;
 import com.company.qcy.R;
+import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.GifSizeFilter;
 import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MatisseImageUtil;
 import com.company.qcy.Utils.MyGlideEngine;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.GlideEngine;
 import com.zhihu.matisse.filter.Filter;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnClickListener {
@@ -66,6 +88,19 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
         initView();
     }
 
+    @Override
+    public void onReciveMessage(MessageBean msg) {
+        super.onReciveMessage(msg);
+
+        switch (msg.getCode()) {
+            case MessageBean.Code.CHANGEPASSWORDCHENGGONG:
+                SPUtils.getInstance().clear();
+                ActivityUtils.finishAllActivities();
+                ActivityUtils.startActivity(MainActivity.class);
+                break;
+        }
+    }
+
     private void initView() {
         mActivityZhanghaozhongxinShenfen = (TextView) findViewById(R.id.activity_zhanghaozhongxin_shenfen);
         mActivityZhanghaozhongxinName = (TextView) findViewById(R.id.activity_zhanghaozhongxin_name);
@@ -80,7 +115,6 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
         mActivityZhanghaozhongxinShenqing.setOnClickListener(this);
         mActivityZhanghaozhongxinBack = (TextView) findViewById(R.id.activity_zhanghaozhongxin_back);
         mActivityZhanghaozhongxinBack.setOnClickListener(this);
-
         setData();
     }
 
@@ -108,7 +142,6 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
             mActivityZhanghaozhongxinShenfen2.setTextColor(getResources().getColor(R.color.lanse));
             mActivityZhanghaozhongxinShenqing.setVisibility(View.VISIBLE);
         }
-
     }
 
     List<Uri> mSelected;
@@ -120,6 +153,66 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
             mSelected = Matisse.obtainResult(data);
             LogUtils.d("Matisse", "mSelected: " + mSelected);
             mActivityZhanghaozhongxinImg.setImageURI(mSelected.get(0));
+
+            try {
+
+                List<File> picFilePaths = new ArrayList<>();
+                for (int i = 0; i < mSelected.size(); i++) {
+                    String picFilePath = MatisseImageUtil.getRealFilePath(this, mSelected.get(i));
+                    Bitmap bmp = MatisseImageUtil.revitionImageSize(picFilePath);
+                    picFilePath = MatisseImageUtil.saveBitmap(bmp);
+                    picFilePaths.add(new File(picFilePath));
+
+                }
+                // 压缩图片
+                PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.UPLOADHEADPHOTO)
+                        .tag(this)
+                        .params("token", SPUtils.getInstance().getString("token"))
+                        .params("sign", SPUtils.getInstance().getString("sign"))
+                        .params("file", new File(picFilePaths.get(0).getPath()));
+
+
+                DialogStringCallback stringCallback = new DialogStringCallback(ZhanghaozhongxinActivity.this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        LogUtils.e("UPLOADHEADPHOTO", response.body());
+
+                        try {
+                            JSONObject jsonObject = JSONObject.parseObject(response.body());
+                            String msg = jsonObject.getString("msg");
+                            if (response.code() == 200) {
+
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    if (!StringUtils.isEmpty(jsonObject.getString("data"))) {
+                                        GlideUtils.loadCircleImage(ZhanghaozhongxinActivity.this, jsonObject.getString("data"), mActivityZhanghaozhongxinImg);
+                                        EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHANGEPERSONHEADIMG, jsonObject.getString("data")));
+                                        SPUtils.getInstance().put("photo", jsonObject.getString("data"));
+                                    }
+                                    return;
+                                }
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                                    SignAndTokenUtil.getSign(ZhanghaozhongxinActivity.this, request, this);
+                                    return;
+                                }
+                                ToastUtils.showShort(msg);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+                    }
+                };
+
+                request.execute(stringCallback);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -131,20 +224,23 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
             default:
                 break;
             case R.id.activity_zhanghaozhongxin_img:
-                Matisse.from(this)
-                        .choose(MimeType.ofImage())
-                        .countable(false)
-                        .maxSelectable(1)
-//                        .addFilter(new GifSizeFilter(320, 320, 5 * Filter.K * Filter.K))
-//                        .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
-                        .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                        .thumbnailScale(0.85f)
-                        .imageEngine(new MyGlideEngine())
-                        .forResult(REQUEST_CODE_CHOOSE);
+                AndPermission.with(this)
+                        .runtime()
+                        .permission(Permission.Group.STORAGE, Permission.Group.CAMERA)
+                        .onGranted(permissions -> {
+                            // Storage permission are allowed.
+                            MatisseImageUtil.chooseOnlyOnePhoto(this, REQUEST_CODE_CHOOSE);
+
+                        })
+                        .onDenied(permissions -> {
+                            // Storage permission are not allowed.
+                            ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
+                        })
+                        .start();
 
                 break;
             case R.id.activity_zhanghaozhongxin_changepawwsord:
-
+                ActivityUtils.startActivity(ChangePasswordActivity.class);
 
                 break;
             case R.id.activity_zhanghaozhongxin_shenqing:

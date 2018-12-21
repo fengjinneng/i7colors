@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,18 +20,23 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyLoadMoreView;
+import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.message.NormalMessageAdapter;
+import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.message.MessageBean;
 import com.company.qcy.ui.activity.message.MessageDetailActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,13 +48,10 @@ import java.util.List;
  * Use the {@link QiugouxiaoxiFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QiugouxiaoxiFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class QiugouxiaoxiFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private RecyclerView recyclerView;
@@ -56,18 +59,8 @@ public class QiugouxiaoxiFragment extends Fragment {
     private NormalMessageAdapter adapter;
 
     public QiugouxiaoxiFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment QiugouxiaoxiFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static QiugouxiaoxiFragment newInstance(String param1, String param2) {
         QiugouxiaoxiFragment fragment = new QiugouxiaoxiFragment();
         Bundle args = new Bundle();
@@ -75,6 +68,34 @@ public class QiugouxiaoxiFragment extends Fragment {
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private SwipeRefreshLayout.OnRefreshListener refreshListener;
+
+    @Override
+    public void onRec(com.company.qcy.bean.eventbus.MessageBean messageBean) {
+        super.onRec(messageBean);
+
+        switch (messageBean.getCode()) {
+          //登录成功
+
+            case com.company.qcy.bean.eventbus.MessageBean.Code.DELU:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+
+            case com.company.qcy.bean.eventbus.MessageBean.Code.WXLOGIN:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+            //消息已读
+            case com.company.qcy.bean.eventbus.MessageBean.Code.ENQUIRYMESSAGEREAD:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+
+        }
     }
 
     @Override
@@ -93,10 +114,13 @@ public class QiugouxiaoxiFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_qiugouxiaoxi, container, false);
     }
 
+    private boolean isReflash;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_qiugouxiaoxi_recyclerview);
+        swipeRefreshLayout = view.findViewById(R.id.fragment_qiugouxiaoxi_swipeRefreshLayout);
         //创建布局管理
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -104,13 +128,11 @@ public class QiugouxiaoxiFragment extends Fragment {
         datas = new ArrayList<>();
         adapter = new NormalMessageAdapter(R.layout.item_message, datas);
         recyclerView.setAdapter(adapter);
-        DividerItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
-        itemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_fengexian));
-        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.addItemDecoration(new RecyclerviewDisplayDecoration(getContext()));
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-               addData();
+                addData();
             }
         }, recyclerView);
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
@@ -118,77 +140,109 @@ public class QiugouxiaoxiFragment extends Fragment {
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 MessageBean messageBean = (MessageBean) adapter.getData().get(position);
                 Intent intent = new Intent(getContext(), MessageDetailActivity.class);
-                intent.putExtra("id",messageBean.getId());
-                intent.putExtra("isfrom","qiugou");
+                intent.putExtra("id", messageBean.getId());
+                intent.putExtra("isfrom", "qiugou");
                 ActivityUtils.startActivity(intent);
             }
         });
 
+        refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //下拉业务
+                isReflash = true;
+                pageNo = 0;
+                addData();
+            }
+        };
+        swipeRefreshLayout.setOnRefreshListener(refreshListener);
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+            }
+        });
+        swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
+                android.R.color.holo_green_light, android.R.color.holo_blue_light);
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+        adapter.setLoadMoreView(new MyLoadMoreView());
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
-        pageNo =0;
-        addData();
     }
-
 
     private int pageNo;
 
     private void addData() {
-
         pageNo++;
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMLIST)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
                 .params("pageSize", 20)
                 .params("type", "buyer")
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new DialogStringCallback(getActivity()) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                        try {
-                            if (response.code() == 200) {
+        StringCallback stringCallback = new StringCallback() {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+            @Override
+            public void onSuccess(Response<String> response) {
+                swipeRefreshLayout.setRefreshing(false);
+                LogUtils.v("GETENQUIRYINFORMLIST", response.body());
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+//                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("GETENQUIRYINFORMLIST", data);
-                                    if(pageNo==1){
-                                        datas.clear();
-                                    }
-                                    List<MessageBean> messageBeans = JSONObject.parseArray(data.toJSONString(), MessageBean.class);
-                                    if (ObjectUtils.isEmpty(messageBeans)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    adapter.addData(messageBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(getActivity(), jsonObject);
-
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            List<MessageBean> messageBeans = JSONObject.parseArray(data.toJSONString(), MessageBean.class);
+                            if (ObjectUtils.isEmpty(messageBeans)) {
+                                adapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            if (isReflash) {
+                                datas.clear();
+                                datas.addAll(messageBeans);
+                                adapter.setNewData(datas);
+                                isReflash = false;
+                                adapter.loadMoreComplete();
+                                return;
+                            }
+
+                            adapter.addData(messageBeans);
+                            adapter.setNewData(datas);
+                            adapter.loadMoreComplete();
+                            adapter.disableLoadMoreIfNotFullPage();
+                            return;
                         }
-                    }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
+                            return;
+                        }
+//                        ToastUtils.showShort(msg);
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                swipeRefreshLayout.setRefreshing(false);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
     }
+
 
     @Override
     public void onDetach() {

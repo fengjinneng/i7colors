@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x180">
+
+    <ImageView
+        android:layout_marginLeft="@dimen/x30"
+        android:id="@+id/item_myfans_image"
+        android:layout_width="@dimen/x108"
+        android:layout_height="@dimen/x108"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/morentouxiang" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/item_myfans_company_zhiwei"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/x36"
+        android:textColor="@color/chunhongse"
+        android:textSize="@dimen/x30"
+        android:layout_marginStart="@dimen/x30"
+        android:text="上海七彩云电子商务有限公司 总经理  徐长进"
+        app:layout_constraintEnd_toStartOf="@+id/item_myfans_time"
+        app:layout_constraintStart_toEndOf="@+id/item_myfans_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/item_myfans_companyname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/x30"
+        android:layout_marginTop="@dimen/x8"
+        android:textSize="@dimen/x24"
+        android:text="上海七彩云电子商务有限公司"
+        app:layout_constraintEnd_toStartOf="@+id/item_myfans_time"
+        app:layout_constraintStart_toEndOf="@+id/item_myfans_image"
+        app:layout_constraintTop_toBottomOf="@+id/item_myfans_company_zhiwei" />
+
+    <TextView
+        android:id="@+id/item_myfans_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_myfans_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/x30"
+        android:layout_marginTop="8dp"
+        android:text="Y.C.Pixel"
+        android:textColor="@color/erjibiaoti"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/item_myfans_time"
+        app:layout_constraintStart_toEndOf="@+id/item_myfans_image"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_myfans_bigv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/item_myfans_image"
+        app:layout_constraintEnd_toEndOf="@+id/item_myfans_image"
+        app:srcCompat="@mipmap/bigv" />
+</android.support.constraint.ConstraintLayout>

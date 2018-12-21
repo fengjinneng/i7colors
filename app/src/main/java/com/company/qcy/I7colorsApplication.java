@@ -2,9 +2,8 @@ package com.company.qcy;
 
 import android.app.Application;
 import android.content.Context;
-
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.blankj.utilcode.util.LogUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.cache.CacheMode;
@@ -13,13 +12,16 @@ import com.lzy.okgo.cookie.store.DBCookieStore;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
+import com.mob.MobSDK;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
-
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
-
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 public class I7colorsApplication extends Application {
@@ -35,15 +37,17 @@ public class I7colorsApplication extends Application {
         instance = this;
         mContext = getApplicationContext();
         initOkGo();
-
+        MobSDK.init(this);
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
 
         if (isDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();     // 打印日志
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
-    }
 
+    }
 
     public static Context getContext(){
         return mContext;

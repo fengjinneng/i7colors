@@ -54,6 +54,7 @@ public class DianpuliebiaoBean {
     private Object isCheck;
     private Object isNew;
     private Object isHot;
+    private String tel;
     private Integer sortNum;
     private Object createdAt;
     private Object updatedAt;

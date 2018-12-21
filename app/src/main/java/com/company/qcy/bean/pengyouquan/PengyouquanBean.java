@@ -3,41 +3,53 @@ package com.company.qcy.bean.pengyouquan;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class PengyouquanBean implements Parcelable {
 
-    /**
-     * id : 1
-     * userId : null
-     * loginUserId : null
-     * loginCompanyId : null
-     * postUser : why公司
-     * postUserPhoto : null
-     * content : 中国纺织工业联合会副会长杨纪朝，虎门镇镇委副书记、镇长邓卫洪，中国印染行业协会会长陈志华，中国美术学院设计与艺术学院院长吴海燕，中山市沙溪镇副镇长肖亦宁，虎门服装服饰产业管委会主任谭志强、副主任王宝敏，广东省服装服饰行业协会副会长黄益群、秦建华，深圳市纺织行业协会会长刘士杰，东莞市毛织服装设计师协会会长陈敬东，东莞市虎门服装服饰行业协会常务副会长兼秘书长朱华泽等领导嘉宾出席。来自全国各地服装印花行业产业链上下游各领域的大咖齐聚虎门，共同打造一场服装印花行业交流与展示的盛宴。
-     * pic1 : /dye_community/123456789JKL.jpg
-     * pic2 : /dye_community/123456789JKL.jpg
-     * pic3 : /dye_community/123456789JKL.jpg
-     * pic4 : /dye_community/123456789JKL.jpg
-     * pic5 : /dye_community/123456789JKL.jpg
-     * pic6 : /dye_community/123456789JKL.jpg
-     * pic7 : /dye_community/123456789JKL.jpg
-     * pic8 : /dye_community/123456789JKL.jpg
-     * pic9 : /dye_community/123456789JKL.jpg
-     * isBan : null
-     * sortNum : 2
-     * isValid : null
-     * createdAt : 2018-10-23 14:33:05.0
-     * createdAtStamp : 1540276385
-     * isLike : 1
-     * updatedAt : null
-     * commentList : [{"id":1,"dyeId":null,"userId":null,"commentUser":"15580804456","byCommentUser":null,"parentId":null,"content":"阿伦公司来评论啦","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null},{"id":2,"dyeId":null,"userId":null,"commentUser":"封金能","byCommentUser":null,"parentId":null,"content":"阿伦子公司来评论啦","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null},{"id":3,"dyeId":null,"userId":null,"commentUser":"封金能","byCommentUser":"15580804456","parentId":null,"content":"阿伦子公司评论阿伦公司哎","isRead":null,"isBan":null,"isValid":null,"createdAt":null,"createdAtStamp":null,"updatedAt":null}]
-     * likeList : [{"id":114842,"dyeId":null,"userId":null,"likeUserPhoto":null,"isValid":null,"createdAt":null,"updatedAt":null}]
-     */
 
+    @Override
+    public String toString() {
+        return "PengyouquanBean{" +
+                "videoPicUrl='" + videoPicUrl + '\'' +
+                ", videoPicWidth=" + videoPicWidth +
+                ", videoPicHigh=" + videoPicHigh +
+                ", id=" + id +
+                ", userId=" + userId +
+                ", loginUserId=" + loginUserId +
+                ", loginCompanyId=" + loginCompanyId +
+                ", postUser='" + postUser + '\'' +
+                ", postUserPhoto='" + postUserPhoto + '\'' +
+                ", content='" + content + '\'' +
+                ", pic1='" + pic1 + '\'' +
+                ", pic2='" + pic2 + '\'' +
+                ", pic3='" + pic3 + '\'' +
+                ", pic4='" + pic4 + '\'' +
+                ", pic5='" + pic5 + '\'' +
+                ", isCompany='" + isCompany + '\'' +
+                ", isDyeV='" + isDyeV + '\'' +
+                ", isFollow='" + isFollow + '\'' +
+                ", dyeFollowCount='" + dyeFollowCount + '\'' +
+                ", isCharger='" + isCharger + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", dyeVName='" + dyeVName + '\'' +
+                ", bossLevel='" + bossLevel + '\'' +
+                ", pic6='" + pic6 + '\'' +
+                ", pic7='" + pic7 + '\'' +
+                ", pic8='" + pic8 + '\'' +
+                ", pic9='" + pic9 + '\'' +
+                ", url='" + url + '\'' +
+                ", createdAt='" + createdAt + '\'' +
+                ", createdAtStamp='" + createdAtStamp + '\'' +
+                ", isLike='" + isLike + '\'' +
+                ", commentList=" + commentList +
+                ", likeList=" + likeList +
+                '}';
+    }
 
-
+    private String videoPicUrl;
+    private Integer videoPicWidth;
+    private Integer videoPicHigh;
     private Long id;
     private Long userId;
     private Long loginUserId;
@@ -50,26 +62,117 @@ public class PengyouquanBean implements Parcelable {
     private String pic3;
     private String pic4;
     private String pic5;
+    private String isCompany;
+    private String isDyeV;
+    private String isFollow;
+    private String dyeFollowCount;
+    private String isCharger;
+    private String companyName;
+    private String dyeVName;
+    private String bossLevel;
+
+    public String getBossLevel() {
+        return bossLevel;
+    }
+
+    public void setBossLevel(String bossLevel) {
+        this.bossLevel = bossLevel;
+    }
+
+    public String getDyeVName() {
+        return dyeVName;
+    }
+
+    public void setDyeVName(String dyeVName) {
+        this.dyeVName = dyeVName;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getIsCharger() {
+        return isCharger;
+    }
+
+    public void setIsCharger(String isCharger) {
+        this.isCharger = isCharger;
+    }
+
+    public String getDyeFollowCount() {
+        return dyeFollowCount;
+    }
+
+    public void setDyeFollowCount(String dyeFollowCount) {
+        this.dyeFollowCount = dyeFollowCount;
+    }
+
+    public String getIsFollow() {
+        return isFollow;
+    }
+
+    public void setIsFollow(String isFollow) {
+        this.isFollow = isFollow;
+    }
+
+    public String getIsDyeV() {
+        return isDyeV;
+    }
+
+    public void setIsDyeV(String isDyeV) {
+        this.isDyeV = isDyeV;
+    }
+
+    public String getIsCompany() {
+        return isCompany;
+    }
+
+    public void setIsCompany(String isCompany) {
+        this.isCompany = isCompany;
+    }
+
+    public static Creator<PengyouquanBean> getCREATOR() {
+        return CREATOR;
+    }
+
     private String pic6;
     private String pic7;
     private String pic8;
     private String pic9;
-    private int sortNum;
     private String url;
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     private String createdAt;
-    private Long createdAtStamp;
+    private String createdAtStamp;
     private String isLike;
     private List<CommentListBean> commentList;
     private List<LikeListBean> likeList;
+
+    public String getVideoPicUrl() {
+        return videoPicUrl;
+    }
+
+    public void setVideoPicUrl(String videoPicUrl) {
+        this.videoPicUrl = videoPicUrl;
+    }
+
+    public Integer getVideoPicWidth() {
+        return videoPicWidth;
+    }
+
+    public void setVideoPicWidth(Integer videoPicWidth) {
+        this.videoPicWidth = videoPicWidth;
+    }
+
+    public Integer getVideoPicHigh() {
+        return videoPicHigh;
+    }
+
+    public void setVideoPicHigh(Integer videoPicHigh) {
+        this.videoPicHigh = videoPicHigh;
+    }
 
     public Long getId() {
         return id;
@@ -199,14 +302,12 @@ public class PengyouquanBean implements Parcelable {
         this.pic9 = pic9;
     }
 
-
-
-    public int getSortNum() {
-        return sortNum;
+    public String getUrl() {
+        return url;
     }
 
-    public void setSortNum(int sortNum) {
-        this.sortNum = sortNum;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getCreatedAt() {
@@ -217,11 +318,11 @@ public class PengyouquanBean implements Parcelable {
         this.createdAt = createdAt;
     }
 
-    public Long getCreatedAtStamp() {
+    public String getCreatedAtStamp() {
         return createdAtStamp;
     }
 
-    public void setCreatedAtStamp(Long createdAtStamp) {
+    public void setCreatedAtStamp(String createdAtStamp) {
         this.createdAtStamp = createdAtStamp;
     }
 
@@ -232,7 +333,6 @@ public class PengyouquanBean implements Parcelable {
     public void setIsLike(String isLike) {
         this.isLike = isLike;
     }
-
 
     public List<CommentListBean> getCommentList() {
         return commentList;
@@ -250,24 +350,23 @@ public class PengyouquanBean implements Parcelable {
         this.likeList = likeList;
     }
 
-
-
     public static class CommentListBean implements Parcelable {
-        /**
-         * id : 1
-         * dyeId : null
-         * userId : null
-         * commentUser : 15580804456
-         * byCommentUser : null
-         * parentId : null
-         * content : 阿伦公司来评论啦
-         * isRead : null
-         * isBan : null
-         * isValid : null
-         * createdAt : null
-         * createdAtStamp : null
-         * updatedAt : null
-         */
+
+        @Override
+        public String toString() {
+            return "CommentListBean{" +
+                    "id=" + id +
+                    ", dyeId=" + dyeId +
+                    ", userId=" + userId +
+                    ", commentUser='" + commentUser + '\'' +
+                    ", byCommentUser='" + byCommentUser + '\'' +
+                    ", content='" + content + '\'' +
+                    ", createdAtStamp='" + createdAtStamp + '\'' +
+                    ", isCharger='" + isCharger + '\'' +
+                    ", commentPhoto='" + commentPhoto + '\'' +
+                    ", byUserId=" + byUserId +
+                    '}';
+        }
 
         private Long id;
         private Long dyeId;
@@ -275,46 +374,54 @@ public class PengyouquanBean implements Parcelable {
         private String commentUser;
         private String byCommentUser;
         private String content;
-        private Long createdAtStamp;
+        private String createdAtStamp;
+        private String isCharger;
+        private String commentPhoto;
+        private Long byUserId;
 
-        public String getContent() {
-            return content;
+        public Long getByUserId() {
+            return byUserId;
         }
 
-        public void setContent(String content) {
-            this.content = content;
+        public void setByUserId(Long byUserId) {
+            this.byUserId = byUserId;
         }
 
-        public Long getCreatedAtStamp() {
-            return createdAtStamp;
+        public String getCommentPhoto() {
+            return commentPhoto;
         }
 
-        public void setCreatedAtStamp(Long createdAtStamp) {
-            this.createdAtStamp = createdAtStamp;
+        public void setCommentPhoto(String commentPhoto) {
+            this.commentPhoto = commentPhoto;
+        }
+
+        public static Creator<CommentListBean> getCREATOR() {
+            return CREATOR;
+        }
+
+
+        public Long getId() {
+            return id;
         }
 
         public void setId(Long id) {
             this.id = id;
         }
 
-        public void setDyeId(Long dyeId) {
-            this.dyeId = dyeId;
-        }
-
-        public void setUserId(Long userId) {
-            this.userId = userId;
-        }
-
-        public Long getId() {
-            return id;
-        }
-
         public Long getDyeId() {
             return dyeId;
         }
 
+        public void setDyeId(Long dyeId) {
+            this.dyeId = dyeId;
+        }
+
         public Long getUserId() {
             return userId;
+        }
+
+        public void setUserId(Long userId) {
+            this.userId = userId;
         }
 
         public String getCommentUser() {
@@ -333,6 +440,30 @@ public class PengyouquanBean implements Parcelable {
             this.byCommentUser = byCommentUser;
         }
 
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public String getCreatedAtStamp() {
+            return createdAtStamp;
+        }
+
+        public void setCreatedAtStamp(String createdAtStamp) {
+            this.createdAtStamp = createdAtStamp;
+        }
+
+        public String getIsCharger() {
+            return isCharger;
+        }
+
+        public void setIsCharger(String isCharger) {
+            this.isCharger = isCharger;
+        }
+
 
         @Override
         public int describeContents() {
@@ -347,7 +478,8 @@ public class PengyouquanBean implements Parcelable {
             dest.writeString(this.commentUser);
             dest.writeString(this.byCommentUser);
             dest.writeString(this.content);
-            dest.writeValue(this.createdAtStamp);
+            dest.writeString(this.createdAtStamp);
+            dest.writeString(this.isCharger);
         }
 
         public CommentListBean() {
@@ -360,10 +492,11 @@ public class PengyouquanBean implements Parcelable {
             this.commentUser = in.readString();
             this.byCommentUser = in.readString();
             this.content = in.readString();
-            this.createdAtStamp = (Long) in.readValue(Long.class.getClassLoader());
+            this.createdAtStamp = in.readString();
+            this.isCharger = in.readString();
         }
 
-        public static final Creator<CommentListBean> CREATOR = new Creator<CommentListBean>() {
+        public static final Parcelable.Creator<CommentListBean> CREATOR = new Parcelable.Creator<CommentListBean>() {
             @Override
             public CommentListBean createFromParcel(Parcel source) {
                 return new CommentListBean(source);
@@ -377,30 +510,78 @@ public class PengyouquanBean implements Parcelable {
     }
 
     public static class LikeListBean implements Parcelable {
-        /**
-         * id : 114842
-         * dyeId : null
-         * userId : null
-         * likeUserPhoto : null
-         * isValid : null
-         * createdAt : null
-         * updatedAt : null
-         */
 
-
+        @Override
+        public String toString() {
+            return "LikeListBean{" +
+                    "id=" + id +
+                    ", dyeId=" + dyeId +
+                    ", userId=" + userId +
+                    ", createdAt='" + createdAt + '\'' +
+                    ", likeUser='" + likeUser + '\'' +
+                    ", likeUserPhoto='" + likeUserPhoto + '\'' +
+                    ", likePhoto='" + likePhoto + '\'' +
+                    '}';
+        }
 
         private Long id;
         private Long dyeId;
         private Long userId;
-        private Long createdAt;
+        private String createdAt;
         private String likeUser;
         private String likeUserPhoto;
+        private String likePhoto;
+        private String createdAtStamp;
 
-        public Long getCreatedAt() {
+        public String getCreatedAtStamp() {
+            return createdAtStamp;
+        }
+
+        public void setCreatedAtStamp(String createdAtStamp) {
+            this.createdAtStamp = createdAtStamp;
+        }
+
+        public String getLikePhoto() {
+            return likePhoto;
+        }
+
+        public void setLikePhoto(String likePhoto) {
+            this.likePhoto = likePhoto;
+        }
+
+        public static Creator<LikeListBean> getCREATOR() {
+            return CREATOR;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public Long getDyeId() {
+            return dyeId;
+        }
+
+        public void setDyeId(Long dyeId) {
+            this.dyeId = dyeId;
+        }
+
+        public Long getUserId() {
+            return userId;
+        }
+
+        public void setUserId(Long userId) {
+            this.userId = userId;
+        }
+
+        public String getCreatedAt() {
             return createdAt;
         }
 
-        public void setCreatedAt(Long createdAt) {
+        public void setCreatedAt(String createdAt) {
             this.createdAt = createdAt;
         }
 
@@ -420,30 +601,6 @@ public class PengyouquanBean implements Parcelable {
             this.likeUserPhoto = likeUserPhoto;
         }
 
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
-
-        public Long getDyeId() {
-            return dyeId;
-        }
-
-        public void setDyeId(Long dyeId) {
-            this.dyeId = dyeId;
-        }
-
-        public Long getUserId() {
-            return userId;
-        }
-
-        public void setUserId(Long userId) {
-            this.userId = userId;
-        }
-
 
         @Override
         public int describeContents() {
@@ -455,7 +612,7 @@ public class PengyouquanBean implements Parcelable {
             dest.writeValue(this.id);
             dest.writeValue(this.dyeId);
             dest.writeValue(this.userId);
-            dest.writeValue(this.createdAt);
+            dest.writeString(this.createdAt);
             dest.writeString(this.likeUser);
             dest.writeString(this.likeUserPhoto);
         }
@@ -467,12 +624,12 @@ public class PengyouquanBean implements Parcelable {
             this.id = (Long) in.readValue(Long.class.getClassLoader());
             this.dyeId = (Long) in.readValue(Long.class.getClassLoader());
             this.userId = (Long) in.readValue(Long.class.getClassLoader());
-            this.createdAt = (Long) in.readValue(Long.class.getClassLoader());
+            this.createdAt = in.readString();
             this.likeUser = in.readString();
             this.likeUserPhoto = in.readString();
         }
 
-        public static final Creator<LikeListBean> CREATOR = new Creator<LikeListBean>() {
+        public static final Parcelable.Creator<LikeListBean> CREATOR = new Parcelable.Creator<LikeListBean>() {
             @Override
             public LikeListBean createFromParcel(Parcel source) {
                 return new LikeListBean(source);
@@ -485,6 +642,7 @@ public class PengyouquanBean implements Parcelable {
         };
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -492,6 +650,9 @@ public class PengyouquanBean implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.videoPicUrl);
+        dest.writeValue(this.videoPicWidth);
+        dest.writeValue(this.videoPicHigh);
         dest.writeValue(this.id);
         dest.writeValue(this.userId);
         dest.writeValue(this.loginUserId);
@@ -508,19 +669,21 @@ public class PengyouquanBean implements Parcelable {
         dest.writeString(this.pic7);
         dest.writeString(this.pic8);
         dest.writeString(this.pic9);
-        dest.writeInt(this.sortNum);
         dest.writeString(this.url);
         dest.writeString(this.createdAt);
-        dest.writeValue(this.createdAtStamp);
+        dest.writeString(this.createdAtStamp);
         dest.writeString(this.isLike);
-        dest.writeList(this.commentList);
-        dest.writeList(this.likeList);
+        dest.writeTypedList(this.commentList);
+        dest.writeTypedList(this.likeList);
     }
 
     public PengyouquanBean() {
     }
 
     protected PengyouquanBean(Parcel in) {
+        this.videoPicUrl = in.readString();
+        this.videoPicWidth = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.videoPicHigh = (Integer) in.readValue(Integer.class.getClassLoader());
         this.id = (Long) in.readValue(Long.class.getClassLoader());
         this.userId = (Long) in.readValue(Long.class.getClassLoader());
         this.loginUserId = (Long) in.readValue(Long.class.getClassLoader());
@@ -537,15 +700,12 @@ public class PengyouquanBean implements Parcelable {
         this.pic7 = in.readString();
         this.pic8 = in.readString();
         this.pic9 = in.readString();
-        this.sortNum = in.readInt();
         this.url = in.readString();
         this.createdAt = in.readString();
-        this.createdAtStamp = (Long) in.readValue(Long.class.getClassLoader());
+        this.createdAtStamp = in.readString();
         this.isLike = in.readString();
-        this.commentList = new ArrayList<CommentListBean>();
-        in.readList(this.commentList, CommentListBean.class.getClassLoader());
-        this.likeList = new ArrayList<LikeListBean>();
-        in.readList(this.likeList, LikeListBean.class.getClassLoader());
+        this.commentList = in.createTypedArrayList(CommentListBean.CREATOR);
+        this.likeList = in.createTypedArrayList(LikeListBean.CREATOR);
     }
 
     public static final Parcelable.Creator<PengyouquanBean> CREATOR = new Parcelable.Creator<PengyouquanBean>() {

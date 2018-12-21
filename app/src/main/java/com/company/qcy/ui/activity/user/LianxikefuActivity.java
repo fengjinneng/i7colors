@@ -1,17 +1,11 @@
 package com.company.qcy.ui.activity.user;
-
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.blankj.utilcode.util.PhoneUtils;
 import com.company.qcy.R;
-
+import com.company.qcy.Utils.PermisionUtil;
 public class LianxikefuActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
@@ -49,17 +43,9 @@ public class LianxikefuActivity extends AppCompatActivity implements View.OnClic
                 finish();
                 break;
             case R.id.activity_lianxikefu_yijianhujiao:
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                PhoneUtils.call(getResources().getString(R.string.PHONE));
+
+
+                PermisionUtil.callKefu(LianxikefuActivity.this);
                 break;
         }
     }

@@ -22,8 +22,6 @@ import java.io.File;
 public class GlideUtils {
 
 
-    public static final int placeholderSoWhite = R.color.baise;
-    public static final int errorSoWhite = R.color.baise;
     // public static final int soWhite = R.color.white;
 
     /*
@@ -34,6 +32,40 @@ public class GlideUtils {
                 .centerCrop()
                 .placeholder(R.drawable.place_500x500) //占位图
                 .error(R.drawable.place_500x500)       //错误图
+                // .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(context).load(url).apply(options).into(imageView);
+
+    }
+
+
+    public static void loadImageFitCenter(Context context, String url, ImageView imageView) {
+        RequestOptions options = new RequestOptions()
+                .fitCenter()
+                .placeholder(R.drawable.place_500x500) //占位图
+                .error(R.drawable.place_500x500)       //错误图
+                // .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(context).load(url).apply(options).into(imageView);
+
+    }
+
+    public static void loadImageCenter(Context context, String url, ImageView imageView) {
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.place_500x500) //占位图
+                .error(R.drawable.place_500x500)       //错误图
+                // .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(context).load(url).apply(options).into(imageView);
+
+    }
+
+
+    public static void loadImageWithStartPage(Context context, String url, ImageView imageView) {
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .placeholder(R.drawable.qidongye) //占位图
+                .error(R.drawable.qidongye)       //错误图
                 // .priority(Priority.HIGH)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(context).load(url).apply(options).into(imageView);
@@ -68,7 +100,7 @@ public class GlideUtils {
     public static void loadImageSize(Context context, String url, ImageView imageView, int width, int height) {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
-                .placeholder(placeholderSoWhite) //占位图
+//                .placeholder(placeholderSoWhite) //占位图
                 .error(R.color.baise)       //错误图
                 .override(width, height)
                 // .priority(Priority.HIGH)
@@ -91,7 +123,7 @@ public class GlideUtils {
 
     public static void loadImageSizekipMemoryCache(Context context, String url, ImageView imageView) {
         RequestOptions options = new RequestOptions()
-                .placeholder(placeholderSoWhite) //占位图
+//                .placeholder(placeholderSoWhite) //占位图
                 .error(R.color.baise)       //错误图S
                 .skipMemoryCache(true)//禁用掉Glide的内存缓存功能
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
@@ -107,8 +139,8 @@ public class GlideUtils {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .circleCrop()//设置圆形
-                .placeholder(placeholderSoWhite)
-                .error(errorSoWhite)
+                .placeholder(R.mipmap.app_img_round)
+                .error(R.mipmap.app_img_round)
                 //.priority(Priority.HIGH)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(context).load(url).apply(options).into(imageView);
@@ -207,9 +239,9 @@ public class GlideUtils {
      * @param imageView
      */
     private void loadGif(Context context, String url, ImageView imageView) {
-        RequestOptions options = new RequestOptions()
-                .placeholder(placeholderSoWhite)
-                .error(errorSoWhite);
+        RequestOptions options = new RequestOptions();
+//                .placeholder(placeholderSoWhite)
+//                .error(errorSoWhite);
         Glide.with(context)
                 .load(url)
                 .apply(options)

@@ -1,6 +1,7 @@
 package com.company.qcy.widght.pengyouquan;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.text.Spannable;
@@ -15,9 +16,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.company.qcy.I7colorsApplication;
 import com.company.qcy.R;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
+import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,12 +128,12 @@ public class CommentListView extends LinearLayout {
         }
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(setClickableSpan(name, String.valueOf(id)));
+        builder.append(setClickableSpan(name, String.valueOf(id),bean.getUserId()));
 
         if (!TextUtils.isEmpty(toReplyName)) {
 
             builder.append(" 回复 ");
-            builder.append(setClickableSpan(toReplyName, bean.getByCommentUser()));
+            builder.append(setClickableSpan(toReplyName, bean.getByCommentUser(),bean.getUserId()));
         }
         builder.append(": ");
         //转换表情字符
@@ -165,12 +169,14 @@ public class CommentListView extends LinearLayout {
     }
 
     @NonNull
-    private SpannableString setClickableSpan(final String textStr, final String id) {
+    private SpannableString setClickableSpan(final String textStr, final String id,final Long userId) {
         SpannableString subjectSpanText = new SpannableString(textStr);
         subjectSpanText.setSpan(new SpannableClickable(itemColor) {
                                     @Override
                                     public void onClick(View widget) {
-                                        Toast.makeText(I7colorsApplication.getContext(), textStr + " &id = " + id, Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(getContext(), PersonInfoActivity.class);
+                                        intent.putExtra("userId",userId);
+                                        ActivityUtils.startActivity(intent);
                                     }
                                 }, 0, subjectSpanText.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +17,14 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.bumptech.glide.Glide;
+import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
+import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.NumberBean;
 import com.company.qcy.ui.activity.qiugoudating.DaichulibaojiaActivity;
@@ -31,20 +32,17 @@ import com.company.qcy.ui.activity.qiugoudating.DaichuliqiugouActivity;
 import com.company.qcy.ui.activity.qiugoudating.WodebaojiaActivity;
 import com.company.qcy.ui.activity.qiugoudating.WodeqiugouActivity;
 import com.company.qcy.ui.activity.user.LianxikefuActivity;
-import com.company.qcy.ui.activity.user.QiehuanshenfenActivity;
 import com.company.qcy.ui.activity.user.SettingActivity;
+import com.company.qcy.ui.activity.user.ZhanghaozhongxinActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
+import com.lzy.okgo.request.GetRequest;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
-public class WodeFragment extends Fragment implements View.OnClickListener {
+public class WodeFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
 
     private String mParam1;
@@ -66,18 +64,7 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
      * 999
      */
     private TextView mFragmentWodeLishibaojia;
-    private ImageView mFragmentWodeZhongxinImage;
-    /**
-     * 热门询价/询价管理
-     */
-    private TextView mFragmentWodeZhongxinwenzi;
-    /**
-     * 买家中心
-     */
-    private TextView mFragmentWodeZhongxin;
-    /**
-     * 查看全部
-     */
+
     private TextView mFragmentWodeAllQiugou;
     private ImageView mFragmentWodeXunpanzhongImg;
     /**
@@ -99,10 +86,7 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
      * 设置
      */
     private TextView mToolbarText;
-    /**
-     * 点击切换
-     */
-    private TextView mFragmentWodeExchangeShenfen;
+
     /**
      * 我的求购
      */
@@ -122,12 +106,21 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
      */
     private TextView mFragmentWodeAllQiugouSell;
 
-    private TextView textView90;
     /**
      * 标题
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
+    private ConstraintLayout mFragmentWodeBuyerLayout;
+    private ConstraintLayout mFragmentWodeSellerLayout;
+    /**
+     * 买家中心
+     */
+    private TextView mFragmentWodeBuyerZhongxin;
+    /**
+     * 卖家中心
+     */
+    private TextView mFragmentWodeSellerZhongxin;
 
     public WodeFragment() {
     }
@@ -143,7 +136,6 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
@@ -160,16 +152,14 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View inflater) {
-
-        textView90 = inflater.findViewById(R.id.textView90);
+        mFragmentWodeBuyerZhongxin = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_zhongxin);
+        mFragmentWodeSellerZhongxin = (TextView) inflater.findViewById(R.id.fragment_wode_seller_zhongxin);
         mFragmentWodeImage = (ImageView) inflater.findViewById(R.id.fragment_wode_image);
         mFragmentWodeImage.setOnClickListener(this);
         mFragmentWodeName = (TextView) inflater.findViewById(R.id.fragment_wode_name);
         mFragmentWodeShenfen = (TextView) inflater.findViewById(R.id.fragment_wode_shenfen);
         mFragmentWodeLishiqiugou = (TextView) inflater.findViewById(R.id.fragment_wode_lishiqiugou);
         mFragmentWodeLishibaojia = (TextView) inflater.findViewById(R.id.fragment_wode_lishibaojia);
-        mFragmentWodeZhongxinImage = (ImageView) inflater.findViewById(R.id.fragment_wode_zhongxin_image);
-        mFragmentWodeZhongxin = (TextView) inflater.findViewById(R.id.fragment_wode_zhongxin);
         mFragmentWodeAllQiugou = (TextView) inflater.findViewById(R.id.fragment_wode_all_qiugou);
         mFragmentWodeXunpanzhongImg = (ImageView) inflater.findViewById(R.id.fragment_wode_xunpanzhong_img);
         mFragmentWodeXunpanzhongText = (TextView) inflater.findViewById(R.id.fragment_wode_xunpanzhong_text);
@@ -178,6 +168,10 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
         mFragmentWodeJijiangguoqiImg = (ImageView) inflater.findViewById(R.id.fragment_wode_jijiangguoqi_img);
         mFragmentWodeJijiangguoqiText = (TextView) inflater.findViewById(R.id.fragment_wode_jijiangguoqi_text);
         mFragmentWodeLixikefu = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_lixikefu);
+        mFragmentWodeBuyerLayout = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_buyer_layout);
+        mFragmentWodeSellerLayout = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_seller_layout);
+        mFragmentWodeBuyerLayout.setOnClickListener(this);
+        mFragmentWodeSellerLayout.setOnClickListener(this);
         mFragmentWodeXunpanzhongImg.setOnClickListener(this);
         mFragmentWodeXunpanzhongText.setOnClickListener(this);
 
@@ -188,12 +182,9 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
         mFragmentWodeJijiangguoqiText.setOnClickListener(this);
 
         mFragmentWodeAllQiugou.setOnClickListener(this);
-        textView90.setOnClickListener(this);
         mToolbarText = inflater.findViewById(R.id.toolbar_text);
         mToolbarText.setVisibility(View.VISIBLE);
         mToolbarText.setOnClickListener(this);
-        mFragmentWodeExchangeShenfen = (TextView) inflater.findViewById(R.id.fragment_wode_exchange_shenfen);
-        mFragmentWodeExchangeShenfen.setOnClickListener(this);
         mFragmentWodeWodeqiugou = (TextView) inflater.findViewById(R.id.fragment_wode_wodeqiugou);
         mToolbarLayout = (ConstraintLayout) inflater.findViewById(R.id.include8);
         mFragmentWodeMaijiajieshouImg = (ImageView) inflater.findViewById(R.id.fragment_wode_maijiajieshou_img);
@@ -222,12 +213,14 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
         mToolbarBack.setVisibility(View.INVISIBLE);
         mToolbarText = (TextView) inflater.findViewById(R.id.toolbar_text);
         mToolbarText.setOnClickListener(this);
+        mToolbarTitle.setText("个人中心");
+
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
 
@@ -243,14 +236,17 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-
-    public void doEventMessage(MessageBean message) {
-
-        if (message.getCode() == MessageBean.Code.DELU) {
-
-            tianxiexinxi();
-
+    @Override
+    public void onRec(MessageBean messageBean) {
+        super.onRec(messageBean);
+        switch (messageBean.getCode()) {
+            case MessageBean.Code.DELU:
+                tianxiexinxi();
+                break;
+            case MessageBean.Code.CHANGEPERSONHEADIMG:
+                String meaasge = messageBean.getMeaasge();
+                GlideUtils.loadCircleImage(getContext(), meaasge, mFragmentWodeImage);
+                break;
         }
     }
 
@@ -262,67 +258,78 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        if (StringUtils.equals(SPUtils.getInstance().getString("isLogin"), "true")) {
+        if (UserUtil.isLogin()) {
             tianxiexinxi();
             if (!StringUtils.isEmpty(SPUtils.getInstance().getString("photo"))) {
                 GlideUtils.loadCircleImage(getContext(), SPUtils.getInstance().getString("photo"), mFragmentWodeImage);
+            } else {
+                mFragmentWodeImage.setImageDrawable(getResources().getDrawable(R.mipmap.morentouxiang));
             }
             getAllCount();
             //买家
             if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "1")) {
                 mFragmentWodeConstraintlayoutBuyer.setVisibility(View.VISIBLE);
                 mFragmentWodeConstraintlayoutSeller.setVisibility(View.INVISIBLE);
-                mToolbarTitle.setText("买家中心");
+                mFragmentWodeBuyerZhongxin.setTextSize(18);
+                mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
                 //卖家
             } else if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "2")) {
                 mFragmentWodeConstraintlayoutSeller.setVisibility(View.VISIBLE);
                 mFragmentWodeConstraintlayoutBuyer.setVisibility(View.INVISIBLE);
-                mToolbarTitle.setText("卖家中心");
+                mFragmentWodeSellerZhongxin.setTextSize(18);
+                mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
             }
 
         }
-
     }
 
     private void getAllCount() {
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETALLCOUNT)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETALLCOUNT)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        try {
-                            LogUtils.v("GETALLCOUNT", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
-                                    JSONObject data = jsonObject.getJSONObject("data");
-                                    NumberBean numberBean = data.toJavaObject(NumberBean.class);
-                                    xunpan.setBadgeNumber(numberBean.getIsEnquiryCount());
-                                    daiquerenbaojia.setBadgeNumber(numberBean.getWaitSureCount());
-                                    jijiangguoqi.setBadgeNumber(numberBean.getMyExpireCount());
-                                    maijiajieshou.setBadgeNumber(numberBean.getMyAcceptOfferCount());
-                                    mFragmentWodeLishibaojia.setText(numberBean.getOfferTimes() + "");
-                                    mFragmentWodeLishiqiugou.setText(numberBean.getEnquiryTimes() + "");
-                                    return;
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(activity, jsonObject);
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("GETALLCOUNT", response.body());
 
-                            } else {
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
 
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                        if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            NumberBean numberBean = data.toJavaObject(NumberBean.class);
+                            xunpan.setBadgeNumber(numberBean.getIsEnquiryCount());
+                            daiquerenbaojia.setBadgeNumber(numberBean.getWaitSureCount());
+                            jijiangguoqi.setBadgeNumber(numberBean.getMyExpireCount());
+                            maijiajieshou.setBadgeNumber(numberBean.getMyAcceptOfferCount());
+                            mFragmentWodeLishibaojia.setText(numberBean.getOfferTimes() + "");
+                            mFragmentWodeLishiqiugou.setText(numberBean.getEnquiryTimes() + "");
+                            return;
+
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
     }
 
@@ -335,16 +342,6 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
             mFragmentWodeShenfen.setText("企业用户");
         }
 
-        if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "1")) {
-            mFragmentWodeZhongxin.setText("买家中心");
-            mFragmentWodeZhongxinImage.setImageDrawable(getResources().getDrawable(R.mipmap.buy));
-            mFragmentWodeWodeqiugou.setText("我的求购");
-        } else if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "2")) {
-            mFragmentWodeZhongxin.setText("卖家中心");
-            mFragmentWodeZhongxinImage.setImageDrawable(getResources().getDrawable(R.mipmap.sell));
-            mFragmentWodeWodeqiugou.setText("我的报价");
-        }
-
     }
 
     @Override
@@ -354,6 +351,7 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
                 break;
             //我的头像
             case R.id.fragment_wode_image:
+                ActivityUtils.startActivity(ZhanghaozhongxinActivity.class);
                 break;
             case R.id.fragment_wode_xunpanzhong_img:
                 jumpToDaichuli(1);
@@ -391,17 +389,41 @@ public class WodeFragment extends Fragment implements View.OnClickListener {
             case R.id.toolbar_text:
                 ActivityUtils.startActivity(SettingActivity.class);
                 break;
-            case R.id.fragment_wode_exchange_shenfen:
-                ActivityUtils.startActivity(QiehuanshenfenActivity.class);
-                break;
-            case R.id.textView90:
-                ActivityUtils.startActivity(QiehuanshenfenActivity.class);
-                break;
+
             case R.id.fragment_wode_lixikefu:
                 ActivityUtils.startActivity(LianxikefuActivity.class);
                 break;
+
+            case R.id.fragment_wode_buyer_layout:
+//                mFragmentWodeBuyerLayout.setBackgroundColor(getResources().getColor(R.color.fengexian));
+//                mFragmentWodeSellerLayout.setBackgroundColor(getResources().getColor(R.color.baise));
+                mFragmentWodeConstraintlayoutBuyer.setVisibility(View.VISIBLE);
+                mFragmentWodeConstraintlayoutSeller.setVisibility(View.INVISIBLE);
+                SPUtils.getInstance().put("identity", "1");
+                mFragmentWodeWodeqiugou.setText("我的求购");
+                mFragmentWodeBuyerZhongxin.setTextSize(18);
+                mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
+
+                mFragmentWodeSellerZhongxin.setTextSize(15);
+                mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.putongwenben));
+                break;
+
+            case R.id.fragment_wode_seller_layout:
+//                mFragmentWodeSellerLayout.setBackgroundColor(getResources().getColor(R.color.fengexian));
+//                mFragmentWodeSellerLayout.setBackgroundColor(getResources().getColor(R.color.baise));
+                mFragmentWodeConstraintlayoutSeller.setVisibility(View.VISIBLE);
+                mFragmentWodeConstraintlayoutBuyer.setVisibility(View.INVISIBLE);
+                SPUtils.getInstance().put("identity", "2");
+                mFragmentWodeWodeqiugou.setText("我的报价");
+                mFragmentWodeSellerZhongxin.setTextSize(18);
+                mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
+
+                mFragmentWodeBuyerZhongxin.setTextSize(15);
+                mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.putongwenben));
+                break;
         }
     }
+
 
     private void jumpToMaijiajieshou() {
         Intent intent = new Intent(getContext(), DaichulibaojiaActivity.class);

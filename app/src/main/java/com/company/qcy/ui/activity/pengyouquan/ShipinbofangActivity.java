@@ -9,17 +9,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.VideoView;
 
+import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
+import com.company.qcy.base.BaseActivity;
+import com.xiao.nicevideoplayer.NiceVideoPlayer;
+
+import java.net.URL;
 
 import cn.jzvd.JZMediaManager;
 import cn.jzvd.Jzvd;
 import cn.jzvd.JzvdStd;
+import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
-public class ShipinbofangActivity extends AppCompatActivity {
+public class ShipinbofangActivity extends BaseActivity {
 
     private VideoView videoPlayer;
     private Uri uri;
     private JzvdStd mActivityShipinbofangJzvideo;
+    private String url;
 
 
     JZMediaManager manager = new JZMediaManager();
@@ -28,8 +35,13 @@ public class ShipinbofangActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipinbofang);
-        String stringExtra = getIntent().getStringExtra("uri");
-        uri = Uri.parse(stringExtra);
+        String uriExtra = getIntent().getStringExtra("uri");
+
+        if (StringUtils.isEmpty(uriExtra)) {
+            url = getIntent().getStringExtra("url");
+        } else {
+            uri = Uri.parse(uriExtra);
+        }
         initView();
 
 
@@ -75,8 +87,13 @@ public class ShipinbofangActivity extends AppCompatActivity {
 //        setFull();
 
         mActivityShipinbofangJzvideo = (JzvdStd) findViewById(R.id.activity_shipinbofang_jzvideo);
+        if (StringUtils.isEmpty(url)) {
+            mActivityShipinbofangJzvideo.setUp(uri.toString(), "视频播放", JzvdStd.SCREEN_WINDOW_NORMAL);
 
-        mActivityShipinbofangJzvideo.setUp(uri.toString(), "视频播放", JzvdStd.SCREEN_WINDOW_NORMAL);
+        } else {
+            mActivityShipinbofangJzvideo.setUp(url, "视频播放", JzvdStd.SCREEN_WINDOW_NORMAL);
+
+        }
         mActivityShipinbofangJzvideo.startVideo();
         mActivityShipinbofangJzvideo.backButton.setVisibility(View.VISIBLE);
         mActivityShipinbofangJzvideo.backButton.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +102,10 @@ public class ShipinbofangActivity extends AppCompatActivity {
                 finish();
             }
         });
-        mActivityShipinbofangJzvideo.thumbImageView.setImageBitmap(getLocalVideoThumbnail(uri.toString()));
+        if (StringUtils.isEmpty(url)) {
+            mActivityShipinbofangJzvideo.thumbImageView.setImageBitmap(getLocalVideoThumbnail(uri.toString()));
+        }
+
     }
 
     private void setFull() {
@@ -103,6 +123,7 @@ public class ShipinbofangActivity extends AppCompatActivity {
         }
         super.onBackPressed();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -111,15 +132,10 @@ public class ShipinbofangActivity extends AppCompatActivity {
 
 
     /**
-
      * 获取本地视频的第一帧
-
      *
-
      * @param filePath
-
      * @return
-
      */
 
     public static Bitmap getLocalVideoThumbnail(String filePath) {

@@ -26,12 +26,14 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.tuangou.TuangouBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.convert.Converter;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -39,7 +41,7 @@ import cn.qqtheme.framework.entity.City;
 import cn.qqtheme.framework.entity.County;
 import cn.qqtheme.framework.entity.Province;
 
-public class WoyaotuangouActivity extends AppCompatActivity implements View.OnClickListener {
+public class WoyaotuangouActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -310,41 +312,47 @@ public class WoyaotuangouActivity extends AppCompatActivity implements View.OnCl
         paras.put("invitationCode", mActivityWoyaotuangouYinxiongma.getText().toString());
         paras.put("from", "app");
 
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.WOYAOTUANGOU)
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.WOYAOTUANGOU)
                 .tag(this)
-                .params(paras)
-                .execute(new DialogStringCallback(WoyaotuangouActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params(paras);
 
-                        try {
-                            LogUtils.v("WOYAOTUANGOU", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    String msg = jsonObject.getString("msg");
-                                    ToastUtils.showShort(msg);
-                                    finish();
-                                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.TUANGOUCHENGGONG));
-                                    return;
+        DialogStringCallback stringCallback = new DialogStringCallback(WoyaotuangouActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("WOYAOTUANGOU", response.body());
 
-                                }
-                                SignAndTokenUtil.checkSignAndToken(WoyaotuangouActivity.this, jsonObject);
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            ToastUtils.showShort(msg);
+                            finish();
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.TUANGOUCHENGGONG));
+                            return;
 
-                            } else {
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(WoyaotuangouActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
     }
 

@@ -25,16 +25,18 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
 
 import org.greenrobot.eventbus.EventBus;
 
 import cn.qqtheme.framework.picker.DatePicker;
 
-public class CanyubaojiaActivity extends AppCompatActivity implements View.OnClickListener {
+public class CanyubaojiaActivity extends BaseActivity implements View.OnClickListener {
 
 
     /**
@@ -201,39 +203,45 @@ public class CanyubaojiaActivity extends AppCompatActivity implements View.OnCli
         paras.put("phone", mActivityCanyubaojiaPhone.getText().toString());
         paras.put("validTime", mActivityCanyubaojiaTime.getText().toString());
         paras.put("description", mActivityCanyubaojiaDescription.getText().toString());
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUBAOJIA)
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUBAOJIA)
                 .tag(this)
-                .params(paras)
-                .execute(new DialogStringCallback(CanyubaojiaActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params(paras);
 
-                        try {
-                            LogUtils.v("tijiaobaojia", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    ToastUtils.showShort("您已经报价成功");
-                                    ActivityUtils.finishActivity(CanyubaojiaActivity.class);
-                                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.BAOJIACHENGGONG));
-                                    return;
-                                }
-                                SignAndTokenUtil.checkSignAndToken(CanyubaojiaActivity.this, jsonObject);
+        DialogStringCallback stringCallback = new DialogStringCallback(CanyubaojiaActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
 
-                            } else {
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                try {
+                    LogUtils.v("tijiaobaojia", response.body());
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            ActivityUtils.finishActivity(CanyubaojiaActivity.class);
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.BAOJIACHENGGONG));
+                            return;
                         }
-                    }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(CanyubaojiaActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
 
     }

@@ -1,14 +1,9 @@
 package com.company.qcy.ui.activity.chanpindating;
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,7 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -31,24 +28,33 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.chanpindating.ChanpinCanshuRecyclerviewAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.kaifangshangcheng.ProductBean;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
+import com.company.qcy.ui.activity.pengyouquan.ChangeNicknameActivity;
 import com.company.qcy.ui.activity.user.LianxikefuActivity;
+import com.lijiankun24.shadowlayout.ShadowLayout;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
+import com.lzy.okgo.request.PostRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
- @Route(path = "product/productDetail")
-public class ChanpinxiangqingActivity extends AppCompatActivity implements View.OnClickListener {
+@Route(path = "/product/productDetail")
+public class ChanpinxiangqingActivity extends BaseActivity implements View.OnClickListener {
 
 
-    private String productID;//商品ID
+    //变量名与传参时一致且修饰符为public
+    @Autowired
+    public String id;//商品ID
     /**
      * 分享
      */
@@ -93,9 +99,12 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chanpinxiangqing);
-        productID = getIntent().getStringExtra("id");
+        Uri data = getIntent().getData();
+        //不为空说明是外部网页传过来的
+        if (!ObjectUtils.isEmpty(data)) {
+            id = data.getQueryParameter("id");
+        } else id = getIntent().getStringExtra("id");
         initView();
-
     }
 
     private void initView() {
@@ -141,191 +150,200 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
 
     private void isShouCang() {
 
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ISFAVORITEPRODUCT)
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ISFAVORITEPRODUCT)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", productID)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("id", id)
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                        try {
-                            if (response.code() == 200) {
-
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                LogUtils.v("ISFAVORITEPRODUCT", jsonObject);
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    String data = jsonObject.getString("data");
-                                    if (StringUtils.equals("true", data)) {
-                                        isShoucang = true;
-                                        mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.yishouchang));
-                                        mActivityChanpinxiangqingShoucangText.setText("已收藏");
-                                    } else {
-                                        isShoucang = false;
-                                        mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.weishouchang));
-                                        mActivityChanpinxiangqingShoucangText.setText("收藏");
-                                    }
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(ChanpinxiangqingActivity.this, jsonObject);
-
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("ISFAVORITEPRODUCT", response.body());
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            String data = jsonObject.getString("data");
+                            if (StringUtils.equals("true", data)) {
+                                isShoucang = true;
+                                mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.yishouchang));
+                                mActivityChanpinxiangqingShoucangText.setText("已收藏");
                             } else {
+                                isShoucang = false;
+                                mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.weishouchang));
+                                mActivityChanpinxiangqingShoucangText.setText("收藏");
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            return;
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(ChanpinxiangqingActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+            }
+        };
+
+        request.execute(stringCallback);
 
 
     }
 
     private void addData() {
 
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETCHANPINDETAIL)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETCHANPINDETAIL)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", productID)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("id", id);
 
-                        try {
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("GETCHANPINDETAIL", response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONObject data = jsonObject.getJSONObject("data");
-                                    LogUtils.v("GETCHANPINDETAIL", data);
-                                    productBean = data.toJavaObject(ProductBean.class);
-                                    List<ProductBean.PropMapBean> propMap = productBean.getPropMap();
-                                    if(ObjectUtils.isEmpty(propMap)){
-                                        adapter.addHeaderView(LayoutInflater.from(ChanpinxiangqingActivity.this).inflate(R.layout.head_chanpin_noinfo,null));
-                                    }else adapter.addData(propMap);
-                                    setData(productBean);
-                                    return;
+                            productBean = data.toJavaObject(ProductBean.class);
+                            List<ProductBean.PropMapBean> propMap = productBean.getPropMap();
+                            if (ObjectUtils.isEmpty(propMap)) {
+                                adapter.addHeaderView(LayoutInflater.from(ChanpinxiangqingActivity.this).inflate(R.layout.head_chanpin_noinfo, null));
+                            } else adapter.addData(propMap);
+                            setData();
+                            return;
 
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(ChanpinxiangqingActivity.this, jsonObject);
-
-                            } else {
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(ChanpinxiangqingActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
 
     }
 
 
     private void shouCang() {
+        ToastUtils.showShort("暂不支持收藏！");
 
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ADDFAVORITEPRODUCT)
-                .tag(this)
-
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", productID)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-
-                        try {
-                            if (response.code() == 200) {
-
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                LogUtils.v("ADDFAVORITEPRODUCT", jsonObject);
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    String data = jsonObject.getString("data");
-                                    if (StringUtils.equals("true", data)) {
-                                        isShoucang = true;
-                                        mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.yishouchang));
-                                        mActivityChanpinxiangqingShoucangText.setText("已收藏");
-                                    }
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(ChanpinxiangqingActivity.this, jsonObject);
-
-                            } else {
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
-
-
-    }
-
-    private void quxiaoShouCang() {
-
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CANCEFAVORITEPRODUCT)
-                .tag(this)
-
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", productID)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-
-                        try {
-                            if (response.code() == 200) {
-
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                LogUtils.v("CANCEFAVORITEPRODUCT", jsonObject);
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    String data = jsonObject.getString("data");
-                                    if (StringUtils.equals("true", data)) {
-                                        isShoucang = false;
-                                        mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.weishouchang));
-                                        mActivityChanpinxiangqingShoucangText.setText("收藏");
-                                    }
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(ChanpinxiangqingActivity.this, jsonObject);
-
-                            } else {
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+//        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ADDFAVORITEPRODUCT)
+//                .tag(this)
+//                .params("sign", SPUtils.getInstance().getString("sign"))
+//                .params("id", id)
+//                .params("token", SPUtils.getInstance().getString("token"))
+//                .execute(new DialogStringCallback(this) {
+//                    @Override
+//                    public void onSuccess(Response<String> response) {
+//
+//                        try {
+//                            if (response.code() == 200) {
+//
+//                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+//                                LogUtils.v("ADDFAVORITEPRODUCT", jsonObject);
+//                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+//                                    String data = jsonObject.getString("data");
+//                                    if (StringUtils.equals("true", data)) {
+//                                        isShoucang = true;
+//                                        mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.yishouchang));
+//                                        mActivityChanpinxiangqingShoucangText.setText("已收藏");
+//                                    }
+//                                    return;
+//
+//                                } else
+//                                    SignAndTokenUtil.checkSignAndToken(ChanpinxiangqingActivity.this, jsonObject);
+//
+//                            } else {
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Response<String> response) {
+//                        super.onError(response);
+//                    }
+//                });
 
 
     }
 
-    private void setData(ProductBean productBean) {
+//    private void quxiaoShouCang() {
+//
+//        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CANCEFAVORITEPRODUCT)
+//                .tag(this)
+//
+//                .params("sign", SPUtils.getInstance().getString("sign"))
+//                .params("id", id)
+//                .params("token", SPUtils.getInstance().getString("token"))
+//                .execute(new DialogStringCallback(this) {
+//                    @Override
+//                    public void onSuccess(Response<String> response) {
+//
+//                        try {
+//                            if (response.code() == 200) {
+//
+//                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+//                                LogUtils.v("CANCEFAVORITEPRODUCT", jsonObject);
+//                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+//                                    String data = jsonObject.getString("data");
+//                                    if (StringUtils.equals("true", data)) {
+//                                        isShoucang = false;
+//                                        mActivityChanpinxiangqingShoucangImg.setImageDrawable(getResources().getDrawable(R.mipmap.weishouchang));
+//                                        mActivityChanpinxiangqingShoucangText.setText("收藏");
+//                                    }
+//                                    return;
+//
+//                                } else
+//                                    SignAndTokenUtil.checkSignAndToken(ChanpinxiangqingActivity.this, jsonObject);
+//
+//                            } else {
+//                            }
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Response<String> response) {
+//                        super.onError(response);
+//                    }
+//                });
+//
+//
+//    }
+
+    private void setData() {
         if (ObjectUtils.isEmpty(productBean)) {
             return;
         }
@@ -351,8 +369,12 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
             default:
                 break;
             case R.id.activity_chanpinxiangqing_share:
-
-
+                if (ObjectUtils.isEmpty(productBean)) {
+                    ToastUtils.showShort("分享异常");
+                    return;
+                }
+                ShareUtil.shareProduct(ChanpinxiangqingActivity.this, "【产品】" + productBean.getProductName(),
+                        productBean.getCompanyName(), productBean.getPic(), productBean.getId());
 
                 break;
             case R.id.activity_chanpinxiangqing_dianpu_layout:
@@ -367,76 +389,74 @@ public class ChanpinxiangqingActivity extends AppCompatActivity implements View.
                 ActivityUtils.startActivity(LianxikefuActivity.class);
                 break;
             case R.id.activity_chanpinxiangqing_shoucang_img:
+                ToastUtils.showShort("暂时不支持收藏!");
 
-                if (!SPUtils.getInstance().getBoolean("isCompany")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("您还不是企业用户！");
-                    builder.setMessage("升级为企业用户可收藏盖产品，是否要升级为企业用户?");
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ToastUtils.showShort("升级企业用户");
-                        }
-                    });
-                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ToastUtils.showShort("取消升级");
-                        }
-                    });
-                    builder.show();
-                } else {
-                    if (isShoucang) {
-                        quxiaoShouCang();
-                    } else {
-                        shouCang();
-                    }
-                }
+//                if (!SPUtils.getInstance().getBoolean("isCompany")) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                    builder.setTitle("您还不是企业用户！");
+//                    builder.setMessage("升级为企业用户可收藏盖产品，是否要升级为企业用户?");
+//                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            ToastUtils.showShort("升级企业用户");
+//                        }
+//                    });
+//                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            ToastUtils.showShort("取消升级");
+//                        }
+//                    });
+//                    builder.show();
+//                } else {
+//                    if (isShoucang) {
+//                        quxiaoShouCang();
+//                    } else {
+//                        shouCang();
+//                    }
+//                }
                 break;
             case R.id.activity_chanpinxiangqing_shoucang_text:
-                if (!SPUtils.getInstance().getBoolean("isCompany")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                    builder.setTitle("您还不是企业用户！");
-                    builder.setMessage("升级为企业用户可收藏盖产品，是否要升级为企业用户?");
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ToastUtils.showShort("升级企业用户");
-                        }
-                    });
-                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ToastUtils.showShort("取消升级");
-                        }
-                    });
-                    builder.show();
-                } else {
-                    if (isShoucang) {
-                        quxiaoShouCang();
-
-                    } else shouCang();
-                    {
-                        shouCang();
-                    }
-                }
+//                if (!SPUtils.getInstance().getBoolean("isCompany")) {
+//                    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//                    builder.setTitle("您还不是企业用户！");
+//                    builder.setMessage("升级为企业用户可收藏盖产品，是否要升级为企业用户?");
+//                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            ToastUtils.showShort("升级企业用户");
+//                        }
+//                    });
+//                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            ToastUtils.showShort("取消升级");
+//                        }
+//                    });
+//                    builder.show();
+//                } else {
+//                    if (isShoucang) {
+//                        quxiaoShouCang();
+//
+//                    } else shouCang();
+//                    {
+//                        shouCang();
+//                    }
+//                }
                 break;
             case R.id.toolbar_back:
                 finish();
                 break;
 
             case R.id.activity_chanpinxiangqing_yijianhujiao:
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
+                if (ObjectUtils.isEmpty(productBean)) {
                     return;
                 }
-                PhoneUtils.call(getResources().getString(R.string.PHONE));
+                if (StringUtils.isEmpty(productBean.getPhone())) {
+                    ToastUtils.showShort("该企业没有留下电话号码哦！");
+                    return;
+                }
+                PermisionUtil.callPhone(ChanpinxiangqingActivity.this, productBean.getPhone());
                 break;
         }
     }

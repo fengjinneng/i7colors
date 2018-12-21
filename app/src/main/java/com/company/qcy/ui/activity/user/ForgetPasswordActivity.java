@@ -27,6 +27,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -79,7 +80,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
-        mToolbarTitle.setText("修改密码");
+        mToolbarTitle.setText("忘记密码");
         mForgetpasswordCapcha = (EditText) findViewById(R.id.forgetpassword_capcha);
         mForgetpasswordCapchaImg = (ImageView) findViewById(R.id.forgetpassword_capcha_img);
         mForgetpasswordCapchaChange = (TextView) findViewById(R.id.forgetpassword_capcha_change);
@@ -102,7 +103,11 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     @Override
                     public void onSuccess(Response<Bitmap> response) {
                         try {
-                            mForgetpasswordCapchaImg.setImageBitmap(response.body());
+                            if (response.code() == 200) {
+                                mForgetpasswordCapchaImg.setImageBitmap(response.body());
+                            }else {
+                                ToastUtils.showShort("获取图片验证码失败！");
+                            }
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -112,6 +117,7 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     @Override
                     public void onError(Response<Bitmap> response) {
                         super.onError(response);
+                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
                     }
                 });
 
@@ -130,48 +136,59 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                 } else if (StringUtils.length(mForgetpasswordCapcha.getText().toString().trim()) != 4) {
                     ToastUtils.showShort("请填写正确的图片验证码");
                     return;
-                }else if(mForgetpasswordVerifycode.getText().toString().length()!=6){
+                } else if (mForgetpasswordVerifycode.getText().toString().length() != 6) {
                     ToastUtils.showShort("请填写正确的短信验证码");
                     return;
                 }
-                OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CHECKSMSCODE)
+                PostRequest<String> stringPostRequest = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CHECKSMSCODE)
                         .tag(this)
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("mobile", mForgetpasswordPhonenumber.getText().toString().trim())
-                        .params("smsCode", mForgetpasswordVerifycode.getText().toString().trim())
-                        .execute(new DialogStringCallback(this) {
+                        .params("smsCode", mForgetpasswordVerifycode.getText().toString().trim());
 
-                            @Override
-                            public void onSuccess(Response<String> response) {
-                                try {
-                                    if (response.code() == 200) {
-                                        JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                        String msg = jsonObject.getString("msg");
-                                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                            String s = jsonObject.getString("data");
-                                            if (StringUtils.equals("true", s)) {
 
-                                                Intent intent = new Intent(ForgetPasswordActivity.this,ResetPasswordActivity.class);
-                                                intent.putExtra("phone",mForgetpasswordPhonenumber.getText().toString());
-                                                ActivityUtils.startActivity(intent);
-                                                finish();
-                                            } else {
-                                                ToastUtils.showShort(msg);
-                                            }
-                                        } else
-                                            ToastUtils.showShort(msg);
+                DialogStringCallback dialogStringCallback = new DialogStringCallback(this) {
+
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        LogUtils.v("CHECKSMSCODE", response.body());
+                        try {
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                                String msg = jsonObject.getString("msg");
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    String s = jsonObject.getString("data");
+                                    if (StringUtils.equals("true", s)) {
+
+                                        Intent intent = new Intent(ForgetPasswordActivity.this, ResetPasswordActivity.class);
+                                        intent.putExtra("phone", mForgetpasswordPhonenumber.getText().toString());
+                                        ActivityUtils.startActivity(intent);
+                                        finish();
+                                    } else {
+                                        ToastUtils.showShort(msg);
                                     }
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                    return;
                                 }
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                                    SignAndTokenUtil.getSign(ForgetPasswordActivity.this,stringPostRequest,this);
+                                    return;
+                                }
+                                ToastUtils.showShort(msg);
                             }
 
-                            @Override
-                            public void onError(Response<String> response) {
-                                super.onError(response);
-                            }
-                        });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+                    }
+                };
+
+                stringPostRequest.execute(dialogStringCallback);
                 break;
             case R.id.toolbar_back:
                 finish();
@@ -190,63 +207,66 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     return;
                 }
 
-                OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMSCHECKPASSWORD)
+                PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMSCHECKPASSWORD)
                         .tag(this)
                         .params("deviceNo", DeviceUtils.getAndroidID())
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("mobile", mForgetpasswordPhonenumber.getText().toString().trim())
-                        .params("captcha", mForgetpasswordCapcha.getText().toString().trim())
-                        .execute(new DialogStringCallback(this) {
-                            @Override
-                            public void onSuccess(Response<String> response) {
-                                try {
-                                    LogUtils.v("SENDSMS", response.body());
+                        .params("captcha", mForgetpasswordCapcha.getText().toString().trim());
 
-                                    if (response.code() == 200) {
 
-                                        JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                            String s = jsonObject.getString("data");
-                                            if (StringUtils.equals("true", s)) {
-                                                ToastUtils.showShort("短信获取成功！");
+                DialogStringCallback stringCallback = new DialogStringCallback(this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            LogUtils.v("SENDSMSCHECKPASSWORD", response.body());
 
-                                                timer = new CountDownTimer(59000, 1000) {
-                                                    @Override
-                                                    public void onTick(long millisUntilFinished) {
-                                                        SimpleDateFormat sdf = new SimpleDateFormat("ss");
-                                                        mForgetpasswordSendsms.setText(sdf.format(new Date(millisUntilFinished)) + "S");
-                                                        mForgetpasswordSendsms.setEnabled(false);
-                                                    }
-
-                                                    @Override
-                                                    public void onFinish() {
-                                                        mForgetpasswordSendsms.setText("重新获取验证码");
-                                                        mForgetpasswordSendsms.setEnabled(true);
-                                                    }
-                                                }.start();
-
-                                            } else {
-                                                ToastUtils.showShort("短信获取失败！");
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                                String msg = jsonObject.getString("msg");
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    String s = jsonObject.getString("data");
+                                    if (StringUtils.equals("true", s)) {
+                                        ToastUtils.showShort(msg);
+                                        timer = new CountDownTimer(59000, 1000) {
+                                            @Override
+                                            public void onTick(long millisUntilFinished) {
+                                                SimpleDateFormat sdf = new SimpleDateFormat("ss");
+                                                mForgetpasswordSendsms.setText(sdf.format(new Date(millisUntilFinished)) + "S");
+                                                mForgetpasswordSendsms.setEnabled(false);
                                             }
-                                            return;
 
-                                        } else
-                                            SignAndTokenUtil.checkSignAndToken(ForgetPasswordActivity.this, jsonObject);
+                                            @Override
+                                            public void onFinish() {
+                                                mForgetpasswordSendsms.setText("重新获取验证码");
+                                                mForgetpasswordSendsms.setEnabled(true);
+                                            }
+                                        }.start();
+                                        return;
 
-                                    } else {
                                     }
-
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                                    if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                                        SignAndTokenUtil.getSign(ForgetPasswordActivity.this, request, this);
+                                        return;
+                                    }
+                                    ToastUtils.showShort(msg);
                                 }
                             }
 
-                            @Override
-                            public void onError(Response<String> response) {
-                                super.onError(response);
-                            }
-                        });
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+                    }
+                };
+
+                request.execute(stringCallback);
 
                 break;
         }

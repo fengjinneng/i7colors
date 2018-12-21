@@ -22,6 +22,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
@@ -37,6 +38,7 @@ import com.company.qcy.bean.tuangou.TuangouBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,10 +126,13 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
                 ActivityUtils.startActivity(intent);
             }
         });
+
+        refreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
+                android.R.color.holo_green_light, android.R.color.holo_blue_light);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("七彩云团购惠");
         addBannerData();
-
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
     }
 
     private List<String> advDatas = new ArrayList<>();
@@ -178,48 +183,56 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
 
     private void addBannerData() {
 
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("plate_code", "APP_Index_Banner")
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("plate_code", "APP_Group_Buy");
 
-                        try {
-                            LogUtils.v("INDEXBANNER2", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    if (ObjectUtils.isEmpty(data)) {
-                                        return;
-                                    }
-                                    List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
-                                    for (int i = 0; i < bannerBeans.size(); i++) {
-                                        advDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
-                                    }
-                                    addHeadView();
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("INDEXBANNER", response.body());
 
-                                    return;
-
-                                }
-                                SignAndTokenUtil.checkSignAndToken(TuangouliebiaoActivity.this, jsonObject);
-
-                            } else {
-
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                            List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+                            for (int i = 0; i < bannerBeans.size(); i++) {
+                                advDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
+                            }
+                            addHeadView();
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
+                            return;
+
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(TuangouliebiaoActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+
+        request.execute(stringCallback);
 
     }
 
@@ -229,61 +242,69 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
 
     private void addData() {
         pageNo++;
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYLIST)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
-                .params("pageSize", 20)
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("pageSize", 20);
 
-                        try {
-                            if (response.code() == 200) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                refreshLayout.setRefreshing(false);
+                LogUtils.v("GROUPBUYLIST", response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("GROUPBUYLIST", data);
+                try {
+                    if (response.code() == 200) {
 
-                                    if (ObjectUtils.isEmpty(data)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    List<TuangouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), TuangouBean.class);
-                                    if (isReflash) {
-                                        datas.clear();
-                                        adapter.addData(qiugouBeans);
-                                        isReflash = false;
-                                        refreshLayout.setRefreshing(false);
-                                        adapter.loadMoreComplete();
-                                        return;
-                                    }
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
 
-                                    adapter.addData(qiugouBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(TuangouliebiaoActivity.this, jsonObject);
-
-                            } else {
-                                refreshLayout.setRefreshing(false);
+                            if (ObjectUtils.isEmpty(data)) {
+                                adapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            List<TuangouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), TuangouBean.class);
+                            if (isReflash) {
+                                datas.clear();
+                                datas.addAll(qiugouBeans);
+                                adapter.setNewData(datas);
+                                isReflash = false;
+                                adapter.loadMoreComplete();
+                                return;
+                            }
+
+                            datas.addAll(qiugouBeans);
+                            adapter.setNewData(datas);
+                            adapter.loadMoreComplete();
+                            adapter.disableLoadMoreIfNotFullPage();
+                            return;
+
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(TuangouliebiaoActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                refreshLayout.setRefreshing(false);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
 
+        request.execute(stringCallback);
 
     }
 

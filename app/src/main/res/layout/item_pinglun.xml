@@ -5,72 +5,93 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/item_pinglun_img"
-        android:layout_width="@dimen/x80"
-        android:layout_height="@dimen/x80"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/morentouxiang" />
-
     <TextView
-        android:id="@+id/item_pinglun_name"
+        android:id="@+id/item_pinglun_commentUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintStart_toEndOf="@+id/item_pinglun_img"
-        app:layout_constraintTop_toTopOf="@+id/item_pinglun_img" />
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/x28"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/item_pinglun_content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/item_pinglun_img"
-        app:layout_constraintStart_toEndOf="@+id/item_pinglun_img" />
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="@dimen/x8"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_pinglun_commentUser"
+        app:layout_constraintTop_toBottomOf="@+id/item_pinglun_commentUser" />
 
     <TextView
         android:id="@+id/item_pinglun_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="2018-01-02"
+        android:textSize="@dimen/x24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_pinglun_name" />
+        app:layout_constraintTop_toTopOf="@+id/item_pinglun_commentUser" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_pinglun_pinglun_layout"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_pinglun_content">
+
+        <TextView
+            android:id="@+id/item_pinglun_pinglun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="评论"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="@dimen/x30"
+            android:layout_height="0dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/item_pinglun_pinglun"
+            app:layout_constraintEnd_toStartOf="@+id/item_pinglun_pinglun"
+            app:layout_constraintTop_toTopOf="@+id/item_pinglun_pinglun"
+            app:srcCompat="@mipmap/xiaoxi_unchecked" />
+
+    </android.support.constraint.ConstraintLayout>
+
 
     <TextView
-        android:id="@+id/item_pinglun_pinglun"
+        android:id="@+id/item_pinglun_huifu_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:drawableLeft="@mipmap/xiaoxi_unchecked"
-        android:drawablePadding="8dp"
-        android:gravity="center"
-        android:text="评论"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_pinglun_time" />
+        android:layout_marginStart="@dimen/x8"
+        android:text=" 回复:"
+        android:textSize="@dimen/x28"
+        app:layout_constraintStart_toEndOf="@+id/item_pinglun_commentUser"
+        app:layout_constraintTop_toTopOf="@+id/item_pinglun_commentUser" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/item_pinglun_bycommentUser"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/im_distribute_comm_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_pinglun_img">
+        android:layout_marginStart="@dimen/x8"
+        app:layout_constraintEnd_toStartOf="@+id/item_pinglun_time"
+        app:layout_constraintStart_toEndOf="@+id/item_pinglun_huifu_text"
+        app:layout_constraintTop_toTopOf="@+id/item_pinglun_huifu_text" />
 
-        <com.company.qcy.widght.pengyouquan.CommentListView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-        </com.company.qcy.widght.pengyouquan.CommentListView>
-    </LinearLayout>
 
 
 </android.support.constraint.ConstraintLayout>

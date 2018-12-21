@@ -17,6 +17,7 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.company.qcy.R;
+import com.company.qcy.Utils.ClickUtil;
 import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;

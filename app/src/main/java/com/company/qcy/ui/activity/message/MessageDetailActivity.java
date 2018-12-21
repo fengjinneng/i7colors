@@ -13,19 +13,22 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.message.MessageBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
-public class MessageDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class MessageDetailActivity extends BaseActivity implements View.OnClickListener {
 
 
     private Long id;
@@ -68,45 +71,49 @@ public class MessageDetailActivity extends AppCompatActivity implements View.OnC
 
     private void addData() {
 
-
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMDETAIL)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMDETAIL)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("id", id)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                        try {
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("GETENQUIRYINFORMDETAIL", response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            LogUtils.v("GETENQUIRYINFORMDETAIL", data);
+                            messageBean = data.toJavaObject(MessageBean.class);
+                            setData(messageBean);
+                            return;
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONObject data = jsonObject.getJSONObject("data");
-                                    LogUtils.v("GETENQUIRYINFORMDETAIL", data);
-                                    messageBean = data.toJavaObject(MessageBean.class);
-                                    setData(messageBean);
-
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(MessageDetailActivity.this, jsonObject);
-
-                            } else {
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(MessageDetailActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
     }
 

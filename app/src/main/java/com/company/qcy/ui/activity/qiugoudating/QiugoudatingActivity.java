@@ -21,9 +21,11 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.qiugou.QiugoudatingRecyclerviewAdapter;
@@ -36,6 +38,7 @@ import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,11 +101,7 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
 
         mQiugoudatingFabuqiugou = (Button) findViewById(R.id.qiugoudating_fabuqiugou);
         mQiugoudatingFabuqiugou.setOnClickListener(this);
-
         mQiugoudatingSearch.setOnClickListener(this);
-//        adapter.setPreLoadNumber(3);
-//        adapter.setLoadMoreView(new CustomLoadMoreView());
-//        adapter.setEmptyView(LayoutInflater.from(this).inflate(R.layout.empty_layout, null));
 
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -142,24 +141,14 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
             }
         });
 
+        refreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
+                android.R.color.holo_green_light, android.R.color.holo_blue_light);
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.item_qiugoudating_yijianhujiao:
-                        if (ActivityCompat.checkSelfPermission(QiugoudatingActivity.this,
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            // TODO: Consider calling
-                            //    ActivityCompat#requestPermissions
-                            // here to request the missing permissions, and then overriding
-                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                            //                                          int[] grantResults)
-                            // to handle the case where the user grants the permission. See the documentation
-                            // for ActivityCompat#requestPermissions for more details.
-                            return;
-                        }
-                        PhoneUtils.call(getResources().getString(R.string.PHONE));
-
+                        PermisionUtil.callKefu(QiugoudatingActivity.this);
                         break;
                 }
             }
@@ -199,60 +188,71 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
 
     private void addData() {
         page++;
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOULIEBIAO)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOULIEBIAO)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", page)
                 .params("pageSize", 20)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new StringCallback() {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                        try {
-                            if (response.code() == 200) {
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                refreshLayout.setRefreshing(false);
+                LogUtils.v("QIUGOULIEBIAO", response.body());
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
-
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("QIUGOULIEBIAO", data);
-                                    List<QiugouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
-                                    if (isReflash) {
-                                        datas.clear();
-                                        adapter.addData(qiugouBeans);
-                                        isReflash = false;
-                                        refreshLayout.setRefreshing(false);
-                                        adapter.loadMoreComplete();
-                                        return;
-                                    }
-                                    if (ObjectUtils.isEmpty(qiugouBeans)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    adapter.addData(qiugouBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(QiugoudatingActivity.this, jsonObject);
-
-                            } else {
-                                refreshLayout.setRefreshing(false);
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                adapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            List<QiugouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
+                            if (ObjectUtils.isEmpty(qiugouBeans)) {
+                                adapter.loadMoreEnd();
+                                return;
+                            }
+                            if (isReflash) {
+                                datas.clear();
+                                datas.addAll(qiugouBeans);
+                                adapter.setNewData(datas);
+                                isReflash = false;
+                                adapter.loadMoreComplete();
+                                return;
+                            }
+
+                            datas.addAll(qiugouBeans);
+                            adapter.setNewData(datas);
+                            adapter.loadMoreComplete();
+                            adapter.disableLoadMoreIfNotFullPage();
+                            return;
+
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(QiugoudatingActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                refreshLayout.setRefreshing(false);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
 
+        request.execute(stringCallback);
 
     }
 

@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.Myenty;
 import com.company.qcy.R;
@@ -26,17 +27,19 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.qiugou.WodeqiugouxiangqingAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WodeqiugouActivity extends AppCompatActivity implements View.OnClickListener {
+public class WodeqiugouActivity extends BaseActivity implements View.OnClickListener {
 
     private CommonTabLayout commonTabLayout;
     private ViewPager mActivityWodeQiugouViewpger;
@@ -148,6 +151,7 @@ public class WodeqiugouActivity extends AppCompatActivity implements View.OnClic
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("我的求购");
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
     }
 
     private int pageNo;
@@ -155,27 +159,29 @@ public class WodeqiugouActivity extends AppCompatActivity implements View.OnClic
 
     private void addData() {
         pageNo++;
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.MYQIUGOU)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.MYQIUGOU)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
                 .params("pageNo", pageNo)
                 .params("pageSize", 20)
-                .params("status", status)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("status", status);
 
-                        try {
-                            LogUtils.v("MYQIUGOU", response.body());
-                            if (response.code() == 200) {
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("MYQIUGOU", response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
+                try {
+                    if (response.code() == 200) {
 
-                                    List<QiugouBean> QiugouxiangqingBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+
+                            List<QiugouBean> QiugouxiangqingBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
 //                                    if (isReflash) {
 //                                        datas.clear();
 //                                        adapter.addData(qiugoudatingBeans);
@@ -183,31 +189,36 @@ public class WodeqiugouActivity extends AppCompatActivity implements View.OnClic
 //                                        refreshLayout.setRefreshing(false);
 //                                        return;
 //                                    }
-                                    if (ObjectUtils.isEmpty(QiugouxiangqingBeans)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    adapter.addData(QiugouxiangqingBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(WodeqiugouActivity.this, jsonObject);
-
-                            } else {
-
+                            if (ObjectUtils.isEmpty(QiugouxiangqingBeans)) {
+                                adapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+                            adapter.addData(QiugouxiangqingBeans);
+                            adapter.loadMoreComplete();
+                            adapter.disableLoadMoreIfNotFullPage();
+                            return;
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(WodeqiugouActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
 
     }

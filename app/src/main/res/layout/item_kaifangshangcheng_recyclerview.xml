@@ -25,12 +25,13 @@
                 android:id="@+id/item_kaifangshangcheng_img"
                 android:layout_width="@dimen/x240"
                 android:layout_height="match_parent"
-                android:padding="@dimen/x48"
+                android:padding="@dimen/x40"
+                android:scaleType="centerInside"
                 android:background="@color/fengexian"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@mipmap/qiugoudating" />
+                android:src="@drawable/place_500x500" />
 
             <View
                 android:id="@+id/view"
@@ -44,12 +45,11 @@
 
             <TextView
                 android:id="@+id/item_kaifangshangcheng_company"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/x30"
                 android:layout_marginStart="@dimen/x48"
                 android:layout_marginTop="@dimen/x26"
-                android:text="徐州开达精细化工有限公司"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
                 android:textStyle="bold"
@@ -70,11 +70,12 @@
 
             <TextView
                 android:id="@+id/item_kaifangshangcheng_phone"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:text="15580808080"
                 android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toTopOf="@+id/textView8" />
 
@@ -114,10 +115,11 @@
 
             <TextView
                 android:id="@+id/item_kaifangshangcheng_address"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="江苏省徐州市"
+                android:layout_marginEnd="8dp"
                 android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/item_kaifangshangcheng_phone"
                 app:layout_constraintTop_toTopOf="@+id/textView17" />
 

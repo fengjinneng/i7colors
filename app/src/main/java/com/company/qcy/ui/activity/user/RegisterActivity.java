@@ -31,6 +31,7 @@ import com.company.qcy.base.BaseActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.PostRequest;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -129,8 +130,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     @Override
                     public void onSuccess(Response<Bitmap> response) {
                         try {
-                            mActivityRegisterVerifycodeImg.setImageBitmap(response.body());
-
+                            if (response.code() == 200) {
+                                mActivityRegisterVerifycodeImg.setImageBitmap(response.body());
+                            } else {
+                                ToastUtils.showShort("获取图片验证码失败！");
+                            }
 
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -175,46 +179,50 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     ToastUtils.showShort("两次输入的密码不同");
                     return;
                 }
-                OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.REGISTER)
+                PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.REGISTER)
                         .tag(this)
                         .params("smsCode", mActivityRegisterSms.getText().toString().trim())
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("phone", mActivityRegisterPhone.getText().toString().trim())
                         .params("password", new String(EncryptUtils.encryptAES2Base64(mActivityRegisterPassword1.getText().toString().trim().getBytes(),
-                                "LnhtI(bt490B74Je".getBytes(), "AES/ECB/PKCS5Padding", null)))
-                        .execute(new DialogStringCallback(this) {
-                            @Override
-                            public void onSuccess(Response<String> response) {
-                                try {
-                                    if (response.code() == 200) {
-                                        LogUtils.e("REGISTER", response.body());
-                                        JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                        String msg = jsonObject.getString("msg");
-                                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                            ToastUtils.showShort(msg);
-                                            finish();
-                                            return;
-
-                                        } else {
-                                            ToastUtils.showShort(msg);
-                                            SignAndTokenUtil.checkSignAndToken(RegisterActivity.this, jsonObject);
-
-                                        }
-
-                                    } else {
-                                    }
+                                "LnhtI(bt490B74Je".getBytes(), "AES/ECB/PKCS5Padding", null)));
 
 
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                DialogStringCallback stringCallback = new DialogStringCallback(this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        LogUtils.e("REGISTER", response.body());
+
+                        try {
+                            if (response.code() == 200) {
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                                String msg = jsonObject.getString("msg");
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    ToastUtils.showShort(msg);
+                                    finish();
+                                    return;
+
                                 }
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                                    SignAndTokenUtil.getSign(RegisterActivity.this, request, this);
+                                    return;
+                                }
+                                ToastUtils.showShort(msg);
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-                            @Override
-                            public void onError(Response<String> response) {
-                                super.onError(response);
-                            }
-                        });
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+
+                    }
+                };
+
+                request.execute(stringCallback);
 
 
                 break;
@@ -228,63 +236,68 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     return;
                 }
 
-                OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMSREGISTER)
+                PostRequest<String> stringPostRequest = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMSREGISTER)
                         .tag(this)
                         .params("deviceNo", DeviceUtils.getAndroidID())
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("mobile", mActivityRegisterPhone.getText().toString().trim())
-                        .params("captcha", mActivityRegisterVerifycode.getText().toString().trim())
-                        .execute(new DialogStringCallback(this) {
-                            @Override
-                            public void onSuccess(Response<String> response) {
-                                try {
-                                    LogUtils.v("SENDSMS", response.body());
+                        .params("captcha", mActivityRegisterVerifycode.getText().toString().trim());
 
-                                    if (response.code() == 200) {
 
-                                        JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                            String s = jsonObject.getString("data");
-                                            if (StringUtils.equals("true", s)) {
-                                                ToastUtils.showShort("短信获取成功！");
+                DialogStringCallback dialogStringCallback = new DialogStringCallback(this) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            LogUtils.v("SENDSMS", response.body());
 
-                                                timer = new CountDownTimer(59000, 1000) {
-                                                    @Override
-                                                    public void onTick(long millisUntilFinished) {
-                                                        SimpleDateFormat sdf = new SimpleDateFormat("ss");
-                                                        mActivityRegisterSendsms.setText(sdf.format(new Date(millisUntilFinished)) + "S");
-                                                        mActivityRegisterSendsms.setEnabled(false);
-                                                    }
+                            if (response.code() == 200) {
 
-                                                    @Override
-                                                    public void onFinish() {
-                                                        mActivityRegisterSendsms.setText("重新获取验证码");
-                                                        mActivityRegisterSendsms.setEnabled(true);
-                                                    }
-                                                }.start();
-
-                                            } else {
-                                                ToastUtils.showShort("短信获取失败！");
+                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                                String msg = jsonObject.getString("msg");
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                                    String s = jsonObject.getString("data");
+                                    if (StringUtils.equals("true", s)) {
+                                        ToastUtils.showShort(msg);
+                                        timer = new CountDownTimer(59000, 1000) {
+                                            @Override
+                                            public void onTick(long millisUntilFinished) {
+                                                SimpleDateFormat sdf = new SimpleDateFormat("ss");
+                                                mActivityRegisterSendsms.setText(sdf.format(new Date(millisUntilFinished)) + "S");
+                                                mActivityRegisterSendsms.setEnabled(false);
                                             }
-                                            return;
-
-                                        } else
-                                            SignAndTokenUtil.checkSignAndToken(RegisterActivity.this, jsonObject);
+                                            @Override
+                                            public void onFinish() {
+                                                mActivityRegisterSendsms.setText("重新获取验证码");
+                                                mActivityRegisterSendsms.setEnabled(true);
+                                            }
+                                        }.start();
 
                                     } else {
+                                        ToastUtils.showShort(msg);
                                     }
+                                    return;
 
-
-                                } catch (Exception e) {
-                                    e.printStackTrace();
                                 }
+                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                                    SignAndTokenUtil.getSign(RegisterActivity.this,stringPostRequest,this);
+                                    return;
+                                }
+                                ToastUtils.showShort(msg);
                             }
 
-                            @Override
-                            public void onError(Response<String> response) {
-                                super.onError(response);
-                            }
-                        });
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Response<String> response) {
+                        super.onError(response);
+                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+                    }
+                };
+
+                stringPostRequest.execute(dialogStringCallback);
 
                 break;
 

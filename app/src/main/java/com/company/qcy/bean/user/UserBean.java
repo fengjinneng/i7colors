@@ -1,6 +1,9 @@
 package com.company.qcy.bean.user;
 
-public class UserBean {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class UserBean implements Parcelable {
 
 
     /**
@@ -13,15 +16,14 @@ public class UserBean {
      */
 
     private String token;
-    private Integer userId;
+    private Long userId;
+    private Long companyId;
     private String companyName;
     private Boolean isCompany;
     private String photo;
     private String loginName;
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    private String communityPhoto;
+    private Boolean needPhone;
 
     public Boolean getCompany() {
         return isCompany;
@@ -29,6 +31,14 @@ public class UserBean {
 
     public void setCompany(Boolean company) {
         isCompany = company;
+    }
+
+    public Boolean getNeedPhone() {
+        return needPhone;
+    }
+
+    public void setNeedPhone(Boolean needPhone) {
+        this.needPhone = needPhone;
     }
 
     public String getToken() {
@@ -39,12 +49,20 @@ public class UserBean {
         this.token = token;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
     }
 
     public String getCompanyName() {
@@ -55,11 +73,11 @@ public class UserBean {
         this.companyName = companyName;
     }
 
-    public boolean isIsCompany() {
+    public Boolean getIsCompany() {
         return isCompany;
     }
 
-    public void setIsCompany(boolean isCompany) {
+    public void setIsCompany(Boolean isCompany) {
         this.isCompany = isCompany;
     }
 
@@ -79,4 +97,57 @@ public class UserBean {
         this.loginName = loginName;
     }
 
+    public String getCommunityPhoto() {
+        return communityPhoto;
+    }
+
+    public void setCommunityPhoto(String communityPhoto) {
+        this.communityPhoto = communityPhoto;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.token);
+        dest.writeValue(this.userId);
+        dest.writeValue(this.companyId);
+        dest.writeString(this.companyName);
+        dest.writeValue(this.isCompany);
+        dest.writeString(this.photo);
+        dest.writeString(this.loginName);
+        dest.writeString(this.communityPhoto);
+        dest.writeValue(this.needPhone);
+    }
+
+    public UserBean() {
+    }
+
+    protected UserBean(Parcel in) {
+        this.token = in.readString();
+        this.userId = (Long) in.readValue(Long.class.getClassLoader());
+        this.companyId = (Long) in.readValue(Long.class.getClassLoader());
+        this.companyName = in.readString();
+        this.isCompany = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.photo = in.readString();
+        this.loginName = in.readString();
+        this.communityPhoto = in.readString();
+        this.needPhone = (Boolean) in.readValue(Boolean.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<UserBean> CREATOR = new Parcelable.Creator<UserBean>() {
+        @Override
+        public UserBean createFromParcel(Parcel source) {
+            return new UserBean(source);
+        }
+
+        @Override
+        public UserBean[] newArray(int size) {
+            return new UserBean[size];
+        }
+    };
 }

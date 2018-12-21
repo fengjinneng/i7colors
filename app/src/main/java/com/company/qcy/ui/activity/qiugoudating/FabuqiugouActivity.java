@@ -26,11 +26,14 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.QiugoufenleiBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
+import com.lzy.okgo.request.PostRequest;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -43,7 +46,7 @@ import cn.qqtheme.framework.entity.Province;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.SinglePicker;
 
-public class FabuqiugouActivity extends AppCompatActivity implements View.OnClickListener {
+public class FabuqiugouActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText mActivityFabuqiugouCompanyName;
     /**
@@ -255,7 +258,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
             //选择交货日期
             case R.id.activity_fabuqiugou_jiaohuoriqi:
                 if (ischoiceEndtime) {
-                    onYearMonthDayPicker(mActivityFabuqiugouJiaohuoriqi, 2);
+                    onJiaohuoPicker(mActivityFabuqiugouJiaohuoriqi);
                 } else ToastUtils.showShort("请先选择结束时间");
                 break;
             //选择分类
@@ -292,7 +295,6 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
 
                 choiceString(zq, mActivityFabuqiugouZhangqi);
 
-
                 break;
             //选择地址
             case R.id.activity_fabuqiugou_address:
@@ -309,7 +311,7 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
                 break;
             //结束日期
             case R.id.activity_fabuqiugou_jieshuriqi:
-                onYearMonthDayPicker(mActivityFabuqiugouJieshuriqi, 1);
+                onEndtimePicker(mActivityFabuqiugouJieshuriqi);
                 break;
 
             //点击checkbox
@@ -386,97 +388,104 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
         paras.put("description", mActivityFabuqiugouXiangxishuoming.getText().toString());
 
 
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUQIUGOU)
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUQIUGOU)
                 .tag(this)
-                .params(paras)
-                .execute(new DialogStringCallback(FabuqiugouActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params(paras);
 
-                        try {
-                            LogUtils.v("FABUQIUGOU", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+        DialogStringCallback stringCallback = new DialogStringCallback(FabuqiugouActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("FABUQIUGOU", response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    String data = jsonObject.getString("data");
-                                    String msg = jsonObject.getString("msg");
-                                    if (StringUtils.equals("true", data)) {
-                                        ToastUtils.showShort("您的发布已成功");
-                                        EventBus.getDefault().post(new MessageBean(MessageBean.Code.FABUQIUGOUCHENGGONG));
-                                        ActivityUtils.finishActivity(FabuqiugouActivity.class);
-                                    } else ToastUtils.showShort(msg);
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
 
-                                    return;
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            String data = jsonObject.getString("data");
+                            if (StringUtils.equals("true", data)) {
+                                EventBus.getDefault().post(new MessageBean(MessageBean.Code.FABUQIUGOUCHENGGONG));
+                                ActivityUtils.finishActivity(FabuqiugouActivity.class);
+                            } else ToastUtils.showShort(msg);
+                            return;
 
-                                }
-                                SignAndTokenUtil.checkSignAndToken(FabuqiugouActivity.this, jsonObject);
-
-                            } else {
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(FabuqiugouActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+        request.execute(stringCallback);
 
     }
-
 
     private void choiceFenlei(final TextView tv, final int level) {
 
         if (level == 1) {
             fenleiID = 0;
         }
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOUFENLEI)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOUFENLEI)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("parentId", fenleiID)
-                .execute(new DialogStringCallback(FabuqiugouActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("parentId", fenleiID);
 
-                        try {
-                            LogUtils.v("choiceFenlei", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    List<QiugoufenleiBean> qiugoufenleiBean = JSONObject.parseArray(data.toJSONString(), QiugoufenleiBean.class);
+        DialogStringCallback stringCallback = new DialogStringCallback(FabuqiugouActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("choiceFenlei", response.body());
 
-                                    List<String> names = new ArrayList<>();
-                                    for (int i = 0; i < qiugoufenleiBean.size(); i++) {
-                                        names.add(qiugoufenleiBean.get(i).getName());
-                                    }
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            List<QiugoufenleiBean> qiugoufenleiBean = JSONObject.parseArray(data.toJSONString(), QiugoufenleiBean.class);
 
-                                    choiceFenleiName(qiugoufenleiBean, names, tv, level);
-
-                                    return;
-
-                                }
-                                SignAndTokenUtil.checkSignAndToken(FabuqiugouActivity.this, jsonObject);
-
-                            } else {
-
+                            List<String> names = new ArrayList<>();
+                            for (int i = 0; i < qiugoufenleiBean.size(); i++) {
+                                names.add(qiugoufenleiBean.get(i).getName());
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
+                            choiceFenleiName(qiugoufenleiBean, names, tv, level);
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(FabuqiugouActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
 
     }
@@ -571,31 +580,17 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
     private int endtime_day;
     private boolean ischoiceEndtime;
 
-    //选择年月   i = 1为选择结束时间  2  为交货日期
-    private void onYearMonthDayPicker(final TextView time, final int i) {
+    private void onJiaohuoPicker( TextView time) {
         final DatePicker picker = new DatePicker(this);
         picker.setCycleDisable(true);
         picker.setTopPadding(15);
-        if (i == 1) {
-            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
-            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay());
-        }
-        if (i == 2) {
-            picker.setRangeStart(endtime_year, endtime_month, endtime_day);
-        }
+        picker.setRangeStart(endtime_year, endtime_month, endtime_day);
 
         picker.setLineColor(Color.BLACK);
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
                 time.setText(year + "-" + month + "-" + day);
-                if (i == 1) {
-                    ischoiceEndtime = true;
-                    endtime_year = Integer.parseInt(year);
-                    endtime_month = Integer.parseInt(month);
-                    endtime_day = Integer.parseInt(day);
-                    mActivityFabuqiugouJiaohuoriqi.setText("选择交货日期");
-                }
 
             }
         });
@@ -616,6 +611,102 @@ public class FabuqiugouActivity extends AppCompatActivity implements View.OnClic
             }
         });
         picker.show();
+    }
+
+
+    private void setBigyue(DatePicker picker){
+        if(31-CalendarUtil.getDay()<3){
+            if(CalendarUtil.getMonth()==12){
+                picker.setRangeStart(CalendarUtil.getYear(),1,(CalendarUtil.getDay()+3)-31);
+            }
+            else {
+                picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth()+1,(CalendarUtil.getDay()+3)-31);
+            }
+        }else picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth(),CalendarUtil.getDay()+3);
+    }
+
+    private void setXiaoyue(DatePicker picker){
+        if(30-CalendarUtil.getDay()<3){
+            if(CalendarUtil.getMonth()==12){
+                picker.setRangeStart(CalendarUtil.getYear(),1,(CalendarUtil.getDay()+3)-30);
+            }else {
+                picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth()+1,(CalendarUtil.getDay()+3)-30);
+            }
+        }else picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth(),CalendarUtil.getDay()+3);
+    }
+
+    private void onEndtimePicker( TextView time) {
+        DatePicker endTimePicker = new DatePicker(this);
+        endTimePicker.setCycleDisable(true);
+        endTimePicker.setTopPadding(15);
+
+        switch (CalendarUtil.getMonth()){
+            case 1:
+                 setBigyue(endTimePicker);
+                break;
+            case 3:
+                setBigyue(endTimePicker);
+                break;
+            case 5:
+                setBigyue(endTimePicker);
+                break;
+            case 7:
+                setBigyue(endTimePicker);
+                break;
+            case 8:
+                setBigyue(endTimePicker);
+                break;
+            case 10:
+                setBigyue(endTimePicker);
+                break;
+            case 12:
+                setBigyue(endTimePicker);
+                break;
+            case 2:
+                setXiaoyue(endTimePicker);
+                break;
+            case 4:
+                setXiaoyue(endTimePicker);
+                break;
+            case 6:
+                setXiaoyue(endTimePicker);
+                break;
+            case 9:
+                setXiaoyue(endTimePicker);
+                break;
+            case 11:
+                setXiaoyue(endTimePicker);
+                break;
+        }
+        endTimePicker.setLineColor(Color.BLACK);
+        endTimePicker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+                time.setText(year + "-" + month + "-" + day);
+                    ischoiceEndtime = true;
+                    endtime_year = Integer.parseInt(year);
+                    endtime_month = Integer.parseInt(month);
+                    endtime_day = Integer.parseInt(day);
+                    mActivityFabuqiugouJiaohuoriqi.setText("选择交货日期");
+            }
+        });
+        endTimePicker.setOnWheelListener(new DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                endTimePicker.setTitleText(year + "-" + endTimePicker.getSelectedMonth() + "-" + endTimePicker.getSelectedDay());
+            }
+
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                endTimePicker.setTitleText(endTimePicker.getSelectedYear() + "-" + month + "-" + endTimePicker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                endTimePicker.setTitleText(endTimePicker.getSelectedYear() + "-" + endTimePicker.getSelectedMonth() + "-" + day);
+            }
+        });
+        endTimePicker.show();
     }
 
 

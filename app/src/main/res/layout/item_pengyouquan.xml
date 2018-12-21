@@ -5,81 +5,175 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp"
-        android:orientation="horizontal" >
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x20"
+        android:orientation="horizontal">
 
-        <ImageView
-            android:id="@+id/item_pengyouquan_headimg"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginRight="10dip"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/morentouxiang" />
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="@dimen/x130"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+
+                android:id="@+id/item_pengyouquan_headimg"
+                android:layout_width="@dimen/x108"
+                android:layout_height="@dimen/x108"
+                android:src="@mipmap/morentouxiang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/item_pengyouquan_renzheng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="未认证"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_headimg"
+                app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_headimg"
+                app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_headimg" />
+
+            <TextView
+                android:id="@+id/textView178"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
+                android:gravity="center"
+                android:text="粉丝:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_renzheng"
+                app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_renzheng"
+                app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_renzheng" />
+
+            <TextView
+                android:id="@+id/item_pengyouquan_fans_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="@+id/textView178"
+                app:layout_constraintStart_toStartOf="@+id/textView178"
+                app:layout_constraintTop_toBottomOf="@+id/textView178" />
+
+            <ImageView
+                android:id="@+id/item_pengyouquan_fans_bigv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/item_pengyouquan_headimg"
+                app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_headimg"
+                app:srcCompat="@mipmap/bigv" />
+        </android.support.constraint.ConstraintLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:layout_height="wrap_content">
 
                 <TextView
                     android:id="@+id/item_pengyouquan_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:textColor="@color/color_8290AF"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toTopOf="@+id/item_pengyouquan_companyname"
+                    app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_guanzhu"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_pengyouquan_guanzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/background_pengyouquan_weirenzheng"
+                    android:paddingLeft="@dimen/x10"
+                    android:paddingRight="@dimen/x10"
+                    android:singleLine="true"
+                    android:text="+关注"
+                    android:textSize="@dimen/x24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/item_pengyouquan_companyname"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textSize="@dimen/x24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_guanzhu"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_name" />
 
                 <!--<TextView-->
-                    <!--android:id="@+id/urlTipTv"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginLeft="15dp"-->
-                    <!--android:text="分享了一个连接"-->
-                    <!--android:singleLine="true"-->
-                    <!--android:ellipsize="end"-->
-                    <!--android:textColor="@color/color_aeaeae"-->
-                    <!--android:textSize="14sp" />-->
-            </LinearLayout>
+                <!--android:id="@+id/urlTipTv"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="15dp"-->
+                <!--android:text="分享了一个连接"-->
+                <!--android:singleLine="true"-->
+                <!--android:ellipsize="end"-->
+                <!--android:textColor="@color/color_aeaeae"-->
+                <!--android:textSize="14sp" />-->
+            </android.support.constraint.ConstraintLayout>
 
             <com.company.qcy.widght.pengyouquan.ExpandTextView
                 android:id="@+id/item_pengyouquan_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
-                app:showLines="4"/>
+                app:showLines="4" />
 
             <!-- 不同的地方 -->
             <com.company.qcy.widght.pengyouquan.MultiImageView
                 android:id="@+id/item_pengyouquan_multiImageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                />
+                android:layout_marginRight="@dimen/x80"
+                android:layout_marginTop="5dp" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/item_pengyouquan_shipin_layout"
-                android:layout_width="match_parent"
-                android:visibility="gone"
-                android:layout_height="100dp" >
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/item_pengyouquan_shipin_img"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@mipmap/morentouxiang" />
+                    />
 
                 <ImageView
                     android:id="@+id/item_pengyouquan_shipin_start"
@@ -93,19 +187,20 @@
                     app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_shipin_img"
                     app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_shipin_img"
                     app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_shipin_img"
-                    app:srcCompat="@drawable/ic_player_center_start"/>
+                    app:srcCompat="@drawable/ic_player_center_start" />
             </android.support.constraint.ConstraintLayout>
             <!-- 地址、时间 、删除 、点赞、 评论 -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/x70"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/timeTv"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
                     android:singleLine="true"
                     android:text="2018-1-3"
                     android:textColor="@color/im_font_color_text_hint"
@@ -116,13 +211,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dip"
+                    android:background="@drawable/im_selector_social_dig_name_bg"
                     android:paddingLeft="3dp"
                     android:paddingRight="3dp"
                     android:text="删除"
-                    android:textSize="12sp"
                     android:textColor="@color/color_8290AF"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/item_pengyouquan_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dip"
                     android:background="@drawable/im_selector_social_dig_name_bg"
-                    android:visibility="gone"/>
+                    android:paddingLeft="3dp"
+                    android:paddingRight="3dp"
+                    android:text="详情"
+                    android:textColor="@color/color_8290AF"
+                    android:textSize="12sp" />
 
                 <View
                     android:layout_width="0dip"
@@ -132,63 +239,80 @@
                 <ImageView
                     android:id="@+id/snsBtn"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/im_snsbtn"/>
+                    android:layout_height="match_parent"
+                    android:paddingLeft="@dimen/x10"
+                    android:paddingRight="@dimen/x40"
+                    android:src="@mipmap/im_snsbtn" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/digCommentBody"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:minHeight="10dip"
-                android:paddingLeft="12dip"
-                android:paddingTop="12dip"
-                android:paddingRight="12dip"
-                android:paddingBottom="8dip"
                 android:background="@drawable/im_distribute_comm_bg"
-                android:orientation="vertical" >
+                android:minHeight="10dip"
+                android:orientation="vertical"
+                android:paddingBottom="8dip"
+                android:paddingLeft="12dip"
+                android:paddingRight="12dip"
+                android:paddingTop="12dip">
 
                 <com.company.qcy.widght.pengyouquan.PileLayout
                     android:id="@+id/pileLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
                     android:gravity="center_vertical"
                     android:lineSpacingMultiplier="1.1"
-                    android:layout_marginTop="4dp"
                     android:textColor="@color/praise_item"
-                    app:item_color="@color/praise_item"
-                    />
+                    app:item_color="@color/praise_item" />
 
                 <View
                     android:id="@+id/lin_dig"
                     android:layout_width="match_parent"
                     android:layout_height="1dip"
-                    android:background="@color/im_line_color"
-                    android:layout_marginTop="5dip"
                     android:layout_marginBottom="5dip"
-                    />
+                    android:layout_marginTop="5dip"
+                    android:background="@color/im_line_color" />
+
                 <com.company.qcy.widght.pengyouquan.CommentListView
                     android:id="@+id/commentList"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:orientation="vertical"
-                    app:item_color="@color/praise_item"
-                    />
+                    app:item_color="@color/praise_item" />
 
                 <android.support.constraint.ConstraintLayout
                     android:id="@+id/item_pengyouquan_chakangengduo"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content">
 
                     <TextView
+                        android:id="@+id/textView90"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
+                        android:layout_height="@dimen/x50"
                         android:layout_marginStart="8dp"
-                        android:text="点击查看更多.."
-                        app:layout_constraintEnd_toEndOf="parent"
+                        android:gravity="center"
+                        android:text="点击查看更多评论"
+                        android:textSize="@dimen/x24"
+                        app:layout_constraintEnd_toStartOf="@+id/imageView15"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintHorizontal_chainStyle="packed"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/imageView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="@dimen/x8"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/textView90"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/xiangxia_gengduo" />
 
                 </android.support.constraint.ConstraintLayout>
 

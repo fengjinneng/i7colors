@@ -1,26 +1,113 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.mob.sdk'
+
+
+
+MobSDK {
+    appKey "27b94a832b2f3"
+    appSecret "33ffa9e39c1a9b6eaaee8566deb77bb2"
+    MobPush {
+        devInfo {
+//            HUAWEI {
+//                appId "100215127"
+//            }
+//            MEIZU {
+//                appId "112481"
+//                appKey "03dd70b9be434446a7255c8586e1725a"
+//            }
+//            XIAOMI {
+//                appId "5671772162670"
+//                appKey "2882303761517721670"
+//            }
+//            FCM {
+//                iconRes "@mipmap/default_ic_launcher"
+//            }
+//            OPPO {
+//                appKey "OPPO的appkey"
+//                appSecret "OPPO的appsecret"
+//            }
+        }
+    }
+
+    ShareSDK {
+        devInfo {
+            Wechat {
+                Id = "1"
+                SortId = "1"
+                appId "wx63410989373f8975"
+                appSecret "8a63da0ba72799ddd58edf7b55357094"
+                userName "gh_afb25ac019c9"
+                path "pages/index/index.html?id=1"
+                Enable = true
+                bypassApproval false
+            }
+
+            WechatMoments {
+                Id = "2"
+                SortId = "2"
+                appId "wx63410989373f8975"
+                appSecret "8a63da0ba72799ddd58edf7b55357094"
+                Enable = true
+                bypassApproval false
+            }
+//            QQ {
+//                appId "100371282"
+//                appKey "aed9b0303e3ed1e27bae87c33761161d"
+//                shareByAppClient true
+//                bypassApproval false
+//            }
+        }
+    }
+
+}
+
 
 android {
+    signingConfigs {
+        release {
+            keyAlias 'i7colors'
+            keyPassword 'pass@i7'
+            storeFile file('C:/Users/ThinkPad/Desktop/app相关信息/i7colors.keystore.jks')
+            storePassword 'pass@i7'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.company.qcy"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
-
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+
+
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "72fda44ff48833af8afd0be5", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
+
+
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            signingConfig signingConfigs.release
         }
     }
 }
@@ -34,16 +121,18 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     //noinspection GradleCompatible
     implementation 'com.android.support:appcompat-v7:28.0.0-rc02'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:28.0.0-rc02'
-    implementation 'com.android.support:support-v4:28.0.0-rc02'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
     //底部导航栏
     implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
+
     //vlayout
     implementation('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
@@ -71,53 +160,57 @@ dependencies {
     implementation 'com.blankj:utilcode:1.20.4'
 
     //update
-    implementation 'com.qianwen:update-app:3.5.2'
+    implementation 'com.azhon:appupdate:2.0.0'
 
     //日历
+
     //implementation 'com.haibin:calendarview:3.2.9'
 
     //badge
     implementation 'q.rorbin:badgeview:1.1.3'
-
     implementation 'com.lzy.net:okgo:3.0.4'
 
     /*配合stetho库的StethoInterceptor*/
-    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+//    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+//    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 
     //daojishi
     implementation 'com.github.iwgang:countdownview:2.1.6'
-
     implementation('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:1.5.6') {
         exclude group: 'com.android.support'
     }
-
     implementation 'com.alibaba:fastjson:1.1.55.android'
 
     //查看更多
     implementation 'com.timqi.collapsibletextview:library:1.1.2'
+
     // app:collapsedLines="2"
+
     //    app:collapsedText="(查看全部)"
+
     //    app:expandedText=" 隐藏"
+
     //    app:suffixColor="@color/chunhongse"
+
     //    app:suffixTrigger="true"
 
     //arouter
     implementation 'com.alibaba:arouter-api:1.4.1'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
-
     implementation 'com.lijiankun24:shadowlayout:1.0.0'
-
-
     implementation 'com.zhihu.android:matisse:0.5.2-beta3'
-
     implementation 'com.github.xiaoyanger0825:NiceVieoPlayer:v2.2'
-
-    implementation 'pub.devrel:easypermissions:2.0.0'
-
+    implementation 'com.yanzhenjie:permission:2.0.0-rc12'
     implementation 'cn.jzvd:jiaozivideoplayer:6.4.0'
-
-
     implementation 'com.github.chrisbanes:PhotoView:1.3.0'
+    implementation 'cn.jiguang.sdk:jpush:3.1.6'
+
+    // 此处以JPush 3.1.6 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.2.5'
+
+    // 此处以JCore 1.2.5 版本为例。
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+    implementation 'com.webianks.library:popup-bubble:1.0.5'
 
 
 }

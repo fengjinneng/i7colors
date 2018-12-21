@@ -1,6 +1,8 @@
 package com.company.qcy.adapter.vlayout;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
@@ -16,8 +18,13 @@ import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
+import com.company.qcy.Utils.MatisseImageUtil;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.bean.qiugou.QiugouBean;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 
 import java.util.List;
 
@@ -108,17 +115,7 @@ public class QiugouLayoutAdapter extends DelegateAdapter.Adapter<QiugouLayoutAda
         holder.yijianhujiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                PhoneUtils.call(context.getResources().getString(R.string.PHONE));
+                    PermisionUtil.callKefu(context);
             }
         });
 

@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
@@ -30,6 +31,7 @@ import com.company.qcy.bean.tuangou.TuangouRecordBean;
 import com.company.qcy.ui.activity.tuangou.TuangouxiangqingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,56 +113,62 @@ public class JiluFragment extends Fragment {
             }
         }, recyclerView);
         adapter.addHeaderView(getLayoutInflater().inflate(R.layout.item_tugoujilu,null));
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
     }
 
 
     private void getTuangouRecord() {
         pageNo++;
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYRECORD)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYRECORD)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("mainId", Long.parseLong(mParam1))
                 .params("pageNo", pageNo)
-                .params("pageSize", 20)
-                .execute(new DialogStringCallback(getActivity()) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("pageSize", 20);
 
-                        try {
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("GROUPBUYRECORD", response.body());
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    JSONArray data = jsonObject.getJSONArray("data");
-                                    LogUtils.v("GROUPBUYRECORD", data);
-                                    if (ObjectUtils.isEmpty(data)) {
-                                        adapter.loadMoreEnd();
-                                        return;
-                                    }
-                                    List<TuangouRecordBean> tuangouRecordBeans = JSONObject.parseArray(data.toJSONString(), TuangouRecordBean.class);
-
-                                    adapter.addData(tuangouRecordBeans);
-                                    adapter.loadMoreComplete();
-                                    adapter.disableLoadMoreIfNotFullPage();
-                                    return;
-
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(getActivity(), jsonObject);
-                            } else {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                adapter.loadMoreEnd();
+                                return;
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            List<TuangouRecordBean> tuangouRecordBeans = JSONObject.parseArray(data.toJSONString(), TuangouRecordBean.class);
+
+                            adapter.addData(tuangouRecordBeans);
+                            adapter.loadMoreComplete();
+                            adapter.disableLoadMoreIfNotFullPage();
+                            return;
+
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
-
+        request.execute(stringCallback);
 
     }
 

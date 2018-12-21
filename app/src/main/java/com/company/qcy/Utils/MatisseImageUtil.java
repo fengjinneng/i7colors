@@ -48,7 +48,7 @@ public class MatisseImageUtil {
      */
     public static void choosePhoto(Activity activity, int maxCount, int REQUEST_CODE_CHOOSE) {
         Matisse.from(activity)
-                .choose(MimeType.of(MimeType.JPEG, MimeType.PNG))
+                .choose(MimeType.ofImage())
                 .countable(true)//有序选择图片
                 .maxSelectable(maxCount)//最大选择数量为9
                 .gridExpectedSize(320)//图片显示表格的大小120
@@ -57,10 +57,36 @@ public class MatisseImageUtil {
                 .theme(R.style.Matisse_Zhihu)//主题  知乎de主题
                 //.theme(R.style.Matisse_Dracula)//主题  暗色主题
                 .imageEngine(new MyGlideEngine())//加载方式
-//                .capture(true)//设置是否可以拍照  ---> 需要配置清单文件
-                .captureStrategy(new CaptureStrategy(true, "cn.soolife.android.ShoppingPhone.fileprovider"))//存储到哪里
+                .showSingleMediaType(true)
+                .capture(true)//设置是否可以拍照  ---> 需要配置清单文件
+                .captureStrategy(new CaptureStrategy(true, "com.company.qcy.fileprovider"))//存储到哪里
                 .forResult(REQUEST_CODE_CHOOSE);// 请求响应吗
+
+
+
     }
+
+    public static void chooseOnlyOnePhoto(Activity activity, int REQUEST_CODE_CHOOSE){
+        Matisse.from(activity)
+                .choose(MimeType.ofImage())
+                .countable(false)
+                .maxSelectable(1)
+                //是否需要拍照
+                .capture(true)
+                //兼容7.0系统
+                .captureStrategy(new CaptureStrategy(true, "com.company.qcy.fileprovider"))
+                .showSingleMediaType(true)
+//                        .addFilter(new GifSizeFilter(320))
+//                        .gridExpectedSize(getResources().getDimensionPixelSize(R.dimen.grid_expected_size))
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                .thumbnailScale(0.85f)
+                .imageEngine(new MyGlideEngine())
+                .forResult(REQUEST_CODE_CHOOSE);
+    }
+
+
+
+
 
     public static void chooseAll(Activity activity, int maxCount, int REQUEST_CODE_CHOOSE) {
         Matisse.from(activity)
@@ -75,9 +101,27 @@ public class MatisseImageUtil {
                 .imageEngine(new MyGlideEngine())//加载方式
                 .addFilter(new GifSizeFilter(100 * Filter.K * Filter.K))//限制文件大小
 //                .capture(true)//设置是否可以拍照  ---> 需要配置清单文件
-                .captureStrategy(new CaptureStrategy(true, "cn.soolife.android.ShoppingPhone.fileprovider"))//存储到哪里
+                .captureStrategy(new CaptureStrategy(true, "com.company.qcy.fileprovider"))//存储到哪里
                 .forResult(REQUEST_CODE_CHOOSE);// 请求响应吗
     }
+
+
+    public static void chooseVideo(Activity activity, int REQUEST_CODE_CHOOSE) {
+        Matisse.from(activity)
+                .choose(MimeType.ofVideo())
+                .maxSelectable(1)//最大选择数量为9
+//                .gridExpectedSize(320)//图片显示表格的大小120
+//                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)//图像选择和预览活动所需的方向。
+//                .thumbnailScale(0.85f)//缩放比例
+                .theme(R.style.Matisse_Zhihu)//主题  知乎de主题
+                //.theme(R.style.Matisse_Dracula)//主题  暗色主题
+                .imageEngine(new MyGlideEngine())//加载方式
+                .addFilter(new GifSizeFilter(10 * Filter.K * Filter.K))//限制文件大小
+//                .capture(true)//设置是否可以拍照  ---> 需要配置清单文件
+                .captureStrategy(new CaptureStrategy(true, "com.company.qcy.fileprovider"))//存储到哪里
+                .forResult(REQUEST_CODE_CHOOSE);// 请求响应吗
+    }
+
 
     // 根据Uri获取真实路径以及文件名的方法
     public static String getRealFilePath(final Context context, final Uri uri) {

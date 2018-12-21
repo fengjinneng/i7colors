@@ -8,7 +8,9 @@
 
     <string name="qianmingshixiao">INVALID_SIGN</string>
 
-    <string name="PHONE">4009208599</string>
+    <string name="PHONE">02164860217,8021</string>
+
+    <string name="NETEXCEPTION">七彩云电商:网络异常,请检查网络后重试</string>
 
 
     <string name="qiyefabu">企业发布</string>
@@ -17,6 +19,15 @@
     <string name="success">SUCCESS</string>
 
     <string name="up_load_error">单个图片、视频文件最大10M</string>
+
+
+    <string name="passwordAES">LnhtI(bt490B74Je</string>
+    <string name="signAES">jK)Nig8N40YkntYG</string>
+
+
+    <string name="NO_LOGIN">NO_LOGIN</string>   <!--用户登录信息失效-->
+    <string name="NO_TOKRN">NO_TOKRN</string>   <!--没有token信息（之前没有登录过）-->
+    <string name="LOGIN_SUCCESS">LOGIN_SUCCESS</string>     <!--,已是登陆状态-->
 
 
 </resources>

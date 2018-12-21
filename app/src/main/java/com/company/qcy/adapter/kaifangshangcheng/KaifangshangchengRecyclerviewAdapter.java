@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -38,11 +39,21 @@ public class KaifangshangchengRecyclerviewAdapter extends
         }
 
         ImageView imageView = (ImageView) helper.getView(R.id.item_kaifangshangcheng_img);
+        GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getLogo(), imageView);
 
-        GlideUtils.loadImage(mContext,ServerInfo.IMAGE + item.getLogo(),imageView);
-
-        helper.setText(R.id.item_kaifangshangcheng_phone,item.getCompany().getPhone());
-        helper.setText(R.id.item_kaifangshangcheng_address,item.getCompany().getProvinceName()+" "+item.getCompany().getCityName());
+        if (StringUtils.isEmpty(item.getCompany().getPhone())) {
+            helper.setText(R.id.item_kaifangshangcheng_phone, "暂无联系方式");
+        } else {
+            helper.setText(R.id.item_kaifangshangcheng_phone, item.getCompany().getPhone());
+        }
+        if (!StringUtils.isEmpty(item.getCompany().getProvinceName())) {
+            helper.setText(R.id.item_kaifangshangcheng_address, item.getCompany().getProvinceName());
+            if (!StringUtils.isEmpty(item.getCompany().getCityName())) {
+                helper.setText(R.id.item_kaifangshangcheng_address, item.getCompany().getProvinceName() + " " + item.getCompany().getCityName());
+            }
+        } else {
+            helper.setText(R.id.item_kaifangshangcheng_address, "暂无地址");
+        }
 
     }
 }

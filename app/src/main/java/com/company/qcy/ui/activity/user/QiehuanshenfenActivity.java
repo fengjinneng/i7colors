@@ -57,13 +57,11 @@ public class QiehuanshenfenActivity extends Activity implements View.OnClickList
         switch (v.getId()){
             case R.id.activity_qiehuanshenfen_layout1:
                 SPUtils.getInstance().put("identity","1");
-
                 finish();
                 break;
 
             case R.id.activity_qiehuanshenfen_layout2:
                 SPUtils.getInstance().put("identity","2");
-
                 finish();
 
                 break;

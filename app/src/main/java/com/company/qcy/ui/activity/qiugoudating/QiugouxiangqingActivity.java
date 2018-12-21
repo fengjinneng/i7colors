@@ -2,6 +2,7 @@ package com.company.qcy.ui.activity.qiugoudating;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
@@ -13,10 +14,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -25,6 +29,7 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.qiugou.QiugouxiangqingRecyclerviewAdapter;
 import com.company.qcy.base.BaseActivity;
@@ -33,86 +38,36 @@ import com.company.qcy.bean.qiugou.BaojiaBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
+import com.lzy.okgo.request.PostRequest;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Route(path = "/enquiry/enquiryDetail")
 public class QiugouxiangqingActivity extends BaseActivity implements View.OnClickListener {
-
-    /**
-     * 防紫外线整理剂
-     */
     private TextView mActivityQiugouxiangqingShangpinming;
-    /**
-     * 防紫外线整理剂
-     */
     private TextView mActivityQiugouxiangqingSpm;
-    /**
-     * 助剂 功能性
-     */
     private TextView mActivityQiugouxiangqingFenlei;
-    /**
-     * 50KG/桶
-     */
     private TextView mActivityQiugouxiangqingBaozhuang;
-    /**
-     * 100
-     */
     private TextView mActivityQiugouxiangqingShuliang;
-    /**
-     * 2018-08-04
-     */
     private TextView mActivityQiugouxiangqingJiaohuoshijian;
-    /**
-     * 银行承兑
-     */
     private TextView mActivityQiugouxiangqingFukuanfangshi;
-    /**
-     * 上海市 上海市
-     */
     private TextView mActivityQiugouxiangqingDiqu;
-    /**
-     * 款到发货
-     */
     private TextView mActivityQiugouxiangqingZhangqi;
     private RecyclerView mActivityQiugouxiangqingRecyclerview;
-
     private QiugouxiangqingRecyclerviewAdapter adapter;
-    /**
-     * 23
-     */
     private TextView mQiugouxiangqingHeadviewFirstTime;
-    /**
-     * 天
-     */
     private TextView mQiugouxiangqingHeadviewFirstTimeDanwei;
-    /**
-     * 23
-     */
     private TextView mQiugouxiangqingHeadviewSecondTime;
-    /**
-     * 小时
-     */
     private TextView mQiugouxiangqingHeadviewSecondTimeDanwei;
-    /**
-     * 防紫外线整理剂
-     */
     private TextView mActivityQiugouxiangqingShangpinmingXiao;
-    /**
-     * 1991-08-06
-     */
     private TextView mActivityQiugouxiangqingFabushijian;
-
-    /**
-     * 企业用户
-     */
     private TextView mActivityQiugouxiangqingYonghushenfen;
-    /**
-     * ****公司
-     */
     private TextView mActivityQiugouxiangqingCompany;
     private ImageView mActivityQiugouxiangqingFiveStar;
     private ImageView mActivityQiugouxiangqingFourStar;
@@ -125,7 +80,8 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
     private TextView mActivityQiugouxiangqingShuoming;
 
     //qiugou id
-    private Long enquiryId;
+    @Autowired
+    public Long enquiryId;
     /**
      * 已完成
      */
@@ -154,19 +110,30 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
     private Long wodeBaojiaID;
+    /**
+     * 设置
+     */
+    private TextView mToolbarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qiugouxiangqing);
-        enquiryId = getIntent().getLongExtra("enquiryId", 0);
+
         isWode = getIntent().getIntExtra("wode", 0);
         isCharger = getIntent().getStringExtra("isCharger");
         qiugouStatus = getIntent().getStringExtra("status");
-        wodeBaojiaID = getIntent().getLongExtra("enquiryOfferId",0);
+        wodeBaojiaID = getIntent().getLongExtra("enquiryOfferId", 0);
+
+        Uri data = getIntent().getData();
+        //不为空说明是外部网页传过来的
+        if (!ObjectUtils.isEmpty(data)) {
+            enquiryId = Long.parseLong(data.getQueryParameter("enquiryId"));
+        } else enquiryId = getIntent().getLongExtra("enquiryId", 0);
+
         initView();
 
-        if(wodeBaojiaID!=0){
+        if (wodeBaojiaID != 0) {
             //卖家消息已读
             haveReadMessage();
         }
@@ -175,39 +142,47 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
     private void haveReadMessage() {
 
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.READMYACCEPTOFFER)
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.READMYACCEPTOFFER)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("enquiryOfferId", wodeBaojiaID)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new DialogStringCallback(QiugouxiangqingActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                        try {
-                            LogUtils.v("READMYACCEPTOFFER", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("READMYACCEPTOFFER", response.body());
 
-                                    return;
-                                }
-                                SignAndTokenUtil.checkSignAndToken(QiugouxiangqingActivity.this, jsonObject);
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
-                            } else {
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.ENQUIRYMESSAGEREAD));
 
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            return;
                         }
-                    }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
                     }
-                });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+        request.execute(stringCallback);
 
     }
 
@@ -267,53 +242,60 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("求购详情");
+        mToolbarText = (TextView) findViewById(R.id.toolbar_text);
+        mToolbarText.setOnClickListener(this);
+        mToolbarText.setVisibility(View.VISIBLE);
+        mToolbarText.setText("分享");
     }
 
     private Long enquiryOfferId;
 
 
     private void cainabaojia() {
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CAINABAOJIA)
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CAINABAOJIA)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("enquiryOfferId", enquiryOfferId)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new DialogStringCallback(QiugouxiangqingActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                        try {
-                            LogUtils.v("cainabaojia", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+        DialogStringCallback stringCallback = new DialogStringCallback(QiugouxiangqingActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("CAINABAOJIA", response.body());
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-
-                                    String data = jsonObject.getString("data");
-                                    if (StringUtils.equals(data, "true")) {
-                                        ToastUtils.showShort("您已经成功接受报价");
-                                        EventBus.getDefault().post(new MessageBean(MessageBean.Code.CAINABAOJIACHENGGONG));
-                                    } else ToastUtils.showShort("采纳报价失败");
-                                    return;
-
-                                }
-                                SignAndTokenUtil.checkSignAndToken(QiugouxiangqingActivity.this, jsonObject);
-
-                            } else {
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            String data = jsonObject.getString("data");
+                            if (StringUtils.equals(data, "true")) {
+                                ToastUtils.showShort(msg);
+                                EventBus.getDefault().post(new MessageBean(MessageBean.Code.CAINABAOJIACHENGGONG));
+                            } else ToastUtils.showShort(msg);
+                            return;
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
 
+        request.execute(stringCallback);
 
     }
 
@@ -322,47 +304,51 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
     private void addQiugouxiangqingData() {
 
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOUXIANGQING)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIUGOUXIANGQING)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("enquiryId", enquiryId)
-                .params("token", SPUtils.getInstance().getString("token"))
-                .execute(new DialogStringCallback(QiugouxiangqingActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("token", SPUtils.getInstance().getString("token"));
 
-                        try {
-                            LogUtils.v("addQiugouxiangqing", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+        DialogStringCallback stringCallback = new DialogStringCallback(QiugouxiangqingActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                try {
+                    LogUtils.v("addQiugouxiangqing", response.body());
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
-                                    JSONObject data = jsonObject.getJSONObject("data");
+                            JSONObject data = jsonObject.getJSONObject("data");
 
-                                    qiugouBean = data.toJavaObject(QiugouBean.class);
-                                    reflashQiugouxinxi(qiugouBean);
+                            qiugouBean = data.toJavaObject(QiugouBean.class);
+                            reflashQiugouxinxi();
 
-                                    return;
+                            return;
 
-                                }
-                                SignAndTokenUtil.checkSignAndToken(QiugouxiangqingActivity.this, jsonObject);
-
-                            } else {
-
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
-
+        request.execute(stringCallback);
 
     }
 
@@ -397,7 +383,10 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
     private String isCharger;
 
-    private void reflashQiugouxinxi(QiugouBean qiugouBean) {
+    private void reflashQiugouxinxi() {
+        if (ObjectUtils.isEmpty(qiugouBean)) {
+            return;
+        }
 
         setStarLevel(qiugouBean.getCreditLevel());
         mActivityQiugouxiangqingFabushijian.setText(qiugouBean.getCreateAtString());
@@ -533,49 +522,56 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
     private void addBaojialiebiaoData() {
 
-        OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.BAOJIALIEBIAO)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.BAOJIALIEBIAO)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("enquiryId", enquiryId)
                 .params("token", SPUtils.getInstance().getString("token"))
-                .params("offerId", "")
-                .execute(new DialogStringCallback(QiugouxiangqingActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("offerId", "");
 
-                        try {
-                            LogUtils.v("addBaojialiebiaoData", response.body());
-                            if (response.code() == 200) {
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+        DialogStringCallback stringCallback = new DialogStringCallback(QiugouxiangqingActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("addBaojialiebiaoData", response.body());
 
-                                    JSONArray data = jsonObject.getJSONArray("data");
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
 
-                                    List<BaojiaBean> qiugoudatingBeans = JSONObject.parseArray(data.toJSONString(), BaojiaBean.class);
-                                    if (isReflash) {
-                                        datas.clear();
-                                    }
-                                    adapter.addData(qiugoudatingBeans);
-                                    return;
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
 
-                                }
-                                SignAndTokenUtil.checkSignAndToken(QiugouxiangqingActivity.this, jsonObject);
-
-                            } else {
-
+                            List<BaojiaBean> qiugoudatingBeans = JSONObject.parseArray(data.toJSONString(), BaojiaBean.class);
+                            if (isReflash) {
+                                datas.clear();
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            adapter.addData(qiugoudatingBeans);
+                            return;
+
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
 
     }
@@ -583,47 +579,54 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
     //关闭求购
     private void guanbiqiugou() {
 
-        OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.GUANBIQIUGOU)
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.GUANBIQIUGOU)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
-                .params("id", enquiryId)
-                .execute(new DialogStringCallback(this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
+                .params("id", enquiryId);
 
-                        try {
-                            if (response.code() == 200) {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("GUANBIQIUGOU", response.body());
 
-                                JSONObject jsonObject = JSONObject.parseObject(response.body());
+                try {
+                    if (response.code() == 200) {
 
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    String data = jsonObject.getString("data");
-                                    String msg = jsonObject.getString("msg");
-                                    LogUtils.v("GUANBIQIUGOU", data);
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
 
-                                    if (StringUtils.equals("true", data)) {
-                                        ToastUtils.showShort("你已经成功关闭求购");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            String data = jsonObject.getString("data");
 
-                                        EventBus.getDefault().post(new MessageBean(MessageBean.Code.GUANBIQIUGOU));
-                                    } else {
-                                        ToastUtils.showShort(msg);
-                                    }
-                                } else
-                                    SignAndTokenUtil.checkSignAndToken(QiugouxiangqingActivity.this, jsonObject);
+                            if (StringUtils.equals("true", data)) {
+                                ToastUtils.showShort(msg);
 
+                                EventBus.getDefault().post(new MessageBean(MessageBean.Code.GUANBIQIUGOU));
                             } else {
+                                ToastUtils.showShort(msg);
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+                            return;
                         }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                    }
-                });
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
 
     }
 
@@ -682,12 +685,10 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                     ActivityUtils.startActivity(intent);
 
                 }
-
                 break;
 
             //关闭求购
             case R.id.activity_qiugouxiangqing_guanbiqiugo:
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("提示！");
                 builder.setMessage("您确定要关闭这个求购吗？");
@@ -710,6 +711,14 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.toolbar_back:
                 finish();
+                break;
+            case R.id.toolbar_text:
+                if(ObjectUtils.isEmpty(qiugouBean)){
+                    ToastUtils.showShort("分享异常");
+                    return;
+                }
+                ShareUtil.shareEnquiry(QiugouxiangqingActivity.this,"【求购】"+qiugouBean.getProductName(),
+                        "地区:"+qiugouBean.getLocationProvince() + " " + qiugouBean.getLocationCity()+"\n"+"求购重量:"+qiugouBean.getNum()+"kg",qiugouBean.getId());
                 break;
         }
     }

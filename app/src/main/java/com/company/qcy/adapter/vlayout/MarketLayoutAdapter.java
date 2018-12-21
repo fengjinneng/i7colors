@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
@@ -27,7 +28,7 @@ public class MarketLayoutAdapter extends DelegateAdapter.Adapter<MarketLayoutAda
 
 
     private List<DianpuliebiaoBean> datas;
-    private  Context context;
+    private Context context;
     private LayoutHelper layoutHelper;
     private RecyclerView.LayoutParams layoutParams;
 
@@ -81,10 +82,22 @@ public class MarketLayoutAdapter extends DelegateAdapter.Adapter<MarketLayoutAda
         }
 
 
-        GlideUtils.loadImage(context,ServerInfo.IMAGE + item.getLogo(),holder.img);
+        GlideUtils.loadImage(context, ServerInfo.IMAGE + item.getLogo(), holder.img);
 
-        holder.phone.setText(item.getCompany().getPhone());
-        holder.address.setText(item.getCompany().getProvinceName()+" "+item.getCompany().getCityName());
+
+        if (StringUtils.isEmpty(item.getCompany().getTel())) {
+            holder.phone.setText("暂无联系方式");
+        } else {
+            holder.phone.setText(item.getCompany().getTel());
+        }
+        if (!StringUtils.isEmpty(item.getCompany().getProvinceName())) {
+            holder.address.setText(item.getCompany().getProvinceName());
+            if (!StringUtils.isEmpty(item.getCompany().getCityName())) {
+                holder.address.setText(item.getCompany().getProvinceName() + " " + item.getCompany().getCityName());
+            }
+        } else {
+            holder.address.setText("暂无地址");
+        }
     }
 
     @Override

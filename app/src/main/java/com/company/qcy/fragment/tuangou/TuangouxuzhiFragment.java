@@ -71,7 +71,7 @@ public class TuangouxuzhiFragment extends Fragment {
                         int height = resource.getHeight();
 
                         mFragmentTuangouxuzhiImg.setLayoutParams(new FrameLayout.LayoutParams((FrameLayout.LayoutParams.MATCH_PARENT),height));
-                        GlideUtils.loadImage(getContext(), mParam1,mFragmentTuangouxuzhiImg);
+                        GlideUtils.loadImageCenter(getContext(), mParam1,mFragmentTuangouxuzhiImg);
                     }
 
 

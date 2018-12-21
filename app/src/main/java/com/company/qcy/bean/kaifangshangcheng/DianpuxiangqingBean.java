@@ -34,6 +34,15 @@ public class DianpuxiangqingBean {
     private String vipLevel;
     private String description;
     private Object productList;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public Long getId() {
         return id;

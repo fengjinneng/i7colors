@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
     android:background="@color/fengexian"
+    android:focusable="true"
     android:focusableInTouchMode="true"
     tools:context=".ui.activity.kaifangshangcheng.KaifangshangchengActivity">
 
@@ -19,12 +19,12 @@
 
 
     <TextView
-        android:layout_marginTop="12px"
         android:id="@+id/kaifangshengcheng_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="12px"
         android:layout_weight="1"
         android:background="@drawable/search_oval"
         android:drawableLeft="@mipmap/search"
@@ -40,8 +40,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/kaifangshangcheng_recyclerview"
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/kaifangshangcheng_swipeRefreshLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
@@ -51,6 +52,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/kaifangshengcheng_search" />
+        app:layout_constraintTop_toBottomOf="@+id/kaifangshengcheng_search">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/kaifangshangcheng_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </android.support.constraint.ConstraintLayout>

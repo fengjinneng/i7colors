@@ -18,7 +18,7 @@
         android:layout_height="70dp">
 
         <LinearLayout
-            android:id="@+id/vlayout_home_part1_chanpin"
+            android:id="@+id/vlayout_home_part1_kaifang"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -28,12 +28,12 @@
             <ImageView
                 android:id="@+id/vlayout_home_part1_icon1"
                 android:layout_width="match_parent"
-                android:src="@mipmap/canpindating"
+                android:src="@mipmap/kaifangshangcheng"
                 android:layout_height="wrap_content" />
             <TextView
                 android:layout_marginTop="4dp"
                 android:id="@+id/vlayout_home_part1_title1"
-                android:text="产品大厅"
+                android:text="开放商城"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/vlayout_home_part1_kaifang"
+            android:id="@+id/vlayout_home_part1_chanpin"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="1"
@@ -70,10 +70,10 @@
             <ImageView
                 android:id="@+id/vlayout_home_part1_icon3"
                 android:layout_width="match_parent"
-                android:src="@mipmap/kaifangshangcheng"
+                android:src="@mipmap/canpindating"
                 android:layout_height="wrap_content" />
             <TextView
-                android:text="开放商城"
+                android:text="产品大厅"
                 android:layout_marginTop="4dp"
                 android:id="@+id/vlayout_home_part1_title3"
                 android:gravity="center"

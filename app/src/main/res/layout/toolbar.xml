@@ -59,10 +59,7 @@
         android:gravity="center"
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
-        android:text="设置"
-        android:textSize="@dimen/x30"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="@dimen/x28"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
