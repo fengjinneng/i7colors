@@ -1,13 +1,25 @@
 package com.company.qcy.ui.activity.user;
 
+import android.Manifest;
+import android.app.Dialog;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,6 +41,7 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.ui.activity.pengyouquan.MyDyeInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -44,8 +57,11 @@ import com.zhihu.matisse.internal.entity.CaptureStrategy;
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import id.zelory.compressor.Compressor;
 
 public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnClickListener {
 
@@ -144,79 +160,208 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
         }
     }
 
-    List<Uri> mSelected;
+
+
+    private Dialog chooseHeadDialog;
+    public static final int REQUEST_CODE_CHOOSE_IMG =1;
+    public static final int TAKE_PICTURE =2;
+
+
+    private void showHeadPortraitDialog() {
+
+
+        chooseHeadDialog = new Dialog(ZhanghaozhongxinActivity.this, R.style.BottomDialog);
+        View contentView = LayoutInflater.from(ZhanghaozhongxinActivity.this).inflate(R.layout.dialog_choose_head, null);
+        chooseHeadDialog.setContentView(contentView);
+        ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
+        layoutParams.width = getResources().getDisplayMetrics().widthPixels;
+        // layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        contentView.setLayoutParams(layoutParams);
+        chooseHeadDialog.getWindow().setGravity(Gravity.BOTTOM);
+        chooseHeadDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+        chooseHeadDialog.setCancelable(true);
+        chooseHeadDialog.setCanceledOnTouchOutside(true);
+        chooseHeadDialog.show();
+        contentView.findViewById(R.id.tv_take_video).setVisibility(View.GONE);
+        contentView.findViewById(R.id.tv_choose_video).setVisibility(View.GONE);
+
+
+        // 从相册选择图片
+        contentView.findViewById(R.id.tv_choose_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseHeadDialog.dismiss();  // 选择之后，关闭dialog
+                if (Build.VERSION.SDK_INT >= 23) {
+                    int checkCallWritePermission = ContextCompat.checkSelfPermission(ZhanghaozhongxinActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                    if (checkCallWritePermission != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(ZhanghaozhongxinActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
+                        return;
+                    } else {
+                        // 打开本地相册
+                        MatisseImageUtil.chooseOnlyOnePhoto(ZhanghaozhongxinActivity.this, REQUEST_CODE_CHOOSE_IMG);
+                    }
+                } else {
+                    // 打开本地相册
+                    MatisseImageUtil.chooseOnlyOnePhoto(ZhanghaozhongxinActivity.this, REQUEST_CODE_CHOOSE_IMG);
+                }
+            }
+        });
+        // 拍照
+        contentView.findViewById(R.id.tv_take_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseHeadDialog.dismiss();
+                //判断权限
+                if (Build.VERSION.SDK_INT >= 23) {
+                    int checkCallPhonePermission = ContextCompat.checkSelfPermission(ZhanghaozhongxinActivity.this, Manifest.permission.CAMERA);
+                    if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(ZhanghaozhongxinActivity.this, new String[]{Manifest.permission.CAMERA}, 222);
+                        return;
+                    } else {
+                        int checkCallWritePermission = ContextCompat.checkSelfPermission(ZhanghaozhongxinActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+                        if (checkCallWritePermission != PackageManager.PERMISSION_GRANTED) {
+                            ActivityCompat.requestPermissions(ZhanghaozhongxinActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                            return;
+                        } else {
+                            takePicture();
+                        }
+                    }
+                } else {
+                    takePicture();
+                }
+            }
+        });
+
+        // 取消
+        contentView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                chooseHeadDialog.dismiss();
+            }
+        });
+
+    }
+
+
+    private File outFile;  // 为了根据File获取uri
+
+    // 拍照
+    public void takePicture() {
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
+            try {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                File outDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+                if (!outDir.exists()) {
+                    outDir.mkdirs();
+                }
+                outFile = new File(outDir, System.currentTimeMillis() + ".jpg");
+                String picFileFullName = outFile.getAbsolutePath();
+                LogUtils.e("mxg", "picFileFullName = " + picFileFullName);
+                ContentValues contentValues = new ContentValues(1);
+                contentValues.put(MediaStore.Images.Media.DATA, picFileFullName);
+                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                startActivityForResult(intent, TAKE_PICTURE);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ToastUtils.showShort("请确认是否开启打开相机的权限！");
+                // requestPermission();
+            }
+        } else {
+            ToastUtils.showShort("请确认是否接入SD卡");
+        }
+    }
+
+
+    public void upLoadImg(File imgFile){
+        // 压缩图片
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.UPLOADHEADPHOTO)
+                .tag(this)
+                .params("token", SPUtils.getInstance().getString("token"))
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("file", imgFile);
+
+        DialogStringCallback stringCallback = new DialogStringCallback(ZhanghaozhongxinActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.e("UPLOADHEADPHOTO", response.body());
+
+                try {
+                    JSONObject jsonObject = JSONObject.parseObject(response.body());
+                    String msg = jsonObject.getString("msg");
+                    if (response.code() == 200) {
+
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            if (!StringUtils.isEmpty(jsonObject.getString("data"))) {
+                                GlideUtils.loadCircleImage(ZhanghaozhongxinActivity.this, jsonObject.getString("data"), mActivityZhanghaozhongxinImg);
+                                EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHANGEPERSONHEADIMG, jsonObject.getString("data")));
+                                SPUtils.getInstance().put("photo", jsonObject.getString("data"));
+                            }
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(ZhanghaozhongxinActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_CHOOSE && resultCode == RESULT_OK) {
-            mSelected = Matisse.obtainResult(data);
-            LogUtils.d("Matisse", "mSelected: " + mSelected);
-            mActivityZhanghaozhongxinImg.setImageURI(mSelected.get(0));
 
-            try {
+        switch (requestCode) {
+            case TAKE_PICTURE:
+                if (resultCode == RESULT_OK) {
+                    Uri imageUri = Uri.fromFile(outFile);
+                    String filePath = MatisseImageUtil.getRealFilePath(this, imageUri);
 
-                List<File> picFilePaths = new ArrayList<>();
-                for (int i = 0; i < mSelected.size(); i++) {
-                    String picFilePath = MatisseImageUtil.getRealFilePath(this, mSelected.get(i));
-                    Bitmap bmp = MatisseImageUtil.revitionImageSize(picFilePath);
-                    picFilePath = MatisseImageUtil.saveBitmap(bmp);
-                    picFilePaths.add(new File(picFilePath));
+                    File file = new File(filePath);
+                    File file1 = null;
+                    try {
+                        file1 = new Compressor(this).compressToFile(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
+                    upLoadImg(file1);
                 }
-                // 压缩图片
-                PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.UPLOADHEADPHOTO)
-                        .tag(this)
-                        .params("token", SPUtils.getInstance().getString("token"))
-                        .params("sign", SPUtils.getInstance().getString("sign"))
-                        .params("file", new File(picFilePaths.get(0).getPath()));
+                break;
 
+            case REQUEST_CODE_CHOOSE_IMG:
+                if (resultCode == RESULT_OK) {
+                    List<Uri> uris = Matisse.obtainResult(data);
+                    String filePath = MatisseImageUtil.getRealFilePath(this, uris.get(0));
 
-                DialogStringCallback stringCallback = new DialogStringCallback(ZhanghaozhongxinActivity.this) {
-                    @Override
-                    public void onSuccess(Response<String> response) {
-                        LogUtils.e("UPLOADHEADPHOTO", response.body());
-
-                        try {
-                            JSONObject jsonObject = JSONObject.parseObject(response.body());
-                            String msg = jsonObject.getString("msg");
-                            if (response.code() == 200) {
-
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    if (!StringUtils.isEmpty(jsonObject.getString("data"))) {
-                                        GlideUtils.loadCircleImage(ZhanghaozhongxinActivity.this, jsonObject.getString("data"), mActivityZhanghaozhongxinImg);
-                                        EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHANGEPERSONHEADIMG, jsonObject.getString("data")));
-                                        SPUtils.getInstance().put("photo", jsonObject.getString("data"));
-                                    }
-                                    return;
-                                }
-                                if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                                    SignAndTokenUtil.getSign(ZhanghaozhongxinActivity.this, request, this);
-                                    return;
-                                }
-                                ToastUtils.showShort(msg);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                    File file = new File(filePath);
+                    File file1 = null;
+                    try {
+                        file1 = new Compressor(this).compressToFile(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
 
-                    @Override
-                    public void onError(Response<String> response) {
-                        super.onError(response);
-                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
-                    }
-                };
+                    upLoadImg(file1);
+                }
 
-                request.execute(stringCallback);
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+                break;
         }
     }
-
-    private int REQUEST_CODE_CHOOSE = 1;
 
     @Override
     public void onClick(View v) {
@@ -229,7 +374,7 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
                         .permission(Permission.Group.STORAGE, Permission.Group.CAMERA)
                         .onGranted(permissions -> {
                             // Storage permission are allowed.
-                            MatisseImageUtil.chooseOnlyOnePhoto(this, REQUEST_CODE_CHOOSE);
+                            showHeadPortraitDialog();
 
                         })
                         .onDenied(permissions -> {

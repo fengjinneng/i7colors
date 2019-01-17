@@ -231,7 +231,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
         mBottomnavigation = findViewById(R.id.bottomnavigation);
         mBottomnavigation.setActiveColor(R.color.chunhongse);
         BottomNavigationItem homeItem = new BottomNavigationItem(R.mipmap.home_checked, "首页");
-        BottomNavigationItem toutiaoItem = new BottomNavigationItem(R.mipmap.toutiao_checked, "朋友圈");
+        BottomNavigationItem toutiaoItem = new BottomNavigationItem(R.mipmap.toutiao_checked, "印染圈");
         xiaoxiItem = new BottomNavigationItem(R.mipmap.xiaoxi_checked, "消息");
         BottomNavigationItem wodeItem = new BottomNavigationItem(R.mipmap.wode_checked, "我的");
 //        TextBadgeItem item = new TextBadgeItem();

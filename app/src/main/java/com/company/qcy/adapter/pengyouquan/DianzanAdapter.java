@@ -1,3 +1,4 @@
+
 package com.company.qcy.adapter.pengyouquan;
 
 import android.graphics.drawable.Drawable;
@@ -46,7 +47,9 @@ public class DianzanAdapter extends BaseQuickAdapter<PengyouquanBean.LikeListBea
         }
         name.setText(item.getLikeUser());
 
-        helper.setText(R.id.item_fragment_praise_time, TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())));
+        if(!StringUtils.isEmpty(item.getCreatedAtStamp())){
+            helper.setText(R.id.item_fragment_praise_time, TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())));
+        }
 
     }
 }

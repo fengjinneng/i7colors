@@ -58,9 +58,9 @@ public class TuangouRecyclerviewAdapter extends
         helper.setText(R.id.item_tuangouliebiao_total_danwei, item.getNumUnit());
         helper.setText(R.id.item_tuangouliebiao_shengyu_danwei, item.getNumUnit());
 
-        helper.setText(R.id.item_tuangouliebiao_yuanjia_danwei, "元/" + item.getNumUnit());
+        helper.setText(R.id.item_tuangouliebiao_yuanjia_danwei, "元/" + item.getPriceUnit());
 
-        helper.setText(R.id.item_tuangouliebiao_tuangoujia_danwei, "元/" + item.getNumUnit());
+        helper.setText(R.id.item_tuangouliebiao_tuangoujia_danwei, "元/" + item.getPriceUnit());
 
         ConstraintLayout priceLayout = (ConstraintLayout) helper.getView(R.id.item_tuangouliebiao_price_layout);
 

@@ -34,13 +34,13 @@ public class SignAndTokenUtil {
     public static void getSign(Context context, Request request, StringCallback callback) {
         String code = new String(EncryptUtils.encryptAES2Base64(String.valueOf(TimeUtils.getNowMills()).getBytes(),
                 "jK)Nig8N40YkntYG".getBytes(), "AES/ECB/PKCS5Padding", null));
-        LogUtils.v("getsign", code);
         OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.SIGN)
                 .tag(context)
                 .params("code", code)
                 .execute(new StringCallback() {
                     @Override
                     public void onSuccess(Response<String> response) {
+                        LogUtils.v("getsign", response.body());
                         try {
                             if (response.code() == 200) {
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());

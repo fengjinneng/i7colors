@@ -112,7 +112,7 @@ public class JiluFragment extends Fragment {
                 getTuangouRecord();
             }
         }, recyclerView);
-        adapter.addHeaderView(getLayoutInflater().inflate(R.layout.item_tugoujilu,null));
+        adapter.addHeaderView(getLayoutInflater().inflate(R.layout.item_tugoujilu_headview,null));
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
     }
 

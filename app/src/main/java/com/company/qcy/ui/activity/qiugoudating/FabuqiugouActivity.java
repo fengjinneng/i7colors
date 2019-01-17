@@ -287,7 +287,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
             case R.id.activity_fabuqiugou_zhangqi:
 
                 List<String> zq = new ArrayList<>();
-                zq.add("货到发款");
+                zq.add("款到发货");
                 zq.add("货到付款");
                 zq.add("货到30天付款");
                 zq.add("货到45天付款");

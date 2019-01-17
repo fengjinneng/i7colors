@@ -53,6 +53,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import id.zelory.compressor.Compressor;
+
 public class MyDyeInfoActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 标题
@@ -232,15 +234,15 @@ public class MyDyeInfoActivity extends BaseActivity implements View.OnClickListe
                     Uri imageUri = Uri.fromFile(outFile);
                     String filePath = MatisseImageUtil.getRealFilePath(this, imageUri);
 
-                        Bitmap bmp = null;
-                        try {
-                            bmp = MatisseImageUtil.revitionImageSize(filePath);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    filePath = MatisseImageUtil.saveBitmap(bmp);
+                    File file = new File(filePath);
+                    File file1 = null;
+                    try {
+                        file1 = new Compressor(this).compressToFile(file);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
-                    upDateImg(new File(filePath));
+                    upDateImg(file1);
                 }
                 break;
 
@@ -249,15 +251,15 @@ public class MyDyeInfoActivity extends BaseActivity implements View.OnClickListe
                     List<Uri> uris = Matisse.obtainResult(data);
                     String filePath = MatisseImageUtil.getRealFilePath(this, uris.get(0));
 
-                    Bitmap bmp = null;
+                    File file = new File(filePath);
+                    File file1 = null;
                     try {
-                        bmp = MatisseImageUtil.revitionImageSize(filePath);
+                        file1 = new Compressor(this).compressToFile(file);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    filePath = MatisseImageUtil.saveBitmap(bmp);
 
-                    upDateImg(new File(filePath));
+                    upDateImg(file1);
                 }
 
                 break;

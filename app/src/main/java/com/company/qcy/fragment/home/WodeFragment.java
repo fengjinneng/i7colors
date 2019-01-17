@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,8 @@ import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.NumberBean;
+import com.company.qcy.huodong.caigoulianmeng.CaigoulianmengActivity;
+import com.company.qcy.huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichulibaojiaActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichuliqiugouActivity;
 import com.company.qcy.ui.activity.qiugoudating.WodebaojiaActivity;
@@ -121,6 +124,14 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
      * 卖家中心
      */
     private TextView mFragmentWodeSellerZhongxin;
+    /**
+     * 优惠展销
+     */
+    private Button mYouhuizhanxiao;
+    /**
+     * 采购联盟
+     */
+    private Button mCaigoulianmeng;
 
     public WodeFragment() {
     }
@@ -216,6 +227,10 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         mToolbarTitle.setText("个人中心");
 
 
+//        mYouhuizhanxiao = (Button) inflater.findViewById(R.id.youhuizhanxiao);
+//        mYouhuizhanxiao.setOnClickListener(this);
+//        mCaigoulianmeng = (Button) inflater.findViewById(R.id.caigoulianmeng);
+//        mCaigoulianmeng.setOnClickListener(this);
     }
 
     @Override
@@ -421,6 +436,12 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 mFragmentWodeBuyerZhongxin.setTextSize(15);
                 mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.putongwenben));
                 break;
+//            case R.id.youhuizhanxiao:
+//                ActivityUtils.startActivity(YouhuizhanxiaoActivity.class);
+//                break;
+//            case R.id.caigoulianmeng:
+//                ActivityUtils.startActivity(CaigoulianmengActivity.class);
+//                break;
         }
     }
 

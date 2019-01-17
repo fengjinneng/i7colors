@@ -38,7 +38,10 @@ public class MyNotReadCommunityAdapter extends BaseQuickAdapter<PengyouquanBean.
             GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getCommentPhoto(), img);
         }
 
+        if(!StringUtils.isEmpty(item.getCreatedAtStamp())){
+
         helper.setText(R.id.item_my_mot_read_time, TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())));
+        }
 
     }
 }

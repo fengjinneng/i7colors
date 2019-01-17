@@ -380,7 +380,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         title = view.findViewById(R.id.toolbar_title);
         back = view.findViewById(R.id.toolbar_back);
         fabu = view.findViewById(R.id.toolbar_text);
-        title.setText("朋友圈");
+        title.setText("印染圈");
         back.setVisibility(View.INVISIBLE);
         fabu.setVisibility(View.VISIBLE);
         fabu.setText("我要发布");
@@ -451,6 +451,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
                     case R.id.item_pengyouquan_shipin_layout:
                         Intent intent = new Intent(getActivity(), ShipinbofangActivity.class);
                         intent.putExtra("url", ServerInfo.IMAGE + bean.getUrl());
+                        intent.putExtra("diyizhen", ServerInfo.IMAGE + bean.getVideoPicUrl());
                         ActivityUtils.startActivity(intent);
 
                         break;

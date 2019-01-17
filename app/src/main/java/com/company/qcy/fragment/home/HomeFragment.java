@@ -62,6 +62,7 @@ import com.lzy.okgo.request.GetRequest;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -220,7 +221,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         request.execute(stringCallback);
     }
 
-    private List<String> advDatas = new ArrayList<>();
+    private List<BannerBean> advDatas = new ArrayList<>();
     SingleAdvLayoutAdapter2 advAdapter;
 
     private void setAdvData() {
@@ -235,14 +236,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("plate_code", "APP_Group_Buy");
+                .params("plate_code", "APP_Sales_Promotion");
 
         StringCallback stringCallback = new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
 
                 try {
-                    LogUtils.v("INDEXBANNER2", response.body());
+                    LogUtils.v("APP_Sales_Promotion", response.body());
                     if (response.code() == 200) {
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
@@ -255,9 +256,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                             if (isRefresh) {
                                 advDatas.clear();
                             }
-                            for (int i = 0; i < bannerBeans.size(); i++) {
-                                advDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
-                            }
+                            advDatas.addAll(bannerBeans);
                             advAdapter.notifyDataSetChanged();
                             return;
                         }

@@ -3,13 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.bigkoo.convenientbanner.ConvenientBanner
-        android:id="@+id/head_tuangouhui_convenientBanner"
+    <ImageView
+        android:id="@+id/head_img_huodong_img"
         android:layout_width="0dp"
-        android:layout_height="@dimen/x288"
+        android:scaleType="fitXY"
+        android:layout_height="@dimen/x250"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include14">
 
-    </com.bigkoo.convenientbanner.ConvenientBanner>
+    </ImageView>
 </android.support.constraint.ConstraintLayout>

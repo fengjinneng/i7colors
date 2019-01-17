@@ -91,7 +91,6 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
      */
     private TextView mActivityPengyouquanDetailContent;
     private MultiImageView mActivityPengyouquanDetailMultiImageView;
-    private Toolbar mToolbar;
     private CollapsingToolbarLayout mCollapsingToolbar;
     private TabLayout mTabLayout;
     private AppBarLayout mAppbar;
@@ -137,7 +136,6 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
         mActivityPengyouquanDetailTime = (TextView) findViewById(R.id.activity_pengyouquan_detail_time);
         mActivityPengyouquanDetailContent = (TextView) findViewById(R.id.activity_pengyouquan_detail_content);
         mActivityPengyouquanDetailMultiImageView = (MultiImageView) findViewById(R.id.activity_pengyouquan_detail_multiImageView);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mAppbar = (AppBarLayout) findViewById(R.id.appbar);
@@ -348,12 +346,7 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
         mViewpager.setAdapter(baseViewpageAdapter);
         mTabLayout.setupWithViewPager(mViewpager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+
     }
 
     private InputMethodManager inputMethodManager;

@@ -73,7 +73,6 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
             public void onFinish() {
                 if (!isClick) {
                     finish();
-
                 }
 
             }
@@ -177,7 +176,7 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.activity_welcome_text:
                 isClick = true;
-                ActivityUtils.startActivity(MainActivity.class);
+                timer.cancel();
                 finish();
                 break;
         }

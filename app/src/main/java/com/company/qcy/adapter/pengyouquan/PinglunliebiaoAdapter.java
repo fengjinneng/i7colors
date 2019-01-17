@@ -57,8 +57,8 @@ public class PinglunliebiaoAdapter extends BaseQuickAdapter<PengyouquanBean.Comm
         } else {
             helper.getView(R.id.item_pinglun_pinglun_layout).setVisibility(View.VISIBLE);
         }
-
-        helper.setText(R.id.item_pinglun_time, TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())));
-
+        if(!StringUtils.isEmpty(item.getCreatedAtStamp())) {
+            helper.setText(R.id.item_pinglun_time, TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())));
+        }
     }
 }

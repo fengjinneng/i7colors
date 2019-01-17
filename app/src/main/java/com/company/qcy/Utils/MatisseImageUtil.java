@@ -72,7 +72,7 @@ public class MatisseImageUtil {
                 .countable(false)
                 .maxSelectable(1)
                 //是否需要拍照
-                .capture(true)
+//                .capture(true)
                 //兼容7.0系统
                 .captureStrategy(new CaptureStrategy(true, "com.company.qcy.fileprovider"))
                 .showSingleMediaType(true)
@@ -116,7 +116,7 @@ public class MatisseImageUtil {
                 .theme(R.style.Matisse_Zhihu)//主题  知乎de主题
                 //.theme(R.style.Matisse_Dracula)//主题  暗色主题
                 .imageEngine(new MyGlideEngine())//加载方式
-                .addFilter(new GifSizeFilter(10 * Filter.K * Filter.K))//限制文件大小
+                .addFilter(new GifSizeFilter(50 * Filter.K * Filter.K))//限制文件大小
 //                .capture(true)//设置是否可以拍照  ---> 需要配置清单文件
                 .captureStrategy(new CaptureStrategy(true, "com.company.qcy.fileprovider"))//存储到哪里
                 .forResult(REQUEST_CODE_CHOOSE);// 请求响应吗

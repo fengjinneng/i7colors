@@ -3,7 +3,6 @@ package com.company.qcy.ui.activity.tuangou;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +25,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.Utils.ServerInfo;
@@ -94,6 +94,11 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
         refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+
+                if(isFirstIn){
+                    adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+                }
+
                 //下拉业务
                 isReflash = true;
                 pageNo = 0;
@@ -131,36 +136,27 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("七彩云团购惠");
-        addBannerData();
+        addAdvData();
+        if(isFirstIn){
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+        isFirstIn = true;
+        }
+
     }
 
+    private boolean isFirstIn ;
     private List<String> advDatas = new ArrayList<>();
 
-    ConvenientBanner convenientBanner;
 
     private void addHeadView() {
 
-        View inflate = LayoutInflater.from(this).inflate(R.layout.head_tuangouhui, null);
-        convenientBanner = (ConvenientBanner) inflate.findViewById(R.id.head_tuangouhui_convenientBanner);
-
-        convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+        View inflate = LayoutInflater.from(this).inflate(R.layout.head_img_huodong, null);
+        ImageView img = inflate.findViewById(R.id.head_img_huodong_img);
+        GlideUtils.loadImageRct(context,advDatas.get(0),img);
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
-            public NetworkImageHolderView createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, advDatas);
-        convenientBanner.setPageIndicator(new int[]{R.mipmap.banner_unchoiced, R.mipmap.banner_choiced});
-        convenientBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
-        //设置如果只有一组数据时不能滑动
-        convenientBanner.setPointViewVisible(advDatas.size() == 1 ? false : true); // 指示器
-        convenientBanner.setManualPageable(advDatas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
-        convenientBanner.setCanLoop(advDatas.size() == 1 ? false : true); // 是否循环
+            public void onClick(View v) {
 
-
-        convenientBanner.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
             }
         });
         adapter.addHeaderView(inflate);
@@ -172,16 +168,14 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
         super.onReciveMessage(msg);
         switch (msg.getCode()) {
             case MessageBean.Code.TUANGOUCHENGGONG:
-
                 isReflash = true;
                 addData();
                 break;
         }
-
     }
 
 
-    private void addBannerData() {
+    private void addAdvData() {
 
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
                 .tag(this)
@@ -299,6 +293,7 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onError(Response<String> response) {
                 super.onError(response);
+                adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
                 refreshLayout.setRefreshing(false);
                 ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
             }

@@ -30,4 +30,13 @@
     <string name="LOGIN_SUCCESS">LOGIN_SUCCESS</string>     <!--,已是登陆状态-->
 
 
+    <!-- ss首页活动ad——name -->
+    <string name="tuangou">group_buy</string>
+    <string name="youhuizhanxiao">sales</string>
+    <string name="caigoulianmeng">meeting</string>
+    <string name="dakatoupiao">vote</string>
+    <string name="choujiang">draw</string>
+    <string name="jingpai">auction</string>
+
+
 </resources>

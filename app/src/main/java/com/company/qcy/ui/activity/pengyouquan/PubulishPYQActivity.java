@@ -1,14 +1,15 @@
 package com.company.qcy.ui.activity.pengyouquan;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.media.CamcorderProfile;
 import android.media.MediaMetadataRetriever;
-import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,17 +19,22 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.FileUtils;
+import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
@@ -37,18 +43,20 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.BitmapUtil;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MatisseImageUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
-import com.company.qcy.Utils.ZipUtil;
 import com.company.qcy.adapter.pengyouquan.FabupengyouquanAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ImageBean;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
 import com.yanzhenjie.permission.AndPermission;
@@ -61,6 +69,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import id.zelory.compressor.Compressor;
 
 public class PubulishPYQActivity extends BaseActivity implements View.OnClickListener {
 
@@ -155,6 +165,9 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                     mActivityPubylishPeyStart.setVisibility(View.VISIBLE);
 
                     videoUri = Uri.fromFile(outFile);
+
+                    LogUtils.e("mActivityPubylishPeyStart", FileUtils.getFileSize(videoUri.getPath()));
+
                     Bitmap localVideoThumbnail = getLocalVideoThumbnail(videoUri.getPath());
                     videoImg.setImageBitmap(localVideoThumbnail);
                     videoImg.setOnClickListener(new View.OnClickListener() {
@@ -467,15 +480,13 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
     private static final int TAKE_VIDEO = 300;
     private static final int Choose_VIDEO = 400;
 
-
-
     //拍摄视频
     private void takeVideo() {
         String state = Environment.getExternalStorageState();
         if (state.equals(Environment.MEDIA_MOUNTED)) {
             try {
                 Intent intent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);//限制录制时间(10秒=10)
+                intent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 15);//限制录制时间
                 File outDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
                 if (!outDir.exists()) {
                     outDir.mkdirs();
@@ -561,17 +572,15 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                     List<File> picFilePaths = new ArrayList<>();
                     for (int i = 0; i < updateImgList.size(); i++) {
                         String picFilePath = MatisseImageUtil.getRealFilePath(this, updateImgList.get(i));
-
-
-                        Bitmap bmp = null;
+                        File file = new File(picFilePath);
+                        File file1 = null;
                         try {
-                            bmp = MatisseImageUtil.revitionImageSize(picFilePath);
+                            file1 = new Compressor(this).compressToFile(file);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        picFilePath = MatisseImageUtil.saveBitmap(bmp);
+                        picFilePaths.add(file1);
 
-                        picFilePaths.add(new File(picFilePath));
                     }
                     updateContent(picFilePaths, mActivityPubylishPeyContent.getText().toString());
                     return;
@@ -582,7 +591,26 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    ProgressDialog progressDialog;
+    private boolean isWaitResponse;//上传视频完成后等待服务器相应，弹出对话框
+
     private void updateVideo(File videoPath, String content) {
+        progressDialog = new ProgressDialog(this);
+        progressDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMessage("正在上传...");
+        progressDialog.setMax((int) FileUtils.getFileLength(videoPath));
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setButton(ProgressDialog.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                progressDialog.dismiss();
+                OkGo.getInstance().cancelTag(PubulishPYQActivity.this);
+            }
+        });
+        progressDialog.show();
+
         HttpParams params = new HttpParams();
         params.put("file", videoPath);
         params.put("type", "video");
@@ -593,7 +621,9 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 .tag(this)
                 .params(params);
 
-        DialogStringCallback stringCallback = new DialogStringCallback(PubulishPYQActivity.this) {
+
+        StringCallback stringCallback = new StringCallback() {
+
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.e("FABUPENGYOUQUAN", response.body());
@@ -613,7 +643,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(PubulishPYQActivity.this,request,this);
+                            SignAndTokenUtil.getSign(PubulishPYQActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -626,6 +656,27 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
             }
 
             @Override
+            public void uploadProgress(Progress progress) {
+                super.uploadProgress(progress);
+
+                if ((progress.currentSize / FileUtils.getFileLength(videoPath)) > 0.9f && isWaitResponse == false) {
+                    progressDialog.dismiss();
+                    progressDialog.cancel();
+                    ProgressDialog dialog = new ProgressDialog(activity);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setCanceledOnTouchOutside(false);
+                    dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                    dialog.setMessage("正在处理视频，请稍候...");
+                    dialog.show();
+                    isWaitResponse = true;
+                }
+                if (!isWaitResponse) {
+                    progressDialog.setProgress((int) progress.currentSize);
+                }
+
+            }
+
+            @Override
             public void onError(Response<String> response) {
                 super.onError(response);
                 ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
@@ -633,7 +684,6 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         };
         request.execute(stringCallback);
     }
-
 
     private void updateChunText(String content) {
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
@@ -665,7 +715,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(PubulishPYQActivity.this,request,this);
+                            SignAndTokenUtil.getSign(PubulishPYQActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -690,6 +740,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
 
 
     private void updateContent(List<File> picPath, String content) {
+
         HttpParams params = new HttpParams();
         params.put("type", "photo");
         params.put("token", SPUtils.getInstance().getString("token"));
@@ -699,7 +750,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)
                 .params(params)
-                .addFileParams("files", picPath);
+                .addFileParams("files", picPath).isMultipart(true);
 
         DialogStringCallback stringCallback = new DialogStringCallback(PubulishPYQActivity.this) {
             @Override
@@ -720,7 +771,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(PubulishPYQActivity.this,request,this);
+                            SignAndTokenUtil.getSign(PubulishPYQActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -731,6 +782,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 }
 
             }
+
 
             @Override
             public void onError(Response<String> response) {

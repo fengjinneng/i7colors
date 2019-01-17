@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
@@ -14,6 +15,7 @@ buildscript {
 
         classpath "com.mob.sdk:MobSDK:2018.0319.1724"
 
+
     }
 }
 
@@ -21,7 +23,13 @@ allprojects {
     repositories {
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
+        maven { url "https://jitpack.io"
+
+        }
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
+        }
+
     }
 }
 

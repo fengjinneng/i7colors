@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.RegexUtils;
 import com.company.qcy.R;
 
 /**

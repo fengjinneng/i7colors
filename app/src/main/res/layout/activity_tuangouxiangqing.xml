@@ -7,6 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/include28"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -14,7 +21,7 @@
         app:layout_constraintBottom_toTopOf="@+id/activity_tuangouxiangqing_woyaotuangou"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/include28">
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar"
@@ -27,7 +34,7 @@
                 android:id="@+id/collapsingToolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="?attr/colorPrimary"
+                app:contentScrim="@color/baise"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
                 <LinearLayout
@@ -58,8 +65,7 @@
                             android:layout_width="@dimen/x500"
                             android:layout_height="@dimen/x500"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/include15"
-                             />
+                            app:layout_constraintTop_toBottomOf="@+id/include15" />
 
                         <ImageView
                             android:id="@+id/activity_tuangouxiangqing_status"
@@ -99,7 +105,6 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginStart="8dp"
                                 android:gravity="center"
-                                android:text="单个用户采购量\n0.5-1吨"
                                 android:textSize="@dimen/x24"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +149,6 @@
                                 android:id="@+id/activity_tuangouxiangqing_yuanjia"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="35"
                                 android:textSize="@dimen/x30"
                                 app:layout_constraintBottom_toBottomOf="@+id/textView65"
                                 app:layout_constraintEnd_toStartOf="@+id/activity_tuangouxiangqing_yuanjia_danwie"
@@ -155,7 +159,6 @@
                                 android:id="@+id/activity_tuangouxiangqing_yuanjia_danwie"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="元/吨"
                                 android:textSize="@dimen/x24"
                                 app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_yuanjia"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -212,7 +215,6 @@
                                 android:id="@+id/activity_tuangouxiangqing_tuangoujia"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="39"
                                 android:textColor="@color/baise"
                                 android:textSize="@dimen/x40"
                                 android:textStyle="bold"
@@ -226,7 +228,6 @@
                                 android:id="@+id/activity_tuangouxiangqing_tuangoujia_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="元/吨"
                                 android:textColor="@color/baise"
                                 app:layout_constraintBaseline_toBaselineOf="@+id/activity_tuangouxiangqing_tuangoujia"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -236,78 +237,75 @@
 
                         <TextView
                             android:id="@+id/activity_tuangouxiangqing_productname"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:text="活性翠兰G266%"
                             android:textColor="@color/erjibiaoti"
                             android:textSize="@dimen/x36"
                             android:textStyle="bold"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/activity_tuangouxiangqing_img" />
 
                         <TextView
-                            android:id="@+id/textView123"
+                            android:id="@+id/activity_tuangouxiangqing_shengyu_unit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:text="吨"
                             android:textSize="@dimen/x24"
-                            app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_productname"
-                            app:layout_constraintEnd_toEndOf="parent" />
+                            app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_shengyu"
+                            app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_shengyu" />
 
                         <TextView
                             android:id="@+id/activity_tuangouxiangqing_shengyu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="38"
                             android:textSize="@dimen/x24"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView123"
-                            app:layout_constraintEnd_toStartOf="@+id/textView123" />
+                            app:layout_constraintBottom_toBottomOf="@+id/textView126"
+                            app:layout_constraintStart_toEndOf="@+id/textView126" />
 
                         <TextView
                             android:id="@+id/textView126"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
                             android:text="剩余量:"
                             android:textSize="@dimen/x24"
-                            app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_shengyu"
-                            app:layout_constraintEnd_toStartOf="@+id/activity_tuangouxiangqing_shengyu" />
+                            app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_total_unit"
+                            app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_total_unit" />
 
                         <TextView
-                            android:id="@+id/textView127"
+                            android:id="@+id/activity_tuangouxiangqing_total_unit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="16dp"
-                            android:text="吨"
                             android:textSize="@dimen/x24"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView126"
-                            app:layout_constraintEnd_toStartOf="@+id/textView126" />
+                            app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_total"
+                            app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_total" />
 
                         <TextView
                             android:id="@+id/activity_tuangouxiangqing_total"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="22"
                             android:textSize="@dimen/x24"
-                            app:layout_constraintBottom_toBottomOf="@+id/textView127"
-                            app:layout_constraintEnd_toStartOf="@+id/textView127" />
+                            app:layout_constraintBottom_toBottomOf="@+id/textView129"
+                            app:layout_constraintStart_toEndOf="@+id/textView129" />
 
                         <TextView
                             android:id="@+id/textView129"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
                             android:text="总量:"
                             android:textSize="@dimen/x24"
-                            app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_total"
-                            app:layout_constraintEnd_toStartOf="@+id/activity_tuangouxiangqing_total" />
+                            app:layout_constraintStart_toStartOf="@+id/activity_tuangouxiangqing_productname"
+                            app:layout_constraintTop_toBottomOf="@+id/activity_tuangouxiangqing_productname" />
 
                         <TextView
                             android:id="@+id/activity_tuangouxiangqing_shengyushijian_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/x45"
+                            android:layout_marginTop="40dp"
                             android:text="团购剩余时间:"
                             android:textSize="@dimen/x28"
                             app:layout_constraintStart_toStartOf="@+id/activity_tuangouxiangqing_productname"
@@ -347,7 +345,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/x40"
-                            android:text="已认领总量：10吨"
                             android:textSize="@dimen/x24"
                             app:layout_constraintStart_toStartOf="@+id/activity_tuangouxiangqing_shengyushijian_text"
                             app:layout_constraintTop_toBottomOf="@+id/activity_tuangouxiangqing_shengyushijian_text" />
@@ -367,7 +364,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:text="达成10%"
                             android:textSize="@dimen/x24"
                             app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_yirenling"
                             app:layout_constraintEnd_toEndOf="parent" />
@@ -385,16 +381,16 @@
 
                 </LinearLayout>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    android:background="#00ffffff"
-                    android:gravity="center_vertical"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:theme="@style/ToolbarTheme"
-                    app:titleTextColor="#ffffff" />
+                <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--android:background="#00ffffff"-->
+                <!--android:gravity="center_vertical"-->
+                <!--app:layout_collapseMode="pin"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+                <!--app:theme="@style/ToolbarTheme"-->
+                <!--app:titleTextColor="#ffffff" />-->
 
             </android.support.design.widget.CollapsingToolbarLayout>
 

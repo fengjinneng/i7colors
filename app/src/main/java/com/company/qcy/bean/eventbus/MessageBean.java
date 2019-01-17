@@ -145,6 +145,9 @@ public class MessageBean {
         //启动页停止播放gif
         public static final int GUANGGAOTINGZHI=1026;
 
+        //优惠展销购买成功
+        public static final int YOUHUIZHANXIAOGOUMAICHENGGONG = 1027;
+
     }
 
 

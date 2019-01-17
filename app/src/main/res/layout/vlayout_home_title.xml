@@ -22,7 +22,7 @@
                     android:layout_marginBottom="5dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="5dp"
-                    android:background="@color/colorAccent" />
+                    android:background="@color/chunhongse" />
 
                 <TextView
                     android:id="@+id/vlayout_home_title_one"
@@ -31,7 +31,7 @@
                     android:layout_alignLeft="@+id/view20"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:text="促销活动" />
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/vlayout_home_title_more"

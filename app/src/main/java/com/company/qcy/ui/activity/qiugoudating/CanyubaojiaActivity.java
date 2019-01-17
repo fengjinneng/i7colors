@@ -40,7 +40,6 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
 
 
     /**
-     * 分散染料 七彩云 分散红FB 200%
      */
     private TextView mActivityCanyubaojiaChanpinming;
     /**
@@ -73,6 +72,8 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
 
 
     private Long enquiryId;
+
+    private String productName;
     /**
      * 填写50字以内的报价说明...
      */
@@ -88,6 +89,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canyubaojia);
         enquiryId = getIntent().getLongExtra("enquiryId", 0);
+        productName = getIntent().getStringExtra("productName");
         initView();
     }
 
@@ -115,6 +117,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
         } else {
             mActivityCanyubaojiaCompanyText.setText("我的公司名称:");
         }
+        mActivityCanyubaojiaChanpinming.setText(productName);
         mActivityCanyubaojiaFabubaojia = (Button) findViewById(R.id.activity_canyubaojia_fabubaojia);
         mActivityCanyubaojiaFabubaojia.setOnClickListener(this);
         mActivityCanyubaojiaDescription = (EditText) findViewById(R.id.activity_canyubaojia_description);

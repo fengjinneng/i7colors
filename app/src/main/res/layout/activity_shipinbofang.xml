@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.pengyouquan.ShipinbofangActivity">
 
-    <cn.jzvd.JzvdStd
-        android:id="@+id/activity_shipinbofang_jzvideo"
+    <com.xiao.nicevideoplayer.NiceVideoPlayer
+        android:id="@+id/activity_shipinbofang_nicevideo"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

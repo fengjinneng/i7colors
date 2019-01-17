@@ -1,11 +1,8 @@
 package com.company.qcy.ui.activity.tuangou;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
@@ -13,13 +10,10 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -117,17 +111,22 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
      * 我要团购
      */
     private Button mActivityTuangouxiangqingWoyaotuangou;
+    /**
+     * 标题
+     */
+    private TextView mToolbarTitle;
+    private ImageView mToolbarBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //当系统版本为4.4或者4.4以上时可以使用沉浸式状态栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            //透明状态栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//
+//        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tuangouxiangqing);
         id = getIntent().getLongExtra("id", 0);
@@ -140,6 +139,7 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         boolean hasHomeKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME);
         return (!(hasBackKey && hasHomeKey));
     }
+
     //获取虚拟按键的高度
     public static int getNavigationBarHeight(Context context) {
         int result = 0;
@@ -152,8 +152,6 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         }
         return result;
     }
-
-
 
 
     private void initView() {
@@ -175,36 +173,35 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mActivityTuangouxiangqingYuanjiaDanwie = (TextView) findViewById(R.id.activity_tuangouxiangqing_yuanjia_danwie);
         mActivityTuangouxiangqingTuangoujiaDanwei = (TextView) findViewById(R.id.activity_tuangouxiangqing_tuangoujia_danwei);
 
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mAppbar = (AppBarLayout) findViewById(R.id.appbar);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
         mViewpager.setOffscreenPageLimit(2);
 
-        setTitle("返回");
+//        setTitle("返回");
+//        mCollapsingToolbar.setTitle("返回");
+//        mCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
+//        mCollapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.chunhongse));//设置收缩后Toolbar上字体的
 
-        mCollapsingToolbar.setTitle("返回");
-        mCollapsingToolbar.setExpandedTitleColor(Color.parseColor("#00ffffff"));//设置还没收缩时状态下字体颜色
-        mCollapsingToolbar.setCollapsedTitleTextColor(getResources().getColor(R.color.chunhongse));//设置收缩后Toolbar上字体的
-
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        mToolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
+//        mToolbar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
         mActivityTuangouxiangqingShengyushijianText = (TextView) findViewById(R.id.activity_tuangouxiangqing_shengyushijian_text);
         mActivityTuangouxiangqingWoyaotuangou = (Button) findViewById(R.id.activity_tuangouxiangqing_woyaotuangou);
         mActivityTuangouxiangqingWoyaotuangou.setOnClickListener(this);
-        if(isNavigationBarAvailable()){
+        if (isNavigationBarAvailable()) {
 //            ViewGroup.MarginLayoutParams margin=new ViewGroup.MarginLayoutParams(mActivityTuangouxiangqingWoyaotuangou.getLayoutParams());
 //            margin.setMargins(0,0, margin.topMargin, 0);
 //            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(margin);
@@ -212,10 +209,14 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
 
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mActivityTuangouxiangqingWoyaotuangou.getLayoutParams();
             //设置各个方向上的间距
-            params.setMargins(0,0,0,getNavigationBarHeight(this));
+            params.setMargins(0, 0, 0, getNavigationBarHeight(this));
             //改变控件的属性
             mActivityTuangouxiangqingWoyaotuangou.setLayoutParams(params);
         }
+        mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
+        mToolbarBack.setOnClickListener(this);
+        mToolbarTitle.setText("团购详情");
     }
 
 
@@ -243,15 +244,15 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mActivityTuangouxiangqingYuanjia.setText(bean.getOldPrice());
         mActivityTuangouxiangqingTuangoujia.setText(bean.getNewPrice());
         mActivityTuangouxiangqingProductname.setText(bean.getProductName());
-        mActivityTuangouxiangqingTotal.setText(bean.getTotalNum());
-        mActivityTuangouxiangqingShengyu.setText(bean.getRemainNum());
-        GlideUtils.loadImage(TuangouxiangqingActivity.this,ServerInfo.IMAGE+bean.getProductPic(),mActivityTuangouxiangqingImg);
+        mActivityTuangouxiangqingTotal.setText(bean.getTotalNum()+bean.getNumUnit());
+        mActivityTuangouxiangqingShengyu.setText(bean.getRemainNum()+bean.getNumUnit());
+        GlideUtils.loadImage(TuangouxiangqingActivity.this, ServerInfo.IMAGE + bean.getProductPic(), mActivityTuangouxiangqingImg);
         String[] split = bean.getNumPercent().split("%");
         mActivityTuangouxiangqingSeekBar.setProgress(Integer.parseInt(split[0]));
         mActivityTuangouxiangqingDacheng.setText("达成 " + bean.getNumPercent());
         mActivityTuangouxiangqingYirenling.setText("已认领总量:  " + bean.getSubscribedNum() + bean.getNumUnit());
-        mActivityTuangouxiangqingYuanjiaDanwie.setText("元/" + bean.getNumUnit());
-        mActivityTuangouxiangqingTuangoujiaDanwei.setText("元/" + bean.getNumUnit());
+        mActivityTuangouxiangqingYuanjiaDanwie.setText("元/" + bean.getPriceUnit());
+        mActivityTuangouxiangqingTuangoujiaDanwei.setText("元/" + bean.getPriceUnit());
 
 
         if (StringUtils.equals("00", bean.getEndCode())) {
@@ -322,7 +323,7 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(TuangouxiangqingActivity.this,request,this);
+                            SignAndTokenUtil.getSign(TuangouxiangqingActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -352,6 +353,9 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
                 Intent intent = new Intent(this, WoyaotuangouActivity.class);
                 intent.putExtra("bean", bean);
                 ActivityUtils.startActivity(intent);
+                break;
+            case R.id.toolbar_back:
+                finish();
                 break;
         }
     }

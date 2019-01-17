@@ -182,4 +182,25 @@ public class InterfaceInfo {
     //大V
     //申请打V认真
     public static final String DAVRENZHEN = "user/CertV";
+
+
+
+    //优惠展销
+
+    //优惠展销列表
+    public static final String YOUHUIZHANXIAOLIST = "sales/querySalesMainList";
+    //优惠展销详情
+    public static final String YOUHUIZHANXIAODETAIL = "sales/getSalesMainById";
+    //优惠展销记录
+    public static final String YOUHUIZHANXIAORECORD = "sales/querySalesOrderList";
+    //我要购买
+    public static final String YOUHUIZHANXIAOBUY = "sales/addSalesOrder";
+
+
+    //采购联盟
+    //优惠展销列表
+    public static final String CAIGOULIANMENGLIST = "meetingName/queryMeetingNameList";
+
+
+
 }

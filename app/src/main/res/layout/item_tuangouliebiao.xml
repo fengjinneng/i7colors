@@ -13,7 +13,7 @@
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/morentouxiang" />
+        app:srcCompat="@drawable/place_500x500" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/item_tuangouliebiao_price_layout"
@@ -108,13 +108,16 @@
 
     <TextView
         android:id="@+id/item_tuangouliebiao_productname"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/x16"
-        android:text="活性黑 WNN "
+        android:layout_marginTop="9dp"
+        android:singleLine="true"
+        android:ellipsize="end"
         android:textColor="@color/erjibiaoti"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_img"
         app:layout_constraintTop_toTopOf="parent" />
 

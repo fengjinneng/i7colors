@@ -9,10 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.VideoView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.bumptech.glide.Glide;
 import com.company.qcy.R;
+import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.Utils.MyNicePlayerController;
+import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
 import com.xiao.nicevideoplayer.NiceVideoPlayer;
+import com.xiao.nicevideoplayer.NiceVideoPlayerManager;
+import com.xiao.nicevideoplayer.TxVideoPlayerController;
 
 import java.net.URL;
 
@@ -23,111 +30,63 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 public class ShipinbofangActivity extends BaseActivity {
 
-    private VideoView videoPlayer;
     private Uri uri;
-    private JzvdStd mActivityShipinbofangJzvideo;
+    private NiceVideoPlayer niceVideoPlayer;
     private String url;
 
-
-    JZMediaManager manager = new JZMediaManager();
+    private String diyizhen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shipinbofang);
         String uriExtra = getIntent().getStringExtra("uri");
-
+        diyizhen = getIntent().getStringExtra("diyizhen");
         if (StringUtils.isEmpty(uriExtra)) {
             url = getIntent().getStringExtra("url");
         } else {
             uri = Uri.parse(uriExtra);
         }
         initView();
-
+        LogUtils.v("activity_shipinbofang",url);
 
     }
 
     private void initView() {
-//        videoPlayer = (VideoView) findViewById(R.id.activity_shipinbofang_videoview);
-//
-//        MediaController mediaController = new MediaController(this);
-//
-//        //设置videoview的控制条
-//        //设置播放完成以后监听
-//        videoPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mp) {
-//            }
-//        });
-//        //设置发生错误监听，如果不设置videoview会向用户提示发生错误
-//        videoPlayer.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-//            @Override
-//            public boolean onError(MediaPlayer mp, int what, int extra) {
-//                return false;
-//            }
-//        });        //设置在视频文件在加载完毕以后的回调函数
-//        videoPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-//            @Override
-//            public void onPrepared(MediaPlayer mp) {
-//                videoPlayer.start();
-//
-//            }
-//        });
-//        videoPlayer.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                return false;
-//            }
-//        });
-//
-//
-//        videoPlayer.setMediaController(mediaController);
-//
-//        videoPlayer.setVideoURI(uri);
-//        setFull();
-
-        mActivityShipinbofangJzvideo = (JzvdStd) findViewById(R.id.activity_shipinbofang_jzvideo);
+        niceVideoPlayer = (NiceVideoPlayer) findViewById(R.id.activity_shipinbofang_nicevideo);
+        niceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_NATIVE);
+        niceVideoPlayer.setUp(url, null);
         if (StringUtils.isEmpty(url)) {
-            mActivityShipinbofangJzvideo.setUp(uri.toString(), "视频播放", JzvdStd.SCREEN_WINDOW_NORMAL);
-
+            niceVideoPlayer.setUp(uri.toString(),null);
         } else {
-            mActivityShipinbofangJzvideo.setUp(url, "视频播放", JzvdStd.SCREEN_WINDOW_NORMAL);
-
+            niceVideoPlayer.setUp(url,null);
         }
-        mActivityShipinbofangJzvideo.startVideo();
-        mActivityShipinbofangJzvideo.backButton.setVisibility(View.VISIBLE);
-        mActivityShipinbofangJzvideo.backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-        if (StringUtils.isEmpty(url)) {
-            mActivityShipinbofangJzvideo.thumbImageView.setImageBitmap(getLocalVideoThumbnail(uri.toString()));
-        }
+        MyNicePlayerController controller = new MyNicePlayerController(this);
+        controller.setTitle("视频播放");
+        GlideUtils.loadImage(ShipinbofangActivity.this,diyizhen,controller.imageView());
+        niceVideoPlayer.setController(controller);
+        niceVideoPlayer.start();
 
     }
-
-    private void setFull() {
-        ConstraintLayout.LayoutParams LayoutParams = new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.MATCH_PARENT);
-        videoPlayer.setLayoutParams(LayoutParams);
-    }
-
-    private int intPositionWhenPause = -1;
-
 
     @Override
+    protected void onStop() {
+        super.onStop();
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
+    }
+
+    @Override
+
     public void onBackPressed() {
-        if (Jzvd.backPress()) {
-            return;
-        }
-        super.onBackPressed();
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Jzvd.releaseAllVideos();
+        // 在全屏或者小窗口时按返回键要先退出全屏或小窗口，
+
+        // 所以在 Activity 中 onBackPress 要交给 NiceVideoPlayer 先处理。
+
+        if (NiceVideoPlayerManager.instance().onBackPressd()) return;
+
+        super.onBackPressed();
+
     }
 
 

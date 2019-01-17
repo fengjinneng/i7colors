@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:layout_marginLeft="@dimen/x9"
+        android:layout_marginRight="@dimen/x9"
+        android:background="@color/fengexian"/>
+
+    <TextView
+        android:id="@+id/dialog_save_img_save"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x90"
+        android:text="保存图片到本地"
+        android:gravity="center"
+        android:textColor="@color/erjibiaoti"
+        android:textSize="@dimen/x24"/>
+
+
+
+</LinearLayout>

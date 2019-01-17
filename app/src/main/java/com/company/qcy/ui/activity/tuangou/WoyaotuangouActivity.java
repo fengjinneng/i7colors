@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
@@ -270,6 +271,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                 choiceAddress(mActivityWoyaotuangouChoiceAddress);
                 break;
             case R.id.activity_woyaotuangou_yinxiongma_shuoming:
+                ActivityUtils.startActivity(YingxiongmashuomingActivity.class);
                 break;
             case R.id.toolbar_back:
                 finish();

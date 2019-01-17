@@ -18,11 +18,12 @@ import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.base.BaseFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class JibencanshuFragment extends Fragment {
+public class JibencanshuFragment extends BaseFragment {
 
     private static final String ARG_PARAM1 = "param1";
 
