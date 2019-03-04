@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/baise"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/item_caigoulianmeng_woyaodinghuo_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/erjibiaoti"
+        app:layout_constraintBottom_toBottomOf="@+id/item_caigoulianmeng_woyaodinghuo_checkBox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_caigoulianmeng_woyaodinghuo_yudingliang"
+        app:layout_constraintTop_toTopOf="@+id/item_caigoulianmeng_woyaodinghuo_checkBox" />
+
+    <CheckBox
+        android:id="@+id/item_caigoulianmeng_woyaodinghuo_checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:focusableInTouchMode="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_caigoulianmeng_woyaodinghuo_zidingyishangpin" />
+
+    <TextView
+        android:id="@+id/textView204"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="预定量:"
+        android:textSize="@dimen/x24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_caigoulianmeng_woyaodinghuo_checkBox" />
+
+    <EditText
+        android:id="@+id/item_caigoulianmeng_woyaodinghuo_yudingliang"
+        android:layout_width="@dimen/x210"
+        android:layout_height="@dimen/x45"
+        android:background="@drawable/background_wenbenshurubiankuang"
+        android:inputType="number"
+        android:gravity="center"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView204"
+        app:layout_constraintStart_toStartOf="@+id/item_caigoulianmeng_woyaodinghuo_cankaobiaozhun"
+        app:layout_constraintTop_toTopOf="@+id/textView204" />
+
+    <TextView
+        android:id="@+id/item_caigoulianmeng_woyaodinghuo_yudingliang_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:text="吨"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/item_caigoulianmeng_woyaodinghuo_yudingliang"
+        app:layout_constraintStart_toEndOf="@+id/item_caigoulianmeng_woyaodinghuo_yudingliang" />
+
+    <TextView
+        android:id="@+id/item_caigoulianmeng_woyaodinghuo_cankaobiaozhun"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x45"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/background_wenbenshurubiankuang"
+        android:drawableRight="@mipmap/xialajiantou"
+        android:gravity="center"
+        android:drawablePadding="@dimen/x40"
+        android:paddingRight="10dp"
+        android:paddingLeft="@dimen/x60"
+        android:text="请选择"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView228"
+        app:layout_constraintStart_toEndOf="@+id/textView228"
+        app:layout_constraintTop_toTopOf="@+id/textView228" />
+
+    <TextView
+        android:id="@+id/textView228"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x30"
+        android:text="参考标准:"
+        android:textSize="@dimen/x24"
+        app:layout_constraintStart_toStartOf="@+id/textView204"
+        app:layout_constraintTop_toBottomOf="@+id/textView204" />
+
+    <TextView
+        android:id="@+id/textView234"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x10"
+        android:layout_marginTop="@dimen/x30"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_caigoulianmeng_woyaodinghuo_cankaobiaozhun" />
+
+    <TextView
+        android:id="@+id/item_caigoulianmeng_woyaodinghuo_zidingyishangpin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/hongse"
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x10"
+        android:text="自定义商品"
+        android:visibility="gone"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x24"
+        app:layout_constraintStart_toStartOf="@+id/item_caigoulianmeng_woyaodinghuo_title"
+        app:layout_constraintTop_toTopOf="parent" />
+</android.support.constraint.ConstraintLayout>

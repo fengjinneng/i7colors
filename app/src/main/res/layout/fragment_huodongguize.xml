@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".huodong.toupiao.fragment.HuodongguizeFragment">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_1_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="asdsadsadsadsadsadasdsadsad"
+            android:textSize="@dimen/x24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_1_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_1_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_1_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_2_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_1_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_1_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_2_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:visibility="gone"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_2_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_2_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_2_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_3_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_2_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_2_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_3_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:visibility="gone"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_3_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_3_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_3_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_4_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_3_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_3_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_4_content"
+            android:layout_width="0dp"
+            android:layout_height="15dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textSize="@dimen/x24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_4_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_4_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_4_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_5_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_4_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_4_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_5_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textSize="@dimen/x24"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_5_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_5_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_5_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_6_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_5_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_5_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_6_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:visibility="gone"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_6_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_6_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_6_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_huodongjieshao_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="活动介绍"
+
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_6_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_9_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_huodongjieshao_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:lineSpacingExtra="@dimen/x10"
+            android:textSize="@dimen/x24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_huodongjieshao_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_huodongjieshao_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_7_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_6_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_6_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_7_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:visibility="gone"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_7_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_7_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_7_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_8_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_7_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_7_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_8_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_8_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_8_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_8_text" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_9_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/erjibiaoti"
+            android:textSize="@dimen/x30"
+            app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_8_text"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_8_content" />
+
+        <TextView
+            android:id="@+id/fragment_huodongguize_9_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="TextView"
+            android:visibility="gone"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_huodongguize_9_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/fragment_huodongguize_9_text"
+            app:layout_constraintTop_toTopOf="@+id/fragment_huodongguize_9_text" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -43,15 +43,14 @@
 
             <TextView
                 android:id="@+id/activity_canyubaojia_chanpinming"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x210"
                 android:layout_marginTop="@dimen/x20"
                 android:text="分散染料 七彩云 分散红FB 200%"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x28"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_company"
                 app:layout_constraintTop_toBottomOf="@+id/textView62" />
 
             <TextView
@@ -74,11 +73,11 @@
                 android:layout_height="@dimen/x64"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
-                android:textSize="@dimen/x24"
                 android:maxLength="30"
+                android:textSize="@dimen/x24"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_canyubaojia_company_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_chanpinming"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_phone"
                 app:layout_constraintTop_toTopOf="@+id/activity_canyubaojia_company_text" />
 
             <TextView
@@ -153,12 +152,12 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:inputType="number"
-                android:paddingLeft="5dp"
                 android:maxLength="11"
+                android:paddingLeft="5dp"
                 android:textSize="@dimen/x24"
                 app:layout_constraintBottom_toBottomOf="@+id/textView66"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_company"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_price"
                 app:layout_constraintTop_toTopOf="@+id/textView66" />
 
             <EditText
@@ -168,12 +167,12 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:inputType="number"
-                android:paddingLeft="5dp"
                 android:maxLength="8"
+                android:paddingLeft="5dp"
                 android:textSize="@dimen/x24"
                 app:layout_constraintBottom_toBottomOf="@+id/textView67"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_phone"
+                app:layout_constraintStart_toStartOf="@+id/textView71"
                 app:layout_constraintTop_toTopOf="@+id/textView67" />
 
             <TextView
@@ -182,23 +181,23 @@
                 android:layout_height="wrap_content"
                 android:text="KG"
                 app:layout_constraintBottom_toBottomOf="@+id/textView68"
-                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_price"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_radio_group"
                 app:layout_constraintTop_toTopOf="@+id/textView68" />
 
             <TextView
                 android:id="@+id/activity_canyubaojia_time"
                 android:layout_width="@dimen/x230"
                 android:layout_height="@dimen/x64"
-                android:text="请选择"
                 android:background="@drawable/background_dengluwenbenkuang"
+                android:drawablePadding="8dp"
                 android:drawableRight="@mipmap/xialajiantou"
-                android:textSize="@dimen/x24"
                 android:gravity="center"
                 android:paddingLeft="8dp"
                 android:paddingRight="8dp"
-                android:drawablePadding="8dp"
+                android:text="请选择"
+                android:textSize="@dimen/x24"
                 app:layout_constraintBottom_toBottomOf="@+id/textView70"
-                app:layout_constraintStart_toStartOf="@+id/textView71"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyubaojia_radio_group"
                 app:layout_constraintTop_toTopOf="@+id/textView70" />
 
             <TextView
@@ -237,9 +236,10 @@
                 android:id="@+id/activity_canyubaojia_radio_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="@+id/textView69"
-                app:layout_constraintStart_toStartOf="@+id/textView71"
+                app:layout_constraintStart_toEndOf="@+id/textView69"
                 app:layout_constraintTop_toTopOf="@+id/textView69">
 
                 <RadioButton

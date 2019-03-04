@@ -62,32 +62,22 @@
         app:layout_constraintTop_toBottomOf="@+id/item_chanyexixun_title" />
 
     <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="产看详情 >>"
-        android:textSize="@dimen/x24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/item_chanyexixun_content" />
-
-    <TextView
         android:id="@+id/item_chanyexixun_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/x20"
-        android:layout_marginEnd="8dp"
-        android:text="2018-09-18"
+        android:layout_marginStart="8dp"
         android:textSize="@dimen/x24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/textView75"
+        app:layout_constraintStart_toEndOf="@+id/textView75" />
 
     <TextView
         android:id="@+id/textView75"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="8dp"
         android:text="新闻日期:"
         android:textSize="@dimen/x24"
-        app:layout_constraintBottom_toBottomOf="@+id/item_chanyexixun_time"
-        app:layout_constraintEnd_toStartOf="@+id/item_chanyexixun_time" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_chanyexixun_img" />
 </android.support.constraint.ConstraintLayout>

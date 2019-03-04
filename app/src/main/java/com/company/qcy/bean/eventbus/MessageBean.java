@@ -148,8 +148,16 @@ public class MessageBean {
         //优惠展销购买成功
         public static final int YOUHUIZHANXIAOGOUMAICHENGGONG = 1027;
 
-    }
+        //采购联盟 添加自定义商品成功
+        public static final int CGLMTIANJIASHANGPIN = 1028;
 
+        //投票 参与投票成功
+        public static final int CANYUTOUPIAOCHENGGONG = 1029;
+
+        //投票 投票成功
+        public static final int TOUPIAOCHENGGONG = 1030;
+
+    }
 
 }
 

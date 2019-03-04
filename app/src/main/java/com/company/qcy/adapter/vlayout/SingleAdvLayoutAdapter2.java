@@ -17,7 +17,8 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.BannerBean;
-import com.company.qcy.huodong.caigoulianmeng.CaigoulianmengActivity;
+import com.company.qcy.huodong.caigoulianmeng2.activity.CaigoulianmengActivity;
+import com.company.qcy.huodong.toupiao.activity.ToupiaoListActivity;
 import com.company.qcy.huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity;
 import com.company.qcy.ui.activity.tuangou.TuangouliebiaoActivity;
 
@@ -75,16 +76,23 @@ public class SingleAdvLayoutAdapter2 extends DelegateAdapter.Adapter<SingleAdvLa
         holder.layout.setVisibility(View.VISIBLE);
 
         switch (datas.size()) {
-
             case 1:
                 holder.img1.setVisibility(View.VISIBLE);
                 GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(0).getAd_image(), holder.img1);
+                holder.img2.setVisibility(View.GONE);
+                holder.img3.setVisibility(View.GONE);
+                holder.img4.setVisibility(View.GONE);
+                holder.img5.setVisibility(View.GONE);
+
                 break;
             case 2:
-                holder.img1.setVisibility(View.VISIBLE);
-                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(0).getAd_image(), holder.img1);
+                holder.img1.setVisibility(View.GONE);
+                holder.img4.setVisibility(View.GONE);
+                holder.img5.setVisibility(View.GONE);
                 holder.img2.setVisibility(View.VISIBLE);
-                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(1).getAd_image(), holder.img2);
+                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(0).getAd_image(), holder.img2);
+                holder.img3.setVisibility(View.VISIBLE);
+                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(1).getAd_image(), holder.img3);
                 break;
             case 3:
                 holder.img1.setVisibility(View.VISIBLE);
@@ -93,16 +101,19 @@ public class SingleAdvLayoutAdapter2 extends DelegateAdapter.Adapter<SingleAdvLa
                 GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(1).getAd_image(), holder.img2);
                 holder.img3.setVisibility(View.VISIBLE);
                 GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(2).getAd_image(), holder.img3);
+                holder.img4.setVisibility(View.GONE);
+                holder.img5.setVisibility(View.GONE);
                 break;
             case 4:
-                holder.img1.setVisibility(View.VISIBLE);
-                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(0).getAd_image(), holder.img1);
+                holder.img1.setVisibility(View.GONE);
                 holder.img2.setVisibility(View.VISIBLE);
-                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(1).getAd_image(), holder.img2);
+                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(0).getAd_image(), holder.img2);
                 holder.img3.setVisibility(View.VISIBLE);
-                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(2).getAd_image(), holder.img3);
+                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(1).getAd_image(), holder.img3);
                 holder.img4.setVisibility(View.VISIBLE);
-                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(3).getAd_image(), holder.img4);
+                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(2).getAd_image(), holder.img4);
+                holder.img5.setVisibility(View.VISIBLE);
+                GlideUtils.loadImageRct(context, ServerInfo.IMAGE + datas.get(3).getAd_image(), holder.img5);
                 break;
             case 5:
                 holder.img1.setVisibility(View.VISIBLE);
@@ -129,48 +140,97 @@ public class SingleAdvLayoutAdapter2 extends DelegateAdapter.Adapter<SingleAdvLa
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.vlayout_home_part2_img1:
-                jumpTo(datas.get(0).getAd_name());
-                break;
-            case R.id.vlayout_home_part2_img2:
-                jumpTo(datas.get(1).getAd_name());
-                break;
-            case R.id.vlayout_home_part2_img3:
-                jumpTo(datas.get(2).getAd_name());
-                break;
-            case R.id.vlayout_home_part2_img4:
-                jumpTo(datas.get(3).getAd_name());
-                break;
-            case R.id.vlayout_home_part2_img5:
-                jumpTo(datas.get(4).getAd_name());
-                break;
 
+        if (datas.size() == 1) {
+            jumpTo(datas.get(0).getAd_name());
+        }
+        if (datas.size() == 2) {
+
+            switch (v.getId()) {
+                case R.id.vlayout_home_part2_img2:
+                    jumpTo(datas.get(0).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img3:
+                    jumpTo(datas.get(1).getAd_name());
+                    break;
+            }
+        }
+
+        if (datas.size() == 3) {
+            switch (v.getId()) {
+                case R.id.vlayout_home_part2_img1:
+                    jumpTo(datas.get(0).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img2:
+                    jumpTo(datas.get(1).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img3:
+                    jumpTo(datas.get(2).getAd_name());
+                    break;
+            }
+        }
+
+        if (datas.size() == 4) {
+            switch (v.getId()) {
+                case R.id.vlayout_home_part2_img2:
+                    jumpTo(datas.get(0).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img3:
+                    jumpTo(datas.get(1).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img4:
+                    jumpTo(datas.get(2).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img5:
+                    jumpTo(datas.get(3).getAd_name());
+                    break;
+            }
+        }
+        if (datas.size() == 5) {
+            switch (v.getId()) {
+                case R.id.vlayout_home_part2_img1:
+                    jumpTo(datas.get(0).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img2:
+                    jumpTo(datas.get(1).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img3:
+                    jumpTo(datas.get(2).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img4:
+                    jumpTo(datas.get(3).getAd_name());
+                    break;
+                case R.id.vlayout_home_part2_img5:
+                    jumpTo(datas.get(4).getAd_name());
+                    break;
+
+            }
         }
     }
 
     private void jumpTo(String adName) {
 
-        switch (adName){
+        switch (adName) {
             //团购
             case "group_buy":
                 ActivityUtils.startActivity(TuangouliebiaoActivity.class);
                 break;
-                //优惠展销
+            //优惠展销
             case "sales":
                 ActivityUtils.startActivity(YouhuizhanxiaoActivity.class);
                 break;
-                //采购联盟
+            //采购联盟
             case "meeting":
                 ActivityUtils.startActivity(CaigoulianmengActivity.class);
                 break;
-                //大咖投票
+            //投票
             case "vote":
+                ActivityUtils.startActivity(ToupiaoListActivity.class);
                 break;
-                //抽奖
+            //抽奖
             case "draw":
                 break;
-                //竞拍
+            //竞拍
             case "auction":
                 break;
         }

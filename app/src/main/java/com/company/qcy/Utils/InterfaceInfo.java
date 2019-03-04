@@ -7,7 +7,7 @@ public class InterfaceInfo {
     //BANNER
     public static final String INDEXBANNER = "index/getBanner";
     //首页数据
-    public static final String INDEXDATA = "index/getAllData";
+    public static final String INDEXDATA = "index/getAllDataNew";
     //首页搜索
     public static final String INDEXSEARCH = "index/searchData";
 
@@ -119,7 +119,6 @@ public class InterfaceInfo {
     public static final String GETENQUIRYINFORMDETAIL = "user/getMallEnquiryInformDetail";
     //系统消息
     public static final String SYSTEMINFORMLIST = "user/getSystemInformList";
-
     //未读消息
     public static final String GETNOTREADMESSAGECOUNT = "user/getNotReadCount";
 
@@ -184,7 +183,6 @@ public class InterfaceInfo {
     public static final String DAVRENZHEN = "user/CertV";
 
 
-
     //优惠展销
 
     //优惠展销列表
@@ -198,9 +196,30 @@ public class InterfaceInfo {
 
 
     //采购联盟
-    //优惠展销列表
+    //采购联盟列表
     public static final String CAIGOULIANMENGLIST = "meetingName/queryMeetingNameList";
+    //获取某个采购的商品列表0 订货  1供货
+    public static final String CAIGOULIANMENGPRODUCTLIST = "meetingShop/queryAddMeetingShopList";
+    //我的货单  0 订货  1供货
+    public static final String CAIGOULIANMENGHUODAN = "meetingShop/queryMeetingUserShopList";
+    //我要订货
+    public static final String CAIGOULIANMENGWOYAODINGHUO = "meetingShop/addMeetingShop";
+    //发送短信
+    public static final String CAIGOULIANMENMESSAGE = "meetingShop/registerCode";
+    //验证短信
+    public static final String YANZHENGCAIGOULIANMENGMESSAGE = "meetingShop/verifycode";
 
-
-
+    //投票
+    //投票活动列表
+    public static final String TOUPIAOLIST = "voteMain/queryVoteMainList";
+    //获取投票详情
+    public static final String GETTOUPIAOLDETAILBYID = "voteMain/getVoteMainById";
+    //参赛人员列表
+    public static final String CANSHAIRENYUANLIST = "voteApplication/queryVoteApplicationList";
+    //投票
+    public static final String TOUPIAO = "voteJoin/addVoteJoin";
+    //申请参与
+    public static final String SHENGQINGCANYU = "voteApplication/addVoteApplication";
+    //获取参赛人员详情
+    public static final String CANSAIRENYUANDETAIL = "voteApplication/getVoteApplicationById";
 }

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise"
+    tools:context=".huodong.toupiao.activity.XuanshouDetailActivity">
+
+    <include
+        android:id="@+id/include38"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/activity_xuanshou_detail_img"
+        android:layout_width="@dimen/x180"
+        android:layout_height="@dimen/x180"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/x80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include38"
+        app:srcCompat="@drawable/place_500x500" />
+
+    <ImageView
+        android:id="@+id/activity_xuanshou_detail_paiming_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x70"
+        android:layout_marginTop="@dimen/x40"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_xuanshou_detail_img"
+        app:srcCompat="@mipmap/toupiao_diyiming" />
+
+    <TextView
+        android:id="@+id/activity_xuanshou_detail_paiming_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x70"
+        android:layout_marginTop="@dimen/x40"
+        android:text="5"
+        android:textColor="@color/biaoti"
+        android:textStyle="italic"
+        android:visibility="invisible"
+        android:textSize="@dimen/x70"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_xuanshou_detail_img" />
+
+    <TextView
+        android:id="@+id/activity_xuanshou_detail_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="@dimen/x30"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/biaoti"
+        android:textSize="@dimen/x36"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/activity_xuanshou_detail_paiming_img"
+        app:layout_constraintTop_toBottomOf="@+id/activity_xuanshou_detail_img" />
+
+    <TextView
+        android:id="@+id/textView249"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NO."
+        android:textSize="@dimen/x24"
+        app:layout_constraintStart_toStartOf="@+id/activity_xuanshou_detail_name"
+        app:layout_constraintTop_toBottomOf="@+id/activity_xuanshou_detail_name" />
+
+    <TextView
+        android:id="@+id/activity_xuanshou_detail_paiming_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView249"
+        app:layout_constraintStart_toEndOf="@+id/textView249" />
+
+    <TextView
+        android:id="@+id/textView252"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="当前排名第"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_paiming_1"
+        app:layout_constraintStart_toEndOf="@+id/activity_xuanshou_detail_paiming_1" />
+
+    <TextView
+        android:id="@+id/activity_xuanshou_detail_paiming_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView252"
+        app:layout_constraintStart_toEndOf="@+id/textView252" />
+
+    <TextView
+        android:id="@+id/activity_xuanshou_detail_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="@dimen/x50"
+        android:textSize="@dimen/x24"
+        android:lineSpacingExtra="@dimen/x10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/activity_xuanshou_detail_paiming_text"
+        app:layout_constraintTop_toBottomOf="@+id/textView252" />
+
+    <TextView
+        android:id="@+id/activity_xuanshou_detail_tickets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x100"
+        android:layout_marginTop="@dimen/x120"
+        android:text="0"
+        android:textSize="@dimen/x36"
+        android:textColor="@color/chunhongse"
+        app:layout_constraintStart_toStartOf="@+id/activity_xuanshou_detail_content"
+        app:layout_constraintTop_toBottomOf="@+id/activity_xuanshou_detail_content" />
+
+    <TextView
+        android:id="@+id/textView257"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="票"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_tickets"
+        app:layout_constraintStart_toEndOf="@+id/activity_xuanshou_detail_tickets" />
+
+    <TextView
+        android:id="@+id/activity_xuanshou_detail_bianhao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x100"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_tickets"
+        app:layout_constraintEnd_toEndOf="@+id/activity_xuanshou_detail_content" />
+
+    <TextView
+        android:id="@+id/textView259"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:text="编号:"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_bianhao"
+        app:layout_constraintEnd_toStartOf="@+id/activity_xuanshou_detail_bianhao" />
+
+    <Button
+        android:id="@+id/activity_xuanshou_detail_toupiao"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:text="投票"
+        android:textColor="@color/baise"
+        android:background="@mipmap/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

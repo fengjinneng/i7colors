@@ -41,10 +41,16 @@ public class KaifangshangchengRecyclerviewAdapter extends
         ImageView imageView = (ImageView) helper.getView(R.id.item_kaifangshangcheng_img);
         GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getLogo(), imageView);
 
-        if (StringUtils.isEmpty(item.getCompany().getPhone())) {
-            helper.setText(R.id.item_kaifangshangcheng_phone, "暂无联系方式");
+        if (StringUtils.isEmpty(item.getCompany().getTel())) {
+
+            if (StringUtils.isEmpty(item.getCompany().getPhone())) {
+                helper.setText(R.id.item_kaifangshangcheng_phone, "暂无联系方式");
+            } else {
+                helper.setText(R.id.item_kaifangshangcheng_phone, item.getCompany().getPhone());
+            }
+
         } else {
-            helper.setText(R.id.item_kaifangshangcheng_phone, item.getCompany().getPhone());
+            helper.setText(R.id.item_kaifangshangcheng_phone, item.getCompany().getTel());
         }
         if (!StringUtils.isEmpty(item.getCompany().getProvinceName())) {
             helper.setText(R.id.item_kaifangshangcheng_address, item.getCompany().getProvinceName());

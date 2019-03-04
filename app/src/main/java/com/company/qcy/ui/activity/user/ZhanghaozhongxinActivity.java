@@ -169,7 +169,6 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
 
     private void showHeadPortraitDialog() {
 
-
         chooseHeadDialog = new Dialog(ZhanghaozhongxinActivity.this, R.style.BottomDialog);
         View contentView = LayoutInflater.from(ZhanghaozhongxinActivity.this).inflate(R.layout.dialog_choose_head, null);
         chooseHeadDialog.setContentView(contentView);
@@ -184,7 +183,6 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
         chooseHeadDialog.show();
         contentView.findViewById(R.id.tv_take_video).setVisibility(View.GONE);
         contentView.findViewById(R.id.tv_choose_video).setVisibility(View.GONE);
-
 
         // 从相册选择图片
         contentView.findViewById(R.id.tv_choose_photo).setOnClickListener(new View.OnClickListener() {

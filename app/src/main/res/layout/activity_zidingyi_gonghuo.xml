@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_custom_product_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".huodong.caigoulianmeng.activity.AddDinghuoCustomProductActivity">
+
+    <include
+        android:id="@+id/include35"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/x102"
+        app:layout_constraintBottom_toTopOf="@+id/activity_add_custom_product_submit_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <TextView
+                android:id="@+id/textView202"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:text="商品名称:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/activity_zidingyi_gonghuo_product_name"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x64"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="@dimen/x100"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:hint="请输入商品名称"
+                android:inputType="textPersonName"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView202"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView202"
+                app:layout_constraintTop_toTopOf="@+id/textView202" />
+
+            <TextView
+                android:id="@+id/textView217"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x60"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:text="预定量:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView202"
+                app:layout_constraintTop_toBottomOf="@+id/textView254" />
+
+            <EditText
+                android:id="@+id/activity_zidingyi_gonghuo_product_yudingliang"
+                android:layout_width="@dimen/x220"
+                android:layout_height="@dimen/x64"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:hint="请输入预定量"
+                android:inputType="number"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView217"
+                app:layout_constraintStart_toStartOf="@+id/activity_zidingyi_gonghuo_product_name"
+                app:layout_constraintTop_toTopOf="@+id/textView217" />
+
+            <TextView
+                android:id="@+id/textView222"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="吨"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_zidingyi_gonghuo_product_yudingliang"
+                app:layout_constraintStart_toEndOf="@+id/activity_zidingyi_gonghuo_product_yudingliang"
+                app:layout_constraintTop_toTopOf="@+id/activity_zidingyi_gonghuo_product_yudingliang" />
+
+            <TextView
+                android:id="@+id/textView223"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/x60"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:text="包装形式:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView217" />
+
+            <EditText
+                android:id="@+id/activity_zidingyi_gonghuo_product_baozhuangxinshi"
+                android:layout_width="@dimen/x220"
+                android:layout_height="@dimen/x64"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:hint="请输入包装形式"
+                android:inputType="textPersonName"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView223"
+                app:layout_constraintStart_toStartOf="@+id/activity_zidingyi_gonghuo_product_yudingliang"
+                app:layout_constraintTop_toTopOf="@+id/textView223" />
+
+            <TextView
+                android:id="@+id/textView229"
+                android:layout_width="wrap_content"
+                android:layout_height="13dp"
+                android:layout_marginStart="8dp"
+                android:text="（例：25KG/箱）"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_zidingyi_gonghuo_product_baozhuangxinshi"
+                app:layout_constraintStart_toEndOf="@+id/activity_zidingyi_gonghuo_product_baozhuangxinshi"
+                app:layout_constraintTop_toTopOf="@+id/activity_zidingyi_gonghuo_product_baozhuangxinshi" />
+
+            <TextView
+                android:id="@+id/textView230"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x60"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="参考标准\n(可多选)"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView223"
+                app:layout_constraintTop_toBottomOf="@+id/textView260" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_zidingyi_gonghuo_product_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_zidingyi_gonghuo_product_baozhuangxinshi"
+                app:layout_constraintTop_toTopOf="@+id/textView230"
+                app:spanCount="2" />
+
+            <TextView
+                android:id="@+id/textView254"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x60"
+                android:text="价格:"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView202"
+                app:layout_constraintTop_toBottomOf="@+id/textView202" />
+
+            <EditText
+                android:id="@+id/activity_zidingyi_gonghuo_product_price"
+                android:layout_width="@dimen/x220"
+                android:layout_height="@dimen/x64"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:hint="请输入价格"
+                android:inputType="number"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:textSize="@dimen/x24"
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="@+id/textView254"
+                app:layout_constraintStart_toStartOf="@+id/activity_zidingyi_gonghuo_product_name"
+                app:layout_constraintTop_toTopOf="@+id/textView254" />
+
+            <TextView
+                android:id="@+id/textView258"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="元/KG"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_zidingyi_gonghuo_product_price"
+                app:layout_constraintStart_toEndOf="@+id/activity_zidingyi_gonghuo_product_price"
+                app:layout_constraintTop_toTopOf="@+id/activity_zidingyi_gonghuo_product_price" />
+
+            <TextView
+                android:id="@+id/textView260"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x60"
+                android:text="报价有效期:"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView223"
+                app:layout_constraintTop_toBottomOf="@+id/textView223" />
+
+            <TextView
+                android:id="@+id/activity_zidingyi_gonghuo_product_date"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x64"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:gravity="center"
+                android:paddingRight="@dimen/x20"
+                android:text="请选择"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView260"
+                app:layout_constraintEnd_toEndOf="@+id/activity_zidingyi_gonghuo_product_baozhuangxinshi"
+                app:layout_constraintStart_toStartOf="@+id/activity_zidingyi_gonghuo_product_baozhuangxinshi"
+                app:layout_constraintTop_toTopOf="@+id/textView260" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_add_custom_product_submit_layout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/activity_zidingyi_gonghuo_product_submit"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@mipmap/bg"
+            android:gravity="center"
+            android:text="添加"
+            android:textColor="@color/baise"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/activity_zidingyi_gonghuo_product_cancle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_zidingyi_gonghuo_product_cancle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/baise"
+            android:gravity="center"
+            android:text="取消"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/activity_zidingyi_gonghuo_product_submit"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>

@@ -1,9 +1,9 @@
 package com.company.qcy.ui.activity.user;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +13,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -28,8 +28,8 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
+import com.company.qcy.base.WebActivity;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
 
@@ -87,6 +87,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
      * 《七彩云协议》
      */
     private TextView mActivityRegisterXieyi;
+    /**
+     * 输入邀请码(非必填)
+     */
+    private EditText mActivityRegisterYaoqingma;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +100,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
+        mActivityRegisterYaoqingma = (EditText) findViewById(R.id.activity_register_yaoqingma);
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarText = (TextView) findViewById(R.id.toolbar_text);
@@ -118,6 +123,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         getCaptcha();
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("欢迎注册");
+        mActivityRegisterXieyi.setOnClickListener(this);
     }
 
     private void getCaptcha() {
@@ -179,8 +185,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     ToastUtils.showShort("两次输入的密码不同");
                     return;
                 }
+
                 PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.REGISTER)
                         .tag(this)
+                        .params("inviteCode",mActivityRegisterYaoqingma.getText().toString())
                         .params("smsCode", mActivityRegisterSms.getText().toString().trim())
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("phone", mActivityRegisterPhone.getText().toString().trim())
@@ -265,6 +273,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                                 mActivityRegisterSendsms.setText(sdf.format(new Date(millisUntilFinished)) + "S");
                                                 mActivityRegisterSendsms.setEnabled(false);
                                             }
+
                                             @Override
                                             public void onFinish() {
                                                 mActivityRegisterSendsms.setText("重新获取验证码");
@@ -279,7 +288,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                                 }
                                 if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                                    SignAndTokenUtil.getSign(RegisterActivity.this,stringPostRequest,this);
+                                    SignAndTokenUtil.getSign(RegisterActivity.this, stringPostRequest, this);
                                     return;
                                 }
                                 ToastUtils.showShort(msg);
@@ -306,6 +315,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.toolbar_back:
                 finish();
+                break;
+            case R.id.activity_register_xieyi:
+                Intent intent = new Intent(this, WebActivity.class);
+                intent.putExtra("webUrl", "http://mobile.i7colors.com/groupBuyMobile/secret.html");
+                ActivityUtils.startActivity(intent);
                 break;
         }
     }

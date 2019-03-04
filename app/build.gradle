@@ -74,8 +74,8 @@ android {
         applicationId "com.company.qcy"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 5
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -133,7 +133,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //底部导航栏
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.0.5'
+    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
 
     //vlayout
     implementation('com.alibaba.android:vlayout:1.2.8@aar') {

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/baise"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView243"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="参与者:"
+                android:textSize="@dimen/x24"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/fragment_shenqingcanyu_name"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x60"
+                android:layout_marginEnd="8dp"
+                android:hint="请输入全称"
+                android:paddingLeft="@dimen/x20"
+                android:textSize="@dimen/x24"
+                android:background="@drawable/background_shuruwenbenkuang"
+                app:layout_constraintBottom_toBottomOf="@+id/textView243"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_shenqingcanyu_describe"
+                app:layout_constraintTop_toTopOf="@+id/textView243" />
+
+            <TextView
+                android:id="@+id/textView232"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:text="联系方式:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView243"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_shenqingcanyu_name" />
+
+            <EditText
+                android:id="@+id/fragment_shenqingcanyu_phone"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x60"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="@dimen/x50"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:hint="请输入联系人手机号"
+                android:inputType="number"
+                android:maxLength="11"
+                android:paddingLeft="@dimen/x20"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView232"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView232"
+                app:layout_constraintTop_toTopOf="@+id/textView232" />
+
+            <TextView
+                android:id="@+id/textView247"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="5dp"
+                android:text="地区:"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView232"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_shenqingcanyu_phone" />
+
+            <TextView
+                android:id="@+id/fragment_shenqingcanyu_address"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x60"
+                android:text="请选择"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x20"
+                android:gravity="center"
+                android:drawablePadding="5dp"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:textSize="@dimen/x24"
+                android:background="@drawable/background_shuruwenbenkuang"
+                app:layout_constraintBottom_toBottomOf="@+id/textView247"
+                app:layout_constraintStart_toStartOf="@+id/fragment_shenqingcanyu_phone"
+                app:layout_constraintTop_toTopOf="@+id/textView247" />
+
+            <TextView
+                android:id="@+id/textView250"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:text="图片:"
+                android:textSize="@dimen/x24"
+                android:drawablePadding="5dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                app:layout_constraintStart_toStartOf="@+id/textView247"
+                app:layout_constraintTop_toBottomOf="@+id/textView247" />
+
+            <TextView
+                android:id="@+id/fragment_shenqingcanyu_choiceimg_text"
+                android:layout_width="@dimen/x180"
+                android:layout_height="@dimen/x180"
+                android:background="@color/fengexian"
+                android:gravity="center"
+                android:text="点击\n上传"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/fragment_shenqingcanyu_address"
+                app:layout_constraintTop_toTopOf="@+id/textView250" />
+
+            <TextView
+                android:id="@+id/textView253"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:text="描述介绍:"
+                android:textSize="@dimen/x24"
+                android:drawablePadding="5dp"
+                app:layout_constraintStart_toStartOf="@+id/textView250"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_shenqingcanyu_choiceimg_text" />
+
+            <EditText
+                android:id="@+id/fragment_shenqingcanyu_describe"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="top"
+                android:maxLength="50"
+                android:minLines="5"
+                android:padding="@dimen/x20"
+                android:hint="请输入描述,最多50字。"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_shenqingcanyu_choiceimg_text"
+                app:layout_constraintTop_toTopOf="@+id/textView253" />
+
+            <Button
+                android:id="@+id/fragment_shenqingcanyu_submit"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x98"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/x100"
+                android:text="提交"
+                android:background="@mipmap/bg"
+                android:textColor="@color/baise"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_shenqingcanyu_describe" />
+
+            <ImageView
+                android:id="@+id/fragment_shenqingcanyu_choiceimg_img"
+                android:layout_width="@dimen/x180"
+                android:layout_height="@dimen/x180"
+                android:scaleType="fitXY"
+                android:visibility="invisible"
+                android:background="@color/startcolor"
+                app:layout_constraintStart_toStartOf="@+id/fragment_shenqingcanyu_address"
+                app:layout_constraintTop_toTopOf="@+id/textView250" />
+
+        </android.support.constraint.ConstraintLayout>
+
+
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.constraint.ConstraintLayout>

@@ -56,6 +56,10 @@ public class BindPhoneActivity extends AppCompatActivity implements View.OnClick
 
 
     private UserBean userBean;
+    /**
+     * 邀请码（选填）
+     */
+    private EditText mActivityBindPhoneInvitecode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,7 @@ public class BindPhoneActivity extends AppCompatActivity implements View.OnClick
         mActivityBindPhoneCancle.setOnClickListener(this);
         mActivityBindPhoneCommit = (Button) findViewById(R.id.activity_bind_phone_commit);
         mActivityBindPhoneCommit.setOnClickListener(this);
+        mActivityBindPhoneInvitecode = (EditText) findViewById(R.id.activity_bind_phone_invitecode);
     }
 
 
@@ -89,18 +94,16 @@ public class BindPhoneActivity extends AppCompatActivity implements View.OnClick
                     ToastUtils.showShort("请填写正确的手机号码");
                     return;
                 }
-
                 PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.WXSENDSMS)
                         .tag(this)
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("mobile", mActivityBindPhonePhone.getText().toString());
 
-
                 DialogStringCallback stringCallback = new DialogStringCallback(this) {
 
                     @Override
                     public void onSuccess(Response<String> response) {
-                        LogUtils.e("WXSENDSMS" ,response.body());
+                        LogUtils.e("WXSENDSMS", response.body());
 
                         try {
                             JSONObject jsonObject = JSONObject.parseObject(response.body());
@@ -124,7 +127,7 @@ public class BindPhoneActivity extends AppCompatActivity implements View.OnClick
                                 return;
                             }
                             if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                                SignAndTokenUtil.getSign(BindPhoneActivity.this,request,this);
+                                SignAndTokenUtil.getSign(BindPhoneActivity.this, request, this);
                                 return;
                             }
                             ToastUtils.showShort(msg);
@@ -162,6 +165,7 @@ public class BindPhoneActivity extends AppCompatActivity implements View.OnClick
                         .tag(this)
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("phone", mActivityBindPhonePhone.getText().toString())
+                        .params("inviteCode",mActivityBindPhoneInvitecode.getText().toString())
                         .params("token", SPUtils.getInstance().getString("token"))
                         .params("smsCode", mActivityBindPhoneVerifycode.getText().toString());
 
@@ -182,7 +186,7 @@ public class BindPhoneActivity extends AppCompatActivity implements View.OnClick
                                 return;
                             }
                             if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                                SignAndTokenUtil.getSign(BindPhoneActivity.this,postRequest,this);
+                                SignAndTokenUtil.getSign(BindPhoneActivity.this, postRequest, this);
                                 return;
                             }
                             ToastUtils.showShort(msg);

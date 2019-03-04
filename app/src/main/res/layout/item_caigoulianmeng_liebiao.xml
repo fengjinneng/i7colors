@@ -4,20 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/baise"
     android:layout_height="wrap_content">
 
 
     <TextView
-        android:id="@+id/textView189"
+        android:id="@+id/item_caigoulianmeng_liebiao_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="南昌地区印染企业采购联盟南昌"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/erjibiaoti"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -28,7 +29,7 @@
         android:background="@color/fengexian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView189" />
+        app:layout_constraintTop_toBottomOf="@+id/item_caigoulianmeng_liebiao_name" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout27"
@@ -36,42 +37,44 @@
         android:layout_height="@dimen/x62"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView192">
 
         <TextView
-            android:id="@+id/textView194"
+            android:id="@+id/item_caigoulianmeng_liebiao_woyaocaigou"
             android:layout_width="@dimen/x260"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/x10"
+            android:layout_marginTop="@dimen/x10"
             android:gravity="center"
             android:text="我要采购"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView196"
+            app:layout_constraintEnd_toStartOf="@+id/item_caigoulianmeng_liebiao_woyaogonghuo"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView196"
+            android:id="@+id/item_caigoulianmeng_liebiao_woyaogonghuo"
             android:layout_width="@dimen/x260"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/x10"
+            android:layout_marginTop="@dimen/x10"
             android:gravity="center"
             android:text="我要供货"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/textView194"
+            app:layout_constraintStart_toEndOf="@+id/item_caigoulianmeng_liebiao_woyaocaigou"
             app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:background="@color/fengexian"
         android:id="@+id/textView197"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="8dp"
+        android:background="@color/fengexian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout27" />
@@ -98,7 +101,6 @@
                 android:id="@+id/item_caigoulianmeng_liebiao_total_dinghuo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="99"
                 android:textColor="@color/chunhongse"
                 app:layout_constraintBottom_toTopOf="@+id/textView1"
                 app:layout_constraintEnd_toStartOf="@+id/item_caigoulianmeng_liebiao_total_dinghuo_unit"
@@ -127,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:text="吨"
                 android:textSize="@dimen/x20"
-                app:layout_constraintBottom_toBottomOf="@+id/item_caigoulianmeng_liebiao_total_dinghuo"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_caigoulianmeng_liebiao_total_dinghuo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/item_caigoulianmeng_liebiao_total_dinghuo" />
@@ -147,7 +149,6 @@
                 android:id="@+id/item_caigoulianmeng_liebiao_qiyenumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="99"
                 android:textColor="@color/chunhongse"
                 app:layout_constraintBottom_toTopOf="@+id/textView2"
                 app:layout_constraintEnd_toStartOf="@+id/item_caigoulianmeng_liebiao_qiyenumber_unit"
@@ -176,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:text="家"
                 android:textSize="@dimen/x20"
-                app:layout_constraintBottom_toBottomOf="@+id/item_caigoulianmeng_liebiao_qiyenumber"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_caigoulianmeng_liebiao_qiyenumber"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/item_caigoulianmeng_liebiao_qiyenumber" />
@@ -197,7 +198,6 @@
                 android:id="@+id/item_caigoulianmeng_liebiao_total_gonghuo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="99"
                 android:textColor="@color/chunhongse"
                 app:layout_constraintBottom_toTopOf="@+id/textView3"
                 app:layout_constraintEnd_toStartOf="@+id/item_caigoulianmeng_liebiao_total_gonghuo_unit"
@@ -226,7 +226,7 @@
                 android:layout_height="wrap_content"
                 android:text="吨"
                 android:textSize="@dimen/x20"
-                app:layout_constraintBottom_toBottomOf="@+id/item_caigoulianmeng_liebiao_total_gonghuo"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_caigoulianmeng_liebiao_total_gonghuo"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/item_caigoulianmeng_liebiao_total_gonghuo" />
@@ -246,7 +246,6 @@
                 android:id="@+id/item_caigoulianmeng_liebiao_gongyingshan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="99"
                 android:textColor="@color/chunhongse"
                 app:layout_constraintBottom_toTopOf="@+id/textView127"
                 app:layout_constraintEnd_toStartOf="@+id/item_caigoulianmeng_liebiao_gongyingshan_unit"
@@ -275,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:text="家"
                 android:textSize="@dimen/x20"
-                app:layout_constraintBottom_toBottomOf="@+id/item_caigoulianmeng_liebiao_gongyingshan"
+                app:layout_constraintBaseline_toBaselineOf="@+id/item_caigoulianmeng_liebiao_gongyingshan"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/item_caigoulianmeng_liebiao_gongyingshan" />
@@ -327,11 +326,10 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout28" />
 
     <TextView
-        android:id="@+id/textView202"
+        android:id="@+id/item_caigoulianmeng_liebiao_status"
         android:layout_width="0dp"
         android:gravity="center"
         android:textSize="@dimen/x24"
-        android:text="尚未开始（活动时间：2018-12-06  至  2019-01-10）"
         android:layout_height="@dimen/x60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -344,5 +342,5 @@
         android:background="@color/fengexian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView202" />
+        app:layout_constraintTop_toBottomOf="@+id/item_caigoulianmeng_liebiao_status" />
 </android.support.constraint.ConstraintLayout>

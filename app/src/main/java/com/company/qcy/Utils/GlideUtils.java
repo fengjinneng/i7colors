@@ -11,6 +11,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
@@ -260,6 +262,26 @@ public class GlideUtils {
 
     }
 
+    public static void loadYuanjiaoPicture(Context context,String url,ImageView imageView){
+        CornerTransform transformation = new CornerTransform(context, dip2px(context, 10));
+        //只是绘制左上角和右上角圆角
+        transformation.setExceptCorner(false, false, false, false);
+        RequestOptions options = new RequestOptions();
+        options.transform(transformation);
+
+        Glide.with(context).load(url).apply(options).into(imageView);
+
+
+
+        //设置图片圆角角度  没试过，应该也可以
+
+//        RoundedCorners roundedCorners= new RoundedCorners(6);
+        //通过RequestOptions扩展功能,override:采样率,因为ImageView就这么大,可以压缩图片,降低内存消耗
+//        RequestOptions options=RequestOptions.bitmapTransform(roundedCorners).override(300, 300);
+//        Glide.with(context).load(url).apply(options).into(imageView);
+
+    }
+
 
     public static int dip2px(Context context, float dp) {
         float scale = context.getResources().getDisplayMetrics().density;
@@ -289,7 +311,6 @@ public class GlideUtils {
                 }
             }
         }).start();
-
 
     }
 }

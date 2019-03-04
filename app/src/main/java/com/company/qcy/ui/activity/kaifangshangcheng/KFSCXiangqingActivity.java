@@ -183,7 +183,7 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(KFSCXiangqingActivity.this,request,this);
+                            SignAndTokenUtil.getSign(KFSCXiangqingActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -284,11 +284,20 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
                 if (ObjectUtils.isEmpty(dianpuBean)) {
                     return;
                 }
-                if (StringUtils.isEmpty(dianpuBean.getPhone())) {
-                    ToastUtils.showShort("该企业没有留下电话号码哦！");
-                    return;
+
+                if (StringUtils.isEmpty(dianpuBean.getTel())) {
+
+                    if (StringUtils.isEmpty(dianpuBean.getPhone())) {
+                        ToastUtils.showShort("该企业没有留下电话号码哦！");
+                    } else {
+                        PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getPhone());
+                    }
+
+                } else {
+                    PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getTel());
                 }
-                PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getPhone());
+
+
                 break;
         }
     }

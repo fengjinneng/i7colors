@@ -58,6 +58,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -117,6 +119,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         addMarket();
         addBottom();
 
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.Group.STORAGE)
+                .onGranted(permissions -> {
+                    // Storage permission are allowed.
+                })
+                .onDenied(permissions -> {
+                    // Storage permission are not allowed.
+                    ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
+                })
+                .start();
+
     }
 
     private void addBottom() {
@@ -158,6 +172,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", 1)
                 .params("pageSize", 8)
+                .params("androidVersionCode",AppUtils.getAppVersionCode())
                 .params("token", SPUtils.getInstance().getString("token"));
 
         StringCallback stringCallback = new StringCallback() {
@@ -194,8 +209,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                             marketLayoutAdapter.notifyDataSetChanged();
 
                             JSONObject androidVersion = data.getJSONObject("androidVersion");
+
                             UpdateBean updateBean = androidVersion.toJavaObject(UpdateBean.class);
-                            if (AppUtils.getAppVersionCode() < updateBean.getVersionNum()) {
+
+                            if(StringUtils.equals("1",updateBean.getHasUpdate())){
                                 EventBus.getDefault().post(new MessageBean(MessageBean.Code.NEEDUPDATEAPP, updateBean));
                             }
                             return;
@@ -225,7 +242,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     SingleAdvLayoutAdapter2 advAdapter;
 
     private void setAdvData() {
-
         SingleLayoutHelper helper = new SingleLayoutHelper();
         advAdapter = new SingleAdvLayoutAdapter2(context, helper, 1, advDatas);
         delegateAdapter.addAdapter(advAdapter);

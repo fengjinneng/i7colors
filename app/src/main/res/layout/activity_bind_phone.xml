@@ -45,17 +45,18 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/background_wenbenshurubiankuang"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout22">
+        app:layout_constraintTop_toBottomOf="@+id/activity_bind_phone_invitecode">
 
         <EditText
             android:id="@+id/activity_bind_phone_verifycode"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="8dp"
+            android:background="@null"
             android:gravity="center_vertical"
             android:hint="输入验证码"
-            android:background="@null"
             android:inputType="number"
             android:maxLength="6"
             android:paddingLeft="@dimen/x20"
@@ -133,13 +134,30 @@
         android:layout_height="@dimen/x98"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
+        android:background="@mipmap/anniujianbian_round"
         android:text="确认"
         android:textColor="@color/baise"
-        android:background="@mipmap/anniujianbian_round"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout25" />
+
+    <EditText
+        android:id="@+id/activity_bind_phone_invitecode"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x100"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_wenbenshurubiankuang"
+        android:gravity="center_vertical"
+        android:hint="邀请码（选填）"
+        android:inputType="textPersonName"
+        android:maxLength="11"
+        android:paddingLeft="8dp"
+        android:textSize="@dimen/x28"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout22"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout22"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout22" />
 
 
 </android.support.constraint.ConstraintLayout>

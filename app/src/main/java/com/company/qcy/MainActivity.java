@@ -23,7 +23,6 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.bumptech.glide.Glide;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
@@ -42,7 +41,6 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushReceiver;
-
 import java.util.List;
 
 
@@ -67,6 +65,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
 //        ARouter.getInstance().build(uri).navigation();
 //        finish();
         addAdvData();
+
     }
 
 

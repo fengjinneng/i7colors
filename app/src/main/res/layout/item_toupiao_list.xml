@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_toupiao_list_img"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x280"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/place_750x320" />
+
+    <ImageView
+        android:id="@+id/item_toupiao_list_status"
+        android:layout_width="@dimen/x110"
+        android:layout_height="@dimen/x110"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_toupiao_list_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x60"
+        android:layout_marginStart="@dimen/x60"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_img" />
+
+    <TextView
+        android:id="@+id/textView235"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_title" />
+
+    <TextView
+        android:id="@+id/item_toupiao_list_canyuzhe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/lanse"
+        android:textSize="@dimen/x36"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_title"
+        app:layout_constraintTop_toBottomOf="@+id/textView235" />
+
+    <TextView
+        android:id="@+id/textView237"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="参与者"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_canyuzhe"
+        app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_canyuzhe"
+        app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_canyuzhe" />
+
+    <TextView
+        android:id="@+id/item_toupiao_list_fangwenliang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/startcolor"
+        android:textSize="@dimen/x36"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_title"
+        app:layout_constraintTop_toBottomOf="@+id/textView235" />
+
+    <TextView
+        android:id="@+id/textView239"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="访问量"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_fangwenliang"
+        app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_fangwenliang"
+        app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_fangwenliang" />
+
+    <TextView
+        android:id="@+id/item_toupiao_list_toupiaoshu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/chunhongse"
+        android:textSize="@dimen/x36"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/item_toupiao_list_fangwenliang"
+        app:layout_constraintStart_toEndOf="@+id/item_toupiao_list_canyuzhe"
+        app:layout_constraintTop_toBottomOf="@+id/textView235" />
+
+    <TextView
+        android:id="@+id/textView241"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="投票数"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_toupiaoshu"
+        app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_toupiaoshu"
+        app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_toupiaoshu" />
+
+    <TextView
+        android:id="@+id/textView242"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x20"
+        android:layout_marginTop="8dp"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView237" />
+</android.support.constraint.ConstraintLayout>

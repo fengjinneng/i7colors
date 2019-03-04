@@ -21,6 +21,17 @@ public class UpdateBean {
     private int versionNum;
     private String url;
 
+    private String hasUpdate;
+
+
+    public String getHasUpdate() {
+        return hasUpdate;
+    }
+
+    public void setHasUpdate(String hasUpdate) {
+        this.hasUpdate = hasUpdate;
+    }
+
     public String getUrl() {
         return url;
     }

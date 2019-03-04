@@ -28,8 +28,6 @@ import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.NumberBean;
-import com.company.qcy.huodong.caigoulianmeng.CaigoulianmengActivity;
-import com.company.qcy.huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichulibaojiaActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichuliqiugouActivity;
 import com.company.qcy.ui.activity.qiugoudating.WodebaojiaActivity;
