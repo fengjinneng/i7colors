@@ -12,9 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.company.qcy.R;
-import com.company.qcy.adapter.tuangou.TuangouRecyclerviewAdapter;
-import com.company.qcy.bean.ChanpindatingBean;
-import com.company.qcy.bean.tuangou.TuangouBean;
+import com.company.qcy.huodong.tuangou.adapter.TuangouRecyclerviewAdapter;
+import com.company.qcy.huodong.tuangou.bean.TuangouBean;
 
 import java.util.ArrayList;
 import java.util.List;

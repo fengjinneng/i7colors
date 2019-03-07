@@ -222,4 +222,16 @@ public class InterfaceInfo {
     public static final String SHENGQINGCANYU = "voteApplication/addVoteApplication";
     //获取参赛人员详情
     public static final String CANSAIRENYUANDETAIL = "voteApplication/getVoteApplicationById";
+
+
+    //竞拍
+    //竞拍列表
+    public static final String JINGPAILIST = "auction/queryAuctionList";
+
+    //根据id获取竞拍详情
+    public static final String JINGPAIDETAIL = "auction/getAuctionById";
+
+    //根据竞拍id获取参与记录
+    public static final String GETRECORDBYID = "auction/queryAuctionBuyerList";
+
 }

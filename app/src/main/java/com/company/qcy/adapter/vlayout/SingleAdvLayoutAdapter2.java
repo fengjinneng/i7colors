@@ -18,9 +18,10 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.BannerBean;
 import com.company.qcy.huodong.caigoulianmeng2.activity.CaigoulianmengActivity;
+import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.toupiao.activity.ToupiaoListActivity;
 import com.company.qcy.huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity;
-import com.company.qcy.ui.activity.tuangou.TuangouliebiaoActivity;
+import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
 
 import java.util.List;
 
@@ -232,6 +233,7 @@ public class SingleAdvLayoutAdapter2 extends DelegateAdapter.Adapter<SingleAdvLa
                 break;
             //竞拍
             case "auction":
+                ActivityUtils.startActivity(JingpaiActivity.class);
                 break;
         }
 

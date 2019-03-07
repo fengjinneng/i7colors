@@ -49,7 +49,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/baise"
-                        tools:context=".ui.activity.tuangou.TuangouxiangqingActivity">
+                        tools:context=".huodong.tuangou.activity.TuangouxiangqingActivity">
 
                         <View
                             android:id="@+id/include15"

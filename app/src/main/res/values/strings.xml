@@ -37,6 +37,7 @@
     <string name="dakatoupiao">vote</string>
     <string name="choujiang">draw</string>
     <string name="jingpai">auction</string>
+    <string name="title_activity_jingpai_list">JingpaiListActivity</string>
 
 
 </resources>

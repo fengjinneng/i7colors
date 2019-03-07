@@ -52,7 +52,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/fengexian"
-                        tools:context=".ui.activity.tuangou.TuangouxiangqingActivity">
+                        tools:context=".huodong.tuangou.activity.TuangouxiangqingActivity">
 
 
                         <ImageView

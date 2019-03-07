@@ -21,7 +21,6 @@ public class WodebaojiaAdapter extends BaseQuickAdapter<BaojiaBean, BaseViewHold
     @Override
     protected void convert(BaseViewHolder helper, BaojiaBean item) {
 
-
         helper.setText(R.id.item_wode_qiugou_name, item.getEnquiryDomain().getProductName())
         .setText(R.id.item_wode_qiugou_time, item.getOfferTimeString())
                 .setText(R.id.item_wode_qiugou_number, item.getEnquiryDomain().getNum() + "")

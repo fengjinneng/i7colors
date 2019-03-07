@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/baise"
     android:id="@+id/activity_youhuizhanxiao_root_layout"
-    tools:context=".ui.activity.tuangou.WoyaotuangouActivity">
+    tools:context=".huodong.tuangou.activity.WoyaotuangouActivity">
 
     <include
         android:id="@+id/include17"
