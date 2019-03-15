@@ -617,6 +617,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         params.put("token", SPUtils.getInstance().getString("token"));
         params.put("sign", SPUtils.getInstance().getString("sign"));
         params.put("content", content);
+        params.put("from",getResources().getString(R.string.app_android));
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)
                 .params(params);
@@ -692,8 +693,8 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 .params("token", SPUtils.getInstance().getString("token"))
                 .params("type", "photo")
                 .params("content", content)
+                .params("from",getResources().getString(R.string.app_android))
                 .isMultipart(true);
-
         DialogStringCallback stringCallback = new DialogStringCallback(PubulishPYQActivity.this) {
             @Override
             public void onSuccess(Response<String> response) {
@@ -746,6 +747,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         params.put("token", SPUtils.getInstance().getString("token"));
         params.put("sign", SPUtils.getInstance().getString("sign"));
         params.put("content", content);
+        params.put("from",getResources().getString(R.string.app_android));
         // 压缩图片
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)

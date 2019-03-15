@@ -55,13 +55,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     /**
      * 输入图片验证码
      */
-    private EditText mActivityRegisterVerifycode;
-    private ImageView mActivityRegisterVerifycodeImg;
+//    private EditText mActivityRegisterVerifycode;
+//    private ImageView mActivityRegisterVerifycodeImg;
     /**
      * 换一张
      */
-    private TextView mActivityRegisterChange;
-    private LinearLayout mActivityRegisterLinnear;
+//    private TextView mActivityRegisterChange;
+//    private LinearLayout mActivityRegisterLinnear;
     /**
      * 输入短信验证码
      */
@@ -106,10 +106,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mToolbarText = (TextView) findViewById(R.id.toolbar_text);
         mToolbarLayout = (RelativeLayout) findViewById(R.id.toolbar_layout);
         mActivityRegisterPhone = (EditText) findViewById(R.id.activity_register_phone);
-        mActivityRegisterVerifycode = (EditText) findViewById(R.id.activity_register_verifycode);
-        mActivityRegisterVerifycodeImg = (ImageView) findViewById(R.id.activity_register_verifycode_img);
-        mActivityRegisterChange = (TextView) findViewById(R.id.activity_register_change);
-        mActivityRegisterLinnear = (LinearLayout) findViewById(R.id.activity_register_linnear);
+//        mActivityRegisterVerifycode = (EditText) findViewById(R.id.activity_register_verifycode);
+//        mActivityRegisterVerifycodeImg = (ImageView) findViewById(R.id.activity_register_verifycode_img);
+//        mActivityRegisterChange = (TextView) findViewById(R.id.activity_register_change);
+//        mActivityRegisterLinnear = (LinearLayout) findViewById(R.id.activity_register_linnear);
         mActivityRegisterSms = (EditText) findViewById(R.id.activity_register_sms);
         mActivityRegisterSendsms = (TextView) findViewById(R.id.activity_register_sendsms);
         mActivityRegisterLinnear2 = (LinearLayout) findViewById(R.id.activity_register_linnear2);
@@ -119,41 +119,41 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mActivityRegisterSubmit.setOnClickListener(this);
         mActivityRegisterXieyi = (TextView) findViewById(R.id.activity_register_xieyi);
         mActivityRegisterSendsms.setOnClickListener(this);
-        mActivityRegisterChange.setOnClickListener(this);
-        getCaptcha();
+//        mActivityRegisterChange.setOnClickListener(this);
+//        getCaptcha();
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("欢迎注册");
         mActivityRegisterXieyi.setOnClickListener(this);
     }
 
-    private void getCaptcha() {
-
-        OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
-                .tag(this)
-                .params("deviceNo", DeviceUtils.getAndroidID())
-                .execute(new DialogBitmapcallback(this) {
-
-                    @Override
-                    public void onSuccess(Response<Bitmap> response) {
-                        try {
-                            if (response.code() == 200) {
-                                mActivityRegisterVerifycodeImg.setImageBitmap(response.body());
-                            } else {
-                                ToastUtils.showShort("获取图片验证码失败！");
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response<Bitmap> response) {
-                        super.onError(response);
-                    }
-                });
-
-    }
+//    private void getCaptcha() {
+//
+//        OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
+//                .tag(this)
+//                .params("deviceNo", DeviceUtils.getAndroidID())
+//                .execute(new DialogBitmapcallback(this) {
+//
+//                    @Override
+//                    public void onSuccess(Response<Bitmap> response) {
+//                        try {
+//                            if (response.code() == 200) {
+//                                mActivityRegisterVerifycodeImg.setImageBitmap(response.body());
+//                            } else {
+//                                ToastUtils.showShort("获取图片验证码失败！");
+//                            }
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Response<Bitmap> response) {
+//                        super.onError(response);
+//                    }
+//                });
+//
+//    }
 
 
     private CountDownTimer timer;
@@ -169,10 +169,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     ToastUtils.showShort("请填写正确的手机号码");
                     return;
 
-                } else if (StringUtils.length(mActivityRegisterVerifycode.getText().toString().trim()) != 4) {
-                    ToastUtils.showShort("请填写正确的图片验证码");
-                    return;
-                } else if (StringUtils.length(mActivityRegisterSms.getText().toString().trim()) != 6) {
+                }  else if (StringUtils.length(mActivityRegisterSms.getText().toString().trim()) != 6) {
                     ToastUtils.showShort("请填写正确的短信验证码");
                     return;
                 } else if (StringUtils.isEmpty(mActivityRegisterPassword1.getText().toString())) {
@@ -192,6 +189,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         .params("smsCode", mActivityRegisterSms.getText().toString().trim())
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("phone", mActivityRegisterPhone.getText().toString().trim())
+                        .params("from",getResources().getString(R.string.app_android))
                         .params("password", new String(EncryptUtils.encryptAES2Base64(mActivityRegisterPassword1.getText().toString().trim().getBytes(),
                                 "LnhtI(bt490B74Je".getBytes(), "AES/ECB/PKCS5Padding", null)));
 
@@ -239,17 +237,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     ToastUtils.showShort("请输入正确的手机号！");
                     return;
                 }
-                if (mActivityRegisterVerifycode.getText().toString().trim().length() != 4) {
-                    ToastUtils.showShort("请输入正确的图片验证码！");
-                    return;
-                }
+//                if (mActivityRegisterVerifycode.getText().toString().trim().length() != 4) {
+//                    ToastUtils.showShort("请输入正确的图片验证码！");
+//                    return;
+//                }
 
                 PostRequest<String> stringPostRequest = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMSREGISTER)
                         .tag(this)
                         .params("deviceNo", DeviceUtils.getAndroidID())
                         .params("sign", SPUtils.getInstance().getString("sign"))
-                        .params("mobile", mActivityRegisterPhone.getText().toString().trim())
-                        .params("captcha", mActivityRegisterVerifycode.getText().toString().trim());
+                        .params("mobile", mActivityRegisterPhone.getText().toString().trim());
 
 
                 DialogStringCallback dialogStringCallback = new DialogStringCallback(this) {
@@ -310,9 +307,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                 break;
 
-            case R.id.activity_register_change:
-                getCaptcha();
-                break;
+//            case R.id.activity_register_change:
+//                getCaptcha();
+//                break;
             case R.id.toolbar_back:
                 finish();
                 break;

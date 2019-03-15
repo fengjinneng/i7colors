@@ -54,12 +54,12 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
     /**
      * 输入图片验证码
      */
-    private EditText mForgetpasswordCapcha;
-    private ImageView mForgetpasswordCapchaImg;
+//    private EditText mForgetpasswordCapcha;
+//    private ImageView mForgetpasswordCapchaImg;
     /**
      * 换一张
      */
-    private TextView mForgetpasswordCapchaChange;
+//    private TextView mForgetpasswordCapchaChange;
     /**
      * 发送验证码
      */
@@ -81,47 +81,47 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("忘记密码");
-        mForgetpasswordCapcha = (EditText) findViewById(R.id.forgetpassword_capcha);
-        mForgetpasswordCapchaImg = (ImageView) findViewById(R.id.forgetpassword_capcha_img);
-        mForgetpasswordCapchaChange = (TextView) findViewById(R.id.forgetpassword_capcha_change);
-        mForgetpasswordCapchaChange.setOnClickListener(this);
+//        mForgetpasswordCapcha = (EditText) findViewById(R.id.forgetpassword_capcha);
+//        mForgetpasswordCapchaImg = (ImageView) findViewById(R.id.forgetpassword_capcha_img);
+//        mForgetpasswordCapchaChange = (TextView) findViewById(R.id.forgetpassword_capcha_change);
+//        mForgetpasswordCapchaChange.setOnClickListener(this);
         mForgetpasswordSendsms = (TextView) findViewById(R.id.forgetpassword_sendsms);
         mForgetpasswordSendsms.setOnClickListener(this);
-        getCaptcha();
+//        getCaptcha();
     }
 
     private CountDownTimer timer;
 
 
-    private void getCaptcha() {
-
-        OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
-                .tag(this)
-                .params("deviceNo", DeviceUtils.getAndroidID())
-                .execute(new DialogBitmapcallback(this) {
-
-                    @Override
-                    public void onSuccess(Response<Bitmap> response) {
-                        try {
-                            if (response.code() == 200) {
-                                mForgetpasswordCapchaImg.setImageBitmap(response.body());
-                            }else {
-                                ToastUtils.showShort("获取图片验证码失败！");
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response<Bitmap> response) {
-                        super.onError(response);
-                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
-                    }
-                });
-
-    }
+//    private void getCaptcha() {
+//
+//        OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
+//                .tag(this)
+//                .params("deviceNo", DeviceUtils.getAndroidID())
+//                .execute(new DialogBitmapcallback(this) {
+//
+//                    @Override
+//                    public void onSuccess(Response<Bitmap> response) {
+//                        try {
+//                            if (response.code() == 200) {
+//                                mForgetpasswordCapchaImg.setImageBitmap(response.body());
+//                            }else {
+//                                ToastUtils.showShort("获取图片验证码失败！");
+//                            }
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Response<Bitmap> response) {
+//                        super.onError(response);
+//                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+//                    }
+//                });
+//
+//    }
 
     @Override
     public void onClick(View v) {
@@ -133,9 +133,6 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                     ToastUtils.showShort("请填写正确的手机号码");
                     return;
 
-                } else if (StringUtils.length(mForgetpasswordCapcha.getText().toString().trim()) != 4) {
-                    ToastUtils.showShort("请填写正确的图片验证码");
-                    return;
                 } else if (mForgetpasswordVerifycode.getText().toString().length() != 6) {
                     ToastUtils.showShort("请填写正确的短信验证码");
                     return;
@@ -193,26 +190,22 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
             case R.id.toolbar_back:
                 finish();
                 break;
-            case R.id.forgetpassword_capcha_change:
-                getCaptcha();
-
-                break;
+//            case R.id.forgetpassword_capcha_change:
+//                getCaptcha();
+//
+//                break;
             case R.id.forgetpassword_sendsms:
                 if (StringUtils.isEmpty(mForgetpasswordPhonenumber.getText().toString()) || !RegexUtils.isMobileSimple(mForgetpasswordPhonenumber.getText().toString())) {
                     ToastUtils.showShort("请填写正确的手机号码");
                     return;
 
-                } else if (StringUtils.length(mForgetpasswordCapcha.getText().toString().trim()) != 4) {
-                    ToastUtils.showShort("请填写正确的图片验证码");
-                    return;
                 }
 
                 PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.SENDSMSCHECKPASSWORD)
                         .tag(this)
                         .params("deviceNo", DeviceUtils.getAndroidID())
                         .params("sign", SPUtils.getInstance().getString("sign"))
-                        .params("mobile", mForgetpasswordPhonenumber.getText().toString().trim())
-                        .params("captcha", mForgetpasswordCapcha.getText().toString().trim());
+                        .params("mobile", mForgetpasswordPhonenumber.getText().toString().trim());
 
 
                 DialogStringCallback stringCallback = new DialogStringCallback(this) {

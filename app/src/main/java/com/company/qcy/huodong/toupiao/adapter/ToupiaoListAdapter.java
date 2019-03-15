@@ -29,7 +29,7 @@ public class ToupiaoListAdapter  extends BaseQuickAdapter<ToupiaoBean, BaseViewH
         GlideUtils.loadImageRct(mContext, ServerInfo.IMAGE+item.getBanner(),img);
 
         helper.setText(R.id.item_toupiao_list_title,item.getName());
-        helper.setText(R.id.item_toupiao_list_canyuzhe,item.getApplicationNum());
+//        helper.setText(R.id.item_toupiao_list_canyuzhe,item.getApplicationNum());
         helper.setText(R.id.item_toupiao_list_toupiaoshu,item.getJoinNum());
         helper.setText(R.id.item_toupiao_list_fangwenliang,item.getClickNum());
 

@@ -42,6 +42,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="附件查看:"
+            android:visibility="gone"
             android:textSize="@dimen/x26"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_paipinmiaoshu_canshu_recyclerview" />
@@ -52,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:text="Button"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/fragment_paipinmiaoshu_fujian_text"
             app:layout_constraintTop_toBottomOf="@+id/fragment_paipinmiaoshu_fujian_text" />
@@ -66,7 +67,7 @@
             android:text="图片详情:"
             android:textSize="@dimen/x26"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_paipinmiaoshu_fujian_recyclerview" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_paipinmiaoshu_video_recyclerview" />
 
         <TextView
             android:id="@+id/fragment_paipinmiaoshu_shipin_text"
@@ -77,7 +78,7 @@
             android:text="视频详情:"
             android:textSize="@dimen/x26"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_paipinmiaoshu_img_recyclerview" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_paipinmiaoshu_fujian_recyclerview" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_paipinmiaoshu_img_recyclerview"
@@ -105,9 +106,10 @@
             android:id="@+id/textView276"
             android:layout_width="0dp"
             android:layout_height="@dimen/x100"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_paipinmiaoshu_img_recyclerview" />
 
     </android.support.constraint.ConstraintLayout>
 

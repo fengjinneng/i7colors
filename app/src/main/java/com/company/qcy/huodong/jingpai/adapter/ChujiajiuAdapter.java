@@ -33,14 +33,14 @@ public class ChujiajiuAdapter extends BaseQuickAdapter<ChujiajiluBean, BaseViewH
         price.setText(item.getPrice());
         time.setText(item.getCreatedAt());
         if (helper.getAdapterPosition() == 0) {
-            helper.getView(R.id.item_jingpai_chujialilu_zuigaojia).setVisibility(View.VISIBLE);
+//            helper.getView(R.id.item_jingpai_chujialilu_zuigaojia).setVisibility(View.VISIBLE);
             phone.setTextColor(mContext.getResources().getColor(R.color.hongse));
             address.setTextColor(mContext.getResources().getColor(R.color.hongse));
             price.setTextColor(mContext.getResources().getColor(R.color.hongse));
             time.setTextColor(mContext.getResources().getColor(R.color.hongse));
             ((TextView) helper.getView(R.id.textView275)).setTextColor(mContext.getResources().getColor(R.color.hongse));
         } else {
-            helper.getView(R.id.item_jingpai_chujialilu_zuigaojia).setVisibility(View.GONE);
+//            helper.getView(R.id.item_jingpai_chujialilu_zuigaojia).setVisibility(View.GONE);
             phone.setTextColor(mContext.getResources().getColor(R.color.putongwenben));
             address.setTextColor(mContext.getResources().getColor(R.color.putongwenben));
             price.setTextColor(mContext.getResources().getColor(R.color.putongwenben));

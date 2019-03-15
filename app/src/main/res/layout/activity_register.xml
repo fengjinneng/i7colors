@@ -41,7 +41,8 @@
 
 
             <LinearLayout
-                android:id="@+id/activity_register_linnear"
+                app:layout_constraintTop_toBottomOf="@id/activity_register_phone"
+                android:id="@+id/activity_register_linnear2"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x100"
                 android:layout_marginTop="@dimen/x28"
@@ -49,89 +50,37 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_phone"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_phone"
-                app:layout_constraintTop_toBottomOf="@+id/activity_register_phone">
-
-                <EditText
-                    android:id="@+id/activity_register_verifycode"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="输入图片验证码"
-                    android:inputType="text"
-                    android:maxLength="4"
-                    android:paddingLeft="@dimen/x36"
-                    android:textSize="@dimen/x30" />
-
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/x20"
-                    android:layout_marginLeft="@dimen/x38"
-                    android:layout_marginTop="@dimen/x20"
-                    android:background="@color/fengexian" />
-
-                <ImageView
-                    android:id="@+id/activity_register_verifycode_img"
-                    android:layout_width="@dimen/x130"
-                    android:layout_height="@dimen/x60"
-                    android:layout_marginLeft="@dimen/x24"
-                    android:layout_marginTop="@dimen/x22"
-                    app:srcCompat="@mipmap/yanzhengmatupian" />
-
-                <TextView
-                    android:id="@+id/activity_register_change"
-                    android:layout_width="@dimen/x90"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x14"
-                    android:layout_marginRight="@dimen/x28"
-                    android:text="换一张"
-                    android:textColor="@color/chunhongse"
-                    android:textSize="@dimen/x28" />
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/activity_register_linnear2"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/x100"
-                android:layout_marginTop="@dimen/x28"
-                android:background="@drawable/background_dengluwenbenkuang"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear"
-                app:layout_constraintStart_toStartOf="@+id/activity_register_linnear"
-                app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear">
+                >
 
 
                 <EditText
                     android:id="@+id/activity_register_sms"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
                     android:layout_height="match_parent"
-                    android:hint="输入短信验证码"
+                    android:layout_weight="1"
                     android:background="@null"
-                    android:maxLength="6"
+                    android:hint="输入短信验证码"
                     android:inputType="number"
+                    android:maxLength="6"
                     android:paddingLeft="@dimen/x36"
                     android:textSize="@dimen/x30" />
-                
-                
+
+
                 <View
+                    android:layout_width="1dp"
+                    android:layout_height="@dimen/x60"
                     android:layout_gravity="center"
                     android:layout_marginLeft="@dimen/x100"
-                    android:background="@color/fengexian"
-                    android:layout_width="1dp"
-                    android:layout_height="@dimen/x60"/>
+                    android:background="@color/fengexian" />
 
                 <TextView
                     android:id="@+id/activity_register_sendsms"
-                    android:layout_marginLeft="@dimen/x54"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/x28"
+                    android:layout_marginLeft="@dimen/x54"
                     android:layout_marginRight="@dimen/x56"
-                    android:text="发送验证码" />
+                    android:text="发送验证码"
+                    android:textSize="@dimen/x28" />
 
             </LinearLayout>
 
@@ -241,17 +190,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/activity_register_phone"
                 app:layout_constraintEnd_toStartOf="@+id/activity_register_phone"
                 app:layout_constraintTop_toTopOf="@+id/activity_register_phone"
-                app:srcCompat="@mipmap/bitiantupian" />
-
-            <ImageView
-                android:id="@+id/imageView25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/activity_register_linnear"
-                app:layout_constraintEnd_toStartOf="@+id/activity_register_linnear"
-                app:layout_constraintTop_toTopOf="@+id/activity_register_linnear"
                 app:srcCompat="@mipmap/bitiantupian" />
 
             <ImageView

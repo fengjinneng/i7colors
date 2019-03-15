@@ -35,6 +35,10 @@ import com.lzy.okgo.request.GetRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
+import static com.company.qcy.I7colorsApplication.getContext;
+
 public class ChanpindatingActivity extends BaseActivity implements View.OnClickListener {
 
     /**
@@ -64,6 +68,7 @@ public class ChanpindatingActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chanpindating);
         initView();
+        LogUtils.e("asdasdsadasdasdsada",JPushInterface.getRegistrationID(getContext()));
     }
 
     private void initView() {

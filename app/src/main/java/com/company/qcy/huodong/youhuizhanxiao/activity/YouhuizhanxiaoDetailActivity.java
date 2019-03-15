@@ -294,15 +294,15 @@ public class YouhuizhanxiaoDetailActivity extends BaseActivity implements View.O
         mActivityYouhuizhanxiaoTotalnum2Unit.setText(bean.getNumUnit());
         mActivityTuangouxiangqingYuanjia.setText(bean.getOldPrice());
 
-        if(bean.getNewPrice().contains("~")){
-            String[] strings = bean.getNewPrice().split("~");
-            mActivityTuangouxiangqingYouhuijia.setText(strings[0]+"\n~"+strings[1]);
-        }else if(bean.getNewPrice().contains("-")){
-            String[] strings = bean.getNewPrice().split("-");
-            mActivityTuangouxiangqingYouhuijia.setText(strings[0]+"\n-"+strings[1]);
-        }else {
+//        if(bean.getNewPrice().contains("~")){
+//            String[] strings = bean.getNewPrice().split("~");
+//            mActivityTuangouxiangqingYouhuijia.setText(strings[0]+"~"+strings[1]);
+//        }else if(bean.getNewPrice().contains("-")){
+//            String[] strings = bean.getNewPrice().split("-");
+//            mActivityTuangouxiangqingYouhuijia.setText(strings[0]+"-"+strings[1]);
+//        }else {
             mActivityTuangouxiangqingYouhuijia.setText(bean.getNewPrice());
-        }
+//        }
         mActivityTuangouxiangqingYuanjiaDanwie.setText("元/" + bean.getPriceUnit());
         mActivityTuangouxiangqingYouhuijiaDanwei.setText("元/" + bean.getPriceUnit());
 

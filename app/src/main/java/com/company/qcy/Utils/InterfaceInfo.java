@@ -234,4 +234,7 @@ public class InterfaceInfo {
     //根据竞拍id获取参与记录
     public static final String GETRECORDBYID = "auction/queryAuctionBuyerList";
 
+    //参与竞拍
+    public static final String CANYUJINGPAI = "auction/addAuctionBuyer";
+
 }

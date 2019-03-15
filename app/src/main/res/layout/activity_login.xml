@@ -131,60 +131,60 @@
 
 
 
-            <LinearLayout
-                android:id="@+id/activity_login_linnear"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/x106"
-                android:background="@drawable/background_dengluwenbenkuang_queshang"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="@+id/activity_login_linnear3"
-                app:layout_constraintStart_toStartOf="@+id/activity_login_linnear3"
-                app:layout_constraintTop_toBottomOf="@+id/activity_login_linnear3">
+            <!--<LinearLayout-->
+                <!--android:id="@+id/activity_login_linnear"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="@dimen/x106"-->
+                <!--android:background="@drawable/background_dengluwenbenkuang_queshang"-->
+                <!--android:orientation="horizontal"-->
+                <!--app:layout_constraintEnd_toEndOf="@+id/activity_login_linnear3"-->
+                <!--app:layout_constraintStart_toStartOf="@+id/activity_login_linnear3"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/activity_login_linnear3">-->
 
-                <EditText
-                    android:id="@+id/login_verifycode"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:drawableLeft="@mipmap/yanzhengmatouxiang"
-                    android:drawablePadding="@dimen/x30"
-                    android:hint="请输入验证码"
-                    android:inputType="number"
-                    android:maxLength="4"
-                    android:paddingLeft="@dimen/x36"
-                    android:textSize="@dimen/x30" />
+                <!--<EditText-->
+                    <!--android:id="@+id/login_verifycode"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@null"-->
+                    <!--android:drawableLeft="@mipmap/yanzhengmatouxiang"-->
+                    <!--android:drawablePadding="@dimen/x30"-->
+                    <!--android:hint="请输入验证码"-->
+                    <!--android:inputType="number"-->
+                    <!--android:maxLength="4"-->
+                    <!--android:paddingLeft="@dimen/x36"-->
+                    <!--android:textSize="@dimen/x30" />-->
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/x20"
-                    android:layout_marginLeft="@dimen/x38"
-                    android:layout_marginTop="@dimen/x20"
-                    android:background="@color/fengexian" />
+                <!--<View-->
+                    <!--android:layout_width="1dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginBottom="@dimen/x20"-->
+                    <!--android:layout_marginLeft="@dimen/x38"-->
+                    <!--android:layout_marginTop="@dimen/x20"-->
+                    <!--android:background="@color/fengexian" />-->
 
-                <ImageView
-                    android:id="@+id/login_verifycode_img"
-                    android:layout_width="@dimen/x130"
-                    android:layout_height="@dimen/x60"
-                    android:layout_marginLeft="@dimen/x24"
-                    android:layout_marginTop="@dimen/x22"
-                    app:srcCompat="@mipmap/yanzhengmatupian" />
+                <!--<ImageView-->
+                    <!--android:id="@+id/login_verifycode_img"-->
+                    <!--android:layout_width="@dimen/x130"-->
+                    <!--android:layout_height="@dimen/x60"-->
+                    <!--android:layout_marginLeft="@dimen/x24"-->
+                    <!--android:layout_marginTop="@dimen/x22"-->
+                    <!--app:srcCompat="@mipmap/yanzhengmatupian" />-->
 
-                <TextView
-                    android:id="@+id/login_change_img"
-                    android:layout_width="@dimen/x90"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x14"
-                    android:layout_marginRight="@dimen/x28"
-                    android:text="换一张"
-                    android:textColor="@color/chunhongse"
-                    android:textSize="@dimen/x28"
-                     />
+                <!--<TextView-->
+                    <!--android:id="@+id/login_change_img"-->
+                    <!--android:layout_width="@dimen/x90"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/x14"-->
+                    <!--android:layout_marginRight="@dimen/x28"-->
+                    <!--android:text="换一张"-->
+                    <!--android:textColor="@color/chunhongse"-->
+                    <!--android:textSize="@dimen/x28"-->
+                     <!--/>-->
 
 
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
 
 
             <Button
@@ -196,9 +196,9 @@
                 android:text="登录"
                 android:textColor="@color/baise"
                 android:textSize="@dimen/x36"
-                app:layout_constraintEnd_toEndOf="@+id/activity_login_linnear"
-                app:layout_constraintStart_toStartOf="@+id/activity_login_linnear"
-                app:layout_constraintTop_toBottomOf="@+id/activity_login_linnear" />
+                app:layout_constraintEnd_toEndOf="@+id/activity_login_linnear3"
+                app:layout_constraintStart_toStartOf="@+id/activity_login_linnear3"
+                app:layout_constraintTop_toBottomOf="@+id/activity_login_linnear3" />
 
             <TextView
                 android:id="@+id/login_register"

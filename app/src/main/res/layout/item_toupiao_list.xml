@@ -43,27 +43,6 @@
         app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_title" />
 
     <TextView
-        android:id="@+id/item_toupiao_list_canyuzhe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:textColor="@color/lanse"
-        android:textSize="@dimen/x36"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_title"
-        app:layout_constraintTop_toBottomOf="@+id/textView235" />
-
-    <TextView
-        android:id="@+id/textView237"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="参与者"
-        android:textSize="@dimen/x24"
-        app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_canyuzhe"
-        app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_canyuzhe"
-        app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_canyuzhe" />
-
-    <TextView
         android:id="@+id/item_toupiao_list_fangwenliang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +51,9 @@
         android:textColor="@color/startcolor"
         android:textSize="@dimen/x36"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/item_toupiao_list_toupiaoshu"
         app:layout_constraintTop_toBottomOf="@+id/textView235" />
 
     <TextView
@@ -89,14 +70,14 @@
         android:id="@+id/item_toupiao_list_toupiaoshu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/chunhongse"
         android:textSize="@dimen/x36"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/item_toupiao_list_fangwenliang"
-        app:layout_constraintStart_toEndOf="@+id/item_toupiao_list_canyuzhe"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView235" />
 
     <TextView
@@ -117,5 +98,5 @@
         android:background="@color/fengexian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView237" />
+        app:layout_constraintTop_toBottomOf="@+id/textView241" />
 </android.support.constraint.ConstraintLayout>

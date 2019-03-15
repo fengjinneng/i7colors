@@ -62,12 +62,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     /**
      * 请输入验证码
      */
-    private EditText mLoginVerifycode;
-    private ImageView mLoginVerifycodeImg;
+//    private EditText mLoginVerifycode;
+//    private ImageView mLoginVerifycodeImg;
     /**
      * 换一张
      */
-    private TextView mLoginChangeImg;
+//    private TextView mLoginChangeImg;
     /**
      * 登录
      */
@@ -114,10 +114,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private void initView() {
         mLoginUsername = (EditText) findViewById(R.id.login_username);
         mLoginPassword = (EditText) findViewById(R.id.login_password);
-        mLoginVerifycode = (EditText) findViewById(R.id.login_verifycode);
-        mLoginVerifycodeImg = (ImageView) findViewById(R.id.login_verifycode_img);
-        mLoginChangeImg = (TextView) findViewById(R.id.login_change_img);
-        mLoginChangeImg.setOnClickListener(this);
+//        mLoginVerifycode = (EditText) findViewById(R.id.login_verifycode);
+//        mLoginVerifycodeImg = (ImageView) findViewById(R.id.login_verifycode_img);
+//        mLoginChangeImg = (TextView) findViewById(R.id.login_change_img);
+//        mLoginChangeImg.setOnClickListener(this);
         mLoginDenglu = (Button) findViewById(R.id.login_denglu);
         mLoginDenglu.setOnClickListener(this);
         mLoginRegister = (TextView) findViewById(R.id.login_register);
@@ -175,39 +175,39 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("登录");
 
-        getImageVerifycode();
+//        getImageVerifycode();
     }
 
-    private void getImageVerifycode() {
-
-        OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
-                .tag(this)
-                .params("deviceNo", DeviceUtils.getAndroidID())
-                .execute(new DialogBitmapcallback(this) {
-
-                    @Override
-                    public void onSuccess(Response<Bitmap> response) {
-                        try {
-
-                            if (response.code() == 200) {
-                                mLoginVerifycodeImg.setImageBitmap(response.body());
-                            } else {
-                                ToastUtils.showShort("获取图片验证码失败！");
-                            }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Response<Bitmap> response) {
-                        super.onError(response);
-                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
-                    }
-                });
-
-    }
+//    private void getImageVerifycode() {
+//
+//        OkGo.<Bitmap>get(ServerInfo.SERVER + InterfaceInfo.CAPTCHA)
+//                .tag(this)
+//                .params("deviceNo", DeviceUtils.getAndroidID())
+//                .execute(new DialogBitmapcallback(this) {
+//
+//                    @Override
+//                    public void onSuccess(Response<Bitmap> response) {
+//                        try {
+//
+//                            if (response.code() == 200) {
+//                                mLoginVerifycodeImg.setImageBitmap(response.body());
+//                            } else {
+//                                ToastUtils.showShort("获取图片验证码失败！");
+//                            }
+//
+//                        } catch (Exception e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onError(Response<Bitmap> response) {
+//                        super.onError(response);
+//                        ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+//                    }
+//                });
+//
+//    }
 
 
     @Override
@@ -221,8 +221,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
             case MessageBean.Code.RESETPASSWORD:
                 mLoginPassword.setText("");
-                mLoginVerifycode.setText("");
-                getImageVerifycode();
+//                mLoginVerifycode.setText("");
+//                getImageVerifycode();
                 break;
         }
     }
@@ -247,9 +247,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             //获取新的图片验证码
-            case R.id.login_change_img:
-                getImageVerifycode();
-                break;
+//            case R.id.login_change_img:
+//                getImageVerifycode();
+//                break;
 
             //登录
             case R.id.login_denglu:
@@ -263,14 +263,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     ToastUtils.showShort("密码不能为空！");
                     return;
                 }
-                if (StringUtils.isEmpty(mLoginVerifycode.getText().toString())) {
-                    ToastUtils.showShort("验证码不能为空！");
-                    return;
-                }
-                if (mLoginVerifycode.getText().toString().length() != 4) {
-                    ToastUtils.showShort("验证码长度为4位");
-                    return;
-                }
+//                if (StringUtils.isEmpty(mLoginVerifycode.getText().toString())) {
+//                    ToastUtils.showShort("验证码不能为空！");
+//                    return;
+//                }
+//                if (mLoginVerifycode.getText().toString().length() != 4) {
+//                    ToastUtils.showShort("验证码长度为4位");
+//                    return;
+//                }
 
                 PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.LOGIN)
                         .tag(this)
@@ -278,7 +278,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         .params("username", mLoginUsername.getText().toString())
                         .params("aesPass", new String(EncryptUtils.encryptAES2Base64(mLoginPassword.getText().toString().trim().getBytes(),
                                 getResources().getString(R.string.passwordAES).getBytes(), "AES/ECB/PKCS5Padding", null)))
-                        .params("captcha", mLoginVerifycode.getText().toString())
                         .params("deviceNo", DeviceUtils.getAndroidID());
 
                 DialogStringCallback stringCallback = new DialogStringCallback(this) {

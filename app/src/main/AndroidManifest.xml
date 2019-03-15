@@ -261,6 +261,7 @@
             android:theme="@style/startTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -347,14 +348,24 @@
         <activity
             android:name=".huodong.caigoulianmeng2.activity.ZidingyiGonghuoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".huodong.jingpai.activity.JingpaiActivity">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
+        <activity
+            android:name=".huodong.jingpai.activity.JingpaiActivity"
+            android:screenOrientation="portrait">
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".huodong.jingpai.activity.JingpaiDetailActivity"></activity>
+        <activity
+            android:name=".huodong.jingpai.activity.JingpaiDetailActivity"
+            android:screenOrientation="portrait" android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <activity
+            android:name=".huodong.jingpai.activity.CanyujingpaiActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

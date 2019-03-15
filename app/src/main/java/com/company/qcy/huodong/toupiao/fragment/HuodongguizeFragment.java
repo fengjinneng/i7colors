@@ -295,7 +295,7 @@ public class HuodongguizeFragment extends Fragment {
         mFragmentHuodongguize1Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize1Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize1Text.setText("一、" + ruleList.get(0).getKey());
-        mFragmentHuodongguize1Content.setText(ruleList.get(0).getValue());
+        mFragmentHuodongguize1Content.setText("\t\t\t"+ruleList.get(0).getValue());
 
     }
 
@@ -303,14 +303,14 @@ public class HuodongguizeFragment extends Fragment {
         mFragmentHuodongguize2Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize2Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize2Text.setText("二、" + ruleList.get(1).getKey());
-        mFragmentHuodongguize2Content.setText(ruleList.get(1).getValue());
+        mFragmentHuodongguize2Content.setText("\t\t\t"+ruleList.get(1).getValue());
     }
 
     private void show3(List<ToupiaoBean.RuleListBean> ruleList) {
         mFragmentHuodongguize3Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize3Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize3Text.setText("三、" + ruleList.get(2).getKey());
-        mFragmentHuodongguize3Content.setText(ruleList.get(2).getValue());
+        mFragmentHuodongguize3Content.setText("\t\t\t"+ruleList.get(2).getValue());
 
     }
 
@@ -318,7 +318,7 @@ public class HuodongguizeFragment extends Fragment {
         mFragmentHuodongguize4Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize4Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize4Text.setText("四、" + ruleList.get(3).getKey());
-        mFragmentHuodongguize4Content.setText(ruleList.get(3).getValue());
+        mFragmentHuodongguize4Content.setText("\t\t\t"+ruleList.get(3).getValue());
     }
 
 
@@ -326,7 +326,7 @@ public class HuodongguizeFragment extends Fragment {
         mFragmentHuodongguize5Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize5Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize5Text.setText("五、" + ruleList.get(4).getKey());
-        mFragmentHuodongguize5Content.setText(ruleList.get(4).getValue());
+        mFragmentHuodongguize5Content.setText("\t\t\t"+ruleList.get(4).getValue());
 
     }
 
@@ -334,27 +334,27 @@ public class HuodongguizeFragment extends Fragment {
         mFragmentHuodongguize6Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize6Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize6Text.setText("六、" + ruleList.get(5).getKey());
-        mFragmentHuodongguize6Content.setText(ruleList.get(5).getValue());
+        mFragmentHuodongguize6Content.setText("\t\t\t"+ruleList.get(5).getValue());
     }
 
     private void show7(List<ToupiaoBean.RuleListBean> ruleList) {
         mFragmentHuodongguize7Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize7Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize7Text.setText("七、" + ruleList.get(6).getKey());
-        mFragmentHuodongguize7Content.setText(ruleList.get(6).getValue());
+        mFragmentHuodongguize7Content.setText("\t\t\t"+ruleList.get(6).getValue());
     }
 
     private void show8(List<ToupiaoBean.RuleListBean> ruleList) {
         mFragmentHuodongguize8Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize8Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize8Text.setText("八、" + ruleList.get(7).getKey());
-        mFragmentHuodongguize8Content.setText(ruleList.get(7).getValue());
+        mFragmentHuodongguize8Content.setText("\t\t\t"+ruleList.get(7).getValue());
     }
 
     private void show9(List<ToupiaoBean.RuleListBean> ruleList) {
         mFragmentHuodongguize9Text.setVisibility(View.VISIBLE);
         mFragmentHuodongguize9Content.setVisibility(View.VISIBLE);
         mFragmentHuodongguize9Text.setText("九、" + ruleList.get(8).getKey());
-        mFragmentHuodongguize9Content.setText(ruleList.get(8).getValue());
+        mFragmentHuodongguize9Content.setText("\t\t\t"+ruleList.get(8).getValue());
     }
 }

@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.bumptech.glide.Glide;
@@ -25,11 +26,15 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.bean.pengyouquan.PhotoInfo;
 import com.company.qcy.huodong.jingpai.adapter.FujianAdapter;
 import com.company.qcy.huodong.jingpai.adapter.ImgAdapter;
 import com.company.qcy.huodong.jingpai.adapter.JibencanshuAdapter;
 import com.company.qcy.huodong.jingpai.adapter.VideoAdapter;
 import com.company.qcy.huodong.jingpai.bean.JingpaiDetailBean;
+import com.company.qcy.ui.activity.pengyouquan.ImagePagerActivity;
+import com.company.qcy.ui.activity.pengyouquan.PengyouquanDetailActivity;
+import com.xiao.nicevideoplayer.NiceVideoPlayerManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +119,7 @@ public class PaipinmiaoshuFragment extends Fragment implements View.OnClickListe
         jibencanshu = inflate.findViewById(R.id.fragment_paipinmiaoshu_jibencanshu_text);
         fujianchakan = inflate.findViewById(R.id.fragment_paipinmiaoshu_fujian_text);
         tupianxiangqing = inflate.findViewById(R.id.fragment_paipinmiaoshu_tupian_text);
+        shipinxiangqing = inflate.findViewById(R.id.fragment_paipinmiaoshu_shipin_text);
 
         miaoshuDatas = new ArrayList<>();
         fujianDatas = new ArrayList<>();
@@ -125,12 +131,10 @@ public class PaipinmiaoshuFragment extends Fragment implements View.OnClickListe
         imgRecyclerview = inflate.findViewById(R.id.fragment_paipinmiaoshu_img_recyclerview);
         videoRecyclerview = inflate.findViewById(R.id.fragment_paipinmiaoshu_video_recyclerview);
 
-
         miaoshuAdapter = new JibencanshuAdapter(R.layout.item_jingpai_paipinmiaoshu, miaoshuDatas);
         fujianAdapter = new FujianAdapter(R.layout.item_jingpai_fujian, fujianDatas);
-        imgAdapter  =new ImgAdapter(R.layout.item_jingpai_img,imgDatas);
-        videoAdapter = new VideoAdapter(R.layout.item_jingpai_video,videoDatas);
-
+        imgAdapter = new ImgAdapter(R.layout.item_jingpai_img, imgDatas);
+        videoAdapter = new VideoAdapter(R.layout.item_jingpai_video, videoDatas);
 
         //创建布局管理
         LinearLayoutManager canshuLayoutManager = new LinearLayoutManager(getContext());
@@ -148,7 +152,6 @@ public class PaipinmiaoshuFragment extends Fragment implements View.OnClickListe
         LinearLayoutManager videoLayoutManager = new LinearLayoutManager(getContext());
         videoLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         videoRecyclerview.setLayoutManager(videoLayoutManager);
-
 
         canshuRecyclerView.setAdapter(miaoshuAdapter);
         fujianRecyclerview.setAdapter(fujianAdapter);
@@ -168,6 +171,20 @@ public class PaipinmiaoshuFragment extends Fragment implements View.OnClickListe
 //                ActivityUtils.startActivity(intent);
             }
         });
+
+        imgAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
+                List<String> photoUrls = new ArrayList<String>();
+                for (int i = 0; i < imgDatas.size(); i++) {
+                    photoUrls.add(imgDatas.get(i).getDetailPcPic());
+                }
+                ImagePagerActivity.startImagePagerActivity(getActivity(), photoUrls, position, imageSize);
+            }
+        });
+
+
     }
 
     private void setData() {
@@ -180,44 +197,40 @@ public class PaipinmiaoshuFragment extends Fragment implements View.OnClickListe
         if (!ObjectUtils.isEmpty(bean.getAttributeList())) {
             List<JingpaiDetailBean.AttributeListBean> attributeList = bean.getAttributeList();
             miaoshuAdapter.setNewData(attributeList);
+        } else {
+            jibencanshu.setVisibility(View.GONE);
         }
 
         //附件集合
-        if (!ObjectUtils.isEmpty(bean.getAuctionAttaches())) {
-            List<JingpaiDetailBean.AuctionAttachesBean> auctionAttaches = bean.getAuctionAttaches();
-            fujianAdapter.setNewData(auctionAttaches);
-        }
+//        if (!ObjectUtils.isEmpty(bean.getAuctionAttaches())) {
+//            List<JingpaiDetailBean.AuctionAttachesBean> auctionAttaches = bean.getAuctionAttaches();
+//            fujianAdapter.setNewData(auctionAttaches);
+//        }
 
         //图片集合
         if (!ObjectUtils.isEmpty(bean.getDetailList())) {
             List<JingpaiDetailBean.DetailListBean> datailList = bean.getDetailList();
+            imgDatas.addAll(datailList);
             imgAdapter.setNewData(datailList);
+        } else {
+            tupianxiangqing.setVisibility(View.GONE);
         }
 
         //视频集合
         if (!ObjectUtils.isEmpty(bean.getVideoList())) {
             List<JingpaiDetailBean.VideoListBean> videoList = bean.getVideoList();
+
             videoAdapter.setNewData(videoList);
+        } else {
+            shipinxiangqing.setVisibility(View.GONE);
         }
 
+    }
 
-
-//        if (!StringUtils.isEmpty(bean.getDetailPcPic())) {
-//
-//            Glide.with(this).asBitmap()//强制Glide返回一个Bitmap对象
-//                    .load(ServerInfo.IMAGE + bean.getDetailPcPic())
-//                    .into(new SimpleTarget<Bitmap>() {
-//                        @Override
-//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-//
-//                            int height = resource.getHeight();
-//                            mFragmentPaipinmiaoshuImg.setLayoutParams(new FrameLayout.LayoutParams((FrameLayout.LayoutParams.MATCH_PARENT), height));
-//                            GlideUtils.loadImageCenter(getContext(), ServerInfo.IMAGE + bean.getDetailPcPic(), mFragmentPaipinmiaoshuImg);
-//                        }
-//
-//
-//                    });
-//        }
+    @Override
+    public void onStop() {
+        super.onStop();
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
 
     }
 

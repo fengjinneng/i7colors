@@ -1,5 +1,6 @@
 package com.company.qcy.huodong.jingpai.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.TabLayout;
@@ -7,14 +8,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
@@ -23,6 +27,8 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
+import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.jingpai.bean.JingpaiDetailBean;
 import com.company.qcy.huodong.jingpai.fragment.ChujiajiluFragment;
 import com.company.qcy.huodong.jingpai.fragment.JingpaixuzhiFragment;
@@ -36,7 +42,7 @@ import java.util.List;
 
 import cn.iwgang.countdownview.CountdownView;
 
-public class JingpaiDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class JingpaiDetailActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -119,6 +125,14 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
      * 当前价格:
      */
     private TextView mActivityJingpaidetailDangqianjiageText;
+    /**
+     * 参与竞拍
+     */
+    private Button mActivityJingpaiWoyaojingpai;
+    /**
+     * 距离结束:
+     */
+    private TextView mActivityJingpaidetailJulijieshuText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +146,7 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
+        mActivityJingpaidetailJulijieshuText = (TextView) findViewById(R.id.activity_jingpaidetail_julijieshu_text);
         mActivityJingpaidetailImg = (ImageView) findViewById(R.id.activity_jingpaidetail_img);
         mActivityJingpaidetailStatus = (ImageView) findViewById(R.id.activity_jingpaidetail_status);
         mActivityJingpaidetailChujiacishu = (TextView) findViewById(R.id.activity_jingpaidetail_chujiacishu);
@@ -157,9 +172,27 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
         mViewpager.setOffscreenPageLimit(2);
         mToolbarTitle.setText("竞拍详情");
-
+        mActivityJingpaiWoyaojingpai = (Button) findViewById(R.id.activity_jingpai_woyaojingpai);
+        mActivityJingpaiWoyaojingpai.setOnClickListener(this);
         addData();
 
+    }
+
+    private boolean receivMsg ;
+
+    @Override
+    public void onReciveMessage(MessageBean msg) {
+        super.onReciveMessage(msg);
+
+        switch (msg.getCode()) {
+            case MessageBean.Code.TCANYUJINGPAICHENGGONG:
+
+//                bean.setCount(String.valueOf(Integer.parseInt(bean.getCount()) + 1));
+//                mActivityJingpaidetailChujiacishu.setText(bean.getCount());
+                receivMsg = true;
+                addData();
+                break;
+        }
     }
 
     private JingpaiDetailBean bean;
@@ -214,6 +247,7 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
             return;
         }
 
+
         mActivityJingpaidetailProductname.setText(bean.getShopName());
         mActivityJingpaidetailChujiacishu.setText(bean.getCount());
         mActivityJingpaidetailQipaijiage.setText(bean.getPrice());
@@ -224,16 +258,16 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
         mActivityJingpaidetailRiqi.setText(bean.getDateOfProduction());
         mActivityJingpaidetailAddress.setText(bean.getAddress());
 
-        if(!StringUtils.isEmpty(bean.getAuctionDetails())){
+        if (!StringUtils.isEmpty(bean.getAuctionDetails())) {
             mActivityJingpaidetailZidingyi1Key.setVisibility(View.VISIBLE);
             mActivityJingpaidetailZidingyi1Value.setVisibility(View.VISIBLE);
-            mActivityJingpaidetailZidingyi1Key.setText(bean.getAuctionDetails()+":");
+            mActivityJingpaidetailZidingyi1Key.setText(bean.getAuctionDetails() + ":");
             mActivityJingpaidetailZidingyi1Value.setText(bean.getDetailsValue());
         }
-        if(!StringUtils.isEmpty(bean.getAuctionDetails1())){
+        if (!StringUtils.isEmpty(bean.getAuctionDetails1())) {
             mActivityJingpaidetailZidingyi2Key.setVisibility(View.VISIBLE);
             mActivityJingpaidetailZidingyi2Value.setVisibility(View.VISIBLE);
-            mActivityJingpaidetailZidingyi2Key.setText(bean.getAuctionDetails1()+":");
+            mActivityJingpaidetailZidingyi2Key.setText(bean.getAuctionDetails1() + ":");
             mActivityJingpaidetailZidingyi2Value.setText(bean.getDetailsValue1());
         }
 
@@ -241,29 +275,34 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
 
         switch (bean.getIsType()) {
             case "0"://流派
+                mActivityJingpaiWoyaojingpai.setVisibility(View.GONE);
                 mActivityJingpaidetailStatus.setImageDrawable(getResources().getDrawable(R.mipmap.jingpai_yiliupai));
                 mActivityJingpaidetailYiliupai.setVisibility(View.VISIBLE);
                 jiageLayout.setBackground(getResources().getDrawable(R.mipmap.shangpinjiage_huise));
                 mActivityJingpaidetailDangqianjiageText.setVisibility(View.GONE);
                 mActivityJingpaidetailDangqianjiage.setVisibility(View.GONE);
                 mActivityJingpaidetailDangqianjiageUnit.setVisibility(View.GONE);
-
                 break;
             case "1"://未开始
+                mActivityJingpaiWoyaojingpai.setVisibility(View.GONE);
+
                 mActivityJingpaidetailStatus.setImageDrawable(getResources().getDrawable(R.mipmap.jingpai_weikaishi));
                 jiageLayout.setBackground(getResources().getDrawable(R.mipmap.shangpinjiage_huise));
-                mActivityJingpaidetailDangqianjiage.setText("--");
+                mActivityJingpaidetailDangqianjiage.setText(bean.getMaxPrice());
                 mActivityJingpaidetailDangqianjiageUnit.setText(bean.getPriceUnit());
-
                 break;
             case "2"://惊醒中
+                mActivityJingpaidetailJulijieshuText.setVisibility(View.VISIBLE);
+                mActivityJingpaidetailCountdownView.setVisibility(View.VISIBLE);
+                mActivityJingpaidetailCountdownView.start(Long.parseLong(bean.getOverTime()) - TimeUtils.getNowMills());
+                mActivityJingpaiWoyaojingpai.setVisibility(View.VISIBLE);
                 mActivityJingpaidetailStatus.setImageDrawable(getResources().getDrawable(R.mipmap.jingpai_jinxingzhong));
                 jiageLayout.setBackground(getResources().getDrawable(R.mipmap.shangpin_jiage));
                 mActivityJingpaidetailDangqianjiage.setText(bean.getMaxPrice());
                 mActivityJingpaidetailDangqianjiageUnit.setText(bean.getPriceUnit());
-
                 break;
             case "3"://成交
+                mActivityJingpaiWoyaojingpai.setVisibility(View.GONE);
                 mActivityJingpaidetailStatus.setImageDrawable(getResources().getDrawable(R.mipmap.jingpai_yichengjiao));
                 jiageLayout.setBackground(getResources().getDrawable(R.mipmap.shangpinjiage_lanse));
                 mActivityJingpaidetailDangqianjiageText.setText("已成交最高价：");
@@ -272,11 +311,16 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
                 break;
         }
 
+        if(!receivMsg){
+            setFragment();
+        }
+    }
 
+    private void setFragment() {
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add( PaipinmiaoshuFragment.newInstance(bean));
-        fragments.add( JingpaixuzhiFragment.newInstance(bean));
-        fragments.add( ChujiajiluFragment.newInstance(bean.getId()+""));
+        fragments.add(PaipinmiaoshuFragment.newInstance(bean));
+        fragments.add(JingpaixuzhiFragment.newInstance(bean));
+        fragments.add(ChujiajiluFragment.newInstance(bean.getId() + ""));
         List<String> datas = new ArrayList<>();
         datas.add("拍品描述");
         datas.add("竞拍须知");
@@ -285,8 +329,6 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
         mViewpager.setAdapter(viewpageAdapter);
         mTabLayout.setupWithViewPager(mViewpager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-
-
     }
 
     @Override
@@ -296,6 +338,15 @@ public class JingpaiDetailActivity extends AppCompatActivity implements View.OnC
                 break;
             case R.id.toolbar_back:
                 finish();
+                break;
+            case R.id.activity_jingpai_woyaojingpai:
+                Intent intent = new Intent(this, CanyujingpaiActivity.class);
+                intent.putExtra("auctionId", id);
+                intent.putExtra("jiajiafudu", bean.getAddPrice());
+                intent.putExtra("priceUnit", bean.getPriceUnit());
+                intent.putExtra("maxPrice", bean.getMaxPrice());
+                intent.putExtra("count", bean.getCount());
+                ActivityUtils.startActivity(intent);
                 break;
         }
     }

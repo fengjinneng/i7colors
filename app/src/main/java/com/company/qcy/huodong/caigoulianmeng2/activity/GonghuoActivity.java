@@ -552,6 +552,7 @@ public class GonghuoActivity extends BaseActivity implements View.OnClickListene
         params.put("payType", payType.getText().toString());
         params.put("positioner", zhiwu.getText().toString());
         params.put("meetingList", upData);
+        params.put("from",getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CAIGOULIANMENGWOYAODINGHUO)
                 .tag(this)

@@ -266,7 +266,7 @@ public class YouhuizhanxiaoBuyActivity extends AppCompatActivity implements View
         paras.put("address", locationProvince + locationCity);
 
         paras.put("isSendSample", xuyaoyangpin);
-
+        paras.put("from",getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.YOUHUIZHANXIAOBUY)
                 .tag(this)

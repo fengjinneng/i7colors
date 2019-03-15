@@ -259,7 +259,8 @@ public class ShenqingcanyuFragment extends BaseFragment implements View.OnClickL
                 .params("city", locationCity)
                 .params("description", mFragmentShenqingcanyuDescribe.getText().toString())
                 .params("from", "app_android")
-                .params("file", upLoadFile);
+                .params("file", upLoadFile).params("from",getActivity().getResources().getString(R.string.app_android));
+
 
         DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
             @Override

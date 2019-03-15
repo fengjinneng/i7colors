@@ -507,6 +507,7 @@ public class WoyaodinghuoActivity extends BaseActivity implements View.OnClickLi
         params.put("payType", payType.getText().toString());
         params.put("positioner", zhiwu.getText().toString());
 
+
         if (ObjectUtils.isEmpty(upLoadList)) {
             ToastUtils.showShort("选择的货物为空");
             return;

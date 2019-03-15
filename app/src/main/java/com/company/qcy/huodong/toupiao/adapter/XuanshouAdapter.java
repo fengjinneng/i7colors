@@ -28,7 +28,6 @@ public class XuanshouAdapter extends BaseQuickAdapter<XuanshouBean, BaseViewHold
 
         helper.setText(R.id.item_toupiao_xuanshou_name, item.getName());
         helper.setText(R.id.item_toupiao_xuanshou_miaoshu, item.getDescription());
-        helper.setText(R.id.item_toupiao_xuanshou_bianhao, item.getNumber());
         helper.setText(R.id.item_toupiao_xuanshou_tickets, item.getTicketNum());
 
         ImageView imageView = (ImageView) helper.getView(R.id.item_toupiao_xuanshou_img);

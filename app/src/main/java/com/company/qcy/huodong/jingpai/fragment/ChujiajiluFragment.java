@@ -25,6 +25,8 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseFragment;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.jingpai.adapter.ChujiajiuAdapter;
 import com.company.qcy.huodong.jingpai.bean.ChujiajiluBean;
@@ -42,7 +44,7 @@ import java.util.List;
  * Use the {@link ChujiajiluFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ChujiajiluFragment extends Fragment {
+public class ChujiajiluFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -81,6 +83,20 @@ public class ChujiajiluFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+        }
+    }
+
+
+    @Override
+    public void onRec(MessageBean messageBean) {
+        super.onRec(messageBean);
+
+        switch (messageBean.getCode()){
+            case MessageBean.Code.TCANYUJINGPAICHENGGONG:
+                datas.clear();
+                pageNo=0;
+                addData();
+                break;
         }
     }
 

@@ -386,7 +386,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
         paras.put("endTime", mActivityFabuqiugouJieshuriqi.getText().toString());
         paras.put("paymentType", mActivityFabuqiugouFukuanfangshi.getText().toString());
         paras.put("description", mActivityFabuqiugouXiangxishuoming.getText().toString());
-
+        paras.put("from",getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUQIUGOU)
                 .tag(this)

@@ -157,6 +157,9 @@ public class MessageBean {
         //投票 投票成功
         public static final int TOUPIAOCHENGGONG = 1030;
 
+        //竞拍 参与竞拍成功
+        public static final int TCANYUJINGPAICHENGGONG = 1031;
+
     }
 
 }

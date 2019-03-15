@@ -56,7 +56,7 @@ public class ToupiaoDetailActivity extends BaseActivity implements View.OnClickL
     /**
      * 2019
      */
-    private TextView canyuzhe;
+//    private TextView canyuzhe;
     /**
      * 2019
      */
@@ -94,7 +94,7 @@ public class ToupiaoDetailActivity extends BaseActivity implements View.OnClickL
         mToolbarText.setOnClickListener(this);
         mToolbarBack.setOnClickListener(this);
         mActivityToupiaoDetailImg = (ImageView) findViewById(R.id.activity_toupiao_detail_img);
-        canyuzhe = (TextView) findViewById(R.id.activity_toupiao_detail_canyuzhe);
+//        canyuzhe = (TextView) findViewById(R.id.activity_toupiao_detail_canyuzhe);
         toupiaoshu = (TextView) findViewById(R.id.activity_toupiao_detail_toupiaoshu);
         fangwenliang = (TextView) findViewById(R.id.activity_toupiao_detail_fangwenliang);
         countdownView = (CountdownView) findViewById(R.id.activity_toupiao_detail_countdownView);
@@ -111,7 +111,7 @@ public class ToupiaoDetailActivity extends BaseActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        shenqingcanyuFragment.onActivityResult(requestCode, resultCode, data);
+//        shenqingcanyuFragment.onActivityResult(requestCode, resultCode, data);
 
     }
 
@@ -130,14 +130,14 @@ public class ToupiaoDetailActivity extends BaseActivity implements View.OnClickL
         }
     }
 
-    private ShenqingcanyuFragment shenqingcanyuFragment;
+//    private ShenqingcanyuFragment shenqingcanyuFragment;
 
     private void setInfo() {
         if (ObjectUtils.isEmpty(bean)) {
             return;
         }
         toupiaoshu.setText(bean.getJoinNum());
-        canyuzhe.setText(bean.getApplicationNum());
+//        canyuzhe.setText(bean.getApplicationNum());
         fangwenliang.setText(bean.getClickNum());
         mToolbarTitle.setText(bean.getName());
         GlideUtils.loadImageRct(this, ServerInfo.IMAGE + bean.getBanner(), mActivityToupiaoDetailImg);
@@ -148,12 +148,12 @@ public class ToupiaoDetailActivity extends BaseActivity implements View.OnClickL
 
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(DangqianpaimingFragment.newInstance(bean.getId() + ""));
-        shenqingcanyuFragment = ShenqingcanyuFragment.newInstance(bean.getId() + "",bean.getEndCode());
-        fragments.add(shenqingcanyuFragment);
+//        shenqingcanyuFragment = ShenqingcanyuFragment.newInstance(bean.getId() + "",bean.getEndCode());
+//        fragments.add(shenqingcanyuFragment);
         fragments.add(HuodongguizeFragment.newInstance(bean));
         List<String> datas = new ArrayList<>();
         datas.add("当前排名");
-        datas.add("申请参与");
+//        datas.add("申请参与");
         datas.add("活动规则");
         viewpageAdapter = new BaseViewpageAdapter(getSupportFragmentManager(), fragments, datas);
         viewpager.setAdapter(viewpageAdapter);

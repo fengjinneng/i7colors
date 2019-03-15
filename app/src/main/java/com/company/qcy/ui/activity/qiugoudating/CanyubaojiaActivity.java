@@ -206,6 +206,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
         paras.put("phone", mActivityCanyubaojiaPhone.getText().toString());
         paras.put("validTime", mActivityCanyubaojiaTime.getText().toString());
         paras.put("description", mActivityCanyubaojiaDescription.getText().toString());
+        paras.put("from",getResources().getString(R.string.app_android));
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUBAOJIA)
                 .tag(this)
                 .params(paras);

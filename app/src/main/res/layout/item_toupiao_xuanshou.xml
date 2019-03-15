@@ -27,19 +27,18 @@
         android:layout_height="@dimen/x184"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/place_500x500" />
 
     <ImageView
         android:id="@+id/item_toupiao_xuanshou_paiming_img"
-        android:layout_width="@dimen/x72"
-        android:layout_height="@dimen/x72"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/x70"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/place_500x500" />
+        app:layout_constraintBottom_toBottomOf="@+id/item_toupiao_xuanshou_img"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/item_toupiao_xuanshou_miaoshu"
@@ -60,6 +59,7 @@
         android:textColor="@color/chunhongse"
         android:textSize="@dimen/x36"
         android:textStyle="bold"
+        android:text="0"
         app:layout_constraintBottom_toBottomOf="@+id/item_toupiao_xuanshou_img"
         app:layout_constraintStart_toStartOf="@+id/item_toupiao_xuanshou_miaoshu" />
 
@@ -72,25 +72,6 @@
         android:textSize="@dimen/x24"
         app:layout_constraintBottom_toBottomOf="@+id/item_toupiao_xuanshou_tickets"
         app:layout_constraintStart_toEndOf="@+id/item_toupiao_xuanshou_tickets" />
-
-    <TextView
-        android:id="@+id/item_toupiao_xuanshou_bianhao"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textSize="@dimen/x24"
-        app:layout_constraintBottom_toBottomOf="@+id/item_toupiao_xuanshou_tickets"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/textView248"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="编号:"
-        android:textSize="@dimen/x24"
-        app:layout_constraintBottom_toBottomOf="@+id/item_toupiao_xuanshou_bianhao"
-        app:layout_constraintEnd_toStartOf="@+id/item_toupiao_xuanshou_bianhao" />
 
     <Button
         android:id="@+id/item_toupiao_xuanshou_toupiao"
@@ -108,12 +89,11 @@
         android:id="@+id/item_toupiao_xuanshou_paiming_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/x8"
+        android:layout_marginEnd="@dimen/x80"
         android:gravity="center"
-        android:text="5"
-        android:textColor="@color/erjibiaoti"
-        android:textSize="@dimen/x66"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_toupiao_xuanshou_paiming_img" />
+        android:textColor="#daa520"
+        android:textSize="@dimen/x50"
+        app:layout_constraintBottom_toBottomOf="@+id/item_toupiao_xuanshou_img"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

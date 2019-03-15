@@ -40,4 +40,7 @@
     <string name="title_activity_jingpai_list">JingpaiListActivity</string>
 
 
+    <string name="app_android">app_android</string>
+
+
 </resources>

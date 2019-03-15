@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,14 +21,17 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.bean.BannerBean;
 import com.company.qcy.huodong.jingpai.adapter.JingpaiListAdapter;
 import com.company.qcy.huodong.jingpai.bean.JingpaiBean;
 import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
 import com.company.qcy.huodong.tuangou.bean.TuangouBean;
+import com.company.qcy.huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -110,6 +114,77 @@ public class JingpaiActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
         adapter.setLoadMoreView(new MyLoadMoreView());
+        addAdvData();
+    }
+
+
+    private List<String> advDatas = new ArrayList<>();
+
+    private void addHeadView() {
+
+        View inflate = LayoutInflater.from(this).inflate(R.layout.head_img_huodong, null);
+        ImageView img = inflate.findViewById(R.id.head_img_huodong_img);
+        GlideUtils.loadImageRct(this,advDatas.get(0),img);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        adapter.addHeaderView(inflate);
+    }
+    private void addAdvData() {
+
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "App_Auction_Info");
+
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("App_Auction_Info", response.body());
+
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
+                            }
+                            List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+                            for (int i = 0; i < bannerBeans.size(); i++) {
+                                advDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
+                            }
+                            addHeadView();
+
+                            return;
+
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(JingpaiActivity.this,request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+
+        request.execute(stringCallback);
+
     }
 
 

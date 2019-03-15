@@ -16,7 +16,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/activity_jingpai_woyaojingpai"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include40">
@@ -243,9 +243,9 @@
                                 android:layout_marginBottom="8dp"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
-                                android:visibility="gone"
                                 android:text="拍卖已流拍，\n无人参拍！"
                                 android:textColor="@color/baise"
+                                android:visibility="gone"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -271,12 +271,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/x20"
-                            android:text="距离结束:"
+                            android:text="距离竞拍结束:"
+                            android:visibility="gone"
                             android:textSize="@dimen/x26"
                             app:layout_constraintStart_toStartOf="@+id/activity_jingpaidetail_productname"
                             app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_productname" />
 
                         <cn.iwgang.countdownview.CountdownView
+                            android:visibility="gone"
                             android:id="@+id/activity_jingpaidetail_countdownView"
                             android:layout_width="0dp"
                             android:layout_height="34dp"
@@ -298,12 +300,12 @@
                             app:suffixMinute="分"
                             app:suffixSecond="秒"
                             app:suffixTextColor="#000000"
-                            app:suffixTextSize="12sp"
+                            app:suffixTextSize="15sp"
                             app:timeBgColor="@color/chunhongse"
                             app:timeBgRadius="5dp"
                             app:timeBgSize="@dimen/x48"
                             app:timeTextColor="@color/hongse"
-                            app:timeTextSize="@dimen/x30" />
+                            app:timeTextSize="@dimen/x40" />
 
                         <TextView
                             android:id="@+id/textView273"
@@ -322,8 +324,8 @@
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="@dimen/x20"
                             android:text="加价幅度: ¥ "
-                            android:textSize="@dimen/x26"
                             android:textColor="@color/hongse"
+                            android:textSize="@dimen/x26"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView273" />
 
@@ -359,9 +361,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:ellipsize="end"
                             android:maxLines="1"
                             android:textSize="@dimen/x24"
-                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="@+id/textView277"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView277" />
@@ -382,9 +384,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:ellipsize="end"
                             android:maxLines="1"
                             android:textSize="@dimen/x26"
-                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="@+id/textView279"
                             app:layout_constraintEnd_toStartOf="@+id/guideline3"
                             app:layout_constraintStart_toEndOf="@+id/textView279" />
@@ -404,9 +406,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:ellipsize="end"
                             android:maxLines="1"
                             android:textSize="@dimen/x26"
-                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="@+id/textView281"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView281" />
@@ -427,9 +429,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:ellipsize="end"
                             android:maxLines="1"
                             android:textSize="@dimen/x26"
-                            android:ellipsize="end"
                             app:layout_constraintBottom_toBottomOf="@+id/textView283"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView283" />
@@ -439,8 +441,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/x8"
-                            android:visibility="gone"
                             android:textSize="@dimen/x26"
+                            android:visibility="gone"
                             app:layout_constraintStart_toStartOf="@+id/textView283"
                             app:layout_constraintTop_toBottomOf="@+id/textView283" />
 
@@ -460,10 +462,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
-                            android:maxLines="1"
-                            android:visibility="gone"
                             android:ellipsize="end"
+                            android:maxLines="1"
                             android:textSize="@dimen/x26"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@+id/activity_jingpaidetail_zidingyi1_key"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_zidingyi1_key" />
@@ -475,8 +477,8 @@
                             android:layout_marginStart="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:visibility="gone"
                             android:textSize="@dimen/x26"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@+id/activity_jingpaidetail_zidingyi2_key"
                             app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_zidingyi2_key" />
 
@@ -516,5 +518,18 @@
 
 
     </android.support.design.widget.CoordinatorLayout>
+
+
+    <Button
+        android:id="@+id/activity_jingpai_woyaojingpai"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@mipmap/bg"
+        android:text="参与竞拍"
+        android:visibility="gone"
+        android:textColor="@color/baise"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

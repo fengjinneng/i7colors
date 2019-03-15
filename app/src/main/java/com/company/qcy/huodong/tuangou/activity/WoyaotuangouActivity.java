@@ -310,6 +310,8 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         paras.put("invitationCode", mActivityWoyaotuangouYinxiongma.getText().toString());
         paras.put("from", "app");
 
+        paras.put("from",getResources().getString(R.string.app_android));
+
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.WOYAOTUANGOU)
                 .tag(this)
                 .params(paras);

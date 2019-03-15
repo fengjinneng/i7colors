@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.company.qcy.Utils.MyConsrantLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_canyujingpai_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise"
+    tools:context=".huodong.tuangou.activity.WoyaotuangouActivity">
+
+    <include
+        android:id="@+id/include17"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include17">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout12"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x84"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/biankuang_canyubaojia_tishi"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="16dp"
+
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/fabuqiugou_you" />
+
+                <TextView
+                    android:id="@+id/textView82"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:gravity="center_vertical"
+                    android:text="购买提交后，1个工作日内，平台将会电话确认，确认最终交易细节，引导双方签署协议履行合同！"
+                    android:textSize="@dimen/x24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView4"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView95"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:text="我的竞拍报价:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
+
+            <TextView
+                android:id="@+id/textView106"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x68"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:text="联系人:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/textView130"
+                app:layout_constraintTop_toBottomOf="@+id/textView130" />
+
+            <TextView
+                android:id="@+id/textView108"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x68"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:text="联系人方式:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/textView106"
+                app:layout_constraintTop_toBottomOf="@+id/textView106" />
+
+            <TextView
+                android:id="@+id/textView113"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x68"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:text="公司名称:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/textView108"
+                app:layout_constraintTop_toBottomOf="@+id/textView108" />
+
+            <TextView
+                android:id="@+id/textView115"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x68"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:text="公司所属区域:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/textView113"
+                app:layout_constraintTop_toBottomOf="@+id/textView113" />
+
+            <TextView
+                android:id="@+id/textView119"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x68"
+                android:text="公司详细地址:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/textView115"
+                app:layout_constraintTop_toBottomOf="@+id/textView115" />
+
+            <EditText
+                android:id="@+id/activity_canyujingpai_price"
+                android:layout_width="@dimen/x228"
+                android:layout_height="@dimen/x64"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:hint="请输入价格"
+                android:inputType="numberDecimal"
+                android:paddingLeft="8dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView95"
+                app:layout_constraintStart_toEndOf="@+id/textView115"
+                app:layout_constraintTop_toTopOf="@+id/textView95" />
+
+            <EditText
+                android:id="@+id/activity_canyujingpai_lianxiren"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x64"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:hint="请输入联系人"
+                android:paddingLeft="8dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView106"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_price"
+                app:layout_constraintTop_toTopOf="@+id/textView106" />
+
+            <EditText
+                android:id="@+id/activity_canyujingpai_phone"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x64"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:hint="请输入联系电话"
+                android:inputType="phone"
+                android:paddingLeft="8dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView108"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_lianxiren"
+                app:layout_constraintTop_toTopOf="@+id/textView108" />
+
+            <EditText
+                android:id="@+id/activity_canyujingpai_companyname"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x64"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:hint="请输入公司名称"
+                android:paddingLeft="8dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView113"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_phone"
+                app:layout_constraintTop_toTopOf="@+id/textView113" />
+
+            <EditText
+                android:id="@+id/activity_canyujingpai_company_address"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x64"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:hint="请输入公司详细地址"
+                android:paddingLeft="8dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView119"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_companyname"
+                app:layout_constraintTop_toTopOf="@+id/textView119" />
+
+
+            <TextView
+                android:id="@+id/activity_canyujingpai_choiceAddress"
+                android:layout_width="@dimen/x228"
+                android:layout_height="@dimen/x64"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:gravity="center"
+                android:paddingRight="8dp"
+                android:text="请选择"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/textView115"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_companyname"
+                app:layout_constraintTop_toTopOf="@+id/textView115" />
+
+            <TextView
+                android:id="@+id/activity_youhuizhanxiao_numunit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="元"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_canyujingpai_price"
+                app:layout_constraintStart_toEndOf="@+id/activity_canyujingpai_price"
+                app:layout_constraintTop_toTopOf="@+id/activity_canyujingpai_price" />
+
+            <TextView
+                android:id="@+id/textView130"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:text="是否需要样品:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="@+id/textView95"
+                app:layout_constraintTop_toBottomOf="@+id/activity_canyujingpai_maxprice_and_jiajiafudu" />
+
+            <RadioGroup
+                android:id="@+id/activity_canyujingpai_yangpin_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/textView130"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_price"
+                app:layout_constraintTop_toTopOf="@+id/textView130">
+
+                <RadioButton
+                    android:id="@+id/activity_canyujingpai_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="是" />
+
+                <RadioButton
+                    android:id="@+id/activity_canyujingpai_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:text="否" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x118"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView119" />
+
+            <TextView
+                android:id="@+id/activity_canyujingpai_maxprice_and_jiajiafudu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="4dp"
+                android:textSize="@dimen/x24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_price"
+                app:layout_constraintTop_toBottomOf="@+id/activity_canyujingpai_price" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_canyujingpai_button_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x98"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/activity_canyujingpai_cancel"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x98"
+            android:background="@color/fengexian"
+            android:gravity="center"
+            android:text="取消"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/activity_canyujingpai_submit" />
+
+        <TextView
+            android:id="@+id/activity_canyujingpai_submit"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x98"
+            android:background="@mipmap/bg"
+            android:gravity="center"
+            android:text="提交"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/activity_canyujingpai_cancel"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+
+</com.company.qcy.Utils.MyConsrantLayout>
