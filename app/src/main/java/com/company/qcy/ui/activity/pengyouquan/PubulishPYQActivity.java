@@ -102,7 +102,6 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         initView();
     }
 
-
     private static final int REQUEST_CODE_CHOOSE_IMG = 1;
     private static final int REQUEST_CODE_TAKE_VIDEO = 3;
 

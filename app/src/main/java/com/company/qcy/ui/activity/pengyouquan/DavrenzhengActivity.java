@@ -169,6 +169,7 @@ public class DavrenzhengActivity extends BaseActivity implements View.OnClickLis
                 .params("name", mActivityDavrenzhenName.getText().toString())
                 .params("companyName", mActivityDavrenzhenCompany.getText().toString())
                 .params("job", mActivityDavrenzhenJob.getText().toString())
+                .params("from",getResources().getString(R.string.app_android))
                 .params("file", new File(MatisseImageUtil.getRealFilePath(this, mSelected.get(0))));
 
 
