@@ -1,10 +1,8 @@
 package com.company.qcy.ui.activity.kaifangshangcheng;
 
-import android.animation.ObjectAnimator;
 import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -22,7 +20,6 @@ import com.bumptech.glide.Glide;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogBitmapcallback;
 import com.company.qcy.Utils.DialogStringCallback;
-import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
@@ -72,7 +69,7 @@ public class QiyezizhiActivity extends AppCompatActivity implements View.OnClick
         busInformation = getIntent().getStringExtra("busInformation");
 
 
-            initView();
+        initView();
     }
 
     private void initView() {
@@ -88,6 +85,7 @@ public class QiyezizhiActivity extends AppCompatActivity implements View.OnClick
         mToolbarTitle.setText("网店经营者营业执照信息");
         mActivityQiyezizhiPhoneText = (TextView) findViewById(R.id.activity_qiyezizhi_phone_text);
         mActivityQiyezizhiPhone = (TextView) findViewById(R.id.activity_qiyezizhi_phone);
+        mActivityQiyezizhiVerifycode.setOnClickListener(this);
 
         getCaptcha();
 
@@ -217,6 +215,9 @@ public class QiyezizhiActivity extends AppCompatActivity implements View.OnClick
                 finish();
                 break;
             case R.id.activity_qiyezizhi_change:
+                getCaptcha();
+                break;
+            case R.id.activity_qiyezizhi_verifycode:
                 getCaptcha();
                 break;
         }

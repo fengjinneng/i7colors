@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.kaifangshangcheng.QiyezizhiActivity">
+
+
+    <include
+        android:id="@+id/include42"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <uk.co.senab.photoview.PhotoView
+        android:id="@+id/activity_qiyezizhi_img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include42" />
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/activity_qiyezizhi_scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x102"
+        android:background="@color/baise"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include42">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <TextView
+                android:id="@+id/textView236"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="32dp"
+                android:gravity="center"
+                android:text="七彩云网店\n经营者营业执照信息"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x36"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView237"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="根据国家工商总局《网络交易管理办法》要求对网店营业执照信息公示如下："
+                android:textSize="@dimen/x26"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView236" />
+
+            <TextView
+                android:id="@+id/textView280"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x100"
+                android:text="填写验证码"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
+                app:layout_constraintStart_toStartOf="@+id/textView237"
+                app:layout_constraintTop_toBottomOf="@+id/textView237" />
+
+            <TextView
+                android:id="@+id/textView282"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="请输入右图中的验证码"
+                android:textSize="@dimen/x24"
+                app:layout_constraintStart_toStartOf="@+id/textView280"
+                app:layout_constraintTop_toBottomOf="@+id/textView280" />
+
+            <ImageView
+                android:id="@+id/activity_qiyezizhi_verifycode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView282"
+                app:layout_constraintEnd_toStartOf="@+id/activity_qiyezizhi_change"
+                app:layout_constraintStart_toEndOf="@+id/textView282"
+                app:layout_constraintTop_toTopOf="@+id/textView280"
+                app:srcCompat="@mipmap/yanzhengmatupian" />
+
+            <TextView
+                android:id="@+id/activity_qiyezizhi_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="8dp"
+                android:text="换一张"
+                android:textColor="@color/chunhongse"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_qiyezizhi_verifycode"
+                app:layout_constraintEnd_toEndOf="@+id/textView237"
+                app:layout_constraintTop_toTopOf="@+id/activity_qiyezizhi_verifycode" />
+
+            <com.company.qcy.Utils.yanzhengma.SeparatedEditText
+                android:id="@+id/separatedEditText"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="32dp"
+                android:inputType="number"
+                app:blockColor="@color/fengexian"
+                app:blockSpacing="20dp"
+                app:corner="10dp"
+                app:cursorColor="@color/chunhongse"
+                app:cursorDuration="1000"
+                app:cursorWidth="3dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView237"
+                app:layout_constraintStart_toStartOf="@+id/textView237"
+                app:layout_constraintTop_toBottomOf="@+id/textView282"
+                app:maxLength="4"
+                app:separateType="@integer/type_solid"
+                app:textColor="@color/erjibiaoti" />
+
+            <!--<Button-->
+            <!--android:id="@+id/activity_qiyezizhi_submit"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="@dimen/x98"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="15dp"-->
+            <!--android:background="@mipmap/anniujianbian_round"-->
+            <!--android:text="确定"-->
+            <!--android:textColor="@color/baise"-->
+            <!--app:layout_constraintEnd_toEndOf="@+id/separatedEditText"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/separatedEditText"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/separatedEditText" />-->
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+
+        android:id="@+id/activity_qiyezizhi_phone_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="查询有误,请联系平台处理"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include42" />
+
+    <TextView
+        android:id="@+id/activity_qiyezizhi_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
+        android:autoLink="phone"
+        android:text="联系电话：400-920-8599"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/activity_qiyezizhi_phone_text"
+        app:layout_constraintStart_toStartOf="@+id/activity_qiyezizhi_phone_text"
+        app:layout_constraintTop_toBottomOf="@+id/activity_qiyezizhi_phone_text" />
+
+
+</android.support.constraint.ConstraintLayout>
