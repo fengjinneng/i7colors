@@ -188,7 +188,7 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("资讯详情");
         mToolbarText = (TextView) findViewById(R.id.toolbar_text);
-        mToolbarText.setVisibility(View.GONE);
+        mToolbarText.setVisibility(View.INVISIBLE);
     }
 
     @Override

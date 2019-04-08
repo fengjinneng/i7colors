@@ -3,6 +3,7 @@ package com.company.qcy.bean.pengyouquan;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PengyouquanBean implements Parcelable {
@@ -70,6 +71,319 @@ public class PengyouquanBean implements Parcelable {
     private String companyName;
     private String dyeVName;
     private String bossLevel;
+    private String locationAddress;
+    private String longitude;
+    private String latitude;
+    private TopicBean topic;
+    private String locationTitle;
+    private ShareBean shareBean;
+
+    public ShareBean getShareBean() {
+        return shareBean;
+    }
+
+    public void setShareBean(ShareBean shareBean) {
+        this.shareBean = shareBean;
+    }
+
+    public static class ShareBean implements Parcelable {
+
+
+        /**
+         * id : 4210
+         * pic : /news/coverImg/15537345094365CWCU1.jpg
+         * title : 染料价格：分散染料价格还会涨吗？
+         * content : 染料价格：分散染料价格还会涨吗？
+         */
+
+        private Long id;
+        private String pic;
+        private String title;
+        private String content;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getPic() {
+            return pic;
+        }
+
+        public void setPic(String pic) {
+            this.pic = pic;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeValue(this.id);
+            dest.writeString(this.pic);
+            dest.writeString(this.title);
+            dest.writeString(this.content);
+        }
+
+        public ShareBean() {
+        }
+
+        protected ShareBean(Parcel in) {
+            this.id = (Long) in.readValue(Long.class.getClassLoader());
+            this.pic = in.readString();
+            this.title = in.readString();
+            this.content = in.readString();
+        }
+
+        public static final Creator<ShareBean> CREATOR = new Creator<ShareBean>() {
+            @Override
+            public ShareBean createFromParcel(Parcel source) {
+                return new ShareBean(source);
+            }
+
+            @Override
+            public ShareBean[] newArray(int size) {
+                return new ShareBean[size];
+            }
+        };
+    }
+
+    public String getLocationTitle() {
+        return locationTitle;
+    }
+
+    public void setLocationTitle(String locationTitle) {
+        this.locationTitle = locationTitle;
+    }
+
+    public TopicBean getTopic() {
+        return topic;
+    }
+
+    public void setTopic(TopicBean topic) {
+        this.topic = topic;
+    }
+
+    public static class TopicBean implements Parcelable {
+
+        /**
+         * id : 7
+         * parentId : null
+         * level : null
+         * title : 环保降耗
+         * banner :
+         * description : 环保节能降耗环保节能降耗环保节能降耗环保节能降耗环保节能降耗环保节能降耗环保节能降耗环保节能降耗环保节能降耗环保节能降耗环保节能降耗
+         * communityNum : null
+         * isValid : null
+         * createdAt : null
+         * updatedAt : null
+         * topicList : [{"id":8,"parentId":7,"level":null,"title":"节能","banner":"","description":"节能节能节能节能节能节能节能节能节能节能节能节能","communityNum":null,"isValid":null,"createdAt":null,"updatedAt":null,"topicList":null,"sortNum":null}]
+         * sortNum : null
+         */
+
+        private Long id;
+        private Long parentId;
+        private String title;
+        private String banner;
+        private String description;
+        private List<TopicListBean> topicList;
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public Long getParentId() {
+            return parentId;
+        }
+
+        public void setParentId(Long parentId) {
+            this.parentId = parentId;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getBanner() {
+            return banner;
+        }
+
+        public void setBanner(String banner) {
+            this.banner = banner;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public List<TopicListBean> getTopicList() {
+            return topicList;
+        }
+
+        public void setTopicList(List<TopicListBean> topicList) {
+            this.topicList = topicList;
+        }
+
+        public static class TopicListBean {
+            /**
+             * id : 8
+             * parentId : 7
+             * level : null
+             * title : 节能
+             * banner :
+             * description : 节能节能节能节能节能节能节能节能节能节能节能节能
+             * communityNum : null
+             * isValid : null
+             * createdAt : null
+             * updatedAt : null
+             * topicList : null
+             * sortNum : null
+             */
+
+            private Long id;
+            private Long parentId;
+            private String title;
+            private String banner;
+            private String description;
+
+            public Long getId() {
+                return id;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public Long getParentId() {
+                return parentId;
+            }
+
+            public void setParentId(Long parentId) {
+                this.parentId = parentId;
+            }
+
+            public String getTitle() {
+                return title;
+            }
+
+            public void setTitle(String title) {
+                this.title = title;
+            }
+
+            public String getBanner() {
+                return banner;
+            }
+
+            public void setBanner(String banner) {
+                this.banner = banner;
+            }
+
+            public String getDescription() {
+                return description;
+            }
+
+            public void setDescription(String description) {
+                this.description = description;
+            }
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeValue(this.id);
+            dest.writeValue(this.parentId);
+            dest.writeString(this.title);
+            dest.writeString(this.banner);
+            dest.writeString(this.description);
+            dest.writeList(this.topicList);
+        }
+
+        public TopicBean() {
+        }
+
+        protected TopicBean(Parcel in) {
+            this.id = (Long) in.readValue(Long.class.getClassLoader());
+            this.parentId = (Long) in.readValue(Long.class.getClassLoader());
+            this.title = in.readString();
+            this.banner = in.readString();
+            this.description = in.readString();
+            this.topicList = new ArrayList<TopicListBean>();
+            in.readList(this.topicList, TopicListBean.class.getClassLoader());
+        }
+
+        public static final Creator<TopicBean> CREATOR = new Creator<TopicBean>() {
+            @Override
+            public TopicBean createFromParcel(Parcel source) {
+                return new TopicBean(source);
+            }
+
+            @Override
+            public TopicBean[] newArray(int size) {
+                return new TopicBean[size];
+            }
+        };
+    }
+
+    public String getLocationAddress() {
+        return locationAddress;
+    }
+
+    public void setLocationAddress(String locationAddress) {
+        this.locationAddress = locationAddress;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 
     public String getBossLevel() {
         return bossLevel;
@@ -643,6 +957,9 @@ public class PengyouquanBean implements Parcelable {
     }
 
 
+    public PengyouquanBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -665,6 +982,20 @@ public class PengyouquanBean implements Parcelable {
         dest.writeString(this.pic3);
         dest.writeString(this.pic4);
         dest.writeString(this.pic5);
+        dest.writeString(this.isCompany);
+        dest.writeString(this.isDyeV);
+        dest.writeString(this.isFollow);
+        dest.writeString(this.dyeFollowCount);
+        dest.writeString(this.isCharger);
+        dest.writeString(this.companyName);
+        dest.writeString(this.dyeVName);
+        dest.writeString(this.bossLevel);
+        dest.writeString(this.locationAddress);
+        dest.writeString(this.longitude);
+        dest.writeString(this.latitude);
+        dest.writeParcelable(this.topic, flags);
+        dest.writeString(this.locationTitle);
+        dest.writeParcelable(this.shareBean, flags);
         dest.writeString(this.pic6);
         dest.writeString(this.pic7);
         dest.writeString(this.pic8);
@@ -675,9 +1006,6 @@ public class PengyouquanBean implements Parcelable {
         dest.writeString(this.isLike);
         dest.writeTypedList(this.commentList);
         dest.writeTypedList(this.likeList);
-    }
-
-    public PengyouquanBean() {
     }
 
     protected PengyouquanBean(Parcel in) {
@@ -696,6 +1024,20 @@ public class PengyouquanBean implements Parcelable {
         this.pic3 = in.readString();
         this.pic4 = in.readString();
         this.pic5 = in.readString();
+        this.isCompany = in.readString();
+        this.isDyeV = in.readString();
+        this.isFollow = in.readString();
+        this.dyeFollowCount = in.readString();
+        this.isCharger = in.readString();
+        this.companyName = in.readString();
+        this.dyeVName = in.readString();
+        this.bossLevel = in.readString();
+        this.locationAddress = in.readString();
+        this.longitude = in.readString();
+        this.latitude = in.readString();
+        this.topic = in.readParcelable(TopicBean.class.getClassLoader());
+        this.locationTitle = in.readString();
+        this.shareBean = in.readParcelable(ShareBean.class.getClassLoader());
         this.pic6 = in.readString();
         this.pic7 = in.readString();
         this.pic8 = in.readString();
@@ -708,7 +1050,7 @@ public class PengyouquanBean implements Parcelable {
         this.likeList = in.createTypedArrayList(LikeListBean.CREATOR);
     }
 
-    public static final Parcelable.Creator<PengyouquanBean> CREATOR = new Parcelable.Creator<PengyouquanBean>() {
+    public static final Creator<PengyouquanBean> CREATOR = new Creator<PengyouquanBean>() {
         @Override
         public PengyouquanBean createFromParcel(Parcel source) {
             return new PengyouquanBean(source);

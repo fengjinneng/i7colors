@@ -100,6 +100,7 @@ public class HangyezixunFragment extends Fragment {
         datas = new ArrayList<>();
         //创建适配器
         adapter = new ChanyezixunRecyclerviewAdapter(R.layout.item_chanyezixun_fragment, datas);
+
         adapter.setEnableLoadMore(false);
 
         //给RecyclerView设置适配器
@@ -135,14 +136,14 @@ public class HangyezixunFragment extends Fragment {
 
                 Intent intent = new Intent(activity, ZixunxiangqingActivity.class);
                 Long id = ((NewsBean) adapter.getData().get(position)).getId();
-                intent.putExtra("id",id);
+                intent.putExtra("id", id);
                 ActivityUtils.startActivity(intent);
 
             }
         });
         refreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
-        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
     }
 
     private boolean isReflash;
@@ -194,7 +195,7 @@ public class HangyezixunFragment extends Fragment {
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);

@@ -94,9 +94,38 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         return bitmap;
     }
 
-
     @Override
     protected void convert(BaseViewHolder helper, PengyouquanBean item) {
+
+        ConstraintLayout lianjieLayout = (ConstraintLayout) helper.getView(R.id.item_pengyouquan_lianjie_layout);
+        ImageView lianjieImage = (ImageView) helper.getView(R.id.item_pengyouquan_lianjie_image);
+        TextView lianjieTitle = (TextView) helper.getView(R.id.item_pengyouquan_lianjie_title);
+        if (!ObjectUtils.isEmpty(item.getShareBean())) {
+            lianjieLayout.setVisibility(View.VISIBLE);
+            GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getShareBean().getPic(), lianjieImage);
+            lianjieTitle.setText(item.getShareBean().getTitle());
+            helper.addOnClickListener(R.id.item_pengyouquan_lianjie_layout);
+        } else {
+            lianjieLayout.setVisibility(View.GONE);
+        }
+        TextView address = (TextView) helper.getView(R.id.item_pengyouquan_address);
+        helper.addOnClickListener(R.id.item_pengyouquan_address);
+        TextView huati = (TextView) helper.getView(R.id.item_pengyouquan_huati);
+        helper.addOnClickListener(R.id.item_pengyouquan_huati);
+        if (StringUtils.isEmpty(item.getLocationTitle())) {
+            address.setVisibility(View.GONE);
+        } else {
+            address.setText(item.getLocationTitle());
+            address.setVisibility(View.VISIBLE);
+        }
+
+        if (ObjectUtils.isEmpty(item.getTopic())) {
+            huati.setVisibility(View.GONE);
+        } else {
+            huati.setText("#" + item.getTopic().getTopicList().get(0).getTitle() + "#");
+            huati.setVisibility(View.VISIBLE);
+        }
+
         helper.addOnClickListener(R.id.item_pengyouquan_detail);
         inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         ImageView headimg = (ImageView) helper.getView(R.id.item_pengyouquan_headimg);
@@ -159,7 +188,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                 renzheng.setPadding(10, 0, 10, 0);
             }
         }
-        helper.setText(R.id.item_pengyouquan_name,item.getPostUser());
+        helper.setText(R.id.item_pengyouquan_name, item.getPostUser());
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(item.getPostUser() + " .");
         //大佬等级1
         if (StringUtils.equals("1", item.getBossLevel())) {
@@ -169,7 +198,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             ImageSpan span1 = new ImageSpan(level1, ImageSpan.ALIGN_BASELINE);
             spannableStringBuilder.setSpan(span1,
                     spannableStringBuilder.length() - 1, spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            helper.setText(R.id.item_pengyouquan_name,spannableStringBuilder);
+            helper.setText(R.id.item_pengyouquan_name, spannableStringBuilder);
 
         }
         if (StringUtils.equals("2", item.getBossLevel())) {
@@ -180,7 +209,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
             spannableStringBuilder.setSpan(span2,
                     spannableStringBuilder.length() - 1, spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            helper.setText(R.id.item_pengyouquan_name,spannableStringBuilder);
+            helper.setText(R.id.item_pengyouquan_name, spannableStringBuilder);
 
         }
         if (StringUtils.equals("3", item.getBossLevel())) {
@@ -189,7 +218,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             ImageSpan span3 = new ImageSpan(level3, ImageSpan.ALIGN_BASELINE);
             spannableStringBuilder.setSpan(span3,
                     spannableStringBuilder.length() - 1, spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            helper.setText(R.id.item_pengyouquan_name,spannableStringBuilder);
+            helper.setText(R.id.item_pengyouquan_name, spannableStringBuilder);
         }
 
         TextView deleteBtn = (TextView) helper.getView(R.id.deleteBtn);
@@ -246,7 +275,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 //          jzvdStd.setUp(ServerInfo.IMAGE+item.getUrl(), "", JzvdStd.SCREEN_WINDOW_LIST);
 //          jzvdStd.thumbImageView.setImageBitmap(getNetVideoBitmap(ServerInfo.IMAGE+item.getUrl()));
 //          Glide.with(mContext).load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png").into(shipinPlayImage);
-            GlideUtils.loadImageFitCenter(mContext,ServerInfo.IMAGE + item.getVideoPicUrl(),shipinPlayImage);
+            GlideUtils.loadImageFitCenter(mContext, ServerInfo.IMAGE + item.getVideoPicUrl(), shipinPlayImage);
 
         } else {
             shipinLayout.setVisibility(View.GONE);
