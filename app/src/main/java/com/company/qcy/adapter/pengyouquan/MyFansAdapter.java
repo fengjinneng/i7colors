@@ -37,7 +37,11 @@ public class MyFansAdapter extends BaseQuickAdapter<MyFansBean, BaseViewHolder> 
         if (StringUtils.isEmpty(item.getUserCommunityPhoto())) {
             headImg.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.morentouxiang));
         } else {
-            GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getUserCommunityPhoto(), headImg);
+            if (item.getUserCommunityPhoto().startsWith("http")) {
+                GlideUtils.loadCircleImage(mContext, item.getUserCommunityPhoto(), headImg);
+            } else {
+                GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getUserCommunityPhoto(), headImg);
+            }
         }
 
         helper.setText(R.id.item_myfans_time, TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(0, 10) +

@@ -1,29 +1,26 @@
 package com.company.qcy.ui.activity.kaifangshangcheng;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -34,14 +31,14 @@ import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.kaifangshangcheng.DianpuxiangqingBean;
 import com.company.qcy.fragment.kaifangshangcheng.KaifangshangchengxiangqingFragment;
 import com.company.qcy.fragment.kaifangshangcheng.KfscGongsijieshaoFragment;
-import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
-import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -76,6 +73,7 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
     private TabLayout mTabLayout;
     private AppBarLayout mAppbar;
     private ViewPager mViewpager;
+    private ImageView mActivityKfscxiangqingQiyezizhi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +103,8 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
         mAppbar = (AppBarLayout) findViewById(R.id.appbar);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
         initToolBarData();
+        mActivityKfscxiangqingQiyezizhi = (ImageView) findViewById(R.id.activity_kfscxiangqing_qiyezizhi);
+        mActivityKfscxiangqingQiyezizhi.setOnClickListener(this);
     }
 
     BaseViewpageAdapter baseViewpageAdapter;
@@ -271,9 +271,7 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
 
             }
         });
-
     }
-
 
     @Override
     public void onClick(View v) {
@@ -298,6 +296,16 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
                 }
 
 
+                break;
+            case R.id.activity_kfscxiangqing_qiyezizhi:
+
+                if (UserUtil.isLogin()) {
+                    Intent intent = new Intent(this, QiyezizhiActivity.class);
+                    intent.putExtra("busInformation", dianpuBean.getBusInformation());
+                    ActivityUtils.startActivity(intent);
+                } else {
+                    ActivityUtils.startActivity(LoginActivity.class);
+                }
                 break;
         }
     }

@@ -179,8 +179,8 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                 if (s == null) {
                     return;
                 }
-                if(s.length()==2){
-                    if(s.toString().startsWith("0")&&!s.toString().substring(1).equals(".")){
+                if (s.length() == 2) {
+                    if (s.toString().startsWith("0") && !s.toString().substring(1).equals(".")) {
                         mActivityWoyaotuangouRenlingliang.setText(s.toString().substring(1));
                         mActivityWoyaotuangouRenlingliang.setSelection(mActivityWoyaotuangouRenlingliang.getText().length());
                     }
@@ -224,6 +224,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         });
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("我要团购");
+        mActivityWoyaotuangouFanwei.setText(bean.getMinNum()+"<认领量<"+bean.getMaxNum());
     }
 
     @Override
@@ -237,6 +238,10 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                     return;
                 } else if (Float.parseFloat(mActivityWoyaotuangouRenlingliang.getText().toString()) < Float.parseFloat(bean.getMinNum())) {
                     ToastUtils.showShort("认领量不能小于最少认领量");
+                    return;
+
+                } else if (Float.parseFloat(mActivityWoyaotuangouRenlingliang.getText().toString()) > Float.parseFloat(bean.getMaxNum())) {
+                    ToastUtils.showShort("认领量不能高于最高认领量");
                     return;
                 } else if (StringUtils.isTrimEmpty(mActivityWoyaotuangouLianxiren.getText().toString())) {
                     ToastUtils.showShort("请填写联系人");
@@ -310,7 +315,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         paras.put("invitationCode", mActivityWoyaotuangouYinxiongma.getText().toString());
         paras.put("from", "app");
 
-        paras.put("from",getResources().getString(R.string.app_android));
+        paras.put("from", getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.WOYAOTUANGOU)
                 .tag(this)
@@ -334,7 +339,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(WoyaotuangouActivity.this,request,this);
+                            SignAndTokenUtil.getSign(WoyaotuangouActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);

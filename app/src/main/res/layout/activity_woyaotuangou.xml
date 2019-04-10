@@ -230,7 +230,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="0.5吨\u003C认领量\u003C1吨 "
         android:textColor="@color/chunhongse"
         android:textSize="@dimen/x20"
         app:layout_constraintBottom_toBottomOf="@+id/activity_woyaotuangou_renlingliang"

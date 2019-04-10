@@ -74,8 +74,8 @@ android {
         applicationId "com.company.qcy"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 6
-        versionName "1.0.5"
+        versionCode 7
+        versionName "1.0.6"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {
@@ -220,6 +220,5 @@ dependencies {
 //    implementation 'top.zibin:Luban:1.1.8'
 
     implementation 'id.zelory:compressor:2.1.0'
-
 
 }

@@ -15,6 +15,10 @@ public class InterfaceInfo {
     //用户
     //图形验证码
     public static final String CAPTCHA = "captcha";
+
+    //校验图形验证码
+    public static final String CHECKCAPTCHA = "user/checkCaptcha";
+
     //登录
     public static final String LOGIN = "user/toLogin";
     //获取签名

@@ -36,6 +36,15 @@ public class DianpuxiangqingBean {
     private Object productList;
     private String phone;
     private String tel;
+    private String busInformation;
+
+    public String getBusInformation() {
+        return busInformation;
+    }
+
+    public void setBusInformation(String busInformation) {
+        this.busInformation = busInformation;
+    }
 
     public String getTel() {
         return tel;
