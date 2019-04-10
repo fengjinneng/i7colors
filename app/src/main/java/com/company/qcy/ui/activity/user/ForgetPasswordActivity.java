@@ -243,6 +243,9 @@ public class ForgetPasswordActivity extends BaseActivity implements View.OnClick
                                         return;
                                     }
                                     ToastUtils.showShort(msg);
+                                    return;
+                                }else {
+                                    ToastUtils.showShort(msg);
                                 }
                             }
 
