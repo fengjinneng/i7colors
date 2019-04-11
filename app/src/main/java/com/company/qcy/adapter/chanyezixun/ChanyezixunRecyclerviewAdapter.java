@@ -1,6 +1,7 @@
 package com.company.qcy.adapter.chanyezixun;
 
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.StringUtils;
@@ -29,6 +30,13 @@ public class ChanyezixunRecyclerviewAdapter
         GlideUtils.loadImage(mContext,ServerInfo.IMAGE+item.getImg_url(),imageView);
         helper.setText(R.id.item_chanyexixun_content,item.getContent_summary());
         helper.setText(R.id.item_chanyexixun_time, new String(item.getNews_date()).substring(0,10));
+        if(item.isShowChoice()){
+            helper.getView(R.id.item_chanyexixun_xuanze).setVisibility(View.VISIBLE);
+            helper.addOnClickListener(R.id.item_chanyexixun_xuanze);
+        }else {
+            helper.getView(R.id.item_chanyexixun_xuanze).setVisibility(View.GONE);
+        }
+
     }
 }
 

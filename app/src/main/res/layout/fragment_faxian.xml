@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.pengyouquan.FaxianFragment">
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/fragment_faxian_slidingTabLayout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x70"
+        android:layout_marginRight="@dimen/x80"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tl_indicator_color="@color/chunhongse"
+        app:tl_indicator_width="0dp"
+        app:tl_textSelectColor="@color/chunhongse"
+        app:tl_textUnselectColor="@color/erjibiaoti">
+
+    </com.flyco.tablayout.SlidingTabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/fragment_faxian_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_faxian_slidingTabLayout" />
+
+    <ImageView
+        android:id="@+id/fragment_faxian_xiala"
+        android:layout_width="@dimen/x80"
+        android:layout_height="0dp"
+        android:padding="@dimen/x25"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_faxian_slidingTabLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/fragment_faxian_slidingTabLayout"
+        app:srcCompat="@mipmap/xialajiantou" />
+
+
+</android.support.constraint.ConstraintLayout>

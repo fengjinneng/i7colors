@@ -173,8 +173,10 @@ dependencies {
     implementation 'com.lzy.net:okgo:3.0.4'
 
     /*配合stetho库的StethoInterceptor*/
-//    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-//    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+
+    //    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+
+    //    implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
 
     //daojishi
     implementation 'com.github.iwgang:countdownview:2.1.6'
@@ -213,12 +215,14 @@ dependencies {
     // 此处以JCore 1.2.5 版本为例。
     implementation 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
     implementation 'com.webianks.library:popup-bubble:1.0.5'
-
     implementation 'com.aliyun.ams:alicloud-android-hotfix:3.2.7'
 
     //鲁班图片压缩算法
-//    implementation 'top.zibin:Luban:1.1.8'
 
+    //    implementation 'top.zibin:Luban:1.1.8'
     implementation 'id.zelory:compressor:2.1.0'
+    implementation files('libs/AMap3DMap_6.7.0_AMapSearch_6.5.0_AMapLocation_4.4.0_20190213.jar')
 
+    //通讯录
+    implementation 'com.gjiazhe:wavesidebar:1.3'
 }

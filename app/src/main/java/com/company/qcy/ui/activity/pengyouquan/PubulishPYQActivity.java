@@ -1,7 +1,6 @@
 package com.company.qcy.ui.activity.pengyouquan;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -15,11 +14,11 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,14 +26,13 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.amap.api.services.core.PoiItem;
+import com.amap.api.services.help.Tip;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.FileUtils;
-import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
@@ -43,16 +41,18 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
-import com.company.qcy.Utils.BitmapUtil;
 import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MatisseImageUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.pengyouquan.FabupengyouquanAdapter;
 import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.chanyezixun.NewsBean;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ImageBean;
+import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
@@ -94,6 +94,52 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
     private ImageView mActivityPubylishPeyStart;
 
     private ImageView playRedioButton;
+    private ConstraintLayout mActivityPublishPyqAddressLayout;
+    private ImageView mActivityPublishPyqAddressLayoutImg;
+    /**
+     * 你的位置
+     */
+    private TextView mActivityPublishPyqAddressLayoutTitle;
+    private ConstraintLayout mActivityPublishPyqHuatiLayout;
+    /**
+     * # 话题名称话题名称话题名称 #
+     */
+    private TextView mActivityPublishPyqHuatiName;
+    private ImageView mActivityPublishPyqHuatiImg;
+    private ImageView mActivityPublishPyqZixunGuanlianzixunImg;
+    /**
+     * 关联资讯
+     */
+    private TextView mActivityPublishPyqZixunGuanlianzixun;
+    /**
+     * 未关联
+     */
+    private TextView mActivityPublishPyqZixunGuanlianzixunState;
+    private ConstraintLayout mActivityPublishPyqZixunLayout;
+    private ImageView mActivityPublishPyqLianjieImg;
+    /**
+     * 孙瑞哲：科创板是纺织行业“及 时雨”，多细分领域企业有科创板是纺织行业“及 时雨”，多细分领域企业有
+     */
+    private TextView mActivityPublishPyqLianjieTitle;
+    /**
+     * 近日，中国纺织工业联合会（下称 “中纺联”）会长孙瑞哲接受中国
+     */
+    private TextView mActivityPublishPyqLianjieContent;
+    /**
+     * 删除文章
+     */
+    private TextView mActivityPublishPyqLianjieDelete;
+    private ConstraintLayout mActivityPublishPyqLianjieLayout;
+    private ImageView mActivityPublishPyqShuikeyikanImg;
+    /**
+     * 谁可以看
+     */
+    private TextView mActivityPublishPyqShuikeyikanText;
+    /**
+     * 部分关注人可见
+     */
+    private TextView mActivityPublishPyqShuikeyikanStatus;
+    private ConstraintLayout mActivityPublishPyqShuikeyikanLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +147,6 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_pubulish_pyq);
         initView();
     }
-
 
     private static final int REQUEST_CODE_CHOOSE_IMG = 1;
     private static final int REQUEST_CODE_TAKE_VIDEO = 3;
@@ -308,10 +353,6 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                                 ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
                             })
                             .start();
-
-
-                } else {
-
                 }
             }
         });
@@ -338,6 +379,30 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         mActivityPubylishPeyStart.setOnClickListener(this);
         playRedioButton = findViewById(R.id.activity_pubylish_pey_start);
 
+        mActivityPublishPyqAddressLayout = (ConstraintLayout) findViewById(R.id.activity_publish_pyq_address_layout);
+        mActivityPublishPyqAddressLayout.setOnClickListener(this);
+        mActivityPublishPyqAddressLayoutImg = (ImageView) findViewById(R.id.activity_publish_pyq_address_layout_img);
+        mActivityPublishPyqAddressLayoutTitle = (TextView) findViewById(R.id.activity_publish_pyq_address_layout_title);
+        mActivityPublishPyqHuatiLayout = (ConstraintLayout) findViewById(R.id.activity_publish_pyq_huati_layout);
+        mActivityPublishPyqHuatiLayout.setOnClickListener(this);
+        mActivityPublishPyqHuatiName = (TextView) findViewById(R.id.activity_publish_pyq_huati_name);
+        mActivityPublishPyqHuatiImg = (ImageView) findViewById(R.id.activity_publish_pyq_huati_img);
+        mActivityPublishPyqZixunGuanlianzixunImg = (ImageView) findViewById(R.id.activity_publish_pyq_zixun_guanlianzixun_img);
+        mActivityPublishPyqZixunGuanlianzixun = (TextView) findViewById(R.id.activity_publish_pyq_zixun_guanlianzixun);
+        mActivityPublishPyqZixunGuanlianzixunState = (TextView) findViewById(R.id.activity_publish_pyq_zixun_guanlianzixun_state);
+        mActivityPublishPyqZixunLayout = (ConstraintLayout) findViewById(R.id.activity_publish_pyq_zixun_layout);
+        mActivityPublishPyqZixunLayout.setOnClickListener(this);
+        mActivityPublishPyqLianjieImg = (ImageView) findViewById(R.id.activity_publish_pyq_lianjie_img);
+        mActivityPublishPyqLianjieTitle = (TextView) findViewById(R.id.activity_publish_pyq_lianjie_title);
+        mActivityPublishPyqLianjieContent = (TextView) findViewById(R.id.activity_publish_pyq_lianjie_content);
+        mActivityPublishPyqLianjieDelete = (TextView) findViewById(R.id.activity_publish_pyq_lianjie_delete);
+        mActivityPublishPyqLianjieDelete.setOnClickListener(this);
+        mActivityPublishPyqLianjieLayout = (ConstraintLayout) findViewById(R.id.activity_publish_pyq_lianjie_layout);
+        mActivityPublishPyqShuikeyikanImg = (ImageView) findViewById(R.id.activity_publish_pyq_shuikeyikan_img);
+        mActivityPublishPyqShuikeyikanText = (TextView) findViewById(R.id.activity_publish_pyq_shuikeyikan_text);
+        mActivityPublishPyqShuikeyikanStatus = (TextView) findViewById(R.id.activity_publish_pyq_shuikeyikan_status);
+        mActivityPublishPyqShuikeyikanLayout = (ConstraintLayout) findViewById(R.id.activity_publish_pyq_shuikeyikan_layout);
+        mActivityPublishPyqShuikeyikanLayout.setOnClickListener(this);
     }
 
     private Dialog chooseHeadDialog;
@@ -548,6 +613,85 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+
+    @Override
+    public void onReciveMessage(MessageBean msg) {
+        super.onReciveMessage(msg);
+        switch (msg.getCode()) {
+            case MessageBean.Code.PENGYOUQUANCHOICEADDRESS:
+                PoiItem poiItem = (PoiItem) msg.getObj();
+                mActivityPublishPyqAddressLayoutImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_position_checked));
+                mActivityPublishPyqAddressLayoutTitle.setText(poiItem.getTitle());
+                mActivityPublishPyqAddressLayoutTitle.setTextColor(getResources().getColor(R.color.hongse));
+                upLoadLat = String.valueOf(poiItem.getLatLonPoint().getLatitude());
+                upLoadLot = String.valueOf(poiItem.getLatLonPoint().getLongitude());
+                upLoadAddressTitle = poiItem.getTitle();
+                upLoadAddressContent = poiItem.getCityName() + poiItem.getAdName() + poiItem.getSnippet();
+                break;
+            case MessageBean.Code.PENGYOUQUANNOCHOICEADDRESS:
+                mActivityPublishPyqAddressLayoutImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_position_unchecked));
+                mActivityPublishPyqAddressLayoutTitle.setText("你的位置");
+                mActivityPublishPyqAddressLayoutTitle.setTextColor(getResources().getColor(R.color.putongwenben));
+                upLoadLat = "";
+                upLoadLot = "";
+                upLoadAddressTitle = "";
+                break;
+            case MessageBean.Code.PENGYOUQUANCHOICEADDRESSBYSEARCH:
+                Tip tip = (Tip) msg.getObj();
+                mActivityPublishPyqAddressLayoutImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_position_checked));
+                mActivityPublishPyqAddressLayoutTitle.setText(tip.getName());
+                mActivityPublishPyqAddressLayoutTitle.setTextColor(getResources().getColor(R.color.hongse));
+                upLoadLat = String.valueOf(tip.getPoint().getLatitude());
+                upLoadLot = String.valueOf(tip.getPoint().getLongitude());
+                upLoadAddressTitle = tip.getName();
+                upLoadAddressContent = tip.getAddress();
+                break;
+            case MessageBean.Code.CHOICEERJIHUATI:
+                String obj = (String) msg.getObj();
+                mActivityPublishPyqHuatiName.setText(msg.getMeaasge());
+                upErjiHuatiId = obj;
+                mActivityPublishPyqHuatiName.setTextColor(getResources().getColor(R.color.hongse));
+                mActivityPublishPyqHuatiImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_huati_checked));
+                break;
+
+            case MessageBean.Code.CHOICEZIXUN:
+                mActivityPublishPyqLianjieLayout.setVisibility(View.VISIBLE);
+                NewsBean newsBean = (NewsBean) msg.getObj();
+                mActivityPublishPyqZixunGuanlianzixun.setTextColor(getResources().getColor(R.color.hongse));
+                mActivityPublishPyqZixunGuanlianzixunImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_zixun_checked));
+                mActivityPublishPyqZixunGuanlianzixunState.setTextColor(getResources().getColor(R.color.hongse));
+                mActivityPublishPyqZixunGuanlianzixunState.setText("已选中");
+                upLoadShareId = String.valueOf(newsBean.getId());
+                upLoadShareType = "info";
+                GlideUtils.loadImage(this, ServerInfo.IMAGE + newsBean.getImg_url(), mActivityPublishPyqLianjieImg);
+                mActivityPublishPyqLianjieTitle.setText(newsBean.getTitle());
+                mActivityPublishPyqLianjieContent.setText(newsBean.getContent_summary());
+                break;
+        }
+    }
+
+    //上传的二级话题的ID
+    private String upErjiHuatiId;
+
+
+    //上传的位置信息
+    private String upLoadLat;
+    private String upLoadLot;
+    private String upLoadAddressTitle;
+    private String upLoadAddressContent;
+
+    //提醒谁看的用户ID
+    private String upNoticeUserId;
+
+    //指定谁看的用户ID
+    private String upAppointUserId;
+
+    //分享内容类型，info:资讯；enquiry:求购；product：产品；market：店铺；auction：竞拍；groupBuy:团购；meeting：采购联盟；sales;优惠展销;
+    private String upLoadShareType;
+
+    //分享内容的id
+    private String upLoadShareId;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -588,6 +732,31 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                     updateChunText(mActivityPubylishPeyContent.getText().toString());
                 }
                 break;
+            case R.id.activity_publish_pyq_address_layout:
+                ActivityUtils.startActivity(PengyouquanChoiceAddressActivity.class);
+                break;
+            case R.id.activity_publish_pyq_huati_layout:
+                ActivityUtils.startActivity(ChoiceHuatiActivity.class);
+                break;
+            case R.id.activity_publish_pyq_zixun_layout:
+                Intent zixunIntent = new Intent(this, ChanyezixunActivity.class);
+                zixunIntent.putExtra("from", "pengyouquan_fabu");
+                ActivityUtils.startActivity(zixunIntent);
+                break;
+            case R.id.activity_publish_pyq_lianjie_delete:
+
+                mActivityPublishPyqLianjieLayout.setVisibility(View.GONE);
+                upLoadShareId = null;
+                upLoadShareType = null;
+                mActivityPublishPyqZixunGuanlianzixun.setTextColor(getResources().getColor(R.color.putongwenben));
+                mActivityPublishPyqZixunGuanlianzixunImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_zixun_unchecked));
+                mActivityPublishPyqZixunGuanlianzixunState.setTextColor(getResources().getColor(R.color.putongwenben));
+                mActivityPublishPyqZixunGuanlianzixunState.setText("未关联");
+                break;
+            case R.id.activity_publish_pyq_shuikeyikan_layout:
+
+                ActivityUtils.startActivity(MyFriendsActivity.class);
+                break;
         }
     }
 
@@ -617,7 +786,25 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         params.put("token", SPUtils.getInstance().getString("token"));
         params.put("sign", SPUtils.getInstance().getString("sign"));
         params.put("content", content);
-        params.put("from",getResources().getString(R.string.app_android));
+        params.put("from", getResources().getString(R.string.app_android));
+
+        if (!StringUtils.isEmpty(upErjiHuatiId)) {
+            params.put("level2TopicId", upErjiHuatiId);
+        }
+        if (!StringUtils.isEmpty(upLoadAddressTitle)) {
+            params.put("locationTitle", upLoadAddressTitle);
+        }
+        if (!StringUtils.isEmpty(upLoadAddressContent)) {
+            params.put("locationAddress", upLoadAddressContent);
+        }
+
+        if (!StringUtils.isEmpty(upLoadShareId)) {
+            params.put("shareId", upLoadShareId);
+        }
+        if (!StringUtils.isEmpty(upLoadShareType)) {
+            params.put("shareType", "info");
+        }
+
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)
                 .params(params);
@@ -687,14 +874,41 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void updateChunText(String content) {
+        HttpParams params = new HttpParams();
+        params.put("type", "photo");
+        params.put("token", SPUtils.getInstance().getString("token"));
+        params.put("sign", SPUtils.getInstance().getString("sign"));
+        params.put("content", content);
+        params.put("from", getResources().getString(R.string.app_android));
+        if (!StringUtils.isEmpty(upLoadLat)) {
+            params.put("latitude", upLoadLat);
+        }
+        if (!StringUtils.isEmpty(upLoadLot)) {
+            params.put("longitude", upLoadLot);
+        }
+        if (!StringUtils.isEmpty(upLoadAddressTitle)) {
+            params.put("locationTitle", upLoadAddressTitle);
+        }
+        if (!StringUtils.isEmpty(upLoadAddressContent)) {
+            params.put("locationAddress", upLoadAddressContent);
+        }
+        if (!StringUtils.isEmpty(upErjiHuatiId)) {
+            params.put("level2TopicId", upErjiHuatiId);
+        }
+
+        if (!StringUtils.isEmpty(upLoadShareId)) {
+            params.put("shareId", upLoadShareId);
+        }
+
+        if (!StringUtils.isEmpty(upLoadShareType)) {
+            params.put("shareType", "info");
+        }
+
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("token", SPUtils.getInstance().getString("token"))
-                .params("type", "photo")
-                .params("content", content)
-                .params("from",getResources().getString(R.string.app_android))
+                .params(params)
                 .isMultipart(true);
+
         DialogStringCallback stringCallback = new DialogStringCallback(PubulishPYQActivity.this) {
             @Override
             public void onSuccess(Response<String> response) {
@@ -740,6 +954,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
     }
 
 
+    //上传图片
     private void updateContent(List<File> picPath, String content) {
 
         HttpParams params = new HttpParams();
@@ -747,7 +962,31 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         params.put("token", SPUtils.getInstance().getString("token"));
         params.put("sign", SPUtils.getInstance().getString("sign"));
         params.put("content", content);
-        params.put("from",getResources().getString(R.string.app_android));
+        params.put("from", getResources().getString(R.string.app_android));
+
+        if (!StringUtils.isEmpty(upLoadLat)) {
+            params.put("latitude", upLoadLat);
+        }
+        if (!StringUtils.isEmpty(upLoadLot)) {
+            params.put("longitude", upLoadLot);
+        }
+        if (!StringUtils.isEmpty(upLoadAddressTitle)) {
+            params.put("locationTitle", upLoadAddressTitle);
+        }
+        if (!StringUtils.isEmpty(upLoadAddressContent)) {
+            params.put("locationAddress", upLoadAddressContent);
+        }
+        if (!StringUtils.isEmpty(upErjiHuatiId)) {
+            params.put("level2TopicId", upErjiHuatiId);
+        }
+
+        if (!StringUtils.isEmpty(upLoadShareId)) {
+            params.put("shareId", upLoadShareId);
+        }
+        if (!StringUtils.isEmpty(upLoadShareType)) {
+            params.put("shareType", "info");
+        }
+
         // 压缩图片
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)

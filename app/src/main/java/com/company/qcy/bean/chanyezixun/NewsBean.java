@@ -1,6 +1,10 @@
 package com.company.qcy.bean.chanyezixun;
 
-public class NewsBean {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class NewsBean implements Parcelable {
+
 
 
     /**
@@ -26,26 +30,15 @@ public class NewsBean {
      * end_date : null
      */
 
+
+
     private Long id;
-    private Object is_valid;
-    private Object created_at;
-    private Object created_by;
-    private Object updated_at;
-    private Object updated_by;
-    private Object offset;
-    private Object limit;
     private String title;
     private String content;
     private String content_summary;
     private String img_url;
-    private Object source_url;
-    private Object author;
     private String news_date;
-    private Object type;
-    private Object status;
-    private Object type_name;
-    private Object start_date;
-    private Object end_date;
+    private boolean showChoice;//是否显示选择
 
     public Long getId() {
         return id;
@@ -53,62 +46,6 @@ public class NewsBean {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Object getIs_valid() {
-        return is_valid;
-    }
-
-    public void setIs_valid(Object is_valid) {
-        this.is_valid = is_valid;
-    }
-
-    public Object getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Object created_at) {
-        this.created_at = created_at;
-    }
-
-    public Object getCreated_by() {
-        return created_by;
-    }
-
-    public void setCreated_by(Object created_by) {
-        this.created_by = created_by;
-    }
-
-    public Object getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Object updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public Object getUpdated_by() {
-        return updated_by;
-    }
-
-    public void setUpdated_by(Object updated_by) {
-        this.updated_by = updated_by;
-    }
-
-    public Object getOffset() {
-        return offset;
-    }
-
-    public void setOffset(Object offset) {
-        this.offset = offset;
-    }
-
-    public Object getLimit() {
-        return limit;
-    }
-
-    public void setLimit(Object limit) {
-        this.limit = limit;
     }
 
     public String getTitle() {
@@ -143,22 +80,6 @@ public class NewsBean {
         this.img_url = img_url;
     }
 
-    public Object getSource_url() {
-        return source_url;
-    }
-
-    public void setSource_url(Object source_url) {
-        this.source_url = source_url;
-    }
-
-    public Object getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(Object author) {
-        this.author = author;
-    }
-
     public String getNews_date() {
         return news_date;
     }
@@ -167,43 +88,52 @@ public class NewsBean {
         this.news_date = news_date;
     }
 
-    public Object getType() {
-        return type;
+    public boolean isShowChoice() {
+        return showChoice;
     }
 
-    public void setType(Object type) {
-        this.type = type;
+    public void setShowChoice(boolean showChoice) {
+        this.showChoice = showChoice;
     }
 
-    public Object getStatus() {
-        return status;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public void setStatus(Object status) {
-        this.status = status;
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.content);
+        dest.writeString(this.content_summary);
+        dest.writeString(this.img_url);
+        dest.writeString(this.news_date);
+        dest.writeByte(this.showChoice ? (byte) 1 : (byte) 0);
     }
 
-    public Object getType_name() {
-        return type_name;
+    public NewsBean() {
     }
 
-    public void setType_name(Object type_name) {
-        this.type_name = type_name;
+    protected NewsBean(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.title = in.readString();
+        this.content = in.readString();
+        this.content_summary = in.readString();
+        this.img_url = in.readString();
+        this.news_date = in.readString();
+        this.showChoice = in.readByte() != 0;
     }
 
-    public Object getStart_date() {
-        return start_date;
-    }
+    public static final Parcelable.Creator<NewsBean> CREATOR = new Parcelable.Creator<NewsBean>() {
+        @Override
+        public NewsBean createFromParcel(Parcel source) {
+            return new NewsBean(source);
+        }
 
-    public void setStart_date(Object start_date) {
-        this.start_date = start_date;
-    }
-
-    public Object getEnd_date() {
-        return end_date;
-    }
-
-    public void setEnd_date(Object end_date) {
-        this.end_date = end_date;
-    }
+        @Override
+        public NewsBean[] newArray(int size) {
+            return new NewsBean[size];
+        }
+    };
 }

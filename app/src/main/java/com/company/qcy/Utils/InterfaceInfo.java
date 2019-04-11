@@ -127,10 +127,16 @@ public class InterfaceInfo {
     public static final String GETNOTREADMESSAGECOUNT = "user/getNotReadCount";
 
     //朋友圈模块
-    //查询朋友圈列表
-    public static final String QUERYDYECOMMUNITYLIST = "dyeCommunity/queryDyeCommunityList";
+    //查询朋友圈列表  发现
+    public static final String QUERYDYECOMMUNITYLISTFAXIAN = "dyeCommunity/queryMainDyeCommunityList";
+    //查询朋友圈列表  热门
+    public static final String QUERYDYECOMMUNITYLISTREMEN = "dyeCommunity/queryHotDyeCommunityList";
+    //查询朋友圈列表  我的关注
+    public static final String QUERYDYECOMMUNITYLISTGUANZHU= "dyeCommunity/queryMyFollowDyeCommunityList";
+
+
     //发朋友圈
-    public static final String FABUPENGYOUQUAN = "dyeCommunity/addDyeCommunity";
+    public static final String FABUPENGYOUQUAN = "dyeCommunity/addDyeCommunityNew";
     //发表评论
     public static final String FABIAOPINGLUN = "dyeCommunity/addDyeComment";
     //删除评论
@@ -143,6 +149,9 @@ public class InterfaceInfo {
     public static final String QUERYMYFOLLOWLIST = "dyeFollow/queryFollowListByUserId";
     //根据userid获取用户信息
     public static final String GETUSERINFOBYUSERID = "user/getUserInfoDetail";
+
+    //获取我的好友列表
+    public static final String GETMYFRIENDSLIST = "dyeFollow/queryMyFriendListSort";
 
 
     //根据token获取用户信息
@@ -171,7 +180,8 @@ public class InterfaceInfo {
     public static final String QUERYNOTREADCOMMENTCOUNT = "dyeCommunity/queryMyNotReadCommentCount";
     //获取我的未读评论列表
     public static final String QUERYNOTREADCOMMENTLIST = "dyeCommunity/queryMyNotReadCommentList";
-
+    //获取印染圈话题
+    public static final String QUERYHUATI = "dyeCommunity/queryDyeCommunityTopicList";
 
     //微信相关
     //绑定手机号

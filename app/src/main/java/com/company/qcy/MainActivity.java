@@ -31,9 +31,9 @@ import com.company.qcy.bean.BannerBean;
 import com.company.qcy.bean.UpdateBean;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.fragment.home.HomeFragment;
+import com.company.qcy.fragment.home.PengyouquanFragment;
 import com.company.qcy.fragment.home.ToutiaoFragment;
 import com.company.qcy.fragment.home.WodeFragment;
-import com.company.qcy.fragment.home.XiaoxiFragment;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -210,7 +210,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
 
     private HomeFragment homeFragment;
     private ToutiaoFragment toutiaoFragment;
-    private XiaoxiFragment xiaoxiFragment;
+    private PengyouquanFragment pengyouquanFragment;
     private WodeFragment wodeFragment;
 
     private void initFragment() {
@@ -265,12 +265,12 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
                         isNetWork();
 
                         choicedWhitchFragment = 1;
-                        if (xiaoxiFragment == null) {
-                            xiaoxiFragment = new XiaoxiFragment();
-                            fragmentTransaction.add(R.id.home_container, xiaoxiFragment);
+                        if (pengyouquanFragment == null) {
+                            pengyouquanFragment = new PengyouquanFragment();
+                            fragmentTransaction.add(R.id.home_container, pengyouquanFragment);
                         }
                         hideFragment(fragmentTransaction);
-                        fragmentTransaction.show(xiaoxiFragment);
+                        fragmentTransaction.show(pengyouquanFragment);
                         break;
                     case 2:
                         isNetWork();
@@ -396,7 +396,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
                     break;
                 case 1:
                     hideFragment(fragmentTransaction);
-                    fragmentTransaction.show(xiaoxiFragment);
+                    fragmentTransaction.show(pengyouquanFragment);
                     mBottomnavigation.selectTab(choicedWhitchFragment);
                     break;
                 case 2:
@@ -424,9 +424,9 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
 
         }
 
-        if (xiaoxiFragment != null) {
+        if (pengyouquanFragment != null) {
 
-            transaction.hide(xiaoxiFragment);
+            transaction.hide(pengyouquanFragment);
 
         }
 
@@ -436,6 +436,5 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
 
         }
     }
-
 
 }

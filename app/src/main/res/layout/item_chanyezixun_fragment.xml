@@ -80,4 +80,16 @@
         android:textSize="@dimen/x24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_chanyexixun_img" />
+
+
+    <ImageView
+        android:id="@+id/item_chanyexixun_xuanze"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        android:src="@mipmap/xuanzezixun"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

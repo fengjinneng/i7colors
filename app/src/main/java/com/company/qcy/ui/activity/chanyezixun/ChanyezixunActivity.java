@@ -31,10 +31,13 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
+
+    private String from;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chanyezixun);
+        from = getIntent().getStringExtra("from");
         initView();
     }
 
@@ -44,12 +47,12 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
 
 
         List<Fragment> datas = new ArrayList<>();
-        datas.add(new ChanyezixunFragment());
-        datas.add(new HangyezixunFragment());
-        datas.add(new RenwufangtanFragment());
-        datas.add(new ZhengcefaguiFragment());
-        datas.add(new ZhanhuiFragment());
-        datas.add(new RencaizhaopinFragment());
+        datas.add(ChanyezixunFragment.newInstance(from));
+        datas.add(HangyezixunFragment.newInstance(from));
+        datas.add( RenwufangtanFragment.newInstance(from));
+        datas.add( ZhengcefaguiFragment.newInstance(from));
+        datas.add( ZhanhuiFragment.newInstance(from));
+        datas.add( RencaizhaopinFragment.newInstance(from));
 
         String[] arr = new String[datas.size()];
         arr[0] = "全部";
@@ -71,6 +74,7 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("产业资讯");
+        mChanyezixunViewpager.setOffscreenPageLimit(5);
     }
 
 

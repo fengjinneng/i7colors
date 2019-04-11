@@ -94,6 +94,36 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
     @Override
     protected void convert(BaseViewHolder helper, PengyouquanBean item) {
+
+        ConstraintLayout lianjieLayout = (ConstraintLayout) helper.getView(R.id.item_pengyouquan_lianjie_layout);
+        ImageView lianjieImage = (ImageView) helper.getView(R.id.item_pengyouquan_lianjie_image);
+        TextView lianjieTitle = (TextView) helper.getView(R.id.item_pengyouquan_lianjie_title);
+        if (!ObjectUtils.isEmpty(item.getShareBean())) {
+            lianjieLayout.setVisibility(View.VISIBLE);
+            GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getShareBean().getPic(), lianjieImage);
+            lianjieTitle.setText(item.getShareBean().getTitle());
+            helper.addOnClickListener(R.id.item_pengyouquan_lianjie_layout);
+        } else {
+            lianjieLayout.setVisibility(View.GONE);
+        }
+        TextView address = (TextView) helper.getView(R.id.item_pengyouquan_address);
+        helper.addOnClickListener(R.id.item_pengyouquan_address);
+        TextView huati = (TextView) helper.getView(R.id.item_pengyouquan_huati);
+        helper.addOnClickListener(R.id.item_pengyouquan_huati);
+        if (StringUtils.isEmpty(item.getLocationTitle())) {
+            address.setVisibility(View.GONE);
+        } else {
+            address.setText(item.getLocationTitle());
+            address.setVisibility(View.VISIBLE);
+        }
+
+        if (ObjectUtils.isEmpty(item.getTopic())) {
+            huati.setVisibility(View.GONE);
+        } else {
+            huati.setText("#" + item.getTopic().getTopicList().get(0).getTitle() + "#");
+            huati.setVisibility(View.VISIBLE);
+        }
+
         helper.addOnClickListener(R.id.item_pengyouquan_detail);
         inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         ImageView headimg = (ImageView) helper.getView(R.id.item_pengyouquan_headimg);

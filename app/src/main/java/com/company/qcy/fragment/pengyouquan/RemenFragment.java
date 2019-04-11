@@ -1,4 +1,5 @@
-package com.company.qcy.fragment.home;
+package com.company.qcy.fragment.pengyouquan;
+
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -11,9 +12,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -52,13 +52,14 @@ import com.company.qcy.adapter.pengyouquan.PengyouquanAdapter;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ActionItem;
+import com.company.qcy.bean.pengyouquan.MyAddress;
 import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
-import com.company.qcy.ui.activity.pengyouquan.MyNotReadCommunityActivity;
+import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
+import com.company.qcy.ui.activity.pengyouquan.MapActivity;
 import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PengyouquanDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
-import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
 import com.company.qcy.ui.activity.pengyouquan.ShipinbofangActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.company.qcy.widght.pengyouquan.SnsPopupWindow;
@@ -67,43 +68,23 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
-import com.webianks.library.PopupBubble;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
-public class XiaoxiFragment extends BaseFragment implements View.OnClickListener {
+public class RemenFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private View view;
-    private ConstraintLayout mFragmentPengyouquanGerenxinxiLayout;
-    /**
-     * 个人用户
-     */
-    private TextView mHeadPengyouquanFragmentShenfen;
-    private ImageView mHeadPengyouquanFragmentHead;
-    /**
-     * Y.C.Pixel
-     */
-    private TextView mHeadPengyouquanFragmentName;
-    /**
-     * 未认证
-     */
-    private TextView mHeadPengyouquanFragmentRenzheng;
-    private ImageView mHeadPengyouquanFragmentRenzhengImg;
-    private ImageView mHeadPengyouquanFragmentDav;
 
-
-    public XiaoxiFragment() {
+    public RemenFragment() {
         // Required empty public constructor
     }
 
-    public static XiaoxiFragment newInstance(String param1) {
-        XiaoxiFragment fragment = new XiaoxiFragment();
+    public static RemenFragment newInstance(String param1) {
+        RemenFragment fragment = new RemenFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         fragment.setArguments(args);
@@ -119,119 +100,23 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        if (UserUtil.isLogin()) {
-            timer = new Timer();
-            myTask = new MyTask();
-            timer.schedule(myTask, 15 * 1000, 15 * 1000);
-        }
-    }
-
-    private MyTask myTask;
-    private Timer timer;
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            default:
-                break;
-            case R.id.fragment_pengyouquan_gerenxinxi_layout:
-                ActivityUtils.startActivity(MyPersonInfoActivity.class);
-                break;
-        }
-    }
-
-
-    public class MyTask extends TimerTask {
-        @Override
-        public void run() {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYNOTREADCOMMENTCOUNT)
-                            .tag(this)
-                            .params("sign", SPUtils.getInstance().getString("sign"))
-                            .params("token", SPUtils.getInstance().getString("token"));
-
-                    StringCallback stringCallback = new StringCallback() {
-                        @Override
-                        public void onSuccess(Response<String> response) {
-                            LogUtils.e("QUERYNOTREADCOMMENTCOUNT", response.body());
-
-                            try {
-                                if (response.code() == 200) {
-                                    JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                    String msg = jsonObject.getString("msg");
-                                    if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-
-                                        int data = jsonObject.getInteger("data");
-                                        if (data > 0) {
-                                            mPopupBubble.setVisibility(View.VISIBLE);
-//                                                    mPopupBubble.updateIcon(R.mipmap.dianzan_red);
-                                            mPopupBubble.updateText("您有" + data + "条新的信息");
-                                            mPopupBubble.show();
-                                        }
-                                        return;
-                                    }
-                                    if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                                        SignAndTokenUtil.getSign(getActivity(), request, this);
-                                        return;
-                                    }
-                                    ToastUtils.showShort(msg);
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onError(Response<String> response) {
-                            super.onError(response);
-                        }
-                    };
-
-                    request.execute(stringCallback);
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (myTask != null) {
-            myTask.cancel();
-            myTask = null;
-        }
-        if (myTask != null) {
-            myTask.cancel();
-            myTask = null;
-        }
-
-
-    }
-
-    @Override
     public void onRec(MessageBean messageBean) {
 
         switch (messageBean.getCode()) {
             //删除评论成功
-            case MessageBean.Code.DELETEPINGLUNCHENGGONG:
+            case MessageBean.RemenCode.DELETEPINGLUNCHENGGONG:
                 PengyouquanBean.CommentListBean commentListBean = (PengyouquanBean.CommentListBean) messageBean.getObj();
                 List<PengyouquanBean.CommentListBean> commentList = adapter.getData().get(messageBean.getParam()).getCommentList();
                 commentList.remove(commentListBean);
                 adapter.notifyItemChanged(messageBean.getParam());
                 break;
             //发布朋友圈成功
-            case MessageBean.Code.FABUPENGYOUQUANCHENGGONG:
+            case MessageBean.RemenCode.FABUPENGYOUQUANCHENGGONG:
                 swipeRefreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
                 break;
             //登陆成功
             case MessageBean.Code.DELU:
-                getMyIngo();
                 swipeRefreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
                 break;
@@ -241,29 +126,20 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
                 refreshListener.onRefresh();
                 break;
             //朋友圈需要刷新
-            case MessageBean.Code.PENGYOUQUANNEEDREFLUSH:
+            case MessageBean.RemenCode.PENGYOUQUANNEEDREFLUSH:
                 swipeRefreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
                 break;
 
             //朋友圈需要刷新
-            case MessageBean.Code.XIANGQINGYEDIANZANCHENGGONG:
+            case MessageBean.RemenCode.XIANGQINGYEDIANZANCHENGGONG:
                 swipeRefreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
                 break;
             //微信登陆成功
             case MessageBean.Code.WXLOGIN:
-                getMyIngo();
                 swipeRefreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
-                break;
-            //朋友圈头像修改成功
-            case MessageBean.Code.PENGYOUQUANHEADIMGCHANGE:
-                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + messageBean.getMeaasge(), mHeadPengyouquanFragmentHead);
-                break;
-            //朋友圈nickName修改成功
-            case MessageBean.Code.PENGYOUQUANNICKNAMECHANGE:
-                mHeadPengyouquanFragmentName.setText(messageBean.getMeaasge());
                 break;
         }
     }
@@ -272,7 +148,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_xiaoxi, container, false);
+        return inflater.inflate(R.layout.fragment_remen, container, false);
     }
 
     @Override
@@ -282,120 +158,15 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         initView(view);
     }
 
-    private PopupBubble mPopupBubble;
     private RecyclerView recyclerView;
     private PengyouquanAdapter adapter;
     private List<PengyouquanBean> datas;
     private SwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
-    private TextView title;
-    private ImageView back;
-    private TextView fabu;
     LinearLayoutManager layoutManager;
 
 
-    public void getMyIngo() {
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETUSERINFOBYTOKEN)
-                .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("token", SPUtils.getInstance().getString("token"));
-
-        StringCallback stringCallback = new StringCallback() {
-            @Override
-            public void onSuccess(Response<String> response) {
-                LogUtils.v("GETUSERINFOBYTOKEN", response.body());
-
-                try {
-                    if (response.code() == 200) {
-
-                        JSONObject jsonObject = JSONObject.parseObject(response.body());
-                        String msg = jsonObject.getString("msg");
-
-                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                            mFragmentPengyouquanGerenxinxiLayout.setVisibility(View.VISIBLE);
-
-                            JSONObject data = jsonObject.getJSONObject("data");
-
-                            PYQUserBean userBean = data.toJavaObject(PYQUserBean.class);
-                            mHeadPengyouquanFragmentName.setText(userBean.getNickName());
-
-                            if (StringUtils.isEmpty(userBean.getCommunityPhoto())) {
-                                mHeadPengyouquanFragmentHead.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.morentouxiang));
-                            } else {
-                                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + userBean.getCommunityPhoto(), mHeadPengyouquanFragmentHead);
-                            }
-                            if (StringUtils.equals("1", userBean.getIsCompany())) {
-                                mHeadPengyouquanFragmentRenzheng.setText("已认证");
-                                mHeadPengyouquanFragmentRenzhengImg.setVisibility(View.GONE);
-                                mHeadPengyouquanFragmentDav.setVisibility(View.VISIBLE);
-                            } else {
-                                if (StringUtils.equals("1", userBean.getIsDyeV())) {
-                                    mHeadPengyouquanFragmentRenzheng.setText("已认证");
-                                    mHeadPengyouquanFragmentRenzhengImg.setVisibility(View.GONE);
-                                    mHeadPengyouquanFragmentDav.setVisibility(View.VISIBLE);
-                                } else if (StringUtils.equals("2", userBean.getIsDyeV())) {
-                                    mHeadPengyouquanFragmentRenzheng.setText("认证审核中...");
-                                    mHeadPengyouquanFragmentRenzhengImg.setVisibility(View.VISIBLE);
-                                    mHeadPengyouquanFragmentDav.setVisibility(View.GONE);
-                                } else {
-                                    mHeadPengyouquanFragmentRenzheng.setText("未认证");
-                                    mHeadPengyouquanFragmentRenzhengImg.setVisibility(View.VISIBLE);
-                                    mHeadPengyouquanFragmentDav.setVisibility(View.GONE);
-                                }
-                            }
-
-                            return;
-                        }
-                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(), request, this);
-                            return;
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-
-            @Override
-            public void onError(Response<String> response) {
-                super.onError(response);
-                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
-            }
-        };
-
-        request.execute(stringCallback);
-    }
-
     private void initView(View view) {
-        mHeadPengyouquanFragmentDav = view.findViewById(R.id.head_pengyouquan_fragment_dav);
-        mFragmentPengyouquanGerenxinxiLayout = view.findViewById(R.id.fragment_pengyouquan_gerenxinxi_layout);
-        mFragmentPengyouquanGerenxinxiLayout.setOnClickListener(this);
-        mHeadPengyouquanFragmentHead = view.findViewById(R.id.head_pengyouquan_fragment_head);
-        mHeadPengyouquanFragmentName = view.findViewById(R.id.head_pengyouquan_fragment_name);
-        mHeadPengyouquanFragmentRenzheng = view.findViewById(R.id.head_pengyouquan_fragment_renzheng);
-        mHeadPengyouquanFragmentRenzhengImg = view.findViewById(R.id.head_pengyouquan_fragment_renzheng_img);
-
-
-        title = view.findViewById(R.id.toolbar_title);
-        back = view.findViewById(R.id.toolbar_back);
-        fabu = view.findViewById(R.id.toolbar_text);
-        title.setText("印染圈");
-        back.setVisibility(View.INVISIBLE);
-        fabu.setVisibility(View.VISIBLE);
-        fabu.setText("我要发布");
-        fabu.setTextColor(getResources().getColor(R.color.chunhongse));
-        fabu.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!UserUtil.isLogin()) {
-                    ActivityUtils.startActivity(LoginActivity.class);
-                    return;
-                }
-                ActivityUtils.startActivity(PubulishPYQActivity.class);
-            }
-        });
         recyclerView = view.findViewById(R.id.fragment_pengyouquan_recyclerview);
         swipeRefreshLayout = view.findViewById(R.id.fragment_pengyouquan_swipeRefreshLayout);
         //创建布局管理
@@ -518,6 +289,26 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
                         ActivityUtils.startActivity(moreIntent);
 
                         break;
+
+                    case R.id.item_pengyouquan_address:
+                        MyAddress address = new MyAddress();
+                        address.setLat(bean.getLatitude());
+                        address.setLot(bean.getLongitude());
+                        address.setTitle(bean.getLocationTitle());
+                        address.setContent(bean.getLocationAddress());
+                        Intent iAddress = new Intent(getActivity(), MapActivity.class);
+                        iAddress.putExtra("address", address);
+                        ActivityUtils.startActivity(iAddress);
+                        break;
+                    case R.id.item_pengyouquan_huati:
+
+                        break;
+                    case R.id.item_pengyouquan_lianjie_layout:
+                        Intent lianjieIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
+                        Long id = bean.getShareBean().getId();
+                        lianjieIntent.putExtra("id", id);
+                        ActivityUtils.startActivity(lianjieIntent);
+                        break;
                 }
             }
 
@@ -527,26 +318,9 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
 
-//        adapter.addHeaderView(addHeadView());
-
-        mPopupBubble = view.findViewById(R.id.popup_bubble);
-
-        mPopupBubble.setPopupBubbleListener(new PopupBubble.PopupBubbleClickListener() {
-            @Override
-            public void bubbleClicked(Context context) {
-                ActivityUtils.startActivity(getActivity(), MyNotReadCommunityActivity.class);
-            }
-        });
-
-        mPopupBubble.hide();
-        mPopupBubble.setVisibility(View.GONE);
-
-        if (UserUtil.isLogin()) {
-            mFragmentPengyouquanGerenxinxiLayout.setVisibility(View.VISIBLE);
-            getMyIngo();
-        }
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
         adapter.setLoadMoreView(new MyLoadMoreView());
+
     }
 
     private void deleteDyeCommunity(Long communityId, int position) {
@@ -660,18 +434,6 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
 
     }
 
-    private View addHeadView() {
-
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.head_pengyouquan_fragment, null);
-        ImageView headImg = (ImageView) view.findViewById(R.id.head_pengyouquan_fragment_head);
-        TextView name = (TextView) view.findViewById(R.id.head_pengyouquan_fragment_name);
-        TextView renzheng = (TextView) view.findViewById(R.id.head_pengyouquan_fragment_renzheng);
-        ImageView renzhengImg = (ImageView) view.findViewById(R.id.head_pengyouquan_fragment_renzheng_img);
-        TextView shenfen = (TextView) view.findViewById(R.id.head_pengyouquan_fragment_shenfen);
-
-        return view;
-
-    }
 
 
     private void addFollow(Long followUserId) {
@@ -888,7 +650,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     private void addData() {
 
         pageNo++;
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYDYECOMMUNITYLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYDYECOMMUNITYLISTREMEN)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
@@ -899,7 +661,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onSuccess(Response<String> response) {
                 swipeRefreshLayout.setRefreshing(false);
-                LogUtils.v("QUERYDYECOMMUNITYLIST", response.body());
+                LogUtils.v("QUERYDYECOMMUNITYLISTREMEN", response.body());
 
                 try {
                     if (response.code() == 200) {
