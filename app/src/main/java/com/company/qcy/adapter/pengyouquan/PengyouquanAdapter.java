@@ -34,7 +34,6 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
@@ -76,7 +75,6 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         this.mDatas = data;
     }
 
-
     public static Bitmap getNetVideoBitmap(String videoUrl) {
         Bitmap bitmap = null;
 
@@ -94,7 +92,6 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         return bitmap;
     }
 
-
     @Override
     protected void convert(BaseViewHolder helper, PengyouquanBean item) {
         helper.addOnClickListener(R.id.item_pengyouquan_detail);
@@ -102,7 +99,15 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         ImageView headimg = (ImageView) helper.getView(R.id.item_pengyouquan_headimg);
         helper.addOnClickListener(R.id.item_pengyouquan_headimg);
         if (!StringUtils.isEmpty(item.getPostUserPhoto())) {
-            GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getPostUserPhoto(), headimg);
+
+            if (item.getPostUserPhoto().startsWith("http")) {
+
+                GlideUtils.loadCircleImage(mContext, item.getPostUserPhoto(), headimg);
+
+            } else {
+                GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getPostUserPhoto(), headimg);
+
+            }
         } else {
             headimg.setImageResource(R.mipmap.morentouxiang);
         }
@@ -159,7 +164,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                 renzheng.setPadding(10, 0, 10, 0);
             }
         }
-        helper.setText(R.id.item_pengyouquan_name,item.getPostUser());
+        helper.setText(R.id.item_pengyouquan_name, item.getPostUser());
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(item.getPostUser() + " .");
         //大佬等级1
         if (StringUtils.equals("1", item.getBossLevel())) {
@@ -169,7 +174,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             ImageSpan span1 = new ImageSpan(level1, ImageSpan.ALIGN_BASELINE);
             spannableStringBuilder.setSpan(span1,
                     spannableStringBuilder.length() - 1, spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            helper.setText(R.id.item_pengyouquan_name,spannableStringBuilder);
+            helper.setText(R.id.item_pengyouquan_name, spannableStringBuilder);
 
         }
         if (StringUtils.equals("2", item.getBossLevel())) {
@@ -180,7 +185,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
             spannableStringBuilder.setSpan(span2,
                     spannableStringBuilder.length() - 1, spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            helper.setText(R.id.item_pengyouquan_name,spannableStringBuilder);
+            helper.setText(R.id.item_pengyouquan_name, spannableStringBuilder);
 
         }
         if (StringUtils.equals("3", item.getBossLevel())) {
@@ -189,7 +194,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             ImageSpan span3 = new ImageSpan(level3, ImageSpan.ALIGN_BASELINE);
             spannableStringBuilder.setSpan(span3,
                     spannableStringBuilder.length() - 1, spannableStringBuilder.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-            helper.setText(R.id.item_pengyouquan_name,spannableStringBuilder);
+            helper.setText(R.id.item_pengyouquan_name, spannableStringBuilder);
         }
 
         TextView deleteBtn = (TextView) helper.getView(R.id.deleteBtn);
@@ -246,7 +251,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 //          jzvdStd.setUp(ServerInfo.IMAGE+item.getUrl(), "", JzvdStd.SCREEN_WINDOW_LIST);
 //          jzvdStd.thumbImageView.setImageBitmap(getNetVideoBitmap(ServerInfo.IMAGE+item.getUrl()));
 //          Glide.with(mContext).load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png").into(shipinPlayImage);
-            GlideUtils.loadImageFitCenter(mContext,ServerInfo.IMAGE + item.getVideoPicUrl(),shipinPlayImage);
+            GlideUtils.loadImageFitCenter(mContext, ServerInfo.IMAGE + item.getVideoPicUrl(), shipinPlayImage);
 
         } else {
             shipinLayout.setVisibility(View.GONE);
@@ -304,21 +309,63 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             imageView1.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.dianzan_red));
             imageView1.setScaleType(ImageView.ScaleType.CENTER);
             pileLayout.addView(imageView1);
-            for (int i = 0; i < item.getLikeList().size(); i++) {
-                int temp = i;
-                ImageView imageView = (ImageView) inflater.inflate(R.layout.item_pengyouquan_praise, pileLayout, false);
-                GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getLikeList().get(i).getLikeUserPhoto(), imageView);
-                pileLayout.addView(imageView);
-                imageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            if (item.getLikeList().size() < 20) {
+                for (int i = 0; i < item.getLikeList().size(); i++) {
+                    int temp = i;
+                    ImageView imageView = (ImageView) inflater.inflate(R.layout.item_pengyouquan_praise, pileLayout, false);
+                    if (!StringUtils.isEmpty(item.getLikeList().get(i).getLikeUserPhoto())) {
+                        if (item.getLikeList().get(i).getLikeUserPhoto().startsWith("http")) {
 
-                        Intent intent = new Intent(mContext, PersonInfoActivity.class);
-                        intent.putExtra("userId", item.getLikeList().get(temp).getUserId());
-                        ActivityUtils.startActivity(intent);
+                            GlideUtils.loadCircleImage(mContext, item.getLikeList().get(i).getLikeUserPhoto(), imageView);
+
+                        } else {
+                            GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getLikeList().get(i).getLikeUserPhoto(), imageView);
+
+                        }
+                    }else {
+                        imageView.setImageResource(R.mipmap.morentouxiang);
                     }
-                });
+
+                    pileLayout.addView(imageView);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent intent = new Intent(mContext, PersonInfoActivity.class);
+                            intent.putExtra("userId", item.getLikeList().get(temp).getUserId());
+                            ActivityUtils.startActivity(intent);
+                        }
+                    });
+                }
+            } else {
+                for (int i = 0; i < 20; i++) {
+                    int temp = i;
+                    ImageView imageView = (ImageView) inflater.inflate(R.layout.item_pengyouquan_praise, pileLayout, false);
+                    if (!StringUtils.isEmpty(item.getLikeList().get(i).getLikeUserPhoto())) {
+                        if (item.getLikeList().get(i).getLikeUserPhoto().startsWith("http")) {
+
+                            GlideUtils.loadCircleImage(mContext, item.getLikeList().get(i).getLikeUserPhoto(), imageView);
+
+                        } else {
+                            GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getLikeList().get(i).getLikeUserPhoto(), imageView);
+
+                        }
+                    }else {
+                        imageView.setImageResource(R.mipmap.morentouxiang);
+                    }
+                    pileLayout.addView(imageView);
+                    imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent intent = new Intent(mContext, PersonInfoActivity.class);
+                            intent.putExtra("userId", item.getLikeList().get(temp).getUserId());
+                            ActivityUtils.startActivity(intent);
+                        }
+                    });
+                }
             }
+
 
         }
 

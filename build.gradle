@@ -14,7 +14,7 @@ buildscript {
         // in the individual module build.gradle files
 
         classpath "com.mob.sdk:MobSDK:2018.0319.1724"
-
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
     }
 }

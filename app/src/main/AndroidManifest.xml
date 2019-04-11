@@ -355,17 +355,22 @@
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".huodong.jingpai.activity.JingpaiDetailActivity"
-            android:screenOrientation="portrait" android:configChanges="orientation|screenSize|keyboardHidden"/>
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".huodong.jingpai.activity.CanyujingpaiActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.activity.kaifangshangcheng.QiyezizhiActivity"
+            android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
+            android:screenOrientation="portrait">
+
+        </activity>
     </application>
 
 </manifest>
