@@ -52,6 +52,7 @@ import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.chanyezixun.NewsBean;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ImageBean;
+import com.company.qcy.bean.pengyouquan.MyFriendsBean;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -140,6 +141,16 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
      */
     private TextView mActivityPublishPyqShuikeyikanStatus;
     private ConstraintLayout mActivityPublishPyqShuikeyikanLayout;
+    /**
+     * 昵称、头像等人
+     */
+    private TextView mActivityPublishPyqTixinghsuikanContent;
+    private ConstraintLayout mActivityPublishPyqTixinghsuikanLayout;
+    private ImageView mActivityPublishPyqTixinghsuikanImg;
+    /**
+     * 提醒谁看
+     */
+    private TextView mActivityPublishPyqTixinghsuikanText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -403,6 +414,11 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         mActivityPublishPyqShuikeyikanStatus = (TextView) findViewById(R.id.activity_publish_pyq_shuikeyikan_status);
         mActivityPublishPyqShuikeyikanLayout = (ConstraintLayout) findViewById(R.id.activity_publish_pyq_shuikeyikan_layout);
         mActivityPublishPyqShuikeyikanLayout.setOnClickListener(this);
+        mActivityPublishPyqTixinghsuikanContent = (TextView) findViewById(R.id.activity_publish_pyq_tixinghsuikan_content);
+        mActivityPublishPyqTixinghsuikanLayout = (ConstraintLayout) findViewById(R.id.activity_publish_pyq_tixinghsuikan_layout);
+        mActivityPublishPyqTixinghsuikanLayout.setOnClickListener(this);
+        mActivityPublishPyqTixinghsuikanImg = (ImageView) findViewById(R.id.activity_publish_pyq_tixinghsuikan_img);
+        mActivityPublishPyqTixinghsuikanText = (TextView) findViewById(R.id.activity_publish_pyq_tixinghsuikan_text);
     }
 
     private Dialog chooseHeadDialog;
@@ -616,7 +632,6 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onReciveMessage(MessageBean msg) {
-        super.onReciveMessage(msg);
         switch (msg.getCode()) {
             case MessageBean.Code.PENGYOUQUANCHOICEADDRESS:
                 PoiItem poiItem = (PoiItem) msg.getObj();
@@ -667,8 +682,41 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 mActivityPublishPyqLianjieTitle.setText(newsBean.getTitle());
                 mActivityPublishPyqLianjieContent.setText(newsBean.getContent_summary());
                 break;
+            case MessageBean.Code.CHOICETIXINGSHUIKAN:
+                tixingshuikanDatas.clear();
+                tixingshuikanDatas.addAll((ArrayList<MyFriendsBean>) msg.getObj());
+                List<String> idList;
+                List<String> nameList;
+                if (ObjectUtils.isEmpty(tixingshuikanDatas)) {
+                    mActivityPublishPyqTixinghsuikanContent.setText("");
+                    mActivityPublishPyqTixinghsuikanImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_tixingshuikan_unchecked));
+                    mActivityPublishPyqTixinghsuikanText.setTextColor(getResources().getColor(R.color.putongwenben));
+                    upNoticeUserId  = "";
+                }else {
+                    nameList = new ArrayList<>();
+                    idList = new ArrayList<>();
+                    for (int i = 0; i < tixingshuikanDatas.size(); i++) {
+                        if(tixingshuikanDatas.get(i).isChecked()){
+                            idList.add(String.valueOf(tixingshuikanDatas.get(i).getUserId()));
+                            nameList.add(tixingshuikanDatas.get(i).getLoginName());
+                        }
+                    }
+
+                    mActivityPublishPyqTixinghsuikanContent.setText(nameList.toString());
+                    mActivityPublishPyqTixinghsuikanImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_tixingshuikan_checked));
+                    mActivityPublishPyqTixinghsuikanText.setTextColor(getResources().getColor(R.color.hongse));
+
+//                    upNoticeUserId =  (idList.toString()).substring(1,upNoticeUserId.length()-1);
+
+                }
+
+                break;
         }
     }
+
+    private ArrayList<MyFriendsBean> tixingshuikanDatas = new ArrayList<>();
+
+    private List<MyFriendsBean> shuikeyikanDatas= new ArrayList<>();
 
     //上传的二级话题的ID
     private String upErjiHuatiId;
@@ -754,8 +802,13 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 mActivityPublishPyqZixunGuanlianzixunState.setText("未关联");
                 break;
             case R.id.activity_publish_pyq_shuikeyikan_layout:
-
-                ActivityUtils.startActivity(MyFriendsActivity.class);
+                ActivityUtils.startActivity(MyTongunluFriendsActivity.class);
+                break;
+            case R.id.activity_publish_pyq_tixinghsuikan_layout:
+                Intent intent = new Intent(this, MyTongunluFriendsActivity.class);
+                intent.putParcelableArrayListExtra("tixingshuikan",tixingshuikanDatas);
+                intent.putExtra("from", "tixingshuikan");
+                ActivityUtils.startActivity(intent);
                 break;
         }
     }
@@ -803,6 +856,10 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         }
         if (!StringUtils.isEmpty(upLoadShareType)) {
             params.put("shareType", "info");
+        }
+
+        if(!StringUtils.isEmpty(upNoticeUserId)){
+            params.put("noticeUserId", upNoticeUserId);
         }
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
@@ -904,6 +961,10 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
             params.put("shareType", "info");
         }
 
+        if(!StringUtils.isEmpty(upNoticeUserId)){
+
+            params.put("noticeUserId", upNoticeUserId);
+        }
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)
                 .params(params)
@@ -987,6 +1048,9 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
             params.put("shareType", "info");
         }
 
+        if(!StringUtils.isEmpty(upNoticeUserId)){
+            params.put("noticeUserId", upNoticeUserId);
+        }
         // 压缩图片
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)

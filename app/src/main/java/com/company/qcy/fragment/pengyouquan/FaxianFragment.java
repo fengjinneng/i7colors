@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -15,9 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -26,14 +29,20 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.adapter.pengyouquan.HuatiAdapter;
+import com.company.qcy.base.BaseFragment;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.HuatiBean;
+import com.company.qcy.bean.pengyouquan.PYQUserBean;
+import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
@@ -45,7 +54,7 @@ import java.util.List;
  * Use the {@link FaxianFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FaxianFragment extends Fragment implements View.OnClickListener {
+public class FaxianFragment extends BaseFragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,6 +67,17 @@ public class FaxianFragment extends Fragment implements View.OnClickListener {
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mFViewpager;
     private ImageView mFragmentFaxianXiala;
+    private ImageView mPengyouquanFaxianHeadimg;
+    /**
+     * name
+     */
+    private TextView mPengyouquanFaxianName;
+    /**
+     * 未认证
+     */
+    private TextView mPengyouquanFaxianRenzheng;
+    private ImageView mPengyouquanFaxianRenzhengImg;
+    private ConstraintLayout mPengyouquanFaxianMyinfoLayout;
 
 
     public FaxianFragment() {
@@ -98,14 +118,109 @@ public class FaxianFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initView(View inflate) {
-
-
         mSlidingTabLayout = inflate.findViewById(R.id.fragment_faxian_slidingTabLayout);
         mFViewpager = inflate.findViewById(R.id.fragment_faxian_viewpager);
         mFragmentFaxianXiala = inflate.findViewById(R.id.fragment_faxian_xiala);
         mFragmentFaxianXiala.setOnClickListener(this);
+        mPengyouquanFaxianHeadimg = inflate.findViewById(R.id.pengyouquan_faxian_headimg);
+        mPengyouquanFaxianName = inflate.findViewById(R.id.pengyouquan_faxian_name);
+        mPengyouquanFaxianRenzheng = inflate.findViewById(R.id.pengyouquan_faxian_renzheng);
+        mPengyouquanFaxianRenzhengImg = inflate.findViewById(R.id.pengyouquan_faxian_renzheng_img);
+        mPengyouquanFaxianMyinfoLayout = inflate.findViewById(R.id.pengyouquan_faxian_myinfo_layout);
+        mPengyouquanFaxianMyinfoLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityUtils.startActivity(MyPersonInfoActivity.class);
+            }
+        });
         addData();
+        getMyInfo();
+
     }
+
+    @Override
+    public void onRec(MessageBean messageBean) {
+        super.onRec(messageBean);
+
+        switch (messageBean.getCode()){
+            //朋友圈头像修改成功
+            case MessageBean.Code.PENGYOUQUANHEADIMGCHANGE:
+                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + messageBean.getMeaasge(), mPengyouquanFaxianHeadimg);
+                break;
+            //朋友圈nickName修改成功
+            case MessageBean.Code.PENGYOUQUANNICKNAMECHANGE:
+                mPengyouquanFaxianName.setText(messageBean.getMeaasge());
+                break;
+        }
+    }
+
+    public void getMyInfo() {
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETUSERINFOBYTOKEN)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("token", SPUtils.getInstance().getString("token"));
+
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("GETUSERINFOBYTOKEN", response.body());
+
+                try {
+                    if (response.code() == 200) {
+
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+
+                            PYQUserBean userBean = data.toJavaObject(PYQUserBean.class);
+                            mPengyouquanFaxianName.setText(userBean.getNickName());
+
+                            if (StringUtils.isEmpty(userBean.getCommunityPhoto())) {
+                                mPengyouquanFaxianHeadimg.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.morentouxiang));
+                            } else {
+                                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + userBean.getCommunityPhoto(), mPengyouquanFaxianHeadimg);
+                            }
+                            if (StringUtils.equals("1", userBean.getIsCompany())) {
+                                mPengyouquanFaxianRenzheng.setText("已认证");
+                                mPengyouquanFaxianRenzhengImg.setVisibility(View.VISIBLE);
+                            } else {
+                                if (StringUtils.equals("1", userBean.getIsDyeV())) {
+                                    mPengyouquanFaxianRenzheng.setText("已认证");
+                                    mPengyouquanFaxianRenzhengImg.setVisibility(View.VISIBLE);
+                                } else if (StringUtils.equals("2", userBean.getIsDyeV())) {
+                                    mPengyouquanFaxianRenzheng.setText("认证审核中...");
+                                    mPengyouquanFaxianRenzhengImg.setVisibility(View.GONE);
+                                } else {
+                                    mPengyouquanFaxianRenzheng.setText("未认证");
+                                    mPengyouquanFaxianRenzhengImg.setVisibility(View.GONE);
+                                }
+                            }
+
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
+                            return;
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+    }
+
 
     private List<HuatiBean> yijiHuati;
 
@@ -214,6 +329,8 @@ public class FaxianFragment extends Fragment implements View.OnClickListener {
                         mSlidingTabLayout.setVisibility(View.VISIBLE);
                     }
                 });
+                break;
+            case R.id.pengyouquan_faxian_myinfo_layout:
                 break;
         }
     }

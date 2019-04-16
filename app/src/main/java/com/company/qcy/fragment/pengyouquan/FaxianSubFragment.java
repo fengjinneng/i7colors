@@ -51,6 +51,7 @@ import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ActionItem;
 import com.company.qcy.bean.pengyouquan.MyAddress;
+import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.pengyouquan.MapActivity;
@@ -75,16 +76,6 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
     // TODO: Rename and change types of parameters
     private String mParam1;
     private View view;
-    private ImageView mHeadPengyouquanFragmentHead;
-    /**
-     * Y.C.Pixel
-     */
-    private TextView mHeadPengyouquanFragmentName;
-    /**
-     * 未认证
-     */
-    private TextView mHeadPengyouquanFragmentRenzheng;
-    private ImageView mHeadPengyouquanFragmentDav;
     /**
      * # 染者无疆话题名称染者无疆话题名称 #
      */
@@ -162,14 +153,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                 swipeRefreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
                 break;
-            //朋友圈头像修改成功
-            case MessageBean.Code.PENGYOUQUANHEADIMGCHANGE:
-                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + messageBean.getMeaasge(), mHeadPengyouquanFragmentHead);
-                break;
-            //朋友圈nickName修改成功
-            case MessageBean.Code.PENGYOUQUANNICKNAMECHANGE:
-                mHeadPengyouquanFragmentName.setText(messageBean.getMeaasge());
-                break;
+
         }
     }
 
@@ -195,72 +179,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
     LinearLayoutManager layoutManager;
 
 
-//    public void getMyIngo() {
-//        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETUSERINFOBYTOKEN)
-//                .tag(this)
-//                .params("sign", SPUtils.getInstance().getString("sign"))
-//                .params("token", SPUtils.getInstance().getString("token"));
-//
-//        StringCallback stringCallback = new StringCallback() {
-//            @Override
-//            public void onSuccess(Response<String> response) {
-//                LogUtils.v("GETUSERINFOBYTOKEN", response.body());
-//
-//                try {
-//                    if (response.code() == 200) {
-//
-//                        JSONObject jsonObject = JSONObject.parseObject(response.body());
-//                        String msg = jsonObject.getString("msg");
-//
-//                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-//                            JSONObject data = jsonObject.getJSONObject("data");
-//
-//                            PYQUserBean userBean = data.toJavaObject(PYQUserBean.class);
-//                            mHeadPengyouquanFragmentName.setText(userBean.getNickName());
-//
-//                            if (StringUtils.isEmpty(userBean.getCommunityPhoto())) {
-//                                mHeadPengyouquanFragmentHead.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.morentouxiang));
-//                            } else {
-//                                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + userBean.getCommunityPhoto(), mHeadPengyouquanFragmentHead);
-//                            }
-//                            if (StringUtils.equals("1", userBean.getIsCompany())) {
-//                                mHeadPengyouquanFragmentRenzheng.setText("已认证");
-//                                mHeadPengyouquanFragmentDav.setVisibility(View.VISIBLE);
-//                            } else {
-//                                if (StringUtils.equals("1", userBean.getIsDyeV())) {
-//                                    mHeadPengyouquanFragmentRenzheng.setText("已认证");
-//                                    mHeadPengyouquanFragmentDav.setVisibility(View.VISIBLE);
-//                                } else if (StringUtils.equals("2", userBean.getIsDyeV())) {
-//                                    mHeadPengyouquanFragmentRenzheng.setText("认证审核中...");
-//                                    mHeadPengyouquanFragmentDav.setVisibility(View.GONE);
-//                                } else {
-//                                    mHeadPengyouquanFragmentRenzheng.setText("未认证");
-//                                    mHeadPengyouquanFragmentDav.setVisibility(View.GONE);
-//                                }
-//                            }
-//
-//                            return;
-//                        }
-//                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-//                            SignAndTokenUtil.getSign(getActivity(), request, this);
-//                            return;
-//                        }
-//                    }
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//
-//            @Override
-//            public void onError(Response<String> response) {
-//                super.onError(response);
-//                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
-//            }
-//        };
-//
-//        request.execute(stringCallback);
-//    }
+
 
     private void initView(View view) {
         mItemPengyouquanHuati = view.findViewById(R.id.item_pengyouquan_huati);
@@ -415,9 +334,6 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
         swipeRefreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
 
-//        adapter.addHeaderView(addHeadView());
-
-//        getMyIngo();
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
         adapter.setLoadMoreView(new MyLoadMoreView());
 
@@ -533,22 +449,6 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
 
 
     }
-
-    private View addHeadView() {
-        View view = LayoutInflater.from(getContext()).inflate(R.layout.head_pengyouquan_fragment, null);
-        mHeadPengyouquanFragmentHead = (ImageView) view.findViewById(R.id.head_pengyouquan_fragment_head);
-        mHeadPengyouquanFragmentName = (TextView) view.findViewById(R.id.head_pengyouquan_fragment_name);
-        mHeadPengyouquanFragmentRenzheng = (TextView) view.findViewById(R.id.head_pengyouquan_fragment_renzheng);
-        mHeadPengyouquanFragmentDav = (ImageView) view.findViewById(R.id.head_pengyouquan_fragment_renzheng_img);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ActivityUtils.startActivity(MyPersonInfoActivity.class);
-            }
-        });
-        return view;
-    }
-
 
     private void addFollow(Long followUserId) {
 

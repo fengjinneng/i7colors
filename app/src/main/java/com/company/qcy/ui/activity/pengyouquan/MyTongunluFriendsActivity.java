@@ -1,10 +1,13 @@
 package com.company.qcy.ui.activity.pengyouquan;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,24 +18,30 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
-import com.company.qcy.adapter.pengyouquan.MyFriendsAdapter;
+import com.company.qcy.adapter.pengyouquan.TongxunluFriendsAdapter;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.MyFriendsBean;
 import com.gjiazhe.wavesidebar.WaveSideBar;
-import com.google.gson.JsonObject;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.greenrobot.eventbus.EventBus;
 
-public class MyFriendsActivity extends AppCompatActivity implements View.OnClickListener {
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+
+public class MyTongunluFriendsActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -41,18 +50,31 @@ public class MyFriendsActivity extends AppCompatActivity implements View.OnClick
     private ImageView mToolbarBack;
     private WaveSideBar mSideBar;
     private RecyclerView recyclerview;
-    private MyFriendsAdapter adapter;
+    private TongxunluFriendsAdapter adapter;
     private List<MyFriendsBean> datas;
+    private TextView mToolbarText;
+
+    private String from;//谁可以看或者提醒谁看
+
+    private ArrayList<MyFriendsBean> tixingshuikanDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_friends);
+        setContentView(R.layout.activity_my_tongxunlu_friends);
+
+        from = getIntent().getStringExtra("from");
+        tixingshuikanDatas = getIntent().getParcelableArrayListExtra("tixingshuikan");
         initView();
+
+        LogUtils.e("cxzcxzvwvdwwewqqq",tixingshuikanDatas);
+
     }
 
     private void initView() {
         datas = new ArrayList<>();
+        mToolbarText = (TextView) findViewById(R.id.toolbar_text);
+        mToolbarText.setOnClickListener(this);
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
@@ -73,22 +95,58 @@ public class MyFriendsActivity extends AppCompatActivity implements View.OnClick
         });
 
         recyclerview = (RecyclerView) findViewById(R.id.activity_my_friends_recyclerview);
-        adapter = new MyFriendsAdapter(R.layout.item_my_friend, datas);
+        adapter = new TongxunluFriendsAdapter(R.layout.item_my_tongxunlu_friend, datas);
         recyclerview.setAdapter(adapter);
         recyclerview.setLayoutManager(manager);
         recyclerview.addItemDecoration(new RecyclerviewDisplayDecoration(this));
 
-        addData();
+        if(ObjectUtils.isEmpty(tixingshuikanDatas)){
+            addData();
+        }else {
+            datas.addAll(tixingshuikanDatas);
+            adapter.setNewData(datas);
+        }
+        mToolbarText.setVisibility(View.VISIBLE);
+        mToolbarText.setText("完成");
+
+        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+
+                MyFriendsBean myFriendsBean = (MyFriendsBean) adapter.getData().get(position);
+                CheckBox checkBox = (CheckBox) adapter.getViewByPosition(recyclerview, position, R.id.item_my_tongxunlu_friends_checkbox);
+
+
+
+                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (isChecked) {
+                            myFriendsBean.setChecked(true);
+                        } else {
+                            myFriendsBean.setChecked(false);
+                        }
+                    }
+                });
+
+                if (myFriendsBean.isChecked()) {
+                    checkBox.setChecked(false);
+                } else {
+                    checkBox.setChecked(true);
+
+                }
+            }
+        });
     }
 
     private void addData() {
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETMYFRIENDSLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETMYTONGXUNLUFRIENDSLIST)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"));
 
-        StringCallback stringCallback = new StringCallback() {
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("GETMYFRIENDSLIST", response.body());
@@ -271,13 +329,16 @@ public class MyFriendsActivity extends AppCompatActivity implements View.OnClick
                             all.addAll(xs);
                             all.addAll(ys);
                             all.addAll(zs);
+
                             datas.addAll(all);
                             adapter.setNewData(datas);
+                            LogUtils.e("xzcdsvdvdvsvds",datas);
+
                             return;
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(MyFriendsActivity.this, request, this);
+                            SignAndTokenUtil.getSign(MyTongunluFriendsActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -304,6 +365,17 @@ public class MyFriendsActivity extends AppCompatActivity implements View.OnClick
             default:
                 break;
             case R.id.toolbar_back:
+                finish();
+                break;
+            case R.id.toolbar_text:
+
+                if (StringUtils.equals("tixingshuikan", from)) {
+                    //提醒谁看
+                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICETIXINGSHUIKAN, datas));
+
+                } else {
+
+                }
                 finish();
                 break;
         }

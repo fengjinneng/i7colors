@@ -239,7 +239,7 @@ public class MyFansFragment extends Fragment {
 
     private void addData() {
         pageNo++;
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYMYFOLLOWLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYFOLLOWLISTBYUSERID)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)

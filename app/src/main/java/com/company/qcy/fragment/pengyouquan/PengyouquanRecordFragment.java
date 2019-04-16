@@ -100,9 +100,9 @@ public class PengyouquanRecordFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(StringUtils.equals("mine",userId)){
-            isCharge =true;
-        }else {
+        if (StringUtils.equals("mine", userId)) {
+            isCharge = true;
+        } else {
             isCharge = false;
         }
         recyclerView = view.findViewById(R.id.fragment_pengyouquan_record_recyclerview);
@@ -110,9 +110,9 @@ public class PengyouquanRecordFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
-        datas=new ArrayList<>();
+        datas = new ArrayList<>();
 
-        adapter = new MyPengyouquanRecordAdapter(R.layout.item_pengyouquan_record,datas);
+        adapter = new MyPengyouquanRecordAdapter(R.layout.item_pengyouquan_record, datas);
 
         refreshLayout = view.findViewById(R.id.fragment_pengyouquan_record_swipeRefreshLayout);
 
@@ -123,10 +123,10 @@ public class PengyouquanRecordFragment extends Fragment {
                 //下拉业务
                 isReflash = true;
                 pageNo = 0;
-                if(isCharge){
+                if (isCharge) {
                     addMyData();
 
-                }else {
+                } else {
                     addData();
 
                 }
@@ -144,9 +144,9 @@ public class PengyouquanRecordFragment extends Fragment {
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                if(isCharge){
+                if (isCharge) {
                     addMyData();
-                }else {
+                } else {
                     addData();
                 }
             }
@@ -170,7 +170,7 @@ public class PengyouquanRecordFragment extends Fragment {
     }
 
     private void addMyData() {
-            pageNo++;
+        pageNo++;
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYMYDYECOMMUNITYLISTBYTOKEN)
                 .tag(this)
 
@@ -210,10 +210,10 @@ public class PengyouquanRecordFragment extends Fragment {
                             adapter.setNewData(datas);
                             adapter.loadMoreComplete();
                             adapter.disableLoadMoreIfNotFullPage();
-                             return;
+                            return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -242,7 +242,7 @@ public class PengyouquanRecordFragment extends Fragment {
 
     private void addData() {
         pageNo++;
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYMYDYECOMMUNITYLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYDYECOMMUNITYLISTBYUSERID)
                 .tag(this)
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
@@ -281,10 +281,10 @@ public class PengyouquanRecordFragment extends Fragment {
                             adapter.setNewData(datas);
                             adapter.loadMoreComplete();
                             adapter.disableLoadMoreIfNotFullPage();
-                                return;
+                            return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);

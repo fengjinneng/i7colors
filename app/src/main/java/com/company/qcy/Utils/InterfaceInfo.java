@@ -7,7 +7,7 @@ public class InterfaceInfo {
     //BANNER
     public static final String INDEXBANNER = "index/getBanner";
     //首页数据
-    public static final String INDEXDATA = "index/getAllDataNew";
+    public static final String INDEXDATA = "index/getAllDataNew2";
     //首页搜索
     public static final String INDEXSEARCH = "index/searchData";
 
@@ -138,28 +138,36 @@ public class InterfaceInfo {
     //发朋友圈
     public static final String FABUPENGYOUQUAN = "dyeCommunity/addDyeCommunityNew";
     //发表评论
-    public static final String FABIAOPINGLUN = "dyeCommunity/addDyeComment";
+    public static final String FABIAOPINGLUN = "dyeCommunity/addDyeCommentNew";
     //删除评论
     public static final String DELETEPINGLUN = "dyeCommunity/cancelDyeComment";
     //点赞
-    public static final String DIANZAN = "dyeCommunity/addDyeLike";
-    //获取朋友圈记录
-    public static final String QUERYMYDYECOMMUNITYLIST = "dyeCommunity/queryDyeCommunityListByUserId";
-    //获取粉丝列表
-    public static final String QUERYMYFOLLOWLIST = "dyeFollow/queryFollowListByUserId";
+    public static final String DIANZAN = "dyeCommunity/addDyeLikeNew";
+
+
+
+
     //根据userid获取用户信息
     public static final String GETUSERINFOBYUSERID = "user/getUserInfoDetail";
 
-    //获取我的好友列表
-    public static final String GETMYFRIENDSLIST = "dyeFollow/queryMyFriendListSort";
-
+    //获取我的通讯录好友列表
+    public static final String GETMYTONGXUNLUFRIENDSLIST = "dyeFollow/queryMyFriendListSort";
+    //获取我的好友列表（用户详情页用）
+    public static final String GETMYFRIENDSLIST = "dyeFollow/queryMyFriendList";
 
     //根据token获取用户信息
     public static final String GETUSERINFOBYTOKEN = "user/getMyInfoDetail";
+
+    //获取朋友圈记录
+    public static final String QUERYDYECOMMUNITYLISTBYUSERID = "dyeCommunity/queryDyeCommunityListByUserIdNew";
     //根据token获取朋友圈记录
     public static final String QUERYMYDYECOMMUNITYLISTBYTOKEN = "dyeCommunity/queryMyDyeCommunityList";
-    //根据tokendianzan
-    public static final String QUERYMYDYEFOLLOWLISTBYTOKEN = "dyeFollow/queryMyFollowList";
+
+
+    //获取别人的粉丝列表
+    public static final String QUERYFOLLOWLISTBYUSERID = "dyeFollow/queryFollowListByUserIdNew";
+    //获取我的粉丝列表
+    public static final String QUERYMYDYEFOLLOWLISTBYTOKEN = "dyeFollow/queryMyFollowListNew";
 
 
     //根据帖子id获取评论列表（一期）
@@ -182,6 +190,19 @@ public class InterfaceInfo {
     public static final String QUERYNOTREADCOMMENTLIST = "dyeCommunity/queryMyNotReadCommentList";
     //获取印染圈话题
     public static final String QUERYHUATI = "dyeCommunity/queryDyeCommunityTopicList";
+
+    //获取我的评论消息列表（二期）
+    public static final String PINGLUNXIAOXILIST = "dyeCommunityMessage/queryMyNotReadCommentMessageList";
+    //获取我的点赞消息列表
+    public static final String DIANZANXIAOXILIST = "dyeCommunityMessage/queryMyNotReadLikeMessageList";
+    //获取@我的消息列表
+    public static final String AITEWODEXIAOXILIST = "dyeCommunityMessage/queryMyNotReadNoticeMessageList";
+    //获取關注我的消息列表
+    public static final String WODEGUANZHUXIAOXILIST = "dyeCommunityMessage/queryMyNotReadFollowMessageList";
+
+    //朋友圈获取我的消息数目统计
+    public static final String GETPENGYOUQUANNOTREADMESSAGE = "dyeCommunityMessage/getNoReadCount";
+
 
     //微信相关
     //绑定手机号
@@ -241,13 +262,10 @@ public class InterfaceInfo {
     //竞拍
     //竞拍列表
     public static final String JINGPAILIST = "auction/queryAuctionList";
-
     //根据id获取竞拍详情
     public static final String JINGPAIDETAIL = "auction/getAuctionById";
-
     //根据竞拍id获取参与记录
     public static final String GETRECORDBYID = "auction/queryAuctionBuyerList";
-
     //参与竞拍
     public static final String CANYUJINGPAI = "auction/addAuctionBuyer";
 

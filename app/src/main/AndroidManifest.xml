@@ -371,6 +371,7 @@
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 
+
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
@@ -382,11 +383,10 @@
             android:name=".huodong.jingpai.activity.CanyujingpaiActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.activity.kaifangshangcheng.QiyezizhiActivity"
+        <activity
+            android:name=".ui.activity.kaifangshangcheng.QiyezizhiActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".ui.activity.pengyouquan.PengyouquanChoiceAddressActivity">
 
             <!-- <intent-filter> -->
@@ -399,7 +399,14 @@
         <activity android:name=".ui.activity.pengyouquan.ChoiceHuatiActivity" />
         <activity android:name=".ui.activity.pengyouquan.MapActivity" />
         <activity android:name=".ui.activity.pengyouquan.ErjihuatiDetailActivity" />
-        <activity android:name=".ui.activity.pengyouquan.MyFriendsActivity"></activity>
+        <activity android:name=".ui.activity.pengyouquan.MyTongunluFriendsActivity" />
+        <activity android:name=".TestActivity" />
+        <activity android:name=".ui.activity.pengyouquan.MessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodepinglunMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodedianzanMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodeaiteMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodehaoyouMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.ShuikeyikanActivity"></activity>
     </application>
 
 </manifest>

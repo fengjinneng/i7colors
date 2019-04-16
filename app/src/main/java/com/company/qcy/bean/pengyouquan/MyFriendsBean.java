@@ -1,59 +1,55 @@
 package com.company.qcy.bean.pengyouquan;
 
 
-public class MyFriendsBean {
+import android.os.Parcel;
+import android.os.Parcelable;
 
+public class MyFriendsBean implements Parcelable {
 
-    /**
-     * id : 1
-     * userId : 114817
-     * byUserId : null
-     * loginUserId : null
-     * loginCompanyId : null
-     * loginName : 封金能
-     * userNickName : 封金能
-     * userCommunityPhoto : http://thirdwx.qlogo.cn/mmopen/vi_32/RaTBx4YbtKKmzYP28HxmTtMB37vPAAsBQ5aAyqOftiaibhvjyDHKbEN6mJWAM3UhxQl71ZFUia9Lv4bXz4krHFFBA/132
-     * isDyeV : 0
-     * dyeVName : null
-     * bossLevel : 1
-     * isCompany : 0
-     * companyName : null
-     * isFollow : 1
-     * isValid : null
-     * createdAt : null
-     * createdAtStamp : 1542250956000
-     * updatedAt : null
-     * firstSpellStr : fjn
-     */
+    @Override
+    public String toString() {
+        return "MyFriendsBean{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", loginName='" + loginName + '\'' +
+                ", userNickName='" + userNickName + '\'' +
+                ", userCommunityPhoto='" + userCommunityPhoto + '\'' +
+                ", isDyeV='" + isDyeV + '\'' +
+                ", dyeVName='" + dyeVName + '\'' +
+                ", bossLevel='" + bossLevel + '\'' +
+                ", isCompany='" + isCompany + '\'' +
+                ", isFollow='" + isFollow + '\'' +
+                ", createdAtStamp='" + createdAtStamp + '\'' +
+                ", firstSpellStr='" + firstSpellStr + '\'' +
+                ", index='" + index + '\'' +
+                ", checked=" + checked +
+                '}';
+    }
 
     private Long id;
     private Long userId;
-    private Object byUserId;
-    private Object loginUserId;
-    private Object loginCompanyId;
     private String loginName;
+
     private String userNickName;
+
     private String userCommunityPhoto;
     private String isDyeV;
-    private Object dyeVName;
+
+    private String dyeVName;
+
     private String bossLevel;
+
     private String isCompany;
-    private String companyName;
+
     private String isFollow;
-    private Object isValid;
-    private Object createdAt;
+
     private String createdAtStamp;
-    private Object updatedAt;
+
     private String firstSpellStr;
+
     private String index;
 
-    public String getIndex() {
-        return index;
-    }
-
-    public void setIndex(String index) {
-        this.index = index;
-    }
+    private boolean checked;//判斷是否選中
 
     public Long getId() {
         return id;
@@ -69,30 +65,6 @@ public class MyFriendsBean {
 
     public void setUserId(Long userId) {
         this.userId = userId;
-    }
-
-    public Object getByUserId() {
-        return byUserId;
-    }
-
-    public void setByUserId(Object byUserId) {
-        this.byUserId = byUserId;
-    }
-
-    public Object getLoginUserId() {
-        return loginUserId;
-    }
-
-    public void setLoginUserId(Object loginUserId) {
-        this.loginUserId = loginUserId;
-    }
-
-    public Object getLoginCompanyId() {
-        return loginCompanyId;
-    }
-
-    public void setLoginCompanyId(Object loginCompanyId) {
-        this.loginCompanyId = loginCompanyId;
     }
 
     public String getLoginName() {
@@ -127,11 +99,11 @@ public class MyFriendsBean {
         this.isDyeV = isDyeV;
     }
 
-    public Object getDyeVName() {
+    public String getDyeVName() {
         return dyeVName;
     }
 
-    public void setDyeVName(Object dyeVName) {
+    public void setDyeVName(String dyeVName) {
         this.dyeVName = dyeVName;
     }
 
@@ -151,36 +123,12 @@ public class MyFriendsBean {
         this.isCompany = isCompany;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
     public String getIsFollow() {
         return isFollow;
     }
 
     public void setIsFollow(String isFollow) {
         this.isFollow = isFollow;
-    }
-
-    public Object getIsValid() {
-        return isValid;
-    }
-
-    public void setIsValid(Object isValid) {
-        this.isValid = isValid;
-    }
-
-    public Object getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(Object createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getCreatedAtStamp() {
@@ -191,14 +139,6 @@ public class MyFriendsBean {
         this.createdAtStamp = createdAtStamp;
     }
 
-    public Object getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Object updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public String getFirstSpellStr() {
         return firstSpellStr;
     }
@@ -206,4 +146,75 @@ public class MyFriendsBean {
     public void setFirstSpellStr(String firstSpellStr) {
         this.firstSpellStr = firstSpellStr;
     }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeValue(this.userId);
+        dest.writeString(this.loginName);
+        dest.writeString(this.userNickName);
+        dest.writeString(this.userCommunityPhoto);
+        dest.writeString(this.isDyeV);
+        dest.writeString(this.dyeVName);
+        dest.writeString(this.bossLevel);
+        dest.writeString(this.isCompany);
+        dest.writeString(this.isFollow);
+        dest.writeString(this.createdAtStamp);
+        dest.writeString(this.firstSpellStr);
+        dest.writeString(this.index);
+        dest.writeByte(this.checked ? (byte) 1 : (byte) 0);
+    }
+
+    public MyFriendsBean() {
+    }
+
+    protected MyFriendsBean(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.userId = (Long) in.readValue(Long.class.getClassLoader());
+        this.loginName = in.readString();
+        this.userNickName = in.readString();
+        this.userCommunityPhoto = in.readString();
+        this.isDyeV = in.readString();
+        this.dyeVName = in.readString();
+        this.bossLevel = in.readString();
+        this.isCompany = in.readString();
+        this.isFollow = in.readString();
+        this.createdAtStamp = in.readString();
+        this.firstSpellStr = in.readString();
+        this.index = in.readString();
+        this.checked = in.readByte() != 0;
+    }
+
+    public static final Parcelable.Creator<MyFriendsBean> CREATOR = new Parcelable.Creator<MyFriendsBean>() {
+        @Override
+        public MyFriendsBean createFromParcel(Parcel source) {
+            return new MyFriendsBean(source);
+        }
+
+        @Override
+        public MyFriendsBean[] newArray(int size) {
+            return new MyFriendsBean[size];
+        }
+    };
 }

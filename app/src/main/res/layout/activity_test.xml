@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:theme="@style/ToolbarTheme">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:navigationIcon="@mipmap/back_round">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <com.bigkoo.convenientbanner.ConvenientBanner
+                    android:id="@+id/activity_kfscxiangqing_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x400">
+
+                </com.bigkoo.convenientbanner.ConvenientBanner>
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/activity_kfscxiangqing_constrainlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x100"
+                    android:background="@color/baise">
+
+                    <ImageView
+                        android:id="@+id/activity_kfscxiangqing_company_logo"
+                        android:layout_width="@dimen/x60"
+                        android:layout_height="@dimen/x60"
+                        android:layout_marginStart="@dimen/x28"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/morentouxiang" />
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/activity_kfscxiangqing_companyname"-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginStart="@dimen/x20"-->
+                    <!--android:ellipsize="end"-->
+                    <!--android:singleLine="true"-->
+                    <!--android:textColor="@color/erjibiaoti"-->
+                    <!--android:textSize="@dimen/x28"-->
+                    <!--android:textStyle="bold"-->
+                    <!--app:layout_constraintHorizontal_chainStyle="packed"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_company_logo"-->
+                    <!--app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_company_logo" />-->
+
+                    <TextView
+                        android:id="@+id/textView54"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="信用星级:"
+                        android:textColor="@color/chunhongse"
+                        android:textSize="@dimen/x20"
+                        app:layout_constraintStart_toStartOf="@+id/constraintLayout32"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout32" />
+
+                    <ImageView
+
+                        android:id="@+id/activity_kfscxiangqing_firststar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView54"
+                        app:layout_constraintStart_toEndOf="@+id/textView54"
+                        app:layout_constraintTop_toTopOf="@+id/textView54" />
+
+                    <ImageView
+                        android:id="@+id/activity_kfscxiangqing_secondstar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_firststar"
+                        app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_firststar"
+                        app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_firststar" />
+
+                    <ImageView
+                        android:id="@+id/activity_kfscxiangqing_thirdstar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_secondstar"
+                        app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_secondstar" />
+
+                    <ImageView
+                        android:id="@+id/activity_kfscxiangqing_fourstar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_thirdstar"
+                        app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_thirdstar"
+                        app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_thirdstar" />
+
+                    <ImageView
+                        android:id="@+id/activity_kfscxiangqing_fivestar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_fourstar"
+                        app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_fourstar"
+                        app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_fourstar" />
+
+                    <ImageView
+                        android:id="@+id/activity_kfscxiangqing_yijianhujiao"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="@dimen/x18"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@mipmap/hujiaoshangjia" />
+
+                    <android.support.constraint.ConstraintLayout
+                        android:id="@+id/constraintLayout32"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintEnd_toStartOf="@+id/activity_kfscxiangqing_yijianhujiao"
+                        app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_company_logo"
+                        app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_company_logo">
+
+                        <TextView
+                            android:id="@+id/activity_kfscxiangqing_companyname"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLength="12"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintHorizontal_chainStyle="packed"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/activity_kfscxiangqing_qiyezizhi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_companyname"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@mipmap/qiyezizhi" />
+                    </android.support.constraint.ConstraintLayout>
+
+                    <!--<ImageView-->
+                    <!--android:id="@+id/imageView24"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--app:layout_constraintBottom_toBottomOf="@+id/activity_kfscxiangqing_companyname"-->
+                    <!--app:layout_constraintStart_toEndOf="@+id/activity_kfscxiangqing_companyname"-->
+                    <!--app:layout_constraintTop_toTopOf="@+id/activity_kfscxiangqing_companyname"-->
+                    app:srcCompat="@mipmap/qiyezizhi" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x30"
+                    android:background="@color/fengexian" />
+
+            </LinearLayout>
+
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--android:background="#00ffffff"-->
+                <!--android:gravity="center_vertical"-->
+                <!--app:layout_collapseMode="pin"-->
+                <!--app:navigationIcon="@mipmap/back_round"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+                <!--app:theme="@style/ToolbarTheme"-->
+                <!--app:titleTextColor="#ffffff" />-->
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/selector_list_item"
+            app:tabIndicatorColor="@color/chunhongse"
+            app:tabSelectedTextColor="@color/chunhongse"
+            app:tabTextColor="#A7A7A7" />
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <!--<android.support.v4.view.ViewPager-->
+    <!--android:id="@+id/viewpager"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rec"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</android.support.design.widget.CoordinatorLayout>

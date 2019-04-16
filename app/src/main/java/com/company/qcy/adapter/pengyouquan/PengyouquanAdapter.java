@@ -60,6 +60,7 @@ import com.lzy.okgo.request.PostRequest;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -142,14 +143,9 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             headimg.setImageResource(R.mipmap.morentouxiang);
         }
         TextView time = (TextView) helper.getView(R.id.timeTv);
-        time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(0, 10));
-        try {
-            if (DateUtil.IsToday(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())))) {
-                time.setText("今天");
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+//        time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(0, 10));
+        String friendlytime = DateUtil.getFriendlytime(new Date(Long.parseLong(item.getCreatedAtStamp())));
+        time.setText(friendlytime);
 
         if (StringUtils.equals("1", item.getIsCompany())) {
             helper.getView(R.id.item_pengyouquan_companyname).setVisibility(View.VISIBLE);
@@ -163,13 +159,6 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             }
         }
 
-        try {
-            if (DateUtil.IsYesterday(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())))) {
-                time.setText("昨天");
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         TextView renzheng = (TextView) helper.getView(R.id.item_pengyouquan_renzheng);
 
         if (StringUtils.equals("1", item.getIsCompany())) {

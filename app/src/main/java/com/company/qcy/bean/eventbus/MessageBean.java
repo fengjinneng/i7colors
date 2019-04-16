@@ -204,6 +204,12 @@ public class MessageBean {
 
         //朋友圈 选择了资讯
         public static final int CHOICEZIXUN = 1036;
+
+        //朋友圈 选择誰可以看
+        public static final int CHOICESHUIKEYIKAN = 1037;
+
+        //朋友圈 提醒谁看
+        public static final int CHOICETIXINGSHUIKAN = 1038;
     }
 
 }

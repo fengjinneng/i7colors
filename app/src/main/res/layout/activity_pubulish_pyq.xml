@@ -423,7 +423,7 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_shuikeyikan_layout" />
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout44"
+        android:id="@+id/activity_publish_pyq_tixinghsuikan_layout"
         android:layout_width="0dp"
         android:layout_height="@dimen/x100"
         app:layout_constraintEnd_toEndOf="parent"
@@ -431,7 +431,7 @@
         app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_shuikeyikan_layout">
 
         <ImageView
-            android:id="@+id/imageView40"
+            android:id="@+id/activity_publish_pyq_tixinghsuikan_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -443,7 +443,7 @@
             app:srcCompat="@mipmap/fbpyq_tixingshuikan_unchecked" />
 
         <TextView
-            android:id="@+id/textView297"
+            android:id="@+id/activity_publish_pyq_tixinghsuikan_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -451,7 +451,7 @@
             android:layout_marginTop="8dp"
             android:text="提醒谁看"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView40"
+            app:layout_constraintStart_toEndOf="@+id/activity_publish_pyq_tixinghsuikan_img"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
@@ -467,13 +467,12 @@
             app:srcCompat="@mipmap/youjiantou" />
 
         <TextView
-            android:id="@+id/textView298"
+            android:id="@+id/activity_publish_pyq_tixinghsuikan_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginTop="8dp"
-            android:text="昵称、头像等人"
             android:textSize="@dimen/x24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView41"
@@ -487,7 +486,7 @@
         android:background="@color/fengexian"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout44" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_tixinghsuikan_layout" />
 
 
 </android.support.constraint.ConstraintLayout>
