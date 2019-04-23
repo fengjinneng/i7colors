@@ -10,8 +10,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
-import com.company.qcy.Utils.GlideUtils;
-import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.bean.pengyouquan.MyFriendsBean;
 
 import java.util.List;
@@ -27,34 +26,20 @@ public class MyFriendsAdapter extends BaseQuickAdapter<MyFriendsBean, BaseViewHo
     protected void convert(BaseViewHolder helper, MyFriendsBean item) {
 
         TextView name = (TextView) helper.getView(R.id.item_myfriends_name);
-
-        TextView companyName = (TextView) helper.getView(R.id.item_myfriends_company);
-
         name.setText(item.getUserNickName());
-//        companyName.setText(item.getCompanyName());
+        TextView secondName = (TextView) helper.getView(R.id.item_myfriends_secondname);
 
         helper.setText(R.id.item_myfriends_date, TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(0, 10));
 
+        ImageView headImg = (ImageView) helper.getView(R.id.item_myfriends_img);
 
-        ImageView img = (ImageView) helper.getView(R.id.item_myfriends_img);
-        GlideUtils.loadCircleImage(mContext,ServerInfo.IMAGE+item.getUserCommunityPhoto(),img);
+        MyCommonUtil.jiazaitouxiang(mContext,item.getUserCommunityPhoto(),headImg);
 
-        if(StringUtils.equals("1",item.getIsDyeV())){
-            helper.getView(R.id.item_myfriends_bigv).setVisibility(View.VISIBLE);
-        }else {
-            helper.getView(R.id.item_myfriends_bigv).setVisibility(View.GONE);
-        }
+        //判断是否是公司和打V认证
+        MyCommonUtil.isDaVOrCompanyAndSetBossLevel(mContext,secondName,item.getIsCompany(),item.getCompanyName(),
+                item.getIsDyeV(),item.getDyeVName(),helper.getView(R.id.item_myfriends_bigv),item.getUserNickName(),item.getBossLevel(),name);
 
         helper.addOnClickListener(R.id.item_myfriends_guanzhu);
-
-        if(StringUtils.equals("1",item.getIsFollow())){
-            helper.setBackgroundRes(R.id.item_myfriends_guanzhu, R.mipmap.yiguanzhu);
-            helper.setText(R.id.item_myfriends_guanzhu, "");
-        }else {
-            helper.setBackgroundRes(R.id.item_myfriends_guanzhu, R.drawable.background_pengyouquan_weirenzheng);
-            helper.setText(R.id.item_myfriends_guanzhu, "+关注");
-        }
-
 
     }
 }

@@ -39,7 +39,7 @@
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:drawablePadding="5dp"
                 android:text="商品名称:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +54,7 @@
                 android:inputType="textPersonName"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView202"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView202"
@@ -68,7 +68,7 @@
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:drawablePadding="5dp"
                 android:text="预定量:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView202"
                 app:layout_constraintTop_toBottomOf="@+id/textView202" />
 
@@ -82,7 +82,7 @@
                 android:inputType="number"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView217"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_custom_product_name"
                 app:layout_constraintTop_toTopOf="@+id/textView217" />
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="吨"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/activity_add_custom_product_yudingliang"
                 app:layout_constraintStart_toEndOf="@+id/activity_add_custom_product_yudingliang"
                 app:layout_constraintTop_toTopOf="@+id/activity_add_custom_product_yudingliang" />
@@ -107,7 +107,7 @@
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:drawablePadding="5dp"
                 android:text="包装形式:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView217" />
 
@@ -120,7 +120,7 @@
                 android:inputType="textPersonName"
                 android:paddingLeft="@dimen/x20"
                 android:paddingRight="@dimen/x20"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView223"
                 app:layout_constraintStart_toStartOf="@+id/activity_add_custom_product_yudingliang"
                 app:layout_constraintTop_toTopOf="@+id/textView223" />
@@ -131,7 +131,7 @@
                 android:layout_height="13dp"
                 android:layout_marginStart="8dp"
                 android:text="（例：25KG/箱）"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/activity_add_custom_product_baozhuangxinshi"
                 app:layout_constraintStart_toEndOf="@+id/activity_add_custom_product_baozhuangxinshi"
                 app:layout_constraintTop_toTopOf="@+id/activity_add_custom_product_baozhuangxinshi" />
@@ -145,7 +145,7 @@
                 android:drawablePadding="5dp"
                 android:gravity="center"
                 android:text="参考标准\n(可多选)"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView223"
                 app:layout_constraintTop_toBottomOf="@+id/textView223" />
 

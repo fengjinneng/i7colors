@@ -8,38 +8,23 @@ import java.util.List;
 
 public class HuatiBean implements Parcelable {
 
-
     private Long id;
     private Long parentId;
     private String level;
     private String title;
     private String description;
     private boolean checked;
-
-
-    public boolean isChecked() {
-        return checked;
-    }
-
-    public void setChecked(boolean checked) {
-        this.checked = checked;
-    }
-
-    public static Creator<HuatiBean> getCREATOR() {
-        return CREATOR;
-    }
-
-    public String getCommunityNum() {
-        return communityNum;
-    }
-
-    public void setCommunityNum(String communityNum) {
-        this.communityNum = communityNum;
-    }
-
     private String communityNum;
-    private List<TopicListBean> topicList;
+    private String banner;
 
+
+    public String getBanner() {
+        return banner;
+    }
+
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
 
     public Long getId() {
         return id;
@@ -81,88 +66,20 @@ public class HuatiBean implements Parcelable {
         this.description = description;
     }
 
-    public List<TopicListBean> getTopicList() {
-        return topicList;
+    public boolean isChecked() {
+        return checked;
     }
 
-    public void setTopicList(List<TopicListBean> topicList) {
-        this.topicList = topicList;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
-    public static class TopicListBean {
+    public String getCommunityNum() {
+        return communityNum;
+    }
 
-
-
-
-        /**
-         * id : 2
-         * parentId : 1
-         * level : 2
-         * title : 助剂
-         * banner : null
-         * description : 助剂助剂助剂助剂助剂助剂助剂助剂助剂助剂助剂助剂助剂助剂助剂
-         * communityNum : null
-         * isValid : null
-         * createdAt : null
-         * updatedAt : null
-         * topicList : null
-         * sortNum : null
-         */
-
-        private Long id;
-        private Long parentId;
-        private String level;
-        private String title;
-        private String description;
-        private String communityNum;
-
-        public String getCommunityNum() {
-            return communityNum;
-        }
-
-        public void setCommunityNum(String communityNum) {
-            this.communityNum = communityNum;
-        }
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
-
-        public Long getParentId() {
-            return parentId;
-        }
-
-        public void setParentId(Long parentId) {
-            this.parentId = parentId;
-        }
-
-        public String getLevel() {
-            return level;
-        }
-
-        public void setLevel(String level) {
-            this.level = level;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
+    public void setCommunityNum(String communityNum) {
+        this.communityNum = communityNum;
     }
 
     public HuatiBean() {
@@ -182,7 +99,7 @@ public class HuatiBean implements Parcelable {
         dest.writeString(this.description);
         dest.writeByte(this.checked ? (byte) 1 : (byte) 0);
         dest.writeString(this.communityNum);
-        dest.writeList(this.topicList);
+        dest.writeString(this.banner);
     }
 
     protected HuatiBean(Parcel in) {
@@ -193,8 +110,7 @@ public class HuatiBean implements Parcelable {
         this.description = in.readString();
         this.checked = in.readByte() != 0;
         this.communityNum = in.readString();
-        this.topicList = new ArrayList<TopicListBean>();
-        in.readList(this.topicList, TopicListBean.class.getClassLoader());
+        this.banner = in.readString();
     }
 
     public static final Creator<HuatiBean> CREATOR = new Creator<HuatiBean>() {

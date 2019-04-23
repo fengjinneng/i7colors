@@ -1,16 +1,12 @@
 package com.company.qcy.ui.activity.pengyouquan;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.LogUtils;
@@ -26,22 +22,18 @@ import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.pengyouquan.TongxunluFriendsAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.MyFriendsBean;
 import com.gjiazhe.wavesidebar.WaveSideBar;
 import com.lzy.okgo.OkGo;
-import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
-
 import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
-public class MyTongunluFriendsActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyTongunluFriendsActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -57,6 +49,7 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
     private String from;//谁可以看或者提醒谁看
 
     private ArrayList<MyFriendsBean> tixingshuikanDatas;
+    private ArrayList<MyFriendsBean> shuikeyikanDatas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,10 +57,13 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
         setContentView(R.layout.activity_my_tongxunlu_friends);
 
         from = getIntent().getStringExtra("from");
-        tixingshuikanDatas = getIntent().getParcelableArrayListExtra("tixingshuikan");
+        if(StringUtils.equals("shuikeyikan",from)){
+            shuikeyikanDatas = getIntent().getParcelableArrayListExtra("shuikeyikan");
+        }
+        if(StringUtils.equals("tixingshuikan",from)){
+            tixingshuikanDatas = getIntent().getParcelableArrayListExtra("tixingshuikan");
+        }
         initView();
-
-        LogUtils.e("cxzcxzvwvdwwewqqq",tixingshuikanDatas);
 
     }
 
@@ -100,11 +96,16 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
         recyclerview.setLayoutManager(manager);
         recyclerview.addItemDecoration(new RecyclerviewDisplayDecoration(this));
 
-        if(ObjectUtils.isEmpty(tixingshuikanDatas)){
-            addData();
-        }else {
+        if(!ObjectUtils.isEmpty(tixingshuikanDatas)){
             datas.addAll(tixingshuikanDatas);
             adapter.setNewData(datas);
+        } else if(!ObjectUtils.isEmpty(shuikeyikanDatas)){
+            datas.addAll(shuikeyikanDatas);
+            adapter.setNewData(datas);
+        }
+
+        if(ObjectUtils.isEmpty(tixingshuikanDatas)&ObjectUtils.isEmpty(shuikeyikanDatas)){
+            addData();
         }
         mToolbarText.setVisibility(View.VISIBLE);
         mToolbarText.setText("完成");
@@ -116,23 +117,12 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
                 MyFriendsBean myFriendsBean = (MyFriendsBean) adapter.getData().get(position);
                 CheckBox checkBox = (CheckBox) adapter.getViewByPosition(recyclerview, position, R.id.item_my_tongxunlu_friends_checkbox);
 
-
-
-                checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if (isChecked) {
-                            myFriendsBean.setChecked(true);
-                        } else {
-                            myFriendsBean.setChecked(false);
-                        }
-                    }
-                });
-
                 if (myFriendsBean.isChecked()) {
                     checkBox.setChecked(false);
+                    myFriendsBean.setChecked(false);
                 } else {
                     checkBox.setChecked(true);
+                    myFriendsBean.setChecked(true);
 
                 }
             }
@@ -163,7 +153,6 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
                                 return;
                             }
 
-                            JSONArray other = object.getJSONArray("#");
                             JSONArray a = object.getJSONArray("a");
                             JSONArray b = object.getJSONArray("b");
                             JSONArray c = object.getJSONArray("c");
@@ -190,8 +179,9 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
                             JSONArray x = object.getJSONArray("x");
                             JSONArray y = object.getJSONArray("y");
                             JSONArray z = object.getJSONArray("z");
+                            JSONArray other = object.getJSONArray("#");
 
-                            List<MyFriendsBean> others = JSONObject.parseArray(other.toJSONString(), MyFriendsBean.class);
+
                             List<MyFriendsBean> as = JSONObject.parseArray(a.toJSONString(), MyFriendsBean.class);
                             List<MyFriendsBean> bs = JSONObject.parseArray(b.toJSONString(), MyFriendsBean.class);
                             List<MyFriendsBean> cs = JSONObject.parseArray(c.toJSONString(), MyFriendsBean.class);
@@ -218,10 +208,10 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
                             List<MyFriendsBean> xs = JSONObject.parseArray(x.toJSONString(), MyFriendsBean.class);
                             List<MyFriendsBean> ys = JSONObject.parseArray(y.toJSONString(), MyFriendsBean.class);
                             List<MyFriendsBean> zs = JSONObject.parseArray(z.toJSONString(), MyFriendsBean.class);
+                            List<MyFriendsBean> others = JSONObject.parseArray(other.toJSONString(), MyFriendsBean.class);
 
-                            for (MyFriendsBean myFriendsBean : others) {
-                                myFriendsBean.setIndex("#");
-                            }
+
+
                             for (MyFriendsBean myFriendsBean : as) {
                                 myFriendsBean.setIndex("A");
                             }
@@ -300,9 +290,12 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
                             for (MyFriendsBean myFriendsBean : zs) {
                                 myFriendsBean.setIndex("Z");
                             }
+                            for (MyFriendsBean myFriendsBean : others) {
+                                myFriendsBean.setIndex("#");
+                            }
 
                             List<MyFriendsBean> all = new ArrayList<>();
-                            all.addAll(others);
+
                             all.addAll(as);
                             all.addAll(bs);
                             all.addAll(cs);
@@ -329,10 +322,10 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
                             all.addAll(xs);
                             all.addAll(ys);
                             all.addAll(zs);
+                            all.addAll(others);
 
                             datas.addAll(all);
                             adapter.setNewData(datas);
-                            LogUtils.e("xzcdsvdvdvsvds",datas);
 
                             return;
 
@@ -373,8 +366,10 @@ public class MyTongunluFriendsActivity extends AppCompatActivity implements View
                     //提醒谁看
                     EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICETIXINGSHUIKAN, datas));
 
-                } else {
-
+                }
+                if(StringUtils.equals("shuikeyikan", from)){
+                    //水可以看
+                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICESHUIKEYIKAN, datas));
                 }
                 finish();
                 break;

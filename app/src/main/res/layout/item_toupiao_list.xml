@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="访问量"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_fangwenliang"
         app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_fangwenliang"
         app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_fangwenliang" />
@@ -85,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="投票数"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toEndOf="@+id/item_toupiao_list_toupiaoshu"
         app:layout_constraintStart_toStartOf="@+id/item_toupiao_list_toupiaoshu"
         app:layout_constraintTop_toBottomOf="@+id/item_toupiao_list_toupiaoshu" />

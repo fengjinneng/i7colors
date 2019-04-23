@@ -22,7 +22,7 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.ShareUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
@@ -30,8 +30,6 @@ import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.toupiao.bean.ToupiaoBean;
 import com.company.qcy.huodong.toupiao.fragment.DangqianpaimingFragment;
 import com.company.qcy.huodong.toupiao.fragment.HuodongguizeFragment;
-import com.company.qcy.huodong.toupiao.fragment.ShenqingcanyuFragment;
-import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -216,6 +214,9 @@ public class ToupiaoDetailActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.toolbar_text:
+                if(ObjectUtils.isEmpty(bean)){
+                    return;
+                }
                 ShareUtil.shareVoteDetail(ToupiaoDetailActivity.this,"【投票】"+bean.getName(),
                         "正能量 新征程 共同见证 ! 没有绝代风采，不会甜言蜜语,你的一小票，我们的一大步!",bean.getBanner(),bean.getId()+"");
                 break;

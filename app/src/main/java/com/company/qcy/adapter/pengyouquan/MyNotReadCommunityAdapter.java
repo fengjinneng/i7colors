@@ -32,6 +32,7 @@ public class MyNotReadCommunityAdapter extends BaseQuickAdapter<PengyouquanBean.
 
         helper.addOnClickListener(R.id.item_my_mot_read_img);
 
+
         if (StringUtils.isEmpty(item.getCommentPhoto())) {
             img.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.morentouxiang));
         } else {

@@ -23,7 +23,7 @@
         app:layout_constraintTop_toBottomOf="@+id/include51">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/activity_shuikeyikan_gongkai_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -40,9 +40,9 @@
             android:layout_marginStart="16dp"
             android:text="公开"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintBottom_toTopOf="@+id/textView306"
-            app:layout_constraintStart_toEndOf="@+id/checkBox"
+            app:layout_constraintStart_toEndOf="@+id/activity_shuikeyikan_gongkai_checkBox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="所有人可见"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView305"
             app:layout_constraintTop_toBottomOf="@+id/textView305" />
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView307">
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/activity_shuikeyikan_quanbuhaoyou_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -93,9 +93,9 @@
             android:layout_marginStart="16dp"
             android:text="全部好友"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintBottom_toTopOf="@+id/textView309"
-            app:layout_constraintStart_toEndOf="@+id/checkBox2"
+            app:layout_constraintStart_toEndOf="@+id/activity_shuikeyikan_quanbuhaoyou_checkBox"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -104,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="好友可见，指相互关注的人"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView308"
             app:layout_constraintTop_toBottomOf="@+id/textView308" />
@@ -135,7 +135,7 @@
             android:layout_marginStart="24dp"
             android:text="指定部分好友可见"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintBottom_toTopOf="@+id/textView312"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -146,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="选择好友"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView311"
             app:layout_constraintTop_toBottomOf="@+id/textView311" />
@@ -165,6 +165,7 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
+        android:visibility="gone"
         android:id="@+id/activity_shuikeyikan_haoyou_layout"
         android:layout_width="0dp"
         android:layout_height="@dimen/x130"
@@ -196,7 +197,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="英雄の证、张学友、出山、生僻字、周杰伦、冯...英雄の证、张学友、出山、生僻字、周杰伦、冯...英雄の证、张学友、出山、生僻字、周杰伦、冯..."
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/activity_shuikeyikan_haoyou_checkbox"

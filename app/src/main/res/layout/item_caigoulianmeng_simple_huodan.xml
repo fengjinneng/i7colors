@@ -27,7 +27,7 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:text="查看"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/item_caigoulianmeng_yonghuodan_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/item_caigoulianmeng_yonghuodan_name"
@@ -38,7 +38,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/x60"
         android:gravity="center"
-        android:textSize="@dimen/x24"
+
         android:textColor="@color/baise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -31,7 +31,6 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/button2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/include6">
@@ -47,7 +46,7 @@
                 android:drawablePadding="@dimen/x8"
                 android:text="我公司的名称:"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,10 +55,9 @@
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x64"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="@dimen/x230"
+                android:layout_marginStart="@dimen/x250"
                 android:background="@drawable/background_shuruwenbenkuang"
-                android:textSize="@dimen/x28"
-                android:paddingLeft="16dp"
+                android:textSize="@dimen/x30"
                 android:maxLength="30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView12"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +73,7 @@
                 android:layout_marginTop="@dimen/x66"
                 android:text="产品分类:"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView12"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
@@ -87,6 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
                 android:text="产品名称:"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/erjibiaoti"
                 app:layout_constraintStart_toStartOf="@+id/textView25"
                 app:layout_constraintTop_toBottomOf="@+id/textView25" />
@@ -100,7 +99,7 @@
                 android:layout_marginTop="@dimen/x66"
                 android:text="包装规格:"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView26"
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
@@ -113,7 +112,7 @@
                 android:layout_marginTop="@dimen/x66"
                 android:text="求购数量:"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView27"
                 app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
@@ -124,9 +123,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
-                android:text="付款方式:"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:text="付款方式:"
                 app:layout_constraintStart_toStartOf="@+id/textView28"
                 app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
@@ -139,7 +138,7 @@
                 android:layout_marginTop="@dimen/x66"
                 android:text="账期:"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView29"
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
@@ -152,7 +151,7 @@
                 android:text="需方所在地:"
                 android:layout_marginTop="@dimen/x64"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView30"
                 app:layout_constraintTop_toBottomOf="@+id/activity_fabuqiugou_shoudongzhangqi" />
 
@@ -165,7 +164,7 @@
                 android:text="结束时间:"
                 android:layout_marginTop="@dimen/x66"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView31"
                 app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
@@ -178,7 +177,7 @@
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:hint="请输入产品名称"
                 android:paddingLeft="16dp"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 android:maxLength="50"
                 app:layout_constraintBottom_toBottomOf="@+id/textView26"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -193,7 +192,7 @@
                 android:gravity="center"
                 android:hint="填写重量"
                 android:inputType="number"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView27"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_chanpinmingchen"
                 app:layout_constraintTop_toTopOf="@+id/textView27" />
@@ -207,7 +206,7 @@
                 android:gravity="center"
                 android:text="请选择分类"
                 android:paddingRight="@dimen/x10"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView25"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_company_name"
                 app:layout_constraintTop_toTopOf="@+id/textView25" />
@@ -222,7 +221,7 @@
                 android:gravity="center"
                 android:paddingRight="@dimen/x10"
                 android:text="产品二级分类"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_fenlei"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_fenlei"
@@ -247,7 +246,7 @@
                 android:gravity="center"
                 android:hint="请填写数量"
                 android:inputType="number"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView28"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_weight"
                 app:layout_constraintTop_toTopOf="@+id/textView28" />
@@ -261,7 +260,7 @@
                 android:gravity="center"
                 android:text="请选择"
                 android:paddingRight="@dimen/x10"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView29"
                 app:layout_constraintEnd_toEndOf="@+id/activity_fabuqiugou_qiugoushuliang"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_qiugoushuliang"
@@ -276,7 +275,7 @@
                 android:gravity="center"
                 android:text="请选择"
                 android:paddingRight="@dimen/x10"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView30"
                 app:layout_constraintEnd_toEndOf="@+id/activity_fabuqiugou_fukuanfangshi"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_fukuanfangshi"
@@ -291,7 +290,7 @@
                 android:gravity="center"
                 android:text="请选择"
                 android:paddingRight="@dimen/x10"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView31"
                 app:layout_constraintEnd_toEndOf="@+id/activity_fabuqiugou_zhangqi"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_zhangqi"
@@ -308,7 +307,7 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="@dimen/x10"
                 android:text="请选择单位"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView40"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView40"
@@ -324,7 +323,7 @@
                 android:gravity="center"
                 android:text="选择结束日期"
                 android:paddingRight="@dimen/x10"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView33"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_address"
                 app:layout_constraintTop_toTopOf="@+id/textView33" />
@@ -338,7 +337,7 @@
                 android:layout_marginTop="@dimen/x36"
                 android:text="交货日期:"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView33"
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -351,7 +350,7 @@
                 android:gravity="center"
                 android:text="选择交货日期"
                 android:paddingRight="@dimen/x10"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView47"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_jieshuriqi"
                 app:layout_constraintTop_toTopOf="@+id/textView47" />
@@ -363,7 +362,7 @@
                 android:text="详细说明:"
                 android:textColor="@color/erjibiaoti"
                 android:layout_marginTop="@dimen/x36"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView47"
                 app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -379,7 +378,7 @@
                 android:padding="10dp"
                 android:hint="说明在200字以内..."
                 android:minLines="3"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_jiaohuoriqi"
@@ -391,7 +390,7 @@
                 android:layout_height="@dimen/x64"
                 android:layout_marginStart="8dp"
                 android:text="其它时间"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_zhangqi"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_danwei"
                 app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_zhangqi" />
@@ -406,7 +405,7 @@
                 android:hint="选择其它时间手动输入账期"
                 android:paddingLeft="16dp"
                 android:inputType="textPersonName"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 android:maxLength="20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_zhangqi"
@@ -415,11 +414,13 @@
             <TextView
                 android:id="@+id/textView21"
                 android:layout_width="0dp"
-                android:layout_height="18dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x10"
+                android:layout_marginEnd="8dp"
                 android:text="(求购结束时间不能小于3天，不能大于30天)"
                 android:textColor="@color/chunhongse"
-                android:textSize="@dimen/x24"
-                android:layout_marginTop="@dimen/x10"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_jieshuriqi"
                 app:layout_constraintTop_toBottomOf="@+id/activity_fabuqiugou_jieshuriqi" />
 
@@ -430,7 +431,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="@dimen/x10"
                 android:text="(交货日期不能小于结束日期)"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/chunhongse"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_jiaohuoriqi"
@@ -442,7 +443,7 @@
                 android:layout_height="0dp"
                 android:gravity="center"
                 android:text=""
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 android:paddingLeft="@dimen/x10"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_qiugoushuliang"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_qiugoushuliang"
@@ -453,7 +454,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:text=""
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_danwei_text"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_danwei_text"
@@ -464,7 +465,7 @@
                 android:id="@+id/activity_fabuqiugou_zongliang"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 android:gravity="center"
                 android:text=""
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_zongliangwei"
@@ -477,7 +478,7 @@
                 android:layout_height="0dp"
                 android:gravity="center"
                 android:text=""
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_zongliangwei"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_zongliang"
                 app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_zongliangwei" />

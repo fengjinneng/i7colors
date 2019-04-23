@@ -15,7 +15,7 @@
         android:layout_marginTop="8dp"
         android:text="TextView"
         android:textColor="@color/erjibiaoti"
-        android:textSize="@dimen/x30"
+
         app:layout_constraintEnd_toStartOf="@+id/textView300"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="次"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/item_huati_erjihuati_title"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/x8"
         android:text="99"
-        android:textSize="@dimen/x30"
+
         android:textColor="@color/hongse"
         app:layout_constraintBottom_toBottomOf="@+id/textView288"
         app:layout_constraintEnd_toStartOf="@+id/textView288" />
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/x8"
         android:text="讨论"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView288"
         app:layout_constraintEnd_toStartOf="@+id/item_huati_erjihuati_cishu" />
 

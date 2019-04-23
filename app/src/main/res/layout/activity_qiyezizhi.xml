@@ -80,7 +80,7 @@
                 android:layout_marginTop="@dimen/x100"
                 android:text="填写验证码"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x30"
+
                 app:layout_constraintStart_toStartOf="@+id/textView237"
                 app:layout_constraintTop_toBottomOf="@+id/textView237" />
 
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="请输入右图中的验证码"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView280"
                 app:layout_constraintTop_toBottomOf="@+id/textView280" />
 

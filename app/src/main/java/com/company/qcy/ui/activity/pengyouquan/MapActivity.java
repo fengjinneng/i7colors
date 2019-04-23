@@ -20,9 +20,10 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.maputil.MapUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.pengyouquan.MyAddress;
 
-public class MapActivity extends AppCompatActivity implements View.OnClickListener {
+public class MapActivity extends BaseActivity implements View.OnClickListener {
 
 
     private MyAddress address;

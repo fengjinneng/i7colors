@@ -42,7 +42,6 @@
         android:ellipsize="end"
         android:maxLines="3"
         android:minLines="3"
-        android:textSize="@dimen/x28"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_record_img"

@@ -13,6 +13,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 

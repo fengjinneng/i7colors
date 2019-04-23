@@ -1,6 +1,8 @@
 package com.company.qcy.fragment.pengyouquan;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -25,8 +27,10 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
+import com.company.qcy.Utils.RecyclerViewNoBugLayoutManager;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
@@ -39,6 +43,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.lzy.okgo.request.PostRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -107,9 +112,7 @@ public class PengyouquanRecordFragment extends Fragment {
         }
         recyclerView = view.findViewById(R.id.fragment_pengyouquan_record_recyclerview);
         //创建布局管理
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new RecyclerViewNoBugLayoutManager(getActivity()));
         datas = new ArrayList<>();
 
         adapter = new MyPengyouquanRecordAdapter(R.layout.item_pengyouquan_record, datas);
@@ -167,6 +170,87 @@ public class PengyouquanRecordFragment extends Fragment {
 
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
         adapter.setLoadMoreView(new MyLoadMoreView());
+
+        if(isCharge){
+            adapter.setOnItemLongClickListener(new BaseQuickAdapter.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(BaseQuickAdapter adapter, View view, int position) {
+
+                    PengyouquanBean bean = (PengyouquanBean) adapter.getData().get(position);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setTitle("提示");
+                    builder.setMessage("确定要删除这条印染圈记录吗");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            deleteDyeCommunity(bean.getId(),position);
+                        }
+                    });
+                    builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    builder.show();
+                    return false;
+                }
+            });
+        }
+    }
+
+    private void deleteDyeCommunity(Long communityId, int position) {
+
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CANCLEDYECOMMUNTY)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("token", SPUtils.getInstance().getString("token"))
+                .params("id", communityId);
+
+        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.e("CANCLEDYECOMMUNTY", response.body());
+
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+
+                            Boolean data = jsonObject.getBoolean("data");
+                            ToastUtils.showShort(msg);
+                            if (data) {
+                                adapter.getData().remove(position);
+                                adapter.notifyItemRemoved(position);
+                                if (position != adapter.getData().size()) { // 如果移除的是最后一个，忽略
+                                    adapter.notifyItemRangeChanged(position, adapter.getData().size() - position);
+                                }
+                            }
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+
     }
 
     private void addMyData() {
@@ -176,7 +260,7 @@ public class PengyouquanRecordFragment extends Fragment {
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
-                .params("pageSize", 10)
+                .params("pageSize", 20)
                 .params("token", SPUtils.getInstance().getString("token"));
 
         StringCallback stringCallback = new StringCallback() {
@@ -247,7 +331,8 @@ public class PengyouquanRecordFragment extends Fragment {
 
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
-                .params("pageSize", 10)
+                .params("pageSize", 20)
+                .params("token", SPUtils.getInstance().getString("token"))
                 .params("userId", Long.valueOf(userId));
 
         StringCallback stringCallback = new StringCallback() {

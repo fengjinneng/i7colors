@@ -22,6 +22,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.CaigoulianmengAddCankaobiaozhunDialog;
 import com.company.qcy.Utils.CalendarUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.caigoulianmeng2.adapter.CankaobiaozhunAdapter;
 import com.company.qcy.huodong.caigoulianmeng2.bean.ProductBean;
@@ -33,7 +34,7 @@ import java.util.List;
 
 import cn.qqtheme.framework.picker.DatePicker;
 
-public class ZidingyiGonghuoActivity extends AppCompatActivity implements View.OnClickListener {
+public class ZidingyiGonghuoActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -105,7 +106,6 @@ public class ZidingyiGonghuoActivity extends AppCompatActivity implements View.O
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        mToolbarTitle.setText("添加订货自定义商品");
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override

@@ -47,9 +47,20 @@ public class MyFriendsBean implements Parcelable {
 
     private String firstSpellStr;
 
+    private String companyName;
+
     private String index;
 
     private boolean checked;//判斷是否選中
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
 
     public Long getId() {
         return id;
@@ -163,6 +174,9 @@ public class MyFriendsBean implements Parcelable {
         this.checked = checked;
     }
 
+    public MyFriendsBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -182,11 +196,9 @@ public class MyFriendsBean implements Parcelable {
         dest.writeString(this.isFollow);
         dest.writeString(this.createdAtStamp);
         dest.writeString(this.firstSpellStr);
+        dest.writeString(this.companyName);
         dest.writeString(this.index);
         dest.writeByte(this.checked ? (byte) 1 : (byte) 0);
-    }
-
-    public MyFriendsBean() {
     }
 
     protected MyFriendsBean(Parcel in) {
@@ -202,11 +214,12 @@ public class MyFriendsBean implements Parcelable {
         this.isFollow = in.readString();
         this.createdAtStamp = in.readString();
         this.firstSpellStr = in.readString();
+        this.companyName = in.readString();
         this.index = in.readString();
         this.checked = in.readByte() != 0;
     }
 
-    public static final Parcelable.Creator<MyFriendsBean> CREATOR = new Parcelable.Creator<MyFriendsBean>() {
+    public static final Creator<MyFriendsBean> CREATOR = new Creator<MyFriendsBean>() {
         @Override
         public MyFriendsBean createFromParcel(Parcel source) {
             return new MyFriendsBean(source);

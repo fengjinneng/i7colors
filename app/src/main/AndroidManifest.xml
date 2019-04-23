@@ -406,7 +406,8 @@
         <activity android:name=".ui.activity.pengyouquan.WodedianzanMessageActivity" />
         <activity android:name=".ui.activity.pengyouquan.WodeaiteMessageActivity" />
         <activity android:name=".ui.activity.pengyouquan.WodehaoyouMessageActivity" />
-        <activity android:name=".ui.activity.pengyouquan.ShuikeyikanActivity"></activity>
+        <activity android:name=".ui.activity.pengyouquan.ShuikeyikanActivity" />
+        <activity android:name=".ui.activity.user.ChoiceHeadImageActivity"></activity>
     </application>
 
 </manifest>

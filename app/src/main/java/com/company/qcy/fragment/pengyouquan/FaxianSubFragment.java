@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -38,12 +37,11 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
-import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.ShareUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.pengyouquan.PengyouquanAdapter;
@@ -51,11 +49,10 @@ import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ActionItem;
 import com.company.qcy.bean.pengyouquan.MyAddress;
-import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
+import com.company.qcy.ui.activity.pengyouquan.ErjihuatiDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.MapActivity;
-import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PengyouquanDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.ShipinbofangActivity;
@@ -160,9 +157,11 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_faxian_sub, container, false);
+
+        return inflater.inflate(R.layout.fragment_faxian_sub,container, false);
+
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -170,6 +169,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
         inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         initView(view);
     }
+
 
     private RecyclerView recyclerView;
     private PengyouquanAdapter adapter;
@@ -317,7 +317,10 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                         ActivityUtils.startActivity(iAddress);
                         break;
                     case R.id.item_pengyouquan_huati:
-
+                        Intent huati = new Intent(getActivity(),ErjihuatiDetailActivity.class);
+                        huati.putExtra("level2TopicId",bean.getTopic().getTopicList().get(0).getId()+"");
+                        huati.putExtra("name",bean.getTopic().getTopicList().get(0).getTitle());
+                        ActivityUtils.startActivity(huati);
                         break;
                     case R.id.item_pengyouquan_lianjie_layout:
                         Intent lianjieIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
@@ -363,6 +366,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                             if (data) {
                                 adapter.getData().remove(position);
                                 adapter.notifyItemRemoved(position );
+                                LogUtils.e("sadsadsadadasd",position+" --- "+adapter.getData().size());
                                 if (position != adapter.getData().size()) { // 如果移除的是最后一个，忽略
                                     adapter.notifyItemRangeChanged(position, adapter.getData().size() - position);
                                 }
@@ -531,7 +535,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
     public void showPop(Long id, int tieziPosition) {
         View inflate = LayoutInflater.from(getContext()).inflate(R.layout.pengyouquan_huifu_layout, null);
 
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 100, true);
+        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
 
         btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
         //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);
@@ -614,6 +618,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", "")
+                .params("from",getActivity().getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {

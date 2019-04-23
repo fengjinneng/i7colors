@@ -2,7 +2,6 @@ package com.company.qcy.huodong.toupiao.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,7 +20,7 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.ShareUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseActivity;
@@ -252,7 +251,9 @@ public class XuanshouDetailActivity extends BaseActivity implements View.OnClick
                 toupiao();
                 break;
             case R.id.toolbar_text:
-
+                if(ObjectUtils.isEmpty(xuanshouBean)){
+                    return;
+                }
                 ShareUtil.shareVotePlayerDetail(XuanshouDetailActivity.this, "【投票】" + xuanshouBean.getName(),
                         xuanshouBean.getDescription(), xuanshouBean.getPic(), xuanshouBean.getId() + "", xuanshouBean.getMainId() + "");
 

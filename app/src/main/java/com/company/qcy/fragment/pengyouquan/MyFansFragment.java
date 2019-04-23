@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -24,12 +25,14 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.pengyouquan.MyFansAdapter;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.MyFansBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
@@ -37,6 +40,9 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.lzy.okgo.request.PostRequest;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -161,7 +167,142 @@ public class MyFansFragment extends Fragment {
         });
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
         adapter.setLoadMoreView(new MyLoadMoreView());
+
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                MyFansBean myFansBean = (MyFansBean) adapter.getData().get(position);
+                ImageView guanzhu = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.item_myfans_guanzhu);
+                switch (view.getId()){
+                    case R.id.item_myfans_guanzhu:
+
+                        if(StringUtils.equals("1",myFansBean.getIsFollow())){
+                            cancelFollow(myFansBean.getUserId(),position,guanzhu);
+                        }else {
+                            addFollow(myFansBean.getUserId(),position,guanzhu);
+                        }
+
+                        break;
+                }
+            }
+        });
     }
+
+
+    private void cancelFollow(Long userId, int position,ImageView guanzhuImage) {
+
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CANCLEFOLLOWBYUSERID)
+                .tag(this)
+
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("token", SPUtils.getInstance().getString("token"))
+                .params("byUserId", userId);
+
+        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.e("CANCLEFOLLOWBYUSERID", response.body());
+
+                try {
+                    if (response.code() == 200) {
+
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+
+                            Boolean data = jsonObject.getBoolean("data");
+                            ToastUtils.showShort(msg);
+                            if (data) {
+//                                adapter.getData().remove(position);
+//                                adapter.notifyItemRemoved(position);
+//                                if (position != adapter.getData().size()) { // 如果移除的是最后一个，忽略
+//                                    adapter.notifyItemRangeChanged(position, adapter.getData().size() - position);
+//                                }
+                                adapter.getData().get(position).setIsFollow("0");
+                                guanzhuImage.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.jiaguanzhu));
+                            } else {
+                                ToastUtils.showShort(msg);
+                            }
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+        request.execute(stringCallback);
+
+    }
+
+
+    private void addFollow(Long followUserId,int position,ImageView guanzhuImage) {
+
+        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ADDFOLLOWBYUSERID)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("token", SPUtils.getInstance().getString("token"))
+                .params("byUserId", followUserId);
+
+        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.e("ADDFOLLOWBYUSERID", response.body());
+
+                try {
+                    if (response.code() == 200) {
+
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            Boolean data = jsonObject.getBoolean("data");
+                            if (data) {
+//                                adapter.getData().remove(position);
+//                                adapter.notifyItemRemoved(position);
+//                                if (position != adapter.getData().size()) { // 如果移除的是最后一个，忽略
+//                                    adapter.notifyItemRangeChanged(position, adapter.getData().size() - position);
+//                                }
+                                adapter.getData().get(position).setIsFollow("1");
+                                guanzhuImage.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.buzaiguanzhu));
+                            }else {
+                                ToastUtils.showShort(msg);
+                            }
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+
+    }
+
 
     private void addMyData() {
         pageNo++;
@@ -262,7 +403,6 @@ public class MyFansFragment extends Fragment {
                             List<MyFansBean> myFansBeans = JSONObject.parseArray(data.toJSONString(), MyFansBean.class);
                             if (ObjectUtils.isEmpty(myFansBeans)) {
                                 adapter.loadMoreEnd();
-                                refreshLayout.setRefreshing(false);
                                 return;
                             }
                             if (isReflash) {
@@ -270,7 +410,6 @@ public class MyFansFragment extends Fragment {
                                 datas.addAll(myFansBeans);
                                 adapter.setNewData(datas);
                                 isReflash = false;
-                                refreshLayout.setRefreshing(false);
                                 adapter.loadMoreComplete();
                                 return;
                             }

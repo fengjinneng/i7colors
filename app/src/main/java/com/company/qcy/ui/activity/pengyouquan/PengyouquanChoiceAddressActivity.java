@@ -24,12 +24,16 @@ import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.adapter.pengyouquan.FabuAddressAdapter;
 import com.company.qcy.adapter.pengyouquan.ShurutishiAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -38,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PengyouquanChoiceAddressActivity extends AppCompatActivity implements AMapLocationListener, View.OnClickListener, Inputtips.InputtipsListener {
+public class PengyouquanChoiceAddressActivity extends BaseActivity implements AMapLocationListener, View.OnClickListener, Inputtips.InputtipsListener {
 
 
     //声明mlocationClient对象
@@ -66,7 +70,6 @@ public class PengyouquanChoiceAddressActivity extends AppCompatActivity implemen
         setContentView(R.layout.activity_pengyouquan_choice_address);
         initView();
 
-
         mlocationClient = new AMapLocationClient(this);
         //初始化定位参数
         mLocationOption = new AMapLocationClientOption();
@@ -83,8 +86,18 @@ public class PengyouquanChoiceAddressActivity extends AppCompatActivity implemen
         // 在定位结束后，在合适的生命周期调用onDestroy()方法
         // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
         //启动定位
-        mlocationClient.startLocation();
-
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.Group.STORAGE, Permission.Group.LOCATION)
+                .onGranted(permissions -> {
+                    // Storage permission are allowed.
+                    mlocationClient.startLocation();
+                })
+                .onDenied(permissions -> {
+                    // Storage permission are not allowed.
+                    ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
+                })
+                .start();
 
     }
 

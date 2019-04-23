@@ -35,7 +35,7 @@
         android:hint="请输入姓名"
         android:inputType="textPersonName"
         android:paddingLeft="8dp"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView155"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/activity_davrenzhen_company"
@@ -62,7 +62,7 @@
         android:hint="请输入公司名称"
         android:inputType="textPersonName"
         android:paddingLeft="8dp"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView161"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/activity_davrenzhen_job"
@@ -90,7 +90,7 @@
         android:hint="请输入个人职务名称"
         android:inputType="textPersonName"
         android:paddingLeft="8dp"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView163"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView163"
@@ -143,7 +143,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="1.上传您的职业身份证、名片、工牌等任一材料。 \n2.请确保照片的内容完整并清晰可见，仅支持jpg、png格式图。\n3.请上传彩色图像。"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />

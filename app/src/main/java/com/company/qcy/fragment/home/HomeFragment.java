@@ -54,6 +54,7 @@ import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
+import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -99,6 +100,21 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         this.context = context;
     }
 
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise),true);
+        }
+    }
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise),true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -158,13 +174,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         });
     }
 
-    @Override
-    public void onRec(MessageBean messageBean) {
-        switch (messageBean.getCode()) {
-
-        }
-    }
-
     private void addData() {
 
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXDATA)
@@ -173,7 +182,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 .params("pageNo", 1)
                 .params("pageSize", 8)
                 .params("androidVersionCode",AppUtils.getAppVersionCode())
-                .params("token", SPUtils.getInstance().getString("token"));
+                .params("token", SPUtils.getInstance().getString("token"))
+                .params("registrationId",SPUtils.getInstance().getString("registrationId"))
+                .params("platform",getResources().getString(R.string.app_android));
 
         StringCallback stringCallback = new StringCallback() {
             @Override

@@ -6,12 +6,71 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.pengyouquan.WodepinglunMessageActivity">
 
-    <include
-        android:id="@+id/include48"
-        layout="@layout/toolbar"
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout43"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x82"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="标题"
+            android:textColor="@color/biaoti"
+            android:textSize="@dimen/x36"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/toolbar_text"
+            app:layout_constraintStart_toEndOf="@+id/toolbar_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/toolbar_back"
+            android:layout_width="@dimen/x120"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/back" />
+
+        <View
+            android:id="@+id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/fengexian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="8dp"
+            android:gravity="center"
+            android:text="全标记已读"
+            android:textSize="@dimen/x24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 
     <android.support.v4.widget.SwipeRefreshLayout
@@ -22,8 +81,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include48"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout43">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/activity_wodedianzan_message_recyclerView"

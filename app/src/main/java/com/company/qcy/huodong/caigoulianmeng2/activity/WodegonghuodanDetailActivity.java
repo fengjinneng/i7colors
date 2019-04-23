@@ -11,13 +11,14 @@ import android.widget.TextView;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.company.qcy.R;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.huodong.caigoulianmeng.adapter.WodegonghuodanDetailAdapter;
 import com.company.qcy.huodong.caigoulianmeng2.bean.HuodanBean;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class WodegonghuodanDetailActivity extends AppCompatActivity implements View.OnClickListener {
+public class WodegonghuodanDetailActivity extends BaseActivity implements View.OnClickListener {
 
 
     private HuodanBean bean;

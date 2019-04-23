@@ -12,7 +12,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,7 +23,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -40,12 +38,11 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
-import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.ShareUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.pengyouquan.PengyouquanAdapter;
@@ -53,11 +50,10 @@ import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ActionItem;
 import com.company.qcy.bean.pengyouquan.MyAddress;
-import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
+import com.company.qcy.ui.activity.pengyouquan.ErjihuatiDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.MapActivity;
-import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PengyouquanDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.ShipinbofangActivity;
@@ -301,7 +297,10 @@ public class RemenFragment extends BaseFragment {
                         ActivityUtils.startActivity(iAddress);
                         break;
                     case R.id.item_pengyouquan_huati:
-
+                        Intent huati = new Intent(getActivity(),ErjihuatiDetailActivity.class);
+                        huati.putExtra("level2TopicId",bean.getTopic().getTopicList().get(0).getId()+"");
+                        huati.putExtra("name",bean.getTopic().getTopicList().get(0).getTitle());
+                        ActivityUtils.startActivity(huati);
                         break;
                     case R.id.item_pengyouquan_lianjie_layout:
                         Intent lianjieIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
@@ -600,6 +599,7 @@ public class RemenFragment extends BaseFragment {
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", "")
+                .params("from",getActivity().getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {

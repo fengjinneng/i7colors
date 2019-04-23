@@ -1,8 +1,10 @@
 package com.company.qcy.ui.activity.chanyezixun;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -11,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -20,12 +23,16 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.chanyezixun.NewsBean;
+import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class ZixunxiangqingActivity extends BaseActivity implements View.OnClickListener {
 
@@ -153,7 +160,7 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(ZixunxiangqingActivity.this,request,this);
+                            SignAndTokenUtil.getSign(ZixunxiangqingActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -171,9 +178,7 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
         };
 
         request.execute(stringCallback);
-
     }
-
 
     private void initView() {
         mWebview = (WebView) findViewById(R.id.webview);
@@ -188,7 +193,9 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("资讯详情");
         mToolbarText = (TextView) findViewById(R.id.toolbar_text);
-        mToolbarText.setVisibility(View.INVISIBLE);
+        mToolbarText.setVisibility(View.VISIBLE);
+        mToolbarText.setText("分享");
+        mToolbarText.setOnClickListener(this);
     }
 
     @Override
@@ -211,6 +218,54 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.toolbar_back:
                 finish();
+                break;
+            case R.id.toolbar_text:
+
+                OnekeyShare oks = new OnekeyShare();
+                //关闭sso授权
+                oks.disableSSOWhenAuthorize();
+
+                // 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+                //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+                // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+                oks.setTitle(newsBean.getTitle());
+                // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+//        oks.setTitleUrl("http://sharesdk.cn");
+                // text是分享文本，所有平台都需要这个字段
+                oks.setText(newsBean.getContent_summary());
+                // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+//        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+                if (StringUtils.isEmpty(newsBean.getImg_url())) {
+                    oks.setImageUrl("http://static.i7colors.com/i7colors_logo.png");
+                } else {
+                    oks.setImageUrl(ServerInfo.IMAGE + newsBean.getImg_url());
+                }
+
+                // url仅在微信（包括好友和朋友圈）中使用
+                oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/voteList.html?id=" + newsBean.getId());
+                // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+//        oks.setComment("我是测试评论文本");
+                // site是分享此内容的网站名称，仅在QQ空间使用
+//        oks.setSite(getString(R.string.app_name));
+                // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+//        oks.setSiteUrl("http://sharesdk.cn");
+
+
+                Bitmap enableLogo = BitmapFactory.decodeResource(context.getResources(), R.mipmap.zhanneifenxiang);
+                String label = "站内分享";
+                View.OnClickListener listener = new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ZixunxiangqingActivity.this, PubulishPYQActivity.class);
+                        intent.putExtra("from", "chanyezixun");
+                        intent.putExtra("newsBean", newsBean);
+                        ActivityUtils.startActivity(intent);
+                    }
+                };
+
+                oks.setCustomerLogo(enableLogo, label, listener);
+
+//      启动分享GUI
+                oks.show(context);
                 break;
         }
     }

@@ -42,6 +42,7 @@ import com.company.qcy.Utils.DateUtil;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
@@ -129,19 +130,8 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         ImageView headimg = (ImageView) helper.getView(R.id.item_pengyouquan_headimg);
         helper.addOnClickListener(R.id.item_pengyouquan_headimg);
-        if (!StringUtils.isEmpty(item.getPostUserPhoto())) {
+        MyCommonUtil.jiazaitouxiang(mContext,item.getPostUserPhoto(),headimg);
 
-            if (item.getPostUserPhoto().startsWith("http")) {
-
-                GlideUtils.loadCircleImage(mContext, item.getPostUserPhoto(), headimg);
-
-            } else {
-                GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getPostUserPhoto(), headimg);
-
-            }
-        } else {
-            headimg.setImageResource(R.mipmap.morentouxiang);
-        }
         TextView time = (TextView) helper.getView(R.id.timeTv);
 //        time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(0, 10));
         String friendlytime = DateUtil.getFriendlytime(new Date(Long.parseLong(item.getCreatedAtStamp())));
@@ -549,6 +539,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", parentId)
+                .params("from",mContext.getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
 

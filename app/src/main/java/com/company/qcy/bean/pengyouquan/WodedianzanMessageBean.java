@@ -28,7 +28,61 @@ public class WodedianzanMessageBean {
     private String isRead;
     private String createdAtStamp;
     private String postUserPhoto;
+    private Long communityId;
+    private Long commentId;
+    private String postUserDyeVName;
+    private String bossLevel;
 
+    private String postUserCompanyName;
+    private String postUserIsCompany;
+
+    public String getBossLevel() {
+        return bossLevel;
+    }
+
+    public void setBossLevel(String bossLevel) {
+        this.bossLevel = bossLevel;
+    }
+
+    public String getPostUserDyeVName() {
+        return postUserDyeVName;
+    }
+
+    public void setPostUserDyeVName(String postUserDyeVName) {
+        this.postUserDyeVName = postUserDyeVName;
+    }
+
+    public String getPostUserCompanyName() {
+        return postUserCompanyName;
+    }
+
+    public void setPostUserCompanyName(String postUserCompanyName) {
+        this.postUserCompanyName = postUserCompanyName;
+    }
+
+    public String getPostUserIsCompany() {
+        return postUserIsCompany;
+    }
+
+    public void setPostUserIsCompany(String postUserIsCompany) {
+        this.postUserIsCompany = postUserIsCompany;
+    }
+
+    public Long getCommunityId() {
+        return communityId;
+    }
+
+    public void setCommunityId(Long communityId) {
+        this.communityId = communityId;
+    }
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
+    }
 
     public String getPostUserPhoto() {
         return postUserPhoto;

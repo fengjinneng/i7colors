@@ -151,11 +151,13 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
      * 提醒谁看
      */
     private TextView mActivityPublishPyqTixinghsuikanText;
+    private String from;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pubulish_pyq);
+        from = getIntent().getStringExtra("from");
         initView();
     }
 
@@ -312,11 +314,8 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         } finally {
 
             retriever.release();
-
         }
-
         return bitmap;
-
     }
 
 
@@ -419,6 +418,23 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
         mActivityPublishPyqTixinghsuikanLayout.setOnClickListener(this);
         mActivityPublishPyqTixinghsuikanImg = (ImageView) findViewById(R.id.activity_publish_pyq_tixinghsuikan_img);
         mActivityPublishPyqTixinghsuikanText = (TextView) findViewById(R.id.activity_publish_pyq_tixinghsuikan_text);
+
+        if(!StringUtils.isEmpty(from)){
+            if(StringUtils.equals("chanyezixun",from)){
+                NewsBean newsBean = (NewsBean) getIntent().getParcelableExtra("newsBean");
+                mActivityPublishPyqLianjieLayout.setVisibility(View.VISIBLE);
+                mActivityPublishPyqZixunGuanlianzixun.setTextColor(getResources().getColor(R.color.hongse));
+                mActivityPublishPyqZixunGuanlianzixunImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_zixun_checked));
+                mActivityPublishPyqZixunGuanlianzixunState.setTextColor(getResources().getColor(R.color.hongse));
+                mActivityPublishPyqZixunGuanlianzixunState.setText("已选中");
+                upLoadShareId = String.valueOf(newsBean.getId());
+                upLoadShareType = "info";
+                GlideUtils.loadImage(this, ServerInfo.IMAGE + newsBean.getImg_url(), mActivityPublishPyqLianjieImg);
+                mActivityPublishPyqLianjieTitle.setText(newsBean.getTitle());
+                mActivityPublishPyqLianjieContent.setText(newsBean.getContent_summary());
+            }
+        }
+
     }
 
     private Dialog chooseHeadDialog;
@@ -683,44 +699,83 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 mActivityPublishPyqLianjieContent.setText(newsBean.getContent_summary());
                 break;
             case MessageBean.Code.CHOICETIXINGSHUIKAN:
+                //提醒谁看
                 tixingshuikanDatas.clear();
                 tixingshuikanDatas.addAll((ArrayList<MyFriendsBean>) msg.getObj());
-                List<String> idList;
-                List<String> nameList;
-                if (ObjectUtils.isEmpty(tixingshuikanDatas)) {
+
+                List<String> nameList = new ArrayList<>();
+                List<String> idList = new ArrayList<>();
+                boolean hasData = false;//是否选择了数据
+                for (int i = 0; i < tixingshuikanDatas.size(); i++) {
+                    if (tixingshuikanDatas.get(i).isChecked()) {
+                        idList.add(String.valueOf(tixingshuikanDatas.get(i).getUserId()));
+                        nameList.add(tixingshuikanDatas.get(i).getUserNickName());
+                        hasData = true;
+                    }
+                }
+
+                if (hasData) {
+                    mActivityPublishPyqTixinghsuikanContent.setText((nameList.toString()).substring(1, nameList.toString().length() - 1));
+                    mActivityPublishPyqTixinghsuikanImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_tixingshuikan_checked));
+                    mActivityPublishPyqTixinghsuikanText.setTextColor(getResources().getColor(R.color.hongse));
+                    upNoticeUserId = (idList.toString()).substring(1, idList.toString().length() - 1);
+                } else {
                     mActivityPublishPyqTixinghsuikanContent.setText("");
                     mActivityPublishPyqTixinghsuikanImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_tixingshuikan_unchecked));
                     mActivityPublishPyqTixinghsuikanText.setTextColor(getResources().getColor(R.color.putongwenben));
-                    upNoticeUserId  = "";
-                }else {
-                    nameList = new ArrayList<>();
-                    idList = new ArrayList<>();
-                    for (int i = 0; i < tixingshuikanDatas.size(); i++) {
-                        if(tixingshuikanDatas.get(i).isChecked()){
-                            idList.add(String.valueOf(tixingshuikanDatas.get(i).getUserId()));
-                            nameList.add(tixingshuikanDatas.get(i).getLoginName());
-                        }
+                    upNoticeUserId = "";
+                }
+
+                break;
+
+            case MessageBean.Code.QUEDINGSHUIKAN:
+                shukeyikanType = msg.getMeaasge();
+                upAppointUserId = "";
+                if(StringUtils.equals(shukeyikanType,"1")){
+                    mActivityPublishPyqShuikeyikanStatus.setText("公开");
+                    return;
+                }
+
+                if(StringUtils.equals(shukeyikanType,"2")){
+                    mActivityPublishPyqShuikeyikanStatus.setText("全部好友可见");
+                    return;
+                }
+                mActivityPublishPyqShuikeyikanStatus.setText("部分好友可见");
+                //谁可以看
+                shuikeyikanDatas.clear();
+                shuikeyikanDatas.addAll((ArrayList<MyFriendsBean>) msg.getObj());
+
+                List<String> shuikeyikanIdList = new ArrayList<>();
+                boolean shuikeyikanHasData = false;//是否选择了数据
+                for (int i = 0; i < shuikeyikanDatas.size(); i++) {
+                    if (shuikeyikanDatas.get(i).isChecked()) {
+                        shuikeyikanIdList.add(String.valueOf(shuikeyikanDatas.get(i).getUserId()));
+                        shuikeyikanHasData = true;
                     }
-
-                    mActivityPublishPyqTixinghsuikanContent.setText(nameList.toString());
-                    mActivityPublishPyqTixinghsuikanImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_tixingshuikan_checked));
-                    mActivityPublishPyqTixinghsuikanText.setTextColor(getResources().getColor(R.color.hongse));
-
-//                    upNoticeUserId =  (idList.toString()).substring(1,upNoticeUserId.length()-1);
-
+                }
+                if (shuikeyikanHasData) {
+                    mActivityPublishPyqShuikeyikanImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_shuikeyikan_checked));
+                    mActivityPublishPyqShuikeyikanText.setTextColor(getResources().getColor(R.color.hongse));
+                    upAppointUserId = (shuikeyikanIdList.toString()).substring(1, shuikeyikanIdList.toString().length() - 1);
+                } else {
+                    mActivityPublishPyqShuikeyikanStatus.setText("公开");
+                    mActivityPublishPyqShuikeyikanImg.setImageDrawable(getResources().getDrawable(R.mipmap.fbpyq_shuikeyikan_unchecked));
+                    mActivityPublishPyqShuikeyikanText.setTextColor(getResources().getColor(R.color.putongwenben));
+                    upAppointUserId = "";
                 }
 
                 break;
         }
     }
 
+    //提醒谁看
     private ArrayList<MyFriendsBean> tixingshuikanDatas = new ArrayList<>();
 
-    private List<MyFriendsBean> shuikeyikanDatas= new ArrayList<>();
+    //谁可以看
+    private ArrayList<MyFriendsBean> shuikeyikanDatas = new ArrayList<>();
 
     //上传的二级话题的ID
     private String upErjiHuatiId;
-
 
     //上传的位置信息
     private String upLoadLat;
@@ -802,16 +857,21 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 mActivityPublishPyqZixunGuanlianzixunState.setText("未关联");
                 break;
             case R.id.activity_publish_pyq_shuikeyikan_layout:
-                ActivityUtils.startActivity(MyTongunluFriendsActivity.class);
+                Intent shuikeyikanIntent = new Intent(this, ShuikeyikanActivity.class);
+                shuikeyikanIntent.putParcelableArrayListExtra("shuikeyikan", shuikeyikanDatas);
+                shuikeyikanIntent.putExtra("shukeyikanType",shukeyikanType);
+                ActivityUtils.startActivity(shuikeyikanIntent);
                 break;
             case R.id.activity_publish_pyq_tixinghsuikan_layout:
                 Intent intent = new Intent(this, MyTongunluFriendsActivity.class);
-                intent.putParcelableArrayListExtra("tixingshuikan",tixingshuikanDatas);
+                intent.putParcelableArrayListExtra("tixingshuikan", tixingshuikanDatas);
                 intent.putExtra("from", "tixingshuikan");
                 ActivityUtils.startActivity(intent);
                 break;
         }
     }
+
+    private String shukeyikanType ="1" ;//1为全部  2为全部好友  3为部分好友
 
     ProgressDialog progressDialog;
     private boolean isWaitResponse;//上传视频完成后等待服务器相应，弹出对话框
@@ -858,7 +918,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
             params.put("shareType", "info");
         }
 
-        if(!StringUtils.isEmpty(upNoticeUserId)){
+        if (!StringUtils.isEmpty(upNoticeUserId)) {
             params.put("noticeUserId", upNoticeUserId);
         }
 
@@ -961,10 +1021,20 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
             params.put("shareType", "info");
         }
 
-        if(!StringUtils.isEmpty(upNoticeUserId)){
+        if (!StringUtils.isEmpty(upNoticeUserId)) {
 
             params.put("noticeUserId", upNoticeUserId);
         }
+
+        if(StringUtils.equals("1",shukeyikanType)){
+
+        }else if(StringUtils.equals("2",shukeyikanType)){
+            params.put("appointType", "all");
+        }else if(StringUtils.equals("3",shukeyikanType)){
+            params.put("appointType", "notAll");
+            params.put("appointUserId",upAppointUserId);
+        }
+
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUPENGYOUQUAN)
                 .tag(this)
                 .params(params)
@@ -1048,7 +1118,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
             params.put("shareType", "info");
         }
 
-        if(!StringUtils.isEmpty(upNoticeUserId)){
+        if (!StringUtils.isEmpty(upNoticeUserId)) {
             params.put("noticeUserId", upNoticeUserId);
         }
         // 压缩图片

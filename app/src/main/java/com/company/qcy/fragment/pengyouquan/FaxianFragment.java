@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.adapter.pengyouquan.HuatiAdapter;
 import com.company.qcy.base.BaseFragment;
@@ -40,6 +42,7 @@ import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.HuatiBean;
 import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.flyco.tablayout.SlidingTabLayout;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -130,7 +133,11 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
         mPengyouquanFaxianMyinfoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityUtils.startActivity(MyPersonInfoActivity.class);
+                if(UserUtil.isLogin()){
+                    ActivityUtils.startActivity(MyPersonInfoActivity.class);
+                }else {
+                    ActivityUtils.startActivity(LoginActivity.class);
+                }
             }
         });
         addData();
@@ -150,6 +157,12 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
             //朋友圈nickName修改成功
             case MessageBean.Code.PENGYOUQUANNICKNAMECHANGE:
                 mPengyouquanFaxianName.setText(messageBean.getMeaasge());
+                break;
+            case MessageBean.Code.WXLOGIN:
+                getMyInfo();
+                break;
+            case MessageBean.Code.DELU:
+                getMyInfo();
                 break;
         }
     }
@@ -227,9 +240,10 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
     private void addData() {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYHUATI)
                 .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"));
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("level","1");
 
-        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+        StringCallback stringCallback = new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("QUERYHUATI", response.body());
@@ -244,13 +258,21 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                             }
                             yijiHuati = JSONObject.parseArray(data.toJSONString(), HuatiBean.class);
                             List<Fragment> fragments = new ArrayList<>();
+                            fragments.add(FaxianSubFragment.newInstance(""));
                             for (int i = 0; i < yijiHuati.size(); i++) {
                                 fragments.add(FaxianSubFragment.newInstance(String.valueOf(yijiHuati.get(i).getId())));
                             }
-                            String[] arr = new String[yijiHuati.size()];
-                            for (int i = 0; i < yijiHuati.size(); i++) {
-                                arr[i] = yijiHuati.get(i).getTitle();
+                            String[] arr = new String[yijiHuati.size()+1];
+                            arr[0] ="全部";
+                            for (int i = 1; i < yijiHuati.size()+1; i++) {
+                                arr[i] = yijiHuati.get(i-1).getTitle();
                             }
+
+                            HuatiBean huatiBean = new HuatiBean();
+                            huatiBean.setTitle("全部");
+                            popList.add(huatiBean);
+                            popList.addAll(yijiHuati);
+
                             mFViewpager.setAdapter(new BaseViewpageAdapter(getActivity().getSupportFragmentManager(), fragments));
                             mSlidingTabLayout.setViewPager(mFViewpager, arr);
                             return;
@@ -279,12 +301,14 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
     private RecyclerView huatiRecyclerview;
     private HuatiAdapter huatiAdapter;
 
+    private List<HuatiBean> popList = new ArrayList<>();//弹出的pop集合，添加了全部之后添加的
+
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.fragment_faxian_xiala:
-                if (ObjectUtils.isEmpty(yijiHuati)) {
+                if (ObjectUtils.isEmpty(popList)) {
                     ToastUtils.showShort("数据异常");
                     return;
                 }
@@ -293,27 +317,38 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                     popupWindow.setFocusable(true);//要先让popupwindow获得焦点，才能正确获取popupwindow的状态
                     if (popupWindow.isShowing()) {
                         popupWindow.dismiss();
+                        mFragmentFaxianXiala.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.xiajiantu_hongse));
                     } else {
+                        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                        lp.alpha = 0.6f;
+                        getActivity().getWindow().setAttributes(lp);
                         mSlidingTabLayout.setVisibility(View.INVISIBLE);
                         popupWindow.showAsDropDown(mSlidingTabLayout);
+                        mFragmentFaxianXiala.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.shangjiantou_hongse));
                     }
                     return;
                 }
 
-
+                mFragmentFaxianXiala.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.shangjiantou_hongse));
                 mSlidingTabLayout.setVisibility(View.INVISIBLE);
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.popwindow_huati, null);
                 huatiRecyclerview = view.findViewById(R.id.popwindow_huati_recyclerview);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);
                 huatiRecyclerview.setLayoutManager(gridLayoutManager);
 
-                huatiAdapter = new HuatiAdapter(R.layout.item_popwindow_huati, yijiHuati);
+                huatiAdapter = new HuatiAdapter(R.layout.item_popwindow_huati, popList);
                 huatiRecyclerview.setAdapter(huatiAdapter);
 
                 popupWindow = new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+                //产生背景变暗效果
+                WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                lp.alpha = 0.4f;
+                getActivity().getWindow().setAttributes(lp);
                 popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 popupWindow.setOutsideTouchable(true);
                 popupWindow.setTouchable(true);
+                popupWindow.setFocusable(true);
                 popupWindow.showAsDropDown(mSlidingTabLayout);
                 huatiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
@@ -327,11 +362,14 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                     @Override
                     public void onDismiss() {
                         mSlidingTabLayout.setVisibility(View.VISIBLE);
+                        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+                        lp.alpha = 1f;
+                        getActivity().getWindow().setAttributes(lp);
+                        mFragmentFaxianXiala.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.xiajiantu_hongse));
                     }
                 });
                 break;
-            case R.id.pengyouquan_faxian_myinfo_layout:
-                break;
+
         }
     }
 }

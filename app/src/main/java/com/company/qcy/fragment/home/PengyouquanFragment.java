@@ -27,13 +27,17 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
+import com.company.qcy.base.BaseFragment;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.fragment.pengyouquan.FaxianFragment;
 import com.company.qcy.fragment.pengyouquan.GuanzhuFragment;
 import com.company.qcy.fragment.pengyouquan.RemenFragment;
+import com.company.qcy.ui.activity.pengyouquan.MessageActivity;
 import com.company.qcy.ui.activity.pengyouquan.MyNotReadCommunityActivity;
 import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -50,7 +54,7 @@ import java.util.TimerTask;
  * Use the {@link PengyouquanFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PengyouquanFragment extends Fragment {
+public class PengyouquanFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -64,7 +68,6 @@ public class PengyouquanFragment extends Fragment {
     private SlidingTabLayout tabLayout;
     private ImageView mFragmentPengyouquanFabu;
     private ViewPager viewPager;
-
 
     public PengyouquanFragment() {
         // Required empty public constructor
@@ -86,7 +89,18 @@ public class PengyouquanFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), true);
+
     }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), true);
+        }
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -98,103 +112,32 @@ public class PengyouquanFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        inputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         initView(view);
     }
-
-
-    private MyTask myTask;
-
-    private InputMethodManager inputMethodManager;
-
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-            return false;
-        }
-    });
-
-    private Timer timer;
 
     @Override
     public void onResume() {
         super.onResume();
-        if (UserUtil.isLogin()) {
-            timer = new Timer();
-            myTask = new MyTask();
-            timer.schedule(myTask, 15 * 1000, 15 * 1000);
+        if (SPUtils.getInstance().getInt("pengyouquanNews") != 0) {
+            mPopupBubble.setVisibility(View.VISIBLE);
+            mPopupBubble.updateText("您有" + SPUtils.getInstance().getInt("pengyouquanNews") + "条新的信息");
+            mPopupBubble.show();
+        }else {
+            mPopupBubble.setVisibility(View.GONE);
         }
     }
 
-    public class MyTask extends TimerTask {
-        @Override
-        public void run() {
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYNOTREADCOMMENTCOUNT)
-                            .tag(this)
-                            .params("sign", SPUtils.getInstance().getString("sign"))
-                            .params("token", SPUtils.getInstance().getString("token"));
-
-                    StringCallback stringCallback = new StringCallback() {
-                        @Override
-                        public void onSuccess(Response<String> response) {
-                            LogUtils.e("QUERYNOTREADCOMMENTCOUNT", response.body());
-
-                            try {
-                                if (response.code() == 200) {
-                                    JSONObject jsonObject = JSONObject.parseObject(response.body());
-                                    String msg = jsonObject.getString("msg");
-                                    if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-
-                                        int data = jsonObject.getInteger("data");
-                                        if (data > 0) {
-                                            mPopupBubble.setVisibility(View.VISIBLE);
-//                                                    mPopupBubble.updateIcon(R.mipmap.dianzan_red);
-                                            mPopupBubble.updateText("您有" + data + "条新的信息");
-                                            mPopupBubble.show();
-                                        }
-                                        return;
-                                    }
-                                    if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                                        SignAndTokenUtil.getSign(getActivity(), request, this);
-                                        return;
-                                    }
-                                    ToastUtils.showShort(msg);
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onError(Response<String> response) {
-                            super.onError(response);
-                        }
-                    };
-
-                    request.execute(stringCallback);
-                }
-            });
-        }
-    }
 
     @Override
-    public void onPause() {
-        super.onPause();
-
-        if (myTask != null) {
-            myTask.cancel();
-            myTask = null;
+    public void onRec(MessageBean messageBean) {
+        super.onRec(messageBean);
+        switch (messageBean.getCode()) {
+            case MessageBean.Code.PENGYOUQUANHAVENEWMESSAGE:
+                mPopupBubble.setVisibility(View.VISIBLE);
+                mPopupBubble.updateText("您有" + SPUtils.getInstance().getInt("pengyouquanNews") + "条新的信息");
+                mPopupBubble.show();
+                break;
         }
-        if (myTask != null) {
-            myTask.cancel();
-            myTask = null;
-        }
-
-
     }
 
     private void initView(View inflate) {
@@ -203,11 +146,10 @@ public class PengyouquanFragment extends Fragment {
         mFragmentPengyouquanFabu = (ImageView) inflate.findViewById(R.id.fragment_pengyouquan_fabu);
         viewPager = inflate.findViewById(R.id.fragment_pengyouquan_viewpager);
         mPopupBubble = inflate.findViewById(R.id.popup_bubble);
-        viewPager.setOffscreenPageLimit(2);
         mPopupBubble.setPopupBubbleListener(new PopupBubble.PopupBubbleClickListener() {
             @Override
             public void bubbleClicked(Context context) {
-                ActivityUtils.startActivity(getActivity(), MyNotReadCommunityActivity.class);
+                ActivityUtils.startActivity(getActivity(), MessageActivity.class);
             }
         });
 
@@ -215,16 +157,15 @@ public class PengyouquanFragment extends Fragment {
         mPopupBubble.setVisibility(View.GONE);
 
         List<Fragment> fragments = new ArrayList<>();
-        fragments.add(new RemenFragment());
         fragments.add(new FaxianFragment());
+        fragments.add(new RemenFragment());
         fragments.add(new GuanzhuFragment());
         String[] arr = new String[3];
-        arr[0] = "热门";
-        arr[1] = "发现";
+        arr[0] = "发现";
+        arr[1] = "热门";
         arr[2] = "关注";
         viewPager.setAdapter(new BaseViewpageAdapter(getActivity().getSupportFragmentManager(), fragments));
         tabLayout.setViewPager(viewPager, arr);
-        tabLayout.setCurrentTab(1);
         mFragmentPengyouquanFabu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,5 +177,4 @@ public class PengyouquanFragment extends Fragment {
             }
         });
     }
-
 }

@@ -20,12 +20,12 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/x80"
         android:background="@color/baise"
+        android:ellipsize="end"
         android:gravity="center_vertical"
         android:paddingLeft="8dp"
+        android:singleLine="true"
         android:textColor="@color/erjibiaoti"
         android:textStyle="bold"
-        android:singleLine="true"
-        android:ellipsize="end"
         app:layout_constraintEnd_toStartOf="@+id/activity_chanpinxiangqing_share"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include12" />
@@ -34,9 +34,9 @@
         android:id="@+id/activity_chanpinxiangqing_share"
         android:layout_width="@dimen/x125"
         android:layout_height="@dimen/x80"
+        android:background="@color/baise"
         android:gravity="center"
         android:text="分享"
-        android:background="@color/baise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include12" />
 
@@ -63,10 +63,10 @@
             android:id="@+id/activity_chanpinxiangqing_shoucang_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x8"
             android:text="收藏"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintEnd_toEndOf="@+id/activity_chanpinxiangqing_shoucang_img"
             app:layout_constraintStart_toStartOf="@+id/activity_chanpinxiangqing_shoucang_img"
             app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_shoucang_img" />
@@ -101,9 +101,9 @@
             android:id="@+id/textView53"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="¥"
             android:textColor="@color/baise"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -143,10 +143,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="议价"
             android:textColor="@color/baise"
             android:textSize="@dimen/x36"
@@ -266,8 +266,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingLeft="@dimen/x30"
-                android:paddingRight="@dimen/x30"
                 android:paddingTop="@dimen/x10"
+                android:paddingRight="@dimen/x30"
                 android:src="@mipmap/dianpu" />
 
             <TextView
@@ -305,8 +305,8 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:paddingLeft="@dimen/x30"
-                android:paddingRight="@dimen/x30"
                 android:paddingTop="@dimen/x10"
+                android:paddingRight="@dimen/x30"
                 android:src="@mipmap/wode_kefu_uncheck" />
 
             <TextView
@@ -333,8 +333,8 @@
                 android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/textView58"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -347,9 +347,9 @@
                 android:id="@+id/textView58"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="一键呼叫"
                 android:textColor="@color/baise"
                 app:layout_constraintBottom_toBottomOf="parent"

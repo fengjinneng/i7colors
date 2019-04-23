@@ -11,7 +11,7 @@
         android:id="@+id/constraintLayout15"
         android:layout_width="0dp"
         android:layout_height="@dimen/x330"
-        android:background="@mipmap/bg"
+        android:background="@color/chunhongse"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -38,7 +38,7 @@
             android:layout_marginTop="8dp"
             android:text="账号中心"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +67,7 @@
             android:drawablePadding="8dp"
             android:text="更换头像"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -82,7 +82,7 @@
             android:paddingRight="@dimen/x20"
             android:text="个人用户"
             android:textColor="@color/lanse"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -176,7 +176,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="@dimen/x30"
             android:text="用户名称:"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView158" />
 
@@ -221,7 +221,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="修改密码:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -233,7 +233,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="44dp"
                 android:text="提高安全意识，建议您定期更改密码 以保护账号安全。"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView165"
                 app:layout_constraintEnd_toStartOf="@+id/imageView13"
                 app:layout_constraintStart_toEndOf="@+id/textView165"
@@ -308,7 +308,7 @@
             android:paddingRight="@dimen/x20"
             android:text="PC端可申请成为企业账户"
             android:textColor="@color/chunhongse"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="@+id/activity_zhanghaozhongxin_shenfen2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/activity_zhanghaozhongxin_shenfen2" />

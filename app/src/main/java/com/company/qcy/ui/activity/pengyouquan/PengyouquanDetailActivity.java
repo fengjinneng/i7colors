@@ -15,7 +15,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -45,8 +44,9 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.ShareUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
@@ -56,10 +56,12 @@ import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.bean.pengyouquan.PhotoInfo;
 import com.company.qcy.fragment.pengyouquan.PinglunFragment;
 import com.company.qcy.fragment.pengyouquan.PraiseFragment;
+import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.company.qcy.widght.pengyouquan.MultiImageView;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
@@ -87,7 +89,6 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
      */
     private TextView mActivityPengyouquanDetailTime;
     /**
-     * 1、四轮降息周期的背景分析。此前共有四轮降息周期：1996-1999年、2008年、2012年、2014-2015年，总结发现降息周期有以下几个特点：1)背景均是经济明显下行，并且大多伴随外部的冲击。其中仅有14-15年降息中没有来自外部危机的影响，其余的三轮降息分别处于亚洲金融危机、次贷危机和欧债危机的阶段。2)降息和降准往往一起出现，货币政策全面转向宽松；并且大多有积极财政政策的配合，形成宽货币+宽财政的政策组合。3)与全球货币政策周期有一定的同步性，大多处于美联储“非加息”的阶段。但在97年和99年，也曾在美联储短暂加息阶段进行过降息。4)对经济的拉动作用在逐渐减弱。如前三轮降息中，经济均在滞后2-3个季度左右见底回升。而14-15年的降息对经济的拉动作用已经有长达1年的时滞，并且只是结束了GDP下滑的趋势，并未出现经济的明显回升。5)对股市和房地产有明显利好，债市影响则不确定。此前四轮降息对股市的影响大多是利好(96-99、08年、14-15年股市均上涨，12年股市震荡走平)，债市的影响则不确定(08年、12年债市均下跌，14-15年债市上涨)。此外，08年以来的三轮降息中均伴随着房价的明显上涨和地产销售的大幅回升，降息对于地产的拉动作用最为明显。
      */
     private TextView mActivityPengyouquanDetailContent;
     private MultiImageView mActivityPengyouquanDetailMultiImageView;
@@ -112,6 +113,17 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
      */
     private TextView mFragmentPinglunDianzanText;
 
+
+    //由于我的消息页面过来，判断消息是否已读
+    private String pinglunId;
+    private String dianzanId;
+    private String aiteId;
+    private String from;
+    private ImageView mActivityPengyouquanDetailLianjieImg;
+    private TextView mActivityPengyouquanDetailLianjieTitle;
+    private TextView mActivityPengyouquanDetailLianjieContent;
+    private ConstraintLayout mActivityPengyouquanDetailLianjieLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +134,22 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
         if (!ObjectUtils.isEmpty(data)) {
             id = Long.parseLong(data.getQueryParameter("id"));
         } else id = getIntent().getLongExtra("id", 0);
+
+        from = getIntent().getStringExtra("from");
+        if (!StringUtils.isEmpty(from)) {
+            switch (from) {
+                case "pinglun":
+                    pinglunId = getIntent().getStringExtra("pinlunId");
+                    break;
+                case "dianzan":
+                    dianzanId = getIntent().getStringExtra("dianzanId");
+                    break;
+                case "aite":
+                    aiteId = getIntent().getStringExtra("aiteId");
+                    break;
+
+            }
+        }
         initView();
 
     }
@@ -158,6 +186,12 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
         mFragmentPinglunDianzan = (ConstraintLayout) findViewById(R.id.fragment_pinglun_dianzan);
         mFragmentPinglunDianzan.setOnClickListener(this);
         mFragmentPinglunDianzanText = (TextView) findViewById(R.id.fragment_pinglun_dianzan_text);
+        mActivityPengyouquanDetailLianjieImg = (ImageView) findViewById(R.id.activity_pengyouquan_detail_lianjie_img);
+        mActivityPengyouquanDetailLianjieTitle = (TextView) findViewById(R.id.activity_pengyouquan_detail_lianjie_title);
+        mActivityPengyouquanDetailLianjieContent = (TextView) findViewById(R.id.activity_pengyouquan_detail_lianjie_content);
+        mActivityPengyouquanDetailLianjieLayout = (ConstraintLayout) findViewById(R.id.activity_pengyouquan_detail_lianjie_layout);
+        mActivityPengyouquanDetailLianjieLayout.setOnClickListener(this);
+        mActivityPengyouquanDetailImg.setOnClickListener(this);
     }
 
     private void setPengyouquanBeanInfo(PengyouquanBean pengyouquanBean) {
@@ -171,11 +205,9 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
         } else {
             mFragmentPinglunDianzanText.setText("点赞");
         }
-        if (StringUtils.isEmpty(pengyouquanBean.getPostUserPhoto())) {
-            mActivityPengyouquanDetailImg.setImageDrawable(getResources().getDrawable(R.mipmap.morentouxiang));
-        } else {
-            GlideUtils.loadCircleImage(this, ServerInfo.IMAGE + pengyouquanBean.getPostUserPhoto(), mActivityPengyouquanDetailImg);
-        }
+
+        MyCommonUtil.jiazaitouxiang(this, pengyouquanBean.getPostUserPhoto(), mActivityPengyouquanDetailImg);
+
         mActivityPengyouquanDetailTime.setText(TimeUtils.millis2String(Long.parseLong(pengyouquanBean.getCreatedAtStamp())));
         mActivityPengyouquanDetailContent.setText(pengyouquanBean.getContent());
 
@@ -190,10 +222,10 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                 mActivityPengyouquanDetailBigv.setVisibility(View.VISIBLE);
                 mActivityPengyouquanDetailCompanyname.setText(pengyouquanBean.getDyeVName());
             } else {
+                mActivityPengyouquanDetailCompanyname.setVisibility(View.GONE);
                 mActivityPengyouquanDetailBigv.setVisibility(View.GONE);
             }
         }
-
 
         SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder(pengyouquanBean.getPostUser() + " .");
 
@@ -282,15 +314,51 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                 ImagePagerActivity.startImagePagerActivity(PengyouquanDetailActivity.this, photoUrls, position, imageSize);
             }
         });
+
+
+        if (!ObjectUtils.isEmpty(pengyouquanBean.getShareBean())) {
+            mActivityPengyouquanDetailLianjieLayout.setVisibility(View.VISIBLE);
+            GlideUtils.loadImage(this, ServerInfo.IMAGE + pengyouquanBean.getShareBean().getPic(), mActivityPengyouquanDetailLianjieImg);
+            mActivityPengyouquanDetailLianjieTitle.setText(pengyouquanBean.getShareBean().getTitle());
+            mActivityPengyouquanDetailLianjieLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PengyouquanDetailActivity.this, ZixunxiangqingActivity.class);
+                    intent.putExtra("id", pengyouquanBean.getShareBean().getId());
+                    ActivityUtils.startActivity(intent);
+                }
+            });
+        } else {
+            mActivityPengyouquanDetailLianjieLayout.setVisibility(View.GONE);
+        }
+
     }
 
     private void addData() {
 
+        HttpParams params = new HttpParams();
+        params.put("sign", SPUtils.getInstance().getString("sign"));
+        params.put("token", SPUtils.getInstance().getString("token"));
+        params.put("id", id);
+        if (!StringUtils.isEmpty(from)) {
+            switch (from) {
+                case "pinglun":
+                    params.put("messageType", "dyeComment");
+                    params.put("messageId", pinglunId);
+                    break;
+                case "dianzan":
+                    params.put("messageType", "dyeLike");
+                    params.put("messageId", dianzanId);
+                    break;
+                case "aite":
+                    params.put("messageType", "dyeNotice");
+                    params.put("messageId", aiteId);
+                    break;
+            }
+        }
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYDYECOMMENTDETAIL)
                 .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("token", SPUtils.getInstance().getString("token"))
-                .params("id", id);
+                .params(params);
 
         StringCallback stringCallback = new StringCallback() {
             @Override
@@ -443,6 +511,7 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", "")
+                .params("from",getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
 
@@ -608,6 +677,11 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                     dianZan(id);
                 }
 
+                break;
+            case R.id.activity_pengyouquan_detail_img:
+                Intent i = new Intent(this, PersonInfoActivity.class);
+                i.putExtra("userId", pengyouquanBean.getUserId());
+                ActivityUtils.startActivity(i);
                 break;
         }
     }

@@ -6,7 +6,7 @@
     android:gravity="center_vertical"
     android:background="@color/baise"
     android:id="@+id/toolbar_layout"
-    android:layout_height="@dimen/x102">
+    android:layout_height="@dimen/x82">
 
 
     <TextView

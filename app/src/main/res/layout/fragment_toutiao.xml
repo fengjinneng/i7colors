@@ -97,7 +97,7 @@
                 android:layout_marginTop="8dp"
                 android:text="我是买家"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -142,7 +142,7 @@
                 android:layout_marginTop="8dp"
                 android:text="我是卖家"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -186,7 +186,7 @@
                 android:layout_marginStart="@dimen/x10"
                 android:layout_marginTop="8dp"
                 android:text="系统消息"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

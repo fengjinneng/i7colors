@@ -19,7 +19,15 @@ public class PYQUserBean {
     private String dyeVName;
     private String isCharger;
     private String isCompany;
+    private String notReadMessageCount;
 
+    public String getNotReadMessageCount() {
+        return notReadMessageCount;
+    }
+
+    public void setNotReadMessageCount(String notReadMessageCount) {
+        this.notReadMessageCount = notReadMessageCount;
+    }
 
     public String getIsFollow() {
         return isFollow;

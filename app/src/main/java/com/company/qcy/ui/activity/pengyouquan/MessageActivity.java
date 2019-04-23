@@ -18,15 +18,19 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
+import org.greenrobot.eventbus.EventBus;
+
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
-public class MessageActivity extends AppCompatActivity implements View.OnClickListener {
+public class MessageActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -47,9 +51,13 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         initView();
+
+        EventBus.getDefault().post(new MessageBean(MessageBean.Code.DIANJIJINQUMESSAGE));
+
     }
 
     private void initView() {
+        SPUtils.getInstance().put("pengyouquanNews",0);
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
@@ -82,11 +90,16 @@ public class MessageActivity extends AppCompatActivity implements View.OnClickLi
         haoyouBadge = new QBadgeView(this).bindTarget(mActivityMessageHaoyouYoujiantouLayout)
                 .setBadgeGravity(Gravity.START | Gravity.CENTER).setBadgeTextSize(10, true).setExactMode(false);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         getNotReadMessage();
+
     }
 
     private void getNotReadMessage() {
-
 
             GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETPENGYOUQUANNOTREADMESSAGE)
                     .tag(this)

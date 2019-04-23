@@ -37,10 +37,10 @@
             android:id="@+id/activity_map_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintBottom_toTopOf="@+id/activity_map_content"
             app:layout_constraintEnd_toStartOf="@+id/activity_map_navi"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,8 +51,8 @@
             android:id="@+id/activity_map_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:textSize="@dimen/x26"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/activity_map_navi"
@@ -63,13 +63,13 @@
             android:id="@+id/activity_map_navi"
             android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x80"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="24dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
+            android:src="@mipmap/daohang_img"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/background_qiugouxiangqing_caina" />
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

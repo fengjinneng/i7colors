@@ -74,7 +74,6 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("产业资讯");
-        mChanyezixunViewpager.setOffscreenPageLimit(5);
     }
 
 

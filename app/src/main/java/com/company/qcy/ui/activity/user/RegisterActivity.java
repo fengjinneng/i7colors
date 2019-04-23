@@ -204,7 +204,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
                                 String msg = jsonObject.getString("msg");
                                 if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    ToastUtils.showShort(msg);
                                     finish();
                                     return;
 

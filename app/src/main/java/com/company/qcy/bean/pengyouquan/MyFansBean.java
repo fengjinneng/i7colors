@@ -36,6 +36,15 @@ public class MyFansBean {
     private String isFollow;
     private String createdAt;
     private String createdAtStamp;
+    private String isSelf;
+
+    public String getIsSelf() {
+        return isSelf;
+    }
+
+    public void setIsSelf(String isSelf) {
+        this.isSelf = isSelf;
+    }
 
     public Long getId() {
         return id;

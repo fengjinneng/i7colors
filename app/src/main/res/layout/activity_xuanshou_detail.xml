@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="NO."
-        android:textSize="@dimen/x24"
+
         app:layout_constraintStart_toStartOf="@+id/activity_xuanshou_detail_name"
         app:layout_constraintTop_toBottomOf="@+id/activity_xuanshou_detail_name" />
 
@@ -76,7 +76,7 @@
         android:id="@+id/activity_xuanshou_detail_paiming_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView249"
         app:layout_constraintStart_toEndOf="@+id/textView249" />
 
@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="当前排名第"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_paiming_1"
         app:layout_constraintStart_toEndOf="@+id/activity_xuanshou_detail_paiming_1" />
 
@@ -94,7 +94,7 @@
         android:id="@+id/activity_xuanshou_detail_paiming_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView252"
         app:layout_constraintStart_toEndOf="@+id/textView252" />
 
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginTop="@dimen/x50"
-        android:textSize="@dimen/x24"
+
         android:lineSpacingExtra="@dimen/x10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/activity_xuanshou_detail_paiming_text"
@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="票"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_tickets"
         app:layout_constraintStart_toEndOf="@+id/activity_xuanshou_detail_tickets" />
 
@@ -137,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/x100"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_tickets"
         app:layout_constraintEnd_toEndOf="@+id/activity_xuanshou_detail_content" />
 
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
         android:text="编号:"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/activity_xuanshou_detail_bianhao"
         app:layout_constraintEnd_toStartOf="@+id/activity_xuanshou_detail_bianhao" />
 

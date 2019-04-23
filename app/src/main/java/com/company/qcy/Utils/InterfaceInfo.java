@@ -40,7 +40,6 @@ public class InterfaceInfo {
     //修改密码
     public static final String CHANGEPASSWORD = "user/updateUserPassword";
 
-
     //求购列表
     public static final String QIUGOULIEBIAO = "enquiry/getEnquiryList";
     //发布求购
@@ -145,6 +144,18 @@ public class InterfaceInfo {
     public static final String DIANZAN = "dyeCommunity/addDyeLikeNew";
 
 
+    //删除推送的消息
+    //删除评论消息
+    public static final String DELETEPINGLUNMESSAGE = "dyeCommunityMessage/delCommentMessageById";
+    //删除点赞消息
+    public static final String DELETEDIANZANMESSAGE = "dyeCommunityMessage/delLikeMessageById";
+    //删除艾特我的消息
+    public static final String DELETEAITEMESSAGE = "dyeCommunityMessage/delNoticeMessageById";
+    //删除关注消息
+    public static final String DELETEGUANZHUMESSAGE = "dyeCommunityMessage/delFollowMessageById";
+
+    //消息全部标为已读
+    public static final String BIAOWEIYIDUMESSAGE = "dyeCommunityMessage/batchReadMessage";
 
 
     //根据userid获取用户信息
@@ -175,7 +186,7 @@ public class InterfaceInfo {
     //根据帖子id获取帖子详情
     public static final String QUERYDYECOMMENTDETAIL = "dyeCommunity/queryDyeCommunityDetail";
     //根据用户id添加关注
-    public static final String ADDFOLLOWBYUSERID = "dyeFollow/addDyeFollowByUserId";
+    public static final String ADDFOLLOWBYUSERID = "dyeFollow/addDyeFollowByUserIdNew";
     //根据用户id取消关注
     public static final String CANCLEFOLLOWBYUSERID = "dyeFollow/cancelDyeFollowByUserId";
     //删除帖子

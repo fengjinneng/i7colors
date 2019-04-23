@@ -68,7 +68,6 @@ public class ChanpindatingActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chanpindating);
         initView();
-        LogUtils.e("asdasdsadasdasdsada",JPushInterface.getRegistrationID(getContext()));
     }
 
     private void initView() {

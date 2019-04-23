@@ -35,7 +35,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.company.qcy.R;
+import com.company.qcy.Utils.CommonUtils;
 import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.NoPreloadViewPager;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
@@ -195,42 +197,6 @@ public class ImagePagerActivity extends BaseActivity implements View.OnClickList
             return datas.size();
         }
 
-        private void SaveImageToSysAlbum(ImageView imageView) {
-            if (SDCardUtils.isSDCardEnable()) {
-                BitmapDrawable bmpDrawable = (BitmapDrawable) imageView.getDrawable();
-                Bitmap bmp = bmpDrawable.getBitmap();
-                if (bmp != null) {
-                    try {
-                        ContentResolver cr = getContentResolver();
-                        String url = MediaStore.Images.Media.insertImage(cr, bmp,
-                                String.valueOf(System.currentTimeMillis()), "");
-                        ToastUtils.showShort("图片保存成功");
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    ToastUtils.showShort("图片保存失败");
-                }
-            } else {
-                ToastUtils.showShort("图片保存失败");
-            }
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                Intent mediaScanIntent = new Intent(
-                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                Uri contentUri = Uri.fromFile(new File("com.company.qcy.image"));
-                mediaScanIntent.setData(contentUri);
-                ImagePagerActivity.this.sendBroadcast(mediaScanIntent);
-            } else {
-                sendBroadcast(new Intent(
-                        Intent.ACTION_MEDIA_MOUNTED,
-                        Uri.parse("file://"
-                                + Environment.getExternalStorageDirectory())));
-            }
-        }
-
-
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
             View view = inflater.inflate(R.layout.item_pager_image, container, false);
@@ -279,7 +245,7 @@ public class ImagePagerActivity extends BaseActivity implements View.OnClickList
                             @Override
                             public void onClick(View view) {
                                 chooseHeadDialog.dismiss();  // 选择之后，关闭dialog
-                                SaveImageToSysAlbum(imageView);
+                               MyCommonUtil.saveImageToSysAlbum(ImagePagerActivity.this,imageView);
 
 
                             }

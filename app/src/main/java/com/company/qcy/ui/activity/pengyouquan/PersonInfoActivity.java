@@ -2,7 +2,7 @@ package com.company.qcy.ui.activity.pengyouquan;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
@@ -11,10 +11,8 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,6 +29,7 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
@@ -40,7 +39,9 @@ import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.fragment.pengyouquan.MyFansFragment;
 import com.company.qcy.fragment.pengyouquan.PengyouquanRecordFragment;
+import com.company.qcy.ui.activity.user.ChoiceHeadImageActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
+import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -81,10 +82,14 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
     private TextView mActivityPersonInfoGuanzhu;
     private ImageView mActivityPersonInfoDavImg;
 
+    private String messageId;//判断是否为已读
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.chunhongse), false);
+        messageId = getIntent().getStringExtra("messageId");
         userId = getIntent().getLongExtra("userId", 0);
         initView();
     }
@@ -98,12 +103,14 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mAppbar = (AppBarLayout) findViewById(R.id.appbar);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
-        initToolBarData();
-        addData();
+
         mActivityPersonInfoIsRehzheng = (TextView) findViewById(R.id.activity_person_info_isRehzheng);
         mActivityPersonInfoGuanzhu = (TextView) findViewById(R.id.activity_person_info_guanzhu);
         mActivityPersonInfoGuanzhu.setOnClickListener(this);
         mActivityPersonInfoDavImg = (ImageView) findViewById(R.id.activity_person_info_dav_img);
+        mActivityPersonInfoImg.setOnClickListener(this);
+        initToolBarData();
+        addData();
     }
 
     private PYQUserBean userBean;
@@ -113,11 +120,8 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
         if (ObjectUtils.isEmpty(userBean)) {
             return;
         }
-        if (!StringUtils.isEmpty(userBean.getCommunityPhoto())) {
-            GlideUtils.loadCircleImage(this, ServerInfo.IMAGE + userBean.getCommunityPhoto(), mActivityPersonInfoImg);
-        } else {
-            mActivityPersonInfoImg.setImageDrawable(getResources().getDrawable(R.mipmap.morentouxiang));
-        }
+
+        MyCommonUtil.jiazaitouxiang(this,userBean.getCommunityPhoto(),mActivityPersonInfoImg);
 
         if (StringUtils.equals("1", userBean.getIsCompany())) {
             mActivityPersonInfoDavImg.setVisibility(View.VISIBLE);
@@ -172,7 +176,7 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
             }
         }
 
-        if(!StringUtils.equals("1",userBean.getIsCharger())){
+        if (!StringUtils.equals("1", userBean.getIsCharger())) {
             mActivityPersonInfoGuanzhu.setVisibility(View.VISIBLE);
             if (StringUtils.equals("1", userBean.getIsFollow())) {
                 mActivityPersonInfoGuanzhu.setBackground(getResources().getDrawable(R.mipmap.yiguanzhu));
@@ -181,7 +185,7 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                 mActivityPersonInfoGuanzhu.setText("+关注");
                 mActivityPersonInfoGuanzhu.setBackgroundResource(R.drawable.background_pengyouquan_weirenzheng);
             }
-        }else {
+        } else {
             mActivityPersonInfoGuanzhu.setVisibility(View.GONE);
         }
     }
@@ -196,7 +200,7 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETUSERINFOBYUSERID)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("pageSize", 10)
+                .params("messageId",messageId)
                 .params("userId", userId)
                 .params("token", SPUtils.getInstance().getString("token"));
 
@@ -217,7 +221,7 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(PersonInfoActivity.this,request,this);
+                            SignAndTokenUtil.getSign(PersonInfoActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -294,7 +298,7 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(PersonInfoActivity.this,request,this);
+                            SignAndTokenUtil.getSign(PersonInfoActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -346,7 +350,7 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(PersonInfoActivity.this,request,this);
+                            SignAndTokenUtil.getSign(PersonInfoActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -399,6 +403,13 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
                 if (StringUtils.equals("0", isGuanzhu)) {
                     addFollow(userId);
                 }
+
+                break;
+            case R.id.activity_person_info_img:
+
+                Intent i = new Intent(this,ChoiceHeadImageActivity.class);
+                i.putExtra("imgUrl",userBean.getCommunityPhoto());
+                ActivityUtils.startActivity(i);
 
                 break;
         }

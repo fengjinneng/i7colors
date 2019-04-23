@@ -95,7 +95,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="投票数"
-                                android:textSize="@dimen/x24"
+
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/activity_toupiao_detail_toupiaoshu"
@@ -138,7 +138,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="访问量"
-                                android:textSize="@dimen/x24"
+
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="@+id/activity_toupiao_detail_fangwenliang"
@@ -164,7 +164,7 @@
                                 android:layout_marginStart="32dp"
                                 android:layout_marginTop="8dp"
                                 android:text="投票截止:"
-                                android:textSize="@dimen/x24"
+
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />

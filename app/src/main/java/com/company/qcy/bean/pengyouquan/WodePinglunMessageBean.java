@@ -2,20 +2,44 @@ package com.company.qcy.bean.pengyouquan;
 
 public class WodePinglunMessageBean {
 
-
-
-
     private Long id;
     private Long postUserId;
     private String postUserName;
     private String postUserPhoto;
     private String postUserIsDyeV;
     private String postUserDyeVName;
+    private String postUserCompanyName;
+    private String postUserIsCompany;
     private Long communityId;
     private Long commentId;
     private String commentText;
     private String isRead;
     private String createdAtStamp;
+    private String bossLevel;
+
+    public String getBossLevel() {
+        return bossLevel;
+    }
+
+    public void setBossLevel(String bossLevel) {
+        this.bossLevel = bossLevel;
+    }
+
+    public String getPostUserCompanyName() {
+        return postUserCompanyName;
+    }
+
+    public void setPostUserCompanyName(String postUserCompanyName) {
+        this.postUserCompanyName = postUserCompanyName;
+    }
+
+    public String getPostUserIsCompany() {
+        return postUserIsCompany;
+    }
+
+    public void setPostUserIsCompany(String postUserIsCompany) {
+        this.postUserIsCompany = postUserIsCompany;
+    }
 
     public Long getId() {
         return id;

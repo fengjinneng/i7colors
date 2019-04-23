@@ -20,7 +20,7 @@
         android:imeOptions="actionSearch"
         android:paddingLeft="10dp"
         android:singleLine="true"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/homepage_search_back"
         app:layout_constraintTop_toTopOf="parent" />

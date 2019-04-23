@@ -7,8 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.company.qcy.R;
+import com.company.qcy.base.BaseActivity;
 
-public class AboutQCYActivity extends AppCompatActivity implements View.OnClickListener {
+public class AboutQCYActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题

@@ -135,14 +135,29 @@ public class ChanyezixunFragment extends Fragment {
         });
 
         if (StringUtils.equals("pengyouquan_fabu", mParam1)) {
-            adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+
+            adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override
-                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                     NewsBean newsBean = (NewsBean) adapter.getData().get(position);
                     EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICEZIXUN, newsBean));
                     getActivity().finish();
                 }
             });
+
+            adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                    NewsBean newsBean = (NewsBean) adapter.getData().get(position);
+                    switch (view.getId()){
+                        case R.id.item_chanyexixun_xuanze:
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICEZIXUN, newsBean));
+                            getActivity().finish();
+                            break;
+                    }
+                }
+            });
+
         } else {
             adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                 @Override

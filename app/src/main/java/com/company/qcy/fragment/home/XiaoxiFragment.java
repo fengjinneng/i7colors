@@ -3,6 +3,7 @@ package com.company.qcy.fragment.home;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,11 +16,12 @@ import com.company.qcy.R;
 import com.company.qcy.fragment.xiaoxi.BaojiaxiaoxiFragment;
 import com.company.qcy.fragment.xiaoxi.QiugouxiaoxiFragment;
 import com.company.qcy.fragment.xiaoxi.XitongxiaoxiFragment;
+import com.githang.statusbar.StatusBarCompat;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ToutiaoFragment extends Fragment implements View.OnClickListener {
+public class XiaoxiFragment extends Fragment implements View.OnClickListener {
 
     Context context;
     Activity activity;
@@ -43,7 +45,7 @@ public class ToutiaoFragment extends Fragment implements View.OnClickListener {
     private TextView mFragmentToutiaoXitongxiaoxiText;
     private ConstraintLayout mFragmentToutiaoXitongxiaoxi;
 
-    public ToutiaoFragment() {
+    public XiaoxiFragment() {
         // Required empty public constructor
     }
 
@@ -57,6 +59,23 @@ public class ToutiaoFragment extends Fragment implements View.OnClickListener {
         initView(inflate);
         return inflate;
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
+
+    }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
+        }
+    }
+
 
     private QiugouxiaoxiFragment qiugouxiaoxiFragment;
     private  BaojiaxiaoxiFragment baojiaxiaoxiFragment;

@@ -20,7 +20,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:text="序号"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_youhuizhanxiao_companyname"
             app:layout_constraintHorizontal_bias="0.5"
@@ -34,7 +34,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:text="公司名称"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_youhuizhanxiao_phone"
             app:layout_constraintHorizontal_bias="0.5"
@@ -47,7 +47,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:text="联系方式"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_youhuizhanxiao_goumailiang"
             app:layout_constraintHorizontal_bias="0.5"
@@ -61,7 +61,7 @@
             android:gravity="center"
             android:text="购买量"
             android:textColor="@color/chunhongse"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

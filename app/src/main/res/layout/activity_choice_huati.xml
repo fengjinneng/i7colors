@@ -17,16 +17,14 @@
         android:id="@+id/choice_huati_slidingTabLayout"
         android:layout_width="0dp"
         android:layout_height="@dimen/x70"
-        android:layout_marginTop="48dp"
-        app:tl_textSelectColor="@color/chunhongse"
-        app:tl_textUnselectColor="@color/erjibiaoti"
-        app:tl_indicator_color="@color/chunhongse"
-        app:tl_indicator_width="@dimen/x50"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView313"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginRight="@dimen/x80"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/include42"
+        app:tl_indicator_color="@color/chunhongse"
+        app:tl_indicator_width="@dimen/x50"
+        app:tl_textSelectColor="@color/chunhongse"
+        app:tl_textUnselectColor="@color/erjibiaoti">
 
     </com.flyco.tablayout.SlidingTabLayout>
 
@@ -42,13 +40,13 @@
 
     <ImageView
         android:id="@+id/choice_huati_xiala"
-        android:layout_width="@dimen/x80"
+        android:layout_width="@dimen/x100"
         android:layout_height="0dp"
         android:padding="@dimen/x25"
         app:layout_constraintBottom_toBottomOf="@+id/choice_huati_slidingTabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include42"
-        app:srcCompat="@mipmap/xialajiantou" />
+        app:srcCompat="@mipmap/xiajiantu_hongse" />
 
     <TextView
         android:id="@+id/textView282"
@@ -58,6 +56,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/choice_huati_slidingTabLayout" />
+
+    <TextView
+        android:id="@+id/textView313"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:background="@color/fengexian"
+        app:layout_constraintBottom_toTopOf="@+id/textView282"
+        app:layout_constraintEnd_toStartOf="@+id/choice_huati_xiala"
+        app:layout_constraintTop_toBottomOf="@+id/include42" />
 
 
 </android.support.constraint.ConstraintLayout>

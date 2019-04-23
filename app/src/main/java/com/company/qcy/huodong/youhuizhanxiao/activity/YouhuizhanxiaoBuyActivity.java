@@ -26,6 +26,7 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyConsrantLayout;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -38,7 +39,7 @@ import cn.qqtheme.framework.entity.City;
 import cn.qqtheme.framework.entity.County;
 import cn.qqtheme.framework.entity.Province;
 
-public class YouhuizhanxiaoBuyActivity extends AppCompatActivity implements View.OnClickListener {
+public class YouhuizhanxiaoBuyActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题

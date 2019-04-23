@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.adapter.pengyouquan.HuatiAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.pengyouquan.HuatiBean;
 import com.company.qcy.fragment.pengyouquan.ErjihuatiFragment;
 import com.flyco.tablayout.SlidingTabLayout;
@@ -40,7 +42,7 @@ import com.lzy.okgo.request.GetRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChoiceHuatiActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -76,7 +78,8 @@ public class ChoiceHuatiActivity extends AppCompatActivity implements View.OnCli
     private void addData() {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYHUATI)
                 .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"));
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("level","1");
 
         DialogStringCallback stringCallback = new DialogStringCallback(ChoiceHuatiActivity.this) {
             @Override
@@ -147,14 +150,20 @@ public class ChoiceHuatiActivity extends AppCompatActivity implements View.OnCli
                     popupWindow.setFocusable(true);//要先让popupwindow获得焦点，才能正确获取popupwindow的状态
                     if (popupWindow.isShowing()) {
                         popupWindow.dismiss();
+                        mChoiceHuatiXiala.setImageDrawable(this.getResources().getDrawable(R.mipmap.xiajiantu_hongse));
                     } else {
+
+                        WindowManager.LayoutParams lp = getWindow().getAttributes();
+                        lp.alpha = 0.6f;
+                        getWindow().setAttributes(lp);
                         mChoiceHuatiSlidingTabLayout.setVisibility(View.INVISIBLE);
                         popupWindow.showAsDropDown(mChoiceHuatiSlidingTabLayout);
+                        mChoiceHuatiXiala.setImageDrawable(getResources().getDrawable(R.mipmap.shangjiantou_hongse));
                     }
                     return;
                 }
 
-
+                mChoiceHuatiXiala.setImageDrawable(getResources().getDrawable(R.mipmap.shangjiantou_hongse));
                 mChoiceHuatiSlidingTabLayout.setVisibility(View.INVISIBLE);
                 View view = LayoutInflater.from(this).inflate(R.layout.popwindow_huati, null);
                 huatiRecyclerview = view.findViewById(R.id.popwindow_huati_recyclerview);
@@ -181,6 +190,10 @@ public class ChoiceHuatiActivity extends AppCompatActivity implements View.OnCli
                     @Override
                     public void onDismiss() {
                         mChoiceHuatiSlidingTabLayout.setVisibility(View.VISIBLE);
+                        WindowManager.LayoutParams lp = getWindow().getAttributes();
+                        lp.alpha = 1f;
+                        getWindow().setAttributes(lp);
+                        mChoiceHuatiXiala.setImageDrawable(getResources().getDrawable(R.mipmap.xiajiantu_hongse));
                     }
                 });
                 break;

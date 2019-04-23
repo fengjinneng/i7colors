@@ -32,6 +32,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.chanyezixun.ChanyezixunRecyclerviewAdapter;
 import com.company.qcy.bean.ChanpindatingBean;
 import com.company.qcy.bean.chanyezixun.NewsBean;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
@@ -39,6 +40,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,18 +134,43 @@ public class ZhengcefaguiFragment extends Fragment {
         });
 
 
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        if (StringUtils.equals("pengyouquan_fabu", mParam1)) {
+
+            adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    NewsBean newsBean = (NewsBean) adapter.getData().get(position);
+                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICEZIXUN, newsBean));
+                    getActivity().finish();
+                }
+            });
+
+            adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+                @Override
+                public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                    NewsBean newsBean = (NewsBean) adapter.getData().get(position);
+                    switch (view.getId()){
+                        case R.id.item_chanyexixun_xuanze:
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICEZIXUN, newsBean));
+                            getActivity().finish();
+                            break;
+                    }
+                }
+            });
+        } else {
+            adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
 
 
-                Intent intent = new Intent(activity, ZixunxiangqingActivity.class);
-                Long id = ((NewsBean) adapter.getData().get(position)).getId();
-                intent.putExtra("id",id);
-                ActivityUtils.startActivity(intent);
+                    Intent intent = new Intent(activity, ZixunxiangqingActivity.class);
+                    Long id = ((NewsBean) adapter.getData().get(position)).getId();
+                    intent.putExtra("id", id);
+                    ActivityUtils.startActivity(intent);
 
-            }
-        });
+                }
+            });
+        }
         refreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
 
@@ -180,6 +208,17 @@ public class ZhengcefaguiFragment extends Fragment {
                                 return;
                             }
                             List<NewsBean> newsBeans = JSONObject.parseArray(data.toJSONString(), NewsBean.class);
+
+                            if (ObjectUtils.isEmpty(newsBeans)) {
+                                adapter.loadMoreEnd();
+                                return;
+                            }
+
+                            if (StringUtils.equals("pengyouquan_fabu", mParam1)) {
+                                for (int i = 0; i < newsBeans.size(); i++) {
+                                    newsBeans.get(i).setShowChoice(true);
+                                }
+                            }
                             if (isReflash) {
                                 datas.clear();
                                 datas.addAll(newsBeans);

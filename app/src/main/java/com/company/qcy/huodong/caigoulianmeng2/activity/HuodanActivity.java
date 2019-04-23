@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.company.qcy.R;
 import com.company.qcy.adapter.BaseViewpageAdapter;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.huodong.caigoulianmeng2.adapter.WodegonghuodanAdapter;
 import com.company.qcy.huodong.caigoulianmeng2.fragment.WodedinghuodanFragment;
 import com.company.qcy.huodong.caigoulianmeng2.fragment.WodegonghuodanFragment;
@@ -18,7 +19,7 @@ import com.company.qcy.huodong.caigoulianmeng2.fragment.WodegonghuodanFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HuodanActivity extends AppCompatActivity implements View.OnClickListener {
+public class HuodanActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题

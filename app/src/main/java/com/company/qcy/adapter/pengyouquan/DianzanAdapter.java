@@ -16,6 +16,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.pengyouquan.DianzantouxiangBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
@@ -40,11 +41,8 @@ public class DianzanAdapter extends BaseQuickAdapter<PengyouquanBean.LikeListBea
 
         helper.addOnClickListener(R.id.item_fragment_praise_head);
 
-        if (StringUtils.isEmpty(item.getLikeUserPhoto())) {
-            imageView.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.morentouxiang));
-        } else {
-            GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getLikeUserPhoto(), imageView);
-        }
+        MyCommonUtil.jiazaitouxiang(mContext,item.getLikeUserPhoto(),imageView);
+
         name.setText(item.getLikeUser());
 
         if(!StringUtils.isEmpty(item.getCreatedAtStamp())){

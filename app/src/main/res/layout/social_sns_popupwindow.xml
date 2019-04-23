@@ -14,7 +14,7 @@
     	android:layout_weight="1"
     	android:text="点赞"
 		android:paddingLeft="@dimen/x20"
-		android:textSize="@dimen/x24"
+
     	android:gravity="center"
     	android:textColor="#d2d2d2"/>
     <View 
@@ -35,7 +35,7 @@
 		android:text="评论"
 		android:paddingLeft="@dimen/x20"
 		android:textColor="#d2d2d2"
-		android:textSize="@dimen/x24" />
+		 />
 
 	<View
 		android:layout_width="1dp"
@@ -55,5 +55,5 @@
 		android:text="分享"
 		android:paddingLeft="@dimen/x20"
 		android:textColor="#d2d2d2"
-		android:textSize="@dimen/x24" />
+		 />
 </LinearLayout>

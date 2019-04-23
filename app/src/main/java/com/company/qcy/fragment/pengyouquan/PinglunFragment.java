@@ -381,6 +381,7 @@ public class PinglunFragment extends BaseFragment {
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", parentId)
+                .params("from",getActivity().getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {

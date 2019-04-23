@@ -210,6 +210,18 @@ public class MessageBean {
 
         //朋友圈 提醒谁看
         public static final int CHOICETIXINGSHUIKAN = 1038;
+
+        //朋友圈 确定谁可以看
+        public static final int QUEDINGSHUIKAN = 1039;
+
+        //朋友圈 有新的消息
+        public static final int PENGYOUQUANHAVENEWMESSAGE = 1040;
+
+        //系统消息 有新的消息
+        public static final int XITONGHAVENEWMESSAGE = 1041;
+
+        //系统消息 进去了messageActivity
+        public static final int DIANJIJINQUMESSAGE = 1042;
     }
 
 }

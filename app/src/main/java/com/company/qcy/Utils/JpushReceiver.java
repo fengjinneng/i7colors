@@ -7,14 +7,18 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.SPUtils;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * 自定义接收器
@@ -26,6 +30,7 @@ import cn.jpush.android.api.JPushInterface;
 public class JpushReceiver extends BroadcastReceiver {
     private static final String TAG = "JIGUANG-Example";
 
+
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
@@ -35,11 +40,13 @@ public class JpushReceiver extends BroadcastReceiver {
             if (JPushInterface.ACTION_REGISTRATION_ID.equals(intent.getAction())) {
                 String regId = bundle.getString(JPushInterface.EXTRA_REGISTRATION_ID);
                 LogUtils.d(TAG, "[MyReceiver] 接收Registration Id : " + regId);
-                //send the Registration Id to your server...
 
             } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
-                LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
-//                processCustomMessage(context, bundle);
+
+//                LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+                SPUtils.getInstance().put("pengyouquanNews",SPUtils.getInstance().getInt("pengyouquanNews")+1);
+                EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANHAVENEWMESSAGE));
+
 
             } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
                 LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的通知");

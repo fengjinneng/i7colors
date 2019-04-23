@@ -16,7 +16,7 @@
         android:singleLine="true"
         android:text="活性黑 WNN（龙盛268标准）"
         android:textColor="@color/erjibiaoti"
-        android:textSize="@dimen/x30"
+
         app:layout_constraintEnd_toStartOf="@+id/item_message_time"
         app:layout_constraintStart_toEndOf="@+id/item_message_status"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +43,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="您好，您发布的“活性黑 WNN（龙盛268标准）”求购有 供应商已报价，请及时查看。"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_message_status"
@@ -70,7 +70,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="8dp"
         android:text="2018/10/18"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
