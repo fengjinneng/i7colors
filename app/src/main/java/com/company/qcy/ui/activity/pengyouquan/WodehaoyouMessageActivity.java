@@ -122,8 +122,7 @@ public class WodehaoyouMessageActivity extends BaseActivity implements View.OnCl
 
                 switch (view.getId()) {
                     case R.id.item_wodehaoyoufensi_message_add:
-
-                        addFollow(wodehaoyoufensiMessageBean.getPostUserId(), position, wodehaoyoufensiMessageBean.getId(), add);
+                        addFollow(wodehaoyoufensiMessageBean, position);
                         break;
                     case R.id.item_wodehaoyoufensi_message_img:
                         Intent i = new Intent(WodehaoyouMessageActivity.this, PersonInfoActivity.class);
@@ -214,14 +213,14 @@ public class WodehaoyouMessageActivity extends BaseActivity implements View.OnCl
     }
 
 
-    private void addFollow(Long followUserId, int position, Long messageId, TextView add) {
+    private void addFollow(WodehaoyoufensiMessageBean bean, int position) {
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ADDFOLLOWBYUSERID)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
-                .params("byUserId", followUserId)
-                .params("messageId", messageId);
+                .params("byUserId", bean.getPostUserId())
+                .params("messageId", bean.getId());
 
         DialogStringCallback stringCallback = new DialogStringCallback(WodehaoyouMessageActivity.this) {
             @Override
@@ -237,11 +236,12 @@ public class WodehaoyouMessageActivity extends BaseActivity implements View.OnCl
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
                             Boolean data = jsonObject.getBoolean("data");
-                            ToastUtils.showShort(msg);
                             if (data) {
-                                add.setText("已添加");
-                                add.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                                add.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                                  bean.setIsFollow("1");
+//                                addTextView.setText("已添加");
+//                                addTextView.setTextColor(getResources().getColor(R.color.erjibiaoti));
+//                                addTextView.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                                adapter.notifyItemChanged(position);
                             } else {
                                 ToastUtils.showShort(msg);
                             }

@@ -84,6 +84,11 @@ public class MessageBean {
     }
 
 
+    public static class JPush{
+        //發送的系統消息
+        public static final int XITONGXIAOXI=1001;
+    }
+
 
     public static class RemenCode{
         //删除评论成功

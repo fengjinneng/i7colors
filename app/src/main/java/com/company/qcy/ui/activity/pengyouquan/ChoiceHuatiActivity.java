@@ -35,6 +35,7 @@ import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.pengyouquan.HuatiBean;
 import com.company.qcy.fragment.pengyouquan.ErjihuatiFragment;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
@@ -73,13 +74,33 @@ public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickLis
         mChoiceHuatiXiala.setOnClickListener(this);
         addData();
 
+        mChoiceHuatiSlidingTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                for (int i = 0; i < yijiHuati.size(); i++) {
+                    if (i == position) {
+                        yijiHuati.get(i).setChecked(true);
+                    } else {
+                        yijiHuati.get(i).setChecked(false);
+                    }
+                }
+                if (!ObjectUtils.isEmpty(huatiAdapter)) {
+                    huatiAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+            }
+        });
+
     }
 
     private void addData() {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYHUATI)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("level","1");
+                .params("level", "1");
 
         DialogStringCallback stringCallback = new DialogStringCallback(ChoiceHuatiActivity.this) {
             @Override
@@ -105,6 +126,8 @@ public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickLis
                             }
                             mChoiceHuatiViewpager.setAdapter(new BaseViewpageAdapter(getSupportFragmentManager(), fragments));
                             mChoiceHuatiSlidingTabLayout.setViewPager(mChoiceHuatiViewpager, arr);
+                            mChoiceHuatiSlidingTabLayout.setCurrentTab(0);
+                            yijiHuati.get(0).setChecked(true);
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -152,11 +175,10 @@ public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickLis
                         popupWindow.dismiss();
                         mChoiceHuatiXiala.setImageDrawable(this.getResources().getDrawable(R.mipmap.xiajiantu_hongse));
                     } else {
-
                         WindowManager.LayoutParams lp = getWindow().getAttributes();
                         lp.alpha = 0.6f;
                         getWindow().setAttributes(lp);
-                        mChoiceHuatiSlidingTabLayout.setVisibility(View.INVISIBLE);
+//                        mChoiceHuatiSlidingTabLayout.setVisibility(View.INVISIBLE);
                         popupWindow.showAsDropDown(mChoiceHuatiSlidingTabLayout);
                         mChoiceHuatiXiala.setImageDrawable(getResources().getDrawable(R.mipmap.shangjiantou_hongse));
                     }
@@ -164,7 +186,7 @@ public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickLis
                 }
 
                 mChoiceHuatiXiala.setImageDrawable(getResources().getDrawable(R.mipmap.shangjiantou_hongse));
-                mChoiceHuatiSlidingTabLayout.setVisibility(View.INVISIBLE);
+//                mChoiceHuatiSlidingTabLayout.setVisibility(View.INVISIBLE);
                 View view = LayoutInflater.from(this).inflate(R.layout.popwindow_huati, null);
                 huatiRecyclerview = view.findViewById(R.id.popwindow_huati_recyclerview);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
@@ -181,6 +203,14 @@ public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickLis
                 huatiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        for (int i = 0; i < yijiHuati.size(); i++) {
+                            if (i == position) {
+                                yijiHuati.get(i).setChecked(true);
+                            } else {
+                                yijiHuati.get(i).setChecked(false);
+                            }
+                        }
+                        huatiAdapter.notifyDataSetChanged();
                         mChoiceHuatiSlidingTabLayout.setCurrentTab(position);
                         popupWindow.dismiss();
                     }
@@ -189,7 +219,7 @@ public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickLis
                 popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
-                        mChoiceHuatiSlidingTabLayout.setVisibility(View.VISIBLE);
+//                        mChoiceHuatiSlidingTabLayout.setVisibility(View.VISIBLE);
                         WindowManager.LayoutParams lp = getWindow().getAttributes();
                         lp.alpha = 1f;
                         getWindow().setAttributes(lp);

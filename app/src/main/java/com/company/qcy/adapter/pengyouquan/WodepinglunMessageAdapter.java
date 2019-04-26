@@ -33,8 +33,7 @@ public class WodepinglunMessageAdapter extends BaseQuickAdapter<WodePinglunMessa
         name.setText(item.getPostUserName());
         TextView time = (TextView) helper.getView(R.id.item_wodepinglun_message_time);
         if (!ObjectUtils.isEmpty(item.getCreatedAtStamp())) {
-            time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp()))
-                    .substring(0, 10));
+            time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(0, 16));
         }
 
         TextView content = (TextView) helper.getView(R.id.item_wodepinglun_message_content);

@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.LogUtils;
@@ -44,7 +45,8 @@ import cn.iwgang.countdownview.CountdownView;
 public class ToupiaoDetailActivity extends BaseActivity implements View.OnClickListener {
 
 
-    private String id;
+    @Autowired
+    public String id;
     /**
      * 标题
      */

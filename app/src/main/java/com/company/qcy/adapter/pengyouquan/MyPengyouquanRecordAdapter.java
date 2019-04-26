@@ -1,10 +1,12 @@
 package com.company.qcy.adapter.pengyouquan;
 
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -38,6 +40,7 @@ public class MyPengyouquanRecordAdapter extends BaseQuickAdapter<PengyouquanBean
         String substring = TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(5, 10);
         String replace = substring.replace("-", "/");
         monthAndDay.setText(replace);
+        monthAndDay.setVisibility(View.VISIBLE);
         try {
             if (DateUtil.IsToday(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())))) {
                 time.setText("今天");
@@ -66,6 +69,26 @@ public class MyPengyouquanRecordAdapter extends BaseQuickAdapter<PengyouquanBean
                 img.setVisibility(View.VISIBLE);
                 GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getPic1(), img);
             }
+        }
+
+        ConstraintLayout contentLayout = (ConstraintLayout) helper.getView(R.id.item_pengyouquan_record_content_layout);
+        ConstraintLayout lianjieLayout = (ConstraintLayout) helper.getView(R.id.item_pengyouquan_record_lianjie_layout);
+        ImageView lianjieImage = (ImageView) helper.getView(R.id.item_pengyouquan_record_lianjie_img);
+        TextView lianjieText = (TextView) helper.getView(R.id.item_pengyouquan_record_lianjie_title);
+
+        if(ObjectUtils.isEmpty(item.getShareBean())){
+            lianjieLayout.setVisibility(View.GONE);
+        }else {
+            lianjieLayout.setVisibility(View.VISIBLE);
+            GlideUtils.loadImage(mContext,ServerInfo.IMAGE+item.getShareBean().getPic(),lianjieImage);
+            lianjieText.setText(item.getShareBean().getTitle());
+        }
+
+
+        if(StringUtils.isEmpty(item.getVideoPicUrl())&&StringUtils.isEmpty(item.getContent())&&StringUtils.isEmpty(item.getPic1())){
+            contentLayout.setVisibility(View.GONE);
+        }else {
+            contentLayout.setVisibility(View.VISIBLE);
         }
 
     }

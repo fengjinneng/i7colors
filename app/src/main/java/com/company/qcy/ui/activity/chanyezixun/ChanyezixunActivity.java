@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.company.qcy.R;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
@@ -22,6 +24,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ChanyezixunActivity extends BaseActivity implements View.OnClickListener {
 
     private ViewPager mChanyezixunViewpager;
@@ -33,6 +36,8 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
     private ImageView mToolbarBack;
 
     private String from;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +49,6 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
     private void initView() {
         mChanyezixunViewpager = (ViewPager) findViewById(R.id.chanyezixun_viewpager);
         mChanyezixunSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.chanyezixun_slidingTabLayout);
-
 
         List<Fragment> datas = new ArrayList<>();
         datas.add(ChanyezixunFragment.newInstance(from));

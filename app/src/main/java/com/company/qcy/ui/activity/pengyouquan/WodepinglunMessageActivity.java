@@ -73,7 +73,8 @@ public class WodepinglunMessageActivity extends BaseActivity implements View.OnC
         recyclerView = (RecyclerView) findViewById(R.id.activity_wodepinglun_message_recyclerView);
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_wodepinglun_message_swipeRefreshLayout);
         mToolbarTitle.setText("评论");
-
+        mToolbarText = (TextView) findViewById(R.id.toolbar_text);
+        mToolbarText.setOnClickListener(this);
         recyclerView.setLayoutManager(new RecyclerViewNoBugLayoutManager(this));
         adapter = new WodepinglunMessageAdapter(R.layout.item_wodepinglun_message, datas);
         recyclerView.setAdapter(adapter);
@@ -153,8 +154,8 @@ public class WodepinglunMessageActivity extends BaseActivity implements View.OnC
                 return false;
             }
         });
-        mToolbarText = (TextView) findViewById(R.id.toolbar_text);
-        mToolbarText.setOnClickListener(this);
+
+
     }
 
 

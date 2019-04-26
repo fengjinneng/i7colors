@@ -152,6 +152,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
+                android:visibility="gone"
                 app:showLines="4" />
 
             <!-- 不同的地方 -->
@@ -202,7 +203,7 @@
                 android:layout_height="@dimen/x120"
                 android:layout_marginTop="@dimen/x10"
                 android:background="@color/fengexian"
-                android:visibility="gone">
+                >
 
                 <ImageView
                     android:id="@+id/item_pengyouquan_lianjie_image"

@@ -7,10 +7,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.ArrayMap;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -29,6 +31,7 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
+import com.company.qcy.base.WebActivity;
 import com.company.qcy.bean.BannerBean;
 import com.company.qcy.bean.UpdateBean;
 import com.company.qcy.bean.eventbus.MessageBean;
@@ -36,6 +39,11 @@ import com.company.qcy.fragment.home.HomeFragment;
 import com.company.qcy.fragment.home.PengyouquanFragment;
 import com.company.qcy.fragment.home.XiaoxiFragment;
 import com.company.qcy.fragment.home.WodeFragment;
+import com.company.qcy.huodong.tuangou.activity.TuangouxiangqingActivity;
+import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
+import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
+import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
+import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
@@ -45,12 +53,16 @@ import com.lzy.okgo.request.GetRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushReceiver;
 
+import org.greenrobot.eventbus.EventBus;
+
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-
+@Route(path = "/main/entrance")
 public class MainActivity extends BaseActivity implements OnButtonClickListener {
 
     private BottomNavigationBar mBottomnavigation;
@@ -62,41 +74,110 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        HashMap<String, String> map = (HashMap) getIntent().getSerializableExtra("jpush_data");
+
         if (!StringUtils.isEmpty(SPUtils.getInstance().getString("adv"))
-                && SPUtils.getInstance().getString("adv").length() > 5) {
+                && SPUtils.getInstance().getString("adv").length() > 5 && ObjectUtils.isEmpty(map)) {
             ActivityUtils.startActivity(MyWelcomeActivity.class);
         }
         SPUtils.getInstance().put("isFirstIn", "1");
         initView();
-//        Uri uri = getIntent().getData();
-//        ARouter.getInstance().build(uri).navigation();
-//        finish();
+
         addAdvData();
+
         SPUtils.getInstance().put("registrationId", JPushInterface.getRegistrationID(this));
 
-        int pengyouquanNews = SPUtils.getInstance().getInt("pengyouquanNews");
-        if (pengyouquanNews == -1) {
+        if (SPUtils.getInstance().getInt("pengyouquanNews") == -1) {
             SPUtils.getInstance().put("pengyouquanNews", 0);
         }
 
         ShortcutBadger.removeCount(this);
 
-//        if (SPUtils.getInstance().getInt("pengyouquanNews") != 0) {
-//            pengyouquanMessageItem.setText(SPUtils.getInstance().getInt("pengyouquanNews") + "");
-//            if (pengyouquanMessageItem.isHidden()) {
-//                pengyouquanMessageItem.show();
-//
-//                LogUtils.e("sasadsadsadsadsadsadsadsad"+pengyouquanMessageItem);
-//            }
-//        }
+        //JPUSH推送消息過來的
+        if (!ObjectUtils.isEmpty(map)) {
 
-//        pengyouquanMessageItem.setText(SPUtils.getInstance().getInt("pengyouquanNews") + "");
-//        if (pengyouquanMessageItem.isHidden()) {
-//            pengyouquanMessageItem.show();
-//        }
+            if (StringUtils.equals("html", map.get("workType"))) {
+                Intent htmlIntent = new Intent(context, WebActivity.class);
+                htmlIntent.putExtra("webUrl", map.get("url"));
+//            htmlIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                ActivityUtils.startActivity(htmlIntent);
+            } else if (StringUtils.equals("appSystemInform", map.get("workType"))) {
+                if (StringUtils.equals("txt", map.get("type"))) {
+                    return;
+                } else if (StringUtils.equals("inner", map.get("type"))) {
+                    choicedWhitchFragment = 2;
+                    if (StringUtils.equals("enquiry", map.get("directType"))) {
 
+                        if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
+                            Intent enquiryIntent = new Intent(context, QiugouxiangqingActivity.class);
+//                        enquiryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(enquiryIntent);
+                        } else {
+                            Intent enquiryIntent = new Intent(context, QiugouxiangqingActivity.class);
+                            enquiryIntent.putExtra("enquiryId", Long.parseLong(map.get("directTypeId")));
+//                        enquiryIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(enquiryIntent);
+                        }
+                    } else if (StringUtils.equals("market", map.get("directType"))) {
+                        if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
+                            Intent marketIntent = new Intent(context, KFSCXiangqingActivity.class);
+//                        marketIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(marketIntent);
+                        } else {
+                            Intent marketIntent = new Intent(context, KFSCXiangqingActivity.class);
+                            marketIntent.putExtra("id", Long.parseLong(map.get("directTypeId")));
+//                        marketIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(marketIntent);
+                        }
+                    } else if (StringUtils.equals("product", map.get("directType"))) {
+                        if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
+                            Intent productIntent = new Intent(context, ChanpinxiangqingActivity.class);
+//                        productIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(productIntent);
+
+                        } else {
+                            Intent productIntent = new Intent(context, ChanpinxiangqingActivity.class);
+                            productIntent.putExtra("id", map.get("directTypeId") + "m");
+//                        productIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(productIntent);
+                        }
+                    } else if (StringUtils.equals("information", map.get("directType"))) {
+                        if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
+                            Intent zixunIntent = new Intent(context, ZixunxiangqingActivity.class);
+//                        zixunIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(zixunIntent);
+                        } else {
+                            Intent zixunIntent = new Intent(context, ZixunxiangqingActivity.class);
+                            zixunIntent.putExtra("id", map.get("directTypeId"));
+//                        zixunIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(zixunIntent);
+
+                        }
+
+                    } else if (StringUtils.equals("groupBuy", map.get("directType"))) {
+                        if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
+                            Intent tuangouIntent = new Intent(context, TuangouxiangqingActivity.class);
+//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(tuangouIntent);
+
+                        } else {
+                            Intent tuangouIntent = new Intent(context, TuangouxiangqingActivity.class);
+                            tuangouIntent.putExtra("id", Long.parseLong(map.get("directTypeId")));
+//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            ActivityUtils.startActivity(tuangouIntent);
+                        }
+                    }
+
+                } else if (StringUtils.equals("html", map.get("type"))) {
+                    Intent i = new Intent(context, WebActivity.class);
+                    i.putExtra("webUrl", map.get("url"));
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    ActivityUtils.startActivity(i);
+                }
+            }
+        }
     }
-
 
     private void addAdvData() {
 
@@ -255,7 +336,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
     }
 
     private HomeFragment homeFragment;
-    private XiaoxiFragment toutiaoFragment;
+    private XiaoxiFragment xiaoxiFragment;
     private PengyouquanFragment pengyouquanFragment;
     private WodeFragment wodeFragment;
 
@@ -294,7 +375,12 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
 
         pengyouquanMessageItem.setHideOnSelect(false);
         pengyouquanItem.setBadgeItem(pengyouquanMessageItem);
-        pengyouquanMessageItem.hide();
+        if(SPUtils.getInstance().getInt("pengyouquanNews")>0){
+            pengyouquanMessageItem.setText(SPUtils.getInstance().getInt("pengyouquanNews")+"");
+
+        }else {
+            pengyouquanMessageItem.hide();
+        }
 
         mBottomnavigation.addItem(homeItem).addItem(pengyouquanItem).addItem(xiaoxiItem).addItem(wodeItem).initialise();
 
@@ -332,13 +418,13 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
                         isNetWork();
 
                         choicedWhitchFragment = 2;
-                        if (toutiaoFragment == null) {
+                        if (xiaoxiFragment == null) {
 
-                            toutiaoFragment = new XiaoxiFragment();
-                            fragmentTransaction.add(R.id.home_container, toutiaoFragment);
+                            xiaoxiFragment = new XiaoxiFragment();
+                            fragmentTransaction.add(R.id.home_container, xiaoxiFragment);
                         }
                         hideFragment(fragmentTransaction);
-                        fragmentTransaction.show(toutiaoFragment);
+                        fragmentTransaction.show(xiaoxiFragment);
                         break;
                     case 3:
                         isNetWork();
@@ -396,7 +482,6 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
         super.onResume();
 
 
-
         if (StringUtils.isEmpty(SPUtils.getInstance().getString("isLogin"))) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -415,7 +500,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
                     break;
                 case 2:
                     hideFragment(fragmentTransaction);
-                    fragmentTransaction.show(toutiaoFragment);
+                    fragmentTransaction.show(xiaoxiFragment);
                     mBottomnavigation.selectTab(choicedWhitchFragment);
                     StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.baise), false);
                     break;
@@ -423,6 +508,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
             fragmentTransaction.commit();
         }
     }
+
     //隐藏所有的fragment
     private void hideFragment(FragmentTransaction transaction) {
 
@@ -435,8 +521,8 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
         if (pengyouquanFragment != null) {
             transaction.hide(pengyouquanFragment);
         }
-        if (toutiaoFragment != null) {
-            transaction.hide(toutiaoFragment);
+        if (xiaoxiFragment != null) {
+            transaction.hide(xiaoxiFragment);
         }
     }
 }

@@ -376,7 +376,7 @@
                 android:layout_height="@dimen/x100"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_zixun_layout">
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_tixinghsuikan_layout">
 
                 <ImageView
                     android:id="@+id/activity_publish_pyq_shuikeyikan_img"
@@ -435,15 +435,17 @@
                 android:background="@color/fengexian"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_shuikeyikan_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_tixinghsuikan_layout" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/activity_publish_pyq_tixinghsuikan_layout"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x100"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_shuikeyikan_layout">
+                app:layout_constraintTop_toBottomOf="@id/activity_publish_pyq_zixun_layout"
+                tools:layout_editor_absoluteY="525dp">
 
                 <ImageView
                     android:id="@+id/activity_publish_pyq_tixinghsuikan_img"
@@ -503,7 +505,7 @@
                 android:background="@color/fengexian"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_tixinghsuikan_layout" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_shuikeyikan_layout" />
 
             <TextView
                 android:id="@+id/textView162"

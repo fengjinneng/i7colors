@@ -1,7 +1,6 @@
 package com.company.qcy.ui.activity.pengyouquan;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -23,6 +22,7 @@ import com.amap.api.services.help.InputtipsQuery;
 import com.amap.api.services.help.Tip;
 import com.amap.api.services.poisearch.PoiResult;
 import com.amap.api.services.poisearch.PoiSearch;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -63,6 +63,7 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
      */
     private EditText mActivityPengyouquanChoiceAddressSearch;
     private RecyclerView mShurutishiRecyclerview;
+    private ImageView mActivityPengyouquanChoiceAddressDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,12 +117,12 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
                 df.format(date);//定位时间
 //                LogUtils.e("sadsadasd",amapLocation.getStreet());
 //                LogUtils.e("sadsadasd",amapLocation.getAoiName());
-                query = new PoiSearch.Query(amapLocation.getAoiName(), "", amapLocation.getCityCode());
+                query = new PoiSearch.Query("", "", amapLocation.getCityCode());
                 query.setPageSize(30);// 设置每页最多返回多少条poiitem
                 query.setPageNum(pageNo);//设置查询页码
                 poiSearch = new PoiSearch(this, query);
                 poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(amapLocation.getLatitude(),
-                        amapLocation.getLongitude()), 2000));
+                        amapLocation.getLongitude()), 1000));
 
                 poiSearch.setOnPoiSearchListener(new PoiSearch.OnPoiSearchListener() {
                     @Override
@@ -185,6 +186,9 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
         mToolbarBack.setOnClickListener(this);
         recyclerView = (RecyclerView) findViewById(R.id.activity_pengyouquan_choice_address_recyclerview);
 
+        mActivityPengyouquanChoiceAddressDelete = (ImageView) findViewById(R.id.activity_pengyouquan_choice_address_delete);
+        mActivityPengyouquanChoiceAddressDelete.setOnClickListener(this);
+
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
@@ -230,14 +234,16 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
                     recyclerView.setVisibility(View.GONE);
                     mShurutishiRecyclerview.setVisibility(View.VISIBLE);
                     shurutishi(s.toString());
-                }else {
+                    mActivityPengyouquanChoiceAddressDelete.setVisibility(View.VISIBLE);
+                } else {
                     recyclerView.setVisibility(View.VISIBLE);
                     mShurutishiRecyclerview.setVisibility(View.GONE);
+                    mActivityPengyouquanChoiceAddressDelete.setVisibility(View.GONE);
                 }
             }
         });
         shurutishiDatas = new ArrayList<>();
-        shurutishiAdapter = new ShurutishiAdapter(R.layout.item_fabu_address,shurutishiDatas);
+        shurutishiAdapter = new ShurutishiAdapter(R.layout.item_fabu_address, shurutishiDatas);
         mShurutishiRecyclerview = (RecyclerView) findViewById(R.id.activity_pengyouquan_choice_address_shurutishi_recyclerview);
         mShurutishiRecyclerview.setAdapter(shurutishiAdapter);
         LinearLayoutManager manager2 = new LinearLayoutManager(this);
@@ -260,6 +266,7 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
 //                shurutishiPageNo++;
 //            }
 //        }, mShurutishiRecyclerview);
+
     }
 
     private int shurutishiPageNo;
@@ -270,7 +277,6 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
         //第二个参数传入null或者“”代表在全国进行检索，否则按照传入的city进行检索
         InputtipsQuery inputquery = new InputtipsQuery(s, cityName);
         inputquery.setCityLimit(true);//限制在当前城市
-
         Inputtips inputTips = new Inputtips(this, inputquery);
         inputTips.setInputtipsListener(this);
         inputTips.requestInputtipsAsyn();
@@ -298,6 +304,9 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
                 break;
             case R.id.toolbar_back:
                 finish();
+                break;
+            case R.id.activity_pengyouquan_choice_address_delete:
+                mActivityPengyouquanChoiceAddressSearch.setText("");
                 break;
         }
     }

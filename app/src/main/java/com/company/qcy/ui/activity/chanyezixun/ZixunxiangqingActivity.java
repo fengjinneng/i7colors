@@ -3,6 +3,7 @@ package com.company.qcy.ui.activity.chanyezixun;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.view.View;
@@ -12,6 +13,8 @@ import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
@@ -34,10 +37,10 @@ import com.lzy.okgo.request.GetRequest;
 
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
+
+@Route(path = "/information/informationDetail")
 public class ZixunxiangqingActivity extends BaseActivity implements View.OnClickListener {
 
-
-    private Long id;//资讯的ID
     private WebView mWebview;
     /**
      * 七彩云应邀参加孟...
@@ -59,11 +62,22 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
      */
     private TextView mToolbarText;
 
+
+    //变量名与传参时一致且修饰符为public
+    @Autowired
+    public String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zixunxiangqing);
-        id = getIntent().getLongExtra("id", 0);
+
+        Uri data = getIntent().getData();
+        //不为空说明是外部网页传过来的
+        if (!ObjectUtils.isEmpty(data)) {
+            id = data.getQueryParameter("id");
+        } else id = getIntent().getStringExtra("id");
+
         initView();
         addData(id);
 
@@ -100,7 +114,7 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
     private boolean haveNext = true;
     private boolean havePrev = true;
 
-    private void addData(Long id) {
+    private void addData(String id) {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INFORMATIONDETAIL)
                 .tag(this)
 
@@ -207,19 +221,28 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
                 if (!haveNext) {
                     return;
                 }
-                addData(nextBean.getId());
+                addData(nextBean.getId()+"");
                 break;
 
             case R.id.activity_zixunxiangqing_prev:
                 if (!havePrev) {
                     return;
                 }
-                addData(prevBean.getId());
+                addData(prevBean.getId()+"");
                 break;
             case R.id.toolbar_back:
                 finish();
                 break;
             case R.id.toolbar_text:
+
+                if(StringUtils.isEmpty(id)){
+                    return;
+                }
+
+                if(ObjectUtils.isEmpty(newsBean)){
+                    return;
+                }
+
 
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权
@@ -242,7 +265,7 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
                 }
 
                 // url仅在微信（包括好友和朋友圈）中使用
-                oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/voteList.html?id=" + newsBean.getId());
+                oks.setUrl(ShareUtil.shareUrl+"information.html?id=" + newsBean.getId());
                 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
                 // site是分享此内容的网站名称，仅在QQ空间使用

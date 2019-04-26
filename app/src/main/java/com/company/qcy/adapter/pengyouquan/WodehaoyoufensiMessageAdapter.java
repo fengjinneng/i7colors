@@ -38,7 +38,7 @@ public class WodehaoyoufensiMessageAdapter extends BaseQuickAdapter<Wodehaoyoufe
 
         if (!ObjectUtils.isEmpty(item.getCreatedAtStamp())) {
             time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp()))
-                    .substring(0, 10));
+                    .substring(0, 16));
         }
 
         if (StringUtils.equals("friend", item.getType())) {
@@ -49,6 +49,7 @@ public class WodehaoyoufensiMessageAdapter extends BaseQuickAdapter<Wodehaoyoufe
             add.setVisibility(View.VISIBLE);
 
             if (StringUtils.equals("1", item.getIsFollow())) {
+                add.setText("已添加");
                 add.setTextColor(mContext.getResources().getColor(R.color.erjibiaoti));
                 add.setBackground(mContext.getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
             } else {

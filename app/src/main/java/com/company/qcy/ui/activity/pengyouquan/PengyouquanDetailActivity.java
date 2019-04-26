@@ -121,7 +121,6 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
     private String from;
     private ImageView mActivityPengyouquanDetailLianjieImg;
     private TextView mActivityPengyouquanDetailLianjieTitle;
-    private TextView mActivityPengyouquanDetailLianjieContent;
     private ConstraintLayout mActivityPengyouquanDetailLianjieLayout;
 
     @Override
@@ -188,7 +187,6 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
         mFragmentPinglunDianzanText = (TextView) findViewById(R.id.fragment_pinglun_dianzan_text);
         mActivityPengyouquanDetailLianjieImg = (ImageView) findViewById(R.id.activity_pengyouquan_detail_lianjie_img);
         mActivityPengyouquanDetailLianjieTitle = (TextView) findViewById(R.id.activity_pengyouquan_detail_lianjie_title);
-        mActivityPengyouquanDetailLianjieContent = (TextView) findViewById(R.id.activity_pengyouquan_detail_lianjie_content);
         mActivityPengyouquanDetailLianjieLayout = (ConstraintLayout) findViewById(R.id.activity_pengyouquan_detail_lianjie_layout);
         mActivityPengyouquanDetailLianjieLayout.setOnClickListener(this);
         mActivityPengyouquanDetailImg.setOnClickListener(this);
@@ -324,7 +322,7 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(PengyouquanDetailActivity.this, ZixunxiangqingActivity.class);
-                    intent.putExtra("id", pengyouquanBean.getShareBean().getId());
+                    intent.putExtra("id", pengyouquanBean.getShareBean().getId()+"");
                     ActivityUtils.startActivity(intent);
                 }
             });

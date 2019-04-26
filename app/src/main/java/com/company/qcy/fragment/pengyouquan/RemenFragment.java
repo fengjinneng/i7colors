@@ -54,6 +54,7 @@ import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.pengyouquan.ErjihuatiDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.MapActivity;
+import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PengyouquanDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.ShipinbofangActivity;
@@ -223,9 +224,14 @@ public class RemenFragment extends BaseFragment {
 
                         break;
                     case R.id.item_pengyouquan_headimg:
-                        Intent i = new Intent(getActivity(), PersonInfoActivity.class);
-                        i.putExtra("userId", bean.getUserId());
-                        ActivityUtils.startActivity(i);
+                        if (StringUtils.equals("1", bean.getIsCharger())) {
+                            Intent my = new Intent(getActivity(), MyPersonInfoActivity.class);
+                            ActivityUtils.startActivity(my);
+                        } else {
+                            Intent other = new Intent(getActivity(), PersonInfoActivity.class);
+                            other.putExtra("userId", bean.getUserId());
+                            ActivityUtils.startActivity(other);
+                        }
                         break;
                     case R.id.item_pengyouquan_name:
                         Intent name = new Intent(getActivity(), PersonInfoActivity.class);
@@ -305,7 +311,7 @@ public class RemenFragment extends BaseFragment {
                     case R.id.item_pengyouquan_lianjie_layout:
                         Intent lianjieIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
                         Long id = bean.getShareBean().getId();
-                        lianjieIntent.putExtra("id", id);
+                        lianjieIntent.putExtra("id", id+"");
                         ActivityUtils.startActivity(lianjieIntent);
                         break;
                 }
@@ -516,7 +522,7 @@ public class RemenFragment extends BaseFragment {
     public void showPop(Long id, int tieziPosition) {
         View inflate = LayoutInflater.from(getContext()).inflate(R.layout.pengyouquan_huifu_layout, null);
 
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 100, true);
+        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
 
         btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
         //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);

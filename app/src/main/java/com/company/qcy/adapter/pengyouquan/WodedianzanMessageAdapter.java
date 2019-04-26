@@ -35,7 +35,7 @@ public class WodedianzanMessageAdapter extends BaseQuickAdapter<WodedianzanMessa
         TextView time = (TextView) helper.getView(R.id.item_wodedianzan_message_time);
         if (!ObjectUtils.isEmpty(item.getCreatedAtStamp())) {
             time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp()))
-                    .substring(0, 10));
+                    .substring(0, 16) );
         }
 
         TextView secondname = (TextView) helper.getView(R.id.item_wodedianzan_message_secondname);

@@ -162,9 +162,14 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
 
                         break;
                     case R.id.item_pengyouquan_headimg:
-                        Intent i = new Intent(ErjihuatiDetailActivity.this, PersonInfoActivity.class);
-                        i.putExtra("userId", bean.getUserId());
-                        ActivityUtils.startActivity(i);
+                        if (StringUtils.equals("1", bean.getIsCharger())) {
+                            Intent my = new Intent(ErjihuatiDetailActivity.this, MyPersonInfoActivity.class);
+                            ActivityUtils.startActivity(my);
+                        } else {
+                            Intent other = new Intent(ErjihuatiDetailActivity.this, PersonInfoActivity.class);
+                            other.putExtra("userId", bean.getUserId());
+                            ActivityUtils.startActivity(other);
+                        }
                         break;
                     case R.id.item_pengyouquan_name:
                         Intent name = new Intent(ErjihuatiDetailActivity.this, PersonInfoActivity.class);
@@ -238,14 +243,14 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                     case R.id.item_pengyouquan_lianjie_layout:
                         Intent lianjieIntent = new Intent(ErjihuatiDetailActivity.this, ZixunxiangqingActivity.class);
                         Long id = bean.getShareBean().getId();
-                        lianjieIntent.putExtra("id", id);
+                        lianjieIntent.putExtra("id", id+"");
                         ActivityUtils.startActivity(lianjieIntent);
                         break;
                 }
             }
 
         });
-//        addBannerData();
+        addBannerData();
     }
 
 
@@ -297,7 +302,6 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
     }
 
 
-
     private void addBannerData() {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYHUATI)
                 .tag(this)
@@ -318,9 +322,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                                 return;
                             }
                             List<HuatiBean> huatiBeans = JSONObject.parseArray(data.toJSONString(), HuatiBean.class);
-                            if(!StringUtils.isEmpty(huatiBeans.get(0).getBanner())){
-//                                addHeadView(huatiBeans.get(0).getBanner());
-                            }
+                            addHeadView(huatiBeans.get(0).getBanner(), huatiBeans.get(0).getDescription());
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -343,13 +345,16 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
         request.execute(stringCallback);
     }
 
-    private int headViewCount = 0;
 
-    private void addHeadView(String banner) {
-        headViewCount++;
+    private void addHeadView(String banner, String description) {
         View inflate = LayoutInflater.from(this).inflate(R.layout.head_img_huodong, null);
         ImageView img = inflate.findViewById(R.id.head_img_huodong_img);
-        GlideUtils.loadImageRct(this,ServerInfo.IMAGE+banner,img);
+        TextView content = inflate.findViewById(R.id.head_img_huodong_content);
+        if (!StringUtils.isEmpty(description)) {
+            content.setVisibility(View.VISIBLE);
+            content.setText(description);
+        }
+        GlideUtils.loadImageRct(this, ServerInfo.IMAGE + banner, img);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -437,7 +442,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
     public void showPop(Long id, int tieziPosition) {
         View inflate = LayoutInflater.from(ErjihuatiDetailActivity.this).inflate(R.layout.pengyouquan_huifu_layout, null);
 
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 100, true);
+        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
 
         btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
         //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);
@@ -534,9 +539,9 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                             ToastUtils.showShort(msg);
                             if (data) {
                                 adapter.getData().remove(position);
-                                adapter.notifyItemRemoved(position);
+                                adapter.notifyItemRemoved(position + 1);
                                 if (position != adapter.getData().size()) { // 如果移除的是最后一个，忽略
-                                    adapter.notifyItemRangeChanged(position, adapter.getData().size() - position);
+                                    adapter.notifyItemRangeChanged(position + 1, adapter.getData().size() - position);
                                 }
                             }
                             return;
@@ -691,7 +696,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", "")
-                .params("from",getResources().getString(R.string.app_android))
+                .params("from", getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
@@ -710,7 +715,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                             List<PengyouquanBean.CommentListBean> commentListBeans = adapter.getData().get(tieziPositon).getCommentList();
                             commentListBeans.add(commentListBean);
                             pengyouquanBean.setCommentList(commentListBeans);
-                            adapter.notifyItemChanged(tieziPositon+headViewCount);
+                            adapter.notifyItemChanged(tieziPositon + 1);
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -845,7 +850,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                             likeList.add(likeListBean);
                             PengyouquanBean pengyouquanBean = adapter.getData().get(tieziPosition);
                             pengyouquanBean.setLikeList(likeList);
-                            adapter.notifyItemChanged(tieziPosition+headViewCount);
+                            adapter.notifyItemChanged(tieziPosition + 1);
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {

@@ -19,10 +19,10 @@ public class DateUtil {
     public static String getFriendlytime(Date d){
         long delta = (new Date().getTime()-d.getTime())/1000;
         if(delta<=0)return d.toLocaleString();
-        if(delta/(60*60*24*365) > 0)return TimeUtils.date2String(d);
-        if(delta/(60*60*24*30) > 0)return TimeUtils.date2String(d);
-        if(delta/(60*60*24*7) > 0)return TimeUtils.date2String(d);
-        if(delta/(60*60*24) > 0) return TimeUtils.date2String(d);
+        if(delta/(60*60*24*365) > 0)return TimeUtils.date2String(d).substring(0,16);
+        if(delta/(60*60*24*30) > 0)return TimeUtils.date2String(d).substring(0,16);
+        if(delta/(60*60*24*7) > 0)return TimeUtils.date2String(d).substring(0,16);
+        if(delta/(60*60*24) > 0) return TimeUtils.date2String(d).substring(0,16);
         if(delta/(60*60) > 0)return delta/(60*60) +"小时前";
         if(delta/(60) > 0) return delta/(60) +"分钟前";
         return "刚刚";

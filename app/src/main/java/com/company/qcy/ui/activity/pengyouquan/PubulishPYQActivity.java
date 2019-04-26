@@ -806,7 +806,7 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.activity_pubylish_pey_publish:
                 KeyboardUtils.hideSoftInput(this);
-                if (ObjectUtils.isEmpty(updateImgList) && ObjectUtils.isEmpty(videoUri) && StringUtils.isTrimEmpty(mActivityPubylishPeyContent.getText().toString())) {
+                if (ObjectUtils.isEmpty(updateImgList) && ObjectUtils.isEmpty(videoUri) && StringUtils.isTrimEmpty(mActivityPubylishPeyContent.getText().toString())&&StringUtils.isEmpty(upLoadShareId)) {
                     ToastUtils.showShort("不能发空的内容!");
                     return;
                 }
@@ -833,6 +833,8 @@ public class PubulishPYQActivity extends BaseActivity implements View.OnClickLis
                     return;
                 } else if (!StringUtils.isTrimEmpty(mActivityPubylishPeyContent.getText().toString())) {
                     updateChunText(mActivityPubylishPeyContent.getText().toString());
+                }else {
+                    updateChunText("");
                 }
                 break;
             case R.id.activity_publish_pyq_address_layout:

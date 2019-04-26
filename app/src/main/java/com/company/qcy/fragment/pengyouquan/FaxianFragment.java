@@ -44,6 +44,7 @@ import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -142,6 +143,26 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
         });
         addData();
         getMyInfo();
+
+        mSlidingTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                for (int i = 0; i < popList.size(); i++) {
+                    if(i==position){
+                        popList.get(i).setChecked(true);
+                    }else {
+                        popList.get(i).setChecked(false);
+                    }
+                }
+                if(!ObjectUtils.isEmpty(huatiAdapter)){
+                    huatiAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+            }
+        });
 
     }
 
@@ -273,6 +294,8 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                             popList.add(huatiBean);
                             popList.addAll(yijiHuati);
 
+                            popList.get(0).setChecked(true);
+
                             mFViewpager.setAdapter(new BaseViewpageAdapter(getActivity().getSupportFragmentManager(), fragments));
                             mSlidingTabLayout.setViewPager(mFViewpager, arr);
                             return;
@@ -322,7 +345,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
                         lp.alpha = 0.6f;
                         getActivity().getWindow().setAttributes(lp);
-                        mSlidingTabLayout.setVisibility(View.INVISIBLE);
+//                        mSlidingTabLayout.setVisibility(View.INVISIBLE);
                         popupWindow.showAsDropDown(mSlidingTabLayout);
                         mFragmentFaxianXiala.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.shangjiantou_hongse));
                     }
@@ -330,7 +353,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                 }
 
                 mFragmentFaxianXiala.setImageDrawable(getActivity().getResources().getDrawable(R.mipmap.shangjiantou_hongse));
-                mSlidingTabLayout.setVisibility(View.INVISIBLE);
+//                mSlidingTabLayout.setVisibility(View.INVISIBLE);
                 View view = LayoutInflater.from(getActivity()).inflate(R.layout.popwindow_huati, null);
                 huatiRecyclerview = view.findViewById(R.id.popwindow_huati_recyclerview);
                 GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 4);
@@ -353,6 +376,14 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                 huatiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                        for (int i = 0; i < popList.size(); i++) {
+                            if(i==position){
+                                popList.get(i).setChecked(true);
+                            }else {
+                                popList.get(i).setChecked(false);
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
                         mSlidingTabLayout.setCurrentTab(position);
                         popupWindow.dismiss();
                     }
@@ -361,7 +392,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                 popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
                     @Override
                     public void onDismiss() {
-                        mSlidingTabLayout.setVisibility(View.VISIBLE);
+//                        mSlidingTabLayout.setVisibility(View.VISIBLE);
                         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
                         lp.alpha = 1f;
                         getActivity().getWindow().setAttributes(lp);

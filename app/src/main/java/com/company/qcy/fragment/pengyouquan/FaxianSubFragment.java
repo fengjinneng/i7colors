@@ -53,6 +53,7 @@ import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.pengyouquan.ErjihuatiDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.MapActivity;
+import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PengyouquanDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.ShipinbofangActivity;
@@ -158,7 +159,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_faxian_sub,container, false);
+        return inflater.inflate(R.layout.fragment_faxian_sub, container, false);
 
     }
 
@@ -177,8 +178,6 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
     private SwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
     LinearLayoutManager layoutManager;
-
-
 
 
     private void initView(View view) {
@@ -243,9 +242,15 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
 
                         break;
                     case R.id.item_pengyouquan_headimg:
-                        Intent i = new Intent(getActivity(), PersonInfoActivity.class);
-                        i.putExtra("userId", bean.getUserId());
-                        ActivityUtils.startActivity(i);
+                        if (StringUtils.equals("1", bean.getIsCharger())) {
+                            Intent my = new Intent(getActivity(), MyPersonInfoActivity.class);
+                            ActivityUtils.startActivity(my);
+                        } else {
+                            Intent other = new Intent(getActivity(), PersonInfoActivity.class);
+                            other.putExtra("userId", bean.getUserId());
+                            ActivityUtils.startActivity(other);
+                        }
+
                         break;
                     case R.id.item_pengyouquan_name:
                         Intent name = new Intent(getActivity(), PersonInfoActivity.class);
@@ -276,7 +281,6 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                             });
                             builder.show();
                         } else {
-
                             addFollow(bean.getUserId());
                         }
                         break;
@@ -317,15 +321,15 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                         ActivityUtils.startActivity(iAddress);
                         break;
                     case R.id.item_pengyouquan_huati:
-                        Intent huati = new Intent(getActivity(),ErjihuatiDetailActivity.class);
-                        huati.putExtra("level2TopicId",bean.getTopic().getTopicList().get(0).getId()+"");
-                        huati.putExtra("name",bean.getTopic().getTopicList().get(0).getTitle());
+                        Intent huati = new Intent(getActivity(), ErjihuatiDetailActivity.class);
+                        huati.putExtra("level2TopicId", bean.getTopic().getTopicList().get(0).getId() + "");
+                        huati.putExtra("name", bean.getTopic().getTopicList().get(0).getTitle());
                         ActivityUtils.startActivity(huati);
                         break;
                     case R.id.item_pengyouquan_lianjie_layout:
                         Intent lianjieIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
                         Long id = bean.getShareBean().getId();
-                        lianjieIntent.putExtra("id", id);
+                        lianjieIntent.putExtra("id", id+"");
                         ActivityUtils.startActivity(lianjieIntent);
                         break;
                 }
@@ -365,8 +369,8 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                             ToastUtils.showShort(msg);
                             if (data) {
                                 adapter.getData().remove(position);
-                                adapter.notifyItemRemoved(position );
-                                LogUtils.e("sadsadsadadasd",position+" --- "+adapter.getData().size());
+                                adapter.notifyItemRemoved(position);
+                                LogUtils.e("sadsadsadadasd", position + " --- " + adapter.getData().size());
                                 if (position != adapter.getData().size()) { // 如果移除的是最后一个，忽略
                                     adapter.notifyItemRangeChanged(position, adapter.getData().size() - position);
                                 }
@@ -618,7 +622,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", "")
-                .params("from",getActivity().getResources().getString(R.string.app_android))
+                .params("from", getActivity().getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
@@ -637,7 +641,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                             List<PengyouquanBean.CommentListBean> commentListBeans = adapter.getData().get(tieziPositon).getCommentList();
                             commentListBeans.add(commentListBean);
                             pengyouquanBean.setCommentList(commentListBeans);
-                            adapter.notifyItemChanged(tieziPositon );
+                            adapter.notifyItemChanged(tieziPositon);
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -674,7 +678,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
                 .params("pageSize", 10)
-                .params("level1TopicId",mParam1)
+                .params("level1TopicId", mParam1)
                 .params("token", SPUtils.getInstance().getString("token"));
 
         StringCallback stringCallback = new StringCallback() {
@@ -851,7 +855,7 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                             likeList.add(likeListBean);
                             PengyouquanBean pengyouquanBean = adapter.getData().get(tieziPosition);
                             pengyouquanBean.setLikeList(likeList);
-                            adapter.notifyItemChanged(tieziPosition );
+                            adapter.notifyItemChanged(tieziPosition);
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {

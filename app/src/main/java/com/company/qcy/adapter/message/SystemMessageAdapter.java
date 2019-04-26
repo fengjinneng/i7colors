@@ -25,11 +25,13 @@ public class SystemMessageAdapter extends BaseQuickAdapter<SystemMeassageBean, B
         helper.setText(R.id.item_system_message_content,item.getContent());
         helper.setText(R.id.item_system_message_time,item.getCreatedAt());
         helper.setText(R.id.item_system_message_title,item.getTitle());
+        ImageView imageView = (ImageView) helper.getView(R.id.item_system_message_img);
 
         if(!StringUtils.isEmpty(item.getPic())){
-            ImageView view = (ImageView) helper.getView(R.id.item_system_message_img);
-            view.setVisibility(View.VISIBLE);
-            GlideUtils.loadImage(mContext, ServerInfo.IMAGE+item.getPic(),view);
+            imageView.setVisibility(View.VISIBLE);
+            GlideUtils.loadImage(mContext, ServerInfo.IMAGE+item.getPic(),imageView);
+        }else {
+            imageView.setVisibility(View.GONE);
         }
     }
 }

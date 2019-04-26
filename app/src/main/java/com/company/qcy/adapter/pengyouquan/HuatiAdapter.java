@@ -25,9 +25,10 @@ public class HuatiAdapter extends BaseQuickAdapter<HuatiBean, BaseViewHolder> {
 
         if (item.isChecked()) {
             name.setTextColor(mContext.getResources().getColor(R.color.hongse));
+            name.setBackground(mContext.getResources().getDrawable(R.drawable.background_huatibiankuang_red));
         } else {
             name.setTextColor(mContext.getResources().getColor(R.color.putongwenben));
+            name.setBackground(mContext.getResources().getDrawable(R.drawable.background_huatibiankuang));
         }
-
     }
 }

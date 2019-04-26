@@ -238,7 +238,12 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         helper.addOnClickListener(R.id.snsBtn);
         ExpandTextView expandTextView = (ExpandTextView) helper.getView(R.id.item_pengyouquan_content);
         CharSequence cs = item.getContent();
-        expandTextView.setText(cs);
+        if(StringUtils.isEmpty(cs)){
+            expandTextView.setVisibility(View.GONE);
+        }   else {
+            expandTextView.setVisibility(View.VISIBLE);
+            expandTextView.setText(cs);
+        }
 
         MultiImageView multiImageView = (MultiImageView) helper.getView(R.id.item_pengyouquan_multiImageView);
 
@@ -450,7 +455,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                         int position) {
         View inflate = LayoutInflater.from(mContext).inflate(R.layout.pengyouquan_huifu_layout, null);
 
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 100, true);
+        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
 
         btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
         //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);

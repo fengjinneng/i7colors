@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
@@ -78,9 +79,11 @@ public class XuanshouDetailActivity extends BaseActivity implements View.OnClick
      */
     private Button mActivityXuanshouDetailToupiao;
 
+    @Autowired
+    public String mainId; //投票活动的ID
 
-    private String mainId; //投票活动的ID
-    private String id;    //选手的Id
+    @Autowired
+    public String id;    //选手的Id
     private TextView mToolbarText;
 
     @Override

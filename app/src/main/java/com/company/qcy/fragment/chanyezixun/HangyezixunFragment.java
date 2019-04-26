@@ -132,19 +132,6 @@ public class HangyezixunFragment extends Fragment {
                 refreshListener.onRefresh();
             }
         });
-        adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-
-
-                Intent intent = new Intent(activity, ZixunxiangqingActivity.class);
-                Long id = ((NewsBean) adapter.getData().get(position)).getId();
-                intent.putExtra("id", id);
-                ActivityUtils.startActivity(intent);
-
-            }
-        });
-
 
         if (StringUtils.equals("pengyouquan_fabu", mParam1)) {
 
@@ -177,7 +164,7 @@ public class HangyezixunFragment extends Fragment {
 
                     Intent intent = new Intent(activity, ZixunxiangqingActivity.class);
                     Long id = ((NewsBean) adapter.getData().get(position)).getId();
-                    intent.putExtra("id", id);
+                    intent.putExtra("id", id+"");
                     ActivityUtils.startActivity(intent);
 
                 }

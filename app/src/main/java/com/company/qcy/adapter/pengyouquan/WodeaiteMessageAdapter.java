@@ -35,7 +35,7 @@ public class WodeaiteMessageAdapter extends BaseQuickAdapter<WodeaiteMessageBean
         TextView time = (TextView) helper.getView(R.id.item_aite_message_time);
         if (!ObjectUtils.isEmpty(item.getCreatedAtStamp())) {
             time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp()))
-                    .substring(0, 10));
+                    .substring(0, 16) );
         }
 
         ImageView img = (ImageView) helper.getView(R.id.item_aite_message_img);

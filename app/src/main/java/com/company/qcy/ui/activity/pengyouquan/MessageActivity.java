@@ -70,7 +70,7 @@ public class MessageActivity extends BaseActivity implements View.OnClickListene
         mActivityMessageHaoyouLayout = (ConstraintLayout) findViewById(R.id.activity_message_haoyou_layout);
         mActivityMessageHaoyouLayout.setOnClickListener(this);
 
-        mToolbarTitle.setText("我的消息");
+        mToolbarTitle.setText("印染圈消息");
 
         mActivityMessagePinglunYoujiantouLayout = (ConstraintLayout) findViewById(R.id.activity_message_pinglun_youjiantou_layout);
         mActivityMessageDianzanYoujiantouLayout = (ConstraintLayout) findViewById(R.id.activity_message_dianzan_youjiantou_layout);

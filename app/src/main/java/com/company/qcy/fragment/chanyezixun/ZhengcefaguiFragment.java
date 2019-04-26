@@ -165,7 +165,7 @@ public class ZhengcefaguiFragment extends Fragment {
 
                     Intent intent = new Intent(activity, ZixunxiangqingActivity.class);
                     Long id = ((NewsBean) adapter.getData().get(position)).getId();
-                    intent.putExtra("id", id);
+                    intent.putExtra("id", id+"");
                     ActivityUtils.startActivity(intent);
 
                 }
