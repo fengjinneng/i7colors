@@ -44,6 +44,8 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.webianks.library.PopupBubble;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -149,6 +151,7 @@ public class PengyouquanFragment extends BaseFragment {
         mPopupBubble.setPopupBubbleListener(new PopupBubble.PopupBubbleClickListener() {
             @Override
             public void bubbleClicked(Context context) {
+                EventBus.getDefault().post(new MessageBean(MessageBean.JPush.DELETELUNCHNUMBER));
                 ActivityUtils.startActivity(getActivity(), MessageActivity.class);
             }
         });

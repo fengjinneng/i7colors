@@ -12,8 +12,8 @@
         android:id="@+id/item_pengyouquan_record_mouth_and_day"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="10/8"
+        app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_record_time"
         app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_record_time"
         app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_record_time" />
 
@@ -22,9 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/x40"
-        android:layout_marginTop="@dimen/x30"
+        android:layout_marginTop="@dimen/x16"
         android:gravity="center"
         android:text="今天"
+        android:paddingBottom="@dimen/x20"
         android:textColor="@color/erjibiaoti"
         android:textSize="@dimen/x36"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +45,7 @@
         <ImageView
             android:id="@+id/item_pengyouquan_record_img"
             android:layout_width="@dimen/x120"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/x120"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -56,16 +57,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/x16"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:minLines="3"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_record_img"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginLeft="0dp" />
 
         <ImageView
             android:id="@+id/item_pengyouquan_record_play"
@@ -88,9 +87,7 @@
         android:layout_marginStart="@dimen/x150"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@color/fengexian"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_record_content_layout">
@@ -120,5 +117,13 @@
             app:layout_constraintStart_toEndOf="@+id/item_pengyouquan_record_lianjie_img"
             app:layout_constraintTop_toTopOf="@+id/item_pengyouquan_record_lianjie_img" />
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView318"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_record_lianjie_layout" />
 
 </android.support.constraint.ConstraintLayout>

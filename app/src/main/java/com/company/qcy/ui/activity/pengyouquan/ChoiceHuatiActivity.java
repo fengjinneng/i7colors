@@ -113,6 +113,8 @@ public class ChoiceHuatiActivity extends BaseActivity implements View.OnClickLis
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONArray data = jsonObject.getJSONArray("data");
                             if (ObjectUtils.isEmpty(data)) {
+                                mChoiceHuatiSlidingTabLayout.setVisibility(View.GONE);
+                                mChoiceHuatiXiala.setVisibility(View.GONE);
                                 return;
                             }
                             yijiHuati = JSONObject.parseArray(data.toJSONString(), HuatiBean.class);

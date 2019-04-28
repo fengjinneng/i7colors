@@ -7,6 +7,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.company.qcy.R;
@@ -24,6 +25,7 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
     private ImageView mActivityWebBack;
     private ImageView mActivityWebForward;
     private ImageView mActivityWebShuaxin;
+    private ProgressBar mActivityWebProgressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,32 +37,7 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
 
     private void initView() {
         mWebview = (WebView) findViewById(R.id.activity_web_webview);
-//        WebSettings webSettings = mWebview.getSettings();
-        //支持缩放，默认为true。
-//        webSettings.setSupportZoom(true);
-        //调整图片至适合webview的大小
-//        webSettings.setUseWideViewPort(true);
-        // 缩放至屏幕的大小
-//        webSettings.setLoadWithOverviewMode(true);
-        //设置默认编码
-//        webSettings.setDefaultTextEncodingName("utf-8");
-        //设置自动加载图片
-//        mWebview.getSettings().setJavaScriptEnabled(true);
-//        webSettings.setLoadsImagesAutomatically(true);
-//        mWebview.getSettings().setBlockNetworkImage(false);
 
-
-//        mWebview.setWebViewClient(new WebViewClient() {
-//            @Override
-//            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                //返回值是true的时候控制去WebView打开，为false调用系统浏览器或第三方浏览器
-//                //view.loadUrl(url);  // webview加载html,a标签超链接禁止跳转
-//                return true;
-//            }
-//
-//
-//        });
-//        mWebview.loadUrl(webUrl);
         mWebview.setWebChromeClient(new WebChromeClient());
         mWebview.setWebViewClient(new WebViewClient());
         mWebview.getSettings().setLoadWithOverviewMode(true);
@@ -69,7 +46,14 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
-        mToolbarTitle.setText("");
+        mActivityWebProgressbar = (ProgressBar) findViewById(R.id.activity_web_progressbar);
+
+        mActivityWebBack = (ImageView) findViewById(R.id.activity_web_back);
+        mActivityWebBack.setOnClickListener(this);
+        mActivityWebForward = (ImageView) findViewById(R.id.activity_web_forward);
+        mActivityWebForward.setOnClickListener(this);
+        mActivityWebShuaxin = (ImageView) findViewById(R.id.activity_web_shuaxin);
+        mActivityWebShuaxin.setOnClickListener(this);
 
 //        mWebview.setOnKeyListener(new View.OnKeyListener() {
 //            @Override
@@ -86,13 +70,32 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
 //            }
 //        });
 
+//        mWebview.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                super.onPageFinished(view, url);
+//
+//
+//                mToolbarTitle.setText(view.getTitle());
+//
+//                mActivityWebProgressbar.setVisibility(View.GONE);
+//            }
+//
+//        });
 
-        mActivityWebBack = (ImageView) findViewById(R.id.activity_web_back);
-        mActivityWebBack.setOnClickListener(this);
-        mActivityWebForward = (ImageView) findViewById(R.id.activity_web_forward);
-        mActivityWebForward.setOnClickListener(this);
-        mActivityWebShuaxin = (ImageView) findViewById(R.id.activity_web_shuaxin);
-        mActivityWebShuaxin.setOnClickListener(this);
+
+        WebChromeClient wvcc = new WebChromeClient() {
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                mToolbarTitle.setText(title);
+                mActivityWebProgressbar.setVisibility(View.GONE);
+            }
+        };
+
+        mWebview.setWebChromeClient(wvcc);
+
+
     }
 
     @Override

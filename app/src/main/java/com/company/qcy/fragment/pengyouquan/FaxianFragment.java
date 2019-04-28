@@ -29,9 +29,11 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.CommonUtils;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
@@ -134,9 +136,9 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
         mPengyouquanFaxianMyinfoLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(UserUtil.isLogin()){
+                if (UserUtil.isLogin()) {
                     ActivityUtils.startActivity(MyPersonInfoActivity.class);
-                }else {
+                } else {
                     ActivityUtils.startActivity(LoginActivity.class);
                 }
             }
@@ -148,13 +150,13 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
             @Override
             public void onTabSelect(int position) {
                 for (int i = 0; i < popList.size(); i++) {
-                    if(i==position){
+                    if (i == position) {
                         popList.get(i).setChecked(true);
-                    }else {
+                    } else {
                         popList.get(i).setChecked(false);
                     }
                 }
-                if(!ObjectUtils.isEmpty(huatiAdapter)){
+                if (!ObjectUtils.isEmpty(huatiAdapter)) {
                     huatiAdapter.notifyDataSetChanged();
                 }
             }
@@ -170,7 +172,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
     public void onRec(MessageBean messageBean) {
         super.onRec(messageBean);
 
-        switch (messageBean.getCode()){
+        switch (messageBean.getCode()) {
             //朋友圈头像修改成功
             case MessageBean.Code.PENGYOUQUANHEADIMGCHANGE:
                 GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + messageBean.getMeaasge(), mPengyouquanFaxianHeadimg);
@@ -211,11 +213,14 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                             PYQUserBean userBean = data.toJavaObject(PYQUserBean.class);
                             mPengyouquanFaxianName.setText(userBean.getNickName());
 
-                            if (StringUtils.isEmpty(userBean.getCommunityPhoto())) {
-                                mPengyouquanFaxianHeadimg.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.morentouxiang));
-                            } else {
-                                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + userBean.getCommunityPhoto(), mPengyouquanFaxianHeadimg);
-                            }
+                            MyCommonUtil.jiazaitouxiang(getActivity(),userBean.getCommunityPhoto(),mPengyouquanFaxianHeadimg);
+
+//                            if (StringUtils.isEmpty(userBean.getCommunityPhoto())) {
+//                                mPengyouquanFaxianHeadimg.setImageDrawable(getContext().getResources().getDrawable(R.mipmap.morentouxiang));
+//                            } else {
+//                                GlideUtils.loadCircleImage(getContext(), ServerInfo.IMAGE + userBean.getCommunityPhoto(), mPengyouquanFaxianHeadimg);
+//                            }
+
                             if (StringUtils.equals("1", userBean.getIsCompany())) {
                                 mPengyouquanFaxianRenzheng.setText("已认证");
                                 mPengyouquanFaxianRenzhengImg.setVisibility(View.VISIBLE);
@@ -262,7 +267,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYHUATI)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("level","1");
+                .params("level", "1");
 
         StringCallback stringCallback = new StringCallback() {
             @Override
@@ -275,6 +280,20 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONArray data = jsonObject.getJSONArray("data");
                             if (ObjectUtils.isEmpty(data)) {
+
+                                List<Fragment> fragments = new ArrayList<>();
+                                fragments.add(FaxianSubFragment.newInstance(""));
+
+                                String[] arr = new String[1];
+                                arr[0]="全部";
+                                HuatiBean huatiBean = new HuatiBean();
+                                huatiBean.setTitle("全部");
+                                huatiBean.setChecked(true);
+                                popList.add(huatiBean);
+
+                                mFViewpager.setAdapter(new BaseViewpageAdapter(getActivity().getSupportFragmentManager(), fragments));
+                                mSlidingTabLayout.setViewPager(mFViewpager, arr);
+
                                 return;
                             }
                             yijiHuati = JSONObject.parseArray(data.toJSONString(), HuatiBean.class);
@@ -283,10 +302,10 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                             for (int i = 0; i < yijiHuati.size(); i++) {
                                 fragments.add(FaxianSubFragment.newInstance(String.valueOf(yijiHuati.get(i).getId())));
                             }
-                            String[] arr = new String[yijiHuati.size()+1];
-                            arr[0] ="全部";
-                            for (int i = 1; i < yijiHuati.size()+1; i++) {
-                                arr[i] = yijiHuati.get(i-1).getTitle();
+                            String[] arr = new String[yijiHuati.size() + 1];
+                            arr[0] = "全部";
+                            for (int i = 1; i < yijiHuati.size() + 1; i++) {
+                                arr[i] = yijiHuati.get(i - 1).getTitle();
                             }
 
                             HuatiBean huatiBean = new HuatiBean();
@@ -377,9 +396,9 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                     @Override
                     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                         for (int i = 0; i < popList.size(); i++) {
-                            if(i==position){
+                            if (i == position) {
                                 popList.get(i).setChecked(true);
-                            }else {
+                            } else {
                                 popList.get(i).setChecked(false);
                             }
                         }

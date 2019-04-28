@@ -87,6 +87,9 @@ public class MessageBean {
     public static class JPush{
         //發送的系統消息
         public static final int XITONGXIAOXI=1001;
+
+        //清除lunch数字
+        public static final int DELETELUNCHNUMBER=1002;
     }
 
 

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.LogUtils;
@@ -29,7 +30,9 @@ import com.gjiazhe.wavesidebar.WaveSideBar;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+
 import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +53,10 @@ public class MyTongunluFriendsActivity extends BaseActivity implements View.OnCl
 
     private ArrayList<MyFriendsBean> tixingshuikanDatas;
     private ArrayList<MyFriendsBean> shuikeyikanDatas;
+    /**
+     * 啊哦，你没有一个好友哦！
+     */
+    private TextView mActivityMyFriendsNodata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,10 +64,10 @@ public class MyTongunluFriendsActivity extends BaseActivity implements View.OnCl
         setContentView(R.layout.activity_my_tongxunlu_friends);
 
         from = getIntent().getStringExtra("from");
-        if(StringUtils.equals("shuikeyikan",from)){
+        if (StringUtils.equals("shuikeyikan", from)) {
             shuikeyikanDatas = getIntent().getParcelableArrayListExtra("shuikeyikan");
         }
-        if(StringUtils.equals("tixingshuikan",from)){
+        if (StringUtils.equals("tixingshuikan", from)) {
             tixingshuikanDatas = getIntent().getParcelableArrayListExtra("tixingshuikan");
         }
         initView();
@@ -90,21 +97,23 @@ public class MyTongunluFriendsActivity extends BaseActivity implements View.OnCl
             }
         });
 
+        mActivityMyFriendsNodata = (TextView) findViewById(R.id.activity_my_friends_nodata);
+
         recyclerview = (RecyclerView) findViewById(R.id.activity_my_friends_recyclerview);
         adapter = new TongxunluFriendsAdapter(R.layout.item_my_tongxunlu_friend, datas);
         recyclerview.setAdapter(adapter);
         recyclerview.setLayoutManager(manager);
         recyclerview.addItemDecoration(new RecyclerviewDisplayDecoration(this));
 
-        if(!ObjectUtils.isEmpty(tixingshuikanDatas)){
+        if (!ObjectUtils.isEmpty(tixingshuikanDatas)) {
             datas.addAll(tixingshuikanDatas);
             adapter.setNewData(datas);
-        } else if(!ObjectUtils.isEmpty(shuikeyikanDatas)){
+        } else if (!ObjectUtils.isEmpty(shuikeyikanDatas)) {
             datas.addAll(shuikeyikanDatas);
             adapter.setNewData(datas);
         }
 
-        if(ObjectUtils.isEmpty(tixingshuikanDatas)&ObjectUtils.isEmpty(shuikeyikanDatas)){
+        if (ObjectUtils.isEmpty(tixingshuikanDatas) & ObjectUtils.isEmpty(shuikeyikanDatas)) {
             addData();
         }
         mToolbarText.setVisibility(View.VISIBLE);
@@ -127,6 +136,7 @@ public class MyTongunluFriendsActivity extends BaseActivity implements View.OnCl
                 }
             }
         });
+
     }
 
     private void addData() {
@@ -149,10 +159,13 @@ public class MyTongunluFriendsActivity extends BaseActivity implements View.OnCl
                             JSONObject object = jsonObject.getJSONObject("data");
 
                             if (ObjectUtils.isEmpty(object)) {
+                                if(ObjectUtils.isEmpty(datas)){
+                                    mActivityMyFriendsNodata.setVisibility(View.VISIBLE);
+                                }
                                 adapter.loadMoreEnd();
                                 return;
                             }
-
+                            mActivityMyFriendsNodata.setVisibility(View.GONE);
                             JSONArray a = object.getJSONArray("a");
                             JSONArray b = object.getJSONArray("b");
                             JSONArray c = object.getJSONArray("c");
@@ -209,7 +222,6 @@ public class MyTongunluFriendsActivity extends BaseActivity implements View.OnCl
                             List<MyFriendsBean> ys = JSONObject.parseArray(y.toJSONString(), MyFriendsBean.class);
                             List<MyFriendsBean> zs = JSONObject.parseArray(z.toJSONString(), MyFriendsBean.class);
                             List<MyFriendsBean> others = JSONObject.parseArray(other.toJSONString(), MyFriendsBean.class);
-
 
 
                             for (MyFriendsBean myFriendsBean : as) {
@@ -367,7 +379,7 @@ public class MyTongunluFriendsActivity extends BaseActivity implements View.OnCl
                     EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICETIXINGSHUIKAN, datas));
 
                 }
-                if(StringUtils.equals("shuikeyikan", from)){
+                if (StringUtils.equals("shuikeyikan", from)) {
                     //水可以看
                     EventBus.getDefault().post(new MessageBean(MessageBean.Code.CHOICESHUIKEYIKAN, datas));
                 }

@@ -77,62 +77,24 @@
         android:id="@+id/activity_web_webview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout45"
+        app:layout_constraintBottom_toTopOf="@+id/activity_web_no_bottom_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" >
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
 
     </WebView>
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout45"
+    <TextView
+        android:id="@+id/activity_web_no_bottom_tv"
         android:layout_width="0dp"
         android:layout_height="@dimen/x80"
+        android:text="阅读并接受"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/activity_web_back"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:paddingLeft="@dimen/x50"
-            android:paddingRight="@dimen/x50"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/activity_web_forward"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/icon_arrow_left" />
-
-        <ImageView
-            android:id="@+id/activity_web_forward"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-
-            android:paddingLeft="@dimen/x50"
-            android:paddingRight="@dimen/x50"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/activity_web_shuaxin"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/activity_web_back"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/icon_arrow_right" />
-
-        <ImageView
-            android:id="@+id/activity_web_shuaxin"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:paddingLeft="@dimen/x50"
-            android:paddingRight="@dimen/x50"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/activity_web_forward"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/shuaxin" />
-
-    </android.support.constraint.ConstraintLayout>
+    </TextView>
 
     <ProgressBar
         android:id="@+id/activity_web_progressbar"
@@ -143,7 +105,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout45"
+        app:layout_constraintBottom_toTopOf="@+id/activity_web_no_bottom_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/activity_web_webview" />

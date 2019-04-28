@@ -166,8 +166,6 @@ public class PengyouquanRecordFragment extends Fragment {
             }
         });
 
-        recyclerView.addItemDecoration(new RecyclerviewDisplayDecoration(getContext()));
-
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
         adapter.setLoadMoreView(new MyLoadMoreView());
 

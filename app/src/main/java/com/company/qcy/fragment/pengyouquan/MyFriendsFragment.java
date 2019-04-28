@@ -133,8 +133,6 @@ public class MyFriendsFragment extends Fragment {
             }
         }, recyclerView);
 
-        adapter.setLoadMoreView(new MyLoadMoreView());
-
         adapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
@@ -144,6 +142,9 @@ public class MyFriendsFragment extends Fragment {
                 ActivityUtils.startActivity(i);
             }
         });
+
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+        adapter.setLoadMoreView(new MyLoadMoreView());
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override

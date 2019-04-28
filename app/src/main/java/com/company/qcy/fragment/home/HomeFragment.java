@@ -333,10 +333,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                             List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
                             if (isRefresh) {
                                 bannerDatas.clear();
+                                bannerUrlDatas.clear();
                             }
 
                             for (int i = 0; i < bannerBeans.size(); i++) {
                                 bannerDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
+                                bannerUrlDatas.add(bannerBeans.get(i).getAd_url());
                             }
                             bannerAdapter.notifyDataSetChanged();
                             return;
@@ -408,11 +410,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     //banner的adapter
     private List<String> bannerDatas = new ArrayList<>();
+    private List<String> bannerUrlDatas = new ArrayList<>();
     private SingleAdvLayoutAdapter bannerAdapter;
 
     private void setBannerData() {
         SingleLayoutHelper helper = new SingleLayoutHelper();
-        bannerAdapter = new SingleAdvLayoutAdapter(context, helper, 1, bannerDatas);
+        bannerAdapter = new SingleAdvLayoutAdapter(context, helper, 1, bannerDatas,bannerUrlDatas);
         delegateAdapter.addAdapter(bannerAdapter);
     }
 

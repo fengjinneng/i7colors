@@ -26,11 +26,13 @@ import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.chanyezixun.NewsBean;
 import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
@@ -221,28 +223,27 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
                 if (!haveNext) {
                     return;
                 }
-                addData(nextBean.getId()+"");
+                addData(nextBean.getId() + "");
                 break;
 
             case R.id.activity_zixunxiangqing_prev:
                 if (!havePrev) {
                     return;
                 }
-                addData(prevBean.getId()+"");
+                addData(prevBean.getId() + "");
                 break;
             case R.id.toolbar_back:
                 finish();
                 break;
             case R.id.toolbar_text:
 
-                if(StringUtils.isEmpty(id)){
+
+                if (StringUtils.isEmpty(id)) {
                     return;
                 }
-
-                if(ObjectUtils.isEmpty(newsBean)){
+                if (ObjectUtils.isEmpty(newsBean)) {
                     return;
                 }
-
 
                 OnekeyShare oks = new OnekeyShare();
                 //关闭sso授权
@@ -265,7 +266,7 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
                 }
 
                 // url仅在微信（包括好友和朋友圈）中使用
-                oks.setUrl(ShareUtil.shareUrl+"information.html?id=" + newsBean.getId());
+                oks.setUrl(ShareUtil.shareUrl + "information.html?id=" + newsBean.getId());
                 // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
                 // site是分享此内容的网站名称，仅在QQ空间使用
@@ -278,6 +279,10 @@ public class ZixunxiangqingActivity extends BaseActivity implements View.OnClick
                 String label = "站内分享";
                 View.OnClickListener listener = new View.OnClickListener() {
                     public void onClick(View v) {
+                        if (!UserUtil.isLogin()) {
+                            ActivityUtils.startActivity(ZixunxiangqingActivity.this, LoginActivity.class);
+                            return;
+                        }
                         Intent intent = new Intent(ZixunxiangqingActivity.this, PubulishPYQActivity.class);
                         intent.putExtra("from", "chanyezixun");
                         intent.putExtra("newsBean", newsBean);

@@ -41,4 +41,19 @@
         app:sidebar_text_color="#8D6E63"
         app:sidebar_text_size="14sp" />
 
+    <TextView
+        android:id="@+id/activity_my_friends_nodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        android:text="啊哦，你没有一个好友哦！"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_my_friends_recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

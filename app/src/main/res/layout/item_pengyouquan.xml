@@ -88,7 +88,6 @@
                     android:layout_weight="1"
                     android:textColor="@color/color_8290AF"
                     android:textSize="@dimen/x34"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/item_pengyouquan_companyname"
                     app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_guanzhu"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -140,12 +139,12 @@
             </android.support.constraint.ConstraintLayout>
 
             <TextView
-                android:layout_marginTop="@dimen/x8"
                 android:id="@+id/item_pengyouquan_huati"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:textColor="@color/hongse" />
+                android:layout_marginTop="@dimen/x8"
+                android:textColor="@color/hongse"
+                android:visibility="gone" />
 
             <com.company.qcy.widght.pengyouquan.ExpandTextView
                 android:id="@+id/item_pengyouquan_content"
@@ -153,6 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:visibility="gone"
+
                 app:showLines="4" />
 
             <!-- 不同的地方 -->
@@ -202,8 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x120"
                 android:layout_marginTop="@dimen/x10"
-                android:background="@color/fengexian"
-                >
+                android:background="@color/fengexian">
 
                 <ImageView
                     android:id="@+id/item_pengyouquan_lianjie_image"

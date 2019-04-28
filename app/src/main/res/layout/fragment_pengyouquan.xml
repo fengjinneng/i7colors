@@ -34,6 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tl_indicator_color="@color/chunhongse"
         app:tl_indicator_width="@dimen/x50"
+        app:tl_textsize="@dimen/x30"
         app:tl_textSelectColor="@color/chunhongse"
         app:tl_textUnselectColor="@color/erjibiaoti">
 

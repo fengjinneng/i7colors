@@ -82,17 +82,18 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
             ActivityUtils.startActivity(MyWelcomeActivity.class);
         }
         SPUtils.getInstance().put("isFirstIn", "1");
+
+        SPUtils.getInstance().put("registrationId", JPushInterface.getRegistrationID(this));
+
         initView();
 
         addAdvData();
 
-        SPUtils.getInstance().put("registrationId", JPushInterface.getRegistrationID(this));
 
         if (SPUtils.getInstance().getInt("pengyouquanNews") == -1) {
             SPUtils.getInstance().put("pengyouquanNews", 0);
         }
 
-        ShortcutBadger.removeCount(this);
 
         //JPUSH推送消息過來的
         if (!ObjectUtils.isEmpty(map)) {
@@ -249,6 +250,12 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
     public void onReciveMessage(MessageBean msg) {
         super.onReciveMessage(msg);
         switch (msg.getCode()) {
+
+            case MessageBean.JPush.DELETELUNCHNUMBER:
+
+                ShortcutBadger.removeCount(this);
+
+                break;
 
             //点击进去四个消息的列表，首页的就隐藏
             case MessageBean.Code.DIANJIJINQUMESSAGE:
