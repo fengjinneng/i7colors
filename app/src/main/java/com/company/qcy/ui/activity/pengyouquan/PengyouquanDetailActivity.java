@@ -14,6 +14,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -46,6 +47,9 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.pengyouquan.dialogfragment.MyDialogFragment;
+import com.company.qcy.Utils.pengyouquan.dialogfragment.PengyouquanDetailDialogFragment;
+import com.company.qcy.Utils.pengyouquan.jiukou.PengyouquanDetailCallBack;
 import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
@@ -54,6 +58,7 @@ import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.bean.pengyouquan.PhotoInfo;
+import com.company.qcy.fragment.pengyouquan.FaxianSubFragment;
 import com.company.qcy.fragment.pengyouquan.PinglunFragment;
 import com.company.qcy.fragment.pengyouquan.PraiseFragment;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
@@ -72,7 +77,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Route(path = "/friendcircle/friendcircleDetail")
-public class PengyouquanDetailActivity extends BaseActivity implements View.OnClickListener {
+public class PengyouquanDetailActivity extends BaseActivity implements View.OnClickListener, PengyouquanDetailCallBack {
 
     /**
      * 标题
@@ -660,8 +665,15 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                     ActivityUtils.startActivity(LoginActivity.class);
                     return;
                 }
-                handler.sendEmptyMessageDelayed(0, 200);
-                showPop(id);
+//                handler.sendEmptyMessageDelayed(0, 200);
+//                showPop(id);
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                PengyouquanDetailDialogFragment dialog = new PengyouquanDetailDialogFragment();
+                dialog.setPinglunHouCallBack(PengyouquanDetailActivity.this);
+                dialog.setId(id);
+                dialog.show(fragmentManager,"dialog");
+
                 break;
             case R.id.fragment_pinglun_dianzan:
                 if (!UserUtil.isLogin()) {
@@ -682,5 +694,10 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                 ActivityUtils.startActivity(i);
                 break;
         }
+    }
+
+    @Override
+    public void save(String content, Long id) {
+        saveDiscuss(content,id);
     }
 }

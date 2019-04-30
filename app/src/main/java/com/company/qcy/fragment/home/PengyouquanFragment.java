@@ -120,7 +120,7 @@ public class PengyouquanFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (SPUtils.getInstance().getInt("pengyouquanNews") != 0) {
+        if (SPUtils.getInstance().getInt("pengyouquanNews") > 0) {
             mPopupBubble.setVisibility(View.VISIBLE);
             mPopupBubble.updateText("您有" + SPUtils.getInstance().getInt("pengyouquanNews") + "条新的信息");
             mPopupBubble.show();

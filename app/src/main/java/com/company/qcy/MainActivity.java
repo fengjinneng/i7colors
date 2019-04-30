@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.ArrayMap;
 import android.view.KeyEvent;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -53,9 +51,6 @@ import com.lzy.okgo.request.GetRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushReceiver;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 
@@ -90,10 +85,12 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
         addAdvData();
 
 
-        if (SPUtils.getInstance().getInt("pengyouquanNews") == -1) {
+        if (ObjectUtils.isEmpty(SPUtils.getInstance().getInt("pengyouquanNews"))||SPUtils.getInstance().getInt("pengyouquanNews") <= -1) {
             SPUtils.getInstance().put("pengyouquanNews", 0);
         }
-
+        if (ObjectUtils.isEmpty(SPUtils.getInstance().getInt("pengyouquanNews"))||SPUtils.getInstance().getInt("notifiction") <= -1) {
+            SPUtils.getInstance().put("notifiction", 0);
+        }
 
         //JPUSH推送消息過來的
         if (!ObjectUtils.isEmpty(map)) {
@@ -271,7 +268,9 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
                 }
                 pengyouquanMessageItem.setText(SPUtils.getInstance().getInt("pengyouquanNews") + "");
 
-                ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("pengyouquanNews"));
+//                ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("pengyouquanNews"));
+                ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("notification"));
+
                 break;
 
             case MessageBean.Code.NEEDUPDATEAPP:

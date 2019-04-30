@@ -168,6 +168,7 @@ public class BindPhoneActivity extends AppCompatActivity implements View.OnClick
                         .params("inviteCode",mActivityBindPhoneInvitecode.getText().toString())
                         .params("token", SPUtils.getInstance().getString("token"))
                         .params("from",getResources().getString(R.string.app_android))
+                        .params("registrationId",SPUtils.getInstance().getString("registrationId"))
                         .params("smsCode", mActivityBindPhoneVerifycode.getText().toString());
 
                 DialogStringCallback dialogStringCallback = new DialogStringCallback(this) {

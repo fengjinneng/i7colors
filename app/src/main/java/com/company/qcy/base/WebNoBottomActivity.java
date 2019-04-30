@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.company.qcy.R;
 
-public class WebNoBottomActivity extends AppCompatActivity implements View.OnClickListener {
+public class WebNoBottomActivity extends BaseActivity implements View.OnClickListener {
 
     private WebView mWebview;
 

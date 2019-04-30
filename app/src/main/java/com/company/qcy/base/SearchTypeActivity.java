@@ -1,7 +1,6 @@
 package com.company.qcy.base;
 
 import android.content.Intent;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,15 +30,11 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.chanpindating.ChanpindatingRecyclerViewAdapter;
 import com.company.qcy.adapter.kaifangshangcheng.KaifangshangchengRecyclerviewAdapter;
 import com.company.qcy.adapter.qiugou.QiugoudatingRecyclerviewAdapter;
-import com.company.qcy.bean.ChanpindatingBean;
 import com.company.qcy.bean.kaifangshangcheng.DianpuliebiaoBean;
 import com.company.qcy.bean.kaifangshangcheng.ProductBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
-import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
-import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
-import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -50,7 +45,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //分类搜索页面
-public class SearchTypeActivity extends AppCompatActivity implements View.OnClickListener {
+public class SearchTypeActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 搜索您想要的商品

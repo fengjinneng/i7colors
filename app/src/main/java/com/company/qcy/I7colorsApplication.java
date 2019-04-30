@@ -40,9 +40,8 @@ public class I7colorsApplication extends Application {
         mContext = getApplicationContext();
         initOkGo();
         MobSDK.init(this);
-        JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
+        JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
-
 
         if (isDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
             ARouter.openLog();     // 打印日志

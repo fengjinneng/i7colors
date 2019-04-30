@@ -124,7 +124,11 @@
                                 android:layout_marginTop="@dimen/x8"
                                 android:layout_marginEnd="8dp"
                                 android:textSize="@dimen/x24"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toStartOf="@+id/activity_my_person_info_isrenzheng"
                                 app:layout_constraintTop_toBottomOf="@+id/activity_my_person_info_isrenzheng" />
 
@@ -132,9 +136,10 @@
                                 android:id="@+id/activity_my_person_info_isrenzheng"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="未认证"
                                 android:textSize="@dimen/x24"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_my_person_info_name"
                                 app:layout_constraintStart_toStartOf="@+id/activity_my_person_info_nickname"
                                 app:layout_constraintTop_toBottomOf="@+id/activity_my_person_info_nickname" />
 
@@ -153,10 +158,17 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/x200"
-                                android:layout_marginTop="@dimen/x40"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:maxLines="2"
+                                android:ellipsize="end"
                                 android:textSize="@dimen/x34"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_my_person_info_isrenzheng"
+                                app:layout_constraintEnd_toStartOf="@+id/activity_my_person_info_edit"
+                                app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <TextView
                                 android:id="@+id/activity_my_person_info_edit"
@@ -176,8 +188,8 @@
                                 android:layout_marginStart="8dp"
                                 android:text="(点击去认证)"
                                 android:textColor="@color/lanse"
-                                android:visibility="gone"
                                 android:textSize="@dimen/x24"
+                                android:visibility="gone"
                                 app:layout_constraintStart_toEndOf="@+id/activity_my_person_info_isrenzheng"
                                 app:layout_constraintTop_toTopOf="@+id/activity_my_person_info_isrenzheng" />
 

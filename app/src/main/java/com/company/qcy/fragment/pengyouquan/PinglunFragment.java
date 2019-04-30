@@ -9,10 +9,12 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,6 +51,9 @@ import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
+import com.company.qcy.Utils.pengyouquan.dialogfragment.MyDialogFragment;
+import com.company.qcy.Utils.pengyouquan.dialogfragment.PinglunListDialogFragment;
+import com.company.qcy.Utils.pengyouquan.jiukou.PinglunListCallBack;
 import com.company.qcy.adapter.pengyouquan.PinglunliebiaoAdapter;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
@@ -67,7 +72,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PinglunFragment extends BaseFragment {
+public class PinglunFragment extends BaseFragment implements PinglunListCallBack {
     private static final String ARG_PARAM1 = "param1";
 
     public PinglunFragment() {
@@ -120,7 +125,7 @@ public class PinglunFragment extends BaseFragment {
     public void onRec(MessageBean messageBean) {
         super.onRec(messageBean);
 
-        switch (messageBean.getCode()){
+        switch (messageBean.getCode()) {
             case MessageBean.Code.PINGLUNNEEDREFLUSH:
                 refreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
@@ -150,19 +155,30 @@ public class PinglunFragment extends BaseFragment {
                             ActivityUtils.startActivity(LoginActivity.class);
                             return;
                         }
-                        showPop(Long.valueOf(mParam1), bean.getId());
-                        KeyboardUtils.showSoftInput(getActivity());
+//                        showPop(Long.valueOf(mParam1), bean.getId());
+//                        getIdKeyboardUtils.showSoftInput(getActivity());
+//                        showSoftKeyBoard();
+
+                        FragmentManager fragmentManager = getFragmentManager();
+                        PinglunListDialogFragment dialog = new PinglunListDialogFragment();
+                        dialog.setPinglunHouCallBack(PinglunFragment.this);
+                        dialog.setId(Long.valueOf(mParam1));
+                        dialog.setPosition(bean.getId());
+                        dialog.setPosition(position);
+                        dialog.show(fragmentManager, "dialog");
+
+
                         break;
-                    case R.id.item_pinglun_commentUser:
-                        Intent i = new Intent(getActivity(), PersonInfoActivity.class);
-                        i.putExtra("userId", bean.getUserId());
-                        ActivityUtils.startActivity(i);
-                        break;
-                    case R.id.item_pinglun_bycommentUser:
-                        Intent i1 = new Intent(getActivity(), PersonInfoActivity.class);
-                        i1.putExtra("userId", bean.getByUserId());
-                        ActivityUtils.startActivity(i1);
-                        break;
+//                    case R.id.item_pinglun_commentUser:
+//                        Intent i = new Intent(getActivity(), PersonInfoActivity.class);
+//                        i.putExtra("userId", bean.getUserId());
+//                        ActivityUtils.startActivity(i);
+//                        break;
+//                    case R.id.item_pinglun_bycommentUser:
+//                        Intent i1 = new Intent(getActivity(), PersonInfoActivity.class);
+//                        i1.putExtra("userId", bean.getByUserId());
+//                        ActivityUtils.startActivity(i1);
+//                        break;
                 }
             }
         });
@@ -171,8 +187,8 @@ public class PinglunFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 PengyouquanBean.CommentListBean bean = (PengyouquanBean.CommentListBean) adapter.getData().get(position);
-                if(StringUtils.equals("1",bean.getIsCharger())){
-                    CommentDialog dialog = new CommentDialog(getActivity(),bean.getId());
+                if (StringUtils.equals("1", bean.getIsCharger())) {
+                    CommentDialog dialog = new CommentDialog(getActivity(), bean.getId());
                     dialog.show();
                 }
             }
@@ -258,7 +274,7 @@ public class PinglunFragment extends BaseFragment {
                         }
 
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -290,16 +306,30 @@ public class PinglunFragment extends BaseFragment {
     }
 
 
+    private void showSoftKeyBoard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null && inputComment != null) {
+            inputComment.post(() -> {
+                inputComment.requestFocus();
+                inputMethodManager.showSoftInput(inputComment, 0);
+            });
+            new Handler().postDelayed(() -> {
+//                changeLayoutNullParams(true);
+//                changeEmojiPanelParams(0);
+            }, 200);
+        }
+    }
+
     private PopupWindow popupWindow;
     private EditText inputComment;
     private TextView btn_submit;
 
 
     @SuppressLint("WrongConstant")
-    public void showPop(Long id, Long parentId) {
+    public void showPop(Long id, Long parentId,int tieziPosition) {
         View inflate = LayoutInflater.from(getContext()).inflate(R.layout.pengyouquan_huifu_layout, null);
 
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 100, true);
+        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
 
         btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
         //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);
@@ -364,24 +394,23 @@ public class PinglunFragment extends BaseFragment {
                     return;
                 }
                 //调用提交评论接口
-                saveDiscuss(comment1, id, parentId);
+                saveDiscuss(comment1, id, parentId,tieziPosition);
                 inputMethodManager.hideSoftInputFromWindow(inputComment.getWindowToken(), 0);
                 inputComment.setText("");
                 popupWindow.dismiss();
             }
         });
-
     }
 
 
-    private void saveDiscuss(String comment1, Long id, Long parentId) {
+    private void saveDiscuss(String comment1, Long id, Long parentId,int tieziPosition) {
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABIAOPINGLUN)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", parentId)
-                .params("from",getActivity().getResources().getString(R.string.app_android))
+                .params("from", getActivity().getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
@@ -394,12 +423,19 @@ public class PinglunFragment extends BaseFragment {
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                            refreshLayout.setRefreshing(true);
-                            refreshListener.onRefresh();
+
+                            PengyouquanBean.CommentListBean commentListBean =
+                                    jsonObject.getJSONObject("data").toJavaObject(PengyouquanBean.CommentListBean.class);
+
+                            adapter.addData(commentListBean);
+                            adapter.notifyItemChanged(tieziPosition);
+
+//                            refreshLayout.setRefreshing(true);
+//                            refreshListener.onRefresh();
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -421,5 +457,9 @@ public class PinglunFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void save(String content, Long id, Long parentId,int position) {
+        saveDiscuss(content, id, parentId,position);
+    }
 }
 

@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +34,7 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
@@ -40,6 +43,8 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.RecyclerViewNoBugLayoutManager;
 import com.company.qcy.Utils.ServerInfo;
+import com.company.qcy.Utils.pengyouquan.dialogfragment.MyDialogFragment;
+import com.company.qcy.Utils.pengyouquan.jiukou.PinglunHouCallBack;
 import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
@@ -50,6 +55,7 @@ import com.company.qcy.bean.pengyouquan.ActionItem;
 import com.company.qcy.bean.pengyouquan.HuatiBean;
 import com.company.qcy.bean.pengyouquan.MyAddress;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
+import com.company.qcy.fragment.pengyouquan.FaxianSubFragment;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.company.qcy.widght.pengyouquan.SnsPopupWindow;
@@ -62,7 +68,7 @@ import com.lzy.okgo.request.PostRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClickListener {
+public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClickListener ,PinglunHouCallBack {
 
     /**
      * 标题
@@ -90,13 +96,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
 
     private InputMethodManager inputMethodManager;
 
-    Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
-            return false;
-        }
-    });
+
 
     private void initView() {
         datas = new ArrayList<>();
@@ -109,7 +109,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
         mToolbarTitle.setText("# " + name + " #");
 
         recyclerView.setLayoutManager(new RecyclerViewNoBugLayoutManager(this));
-        adapter = new PengyouquanNoHuatiAdapter(R.layout.item_pengyouquan, datas, handler);
+        adapter = new PengyouquanNoHuatiAdapter(R.layout.item_pengyouquan, datas,getSupportFragmentManager());
         recyclerView.setAdapter(adapter);
 
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
@@ -243,7 +243,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                     case R.id.item_pengyouquan_lianjie_layout:
                         Intent lianjieIntent = new Intent(ErjihuatiDetailActivity.this, ZixunxiangqingActivity.class);
                         Long id = bean.getShareBean().getId();
-                        lianjieIntent.putExtra("id", id+"");
+                        lianjieIntent.putExtra("id", id + "");
                         ActivityUtils.startActivity(lianjieIntent);
                         break;
                 }
@@ -251,6 +251,19 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
 
         });
         addBannerData();
+
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Glide.with(ErjihuatiDetailActivity.this).resumeRequests();
+                } else {
+                    Glide.with(ErjihuatiDetailActivity.this).pauseRequests();
+                }
+            }
+        });
     }
 
 
@@ -432,89 +445,6 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
         request.execute(stringCallback);
     }
 
-
-    private PopupWindow popupWindow;
-    private EditText inputComment;
-    private TextView btn_submit;
-
-
-    @SuppressLint("WrongConstant")
-    public void showPop(Long id, int tieziPosition) {
-        View inflate = LayoutInflater.from(ErjihuatiDetailActivity.this).inflate(R.layout.pengyouquan_huifu_layout, null);
-
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
-
-        btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
-        //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);
-
-        // 使其聚集 ，要想监听菜单里控件的事件就必须要调用此方法
-
-        popupWindow.setFocusable(true);
-
-        // 设置允许在外点击消失
-
-        popupWindow.setOutsideTouchable(false);
-
-        // 设置背景，这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
-
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-        //软键盘不会挡着popupwindow
-
-        popupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        //设置菜单显示的位置
-
-        popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 0, 0);
-
-        //监听菜单的关闭事件
-
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-            @Override
-
-            public void onDismiss() {
-
-            }
-
-        });
-
-        //监听触屏事件
-
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-
-            public boolean onTouch(View view, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE)
-                    popupWindow.dismiss();
-                inputMethodManager.hideSoftInputFromWindow(inputComment.getWindowToken(), 0);
-                return false;
-            }
-
-        });
-
-
-        inputComment = inflate.findViewById(R.id.et_discuss);
-        inputComment.setFocusable(true);
-        inputComment.setFocusableInTouchMode(true);
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // btn_submit.setClickable(false);
-                String comment1 = inputComment.getText().toString().trim();
-                if (StringUtils.isEmpty(comment1)) {
-                    ToastUtils.showShort("不能发表空的评论");
-                    return;
-                }
-                //调用提交评论接口
-                saveDiscuss(comment1, id, tieziPosition);
-                inputMethodManager.hideSoftInputFromWindow(inputComment.getWindowToken(), 0);
-                inputComment.setText("");
-                popupWindow.dismiss();
-            }
-        });
-
-    }
 
     private void deleteDyeCommunity(Long communityId, int position) {
 
@@ -741,6 +671,14 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
 
     }
 
+
+
+    @Override
+    public void save(String content, Long id, int poisition) {
+        saveDiscuss(content,id,poisition);
+    }
+
+
     private class PopupItemClickListener implements SnsPopupWindow.OnItemClickListener {
         //动态在列表中的位置
         private long mLasttime = 0;
@@ -771,15 +709,14 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
 
                     break;
                 case 1://发布评论
-//                    if(presenter != null){
-//                        CommentConfig config = new CommentConfig();
-//                        config.circlePosition = mCirclePosition;
-//                        config.commentType = CommentConfig.Type.PUBLIC;
-//                        presenter.showEditTextBody(config);
-//                    }
-                    handler.sendEmptyMessageDelayed(0, 200);
-//                    showPopupCommnet(id, tieziPosition);
-                    showPop(id, tieziPosition);
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    MyDialogFragment dialog = new MyDialogFragment();
+                    dialog.setPinglunHouCallBack(ErjihuatiDetailActivity.this);
+                    dialog.setId(id);
+                    dialog.setPosition(tieziPosition);
+                    dialog.show(fragmentManager,"dialog");
+
                     break;
 
                 case 2://分享

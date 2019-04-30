@@ -137,6 +137,7 @@ public class YouhuizhanxiaoDetailActivity extends BaseActivity implements View.O
      * 我要购买
      */
     private Button mActivityYouhuizhanxiaoWoyaogoumai;
+    private ConstraintLayout mActivityYouhuizhanxiaoDengjiLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,6 +215,7 @@ public class YouhuizhanxiaoDetailActivity extends BaseActivity implements View.O
             //改变控件的属性
             mActivityYouhuizhanxiaoWoyaogoumai.setLayoutParams(params);
         }
+        mActivityYouhuizhanxiaoDengjiLayout = (ConstraintLayout) findViewById(R.id.activity_youhuizhanxiao_dengji_layout);
     }
 
 
@@ -288,8 +290,8 @@ public class YouhuizhanxiaoDetailActivity extends BaseActivity implements View.O
 
         GlideUtils.loadImage(context, ServerInfo.IMAGE + bean.getProductPic(), mActivityTuangouxiangqingImg);
         mActivityYouhuizhanxiaoDetailProductname.setText(bean.getProductName());
-        mActivityYouhuizhanxiaoTotalnum1.setText(bean.getTotalNum());
-        mActivityYouhuizhanxiaoTotalnum2.setText(bean.getTotalNum());
+        mActivityYouhuizhanxiaoTotalnum1.setText(bean.getSubscribedNum());
+        mActivityYouhuizhanxiaoTotalnum2.setText(bean.getSubscribedNum());
         mActivityYouhuizhanxiaoTotalnum1Unit.setText(bean.getNumUnit());
         mActivityYouhuizhanxiaoTotalnum2Unit.setText(bean.getNumUnit());
         mActivityTuangouxiangqingYuanjia.setText(bean.getOldPrice());
@@ -301,7 +303,7 @@ public class YouhuizhanxiaoDetailActivity extends BaseActivity implements View.O
 //            String[] strings = bean.getNewPrice().split("-");
 //            mActivityTuangouxiangqingYouhuijia.setText(strings[0]+"-"+strings[1]);
 //        }else {
-            mActivityTuangouxiangqingYouhuijia.setText(bean.getNewPrice());
+        mActivityTuangouxiangqingYouhuijia.setText(bean.getNewPrice());
 //        }
         mActivityTuangouxiangqingYuanjiaDanwie.setText("元/" + bean.getPriceUnit());
         mActivityTuangouxiangqingYouhuijiaDanwei.setText("元/" + bean.getPriceUnit());
@@ -342,6 +344,8 @@ public class YouhuizhanxiaoDetailActivity extends BaseActivity implements View.O
                     mActivityYouhuizhanxiaoSanjiPriceUnit.setText("元/" + bean.getPriceUnit());
                     break;
             }
+        }else {
+            mActivityYouhuizhanxiaoDengjiLayout.setVisibility(View.GONE);
         }
 
     }
@@ -356,9 +360,9 @@ public class YouhuizhanxiaoDetailActivity extends BaseActivity implements View.O
                 break;
             case R.id.activity_youhuizhanxiao_woyaogoumai:
 
-                Intent intent = new Intent(this,YouhuizhanxiaoBuyActivity.class);
-                intent.putExtra("numUnit",numUnit);
-                intent.putExtra("id",id);
+                Intent intent = new Intent(this, YouhuizhanxiaoBuyActivity.class);
+                intent.putExtra("numUnit", numUnit);
+                intent.putExtra("id", id);
                 ActivityUtils.startActivity(intent);
                 break;
         }

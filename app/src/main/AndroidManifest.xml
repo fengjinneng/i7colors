@@ -25,6 +25,9 @@
     <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!--添加权限-->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+
     <application
         android:name=".SophixStubApplication"
         android:allowBackup="true"
@@ -214,6 +217,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.pengyouquan.PengyouquanDetailActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"
             android:screenOrientation="portrait">
 
             <!-- Schame -->
@@ -433,9 +437,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.pengyouquan.MyTongunluFriendsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".TestActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.pengyouquan.MessageActivity"

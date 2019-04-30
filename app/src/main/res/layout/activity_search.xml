@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/homepage_search"
         android:layout_width="0dp"
-        android:layout_height="@dimen/x50"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/search_oval"
@@ -18,9 +18,10 @@
         android:drawablePadding="10dp"
         android:hint="搜索产品/店铺/求购信息"
         android:imeOptions="actionSearch"
+        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
+        android:paddingTop="5dp"
         android:singleLine="true"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/homepage_search_back"
         app:layout_constraintTop_toTopOf="parent" />

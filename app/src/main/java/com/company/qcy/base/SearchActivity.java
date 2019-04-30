@@ -47,7 +47,6 @@ import java.util.List;
 
 public class SearchActivity extends BaseActivity implements View.OnClickListener {
 
-
     /**
      * 搜索您想要的商品
      */

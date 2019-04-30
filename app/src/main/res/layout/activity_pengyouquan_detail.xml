@@ -85,6 +85,7 @@
                             android:layout_marginEnd="8dp"
                             android:textSize="@dimen/x24"
                             app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_goneMarginTop="@dimen/x30"
                             app:layout_constraintStart_toEndOf="@+id/activity_pengyouquan_detail_img"
                             app:layout_constraintTop_toBottomOf="@+id/activity_pengyouquan_detail_companyname" />
 
@@ -93,14 +94,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="@dimen/x150"
+                            android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
-                            android:lineSpacingExtra="1dp"
 
+                            android:lineSpacingExtra="1dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toBottomOf="@+id/activity_pengyouquan_detail_time" />
 
                         <com.company.qcy.widght.pengyouquan.MultiImageView
                             android:id="@+id/activity_pengyouquan_detail_multiImageView"

@@ -40,6 +40,17 @@ public class YouhuizhanxiaoBean implements Parcelable {
     private List<ListPriceBean> listPrice;
     private String detailMobilePic;
 
+    private String subscribedNum;
+
+    public String getSubscribedNum() {
+        return subscribedNum;
+    }
+
+    public void setSubscribedNum(String subscribedNum) {
+        this.subscribedNum = subscribedNum;
+    }
+
+
     public String getDetailMobilePic() {
         return detailMobilePic;
     }
@@ -318,6 +329,9 @@ public class YouhuizhanxiaoBean implements Parcelable {
         };
     }
 
+    public YouhuizhanxiaoBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -336,12 +350,10 @@ public class YouhuizhanxiaoBean implements Parcelable {
         dest.writeString(this.priceUnit);
         dest.writeString(this.totalNum);
         dest.writeString(this.numUnit);
-        dest.writeList(this.listSale);
-        dest.writeList(this.listPrice);
+        dest.writeTypedList(this.listSale);
+        dest.writeTypedList(this.listPrice);
         dest.writeString(this.detailMobilePic);
-    }
-
-    public YouhuizhanxiaoBean() {
+        dest.writeString(this.subscribedNum);
     }
 
     protected YouhuizhanxiaoBean(Parcel in) {
@@ -356,14 +368,13 @@ public class YouhuizhanxiaoBean implements Parcelable {
         this.priceUnit = in.readString();
         this.totalNum = in.readString();
         this.numUnit = in.readString();
-        this.listSale = new ArrayList<ListSaleBean>();
-        in.readList(this.listSale, ListSaleBean.class.getClassLoader());
-        this.listPrice = new ArrayList<ListPriceBean>();
-        in.readList(this.listPrice, ListPriceBean.class.getClassLoader());
+        this.listSale = in.createTypedArrayList(ListSaleBean.CREATOR);
+        this.listPrice = in.createTypedArrayList(ListPriceBean.CREATOR);
         this.detailMobilePic = in.readString();
+        this.subscribedNum = in.readString();
     }
 
-    public static final Parcelable.Creator<YouhuizhanxiaoBean> CREATOR = new Parcelable.Creator<YouhuizhanxiaoBean>() {
+    public static final Creator<YouhuizhanxiaoBean> CREATOR = new Creator<YouhuizhanxiaoBean>() {
         @Override
         public YouhuizhanxiaoBean createFromParcel(Parcel source) {
             return new YouhuizhanxiaoBean(source);

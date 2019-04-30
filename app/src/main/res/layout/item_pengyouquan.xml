@@ -116,10 +116,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
-                    android:ellipsize="end"
-                    android:singleLine="true"
                     android:textSize="@dimen/x24"
-                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/item_pengyouquan_guanzhu"
                     app:layout_constraintHorizontal_bias="0.5"
@@ -138,13 +135,29 @@
                 <!--android:textSize="14sp" />-->
             </android.support.constraint.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/item_pengyouquan_huati"
+
+            <LinearLayout
+                android:id="@+id/item_pengyouquan_huati_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="@dimen/x8"
-                android:textColor="@color/hongse"
-                android:visibility="gone" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="参与话题:" />
+
+                <TextView
+                    android:id="@+id/item_pengyouquan_huati"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="sadasdsadsads"
+                    android:textColor="@color/hongse" />
+
+            </LinearLayout>
+
 
             <com.company.qcy.widght.pengyouquan.ExpandTextView
                 android:id="@+id/item_pengyouquan_content"

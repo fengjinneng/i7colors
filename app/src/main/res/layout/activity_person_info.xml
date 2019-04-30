@@ -71,10 +71,14 @@
                                 android:id="@+id/activity_person_info_name"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/x8"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginEnd="8dp"
                                 android:textSize="@dimen/x24"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toStartOf="@+id/activity_person_info_isRehzheng"
                                 app:layout_constraintTop_toBottomOf="@+id/activity_person_info_isRehzheng" />
 
@@ -85,6 +89,7 @@
                                 android:layout_marginTop="8dp"
                                 android:text="未认证"
                                 android:textSize="@dimen/x24"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_person_info_name"
                                 app:layout_constraintStart_toStartOf="@+id/activity_person_info_nickname"
                                 app:layout_constraintTop_toBottomOf="@+id/activity_person_info_nickname" />
 
@@ -103,14 +108,17 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="@dimen/x200"
-                                android:layout_marginTop="@dimen/x40"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginEnd="8dp"
-                                android:textSize="@dimen/x34"
-                                android:singleLine="true"
                                 android:ellipsize="end"
+                                android:maxLines="2"
+                                android:textSize="@dimen/x34"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_person_info_isRehzheng"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
 
 
                             <TextView

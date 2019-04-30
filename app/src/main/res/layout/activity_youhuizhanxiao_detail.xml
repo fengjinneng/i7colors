@@ -234,7 +234,7 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginStart="8dp"
                                 android:textColor="@color/baise"
-                                android:textSize="@dimen/x40"
+                                android:textSize="@dimen/x36"
                                 android:textStyle="bold"
                                 app:layout_constraintBottom_toTopOf="@+id/activity_youhuizhanxiao_youhuijia_danwei"
                                 app:layout_constraintEnd_toEndOf="parent"
@@ -296,6 +296,7 @@
                             app:layout_constraintTop_toTopOf="@+id/textView200" />
 
                         <android.support.constraint.ConstraintLayout
+                            android:id="@+id/activity_youhuizhanxiao_dengji_layout"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/x114"
                             android:layout_marginBottom="16dp"

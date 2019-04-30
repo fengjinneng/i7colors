@@ -1,38 +1,28 @@
 package com.company.qcy.adapter.pengyouquan;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaMetadataRetriever;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
-
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -46,6 +36,8 @@ import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
+import com.company.qcy.Utils.pengyouquan.dialogfragment.PengyouquanAdapterDialogFragment;
+import com.company.qcy.Utils.pengyouquan.jiukou.PengyouquanAdapterCallBack;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.bean.pengyouquan.PhotoInfo;
 import com.company.qcy.ui.activity.pengyouquan.ImagePagerActivity;
@@ -58,23 +50,24 @@ import com.company.qcy.widght.pengyouquan.PileLayout;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
-
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseViewHolder> {
+public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseViewHolder> implements PengyouquanAdapterCallBack {
 
     private Handler handler;
 
     private List<PengyouquanBean> mDatas;
 
-    public PengyouquanAdapter(int layoutResId, @Nullable List<PengyouquanBean> data, Handler handler) {
+    private FragmentManager fragmentManager;
+
+    public PengyouquanAdapter(int layoutResId, @Nullable List<PengyouquanBean> data,FragmentManager fragmentManager) {
         super(layoutResId, data);
         this.handler = handler;
         this.mDatas = data;
+        this.fragmentManager = fragmentManager;
     }
 
     public static Bitmap getNetVideoBitmap(String videoUrl) {
@@ -111,6 +104,8 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         TextView address = (TextView) helper.getView(R.id.item_pengyouquan_address);
         helper.addOnClickListener(R.id.item_pengyouquan_address);
         TextView huati = (TextView) helper.getView(R.id.item_pengyouquan_huati);
+        LinearLayout huatiLayout = (LinearLayout) helper.getView(R.id.item_pengyouquan_huati_layout);
+
         helper.addOnClickListener(R.id.item_pengyouquan_huati);
         if (StringUtils.isEmpty(item.getLocationTitle())) {
             address.setVisibility(View.GONE);
@@ -120,14 +115,13 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         }
 
         if (ObjectUtils.isEmpty(item.getTopic())) {
-            huati.setVisibility(View.GONE);
+            huatiLayout.setVisibility(View.GONE);
         } else {
+            huatiLayout.setVisibility(View.VISIBLE);
             huati.setText("#" + item.getTopic().getTopicList().get(0).getTitle() + "#");
-            huati.setVisibility(View.VISIBLE);
         }
 
         helper.addOnClickListener(R.id.item_pengyouquan_detail);
-        inputMethodManager = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         ImageView headimg = (ImageView) helper.getView(R.id.item_pengyouquan_headimg);
         helper.addOnClickListener(R.id.item_pengyouquan_headimg);
         MyCommonUtil.jiazaitouxiang(mContext,item.getPostUserPhoto(),headimg);
@@ -433,9 +427,23 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                                 item.getCommentList().get(position).getId(), helper.getAdapterPosition());
                         dialog.show();
                     } else {
-                        handler.sendEmptyMessageDelayed(0, 200);
-                        showPop(item.getId(), item.getCommentList().get(position).getId(),
-                                commentListBeans.get(position).getCommentUser(), item, helper.getAdapterPosition());
+//                        handler.sendEmptyMessageDelayed(0, 200);
+//                        showPop(item.getId(), item.getCommentList().get(position).getId(),
+//                                commentListBeans.get(position).getCommentUser(), item, helper.getAdapterPosition());
+//                        showSoftKeyBoard();
+
+
+                        PengyouquanAdapterDialogFragment dialog = new PengyouquanAdapterDialogFragment();
+                        dialog.setPinglunHouCallBack(PengyouquanAdapter.this);
+                        dialog.setId(item.getId());
+                        dialog.setParentId(item.getCommentList().get(position).getId());
+
+                        dialog.setBean(item);
+                        dialog.setCommentUser(commentListBeans.get(position).getCommentUser());
+
+                        dialog.setPosition(helper.getAdapterPosition());
+
+                        dialog.show(fragmentManager,"dialog");
 
                     }
                 }
@@ -443,97 +451,11 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         }
     }
 
-
-    private PopupWindow popupWindow;
-    private EditText inputComment;
-    private TextView btn_submit;
-    private InputMethodManager inputMethodManager;
-
-
-    @SuppressLint("WrongConstant")
-    public void showPop(Long id, Long parentId, String commentUser, PengyouquanBean bean,
-                        int position) {
-        View inflate = LayoutInflater.from(mContext).inflate(R.layout.pengyouquan_huifu_layout, null);
-
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
-
-        btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
-        //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);
-
-        // 使其聚集 ，要想监听菜单里控件的事件就必须要调用此方法
-
-        popupWindow.setFocusable(true);
-
-        // 设置允许在外点击消失
-
-        popupWindow.setOutsideTouchable(false);
-
-        // 设置背景，这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
-
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-        //软键盘不会挡着popupwindow
-
-        popupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        //设置菜单显示的位置
-
-        popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 0, 0);
-
-        //监听菜单的关闭事件
-
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-            @Override
-
-            public void onDismiss() {
-
-            }
-
-        });
-
-        //监听触屏事件
-
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-
-            public boolean onTouch(View view, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE)
-                    popupWindow.dismiss();
-                inputMethodManager.hideSoftInputFromWindow(inputComment.getWindowToken(), 0);
-                return false;
-            }
-
-        });
-
-
-        inputComment = inflate.findViewById(R.id.et_discuss);
-        inputComment.setFocusable(true);
-        inputComment.setFocusableInTouchMode(true);
-        inputComment.setHint("回复 : " + commentUser);
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!UserUtil.isLogin()) {
-                    ActivityUtils.startActivity(LoginActivity.class);
-                    return;
-                }
-
-                String comment1 = inputComment.getText().toString().trim();
-                if (StringUtils.isEmpty(comment1)) {
-                    ToastUtils.showShort("不能发表空的评论");
-                    return;
-                }
-                //调用提交评论接口
-                saveDiscuss(comment1, id, parentId, bean, position);
-                inputMethodManager.hideSoftInputFromWindow(inputComment.getWindowToken(), 0);
-                inputComment.setText("");
-                popupWindow.dismiss();
-            }
-        });
-
+    @Override
+    public void save(String content, Long id, Long parentId, String commentUser, PengyouquanBean bean, int position) {
+        saveDiscuss(content,id,parentId,bean,position);
     }
+
 
     private void saveDiscuss(String comment1, Long id, Long parentId, PengyouquanBean
             pengyouquanBean, int position) {
@@ -586,8 +508,8 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             }
         };
         request.execute(stringCallback);
-
-
     }
+
+
 
 }

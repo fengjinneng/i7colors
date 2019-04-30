@@ -5,35 +5,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.ArrayMap;
-
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
-import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.MainActivity;
-import com.company.qcy.base.WebActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
-import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
-import com.company.qcy.huodong.tuangou.activity.TuangouxiangqingActivity;
-import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
-import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
-import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
-import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
-import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
-import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
-import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
-import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
+
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
 import me.leolin.shortcutbadger.ShortcutBadger;
@@ -61,16 +45,18 @@ public class JpushReceiver extends BroadcastReceiver {
 
             } else if (JPushInterface.ACTION_MESSAGE_RECEIVED.equals(intent.getAction())) {
 
-//                LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
+                LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的自定义消息: " + bundle.getString(JPushInterface.EXTRA_MESSAGE));
                 SPUtils.getInstance().put("pengyouquanNews", SPUtils.getInstance().getInt("pengyouquanNews") + 1);
                 EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANHAVENEWMESSAGE));
 
+                ShortcutBadger.applyCount(context.getApplicationContext(), SPUtils.getInstance().getInt("notification"));
 
             } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
                 LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的通知");
-                int notifactionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
+                int notifictionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
 
-                LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的通知的ID: " + notifactionId);
+                SPUtils.getInstance().put("notification", SPUtils.getInstance().getInt("notification") + 1);
+                EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANHAVENEWMESSAGE));
 
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                 LogUtils.d(TAG, "[MyReceiver] 用户点击打开了通知");
