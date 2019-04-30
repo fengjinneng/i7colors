@@ -38,7 +38,7 @@
                     android:gravity="bottom"
                     android:text="0"
                     android:textColor="@color/chunhongse"
-                    android:textSize="@dimen/x24" />
+                     />
 
                 <TextView
                     android:id="@+id/qiugouxiangqing_headview_first_time_danwei"
@@ -46,7 +46,7 @@
                     android:layout_height="match_parent"
                     android:gravity="bottom"
                     android:text="天"
-                    android:textSize="@dimen/x24" />
+                     />
 
                 <TextView
                     android:id="@+id/qiugouxiangqing_headview_second_time"
@@ -55,7 +55,7 @@
                     android:gravity="bottom"
                     android:text="0"
                     android:textColor="@color/chunhongse"
-                    android:textSize="@dimen/x24" />
+                     />
 
                 <TextView
                     android:id="@+id/qiugouxiangqing_headview_second_time_danwei"
@@ -63,7 +63,7 @@
                     android:layout_height="match_parent"
                     android:gravity="bottom"
                     android:text="小时"
-                    android:textSize="@dimen/x24" />
+                     />
 
                 <View
                     android:layout_width="0dp"
@@ -104,7 +104,7 @@
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
         android:textColor="@color/biaoti"
-        android:textSize="@dimen/x30"
+
         android:maxLines="2"
         android:ellipsize="end"
         android:paddingRight="8dp"
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="产品名称:"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintStart_toStartOf="@+id/textView49"
             app:layout_constraintTop_toBottomOf="@+id/activity_qiugouxiangqing_fabushijian" />
 
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="产品分类:"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintStart_toStartOf="@+id/textView39"
             app:layout_constraintTop_toBottomOf="@+id/activity_qiugouxiangqing_shangpinming_xiao" />
 
@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x20"
                 android:text="包装规格:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView41"
                 app:layout_constraintTop_toBottomOf="@+id/textView41" />
 
@@ -170,7 +170,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x20"
                 android:text="采购数量:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView42"
                 app:layout_constraintTop_toBottomOf="@+id/textView42" />
 
@@ -180,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x20"
                 android:text="交货日期:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView43"
                 app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
@@ -190,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x20"
                 android:text="付款方式:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView44"
                 app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
@@ -200,7 +200,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x20"
                 android:text="所在地区:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView45"
                 app:layout_constraintTop_toBottomOf="@+id/textView45" />
 
@@ -210,7 +210,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x20"
                 android:text="账期:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView46"
                 app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
@@ -220,7 +220,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x144"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x24"
+
             android:paddingRight="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textView39"
@@ -231,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_shangpinming_xiao"
                 app:layout_constraintTop_toTopOf="@+id/textView41" />
 
@@ -240,7 +240,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_fenlei"
                 app:layout_constraintTop_toTopOf="@+id/textView42" />
 
@@ -249,7 +249,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_baozhuang"
                 app:layout_constraintTop_toTopOf="@+id/textView43" />
 
@@ -258,7 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_shuliang"
                 app:layout_constraintTop_toTopOf="@+id/textView44" />
 
@@ -267,7 +267,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_jiaohuoshijian"
                 app:layout_constraintTop_toTopOf="@+id/textView45" />
 
@@ -276,7 +276,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_fukuanfangshi"
                 app:layout_constraintTop_toTopOf="@+id/textView46" />
 
@@ -285,7 +285,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_diqu"
                 app:layout_constraintTop_toTopOf="@+id/textView48" />
 
@@ -296,7 +296,7 @@
             android:layout_marginTop="@dimen/x20"
             android:text="发布时间:"
             android:layout_marginLeft="@dimen/x50"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -306,7 +306,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/activity_qiugouxiangqing_shangpinming_xiao"
@@ -500,7 +500,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/x12"
             android:text="信用等级:"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="@+id/activity_qiugouxiangqing_first_star"
             app:layout_constraintEnd_toStartOf="@+id/activity_qiugouxiangqing_first_star"
             app:layout_constraintTop_toTopOf="@+id/activity_qiugouxiangqing_first_star" />
@@ -549,7 +549,7 @@
         android:background="@drawable/background_dengluwenbenkuang_queshang"
         android:padding="8dp"
         android:hint="无"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toEndOf="@+id/textView80"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView80"

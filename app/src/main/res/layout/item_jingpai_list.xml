@@ -34,12 +34,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="所在地区:"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintStart_toStartOf="@+id/item_jingpai_list_name"
         app:layout_constraintTop_toBottomOf="@+id/item_jingpai_list_name" />
 
     <TextView
-        android:textSize="@dimen/x24"
+
         android:id="@+id/item_jingpai_list_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             android:layout_marginEnd="16dp"
             android:text="元/KG"
             android:textColor="@color/hongse"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -94,7 +94,7 @@
             android:layout_marginStart="16dp"
             android:text="当前价格:¥ "
             android:textColor="@color/hongse"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_jingpai_list_dangqianjiage"
             app:layout_constraintStart_toStartOf="parent"
@@ -107,7 +107,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:text="元/KG"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/item_jingpai_list_qipaijiage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/item_jingpai_list_qipaijiage" />
@@ -126,7 +126,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="起拍价格: ¥"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/item_jingpai_list_qipaijiage_unit"
         app:layout_constraintEnd_toStartOf="@+id/item_jingpai_list_qipaijiage" />
 
@@ -143,7 +143,7 @@
         android:id="@+id/item_jingpai_list_status_text"
         android:layout_width="0dp"
         android:gravity="center"
-        android:textSize="@dimen/x24"
+
         android:layout_height="@dimen/x80"
         android:text="尚未开始（活动时间：2018-12-11 至 2019-01-10）"
         app:layout_constraintEnd_toEndOf="parent"

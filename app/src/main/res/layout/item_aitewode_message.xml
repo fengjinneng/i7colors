@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x160">
+
+    <ImageView
+        android:id="@+id/item_aite_message_img"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/x100"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/morentouxiang" />
+
+    <TextView
+        android:id="@+id/item_aite_message_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/lanse"
+        app:layout_constraintBottom_toTopOf="@+id/item_aite_message_secondname"
+        app:layout_constraintEnd_toStartOf="@+id/item_aite_message_time"
+        app:layout_constraintStart_toEndOf="@+id/item_aite_message_img"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/item_aite_message_secondname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textSize="@dimen/x26"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/textView291"
+        app:layout_constraintEnd_toStartOf="@+id/item_aite_message_time"
+        app:layout_constraintStart_toEndOf="@+id/item_aite_message_img"
+        app:layout_constraintTop_toBottomOf="@+id/item_aite_message_name" />
+
+    <TextView
+        android:id="@+id/item_aite_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="2000-1-1"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/textView316"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textView316"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="详情"
+        android:layout_marginTop="@dimen/x10"
+        android:textColor="@color/lanse"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/item_aite_message_time"
+        app:layout_constraintTop_toBottomOf="@+id/item_aite_message_time" />
+
+    <TextView
+        android:id="@+id/textView291"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="\@了我"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_aite_message_img"
+        app:layout_constraintTop_toBottomOf="@+id/item_aite_message_secondname" />
+
+    <ImageView
+        android:id="@+id/item_aite_message_bigV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_aite_message_img"
+        app:layout_constraintEnd_toEndOf="@+id/item_aite_message_img"
+        app:srcCompat="@mipmap/bigv" />
+
+    <TextView
+        android:id="@+id/item_aite_message_weiduxiaoxi"
+        android:layout_width="@dimen/x14"
+        android:layout_height="@dimen/x14"
+        android:background="@drawable/background_hongsexiaoyuandian"
+        app:layout_constraintStart_toStartOf="@+id/item_aite_message_img"
+        app:layout_constraintTop_toTopOf="@+id/item_aite_message_img" />
+</android.support.constraint.ConstraintLayout>

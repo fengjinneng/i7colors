@@ -1,96 +1,519 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+
+<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.activity.pengyouquan.PubulishPYQActivity">
+    android:background="@color/fengexian"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <TextView
-        android:id="@+id/activity_pubylish_pey_cancle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="取消"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/activity_pubylish_pey_publish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp"
-        android:text="发布朋友圈"
-        android:textColor="@color/chunhongse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView162"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/fengexian"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_pubylish_pey_publish" />
-
-    <EditText
-        android:id="@+id/activity_pubylish_pey_content"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:background="@null"
-        android:hint="说点什么吧..."
-        android:maxLength="500"
-        android:maxLines="5"
-        android:minLines="1"
-        android:textSize="@dimen/x28"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView162" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/activity_pubylish_pey_recyclerview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="@dimen/x100"
+        android:background="@color/baise"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_pubylish_pey_content" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:visibility="gone"
-        android:id="@+id/activity_pubylish_pey_video"
-        android:layout_width="@dimen/x300"
-        android:layout_height="@dimen/x500"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        <TextView
+            android:id="@+id/activity_pubylish_pey_cancle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="取消"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_pubylish_pey_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="发布朋友圈"
+            android:textColor="@color/chunhongse"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x100"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_pubylish_pey_recyclerview"
-        app:layout_goneMarginTop="36dp" />
-
-    <ImageView
-        android:id="@+id/activity_pubylish_pey_start"
-        android:layout_width="@dimen/x80"
-        android:visibility="gone"
-        android:layout_height="@dimen/x80"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_pubylish_pey_video"
-        app:layout_constraintEnd_toEndOf="@+id/activity_pubylish_pey_video"
-        app:layout_constraintStart_toStartOf="@+id/activity_pubylish_pey_video"
-        app:layout_constraintTop_toTopOf="@+id/activity_pubylish_pey_video"
-        app:srcCompat="@drawable/ic_player_center_start" />
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/baise"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <EditText
+                android:id="@+id/activity_pubylish_pey_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
+                android:background="@null"
+                android:gravity="left|top"
+                android:hint="说点什么吧..."
+                android:maxLength="500"
+                android:minLines="2"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_pubylish_pey_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x50"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/x50"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_pubylish_pey_content" />
+
+            <ImageView
+                android:id="@+id/activity_pubylish_pey_video"
+                android:layout_width="@dimen/x300"
+                android:layout_height="@dimen/x500"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_pubylish_pey_recyclerview"
+                app:layout_goneMarginTop="36dp" />
+
+            <ImageView
+                android:id="@+id/activity_pubylish_pey_start"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/x80"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_pubylish_pey_video"
+                app:layout_constraintEnd_toEndOf="@+id/activity_pubylish_pey_video"
+                app:layout_constraintStart_toStartOf="@+id/activity_pubylish_pey_video"
+                app:layout_constraintTop_toTopOf="@+id/activity_pubylish_pey_video"
+                app:srcCompat="@drawable/ic_player_center_start" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_publish_pyq_lianjie_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x50"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/x50"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_pubylish_pey_video">
+
+                <ImageView
+                    android:id="@+id/activity_publish_pyq_lianjie_img"
+                    android:layout_width="@dimen/x220"
+                    android:layout_height="@dimen/x220"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/app_img" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_lianjie_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="@dimen/x8"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/erjibiaoti"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/activity_publish_pyq_lianjie_img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_lianjie_content"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/activity_publish_pyq_lianjie_title"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_lianjie_title" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_lianjie_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="删除文章"
+                    android:textColor="@color/lanse"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_publish_pyq_huati_layout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView286">
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_huati_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="选择话题"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView25"
+                    app:layout_constraintStart_toEndOf="@+id/activity_publish_pyq_huati_img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/x60"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/youjiantou" />
+
+                <ImageView
+                    android:id="@+id/activity_publish_pyq_huati_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x60"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/fbpyq_huati_unchecked" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView286"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="28dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_lianjie_layout" />
+
+            <TextView
+                android:id="@+id/textView287"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_huati_layout" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_publish_pyq_address_layout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_huati_layout">
+
+                <ImageView
+                    android:id="@+id/activity_publish_pyq_address_layout_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x60"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/fbpyq_position_unchecked" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_address_layout_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="你的位置"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView34"
+                    app:layout_constraintStart_toEndOf="@+id/activity_publish_pyq_address_layout_img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView34"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/x60"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/youjiantou" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView290"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_address_layout" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_publish_pyq_zixun_layout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_address_layout">
+
+                <ImageView
+                    android:id="@+id/activity_publish_pyq_zixun_guanlianzixun_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x60"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/fbpyq_zixun_unchecked" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_zixun_guanlianzixun"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="关联资讯"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/activity_publish_pyq_zixun_guanlianzixun_img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView36"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/x60"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/youjiantou" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_zixun_guanlianzixun_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="未关联"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView36"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView293"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_zixun_layout" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_publish_pyq_shuikeyikan_layout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_tixinghsuikan_layout">
+
+                <ImageView
+                    android:id="@+id/activity_publish_pyq_shuikeyikan_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x60"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/fbpyq_shuikeyikan_unchecked" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_shuikeyikan_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="谁可以看"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/activity_publish_pyq_shuikeyikan_img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView39"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/x60"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/youjiantou" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_shuikeyikan_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="公开"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView39"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView296"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_tixinghsuikan_layout" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_publish_pyq_tixinghsuikan_layout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/activity_publish_pyq_zixun_layout"
+                tools:layout_editor_absoluteY="525dp">
+
+                <ImageView
+                    android:id="@+id/activity_publish_pyq_tixinghsuikan_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x60"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/fbpyq_tixingshuikan_unchecked" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_tixinghsuikan_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="提醒谁看"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/activity_publish_pyq_tixinghsuikan_img"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageView41"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="@dimen/x60"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@mipmap/youjiantou" />
+
+                <TextView
+                    android:id="@+id/activity_publish_pyq_tixinghsuikan_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:ellipsize="end"
+                    android:maxLength="15"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView41"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView299"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x200"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_publish_pyq_shuikeyikan_layout" />
+
+            <TextView
+                android:id="@+id/textView162"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

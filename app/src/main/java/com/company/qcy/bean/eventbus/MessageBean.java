@@ -44,6 +44,12 @@ public class MessageBean {
         this.obj = obj;
     }
 
+    public MessageBean(int code, String meaasge, Object obj) {
+        this.code = code;
+        this.meaasge = meaasge;
+        this.obj = obj;
+    }
+
 
     public int getCode() {
         return code;
@@ -75,6 +81,38 @@ public class MessageBean {
 
     public void setObj(Object obj) {
         this.obj = obj;
+    }
+
+
+    public static class JPush{
+        //發送的系統消息
+        public static final int XITONGXIAOXI=1001;
+
+        //清除lunch数字
+        public static final int DELETELUNCHNUMBER=1002;
+    }
+
+
+    public static class RemenCode{
+        //删除评论成功
+        public static final int DELETEPINGLUNCHENGGONG=1013;
+        //发布朋友圈成功
+        public static final int FABUPENGYOUQUANCHENGGONG=1014;
+        //朋友圈需要刷新
+        public static final int PENGYOUQUANNEEDREFLUSH=1020;
+        //详情页点赞成功需要刷新
+        public static final int XIANGQINGYEDIANZANCHENGGONG=1022;
+    }
+
+    public static class GuanzhuCode{
+        //删除评论成功
+        public static final int DELETEPINGLUNCHENGGONG=1013;
+        //发布朋友圈成功
+        public static final int FABUPENGYOUQUANCHENGGONG=1014;
+        //朋友圈需要刷新
+        public static final int PENGYOUQUANNEEDREFLUSH=1020;
+        //详情页点赞成功需要刷新
+        public static final int XIANGQINGYEDIANZANCHENGGONG=1022;
     }
 
     public static class Code {
@@ -160,6 +198,41 @@ public class MessageBean {
         //竞拍 参与竞拍成功
         public static final int TCANYUJINGPAICHENGGONG = 1031;
 
+        //朋友圈 选择了发布的地址
+        public static final int PENGYOUQUANCHOICEADDRESS = 1032;
+
+        //朋友圈 不选择地址
+        public static final int PENGYOUQUANNOCHOICEADDRESS = 1033;
+
+        //朋友圈 搜索时选择了发布的地址
+        public static final int PENGYOUQUANCHOICEADDRESSBYSEARCH = 1034;
+
+        //朋友圈 选择了二级话题
+        public static final int CHOICEERJIHUATI = 1035;
+
+        //朋友圈 选择了资讯
+        public static final int CHOICEZIXUN = 1036;
+
+        //朋友圈 选择誰可以看
+        public static final int CHOICESHUIKEYIKAN = 1037;
+
+        //朋友圈 提醒谁看
+        public static final int CHOICETIXINGSHUIKAN = 1038;
+
+        //朋友圈 确定谁可以看
+        public static final int QUEDINGSHUIKAN = 1039;
+
+        //朋友圈 有新的消息
+        public static final int PENGYOUQUANHAVENEWMESSAGE = 1040;
+
+        //系统消息 有新的消息
+        public static final int XITONGHAVENEWMESSAGE = 1041;
+
+        //系统消息 进去了messageActivity
+        public static final int DIANJIJINQUMESSAGE = 1042;
+
+        //
+        public static final int ASAAAAAAAAAA = 1043;
     }
 
 }

@@ -21,6 +21,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.CaigoulianmengAddCankaobiaozhunDialog;
 import com.company.qcy.Utils.ShurukuangDialog;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.caigoulianmeng2.adapter.CankaobiaozhunAdapter;
 import com.company.qcy.huodong.caigoulianmeng2.bean.ProductBean;
@@ -30,7 +31,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZidingyiDinghuoActivity extends AppCompatActivity implements View.OnClickListener {
+public class ZidingyiDinghuoActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;

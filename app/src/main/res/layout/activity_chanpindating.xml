@@ -72,7 +72,7 @@
             <!--android:layout_height="wrap_content"-->
             <!--android:gravity="center"-->
             <!--android:text="价格从\n低到高"-->
-            <!--android:textSize="@dimen/x24"-->
+            <!---->
             <!--app:layout_constraintBottom_toBottomOf="@+id/chanpindating_jiagepaixu_img"-->
             <!--app:layout_constraintEnd_toStartOf="@+id/chanpindating_jiagepaixu_img"-->
             <!--app:layout_constraintTop_toTopOf="@+id/chanpindating_jiagepaixu_img" />-->

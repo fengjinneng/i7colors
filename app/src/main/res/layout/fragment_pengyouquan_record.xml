@@ -4,31 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/baise"
     tools:context=".fragment.pengyouquan.PengyouquanRecordFragment">
 
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/fragment_pengyouquan_record_swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:layout_constraintTop_toTopOf="parent">
 
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/fragment_pengyouquan_record_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/fragment_pengyouquan_record_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        >
-
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
     </android.support.v4.widget.SwipeRefreshLayout>
 
 

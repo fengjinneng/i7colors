@@ -20,6 +20,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.NetworkUtil;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
 
 import org.greenrobot.eventbus.EventBus;
@@ -42,15 +43,15 @@ public class BaseActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         activity = this;
         context = getApplicationContext();
+        if(android.os.Build.VERSION.SDK_INT>19){
+            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.baise), true);
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onReciveMessage(MessageBean msg) {
 
     }
-
-
-
 
     /**
      * 判断网络
@@ -68,7 +69,6 @@ public class BaseActivity extends AppCompatActivity {
             }
         }
     }
-
 
     /**
      * 显示无网弹框
@@ -122,7 +122,6 @@ public class BaseActivity extends AppCompatActivity {
         OkGo.getInstance().cancelTag(this);
 
     }
-
 
 
     public static void toSetting(Context context) {

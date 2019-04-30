@@ -16,7 +16,7 @@
         android:paddingRight="5dp"
         android:text="企业发布"
         android:textColor="@color/baise"
-        android:textSize="@dimen/x24"
+
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/item_wode_qiugou_name"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x10"
         android:text="数量:"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintStart_toStartOf="@+id/item_wode_qiugou_name"
         app:layout_constraintTop_toBottomOf="@+id/item_wode_qiugou_name" />
 
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/chunhongse"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintStart_toEndOf="@+id/textView86"
         app:layout_constraintTop_toTopOf="@+id/textView86" />
 
@@ -71,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:text="KG"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toEndOf="@+id/item_wode_qiugou_number"
         app:layout_constraintTop_toTopOf="@+id/item_wode_qiugou_number" />
@@ -81,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="地区:"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="@+id/textView88" />
 
@@ -90,7 +90,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView93"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toEndOf="@+id/textView93"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="包装要求:"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/item_wode_qiugou_address" />
 
@@ -110,7 +110,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/textView96"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView96"
@@ -195,7 +195,7 @@
                 android:layout_marginTop="8dp"
                 android:hint="未添加说明"
                 android:minLines="1"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView103"
                 app:layout_constraintTop_toBottomOf="@+id/textView103" />
@@ -207,7 +207,7 @@
                 android:layout_marginTop="@dimen/x50"
                 android:text="¥ "
                 android:textColor="@color/chunhongse"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toStartOf="@+id/textView100"
                 app:layout_constraintTop_toBottomOf="@+id/textView100" />
 
@@ -226,7 +226,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="/KG"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBaseline_toBaselineOf="@+id/item_wode_qiugou_price"
                 app:layout_constraintBottom_toBottomOf="@+id/item_wode_qiugou_price"
                 app:layout_constraintStart_toEndOf="@+id/item_wode_qiugou_price" />
@@ -236,7 +236,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView107"
                 app:layout_constraintStart_toEndOf="@+id/textView107" />
 
@@ -283,7 +283,7 @@
                 android:layout_marginStart="8dp"
                 android:text="求购说明"
                 android:textColor="@color/erjibiaoti"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/textView91"
                 app:layout_constraintStart_toEndOf="@+id/textView91"
                 app:layout_constraintTop_toTopOf="@+id/textView91" />
@@ -294,7 +294,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
-                android:textSize="@dimen/x24"
+
                 android:hint="未添加说明"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView92"
@@ -353,7 +353,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="已有"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -364,7 +364,7 @@
                 android:layout_height="wrap_content"
                 android:text="0"
                 android:textColor="@color/chunhongse"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toEndOf="@+id/textView111"
                 app:layout_constraintTop_toTopOf="@+id/textView111" />
 
@@ -373,7 +373,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="家报价"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintStart_toEndOf="@+id/item_wode_qiugou_chakan_number"
                 app:layout_constraintTop_toTopOf="@+id/item_wode_qiugou_chakan_number" />
         </android.support.constraint.ConstraintLayout>
@@ -398,7 +398,7 @@
                 android:gravity="center"
                 android:paddingLeft="@dimen/x30"
                 android:text="剩余时间:"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -412,7 +412,7 @@
                 android:background="@drawable/backgroud_daojishi"
                 android:gravity="center"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView116"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -425,7 +425,7 @@
                 android:background="@drawable/backgroud_daojishi"
                 android:gravity="center"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x24"
+
                 app:layout_constraintBottom_toBottomOf="@+id/item_wode_qiugou_firsttime_text"
                 app:layout_constraintStart_toEndOf="@+id/item_wode_qiugou_firsttime_text"
                 app:layout_constraintTop_toTopOf="@+id/item_wode_qiugou_firsttime_text"

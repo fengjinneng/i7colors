@@ -29,7 +29,7 @@ public class NormalMessageAdapter extends BaseQuickAdapter<MessageBean, BaseView
             helper.setText(R.id.item_message_status,"已读");
             helper.setTextColor(R.id.item_message_status,mContext.getResources().getColor(R.color.putongwenben));
         }
-        helper.setText(R.id.item_message_time,item.getCreatedAt());
+        helper.setText(R.id.item_message_time,item.getCreatedAt().substring(0,10));
 
     }
 }

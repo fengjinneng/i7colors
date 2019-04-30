@@ -34,7 +34,7 @@
                 android:hint="请输入手机号(用于登陆/找回密码)"
                 android:inputType="phone"
                 android:paddingLeft="@dimen/x36"
-                android:textSize="@dimen/x30"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -63,14 +63,14 @@
                     android:inputType="number"
                     android:maxLength="6"
                     android:paddingLeft="@dimen/x36"
-                    android:textSize="@dimen/x30" />
+                     />
 
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="@dimen/x60"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="@dimen/x100"
+                    android:layout_marginLeft="@dimen/x50"
                     android:background="@color/fengexian" />
 
                 <TextView
@@ -94,7 +94,7 @@
                 android:inputType="textPassword"
                 android:maxLength="16"
                 android:paddingLeft="@dimen/x36"
-                android:textSize="@dimen/x30"
+
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_yaoqingma"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_yaoqingma"
                 app:layout_constraintTop_toBottomOf="@+id/activity_register_yaoqingma" />
@@ -108,7 +108,7 @@
                 android:hint="请再次输入密码"
                 android:inputType="textPassword"
                 android:paddingLeft="@dimen/x36"
-                android:textSize="@dimen/x30"
+
                 android:maxLength="16"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_password_1"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:text="阅读并接受"
-                    android:textSize="@dimen/x30" />
+                     />
 
                 <TextView
                     android:id="@+id/activity_register_xieyi"
@@ -160,7 +160,7 @@
                     android:layout_height="match_parent"
                     android:text="《七彩云协议》"
                     android:textColor="@color/chunhongse"
-                    android:textSize="@dimen/x30" />
+                     />
 
 
             </LinearLayout>
@@ -173,7 +173,7 @@
                 android:paddingLeft="@dimen/x36"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="输入邀请码(非必填)"
-                android:textSize="@dimen/x30"
+
                 android:inputType="textEmailAddress"
                 android:maxLength="6"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"

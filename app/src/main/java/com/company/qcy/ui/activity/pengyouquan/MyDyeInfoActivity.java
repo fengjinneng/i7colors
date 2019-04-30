@@ -38,6 +38,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ImageBean;
+import com.company.qcy.ui.activity.user.ChoiceHeadImageActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -64,7 +65,6 @@ public class MyDyeInfoActivity extends BaseActivity implements View.OnClickListe
     private ImageView mActivityMyDyeInfoImg;
     private ConstraintLayout mActivityMyDyeInfoImgLayout;
     /**
-     *
      */
     private TextView mActivityMyDyeInfoNickname;
     private ConstraintLayout mActivityMyDyeInfoNicknameLayout;
@@ -95,14 +95,12 @@ public class MyDyeInfoActivity extends BaseActivity implements View.OnClickListe
         if(!StringUtils.isEmpty(nickName)){
             mActivityMyDyeInfoNickname.setText(nickName);
         }
-
         if(StringUtils.isEmpty(imgUrl)){
             mActivityMyDyeInfoImg.setBackground(getResources().getDrawable(R.mipmap.morentouxiang));
         }else {
             GlideUtils.loadCircleImage(this, ServerInfo.IMAGE+imgUrl,mActivityMyDyeInfoImg);
         }
     }
-
 
     @Override
     public void onReciveMessage(MessageBean msg) {
@@ -111,210 +109,11 @@ public class MyDyeInfoActivity extends BaseActivity implements View.OnClickListe
             case MessageBean.Code.PENGYOUQUANNICKNAMECHANGE:
                 mActivityMyDyeInfoNickname.setText(msg.getMeaasge());
                 break;
-        }
-    }
-
-    private Dialog chooseHeadDialog;
-    public static final int REQUEST_CODE_CHOOSE_IMG =1;
-    public static final int TAKE_PICTURE =2;
-
-
-    private void showHeadPortraitDialog() {
-
-
-        chooseHeadDialog = new Dialog(MyDyeInfoActivity.this, R.style.BottomDialog);
-        View contentView = LayoutInflater.from(MyDyeInfoActivity.this).inflate(R.layout.dialog_choose_head, null);
-        chooseHeadDialog.setContentView(contentView);
-        ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
-        layoutParams.width = getResources().getDisplayMetrics().widthPixels;
-        // layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        contentView.setLayoutParams(layoutParams);
-        chooseHeadDialog.getWindow().setGravity(Gravity.BOTTOM);
-        chooseHeadDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
-        chooseHeadDialog.setCancelable(true);
-        chooseHeadDialog.setCanceledOnTouchOutside(true);
-        chooseHeadDialog.show();
-         contentView.findViewById(R.id.tv_take_video).setVisibility(View.GONE);
-         contentView.findViewById(R.id.tv_choose_video).setVisibility(View.GONE);
-
-
-        // 从相册选择图片
-        contentView.findViewById(R.id.tv_choose_photo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseHeadDialog.dismiss();  // 选择之后，关闭dialog
-                if (Build.VERSION.SDK_INT >= 23) {
-                    int checkCallWritePermission = ContextCompat.checkSelfPermission(MyDyeInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                    if (checkCallWritePermission != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(MyDyeInfoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 2);
-                        return;
-                    } else {
-                        // 打开本地相册
-                        MatisseImageUtil.chooseOnlyOnePhoto(MyDyeInfoActivity.this, REQUEST_CODE_CHOOSE_IMG);
-                    }
-                } else {
-                    // 打开本地相册
-                    MatisseImageUtil.chooseOnlyOnePhoto(MyDyeInfoActivity.this, REQUEST_CODE_CHOOSE_IMG);
-                }
-            }
-        });
-        // 拍照
-        contentView.findViewById(R.id.tv_take_photo).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseHeadDialog.dismiss();
-                //判断权限
-                if (Build.VERSION.SDK_INT >= 23) {
-                    int checkCallPhonePermission = ContextCompat.checkSelfPermission(MyDyeInfoActivity.this, Manifest.permission.CAMERA);
-                    if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(MyDyeInfoActivity.this, new String[]{Manifest.permission.CAMERA}, 222);
-                        return;
-                    } else {
-                        int checkCallWritePermission = ContextCompat.checkSelfPermission(MyDyeInfoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-                        if (checkCallWritePermission != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(MyDyeInfoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                            return;
-                        } else {
-                            takePicture();
-                        }
-                    }
-                } else {
-                    takePicture();
-                }
-            }
-        });
-
-        // 取消
-        contentView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                chooseHeadDialog.dismiss();
-            }
-        });
-
-    }
-
-    private File outFile;  // 为了根据File获取uri
-
-    // 拍照
-    public void takePicture() {
-        String state = Environment.getExternalStorageState();
-        if (state.equals(Environment.MEDIA_MOUNTED)) {
-            try {
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File outDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-                if (!outDir.exists()) {
-                    outDir.mkdirs();
-                }
-                outFile = new File(outDir, System.currentTimeMillis() + ".jpg");
-                String picFileFullName = outFile.getAbsolutePath();
-                LogUtils.e("mxg", "picFileFullName = " + picFileFullName);
-                ContentValues contentValues = new ContentValues(1);
-                contentValues.put(MediaStore.Images.Media.DATA, picFileFullName);
-                Uri uri = getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues);
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                startActivityForResult(intent, TAKE_PICTURE);
-            } catch (Exception e) {
-                e.printStackTrace();
-                ToastUtils.showShort("请确认是否开启打开相机的权限！");
-                // requestPermission();
-            }
-        } else {
-            ToastUtils.showShort("请确认是否接入SD卡");
-        }
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case TAKE_PICTURE:
-                if (resultCode == RESULT_OK) {
-                    Uri imageUri = Uri.fromFile(outFile);
-                    String filePath = MatisseImageUtil.getRealFilePath(this, imageUri);
-
-                    File file = new File(filePath);
-                    File file1 = null;
-                    try {
-                        file1 = new Compressor(this).compressToFile(file);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    upDateImg(file1);
-                }
-                break;
-
-            case REQUEST_CODE_CHOOSE_IMG:
-                if (resultCode == RESULT_OK) {
-                    List<Uri> uris = Matisse.obtainResult(data);
-                    String filePath = MatisseImageUtil.getRealFilePath(this, uris.get(0));
-
-                    File file = new File(filePath);
-                    File file1 = null;
-                    try {
-                        file1 = new Compressor(this).compressToFile(file);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-
-                    upDateImg(file1);
-                }
-
+            case MessageBean.Code.PENGYOUQUANHEADIMGCHANGE:
+                GlideUtils.loadCircleImage(this, ServerInfo.IMAGE+msg.getMeaasge(),mActivityMyDyeInfoImg);
                 break;
         }
     }
-
-    private void upDateImg(File imgFile) {
-        PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.UPDATEMYDYEINFO)
-                .tag(this)
-                .isMultipart(true)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("token", SPUtils.getInstance().getString("token"))
-                .params("file", imgFile);
-
-        DialogStringCallback stringCallback = new DialogStringCallback(MyDyeInfoActivity.this) {
-            @Override
-            public void onSuccess(Response<String> response) {
-                LogUtils.v("UPDATEMYDYEINFO", response.body());
-
-                try {
-                    if (response.code() == 200) {
-                        JSONObject jsonObject = JSONObject.parseObject(response.body());
-                        String msg = jsonObject.getString("msg");
-                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                            ToastUtils.showShort(msg);
-                            if(!StringUtils.isEmpty(jsonObject.getString("data"))){
-                                GlideUtils.loadCircleImage(MyDyeInfoActivity.this,ServerInfo.IMAGE+jsonObject.getString("data"),mActivityMyDyeInfoImg);
-                                EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANHEADIMGCHANGE,jsonObject.getString("data")));
-                            }else {
-                                ToastUtils.showShort(msg);
-                            }
-                            return;
-                        }
-                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(MyDyeInfoActivity.this,request,this);
-                            return;
-                        }
-                        ToastUtils.showShort(msg);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onError(Response<String> response) {
-                super.onError(response);
-                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
-            }
-        };
-
-        request.execute(stringCallback);
-
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -324,20 +123,10 @@ public class MyDyeInfoActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.activity_my_dye_info_img_layout:
-
-                AndPermission.with(this)
-                        .runtime()
-                        .permission(Permission.Group.STORAGE,Permission.Group.CAMERA)
-                        .onGranted(permissions -> {
-                            // Storage permission are allowed.
-                            showHeadPortraitDialog();
-
-                        })
-                        .onDenied(permissions -> {
-                            // Storage permission are not allowed.
-                            ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
-                        })
-                        .start();
+                Intent  i = new Intent(this,ChoiceHeadImageActivity.class);
+                i.putExtra("imgUrl",imgUrl);
+                i.putExtra("from","mine");
+                ActivityUtils.startActivity(i);
                 break;
             case R.id.activity_my_dye_info_nickname_layout:
                 Intent intent = new Intent(this,ChangeNicknameActivity.class);

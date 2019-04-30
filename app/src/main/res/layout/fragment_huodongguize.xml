@@ -22,7 +22,7 @@
             android:layout_marginTop="8dp"
             android:textColor="@color/erjibiaoti"
             android:visibility="gone"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
             android:layout_marginTop="4dp"
             android:textColor="@color/erjibiaoti"
             android:visibility="gone"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_1_text"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_1_content" />
 
@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_2_text"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_2_content" />
@@ -96,7 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_3_text"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_3_content" />
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_4_text"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_4_content" />
@@ -146,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_5_text"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_5_content" />
@@ -172,7 +172,7 @@
             android:layout_marginTop="16dp"
             android:text="活动介绍"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             app:layout_constraintStart_toStartOf="@+id/fragment_huodongguize_6_text"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_9_content" />
 
@@ -194,7 +194,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_6_content" />
@@ -220,7 +220,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_7_content" />
@@ -246,7 +246,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30"
+
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/fragment_huodongguize_8_content" />

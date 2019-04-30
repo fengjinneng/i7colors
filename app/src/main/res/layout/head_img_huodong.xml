@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -13,4 +14,16 @@
         app:layout_constraintTop_toBottomOf="@+id/include14">
 
     </ImageView>
+
+    <TextView
+        android:id="@+id/head_img_huodong_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/x20"
+        android:paddingTop="@dimen/x10"
+        android:visibility="gone"
+        android:paddingBottom="@dimen/x10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/head_img_huodong_img" />
 </android.support.constraint.ConstraintLayout>

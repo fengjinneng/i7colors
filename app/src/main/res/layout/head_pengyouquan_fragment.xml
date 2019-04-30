@@ -6,19 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/head_pengyouquan_fragment_shenfen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:background="@color/lanse"
-        android:padding="@dimen/x5"
-        android:text="个人用户"
-        android:textColor="@color/baise"
-        android:textSize="@dimen/x24"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView181" />
-
     <ImageView
         android:id="@+id/head_pengyouquan_fragment_head"
         android:layout_width="@dimen/x100"
@@ -34,7 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginTop="4dp"
-        android:text="Y.C.Pixel"
         android:textColor="@color/erjibiaoti"
         app:layout_constraintEnd_toStartOf="@+id/head_pengyouquan_fragment_head"
         app:layout_constraintTop_toTopOf="@+id/head_pengyouquan_fragment_head" />
@@ -46,7 +32,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginTop="4dp"
         android:text="未认证"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toStartOf="@+id/head_pengyouquan_fragment_head"
         app:layout_constraintTop_toBottomOf="@+id/head_pengyouquan_fragment_name" />
 
@@ -54,11 +40,10 @@
         android:id="@+id/head_pengyouquan_fragment_renzheng_img"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/head_pengyouquan_fragment_renzheng"
-        app:layout_constraintEnd_toStartOf="@+id/head_pengyouquan_fragment_renzheng"
-        app:layout_constraintTop_toTopOf="@+id/head_pengyouquan_fragment_renzheng"
-        app:srcCompat="@mipmap/dav_gray" />
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/head_pengyouquan_fragment_head"
+        app:layout_constraintEnd_toEndOf="@+id/head_pengyouquan_fragment_head"
+        app:srcCompat="@mipmap/bigv" />
 
     <TextView
         android:id="@+id/textView180"

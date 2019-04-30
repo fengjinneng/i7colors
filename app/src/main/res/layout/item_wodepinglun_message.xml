@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/x160">
+
+    <ImageView
+        android:id="@+id/item_wodepinglun_message_img"
+        android:layout_width="@dimen/x100"
+        android:layout_height="@dimen/x100"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/morentouxiang" />
+
+    <TextView
+        android:id="@+id/item_wodepinglun_message_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/lanse"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toStartOf="@+id/item_wodepinglun_message_time"
+        app:layout_constraintStart_toEndOf="@+id/item_wodepinglun_message_img"
+        app:layout_constraintTop_toTopOf="@+id/item_wodepinglun_message_img" />
+
+    <TextView
+        android:id="@+id/item_wodepinglun_message_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toStartOf="@+id/item_wodepinglun_message_time"
+        app:layout_constraintStart_toEndOf="@+id/item_wodepinglun_message_img"
+        app:layout_constraintTop_toBottomOf="@+id/item_wodepinglun_message_secondname" />
+
+    <TextView
+        android:id="@+id/item_wodepinglun_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="2000-1-1"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_wodepinglun_message_img" />
+
+    <TextView
+        android:id="@+id/item_wodepinglun_message_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="详情"
+        android:textColor="@color/lanse"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/item_wodepinglun_message_img"
+        app:layout_constraintEnd_toEndOf="@+id/item_wodepinglun_message_time" />
+
+    <ImageView
+        android:id="@+id/item_wodepinglun_message_bigV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_wodepinglun_message_img"
+        app:layout_constraintEnd_toEndOf="@+id/item_wodepinglun_message_img"
+        app:srcCompat="@mipmap/bigv" />
+
+    <TextView
+        android:id="@+id/item_wodepinglun_message_secondname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/x22"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/item_wodepinglun_message_name"
+        app:layout_constraintStart_toStartOf="@+id/item_wodepinglun_message_name"
+        app:layout_constraintTop_toBottomOf="@+id/item_wodepinglun_message_name" />
+
+    <TextView
+        android:id="@+id/item_wodepinglun_message_weiduxiaoxi"
+        android:layout_width="@dimen/x14"
+        android:layout_height="@dimen/x14"
+        android:background="@drawable/background_hongsexiaoyuandian"
+        app:layout_constraintStart_toStartOf="@+id/item_wodepinglun_message_img"
+        app:layout_constraintTop_toTopOf="@+id/item_wodepinglun_message_img" />
+
+</android.support.constraint.ConstraintLayout>

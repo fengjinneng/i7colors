@@ -1,14 +1,7 @@
-package com.company.qcy.Utils;
-
+package com.company.qcy.Utils.share;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-
-import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.company.qcy.R;
-
+import com.company.qcy.Utils.ServerInfo;
 import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class ShareUtil {
@@ -23,6 +16,13 @@ public class ShareUtil {
      */
 
 
+    //生產
+//    public static String shareUrl ="http://mobile.i7colors.com/groupBuyMobile/openApp/" ;
+
+    //測試
+    public static String shareUrl ="http://manage.i7colors.com/groupBuyMobile/openApp/" ;
+
+    //分享投票
     public static void shareVoteDetail(Context context, String title, String content, String imgUrl, String id) {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -46,7 +46,7 @@ public class ShareUtil {
         }
 
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/voteList.html?id=" + id);
+        oks.setUrl(shareUrl+"voteList.html?id=" + id);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
@@ -58,6 +58,8 @@ public class ShareUtil {
         oks.show(context);
     }
 
+
+    //分享投票选手
     public static void shareVotePlayerDetail(Context context, String title, String content, String imgUrl, String id,String mainId) {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -81,7 +83,7 @@ public class ShareUtil {
         }
 
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/voteMessage.html?id=" + id+"&mainId="+mainId);
+        oks.setUrl(shareUrl+"voteMessage.html?id=" + id+"&mainId="+mainId);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
@@ -94,6 +96,7 @@ public class ShareUtil {
     }
 
 
+    //分享产品
     public static void shareProduct(Context context, String title, String content, String imgUrl, String id) {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -112,7 +115,7 @@ public class ShareUtil {
         oks.setImageUrl(ServerInfo.IMAGE + imgUrl);
 
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/shopDetails.html?id=" + id);
+        oks.setUrl(shareUrl+"shopDetails.html?id=" + id);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
@@ -124,6 +127,8 @@ public class ShareUtil {
         oks.show(context);
     }
 
+
+    //分享朋友圈详情
     public static void shareFriendCircle(Context context, String title, String content, String imgUrl, Long id) {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -148,7 +153,7 @@ public class ShareUtil {
         }
 
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/friendCircle.html?id=" + id);
+        oks.setUrl(shareUrl+"friendCircle.html?id=" + id);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
@@ -160,6 +165,8 @@ public class ShareUtil {
         oks.show(context);
     }
 
+
+    //分享店铺
     public static void shareShop(Context context) {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -177,7 +184,7 @@ public class ShareUtil {
 //        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
         oks.setImageUrl(ServerInfo.IMAGE + "/ad/1538037103910NJAUF1.jpg");
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/preferredShop.html?id=2m");
+        oks.setUrl(shareUrl+"preferredShop.html?id=2m");
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用
@@ -189,6 +196,8 @@ public class ShareUtil {
         oks.show(context);
     }
 
+
+    //分享求购
     public static void shareEnquiry(Context context, String title, String content, Long enquiryId) {
         OnekeyShare oks = new OnekeyShare();
         //关闭sso授权
@@ -207,7 +216,7 @@ public class ShareUtil {
         oks.setImageUrl("http://static.i7colors.com/i7colors_logo.png");
 
         // url仅在微信（包括好友和朋友圈）中使用
-        oks.setUrl("http://mobile.i7colors.com/groupBuyMobile/openApp/industryChain.html?enquiryId="+enquiryId);
+        oks.setUrl(shareUrl+"industryChain.html?enquiryId="+enquiryId);
         // comment是我对这条分享的评论，仅在人人网和QQ空间使用
 //        oks.setComment("我是测试评论文本");
         // site是分享此内容的网站名称，仅在QQ空间使用

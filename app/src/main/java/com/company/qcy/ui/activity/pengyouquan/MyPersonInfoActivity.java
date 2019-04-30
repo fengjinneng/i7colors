@@ -3,15 +3,16 @@ package com.company.qcy.ui.activity.pengyouquan;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
@@ -33,7 +35,9 @@ import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.PYQUserBean;
 import com.company.qcy.fragment.pengyouquan.MyFansFragment;
+import com.company.qcy.fragment.pengyouquan.MyFriendsFragment;
 import com.company.qcy.fragment.pengyouquan.PengyouquanRecordFragment;
+import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -41,6 +45,9 @@ import com.lzy.okgo.request.GetRequest;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
 
 public class MyPersonInfoActivity extends BaseActivity implements View.OnClickListener {
 
@@ -57,7 +64,6 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
      * 点击编辑
      */
     private TextView mActivityPersonInfoEditNickname;
-    private Toolbar mToolbar;
     private CollapsingToolbarLayout mCollapsingToolbar;
     private TabLayout mTabLayout;
     private AppBarLayout mAppbar;
@@ -71,37 +77,57 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
      */
     private TextView mActivityMyPersonInfoDianjirenzheng;
     private ImageView mActivityMyPersonInfoDav;
+    private TextView xiaoxi;
+    private ImageView mActivityMyPersonInfoBack;
+
+    private Badge messageBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_person_info);
         initView();
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.chunhongse), false);
     }
 
 
-
     private void initView() {
+
+        xiaoxi = (TextView) findViewById(R.id.activity_my_person_info_xiaoxi);
         mActivityPersonInfoImg = (ImageView) findViewById(R.id.activity_my_person_info_img);
         mActivityPersonInfoName = (TextView) findViewById(R.id.activity_my_person_info_name);
         mActivityPersonInfoNickname = (TextView) findViewById(R.id.activity_my_person_info_nickname);
         mActivityPersonInfoEditNickname = (TextView) findViewById(R.id.activity_my_person_info_edit);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mCollapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.collapsingToolbar);
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mAppbar = (AppBarLayout) findViewById(R.id.appbar);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
         mActivityPersonInfoEditNickname.setOnClickListener(this);
         mActivityPersonInfoImg.setOnClickListener(this);
+        xiaoxi.setOnClickListener(this);
         initToolBarData();
         addData();
         mActivityMyPersonInfoIsrenzheng = (TextView) findViewById(R.id.activity_my_person_info_isrenzheng);
         mActivityMyPersonInfoDianjirenzheng = (TextView) findViewById(R.id.activity_my_person_info_dianjirenzheng);
         mActivityMyPersonInfoDianjirenzheng.setOnClickListener(this);
         mActivityMyPersonInfoDav = (ImageView) findViewById(R.id.activity_my_person_info_dav);
+        mActivityMyPersonInfoBack = (ImageView) findViewById(R.id.activity_my_person_info_back);
+        mActivityMyPersonInfoBack.setOnClickListener(this);
+
+        messageBadge = new QBadgeView(this).bindTarget(xiaoxi)
+                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(10, true).setExactMode(false);
+        messageBadge.setBadgeBackgroundColor(getResources().getColor(R.color.baise));
+        messageBadge.setBadgeTextColor(getResources().getColor(R.color.chunhongse));
     }
 
     private PYQUserBean userBean;
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        addData();
+    }
 
     private void setData() {
         if (ObjectUtils.isEmpty(userBean)) {
@@ -110,11 +136,7 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
 
         mActivityPersonInfoNickname.setText(userBean.getNickName());
 
-        if (!StringUtils.isEmpty(userBean.getCommunityPhoto())) {
-            GlideUtils.loadCircleImage(this, ServerInfo.IMAGE + userBean.getCommunityPhoto(), mActivityPersonInfoImg);
-        } else {
-            mActivityPersonInfoImg.setImageDrawable(getResources().getDrawable(R.mipmap.morentouxiang));
-        }
+        MyCommonUtil.jiazaitouxiang(this,userBean.getCommunityPhoto(),mActivityPersonInfoImg);
 
         if (StringUtils.equals("1", userBean.getIsCompany())) {
             mActivityPersonInfoName.setText(userBean.getCompanyName());
@@ -125,11 +147,11 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
                 mActivityPersonInfoName.setText(userBean.getDyeVName());
                 mActivityMyPersonInfoIsrenzheng.setText("已认证");
                 mActivityMyPersonInfoDav.setVisibility(View.VISIBLE);
-            } else if (StringUtils.equals("2", userBean.getIsDyeV())){
+            } else if (StringUtils.equals("2", userBean.getIsDyeV())) {
                 mActivityPersonInfoName.setText("");
                 mActivityMyPersonInfoIsrenzheng.setText("认证审核中...");
                 mActivityMyPersonInfoDianjirenzheng.setVisibility(View.GONE);
-            }else {
+            } else {
                 mActivityPersonInfoName.setText("");
                 mActivityMyPersonInfoIsrenzheng.setText("未认证");
                 mActivityMyPersonInfoDianjirenzheng.setVisibility(View.VISIBLE);
@@ -171,15 +193,17 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
             }
         }
 
+        messageBadge.setBadgeNumber(Integer.parseInt(userBean.getNotReadMessageCount()));
+
     }
 
     @Override
     public void onReciveMessage(MessageBean msg) {
         super.onReciveMessage(msg);
 
-        switch (msg.getCode()){
+        switch (msg.getCode()) {
             case MessageBean.Code.PENGYOUQUANHEADIMGCHANGE:
-                GlideUtils.loadCircleImage(MyPersonInfoActivity.this,ServerInfo.IMAGE+msg.getMeaasge(),mActivityPersonInfoImg);
+                GlideUtils.loadCircleImage(MyPersonInfoActivity.this, ServerInfo.IMAGE + msg.getMeaasge(), mActivityPersonInfoImg);
                 break;
 
             case MessageBean.Code.PENGYOUQUANNICKNAMECHANGE:
@@ -241,20 +265,17 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
     private void initToolBarData() {
         List<Fragment> fragments = new ArrayList<>();
         fragments.add(PengyouquanRecordFragment.newInstance("mine"));
+        fragments.add(new MyFriendsFragment());
         fragments.add(MyFansFragment.newInstance("mine"));
         List<String> datas = new ArrayList<>();
-        datas.add("朋友圈记录");
+        datas.add("印染圈记录");
+        datas.add("好友");
         datas.add("粉丝");
         baseViewpageAdapter = new BaseViewpageAdapter(getSupportFragmentManager(), fragments, datas);
         mViewpager.setAdapter(baseViewpageAdapter);
         mTabLayout.setupWithViewPager(mViewpager);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        mViewpager.setOffscreenPageLimit(2);
     }
 
     @Override
@@ -267,7 +288,6 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
                     intent.putExtra("imgUrl", userBean.getCommunityPhoto());
                     ActivityUtils.startActivity(intent);
                 }
-
                 break;
 
             case R.id.activity_my_person_info_img:
@@ -279,9 +299,15 @@ public class MyPersonInfoActivity extends BaseActivity implements View.OnClickLi
                 }
                 break;
             case R.id.activity_my_person_info_dianjirenzheng:
-
                 ActivityUtils.startActivity(DavrenzhengActivity.class);
+                break;
 
+            case R.id.activity_my_person_info_xiaoxi:
+                ActivityUtils.startActivity(MessageActivity.class);
+                break;
+
+            case R.id.activity_my_person_info_back:
+                finish();
                 break;
         }
     }

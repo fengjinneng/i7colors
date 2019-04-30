@@ -48,10 +48,6 @@ public class UpdateBean {
         this.description = description;
     }
 
-
-
-
-
     public String getIsForce() {
         return isForce;
     }

@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:textSize="@dimen/x30"
+
         android:textColor="@color/chunhongse"
         app:layout_constraintBottom_toBottomOf="@+id/item_kfsc_xiangqing_price_fuhao"
         app:layout_constraintStart_toEndOf="@+id/item_kfsc_xiangqing_price_fuhao" />
@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"
         android:text="查看详情"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/item_kfsc_xiangqing_price"
         app:layout_constraintEnd_toEndOf="parent" />
 </android.support.constraint.ConstraintLayout>

@@ -13,7 +13,9 @@
     <color name="startcolor">#f26c27</color>
     <color name="endcolor">#ee2788</color>
 
-    <color name="chunhongse">#ef3673</color>
+
+    <!--<color name="chunhongse">#c84c40</color>-->
+    <color name="chunhongse">#ffed3851</color>
 
     <color name="hongse">#F10215</color>
 

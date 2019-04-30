@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_scrollFlags="scroll|enterAlways"
+        android:background="@color/baise"
+        app:theme="@style/TuangouTheme">
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:navigationIcon="@mipmap/back_round">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/pengyouquan_faxian_myinfo_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/pengyouquan_faxian_headimg"
+                        android:layout_width="@dimen/x100"
+                        android:layout_height="@dimen/x100"
+                        android:layout_marginEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView181"
+                        app:srcCompat="@mipmap/morentouxiang" />
+                    <TextView
+                        android:id="@+id/pengyouquan_faxian_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="4dp"
+                        android:textStyle="bold"
+                        android:textColor="@color/erjibiaoti"
+                        app:layout_constraintEnd_toStartOf="@+id/pengyouquan_faxian_headimg"
+                        app:layout_constraintTop_toTopOf="@+id/pengyouquan_faxian_headimg" />
+
+                    <TextView
+                        android:id="@+id/pengyouquan_faxian_renzheng"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="4dp"
+                        android:text="未认证"
+
+                        app:layout_constraintEnd_toStartOf="@+id/pengyouquan_faxian_headimg"
+                        app:layout_constraintTop_toBottomOf="@+id/pengyouquan_faxian_name" />
+
+                    <ImageView
+                        android:id="@+id/pengyouquan_faxian_renzheng_img"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@+id/pengyouquan_faxian_headimg"
+                        app:layout_constraintEnd_toEndOf="@+id/pengyouquan_faxian_headimg"
+                        app:srcCompat="@mipmap/bigv" />
+
+                    <TextView
+                        android:id="@+id/textView180"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x8"
+                        android:background="@color/fengexian"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/pengyouquan_faxian_headimg" />
+
+                    <TextView
+                        android:id="@+id/textView181"
+                        android:layout_width="0dp"
+                        android:background="@color/fengexian"
+                        android:layout_height="@dimen/x8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+            </LinearLayout>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x70">
+
+            <com.flyco.tablayout.SlidingTabLayout
+                android:id="@+id/fragment_faxian_slidingTabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginRight="@dimen/x100"
+                android:background="@drawable/selector_list_item"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tl_indicator_color="@color/chunhongse"
+                app:tl_indicator_width="0dp"
+                app:tl_textSelectColor="@color/chunhongse"
+                app:tl_textUnselectColor="@color/erjibiaoti" />
+
+            <ImageView
+                android:id="@+id/fragment_faxian_xiala"
+                android:layout_width="@dimen/x100"
+                android:layout_height="0dp"
+                android:padding="@dimen/x25"
+                android:src="@mipmap/xiajiantu_hongse"
+                app:layout_constraintBottom_toTopOf="@+id/textView298"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView297" />
+
+            <TextView
+                android:id="@+id/textView297"
+                android:layout_width="0dp"
+                android:background="#dcdcdc"
+                android:layout_height="0.5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_faxian_xiala"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView298"
+                android:layout_width="0dp"
+                android:background="#dcdcdc"
+                android:layout_height="0.5dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_faxian_xiala" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <android.support.v4.view.ViewPager
+    android:id="@+id/fragment_faxian_viewpager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+
+</android.support.design.widget.CoordinatorLayout>

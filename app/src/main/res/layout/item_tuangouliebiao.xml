@@ -42,7 +42,7 @@
             android:id="@+id/item_tuangouliebiao_yuanjia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="@+id/textView118"
             app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_yuanjia_danwei"
             app:layout_constraintHorizontal_bias="0.5"
@@ -53,7 +53,7 @@
             android:id="@+id/item_tuangouliebiao_yuanjia_danwei"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_yuanjia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -172,7 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="最小认领量 "
-        android:textSize="@dimen/x24"
+
         app:layout_constraintStart_toStartOf="@+id/textView79"
         app:layout_constraintTop_toBottomOf="@+id/textView79" />
 
@@ -182,7 +182,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="最大认领量 "
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_zuixiaorenling"
         app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_zuixiaorenling" />
 
@@ -283,7 +283,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
         android:text="已认领总量 "
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_seekbar"
         app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_seekbar" />
 
@@ -293,7 +293,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

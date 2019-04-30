@@ -29,7 +29,7 @@
             android:background="@drawable/search_oval"
             android:drawableLeft="@mipmap/search"
             android:drawablePadding="10dp"
-            android:textSize="@dimen/x24"
+
             android:hint="请输入参赛选手名称"
             android:imeOptions="actionSearch"
             android:paddingBottom="5dp"

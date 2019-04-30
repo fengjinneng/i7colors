@@ -6,6 +6,10 @@ import android.os.Bundle;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.eventbus.MessageBean;
+
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,6 +23,7 @@ public class SplashActivity extends AppCompatActivity {
             ActivityUtils.startActivity(MainActivity.class);
             finish();
         }
-
     }
+
+
 }

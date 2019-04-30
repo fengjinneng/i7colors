@@ -329,7 +329,7 @@
         android:id="@+id/item_caigoulianmeng_liebiao_status"
         android:layout_width="0dp"
         android:gravity="center"
-        android:textSize="@dimen/x24"
+
         android:layout_height="@dimen/x60"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

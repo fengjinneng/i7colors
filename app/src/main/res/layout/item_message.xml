@@ -4,22 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x160">
+    android:background="@color/baise"
+    android:layout_height="@dimen/x180">
 
     <TextView
         android:id="@+id/item_message_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/x16"
+        android:layout_marginEnd="8dp"
         android:singleLine="true"
-        android:text="活性黑 WNN（龙盛268标准）"
+        android:ellipsize="end"
         android:textColor="@color/erjibiaoti"
-        android:textSize="@dimen/x30"
         app:layout_constraintEnd_toStartOf="@+id/item_message_time"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/item_message_status"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView317" />
 
     <ImageView
         android:id="@+id/item_message_img"
@@ -38,12 +39,10 @@
         android:id="@+id/item_message_content"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="您好，您发布的“活性黑 WNN（龙盛268标准）”求购有 供应商已报价，请及时查看。"
-        android:textSize="@dimen/x24"
+        android:layout_marginTop="@dimen/x8"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_message_status"
@@ -54,23 +53,31 @@
         android:id="@+id/item_message_status"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/x16"
+        android:layout_marginBottom="8dp"
         android:text="未读"
         android:textColor="@color/chunhongse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView317" />
 
     <TextView
         android:id="@+id/item_message_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
         android:text="2018/10/18"
-        android:textSize="@dimen/x24"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_message_title" />
+
+    <TextView
+        android:id="@+id/textView317"
+        android:layout_width="0dp"
+        android:background="@color/fengexian"
+        android:layout_height="@dimen/x10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

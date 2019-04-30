@@ -2,12 +2,12 @@ package com.company.qcy.huodong.toupiao.activity;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
@@ -21,7 +21,7 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.ShareUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseActivity;
@@ -79,9 +79,11 @@ public class XuanshouDetailActivity extends BaseActivity implements View.OnClick
      */
     private Button mActivityXuanshouDetailToupiao;
 
+    @Autowired
+    public String mainId; //投票活动的ID
 
-    private String mainId; //投票活动的ID
-    private String id;    //选手的Id
+    @Autowired
+    public String id;    //选手的Id
     private TextView mToolbarText;
 
     @Override
@@ -252,7 +254,9 @@ public class XuanshouDetailActivity extends BaseActivity implements View.OnClick
                 toupiao();
                 break;
             case R.id.toolbar_text:
-
+                if(ObjectUtils.isEmpty(xuanshouBean)){
+                    return;
+                }
                 ShareUtil.shareVotePlayerDetail(XuanshouDetailActivity.this, "【投票】" + xuanshouBean.getName(),
                         xuanshouBean.getDescription(), xuanshouBean.getPic(), xuanshouBean.getId() + "", xuanshouBean.getMainId() + "");
 

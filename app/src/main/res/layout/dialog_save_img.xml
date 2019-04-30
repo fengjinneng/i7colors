@@ -20,7 +20,7 @@
         android:text="保存图片到本地"
         android:gravity="center"
         android:textColor="@color/erjibiaoti"
-        android:textSize="@dimen/x24"/>
+        />
 
 
 

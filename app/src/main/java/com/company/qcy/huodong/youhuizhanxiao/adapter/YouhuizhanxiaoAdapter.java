@@ -23,7 +23,7 @@ public class YouhuizhanxiaoAdapter extends BaseQuickAdapter<YouhuizhanxiaoBean, 
     protected void convert(BaseViewHolder helper, YouhuizhanxiaoBean item) {
 
         helper.setText(R.id.item_youhuizhanxiao_liebiao_productname,item.getProductName());
-        helper.setText(R.id.item_youhuizhanxiao_liebiao_totalnum,item.getTotalNum()+item.getNumUnit());
+        helper.setText(R.id.item_youhuizhanxiao_liebiao_totalnum,item.getSubscribedNum()+item.getNumUnit());
 
         helper.setText(R.id.item_youhuizhanxiao_liebiao_oldprice,item.getOldPrice());
         helper.setText(R.id.item_youhuizhanxiao_liebiao_newprice,item.getNewPrice());

@@ -4,14 +4,148 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".base.WebActivity">
+    tools:context=".base.WebActivity"
+    tools:layout_editor_absoluteY="25dp">
+
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x82"
+        android:background="@color/baise"
+        android:gravity="center_vertical">
+
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/biaoti"
+            android:textSize="@dimen/x36"
+            android:text="七彩云电商"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/toolbar_text"
+            app:layout_constraintStart_toEndOf="@+id/toolbar_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/toolbar_back"
+            android:layout_width="@dimen/x120"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/x40"
+            android:paddingRight="@dimen/x40"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/icon_close" />
+
+        <View
+            android:id="@+id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/fengexian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/toolbar_text"
+            android:layout_width="@dimen/x120"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textSize="@dimen/x26"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
+
 
     <WebView
         android:id="@+id/activity_web_webview"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout45"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" >
+
+    </WebView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout45"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x80"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/activity_web_back"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/activity_web_forward"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/icon_arrow_left" />
+
+        <ImageView
+            android:id="@+id/activity_web_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/activity_web_shuaxin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/activity_web_back"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/icon_arrow_right" />
+
+        <ImageView
+            android:id="@+id/activity_web_shuaxin"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/activity_web_forward"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/shuaxin" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/activity_web_progressbar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout45"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_web_webview" />
+
 </android.support.constraint.ConstraintLayout>

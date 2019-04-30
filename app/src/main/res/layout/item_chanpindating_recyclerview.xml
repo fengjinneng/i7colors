@@ -30,7 +30,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:textColor="@color/biaoti"
-        android:textSize="@dimen/x30"
+
         android:textStyle="bold"
         android:maxLines="2"
         android:ellipsize="end"
@@ -62,7 +62,7 @@
         android:layout_marginTop="@dimen/x8"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/item_chanpindating_productName"
         app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_productName" />
@@ -89,6 +89,7 @@
         app:tag_corner_radius="5dp"
         app:tag_text_size="@dimen/x20"
         app:tag_theme="none"
+        android:visibility="gone"
         app:tag_vertical_padding="@dimen/x5"
         app:vertical_interval="@dimen/x10">
 
@@ -99,10 +100,11 @@
         android:id="@+id/item_chanpindating_jiage_layout"
         android:layout_width="0dp"
         android:layout_height="26dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/item_chanpindating_yijianhujiao"
         app:layout_constraintEnd_toStartOf="@+id/item_chanpindating_yijianhujiao"
-        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_tagcontainer"
+        app:layout_constraintStart_toEndOf="@+id/item_chanpindating_img"
         app:layout_constraintTop_toTopOf="@+id/item_chanpindating_yijianhujiao">
 
         <TextView
@@ -110,11 +112,11 @@
             android:id="@+id/textView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="¥ "
             android:textColor="@color/chunhongse"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -138,7 +140,7 @@
             android:layout_marginEnd="8dp"
             android:text="元/KG"
             android:textColor="@color/chunhongse"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBaseline_toBaselineOf="@+id/item_chanpindating_price"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/item_chanpindating_price" />
@@ -148,23 +150,23 @@
         android:id="@+id/item_chanpindating_yijia_layout"
         android:layout_width="0dp"
         android:layout_height="26dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:visibility="gone"
-
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/item_chanpindating_yijianhujiao"
         app:layout_constraintEnd_toStartOf="@+id/item_chanpindating_yijianhujiao"
-        app:layout_constraintStart_toStartOf="@+id/item_chanpindating_tagcontainer"
-        app:layout_constraintTop_toBottomOf="@+id/item_chanpindating_tagcontainer">
+        app:layout_constraintStart_toEndOf="@+id/item_chanpindating_img"
+        app:layout_constraintTop_toTopOf="@+id/item_chanpindating_yijianhujiao">
 
         <TextView
 
             android:id="@+id/textView16"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="议价"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

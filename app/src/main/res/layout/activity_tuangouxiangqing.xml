@@ -105,7 +105,7 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_marginStart="8dp"
                                 android:gravity="center"
-                                android:textSize="@dimen/x24"
+
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toBottomOf="@+id/imageView14" />
@@ -137,7 +137,7 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
                                 android:text="原价:¥"
-                                android:textSize="@dimen/x24"
+
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toStartOf="@+id/activity_tuangouxiangqing_yuanjia"
                                 app:layout_constraintHorizontal_bias="0.5"
@@ -149,7 +149,7 @@
                                 android:id="@+id/activity_tuangouxiangqing_yuanjia"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/x30"
+
                                 app:layout_constraintBottom_toBottomOf="@+id/textView65"
                                 app:layout_constraintEnd_toStartOf="@+id/activity_tuangouxiangqing_yuanjia_danwie"
                                 app:layout_constraintHorizontal_bias="0.5"
@@ -159,7 +159,7 @@
                                 android:id="@+id/activity_tuangouxiangqing_yuanjia_danwie"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textSize="@dimen/x24"
+
                                 app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_yuanjia"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintHorizontal_bias="0.5"
@@ -253,7 +253,7 @@
                             android:id="@+id/activity_tuangouxiangqing_shengyu_unit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_shengyu"
                             app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_shengyu" />
 
@@ -261,7 +261,7 @@
                             android:id="@+id/activity_tuangouxiangqing_shengyu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintBottom_toBottomOf="@+id/textView126"
                             app:layout_constraintStart_toEndOf="@+id/textView126" />
 
@@ -271,7 +271,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:text="剩余量:"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_total_unit"
                             app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_total_unit" />
 
@@ -279,7 +279,7 @@
                             android:id="@+id/activity_tuangouxiangqing_total_unit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_total"
                             app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_total" />
 
@@ -287,7 +287,7 @@
                             android:id="@+id/activity_tuangouxiangqing_total"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintBottom_toBottomOf="@+id/textView129"
                             app:layout_constraintStart_toEndOf="@+id/textView129" />
 
@@ -297,7 +297,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
                             android:text="总量:"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintStart_toStartOf="@+id/activity_tuangouxiangqing_productname"
                             app:layout_constraintTop_toBottomOf="@+id/activity_tuangouxiangqing_productname" />
 
@@ -345,7 +345,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/x40"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintStart_toStartOf="@+id/activity_tuangouxiangqing_shengyushijian_text"
                             app:layout_constraintTop_toBottomOf="@+id/activity_tuangouxiangqing_shengyushijian_text" />
 
@@ -364,7 +364,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            android:textSize="@dimen/x24"
+
                             app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_yirenling"
                             app:layout_constraintEnd_toEndOf="parent" />
 

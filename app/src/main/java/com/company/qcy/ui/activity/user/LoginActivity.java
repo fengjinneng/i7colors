@@ -278,6 +278,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         .params("username", mLoginUsername.getText().toString())
                         .params("aesPass", new String(EncryptUtils.encryptAES2Base64(mLoginPassword.getText().toString().trim().getBytes(),
                                 getResources().getString(R.string.passwordAES).getBytes(), "AES/ECB/PKCS5Padding", null)))
+                        .params("from",getResources().getString(R.string.app_android))
+                        .params("registrationId",SPUtils.getInstance().getString("registrationId"))
                         .params("deviceNo", DeviceUtils.getAndroidID());
 
                 DialogStringCallback stringCallback = new DialogStringCallback(this) {

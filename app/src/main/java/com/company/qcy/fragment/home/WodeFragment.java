@@ -22,6 +22,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyCommonUtil;
+import com.company.qcy.Utils.MyStatusBarUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
@@ -35,6 +37,8 @@ import com.company.qcy.ui.activity.qiugoudating.WodeqiugouActivity;
 import com.company.qcy.ui.activity.user.LianxikefuActivity;
 import com.company.qcy.ui.activity.user.SettingActivity;
 import com.company.qcy.ui.activity.user.ZhanghaozhongxinActivity;
+import com.githang.statusbar.StatusBarCompat;
+import com.jaeger.library.StatusBarUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -42,6 +46,8 @@ import com.lzy.okgo.request.GetRequest;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
+
+import static com.blankj.utilcode.util.BarUtils.getStatusBarHeight;
 
 public class WodeFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
@@ -147,6 +153,16 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
+        }
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(!hidden){
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
         }
     }
 
@@ -257,8 +273,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 tianxiexinxi();
                 break;
             case MessageBean.Code.CHANGEPERSONHEADIMG:
-                String meaasge = messageBean.getMeaasge();
-                GlideUtils.loadCircleImage(getContext(), meaasge, mFragmentWodeImage);
+                MyCommonUtil.jiazaitouxiang(getActivity(),messageBean.getMeaasge(),mFragmentWodeImage);
                 break;
         }
     }
@@ -271,13 +286,11 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+
         if (UserUtil.isLogin()) {
             tianxiexinxi();
-            if (!StringUtils.isEmpty(SPUtils.getInstance().getString("photo"))) {
-                GlideUtils.loadCircleImage(getContext(), SPUtils.getInstance().getString("photo"), mFragmentWodeImage);
-            } else {
-                mFragmentWodeImage.setImageDrawable(getResources().getDrawable(R.mipmap.morentouxiang));
-            }
+
+            MyCommonUtil.jiazaitouxiang(getActivity(),SPUtils.getInstance().getString("photo"),mFragmentWodeImage);
             getAllCount();
             //买家
             if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "1")) {
@@ -295,6 +308,9 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 
         }
     }
+
+
+
 
     private void getAllCount() {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETALLCOUNT)

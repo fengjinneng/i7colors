@@ -29,6 +29,7 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.base.WebActivity;
+import com.company.qcy.base.WebNoBottomActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
@@ -97,6 +98,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
+
+        Intent intent = new Intent(this, WebNoBottomActivity.class);
+        intent.putExtra("webUrl", "http://mobile.i7colors.com/groupBuyMobile/secret.html");
+        ActivityUtils.startActivity(intent);
     }
 
     private void initView() {
@@ -204,7 +209,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
                                 String msg = jsonObject.getString("msg");
                                 if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    ToastUtils.showShort(msg);
                                     finish();
                                     return;
 
@@ -314,12 +318,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.activity_register_xieyi:
-                Intent intent = new Intent(this, WebActivity.class);
+                Intent intent = new Intent(this, WebNoBottomActivity.class);
                 intent.putExtra("webUrl", "http://mobile.i7colors.com/groupBuyMobile/secret.html");
                 ActivityUtils.startActivity(intent);
                 break;
         }
     }
+
+
 
 
     @Override

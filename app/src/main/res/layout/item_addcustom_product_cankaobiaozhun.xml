@@ -14,7 +14,7 @@
         android:gravity="center"
         android:maxLines="2"
         android:ellipsize="end"
-        android:textSize="@dimen/x24"
+
         app:layout_constraintEnd_toStartOf="@+id/item_wodehuodan_cankaobianzhun_reduce"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

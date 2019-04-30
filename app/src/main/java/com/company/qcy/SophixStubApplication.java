@@ -27,7 +27,8 @@ public class SophixStubApplication extends SophixApplication {
     // 此处SophixEntry应指定真正的Application，并且保证RealApplicationStub类名不被混淆。
     @Keep
     @SophixEntry(I7colorsApplication.class)
-    static class RealApplicationStub {}
+    static class RealApplicationStub {
+    }
 
     @Override
     protected void attachBaseContext(Context base) {

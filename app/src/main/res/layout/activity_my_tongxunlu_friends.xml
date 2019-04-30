@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.pengyouquan.MyTongunluFriendsActivity">
+
+    <include
+        android:id="@+id/include46"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/activity_my_friends_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include46" />
+
+
+    <com.gjiazhe.wavesidebar.WaveSideBar
+        android:id="@+id/side_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:paddingRight="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_my_friends_recyclerview"
+        app:sidebar_lazy_respond="false"
+        app:sidebar_max_offset="80dp"
+        app:sidebar_position="right"
+        app:sidebar_text_alignment="center"
+        app:sidebar_text_color="#8D6E63"
+        app:sidebar_text_size="14sp" />
+
+    <TextView
+        android:id="@+id/activity_my_friends_nodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:layout_marginBottom="8dp"
+        android:text="啊哦，你没有一个好友哦！"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_my_friends_recyclerview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

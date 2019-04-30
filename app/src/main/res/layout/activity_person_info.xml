@@ -3,6 +3,7 @@
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -15,6 +16,7 @@
             android:id="@+id/appbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/baise"
             android:fitsSystemWindows="true"
             app:theme="@style/ToolbarTheme">
 
@@ -57,9 +59,9 @@
                             android:id="@+id/constraintLayout21"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/x224"
-                            android:layout_marginEnd="@dimen/x36"
                             android:layout_marginStart="@dimen/x36"
-                            android:layout_marginTop="@dimen/x150"
+                            android:layout_marginTop="@dimen/x130"
+                            android:layout_marginEnd="@dimen/x36"
                             android:background="@mipmap/bg_pengyouquan_person"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +71,14 @@
                                 android:id="@+id/activity_person_info_name"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginEnd="8dp"
-                                android:layout_marginTop="@dimen/x8"
                                 android:textSize="@dimen/x24"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toStartOf="@+id/activity_person_info_isRehzheng"
                                 app:layout_constraintTop_toBottomOf="@+id/activity_person_info_isRehzheng" />
 
@@ -83,26 +89,36 @@
                                 android:layout_marginTop="8dp"
                                 android:text="未认证"
                                 android:textSize="@dimen/x24"
-                                app:layout_constraintStart_toStartOf="@+id/textView174"
-                                app:layout_constraintTop_toBottomOf="@+id/textView174" />
+                                app:layout_constraintBottom_toTopOf="@+id/activity_person_info_name"
+                                app:layout_constraintStart_toStartOf="@+id/activity_person_info_nickname"
+                                app:layout_constraintTop_toBottomOf="@+id/activity_person_info_nickname" />
 
-                            <TextView
-                                android:id="@+id/textView174"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/x200"
-                                android:layout_marginTop="@dimen/x40"
-                                android:text="昵称:"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            <!--<TextView-->
+                            <!--android:id="@+id/textView174"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginStart="@dimen/x200"-->
+                            <!--android:layout_marginTop="@dimen/x40"-->
+                            <!--android:text="昵称:"-->
+                            <!--app:layout_constraintStart_toStartOf="parent"-->
+                            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
                             <TextView
                                 android:id="@+id/activity_person_info_nickname"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/x200"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginEnd="8dp"
-                                app:layout_constraintStart_toEndOf="@+id/textView174"
-                                app:layout_constraintTop_toTopOf="@+id/textView174" />
+                                android:ellipsize="end"
+                                android:maxLines="2"
+                                android:textSize="@dimen/x34"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_person_info_isRehzheng"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
 
 
                             <TextView
@@ -115,7 +131,6 @@
                                 android:paddingLeft="@dimen/x16"
                                 android:paddingRight="@dimen/x16"
                                 android:text="+关注"
-                                android:textSize="@dimen/x24"
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
                         </android.support.constraint.ConstraintLayout>
@@ -125,7 +140,7 @@
                             android:layout_width="@dimen/x128"
                             android:layout_height="@dimen/x128"
                             android:layout_marginStart="@dimen/x72"
-                            android:layout_marginTop="@dimen/x120"
+                            android:layout_marginTop="@dimen/x100"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@mipmap/morentouxiang" />

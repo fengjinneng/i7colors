@@ -6,13 +6,13 @@
     android:gravity="center_vertical"
     android:background="@color/baise"
     android:id="@+id/toolbar_layout"
-    android:layout_height="@dimen/x102">
+    android:layout_height="@dimen/x82">
 
 
     <TextView
         android:id="@+id/toolbar_title"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
         android:layout_centerInParent="true"
         android:ellipsize="end"
         android:gravity="center"
@@ -27,12 +27,12 @@
 
     <ImageView
         android:id="@+id/toolbar_back"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/x120"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:paddingLeft="28dp"
-        android:paddingRight="28dp"
+        android:paddingLeft="@dimen/x50"
+        android:paddingRight="@dimen/x50"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -50,16 +50,16 @@
         app:layout_constraintStart_toEndOf="parent" />
 
     <TextView
-        android:visibility="invisible"
         android:id="@+id/toolbar_text"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/x120"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:paddingLeft="28dp"
-        android:paddingRight="28dp"
-        android:textSize="@dimen/x28"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="@dimen/x26"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

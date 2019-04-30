@@ -1,5 +1,6 @@
 package com.company.qcy.adapter.vlayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -14,8 +15,11 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.NetworkImageHolderView;
+import com.company.qcy.base.WebActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
@@ -28,27 +32,31 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
 
     // 用于存放数据列表
 
-    List<String> datas;
+    private List<String> bannerDatas;
     private static Context context;
     private LayoutHelper layoutHelper;
     private RecyclerView.LayoutParams layoutParams;
     private int count;
 
+    private List<String> bannerUrlDatas;
+
     static MySingleAdvItemClickListener myItemClickListener;
     // 用于设置Item点击事件
 
     //构造函数(传入每个的数据列表 & 展示的Item数量)
-    public SingleAdvLayoutAdapter(Context context, LayoutHelper layoutHelper, int count, List<String> datas) {
-        this(context, layoutHelper, count, new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT), datas);
+    public SingleAdvLayoutAdapter(Context context, LayoutHelper layoutHelper, int count, List<String> bannerDatas,List<String> bannerUrlDatas) {
+        this(context, layoutHelper, count, new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT), bannerDatas,bannerUrlDatas);
     }
 
     public SingleAdvLayoutAdapter(Context context, LayoutHelper layoutHelper,
-                                  int count, @NonNull RecyclerView.LayoutParams layoutParams, List<String> datas) {
+                                  int count, @NonNull RecyclerView.LayoutParams layoutParams, List<String> bannerDatas,
+                                  List<String> bannerUrlDatas) {
         this.context = context;
         this.layoutHelper = layoutHelper;
         this.count = count;
         this.layoutParams = layoutParams;
-        this.datas = datas;
+        this.bannerDatas = bannerDatas;
+        this.bannerUrlDatas = bannerUrlDatas;
     }
 
     @Override
@@ -77,18 +85,25 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
             public NetworkImageHolderView createHolder() {
                 return new NetworkImageHolderView();
             }
-        }, datas);
+        }, bannerDatas);
         holder.convenientBanner.setPageIndicator(new int[]{R.mipmap.banner_unchoiced, R.mipmap.banner_choiced});
         holder.convenientBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
         //设置如果只有一组数据时不能滑动
-        holder.convenientBanner.setPointViewVisible(datas.size() == 1 ? false : true); // 指示器
-        holder.convenientBanner.setManualPageable(datas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
-        holder.convenientBanner.setCanLoop(datas.size() == 1 ? false : true); // 是否循环
+        holder.convenientBanner.setPointViewVisible(bannerDatas.size() == 1 ? false : true); // 指示器
+        holder.convenientBanner.setManualPageable(bannerDatas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
+        holder.convenientBanner.setCanLoop(bannerDatas.size() == 1 ? false : true); // 是否循环
 
 
         holder.convenientBanner.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
+
+                if(StringUtils.isEmpty(bannerUrlDatas.get(position))){
+                    return;
+                }
+                Intent intent = new Intent((Activity) context,WebActivity.class);
+                intent.putExtra("webUrl",bannerUrlDatas.get(position));
+                ActivityUtils.startActivity(intent);
             }
         });
     }

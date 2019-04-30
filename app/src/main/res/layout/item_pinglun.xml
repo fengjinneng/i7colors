@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/item_pinglun_commentUser"
-        android:layout_width="wrap_content"
+    <com.company.qcy.widght.pengyouquan.HuanHangCommentListView
+        android:id="@+id/item_pinglun_commentListview"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/x24"
         android:layout_marginTop="8dp"
-        android:textSize="@dimen/x28"
+        android:layout_marginEnd="8dp"
+        app:item_color="@color/praise_item"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -19,21 +21,22 @@
         android:id="@+id/item_pinglun_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x30"
         android:layout_marginEnd="8dp"
-        android:layout_marginTop="@dimen/x8"
-        android:textSize="@dimen/x24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/item_pinglun_commentUser"
-        app:layout_constraintTop_toBottomOf="@+id/item_pinglun_commentUser" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_pinglun_commentListview" />
 
     <TextView
         android:id="@+id/item_pinglun_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textSize="@dimen/x24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_pinglun_commentUser" />
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="2000-1-1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_pinglun_content"
+        app:layout_constraintTop_toBottomOf="@+id/item_pinglun_content" />
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/item_pinglun_pinglun_layout"
@@ -53,7 +56,6 @@
             android:layout_marginTop="8dp"
             android:gravity="center"
             android:text="评论"
-            android:textSize="@dimen/x24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -69,29 +71,6 @@
             app:srcCompat="@mipmap/xiaoxi_unchecked" />
 
     </android.support.constraint.ConstraintLayout>
-
-
-    <TextView
-        android:id="@+id/item_pinglun_huifu_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/x8"
-        android:text=" 回复:"
-        android:textSize="@dimen/x28"
-        app:layout_constraintStart_toEndOf="@+id/item_pinglun_commentUser"
-        app:layout_constraintTop_toTopOf="@+id/item_pinglun_commentUser" />
-
-    <TextView
-        android:id="@+id/item_pinglun_bycommentUser"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="@dimen/x8"
-        app:layout_constraintEnd_toStartOf="@+id/item_pinglun_time"
-        app:layout_constraintStart_toEndOf="@+id/item_pinglun_huifu_text"
-        app:layout_constraintTop_toTopOf="@+id/item_pinglun_huifu_text" />
-
-
 
 
 </android.support.constraint.ConstraintLayout>

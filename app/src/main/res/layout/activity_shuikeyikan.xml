@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.pengyouquan.ShuikeyikanActivity">
+
+    <include
+        android:id="@+id/include51"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:background="@color/baise"
+        android:id="@+id/activity_shuikeyikan_gongkai"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x130"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include51">
+
+        <CheckBox
+            android:id="@+id/activity_shuikeyikan_gongkai_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView305"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="公开"
+            android:textColor="@color/erjibiaoti"
+
+            app:layout_constraintBottom_toTopOf="@+id/textView306"
+            app:layout_constraintStart_toEndOf="@+id/activity_shuikeyikan_gongkai_checkBox"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView306"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="所有人可见"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView305"
+            app:layout_constraintTop_toBottomOf="@+id/textView305" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView307"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_shuikeyikan_gongkai" />
+
+    <android.support.constraint.ConstraintLayout
+        android:background="@color/baise"
+        android:id="@+id/activity_shuikeyikan_quanbuhaoyou"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x130"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView307">
+
+        <CheckBox
+            android:id="@+id/activity_shuikeyikan_quanbuhaoyou_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView308"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="全部好友"
+            android:textColor="@color/erjibiaoti"
+
+            app:layout_constraintBottom_toTopOf="@+id/textView309"
+            app:layout_constraintStart_toEndOf="@+id/activity_shuikeyikan_quanbuhaoyou_checkBox"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView309"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="好友可见，指相互关注的人"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView308"
+            app:layout_constraintTop_toBottomOf="@+id/textView308" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView310"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_shuikeyikan_quanbuhaoyou" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_shuikeyikan_xuanzehaoyou"
+        android:layout_width="0dp"
+        android:background="@color/baise"
+        android:layout_height="@dimen/x130"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView310">
+
+        <TextView
+            android:id="@+id/textView311"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="指定部分好友可见"
+            android:textColor="@color/erjibiaoti"
+
+            app:layout_constraintBottom_toTopOf="@+id/textView312"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/textView312"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择好友"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/textView311"
+            app:layout_constraintTop_toBottomOf="@+id/textView311" />
+
+        <ImageView
+            android:id="@+id/imageView46"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/youjiantou" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/activity_shuikeyikan_haoyou_layout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x130"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:background="@color/baise"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_shuikeyikan_xuanzehaoyou">
+
+        <CheckBox
+            android:id="@+id/activity_shuikeyikan_haoyou_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_shuikeyikan_haoyou_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="英雄の证、张学友、出山、生僻字、周杰伦、冯...英雄の证、张学友、出山、生僻字、周杰伦、冯...英雄の证、张学友、出山、生僻字、周杰伦、冯..."
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_shuikeyikan_haoyou_checkbox"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView315"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/fengexian"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

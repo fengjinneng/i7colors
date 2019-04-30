@@ -43,7 +43,7 @@
             android:paddingLeft="10dp"
             android:paddingTop="5dp"
             android:singleLine="true"
-            android:textSize="@dimen/x24"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

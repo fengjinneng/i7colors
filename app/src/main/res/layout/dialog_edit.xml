@@ -22,7 +22,7 @@
             android:gravity="center"
             android:text="请输入您的电话号码"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30" />
+             />
 
         <EditText
             android:id="@+id/et_phone"
@@ -35,7 +35,7 @@
             android:hint="在此处输入电话号码"
             android:background="@drawable/background_wenbenshurubiankuang"
             android:textColor="@color/erjibiaoti"
-            android:textSize="@dimen/x30" />
+             />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/et_verifycode_layout"
@@ -43,14 +43,14 @@
             android:layout_height="@dimen/x98"
             android:layout_gravity="center"
             android:background="@drawable/background_wenbenshurubiankuang"
-            android:textSize="@dimen/x30">
+            >
 
             <EditText
                 android:id="@+id/et_verifycode"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:hint="请输入验证码"
-                android:textSize="@dimen/x30"
+
                 android:gravity="center"
                 android:textColor="@color/erjibiaoti"
                 android:inputType="number"
@@ -67,7 +67,7 @@
                 android:layout_width="@dimen/x150"
                 android:layout_height="0dp"
                 android:text="发送验证码"
-                android:textSize="@dimen/x24"
+
                 android:gravity="center"
                 android:background="@color/chunhongse"
                 android:textColor="@color/baise"
@@ -94,7 +94,7 @@
                 android:singleLine="true"
                 android:text="取消"
                 android:textColor="@color/putongwenben"
-                android:textSize="@dimen/x30" />
+                 />
 
             <View
                 android:layout_width="1px"
@@ -111,7 +111,7 @@
                 android:singleLine="true"
                 android:text="确 定"
                 android:textColor="@color/hongse"
-                android:textSize="@dimen/x30" />
+                 />
 
         </LinearLayout>
     </LinearLayout>

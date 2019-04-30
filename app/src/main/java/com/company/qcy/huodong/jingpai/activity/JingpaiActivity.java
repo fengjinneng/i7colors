@@ -26,6 +26,7 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.BannerBean;
 import com.company.qcy.huodong.jingpai.adapter.JingpaiListAdapter;
 import com.company.qcy.huodong.jingpai.bean.JingpaiBean;
@@ -40,7 +41,7 @@ import com.lzy.okgo.request.GetRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JingpaiActivity extends AppCompatActivity implements View.OnClickListener {
+public class JingpaiActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题

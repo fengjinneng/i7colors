@@ -1,11 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x98"
+        android:background="@color/chunhongse">
+
+        <ImageView
+            android:id="@+id/activity_my_person_info_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/back_round" />
+
+        <TextView
+            android:id="@+id/textView285"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="个人信息"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x36"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_my_person_info_xiaoxi"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x16"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="@dimen/x16"
+            android:gravity="center"
+            android:paddingLeft="@dimen/x30"
+            android:paddingRight="@dimen/x30"
+            android:text="消息"
+            android:textColor="@color/baise"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -38,12 +89,13 @@
 
                     <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:background="@color/baise">
 
                         <android.support.constraint.ConstraintLayout
                             android:id="@+id/imageView16"
                             android:layout_width="0dp"
-                            android:layout_height="@dimen/x300"
+                            android:layout_height="@dimen/x200"
                             android:background="@mipmap/lingdai"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -57,9 +109,9 @@
                             android:id="@+id/constraintLayout21"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/x224"
-                            android:layout_marginEnd="@dimen/x36"
                             android:layout_marginStart="@dimen/x36"
-                            android:layout_marginTop="@dimen/x150"
+                            android:layout_marginTop="@dimen/x50"
+                            android:layout_marginEnd="@dimen/x36"
                             android:background="@mipmap/bg_pengyouquan_person"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -69,10 +121,14 @@
                                 android:id="@+id/activity_my_person_info_name"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
                                 android:layout_marginTop="@dimen/x8"
+                                android:layout_marginEnd="8dp"
                                 android:textSize="@dimen/x24"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
                                 app:layout_constraintStart_toStartOf="@+id/activity_my_person_info_isrenzheng"
                                 app:layout_constraintTop_toBottomOf="@+id/activity_my_person_info_isrenzheng" />
 
@@ -80,30 +136,39 @@
                                 android:id="@+id/activity_my_person_info_isrenzheng"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
+                                android:layout_marginTop="4dp"
                                 android:text="未认证"
                                 android:textSize="@dimen/x24"
-                                app:layout_constraintStart_toStartOf="@+id/textView174"
-                                app:layout_constraintTop_toBottomOf="@+id/textView174" />
+                                app:layout_constraintBottom_toTopOf="@+id/activity_my_person_info_name"
+                                app:layout_constraintStart_toStartOf="@+id/activity_my_person_info_nickname"
+                                app:layout_constraintTop_toBottomOf="@+id/activity_my_person_info_nickname" />
 
-                            <TextView
-                                android:id="@+id/textView174"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="@dimen/x200"
-                                android:layout_marginTop="@dimen/x40"
-                                android:text="昵称:"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
+                            <!--<TextView-->
+                            <!--android:id="@+id/textView174"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginStart="@dimen/x200"-->
+                            <!--android:layout_marginTop="@dimen/x40"-->
+                            <!--android:text="昵称:"-->
+                            <!--app:layout_constraintStart_toStartOf="parent"-->
+                            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
                             <TextView
                                 android:id="@+id/activity_my_person_info_nickname"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/x200"
+                                android:layout_marginTop="8dp"
                                 android:layout_marginEnd="8dp"
+                                android:maxLines="2"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/x34"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_my_person_info_isrenzheng"
                                 app:layout_constraintEnd_toStartOf="@+id/activity_my_person_info_edit"
-                                app:layout_constraintStart_toEndOf="@+id/textView174"
-                                app:layout_constraintTop_toTopOf="@+id/textView174" />
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <TextView
                                 android:id="@+id/activity_my_person_info_edit"
@@ -112,8 +177,7 @@
                                 android:layout_marginEnd="16dp"
                                 android:text="修改"
                                 android:textColor="@color/lanse"
-                                android:textSize="@dimen/x24"
-                                app:layout_constraintBottom_toBottomOf="@+id/textView174"
+                                app:layout_constraintBottom_toBottomOf="@+id/activity_my_person_info_nickname"
                                 app:layout_constraintEnd_toEndOf="parent" />
 
 
@@ -123,9 +187,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:text="(点击去认证)"
-                                android:visibility="gone"
                                 android:textColor="@color/lanse"
                                 android:textSize="@dimen/x24"
+                                android:visibility="gone"
                                 app:layout_constraintStart_toEndOf="@+id/activity_my_person_info_isrenzheng"
                                 app:layout_constraintTop_toTopOf="@+id/activity_my_person_info_isrenzheng" />
 
@@ -136,7 +200,7 @@
                             android:layout_width="@dimen/x128"
                             android:layout_height="@dimen/x128"
                             android:layout_marginStart="@dimen/x72"
-                            android:layout_marginTop="@dimen/x120"
+                            android:layout_marginTop="@dimen/x20"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:srcCompat="@mipmap/morentouxiang" />
@@ -156,21 +220,21 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x30"
-                        android:background="@color/fengexian" />
+                        android:background="@color/baise" />
 
                 </LinearLayout>
 
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x102"
-                    android:background="#00ffffff"
-                    android:gravity="center_vertical"
-                    app:layout_collapseMode="pin"
-                    app:navigationIcon="@mipmap/back_round"
-                    app:popupTheme="@style/AppTheme.PopupOverlay"
-                    app:theme="@style/ToolbarTheme"
-                    app:titleTextColor="#ffffff" />
+                <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/x102"-->
+                <!--android:background="#00ffffff"-->
+                <!--android:gravity="center_vertical"-->
+                <!--app:layout_collapseMode="pin"-->
+                <!--app:navigationIcon="@mipmap/back_round"-->
+                <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
+                <!--app:theme="@style/ToolbarTheme"-->
+                <!--app:titleTextColor="#ffffff" />-->
 
             </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -199,4 +263,4 @@
 
     <!--<include layout="@layout/toolbar" />-->
 
-</FrameLayout>
+</LinearLayout>

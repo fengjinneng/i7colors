@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.facade.annotation.Autowired;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.company.qcy.R;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
@@ -22,6 +24,7 @@ import com.flyco.tablayout.SlidingTabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ChanyezixunActivity extends BaseActivity implements View.OnClickListener {
 
     private ViewPager mChanyezixunViewpager;
@@ -31,10 +34,15 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
+
+    private String from;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chanyezixun);
+        from = getIntent().getStringExtra("from");
         initView();
     }
 
@@ -42,14 +50,13 @@ public class ChanyezixunActivity extends BaseActivity implements View.OnClickLis
         mChanyezixunViewpager = (ViewPager) findViewById(R.id.chanyezixun_viewpager);
         mChanyezixunSlidingTabLayout = (SlidingTabLayout) findViewById(R.id.chanyezixun_slidingTabLayout);
 
-
         List<Fragment> datas = new ArrayList<>();
-        datas.add(new ChanyezixunFragment());
-        datas.add(new HangyezixunFragment());
-        datas.add(new RenwufangtanFragment());
-        datas.add(new ZhengcefaguiFragment());
-        datas.add(new ZhanhuiFragment());
-        datas.add(new RencaizhaopinFragment());
+        datas.add(ChanyezixunFragment.newInstance(from));
+        datas.add(HangyezixunFragment.newInstance(from));
+        datas.add( RenwufangtanFragment.newInstance(from));
+        datas.add( ZhengcefaguiFragment.newInstance(from));
+        datas.add( ZhanhuiFragment.newInstance(from));
+        datas.add( RencaizhaopinFragment.newInstance(from));
 
         String[] arr = new String[datas.size()];
         arr[0] = "全部";

@@ -141,8 +141,8 @@ public class GlideUtils {
         RequestOptions options = new RequestOptions()
                 .centerCrop()
                 .circleCrop()//设置圆形
-                .placeholder(R.mipmap.app_img_round)
-                .error(R.mipmap.app_img_round)
+                .placeholder(R.mipmap.morentouxiang)
+                .error(R.mipmap.morentouxiang)
                 //.priority(Priority.HIGH)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
         Glide.with(context).load(url).apply(options).into(imageView);

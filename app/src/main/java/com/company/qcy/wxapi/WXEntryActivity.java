@@ -132,6 +132,8 @@ public class WXEntryActivity extends WechatHandlerActivity implements IWXAPIEven
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("code", code)
+                .params("from",getResources().getString(R.string.app_android))
+                .params("registrationId",SPUtils.getInstance().getString("registrationId"))
                 .execute(new StringCallback() {
 
                     @Override

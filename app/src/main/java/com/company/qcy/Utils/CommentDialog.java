@@ -119,7 +119,7 @@ public class CommentDialog extends Dialog implements
 
                         try {
                             if (response.code() == 200) {
-                                LogUtils.e("FABIAOPINGLUN", response.body());
+                                LogUtils.e("DELETEPINGLUN", response.body());
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
                                 String msg = jsonObject.getString("msg");
 
@@ -159,7 +159,7 @@ public class CommentDialog extends Dialog implements
         DialogStringCallback stringCallback = new DialogStringCallback((Activity) mContext) {
             @Override
             public void onSuccess(Response<String> response) {
-                LogUtils.e("FABIAOPINGLUN", response.body());
+                LogUtils.e("DELETEPINGLUN", response.body());
                 try {
                     if (response.code() == 200) {
 
