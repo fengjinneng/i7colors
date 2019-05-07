@@ -253,17 +253,17 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
         addBannerData();
 
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(ErjihuatiDetailActivity.this).resumeRequests();
-                } else {
-                    Glide.with(ErjihuatiDetailActivity.this).pauseRequests();
-                }
-            }
-        });
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    Glide.with(ErjihuatiDetailActivity.this).resumeRequests();
+//                } else {
+//                    Glide.with(ErjihuatiDetailActivity.this).pauseRequests();
+//                }
+//            }
+//        });
     }
 
 
