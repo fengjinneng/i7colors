@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -35,6 +36,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,6 +127,8 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
 
                 intent.putExtra("id", tuangouBean.getId());
                 ActivityUtils.startActivity(intent);
+
+                MobclickAgent.onEvent(TuangouliebiaoActivity.this,"团购_点击了"+tuangouBean.getProductName());
             }
         });
 

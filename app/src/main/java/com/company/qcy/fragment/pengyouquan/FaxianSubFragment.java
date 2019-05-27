@@ -244,13 +244,14 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
                         snsPopupWindow.showPopupWindow(view);
                         snsPopupWindow.setmItemClickListener(new PopupItemClickListener());
                         break;
-                    case R.id.item_pengyouquan_shipin_layout:
-                        Intent intent = new Intent(getActivity(), ShipinbofangActivity.class);
-                        intent.putExtra("url", ServerInfo.IMAGE + bean.getUrl());
-                        intent.putExtra("diyizhen", ServerInfo.IMAGE + bean.getVideoPicUrl());
-                        ActivityUtils.startActivity(intent);
-
-                        break;
+                        //点击视频
+//                    case R.id.item_pengyouquan_shipin_img:
+//                        Intent intent = new Intent(getActivity(), ShipinbofangActivity.class);
+//                        intent.putExtra("url", ServerInfo.IMAGE + bean.getUrl());
+//                        intent.putExtra("diyizhen", ServerInfo.IMAGE + bean.getVideoPicUrl());
+//                        ActivityUtils.startActivity(intent);
+//
+//                        break;
                     case R.id.item_pengyouquan_headimg:
                         if (StringUtils.equals("1", bean.getIsCharger())) {
                             Intent my = new Intent(getActivity(), MyPersonInfoActivity.class);

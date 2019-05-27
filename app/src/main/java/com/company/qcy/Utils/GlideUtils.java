@@ -139,13 +139,14 @@ public class GlideUtils {
      */
     public static void loadCircleImage(Context context, String url, ImageView imageView) {
         RequestOptions options = new RequestOptions()
-                .centerCrop()
                 .circleCrop()//设置圆形
                 .placeholder(R.mipmap.morentouxiang)
                 .error(R.mipmap.morentouxiang)
+
                 //.priority(Priority.HIGH)
                 .diskCacheStrategy(DiskCacheStrategy.ALL);
-        Glide.with(context).load(url).apply(options).into(imageView);
+        Glide.with(context).load(url).thumbnail(0.1f).apply(options).into(imageView);
+
     }
 
     /**

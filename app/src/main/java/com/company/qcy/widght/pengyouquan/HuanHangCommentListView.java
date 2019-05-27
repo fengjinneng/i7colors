@@ -16,8 +16,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
+import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
 
 import java.util.ArrayList;
@@ -125,12 +127,12 @@ public class HuanHangCommentListView extends LinearLayout {
         }
 
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(setClickableSpan(name, String.valueOf(id),bean.getUserId()));
+        builder.append(setClickableSpan(name, String.valueOf(id),bean.getUserId(),bean.getIsCharger()));
 
         if (!TextUtils.isEmpty(toReplyName)) {
 
             builder.append(" 回复 ");
-            builder.append(setClickableSpan(toReplyName, bean.getByCommentUser(),bean.getUserId()));
+            builder.append(setClickableSpan(toReplyName, bean.getByCommentUser(),bean.getUserId(),bean.getByCommentIsCharger()));
         }
         builder.append(": ");
         //转换表情字符
@@ -166,19 +168,27 @@ public class HuanHangCommentListView extends LinearLayout {
     }
 
     @NonNull
-    private SpannableString setClickableSpan(final String textStr, final String id,final Long userId) {
+    private SpannableString setClickableSpan(final String textStr, final String id,final Long userId,String isCharger) {
         SpannableString subjectSpanText = new SpannableString(textStr);
         subjectSpanText.setSpan(new SpannableClickable(itemColor) {
                                     @Override
                                     public void onClick(View widget) {
-                                        Intent intent = new Intent(getContext(), PersonInfoActivity.class);
-                                        intent.putExtra("userId",userId);
-                                        ActivityUtils.startActivity(intent);
+                                        if (StringUtils.equals("1", isCharger)) {
+                                            Intent my = new Intent(getContext(), MyPersonInfoActivity.class);
+                                            ActivityUtils.startActivity(my);
+                                        } else {
+                                            Intent other = new Intent(getContext(), PersonInfoActivity.class);
+                                            other.putExtra("userId", userId);
+                                            ActivityUtils.startActivity(other);
+                                        }
                                     }
                                 }, 0, subjectSpanText.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         return subjectSpanText;
     }
+
+
+
 
     public static interface OnItemClickListener {
         public void onItemClick(int position);

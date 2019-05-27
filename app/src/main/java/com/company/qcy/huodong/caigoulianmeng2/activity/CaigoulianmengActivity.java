@@ -44,6 +44,7 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
+import com.umeng.analytics.MobclickAgent;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -140,12 +141,16 @@ public class CaigoulianmengActivity extends BaseActivity implements View.OnClick
                         intent.putExtra("meetingId", caigoulianmengBean.getId() + "");
                         intent.putExtra("isType",caigoulianmengBean.getIsType());//
                         ActivityUtils.startActivity(intent);
+
+                        MobclickAgent.onEvent(CaigoulianmengActivity.this,"采购联盟订货_点击了"+caigoulianmengBean.getMeetingName());
+
                         break;
                     case R.id.item_caigoulianmeng_liebiao_woyaogonghuo:
                         Intent gonghuo = new Intent(CaigoulianmengActivity.this, GonghuoActivity.class);
                         gonghuo.putExtra("meetingId", caigoulianmengBean.getId() + "");
                         gonghuo.putExtra("isType",caigoulianmengBean.getIsType());//
                         ActivityUtils.startActivity(gonghuo);
+                        MobclickAgent.onEvent(CaigoulianmengActivity.this,"采购联盟供货_点击了"+caigoulianmengBean.getMeetingName());
 
                         break;
                 }

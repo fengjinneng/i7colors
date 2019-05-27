@@ -22,6 +22,7 @@ import com.company.qcy.Utils.NetworkUtil;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
+import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,7 +44,7 @@ public class BaseActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         activity = this;
         context = getApplicationContext();
-        if(android.os.Build.VERSION.SDK_INT>19){
+        if (android.os.Build.VERSION.SDK_INT > 19) {
             StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.baise), true);
         }
     }
@@ -115,6 +116,16 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    protected void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    protected void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -122,7 +133,6 @@ public class BaseActivity extends AppCompatActivity {
         OkGo.getInstance().cancelTag(this);
 
     }
-
 
     public static void toSetting(Context context) {
         Intent intent;

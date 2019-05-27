@@ -27,12 +27,14 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.BannerBean;
+import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
 import com.company.qcy.huodong.youhuizhanxiao.bean.YouhuizhanxiaoBean;
 import com.company.qcy.huodong.youhuizhanxiao.adapter.YouhuizhanxiaoAdapter;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,6 +110,8 @@ public class YouhuizhanxiaoActivity extends BaseActivity implements View.OnClick
                 YouhuizhanxiaoBean bean = (YouhuizhanxiaoBean) adapter.getData().get(position);
                 intent.putExtra("id", String.valueOf(bean.getId()));
                 ActivityUtils.startActivity(intent);
+
+                MobclickAgent.onEvent(YouhuizhanxiaoActivity.this,"优惠展销_点击了"+bean.getProductName());
             }
         });
 

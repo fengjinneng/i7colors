@@ -37,11 +37,13 @@ import com.company.qcy.ui.activity.pengyouquan.MyNotReadCommunityActivity;
 import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.flyco.tablayout.SlidingTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.umeng.analytics.MobclickAgent;
 import com.webianks.library.PopupBubble;
 
 import org.greenrobot.eventbus.EventBus;
@@ -104,6 +106,8 @@ public class PengyouquanFragment extends BaseFragment {
     }
 
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -127,8 +131,19 @@ public class PengyouquanFragment extends BaseFragment {
         }else {
             mPopupBubble.setVisibility(View.GONE);
         }
+
+        MobclickAgent.onPageStart("朋友圈页面");
+
+
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        MobclickAgent.onPageEnd("朋友圈页面");
+
+    }
 
     @Override
     public void onRec(MessageBean messageBean) {
@@ -139,8 +154,11 @@ public class PengyouquanFragment extends BaseFragment {
                 mPopupBubble.updateText("您有" + SPUtils.getInstance().getInt("pengyouquanNews") + "条新的信息");
                 mPopupBubble.show();
                 break;
+
+
         }
     }
+
 
     private void initView(View inflate) {
         mPopupBubble = (PopupBubble) inflate.findViewById(R.id.popup_bubble);
@@ -151,7 +169,6 @@ public class PengyouquanFragment extends BaseFragment {
         mPopupBubble.setPopupBubbleListener(new PopupBubble.PopupBubbleClickListener() {
             @Override
             public void bubbleClicked(Context context) {
-                EventBus.getDefault().post(new MessageBean(MessageBean.JPush.DELETELUNCHNUMBER));
                 ActivityUtils.startActivity(getActivity(), MessageActivity.class);
             }
         });

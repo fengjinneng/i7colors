@@ -419,6 +419,17 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         delegateAdapter.addAdapter(bannerAdapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        bannerAdapter.startTurning();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        bannerAdapter.closeTurning();
+    }
 
     private boolean isRefresh;
 

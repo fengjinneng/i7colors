@@ -18,6 +18,8 @@ import com.taobao.sophix.SophixManager;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -40,7 +42,6 @@ public class I7colorsApplication extends Application {
         mContext = getApplicationContext();
         initOkGo();
         MobSDK.init(this);
-        JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
         JPushInterface.init(this);
 
         if (isDebug()) {           // 这两行必须写在init之前，否则这些配置在init过程中将无效
@@ -48,6 +49,16 @@ public class I7colorsApplication extends Application {
             ARouter.openDebug();   // 开启调试模式(如果在InstantRun模式下运行，必须开启调试模式！线上版本需要关闭,否则有安全风险)
         }
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
+
+
+        UMConfigure.init(this, "5cd38537570df39ed3000a4a", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+//        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+
+        JPushInterface.setDebugMode(true); // 设置开启日志,发布时请关闭日志
+
+        UMConfigure.setLogEnabled(true); // 设置开启日志,发布时请关闭日志
+
+        LogUtils.getConfig().setLogSwitch(true);
 
     }
 

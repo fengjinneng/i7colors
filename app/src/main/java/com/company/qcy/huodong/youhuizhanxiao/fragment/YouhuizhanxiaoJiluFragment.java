@@ -29,6 +29,7 @@ import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.youhuizhanxiao.adapter.YouhuizhanxiaojiluAdapter;
 import com.company.qcy.huodong.youhuizhanxiao.bean.YouhuizhanxiaoRecordBean;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
@@ -134,7 +135,7 @@ public class YouhuizhanxiaoJiluFragment extends BaseFragment {
                 .params("pageNo", pageNo)
                 .params("pageSize", 20);
 
-        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+        StringCallback stringCallback = new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("YOUHUIZHANXIAORECORD", response.body());

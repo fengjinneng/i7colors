@@ -27,6 +27,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.huodong.tuangou.adapter.TuangoujiluAdapter;
 import com.company.qcy.huodong.tuangou.bean.TuangouRecordBean;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
@@ -123,7 +124,7 @@ public class JiluFragment extends Fragment {
                 .params("pageNo", pageNo)
                 .params("pageSize", 20);
 
-        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+        StringCallback stringCallback = new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("GROUPBUYRECORD", response.body());

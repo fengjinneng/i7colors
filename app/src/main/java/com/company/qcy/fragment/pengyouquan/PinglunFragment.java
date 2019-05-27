@@ -298,109 +298,11 @@ public class PinglunFragment extends BaseFragment implements PinglunListCallBack
 
     }
 
-    public static void HideKeyboard(View v) {
-        InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm.isActive()) {
-            imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
-        }
-    }
 
-
-    private void showSoftKeyBoard() {
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (inputMethodManager != null && inputComment != null) {
-            inputComment.post(() -> {
-                inputComment.requestFocus();
-                inputMethodManager.showSoftInput(inputComment, 0);
-            });
-            new Handler().postDelayed(() -> {
-//                changeLayoutNullParams(true);
-//                changeEmojiPanelParams(0);
-            }, 200);
-        }
-    }
 
     private PopupWindow popupWindow;
     private EditText inputComment;
     private TextView btn_submit;
-
-
-    @SuppressLint("WrongConstant")
-    public void showPop(Long id, Long parentId,int tieziPosition) {
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.pengyouquan_huifu_layout, null);
-
-        popupWindow = new PopupWindow(inflate, LinearLayout.LayoutParams.FILL_PARENT, 150, true);
-
-        btn_submit = (TextView) inflate.findViewById(R.id.tv_confirm);
-        //popupwindow弹出时的动画		popWindow.setAnimationStyle(R.style.popupWindowAnimation);
-
-        // 使其聚集 ，要想监听菜单里控件的事件就必须要调用此方法
-
-        popupWindow.setFocusable(true);
-
-        // 设置允许在外点击消失
-
-        popupWindow.setOutsideTouchable(false);
-
-        // 设置背景，这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景
-
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-
-        //软键盘不会挡着popupwindow
-
-        popupWindow.setSoftInputMode(PopupWindow.INPUT_METHOD_NEEDED);
-        popupWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        //设置菜单显示的位置
-
-        popupWindow.showAtLocation(inflate, Gravity.BOTTOM, 0, 0);
-
-        //监听菜单的关闭事件
-
-        popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-
-            @Override
-
-            public void onDismiss() {
-
-            }
-
-        });
-
-        //监听触屏事件
-
-        popupWindow.setTouchInterceptor(new View.OnTouchListener() {
-
-            public boolean onTouch(View view, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_OUTSIDE)
-                    popupWindow.dismiss();
-                inputMethodManager.hideSoftInputFromWindow(inputComment.getWindowToken(), 0);
-                return false;
-            }
-
-        });
-
-
-        inputComment = inflate.findViewById(R.id.et_discuss);
-        inputComment.setFocusable(true);
-        inputComment.setFocusableInTouchMode(true);
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // btn_submit.setClickable(false);
-                String comment1 = inputComment.getText().toString().trim();
-                if (StringUtils.isEmpty(comment1)) {
-                    ToastUtils.showShort("不能发表空的评论");
-                    return;
-                }
-                //调用提交评论接口
-                saveDiscuss(comment1, id, parentId,tieziPosition);
-                inputMethodManager.hideSoftInputFromWindow(inputComment.getWindowToken(), 0);
-                inputComment.setText("");
-                popupWindow.dismiss();
-            }
-        });
-    }
 
 
     private void saveDiscuss(String comment1, Long id, Long parentId,int tieziPosition) {

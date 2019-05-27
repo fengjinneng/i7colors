@@ -78,6 +78,25 @@ public class PengyouquanBean implements Parcelable {
     private String locationTitle;
     private ShareBean shareBean;
 
+    private String pic1Width;
+    private String pic1High;
+
+    public String getPic1Width() {
+        return pic1Width;
+    }
+
+    public void setPic1Width(String pic1Width) {
+        this.pic1Width = pic1Width;
+    }
+
+    public String getPic1High() {
+        return pic1High;
+    }
+
+    public void setPic1High(String pic1High) {
+        this.pic1High = pic1High;
+    }
+
     public ShareBean getShareBean() {
         return shareBean;
     }
@@ -692,6 +711,16 @@ public class PengyouquanBean implements Parcelable {
         private String isCharger;
         private String commentPhoto;
         private Long byUserId;
+        private String byCommentIsCharger;
+
+
+        public String getByCommentIsCharger() {
+            return byCommentIsCharger;
+        }
+
+        public void setByCommentIsCharger(String byCommentIsCharger) {
+            this.byCommentIsCharger = byCommentIsCharger;
+        }
 
         public Long getByUserId() {
             return byUserId;
@@ -779,6 +808,9 @@ public class PengyouquanBean implements Parcelable {
         }
 
 
+        public CommentListBean() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -794,9 +826,9 @@ public class PengyouquanBean implements Parcelable {
             dest.writeString(this.content);
             dest.writeString(this.createdAtStamp);
             dest.writeString(this.isCharger);
-        }
-
-        public CommentListBean() {
+            dest.writeString(this.commentPhoto);
+            dest.writeValue(this.byUserId);
+            dest.writeString(this.byCommentIsCharger);
         }
 
         protected CommentListBean(Parcel in) {
@@ -808,9 +840,12 @@ public class PengyouquanBean implements Parcelable {
             this.content = in.readString();
             this.createdAtStamp = in.readString();
             this.isCharger = in.readString();
+            this.commentPhoto = in.readString();
+            this.byUserId = (Long) in.readValue(Long.class.getClassLoader());
+            this.byCommentIsCharger = in.readString();
         }
 
-        public static final Parcelable.Creator<CommentListBean> CREATOR = new Parcelable.Creator<CommentListBean>() {
+        public static final Creator<CommentListBean> CREATOR = new Creator<CommentListBean>() {
             @Override
             public CommentListBean createFromParcel(Parcel source) {
                 return new CommentListBean(source);
@@ -846,6 +881,16 @@ public class PengyouquanBean implements Parcelable {
         private String likeUserPhoto;
         private String likePhoto;
         private String createdAtStamp;
+        private String isCharger;
+
+
+        public String getIsCharger() {
+            return isCharger;
+        }
+
+        public void setIsCharger(String isCharger) {
+            this.isCharger = isCharger;
+        }
 
         public String getCreatedAtStamp() {
             return createdAtStamp;
@@ -916,6 +961,9 @@ public class PengyouquanBean implements Parcelable {
         }
 
 
+        public LikeListBean() {
+        }
+
         @Override
         public int describeContents() {
             return 0;
@@ -929,9 +977,9 @@ public class PengyouquanBean implements Parcelable {
             dest.writeString(this.createdAt);
             dest.writeString(this.likeUser);
             dest.writeString(this.likeUserPhoto);
-        }
-
-        public LikeListBean() {
+            dest.writeString(this.likePhoto);
+            dest.writeString(this.createdAtStamp);
+            dest.writeString(this.isCharger);
         }
 
         protected LikeListBean(Parcel in) {
@@ -941,9 +989,12 @@ public class PengyouquanBean implements Parcelable {
             this.createdAt = in.readString();
             this.likeUser = in.readString();
             this.likeUserPhoto = in.readString();
+            this.likePhoto = in.readString();
+            this.createdAtStamp = in.readString();
+            this.isCharger = in.readString();
         }
 
-        public static final Parcelable.Creator<LikeListBean> CREATOR = new Parcelable.Creator<LikeListBean>() {
+        public static final Creator<LikeListBean> CREATOR = new Creator<LikeListBean>() {
             @Override
             public LikeListBean createFromParcel(Parcel source) {
                 return new LikeListBean(source);
@@ -996,6 +1047,8 @@ public class PengyouquanBean implements Parcelable {
         dest.writeParcelable(this.topic, flags);
         dest.writeString(this.locationTitle);
         dest.writeParcelable(this.shareBean, flags);
+        dest.writeString(this.pic1Width);
+        dest.writeString(this.pic1High);
         dest.writeString(this.pic6);
         dest.writeString(this.pic7);
         dest.writeString(this.pic8);
@@ -1038,6 +1091,8 @@ public class PengyouquanBean implements Parcelable {
         this.topic = in.readParcelable(TopicBean.class.getClassLoader());
         this.locationTitle = in.readString();
         this.shareBean = in.readParcelable(ShareBean.class.getClassLoader());
+        this.pic1Width = in.readString();
+        this.pic1High = in.readString();
         this.pic6 = in.readString();
         this.pic7 = in.readString();
         this.pic8 = in.readString();

@@ -42,7 +42,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PengyouquanChoiceAddressActivity extends BaseActivity implements AMapLocationListener, View.OnClickListener, Inputtips.InputtipsListener {
+public class PengyouquanChoiceAddressActivity extends BaseActivity implements AMapLocationListener, View.OnClickListener {
 
 
     //声明mlocationClient对象
@@ -102,10 +102,13 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
 
     }
 
+    private AMapLocation TipAmapLocation;
+
     @Override
     public void onLocationChanged(AMapLocation amapLocation) {
         if (amapLocation != null) {
             if (amapLocation.getErrorCode() == 0) {
+                TipAmapLocation = amapLocation;
                 //定位成功回调信息，设置相关消息
                 amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见定位类型表
                 amapLocation.getLatitude();//获取纬度
@@ -175,8 +178,8 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
     private FabuAddressAdapter addressAdapter;
     private List<PoiItem> datas;
 
-    private ShurutishiAdapter shurutishiAdapter;
-    private List<Tip> shurutishiDatas;
+    private FabuAddressAdapter shurutishiAdapter;
+    private List<PoiItem> shurutishiDatas;
 
     private void initView() {
         datas = new ArrayList<>();
@@ -226,24 +229,32 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-            }
+                tipDatas.clear();
+                tipPageNo = 1;
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() >= 1) {
+                if (s.length() > 0) {
                     recyclerView.setVisibility(View.GONE);
                     mShurutishiRecyclerview.setVisibility(View.VISIBLE);
                     shurutishi(s.toString());
+                    tipText = s.toString();
                     mActivityPengyouquanChoiceAddressDelete.setVisibility(View.VISIBLE);
                 } else {
+                    tipText = "";
+
                     recyclerView.setVisibility(View.VISIBLE);
                     mShurutishiRecyclerview.setVisibility(View.GONE);
                     mActivityPengyouquanChoiceAddressDelete.setVisibility(View.GONE);
                 }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
             }
         });
         shurutishiDatas = new ArrayList<>();
-        shurutishiAdapter = new ShurutishiAdapter(R.layout.item_fabu_address, shurutishiDatas);
+        shurutishiAdapter = new FabuAddressAdapter(R.layout.item_fabu_address, shurutishiDatas);
         mShurutishiRecyclerview = (RecyclerView) findViewById(R.id.activity_pengyouquan_choice_address_shurutishi_recyclerview);
         mShurutishiRecyclerview.setAdapter(shurutishiAdapter);
         LinearLayoutManager manager2 = new LinearLayoutManager(this);
@@ -253,33 +264,73 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
         shurutishiAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Tip tip = (Tip) adapter.getData().get(position);
-                EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANCHOICEADDRESSBYSEARCH, tip));
+                PoiItem poiItem = (PoiItem) adapter.getData().get(position);
+                EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANCHOICEADDRESS, poiItem));
                 finish();
 
             }
         });
 
-//        shurutishiAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
-//            @Override
-//            public void onLoadMoreRequested() {
-//                shurutishiPageNo++;
-//            }
-//        }, mShurutishiRecyclerview);
-
+        shurutishiAdapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                tipPageNo++;
+                shurutishi(tipText);
+            }
+        }, mShurutishiRecyclerview);
     }
 
-    private int shurutishiPageNo;
+    private String tipText;
     private String cityName;//用于进行城市搜索
+    private int tipPageNo;
+    private List<PoiItem> tipDatas = new ArrayList<>();
 
     private void shurutishi(String s) {
-        shurutishiPageNo = 1;
+
         //第二个参数传入null或者“”代表在全国进行检索，否则按照传入的city进行检索
-        InputtipsQuery inputquery = new InputtipsQuery(s, cityName);
-        inputquery.setCityLimit(true);//限制在当前城市
-        Inputtips inputTips = new Inputtips(this, inputquery);
-        inputTips.setInputtipsListener(this);
-        inputTips.requestInputtipsAsyn();
+//        InputtipsQuery inputquery = new InputtipsQuery(s, cityName);
+//
+//        inputquery.setCityLimit(true);//限制在当前城市
+//        Inputtips inputTips = new Inputtips(this, inputquery);
+//
+//        inputTips.setInputtipsListener(this);
+//        inputTips.requestInputtipsAsyn();
+
+        PoiSearch.Query query = new PoiSearch.Query(s, "", TipAmapLocation.getCityCode());
+        query.setPageSize(30);// 设置每页最多返回多少条poiitem
+        query.setPageNum(tipPageNo);//设置查询页码
+        query.setCityLimit(true);
+
+        PoiSearch poiSearch = new PoiSearch(this, query);
+
+
+
+//        poiSearch.setBound(new PoiSearch.SearchBound(new LatLonPoint(TipAmapLocation.getLatitude(),
+//                TipAmapLocation.getLongitude()), 2000));
+
+        poiSearch.setOnPoiSearchListener(new PoiSearch.OnPoiSearchListener() {
+            @Override
+            public void onPoiSearched(PoiResult poiResult, int i) {
+
+                if (ObjectUtils.isEmpty(poiResult.getPois())) {
+                    shurutishiAdapter.loadMoreEnd();
+                    return;
+                }
+                ArrayList<PoiItem> pois = poiResult.getPois();
+                tipDatas.addAll(pois);
+                shurutishiAdapter.setNewData(tipDatas);
+                shurutishiAdapter.loadMoreComplete();
+
+            }
+
+            @Override
+            public void onPoiItemSearched(PoiItem poiItem, int i) {
+
+            }
+        });
+        poiSearch.searchPOIAsyn();
+
+
     }
 
 
@@ -311,11 +362,4 @@ public class PengyouquanChoiceAddressActivity extends BaseActivity implements AM
         }
     }
 
-    @Override
-    public void onGetInputtips(List<Tip> list, int i) {
-        shurutishiDatas.clear();
-        shurutishiDatas.addAll(list);
-        shurutishiAdapter.setNewData(shurutishiDatas);
-
-    }
 }

@@ -34,6 +34,7 @@ import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
@@ -138,7 +139,7 @@ public class KaifangshangchengxiangqingFragment extends Fragment {
                 .params("pageSize", 10)
                 .params("marketId", Long.valueOf(mParam1));
 
-        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
+        StringCallback stringCallback = new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("KFSCSHANGPINLIEBIAO", response.body());

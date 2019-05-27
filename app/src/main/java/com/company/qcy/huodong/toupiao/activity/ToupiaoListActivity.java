@@ -28,10 +28,12 @@ import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.toupiao.adapter.ToupiaoListAdapter;
 import com.company.qcy.huodong.toupiao.bean.ToupiaoBean;
+import com.company.qcy.huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,6 +111,9 @@ public class ToupiaoListActivity extends BaseActivity implements View.OnClickLis
                 ToupiaoBean bean = (ToupiaoBean) adapter.getData().get(position);
                 intent.putExtra("id", String.valueOf(bean.getId()));
                 ActivityUtils.startActivity(intent);
+
+                MobclickAgent.onEvent(ToupiaoListActivity.this,"投票_点击了"+bean.getName());
+
             }
         });
 

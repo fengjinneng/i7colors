@@ -17,13 +17,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
@@ -41,8 +45,11 @@ import com.company.qcy.Utils.pengyouquan.jiukou.PengyouquanAdapterCallBack;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.bean.pengyouquan.PhotoInfo;
 import com.company.qcy.ui.activity.pengyouquan.ImagePagerActivity;
+import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
+import com.company.qcy.ui.activity.pengyouquan.ShipinbofangActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
+import com.company.qcy.widght.pengyouquan.ColorFilterImageView;
 import com.company.qcy.widght.pengyouquan.CommentListView;
 import com.company.qcy.widght.pengyouquan.ExpandTextView;
 import com.company.qcy.widght.pengyouquan.MultiImageView;
@@ -50,6 +57,7 @@ import com.company.qcy.widght.pengyouquan.PileLayout;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -63,7 +71,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
     private FragmentManager fragmentManager;
 
-    public PengyouquanAdapter(int layoutResId, @Nullable List<PengyouquanBean> data,FragmentManager fragmentManager) {
+    public PengyouquanAdapter(int layoutResId, @Nullable List<PengyouquanBean> data, FragmentManager fragmentManager) {
         super(layoutResId, data);
         this.handler = handler;
         this.mDatas = data;
@@ -124,7 +132,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         helper.addOnClickListener(R.id.item_pengyouquan_detail);
         ImageView headimg = (ImageView) helper.getView(R.id.item_pengyouquan_headimg);
         helper.addOnClickListener(R.id.item_pengyouquan_headimg);
-        MyCommonUtil.jiazaitouxiang(mContext,item.getPostUserPhoto(),headimg);
+        MyCommonUtil.jiazaitouxiang(mContext, item.getPostUserPhoto(), headimg);
 
         TextView time = (TextView) helper.getView(R.id.timeTv);
 //        time.setText(TimeUtils.millis2String(Long.parseLong(item.getCreatedAtStamp())).substring(0, 10));
@@ -232,9 +240,9 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         helper.addOnClickListener(R.id.snsBtn);
         ExpandTextView expandTextView = (ExpandTextView) helper.getView(R.id.item_pengyouquan_content);
         CharSequence cs = item.getContent();
-        if(StringUtils.isEmpty(cs)){
+        if (StringUtils.isEmpty(cs)) {
             expandTextView.setVisibility(View.GONE);
-        }   else {
+        } else {
             expandTextView.setVisibility(View.VISIBLE);
             expandTextView.setText(cs);
         }
@@ -250,23 +258,39 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
         ConstraintLayout chakangengduo = (ConstraintLayout) helper.getView(R.id.item_pengyouquan_chakangengduo);
         helper.addOnClickListener(R.id.item_pengyouquan_chakangengduo);
-        helper.addOnClickListener(R.id.item_pengyouquan_shipin_layout);
-        ImageView shipinPlayImage = helper.getView(R.id.item_pengyouquan_shipin_img);
+
+//        helper.addOnClickListener(R.id.item_pengyouquan_shipin_img);
+
+        MultiImageView shipinPlayImage = helper.getView(R.id.item_pengyouquan_shipin_img);
+
+
         ConstraintLayout shipinLayout = (ConstraintLayout) helper.getView(R.id.item_pengyouquan_shipin_layout);
         if (!StringUtils.isEmpty(item.getUrl())) {
             shipinLayout.setVisibility(View.VISIBLE);
             multiImageView.setVisibility(View.GONE);
-//          jzvdStd.setUp(ServerInfo.IMAGE+item.getUrl(), "", JzvdStd.SCREEN_WINDOW_LIST);
-//          jzvdStd.thumbImageView.setImageBitmap(getNetVideoBitmap(ServerInfo.IMAGE+item.getUrl()));
-//          Glide.with(mContext).load("http://jzvd-pic.nathen.cn/jzvd-pic/1bb2ebbe-140d-4e2e-abd2-9e7e564f71ac.png").into(shipinPlayImage);
-            GlideUtils.loadImageFitCenter(mContext, ServerInfo.IMAGE + item.getVideoPicUrl(), shipinPlayImage);
+
+            List<PhotoInfo> photoInfos = new ArrayList<>();
+            photoInfos.add(new PhotoInfo(item.getVideoPicUrl(), String.valueOf(item.getVideoPicWidth()), String.valueOf(item.getVideoPicHigh())));
+            shipinPlayImage.setList(photoInfos);
+//            MyCommonUtil.setImageSize(item.getVideoPicWidth().intValue(),item.getVideoPicHigh().intValue(),shipinPlayImage);
+//
+//            Glide.with(mContext).load(ServerInfo.IMAGE + item.getVideoPicUrl()).into(shipinPlayImage);
+            shipinPlayImage.setOnItemClickListener(new MultiImageView.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+                    Intent intent = new Intent(mContext, ShipinbofangActivity.class);
+                    intent.putExtra("url", ServerInfo.IMAGE + item.getUrl());
+                    intent.putExtra("diyizhen", ServerInfo.IMAGE + item.getVideoPicUrl());
+                    ActivityUtils.startActivity(intent);
+                }
+            });
 
         } else {
             shipinLayout.setVisibility(View.GONE);
             multiImageView.setVisibility(View.VISIBLE);
             List<PhotoInfo> photoInfos = new ArrayList<>();
             if (!StringUtils.isEmpty(item.getPic1())) {
-                photoInfos.add(new PhotoInfo(item.getPic1()));
+                photoInfos.add(new PhotoInfo(item.getPic1(), item.getPic1Width(), item.getPic1High()));
             }
             if (!StringUtils.isEmpty(item.getPic2())) {
                 photoInfos.add(new PhotoInfo(item.getPic2()));
@@ -319,6 +343,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
             pileLayout.addView(imageView1);
             if (item.getLikeList().size() < 20) {
                 for (int i = 0; i < item.getLikeList().size(); i++) {
+
                     int temp = i;
                     ImageView imageView = (ImageView) inflater.inflate(R.layout.item_pengyouquan_praise, pileLayout, false);
                     if (!StringUtils.isEmpty(item.getLikeList().get(i).getLikeUserPhoto())) {
@@ -330,7 +355,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                             GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getLikeList().get(i).getLikeUserPhoto(), imageView);
 
                         }
-                    }else {
+                    } else {
                         imageView.setImageResource(R.mipmap.morentouxiang);
                     }
 
@@ -338,10 +363,14 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                     imageView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
-                            Intent intent = new Intent(mContext, PersonInfoActivity.class);
-                            intent.putExtra("userId", item.getLikeList().get(temp).getUserId());
-                            ActivityUtils.startActivity(intent);
+                            if (StringUtils.equals("1", item.getLikeList().get(temp).getIsCharger())) {
+                                Intent my = new Intent(mContext, MyPersonInfoActivity.class);
+                                ActivityUtils.startActivity(my);
+                            } else {
+                                Intent other = new Intent(mContext, PersonInfoActivity.class);
+                                other.putExtra("userId", item.getLikeList().get(temp).getUserId());
+                                ActivityUtils.startActivity(other);
+                            }
                         }
                     });
                 }
@@ -358,7 +387,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                             GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + item.getLikeList().get(i).getLikeUserPhoto(), imageView);
 
                         }
-                    }else {
+                    } else {
                         imageView.setImageResource(R.mipmap.morentouxiang);
                     }
                     pileLayout.addView(imageView);
@@ -366,9 +395,14 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                         @Override
                         public void onClick(View v) {
 
-                            Intent intent = new Intent(mContext, PersonInfoActivity.class);
-                            intent.putExtra("userId", item.getLikeList().get(temp).getUserId());
-                            ActivityUtils.startActivity(intent);
+                            if (StringUtils.equals("1", item.getLikeList().get(temp).getIsCharger())) {
+                                Intent my = new Intent(mContext, MyPersonInfoActivity.class);
+                                ActivityUtils.startActivity(my);
+                            } else {
+                                Intent other = new Intent(mContext, PersonInfoActivity.class);
+                                other.putExtra("userId", item.getLikeList().get(temp).getUserId());
+                                ActivityUtils.startActivity(other);
+                            }
                         }
                     });
                 }
@@ -443,7 +477,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
                         dialog.setPosition(helper.getAdapterPosition());
 
-                        dialog.show(fragmentManager,"dialog");
+                        dialog.show(fragmentManager, "dialog");
 
                     }
                 }
@@ -453,7 +487,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
 
     @Override
     public void save(String content, Long id, Long parentId, String commentUser, PengyouquanBean bean, int position) {
-        saveDiscuss(content,id,parentId,bean,position);
+        saveDiscuss(content, id, parentId, bean, position);
     }
 
 
@@ -466,7 +500,7 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", parentId)
-                .params("from",mContext.getResources().getString(R.string.app_android))
+                .params("from", mContext.getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
 
@@ -509,7 +543,6 @@ public class PengyouquanAdapter extends BaseQuickAdapter<PengyouquanBean, BaseVi
         };
         request.execute(stringCallback);
     }
-
 
 
 }

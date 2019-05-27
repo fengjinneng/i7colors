@@ -31,11 +31,14 @@ import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.pengyouquan.MyFansAdapter;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.MyFansBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
+import com.company.qcy.ui.activity.pengyouquan.MyPersonInfoActivity;
 import com.company.qcy.ui.activity.pengyouquan.PersonInfoActivity;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -98,12 +101,13 @@ public class MyFansFragment extends Fragment {
     private SwipeRefreshLayout refreshLayout;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
     private boolean isCharge;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        if(StringUtils.equals("mine",mParam1)){
-            isCharge =true;
-        }else {
+        if (StringUtils.equals("mine", mParam1)) {
+            isCharge = true;
+        } else {
             isCharge = false;
         }
         recyclerView = view.findViewById(R.id.fragment_my_fans_recyclerview);
@@ -113,7 +117,7 @@ public class MyFansFragment extends Fragment {
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         datas = new ArrayList<>();
-        adapter=new MyFansAdapter(R.layout.item_myfans,datas);
+        adapter = new MyFansAdapter(R.layout.item_myfans, datas);
         recyclerView.setAdapter(adapter);
 
         refreshLayout = view.findViewById(R.id.fragment_my_fans_swipeRefreshLayout);
@@ -123,10 +127,10 @@ public class MyFansFragment extends Fragment {
                 //下拉业务
                 isReflash = true;
                 pageNo = 0;
-                if(isCharge){
+                if (isCharge) {
                     addMyData();
 
-                }else {
+                } else {
                     addData();
 
                 }
@@ -144,10 +148,10 @@ public class MyFansFragment extends Fragment {
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
-                if(isCharge){
+                if (isCharge) {
                     addMyData();
 
-                }else {
+                } else {
                     addData();
 
                 }
@@ -160,12 +164,18 @@ public class MyFansFragment extends Fragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 MyFansBean bean = (MyFansBean) adapter.getData().get(position);
-                Intent i = new Intent(getActivity(),PersonInfoActivity.class);
-                i.putExtra("userId",bean.getUserId());
-                ActivityUtils.startActivity(i);
+
+                if (StringUtils.equals("1", bean.getIsSelf())) {
+                    Intent i = new Intent(getActivity(), MyPersonInfoActivity.class);
+                    ActivityUtils.startActivity(i);
+                } else {
+                    Intent i = new Intent(getActivity(), PersonInfoActivity.class);
+                    i.putExtra("userId", bean.getUserId());
+                    ActivityUtils.startActivity(i);
+                }
             }
         });
-        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
         adapter.setLoadMoreView(new MyLoadMoreView());
 
 
@@ -174,13 +184,18 @@ public class MyFansFragment extends Fragment {
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 MyFansBean myFansBean = (MyFansBean) adapter.getData().get(position);
                 ImageView guanzhu = (ImageView) adapter.getViewByPosition(recyclerView, position, R.id.item_myfans_guanzhu);
-                switch (view.getId()){
+                switch (view.getId()) {
                     case R.id.item_myfans_guanzhu:
 
-                        if(StringUtils.equals("1",myFansBean.getIsFollow())){
-                            cancelFollow(myFansBean.getUserId(),position,guanzhu);
-                        }else {
-                            addFollow(myFansBean.getUserId(),position,guanzhu);
+                        if (!UserUtil.isLogin()) {
+                            ActivityUtils.startActivity(LoginActivity.class);
+                            return;
+                        }
+
+                        if (StringUtils.equals("1", myFansBean.getIsFollow())) {
+                            cancelFollow(myFansBean.getUserId(), position, guanzhu);
+                        } else {
+                            addFollow(myFansBean.getUserId(), position, guanzhu);
                         }
 
                         break;
@@ -190,7 +205,7 @@ public class MyFansFragment extends Fragment {
     }
 
 
-    private void cancelFollow(Long userId, int position,ImageView guanzhuImage) {
+    private void cancelFollow(Long userId, int position, ImageView guanzhuImage) {
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CANCLEFOLLOWBYUSERID)
                 .tag(this)
@@ -248,7 +263,7 @@ public class MyFansFragment extends Fragment {
     }
 
 
-    private void addFollow(Long followUserId,int position,ImageView guanzhuImage) {
+    private void addFollow(Long followUserId, int position, ImageView guanzhuImage) {
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ADDFOLLOWBYUSERID)
                 .tag(this)
@@ -276,13 +291,13 @@ public class MyFansFragment extends Fragment {
 //                                }
                                 adapter.getData().get(position).setIsFollow("1");
                                 guanzhuImage.setImageDrawable(getActivity().getResources().getDrawable(R.drawable.buzaiguanzhu));
-                            }else {
+                            } else {
                                 ToastUtils.showShort(msg);
                             }
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -352,7 +367,7 @@ public class MyFansFragment extends Fragment {
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -421,7 +436,7 @@ public class MyFansFragment extends Fragment {
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(getActivity(),request,this);
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);

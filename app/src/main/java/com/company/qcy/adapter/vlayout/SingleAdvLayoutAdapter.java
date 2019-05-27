@@ -16,6 +16,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.NetworkImageHolderView;
@@ -40,6 +41,8 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
 
     private List<String> bannerUrlDatas;
 
+    public  ConvenientBanner CBanner;
+
     static MySingleAdvItemClickListener myItemClickListener;
     // 用于设置Item点击事件
 
@@ -58,6 +61,19 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
         this.bannerDatas = bannerDatas;
         this.bannerUrlDatas = bannerUrlDatas;
     }
+
+    public  void startTurning(){
+        if(!ObjectUtils.isEmpty(CBanner)){
+            CBanner.startTurning(3000);
+        }
+    }
+
+    public  void closeTurning(){
+        if(!ObjectUtils.isEmpty(CBanner)){
+            CBanner.stopTurning();
+        }
+    }
+
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
@@ -80,6 +96,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
 
 
     private void setBanner(SingleAdvLayoutViewHolder holder){
+        CBanner = holder.convenientBanner;
         holder.convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
             @Override
             public NetworkImageHolderView createHolder() {
@@ -91,8 +108,6 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
         //设置如果只有一组数据时不能滑动
         holder.convenientBanner.setPointViewVisible(bannerDatas.size() == 1 ? false : true); // 指示器
         holder.convenientBanner.setManualPageable(bannerDatas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
-        holder.convenientBanner.setCanLoop(bannerDatas.size() == 1 ? false : true); // 是否循环
-
 
         holder.convenientBanner.setOnItemClickListener(new OnItemClickListener() {
             @Override
