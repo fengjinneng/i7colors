@@ -731,17 +731,17 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                     String title = "";
                     String content = "";
                     if (StringUtils.isEmpty(bean.getContent())) {
-                        title = "【朋友圈】";
+                        title = "【印染圈】";
                     } else {
                         if (bean.getContent().length() < 11) {
-                            title = "【朋友圈】" + bean.getContent() + "...";
+                            title = "【印染圈】" + bean.getContent() + "...";
                         } else {
-                            title = "【朋友圈】" + bean.getContent().substring(0, 10) + "...";
+                            title = "【印染圈】" + bean.getContent().substring(0, 10) + "...";
                         }
                         if (bean.getContent().length() < 31) {
-                            content = "【朋友圈】" + bean.getContent() + "...";
+                            content = "【印染圈】" + bean.getContent() + "...";
                         } else {
-                            content = "【朋友圈】" + bean.getContent().substring(0, 30) + "...";
+                            content = "【印染圈】" + bean.getContent().substring(0, 30) + "...";
                         }
                     }
                     if (!StringUtils.isEmpty(bean.getVideoPicUrl())) {

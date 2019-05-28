@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.blankj.utilcode.util.ConvertUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideOption;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -188,7 +189,7 @@ public class MultiImageView extends LinearLayout {
             imageView.setLayoutParams(position % MAX_PER_ROW_COUNT == 0 ? moreParaColumnFirst : morePara);
         } else {
             imageView.setAdjustViewBounds(true);
-            imageView.setScaleType(ScaleType.CENTER_INSIDE);
+            imageView.setScaleType(ScaleType.CENTER_CROP);
             //imageView.setMaxHeight(pxOneMaxWandH);
 
             int expectW = 0;
@@ -200,16 +201,24 @@ public class MultiImageView extends LinearLayout {
             }
 
             if (expectW == 0 || expectH == 0) {
-
                 imageView.setLayoutParams(onePicPara);
             } else {
 
                 int actualW = 0;
                 int actualH = 0;
                 float scale = ((float) expectH) / ((float) expectW);
-                if (expectW > pxOneMaxWandH) {
-                    actualW = pxOneMaxWandH;
-                    actualH = (int) (actualW * scale);
+                int temp  = (int)(ScreenUtils.getScreenWidth()*0.3);
+
+                if (expectW > temp) {
+                    if(expectH>expectW){
+                        //竖屏
+                        actualW = temp;
+                        actualH = (int) (actualW * 1.5);
+                    }else {
+
+                        actualW = (int)(ScreenUtils.getScreenWidth()*0.6);
+                        actualH = (int) (actualW * 0.6);
+                    }
 
                 } else if (expectW < pxMoreWandH) {
                     actualW = pxMoreWandH;

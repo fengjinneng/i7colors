@@ -189,7 +189,11 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                 break;
 
             case MessageBean.NetWorkState.YILIANJIE:
+
+                LogUtils.e("saasdsadsadsaaf",loadDataState+"=="+isLoad);
                 if(!loadDataState && !isLoad){
+                    getMyInfo();
+
                     addData();
                 }
                 break;

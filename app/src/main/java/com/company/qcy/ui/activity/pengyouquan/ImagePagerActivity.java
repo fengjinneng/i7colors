@@ -42,6 +42,7 @@ import com.company.qcy.Utils.NoPreloadViewPager;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.widght.PhotoViewpager;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -81,7 +82,7 @@ public class ImagePagerActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_imagepager);
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        PhotoViewpager viewPager = (PhotoViewpager) findViewById(R.id.pager);
         guideGroup = (LinearLayout) findViewById(R.id.guideGroup);
 
         getIntentData();

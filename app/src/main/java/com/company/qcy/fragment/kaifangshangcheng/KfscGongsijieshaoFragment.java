@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,6 +80,7 @@ public class KfscGongsijieshaoFragment extends BaseFragment {
     private void initView(View inflate) {
         textView = inflate.findViewById(R.id.fragment_kfsc_gongsijieshao_text);
         textView.setText("暂无公司简介");
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
