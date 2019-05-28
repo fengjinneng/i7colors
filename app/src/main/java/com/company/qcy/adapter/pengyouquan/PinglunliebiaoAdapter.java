@@ -41,6 +41,7 @@ public class PinglunliebiaoAdapter extends BaseQuickAdapter<PengyouquanBean.Comm
 
         List<PengyouquanBean.CommentListBean> list = new ArrayList<>();
         list.add(item);
+
         commentListView.setDatas(list);
 
 //        if (ObjectUtils.isEmpty(item.getByCommentUser())) {

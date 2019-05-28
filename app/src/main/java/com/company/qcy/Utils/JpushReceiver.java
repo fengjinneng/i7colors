@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.company.qcy.MainActivity;
@@ -20,7 +22,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import cn.jpush.android.api.JPushInterface;
-import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * 自定义接收器
@@ -49,14 +50,13 @@ public class JpushReceiver extends BroadcastReceiver {
                 SPUtils.getInstance().put("pengyouquanNews", SPUtils.getInstance().getInt("pengyouquanNews") + 1);
                 EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANHAVENEWMESSAGE));
 
-                ShortcutBadger.applyCount(context.getApplicationContext(), SPUtils.getInstance().getInt("notification"));
 
             } else if (JPushInterface.ACTION_NOTIFICATION_RECEIVED.equals(intent.getAction())) {
                 LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的通知");
-                int notifictionId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
+                int notificationId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
 
                 SPUtils.getInstance().put("notification", SPUtils.getInstance().getInt("notification") + 1);
-                EventBus.getDefault().post(new MessageBean(MessageBean.Code.PENGYOUQUANHAVENEWMESSAGE));
+                EventBus.getDefault().post(new MessageBean(MessageBean.JPush.RECIVENOTIFICATION));
 
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                 LogUtils.d(TAG, "[MyReceiver] 用户点击打开了通知");
@@ -79,14 +79,21 @@ public class JpushReceiver extends BroadcastReceiver {
 
                         }
                     }
+
                 }
 
-                Intent mainIntent = new Intent(context,MainActivity.class);
-                mainIntent.putExtra("jpush_data", map);
-                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                ActivityUtils.startActivity(mainIntent);
+                if (SPUtils.getInstance().getInt("notification") > 0) {
+                    SPUtils.getInstance().put("notification", SPUtils.getInstance().getInt("notification") - 1);
+                }
 
-
+                if (AppUtils.isAppForeground(AppUtils.getAppPackageName())) {
+                    JpushUtil.jumpActivity(map, context);
+                } else {
+                    Intent mainIntent = new Intent(context, MainActivity.class);
+                    mainIntent.putExtra("jpush_data", map);
+                    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    ActivityUtils.startActivity(mainIntent);
+                }
 
             } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
                 LogUtils.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));

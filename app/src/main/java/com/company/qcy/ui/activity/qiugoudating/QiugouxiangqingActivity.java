@@ -209,6 +209,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         //给RecyclerView设置适配器
         mActivityQiugouxiangqingRecyclerview.setAdapter(adapter);
         addQiugouxiangqingData();
+        addBaojialiebiaoData();
         mActivityQiugouxiangqingCanyubaojia = (Button) findViewById(R.id.activity_qiugouxiangqing_canyubaojia);
         mActivityQiugouxiangqingCanyubaojia.setOnClickListener(this);
         mActivityQiugouxiangqingGuanbiqiugo = (Button) findViewById(R.id.activity_qiugouxiangqing_guanbiqiugo);
@@ -473,7 +474,6 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
             mQiugouxiangqingHeadviewSecondTime.setText(qiugouBean.getSurplusHour());
         }
 
-        addBaojialiebiaoData();
     }
 
 
@@ -530,7 +530,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                 .params("offerId", "");
 
 
-        DialogStringCallback stringCallback = new DialogStringCallback(QiugouxiangqingActivity.this) {
+        StringCallback stringCallback = new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("addBaojialiebiaoData", response.body());

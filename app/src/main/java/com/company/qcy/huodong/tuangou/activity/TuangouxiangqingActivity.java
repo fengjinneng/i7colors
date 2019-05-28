@@ -178,7 +178,6 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mAppbar = (AppBarLayout) findViewById(R.id.appbar);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
-        mViewpager.setOffscreenPageLimit(2);
 
 //        setTitle("返回");
 //        mCollapsingToolbar.setTitle("返回");

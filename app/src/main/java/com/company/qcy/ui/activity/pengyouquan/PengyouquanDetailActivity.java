@@ -162,7 +162,7 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
-        mToolbarTitle.setText("朋友圈详情");
+        mToolbarTitle.setText("印染圈详情");
         mActivityPengyouquanDetailImg = (ImageView) findViewById(R.id.activity_pengyouquan_detail_img);
         mActivityPengyouquanDetailName = (TextView) findViewById(R.id.activity_pengyouquan_detail_name);
         mActivityPengyouquanDetailTime = (TextView) findViewById(R.id.activity_pengyouquan_detail_time);
@@ -627,17 +627,17 @@ public class PengyouquanDetailActivity extends BaseActivity implements View.OnCl
                 String title = "";
                 String content = "";
                 if (StringUtils.isEmpty(pengyouquanBean.getContent())) {
-                    title = "【朋友圈】";
+                    title = "【印染圈】";
                 } else {
                     if (pengyouquanBean.getContent().length() < 11) {
-                        title = "【朋友圈】" + pengyouquanBean.getContent() + "...";
+                        title = "【印染圈】" + pengyouquanBean.getContent() + "...";
                     } else {
-                        title = "【朋友圈】" + pengyouquanBean.getContent().substring(0, 10) + "...";
+                        title = "【印染圈】" + pengyouquanBean.getContent().substring(0, 10) + "...";
                     }
                     if (pengyouquanBean.getContent().length() < 31) {
-                        content = "【朋友圈】" + pengyouquanBean.getContent() + "...";
+                        content = "【印染圈】" + pengyouquanBean.getContent() + "...";
                     } else {
-                        content = "【朋友圈】" + pengyouquanBean.getContent().substring(0, 30) + "...";
+                        content = "【印染圈】" + pengyouquanBean.getContent().substring(0, 30) + "...";
                     }
                 }
                 if (!StringUtils.isEmpty(pengyouquanBean.getVideoPicUrl())) {

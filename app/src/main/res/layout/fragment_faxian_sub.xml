@@ -15,11 +15,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
+        android:descendantFocusability="blocksDescendants"
         app:layout_constraintTop_toTopOf="parent">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_pengyouquan_recyclerview"
             android:layout_width="match_parent"
+            android:overScrollMode="never"
             android:layout_height="match_parent" />
 
     </android.support.v4.widget.SwipeRefreshLayout>

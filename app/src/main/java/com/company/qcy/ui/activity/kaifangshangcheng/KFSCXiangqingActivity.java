@@ -26,6 +26,7 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.company.qcy.R;
+import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.Utils.PermisionUtil;
@@ -141,7 +142,7 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("id", id);
 
-        StringCallback stringCallback = new StringCallback() {
+        DialogStringCallback stringCallback = new DialogStringCallback(KFSCXiangqingActivity.this) {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("DIANPUXIANGQING", response.body());

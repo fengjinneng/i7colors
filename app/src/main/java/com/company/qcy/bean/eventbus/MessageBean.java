@@ -84,12 +84,25 @@ public class MessageBean {
     }
 
 
+    public static class NetWorkState{
+        //网络已连接
+        public static final int YILIANJIE=2001;
+
+
+    }
+
+
     public static class JPush{
         //發送的系統消息
         public static final int XITONGXIAOXI=1001;
 
         //清除lunch数字
         public static final int DELETELUNCHNUMBER=1002;
+
+
+        //收到系统消息的通知了
+        public static final int RECIVENOTIFICATION=1003;
+
     }
 
 

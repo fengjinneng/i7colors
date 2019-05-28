@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -74,7 +75,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class GuanzhuFragment extends BaseFragment implements View.OnClickListener,PinglunHouCallBack {
+public class GuanzhuFragment extends BaseFragment implements View.OnClickListener, PinglunHouCallBack {
     private static final String ARG_PARAM1 = "param1";
 
     // TODO: Rename and change types of parameters
@@ -105,6 +106,10 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()) {
             default:
+                break;
+
+            case R.id.fragment_guanzhu_denglu:
+                ActivityUtils.startActivity(LoginActivity.class);
                 break;
         }
     }
@@ -175,17 +180,33 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
     LinearLayoutManager layoutManager;
 
+    private Button denglu;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (UserUtil.isLogin()) {
+            denglu.setVisibility(View.GONE);
+        } else {
+            denglu.setVisibility(View.VISIBLE);
+        }
+
+    }
 
     private void initView(View view) {
         recyclerView = view.findViewById(R.id.fragment_pengyouquan_recyclerview);
         swipeRefreshLayout = view.findViewById(R.id.fragment_pengyouquan_swipeRefreshLayout);
+
+        denglu = view.findViewById(R.id.fragment_guanzhu_denglu);
+        denglu.setOnClickListener(this);
         //创建布局管理
         layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         datas = new ArrayList<>();
         //创建适配器
-        adapter = new PengyouquanAdapter(R.layout.item_pengyouquan, datas,getFragmentManager());
+        adapter = new PengyouquanAdapter(R.layout.item_pengyouquan, datas, getFragmentManager());
         //给RecyclerView设置适配器
         recyclerView.setAdapter(adapter);
 
@@ -195,7 +216,13 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
                 //下拉业务
                 isReflash = true;
                 pageNo = 0;
-                addData();
+                if (UserUtil.isLogin()) {
+                    addData();
+                } else {
+                    if (swipeRefreshLayout.isRefreshing()) {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }
             }
         };
         swipeRefreshLayout.setOnRefreshListener(refreshListener);
@@ -229,13 +256,13 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
                         snsPopupWindow.showPopupWindow(view);
                         snsPopupWindow.setmItemClickListener(new PopupItemClickListener());
                         break;
-                    case R.id.item_pengyouquan_shipin_layout:
-                        Intent intent = new Intent(getActivity(), ShipinbofangActivity.class);
-                        intent.putExtra("url", ServerInfo.IMAGE + bean.getUrl());
-                        intent.putExtra("diyizhen", ServerInfo.IMAGE + bean.getVideoPicUrl());
-                        ActivityUtils.startActivity(intent);
-
-                        break;
+//                    case R.id.item_pengyouquan_shipin_layout:
+//                        Intent intent = new Intent(getActivity(), ShipinbofangActivity.class);
+//                        intent.putExtra("url", ServerInfo.IMAGE + bean.getUrl());
+//                        intent.putExtra("diyizhen", ServerInfo.IMAGE + bean.getVideoPicUrl());
+//                        ActivityUtils.startActivity(intent);
+//
+//                        break;
                     case R.id.item_pengyouquan_headimg:
                         if (StringUtils.equals("1", bean.getIsCharger())) {
                             Intent my = new Intent(getActivity(), MyPersonInfoActivity.class);
@@ -316,15 +343,15 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
                         ActivityUtils.startActivity(iAddress);
                         break;
                     case R.id.item_pengyouquan_huati:
-                        Intent huati = new Intent(getActivity(),ErjihuatiDetailActivity.class);
-                        huati.putExtra("level2TopicId",bean.getTopic().getTopicList().get(0).getId()+"");
-                        huati.putExtra("name",bean.getTopic().getTopicList().get(0).getTitle());
+                        Intent huati = new Intent(getActivity(), ErjihuatiDetailActivity.class);
+                        huati.putExtra("level2TopicId", bean.getTopic().getTopicList().get(0).getId() + "");
+                        huati.putExtra("name", bean.getTopic().getTopicList().get(0).getTitle());
                         ActivityUtils.startActivity(huati);
                         break;
                     case R.id.item_pengyouquan_lianjie_layout:
                         Intent lianjieIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
                         Long id = bean.getShareBean().getId();
-                        lianjieIntent.putExtra("id", id+"");
+                        lianjieIntent.putExtra("id", id + "");
                         ActivityUtils.startActivity(lianjieIntent);
                         break;
                 }
@@ -339,17 +366,17 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
         adapter.setLoadMoreView(new MyLoadMoreView());
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getActivity()).resumeRequests();
-                } else {
-                    Glide.with(getActivity()).pauseRequests();
-                }
-            }
-        });
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    Glide.with(getActivity()).resumeRequests();
+//                } else {
+//                    Glide.with(getActivity()).pauseRequests();
+//                }
+//            }
+//        });
 
     }
 
@@ -465,7 +492,6 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
     }
 
 
-
     private void addFollow(Long followUserId) {
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.ADDFOLLOWBYUSERID)
@@ -538,7 +564,7 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
                 .params("dyeId", id)
                 .params("content", comment1)
                 .params("parentId", "")
-                .params("from",getActivity().getResources().getString(R.string.app_android))
+                .params("from", getActivity().getResources().getString(R.string.app_android))
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
@@ -662,10 +688,9 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
     }
 
 
-
     @Override
     public void save(String content, Long id, int poisition) {
-        saveDiscuss(content,id,poisition);
+        saveDiscuss(content, id, poisition);
     }
 
 
@@ -704,7 +729,7 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
                     dialog.setPinglunHouCallBack(GuanzhuFragment.this);
                     dialog.setId(id);
                     dialog.setPosition(tieziPosition);
-                    dialog.show(fragmentManager,"dialog");
+                    dialog.show(fragmentManager, "dialog");
 
                     break;
 
@@ -718,17 +743,17 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
                     String title = "";
                     String content = "";
                     if (StringUtils.isEmpty(bean.getContent())) {
-                        title = "【朋友圈】";
+                        title = "【印染圈】";
                     } else {
                         if (bean.getContent().length() < 11) {
-                            title = "【朋友圈】" + bean.getContent() + "...";
+                            title = "【印染圈】" + bean.getContent() + "...";
                         } else {
-                            title = "【朋友圈】" + bean.getContent().substring(0, 10) + "...";
+                            title = "【印染圈】" + bean.getContent().substring(0, 10) + "...";
                         }
                         if (bean.getContent().length() < 31) {
-                            content = "【朋友圈】" + bean.getContent() + "...";
+                            content = "【印染圈】" + bean.getContent() + "...";
                         } else {
-                            content = "【朋友圈】" + bean.getContent().substring(0, 30) + "...";
+                            content = "【印染圈】" + bean.getContent().substring(0, 30) + "...";
                         }
                     }
                     if (!StringUtils.isEmpty(bean.getVideoPicUrl())) {

@@ -6,14 +6,20 @@ package com.company.qcy.bean.pengyouquan;
 public class PhotoInfo {
 
     public String url;
-    public int w;
-    public int h;
+    public String w;
+    public String h;
 
     public PhotoInfo() {
     }
 
     public PhotoInfo(String url) {
         this.url = url;
+    }
+
+    public PhotoInfo(String url, String w, String h) {
+        this.url = url;
+        this.w = w;
+        this.h = h;
     }
 
     public String getUrl() {
@@ -24,19 +30,19 @@ public class PhotoInfo {
         this.url = url;
     }
 
-    public int getW() {
+    public String getW() {
         return w;
     }
 
-    public void setW(int w) {
+    public void setW(String w) {
         this.w = w;
     }
 
-    public int getH() {
+    public String getH() {
         return h;
     }
 
-    public void setH(int h) {
+    public void setH(String h) {
         this.h = h;
     }
 }

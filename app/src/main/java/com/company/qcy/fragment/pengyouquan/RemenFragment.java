@@ -220,13 +220,13 @@ public class RemenFragment extends BaseFragment implements PinglunHouCallBack {
                         snsPopupWindow.showPopupWindow(view);
                         snsPopupWindow.setmItemClickListener(new PopupItemClickListener());
                         break;
-                    case R.id.item_pengyouquan_shipin_layout:
-                        Intent intent = new Intent(getActivity(), ShipinbofangActivity.class);
-                        intent.putExtra("url", ServerInfo.IMAGE + bean.getUrl());
-                        intent.putExtra("diyizhen", ServerInfo.IMAGE + bean.getVideoPicUrl());
-                        ActivityUtils.startActivity(intent);
-
-                        break;
+//                    case R.id.item_pengyouquan_shipin_layout:
+//                        Intent intent = new Intent(getActivity(), ShipinbofangActivity.class);
+//                        intent.putExtra("url", ServerInfo.IMAGE + bean.getUrl());
+//                        intent.putExtra("diyizhen", ServerInfo.IMAGE + bean.getVideoPicUrl());
+//                        ActivityUtils.startActivity(intent);
+//
+//                        break;
                     case R.id.item_pengyouquan_headimg:
                         if (StringUtils.equals("1", bean.getIsCharger())) {
                             Intent my = new Intent(getActivity(), MyPersonInfoActivity.class);
@@ -330,17 +330,17 @@ public class RemenFragment extends BaseFragment implements PinglunHouCallBack {
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
         adapter.setLoadMoreView(new MyLoadMoreView());
 
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    Glide.with(getActivity()).resumeRequests();
-                } else {
-                    Glide.with(getActivity()).pauseRequests();
-                }
-            }
-        });
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+//            @Override
+//            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+//                super.onScrollStateChanged(recyclerView, newState);
+//                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+//                    Glide.with(getActivity()).resumeRequests();
+//                } else {
+//                    Glide.with(getActivity()).pauseRequests();
+//                }
+//            }
+//        });
 
     }
 
@@ -711,17 +711,17 @@ public class RemenFragment extends BaseFragment implements PinglunHouCallBack {
                     String title = "";
                     String content = "";
                     if (StringUtils.isEmpty(bean.getContent())) {
-                        title = "【朋友圈】";
+                        title = "【印染圈】";
                     } else {
                         if (bean.getContent().length() < 11) {
-                            title = "【朋友圈】" + bean.getContent() + "...";
+                            title = "【印染圈】" + bean.getContent() + "...";
                         } else {
-                            title = "【朋友圈】" + bean.getContent().substring(0, 10) + "...";
+                            title = "【印染圈】" + bean.getContent().substring(0, 10) + "...";
                         }
                         if (bean.getContent().length() < 31) {
-                            content = "【朋友圈】" + bean.getContent() + "...";
+                            content = "【印染圈】" + bean.getContent() + "...";
                         } else {
-                            content = "【朋友圈】" + bean.getContent().substring(0, 30) + "...";
+                            content = "【印染圈】" + bean.getContent().substring(0, 30) + "...";
                         }
                     }
                     if (!StringUtils.isEmpty(bean.getVideoPicUrl())) {

@@ -17,10 +17,10 @@ public class ShareUtil {
 
 
     //生產
-//    public static String shareUrl ="http://mobile.i7colors.com/groupBuyMobile/openApp/" ;
+    public static String shareUrl ="http://mobile.i7colors.com/groupBuyMobile/openApp/" ;
 
     //測試
-    public static String shareUrl ="http://manage.i7colors.com/groupBuyMobile/openApp/" ;
+//    public static String shareUrl ="http://manage.i7colors.com/groupBuyMobile/openApp/" ;
 
     //分享投票
     public static void shareVoteDetail(Context context, String title, String content, String imgUrl, String id) {

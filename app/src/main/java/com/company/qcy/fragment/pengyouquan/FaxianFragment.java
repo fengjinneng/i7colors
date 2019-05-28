@@ -187,8 +187,21 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
             case MessageBean.Code.DELU:
                 getMyInfo();
                 break;
+
+            case MessageBean.NetWorkState.YILIANJIE:
+
+                LogUtils.e("saasdsadsadsaaf",loadDataState+"=="+isLoad);
+                if(!loadDataState && !isLoad){
+                    getMyInfo();
+
+                    addData();
+                }
+                break;
         }
     }
+
+    private boolean loadDataState;//加载数据的状态I
+    private boolean isLoad; //是否在加载数据
 
     public void getMyInfo() {
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETUSERINFOBYTOKEN)
@@ -264,6 +277,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
     private List<HuatiBean> yijiHuati;
 
     private void addData() {
+        isLoad = true;
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYHUATI)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
@@ -278,6 +292,9 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+
+                            loadDataState = true;
+                            isLoad = false;
                             JSONArray data = jsonObject.getJSONArray("data");
                             if (ObjectUtils.isEmpty(data)) {
 
@@ -323,7 +340,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                             SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
-                        ToastUtils.showShort(msg);
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -334,6 +351,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
             public void onError(Response<String> response) {
                 super.onError(response);
                 ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+                isLoad = false;
             }
         };
         request.execute(stringCallback);

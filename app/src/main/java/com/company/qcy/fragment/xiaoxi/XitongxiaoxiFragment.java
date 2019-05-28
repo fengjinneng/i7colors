@@ -31,6 +31,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.message.SystemMessageAdapter;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.base.WebActivity;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.message.SystemMeassageBean;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
@@ -46,6 +47,8 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,6 +122,15 @@ public class XitongxiaoxiFragment extends BaseFragment {
         switch (messageBean.getCode()) {
 
         }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        SPUtils.getInstance().put("notification",0);
+        EventBus.getDefault().post(new MessageBean(MessageBean.JPush.DELETELUNCHNUMBER));
     }
 
     @Override

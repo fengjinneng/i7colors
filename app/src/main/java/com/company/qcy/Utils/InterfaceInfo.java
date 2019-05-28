@@ -11,7 +11,6 @@ public class InterfaceInfo {
     //首页搜索
     public static final String INDEXSEARCH = "index/searchData";
 
-
     //用户
     //图形验证码
     public static final String CAPTCHA = "captcha";
@@ -176,7 +175,9 @@ public class InterfaceInfo {
 
 
     //获取别人的粉丝列表
-    public static final String QUERYFOLLOWLISTBYUSERID = "dyeFollow/queryFollowListByUserIdNew";
+    public static final String QUERYFOLLOWLISTBYUSERID = "dyeFollow/queryFollowListByUserId";
+
+
     //获取我的粉丝列表
     public static final String QUERYMYDYEFOLLOWLISTBYTOKEN = "dyeFollow/queryMyFollowListNew";
 

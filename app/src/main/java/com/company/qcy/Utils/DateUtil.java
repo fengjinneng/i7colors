@@ -22,7 +22,8 @@ public class DateUtil {
         if(delta/(60*60*24*365) > 0)return TimeUtils.date2String(d).substring(0,16);
         if(delta/(60*60*24*30) > 0)return TimeUtils.date2String(d).substring(0,16);
         if(delta/(60*60*24*7) > 0)return TimeUtils.date2String(d).substring(0,16);
-        if(delta/(60*60*24) > 0) return TimeUtils.date2String(d).substring(0,16);
+        if(delta/(60*60*24) > 1)return TimeUtils.date2String(d).substring(0,16);
+        if(delta/(60*60*24) > 0) return "昨天";
         if(delta/(60*60) > 0)return delta/(60*60) +"小时前";
         if(delta/(60) > 0) return delta/(60) +"分钟前";
         return "刚刚";

@@ -20,6 +20,7 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.user.UserBean;
 import com.lzy.okgo.OkGo;
@@ -31,7 +32,7 @@ import org.greenrobot.eventbus.EventBus;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class BindPhoneActivity extends AppCompatActivity implements View.OnClickListener {
+public class BindPhoneActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 请填写手机号码

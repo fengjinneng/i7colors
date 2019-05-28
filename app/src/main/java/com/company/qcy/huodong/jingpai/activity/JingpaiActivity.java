@@ -37,6 +37,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,6 +113,8 @@ public class JingpaiActivity extends BaseActivity implements View.OnClickListene
                 JingpaiBean jingpaiBean = (JingpaiBean) adapter.getData().get(position);
                 intent.putExtra("id",jingpaiBean.getId()+"");
                 ActivityUtils.startActivity(intent);
+
+                MobclickAgent.onEvent(JingpaiActivity.this,"竞拍_点击了"+jingpaiBean.getShopName());
             }
         });
         adapter.setLoadMoreView(new MyLoadMoreView());

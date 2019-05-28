@@ -3,25 +3,36 @@ package com.company.qcy.fragment.home;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.company.qcy.R;
+import com.company.qcy.base.BaseFragment;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.fragment.xiaoxi.BaojiaxiaoxiFragment;
 import com.company.qcy.fragment.xiaoxi.QiugouxiaoxiFragment;
 import com.company.qcy.fragment.xiaoxi.XitongxiaoxiFragment;
 import com.githang.statusbar.StatusBarCompat;
 
+import me.leolin.shortcutbadger.ShortcutBadger;
+import q.rorbin.badgeview.Badge;
+import q.rorbin.badgeview.QBadgeView;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class XiaoxiFragment extends Fragment implements View.OnClickListener {
+public class XiaoxiFragment extends BaseFragment implements View.OnClickListener {
 
     Context context;
     Activity activity;
@@ -55,15 +66,19 @@ public class XiaoxiFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View inflate = inflater.inflate(R.layout.fragment_toutiao, container, false);
-        initView(inflate);
-        return inflate;
+        return inflater.inflate(R.layout.fragment_toutiao, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse), false);
 
     }
 
@@ -71,17 +86,46 @@ public class XiaoxiFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
-            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
+        if (!hidden) {
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse), false);
         }
     }
 
 
     private QiugouxiaoxiFragment qiugouxiaoxiFragment;
-    private  BaojiaxiaoxiFragment baojiaxiaoxiFragment;
+    private BaojiaxiaoxiFragment baojiaxiaoxiFragment;
     private XitongxiaoxiFragment xitongxiaoxiFragment;
 
+    private Badge messageBadge;
+
+
+    @Override
+    public void onRec(MessageBean messageBean) {
+        super.onRec(messageBean);
+
+        switch (messageBean.getCode()) {
+            case MessageBean.JPush.DELETELUNCHNUMBER:
+                messageBadge.setBadgeNumber(0);
+                break;
+
+            case MessageBean.JPush.RECIVENOTIFICATION:
+                messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
+                break;
+
+        }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(SPUtils.getInstance().getInt("notification")>0&&!ObjectUtils.isEmpty(messageBadge)){
+            messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
+        }
+    }
+
     private void initView(View inflate) {
+
 
         mFragmentToutiaoBuyerImg = (ImageView) inflate.findViewById(R.id.fragment_toutiao_buyer_img);
         mFragmentToutiaoBuyerText = (TextView) inflate.findViewById(R.id.fragment_toutiao_buyer_text);
@@ -103,6 +147,12 @@ public class XiaoxiFragment extends Fragment implements View.OnClickListener {
         fragmentTransaction.add(R.id.fragment_toutiao_container, qiugouxiaoxiFragment);
         fragmentTransaction.commit();
         mFragmentToutiaoBuyer.setOnClickListener(this);
+
+
+        messageBadge = new QBadgeView(getContext()).bindTarget(mFragmentToutiaoXitongxiaoxi)
+                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(10, true).setExactMode(false);
+        messageBadge.setBadgeBackgroundColor(getResources().getColor(R.color.chunhongse));
+        messageBadge.setBadgeTextColor(getResources().getColor(R.color.baise));
     }
 
 
@@ -163,6 +213,13 @@ public class XiaoxiFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.fragment_toutiao_xitongxiaoxi:
+
+                if(!ObjectUtils.isEmpty(messageBadge)){
+                    if (SPUtils.getInstance().getInt("notification") > 0 ) {
+                        messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
+                    } else messageBadge.setBadgeNumber(0);
+                }
+
                 if (xitongxiaoxiFragment == null) {
                     xitongxiaoxiFragment = new XitongxiaoxiFragment();
                     fragmentTransaction.add(R.id.fragment_toutiao_container, xitongxiaoxiFragment);

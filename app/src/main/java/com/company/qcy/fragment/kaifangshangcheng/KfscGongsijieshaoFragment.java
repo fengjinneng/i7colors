@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
+import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 
 import org.greenrobot.eventbus.EventBus;
@@ -24,7 +26,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * Use the {@link KfscGongsijieshaoFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class KfscGongsijieshaoFragment extends Fragment {
+public class KfscGongsijieshaoFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,7 +65,6 @@ public class KfscGongsijieshaoFragment extends Fragment {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -79,6 +80,7 @@ public class KfscGongsijieshaoFragment extends Fragment {
     private void initView(View inflate) {
         textView = inflate.findViewById(R.id.fragment_kfsc_gongsijieshao_text);
         textView.setText("暂无公司简介");
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -86,19 +88,15 @@ public class KfscGongsijieshaoFragment extends Fragment {
 
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
+
+    @Override
     public void onRec(MessageBean messageBean) {
+        super.onRec(messageBean);
         switch (messageBean.getCode()) {
             case MessageBean.Code.KFSCGONGSIJIESHAO:
                 textView.setText(messageBean.getMeaasge());
                 break;
         }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
     }
 
     @Override

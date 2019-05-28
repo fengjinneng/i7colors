@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.constraint.ConstraintLayout;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
@@ -18,7 +19,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SDCardUtils;
+import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
@@ -43,10 +46,63 @@ public class MyCommonUtil {
         }
     }
 
+
+    public static void setImageSize(int dWidth, int dHeight, ImageView imageView) {
+
+        imageView.setAdjustViewBounds(true);
+//        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
+        int width, height;//ImageView调整后的宽高
+
+//        int sWidth  = ScreenUtils.getScreenWidth()/2 ;
+//        int sHeight  = ScreenUtils.getScreenHeight()/2 ;
+//
+//        //屏幕宽高比,一定要先把其中一个转为float
+//        float sScale = (float) sWidth /sHeight;
+//        //图片宽高比
+//        float dScale = (float) dWidth / dHeight;
+//
+//        float scale = 1.0f;
+//        if (sScale > dScale) {
+//            scale = (float) dHeight / sHeight;
+//
+//            height = sHeight;//图片高度就是屏幕高度
+//            width = (int) (dWidth * scale);//按照缩放比算出图片缩放后的宽度
+//        } else if (sScale < dScale) {
+//            scale = (float) dWidth / sWidth;
+//            width = sWidth;
+//            height = (int) (dHeight / scale);//这里用除
+//        } else {
+//            width = sWidth;
+//
+//            height = sHeight;
+//        }
+
+        int maxW = ScreenUtils.getScreenWidth() / 2;
+
+        int actualW = 0;
+        int actualH = 0;
+        float scale = ((float) dHeight) / ((float) dWidth);
+        if (dWidth >= maxW) {
+            actualW = maxW;
+            actualH = (int) (actualW * scale);
+
+        } else if (actualW < maxW/2) {
+            actualW = maxW/2;
+            actualH = (int) (actualW * scale);
+
+        }else {
+            actualW = dWidth;
+            actualH = dHeight;
+
+        }
+        imageView.setLayoutParams(new ConstraintLayout.LayoutParams(actualW, actualH));
+    }
+
     //判断是否是公司和打V认证
     public static void isDaVOrCompanyAndSetBossLevel(Context context, TextView secondNameTextView, String isCompany,
                                                      String companyName, String isDaV, String bigVName, ImageView bigV
-                                                     ,String nickName, String bossLevel, TextView nicknameTextView) {
+            , String nickName, String bossLevel, TextView nicknameTextView) {
         if (StringUtils.equals("1", isCompany)) {
             secondNameTextView.setText(companyName);
             bigV.setVisibility(View.VISIBLE);
@@ -95,7 +151,6 @@ public class MyCommonUtil {
         }
 
     }
-
 
 
     //保存图片到本地

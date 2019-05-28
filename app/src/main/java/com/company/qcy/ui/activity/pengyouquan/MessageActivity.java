@@ -53,6 +53,7 @@ public class MessageActivity extends BaseActivity implements View.OnClickListene
         initView();
 
         EventBus.getDefault().post(new MessageBean(MessageBean.Code.DIANJIJINQUMESSAGE));
+        SPUtils.getInstance().put("pengyouquanNews",0);
 
     }
 
