@@ -5,13 +5,11 @@ import android.widget.ImageView;
 
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.bean.ChanpindatingBean;
 import com.company.qcy.bean.kaifangshangcheng.DianpuliebiaoBean;
 
 import java.util.ArrayList;
@@ -21,8 +19,7 @@ import co.lujun.androidtagview.TagContainerLayout;
 
 public class KaifangshangchengRecyclerviewAdapter extends
         BaseQuickAdapter<DianpuliebiaoBean, BaseViewHolder> {
-    public KaifangshangchengRecyclerviewAdapter(int layoutResId,
-                                                @Nullable List<DianpuliebiaoBean> data) {
+    public KaifangshangchengRecyclerviewAdapter(int layoutResId, @Nullable List<DianpuliebiaoBean> data) {
         super(layoutResId, data);
     }
 

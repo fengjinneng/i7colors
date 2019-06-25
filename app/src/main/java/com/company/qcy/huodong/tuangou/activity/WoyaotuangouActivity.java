@@ -1,5 +1,6 @@
 package com.company.qcy.huodong.tuangou.activity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.text.Editable;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -24,12 +27,17 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.huodong.tuangou.bean.DefaultAddress;
 import com.company.qcy.huodong.tuangou.bean.TuangouBean;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
 
 import org.greenrobot.eventbus.EventBus;
@@ -123,11 +131,20 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
      */
     private TextView mActivityWoyaotuangouYinxiongmaShuoming;
     private RadioGroup mActivityWoyaotuangouYangpinGroup;
+    /**
+     * 吨
+     */
+    private TextView mActivityWoyaotuangouUnit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_woyaotuangou);
+        if (UserUtil.isLogin()) {
+        } else {
+            ActivityUtils.startActivity(LoginActivity.class);
+            finish();
+        }
         bean = getIntent().getParcelableExtra("bean");
         initView();
     }
@@ -135,6 +152,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
     private int xuyaoyangpin = 1;
 
     private void initView() {
+        mActivityWoyaotuangouUnit = (TextView) findViewById(R.id.activity_woyaotuangou_unit);
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarText = (TextView) findViewById(R.id.toolbar_text);
@@ -224,7 +242,94 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         });
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("我要团购");
-        mActivityWoyaotuangouFanwei.setText(bean.getMinNum()+"<认领量<"+bean.getMaxNum());
+        mActivityWoyaotuangouFanwei.setText(bean.getMinNum() + bean.getNumUnit() + " < 认领量 < " + bean.getRemainNum() + bean.getNumUnit());
+        mActivityWoyaotuangouUnit.setText(bean.getNumUnit());
+
+        getDefaultAddress();
+    }
+
+    private DefaultAddress defaultAddress;
+
+    private void getDefaultAddress() {
+
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.HUODONGMORENDIZHI)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("token", SPUtils.getInstance().getString("token"));
+
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("HUODONGMORENDIZHI", response.body());
+                try {
+                    if (response.code() == 200) {
+
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
+                            }
+                            defaultAddress = data.toJavaObject(DefaultAddress.class);
+                            setInfo(defaultAddress);
+                            return;
+
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(WoyaotuangouActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+
+    }
+
+    private void setInfo(DefaultAddress defaultAddress) {
+
+        if (ObjectUtils.isEmpty(defaultAddress)) {
+            return;
+        }
+
+        if (!StringUtils.isEmpty(defaultAddress.getContact())) {
+            mActivityWoyaotuangouLianxiren.setText(defaultAddress.getContact());
+        }
+
+
+        if (!StringUtils.isEmpty(defaultAddress.getPhone())) {
+            mActivityWoyaotuangouPhone.setText(defaultAddress.getPhone());
+        }
+
+
+        if (!StringUtils.isEmpty(defaultAddress.getCompanyName())) {
+            mActivityWoyaotuangouCompanyname.setText(defaultAddress.getCompanyName());
+        }
+
+
+        if (!StringUtils.isEmpty(defaultAddress.getProvince()) || !StringUtils.isEmpty(defaultAddress.getCity())) {
+            mActivityWoyaotuangouChoiceAddress.setText(defaultAddress.getProvince() + " " + defaultAddress.getCity());
+            locationProvince = defaultAddress.getProvince();
+            locationCity = defaultAddress.getCity();
+        }
+
+        if (!StringUtils.isEmpty(defaultAddress.getAddress())) {
+            mActivityWoyaotuangouCompanyAddress.setText(defaultAddress.getAddress());
+        }
+
     }
 
     @Override
@@ -240,7 +345,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                     ToastUtils.showShort("认领量不能小于最少认领量");
                     return;
 
-                } else if (Float.parseFloat(mActivityWoyaotuangouRenlingliang.getText().toString()) > Float.parseFloat(bean.getMaxNum())) {
+                } else if (Float.parseFloat(mActivityWoyaotuangouRenlingliang.getText().toString()) > Float.parseFloat(bean.getRemainNum())) {
                     ToastUtils.showShort("认领量不能高于最高认领量");
                     return;
                 } else if (StringUtils.isTrimEmpty(mActivityWoyaotuangouLianxiren.getText().toString())) {
@@ -258,9 +363,6 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                 } else if (StringUtils.equals("请选择", mActivityWoyaotuangouChoiceAddress.getText().toString())) {
                     ToastUtils.showShort("请选择地址");
                     return;
-                } else if (StringUtils.isTrimEmpty(mActivityWoyaotuangouCompanyAddress.getText().toString())) {
-                    ToastUtils.showShort("请填写公司详细地址");
-                    return;
                 }
                 fabutuangou();
 
@@ -275,6 +377,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                 ActivityUtils.startActivity(YingxiongmashuomingActivity.class);
                 break;
             case R.id.toolbar_back:
+                KeyboardUtils.hideSoftInput(this);
                 finish();
                 break;
         }
@@ -292,6 +395,8 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         HttpParams paras = new HttpParams();
         paras.put("sign", SPUtils.getInstance().getString("sign"));
 
+        paras.put("token", SPUtils.getInstance().getString("token"));
+
         paras.put("mainId", bean.getId());
 
         paras.put("phone", mActivityWoyaotuangouPhone.getText().toString());
@@ -308,12 +413,11 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
 
         paras.put("city", locationCity);
 
-        paras.put("address", locationProvince + locationCity);
+        paras.put("address", mActivityWoyaotuangouCompanyAddress.getText().toString());
 
         paras.put("isSendSample", xuyaoyangpin);
 
         paras.put("invitationCode", mActivityWoyaotuangouYinxiongma.getText().toString());
-        paras.put("from", "app");
 
         paras.put("from", getResources().getString(R.string.app_android));
 

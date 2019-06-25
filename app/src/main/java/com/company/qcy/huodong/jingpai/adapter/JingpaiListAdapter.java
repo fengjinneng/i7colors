@@ -27,6 +27,7 @@ public class JingpaiListAdapter extends BaseQuickAdapter<JingpaiBean, BaseViewHo
 
         helper.setText(R.id.item_jingpai_list_name,item.getShopName());
         helper.setText(R.id.item_jingpai_list_address,item.getAddress());
+        helper.setText(R.id.item_jingpai_list_chujiacishu,item.getCount());
 
         helper.setText(R.id.item_jingpai_list_qipaijiage,item.getPrice());
         helper.setText(R.id.item_jingpai_list_dangqianjiage,item.getMaxPrice());
@@ -45,8 +46,8 @@ public class JingpaiListAdapter extends BaseQuickAdapter<JingpaiBean, BaseViewHo
 
         switch (item.getIsType()){
             case "0"://流派
-                statusImg.setImageDrawable(resources.getDrawable(R.mipmap.jingpai_yiliupai));
-                statusText.setText("竞拍已流拍 ！");
+                statusImg.setImageDrawable(resources.getDrawable(R.mipmap.wurenqianggou));
+                statusText.setText("无人抢购 ！");
                 statusText.setTextColor(resources.getColor(R.color.baise));
                 statusText.setBackgroundColor(resources.getColor(R.color.shenhui));
                 break;
@@ -64,7 +65,7 @@ public class JingpaiListAdapter extends BaseQuickAdapter<JingpaiBean, BaseViewHo
                 break;
             case "3"://成交
                 statusImg.setImageDrawable(resources.getDrawable(R.mipmap.jingpai_yichengjiao));
-                statusText.setText("竞拍已成交 !");
+                statusText.setText("已成交 !");
                 statusText.setTextColor(resources.getColor(R.color.baise));
                 statusText.setBackgroundColor(resources.getColor(R.color.lanse));
                 break;

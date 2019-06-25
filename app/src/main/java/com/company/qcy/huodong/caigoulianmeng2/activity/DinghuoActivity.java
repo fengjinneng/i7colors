@@ -34,11 +34,13 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyConsrantLayout;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.caigoulianmeng2.adapter.DinghuoAdapter;
 import com.company.qcy.huodong.caigoulianmeng2.bean.ProductBean;
 import com.company.qcy.huodong.caigoulianmeng2.bean.UploadProductBean;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -73,6 +75,11 @@ public class DinghuoActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_dinghuo);
+        if(UserUtil.isLogin()){
+        }else {
+            ActivityUtils.startActivity(LoginActivity.class);
+            finish();
+        }
         meetingId = getIntent().getStringExtra("meetingId");
         isType = getIntent().getStringExtra("isType");
         initView();
@@ -467,6 +474,7 @@ public class DinghuoActivity extends BaseActivity implements View.OnClickListene
         params.put("payType", payType.getText().toString());
         params.put("positioner", zhiwu.getText().toString());
         params.put("meetingList", upData);
+        params.put("token",SPUtils.getInstance().getString("token"));
         params.put("from",getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.CAIGOULIANMENGWOYAODINGHUO)

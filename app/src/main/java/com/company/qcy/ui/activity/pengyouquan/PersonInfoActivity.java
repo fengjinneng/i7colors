@@ -250,7 +250,7 @@ public class PersonInfoActivity extends BaseActivity implements View.OnClickList
         fragments.add(PengyouquanRecordFragment.newInstance(String.valueOf(userId)));
         fragments.add(MyFansFragment.newInstance(String.valueOf(userId)));
         List<String> datas = new ArrayList<>();
-        datas.add("朋友圈记录");
+        datas.add("印染圈记录");
         datas.add("粉丝");
         baseViewpageAdapter = new BaseViewpageAdapter(getSupportFragmentManager(), fragments, datas);
         mViewpager.setAdapter(baseViewpageAdapter);

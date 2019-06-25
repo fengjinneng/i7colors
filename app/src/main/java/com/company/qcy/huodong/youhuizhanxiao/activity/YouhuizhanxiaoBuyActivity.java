@@ -13,6 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -26,8 +27,10 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyConsrantLayout;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -101,7 +104,11 @@ public class YouhuizhanxiaoBuyActivity extends BaseActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youhuizhanxiao_buy);
-
+        if (UserUtil.isLogin()) {
+        } else {
+            ActivityUtils.startActivity(LoginActivity.class);
+            finish();
+        }
         numUnit = getIntent().getStringExtra("numUnit");
         id = getIntent().getStringExtra("id");
 
@@ -267,7 +274,10 @@ public class YouhuizhanxiaoBuyActivity extends BaseActivity implements View.OnCl
         paras.put("address", locationProvince + locationCity);
 
         paras.put("isSendSample", xuyaoyangpin);
-        paras.put("from",getResources().getString(R.string.app_android));
+
+        paras.put("token", SPUtils.getInstance().getString("token"));
+
+        paras.put("from", getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.YOUHUIZHANXIAOBUY)
                 .tag(this)

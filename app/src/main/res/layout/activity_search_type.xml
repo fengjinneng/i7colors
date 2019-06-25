@@ -22,6 +22,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:singleLine="true"
+        android:textSize="@dimen/x28"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/activity_search_type_back"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,10 +39,54 @@
         app:layout_constraintTop_toTopOf="@+id/activity_search_type_search"
         app:srcCompat="@mipmap/back" />
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_search_history_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView134">
+
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/activity_search_type_tagFlowLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView321"/>
+        <TextView
+            android:id="@+id/textView321"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="搜索历史"
+            android:textColor="@color/erjibiaoti"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_search_history_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="删除"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_search_type_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,5 +101,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/activity_search_type_search" />
+
+    <ImageView
+        android:id="@+id/activity_search_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:visibility="gone"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_search_type_search"
+        app:layout_constraintEnd_toEndOf="@+id/activity_search_type_search"
+        app:layout_constraintTop_toTopOf="@+id/activity_search_type_search"
+        app:srcCompat="@mipmap/close" />
 
 </android.support.constraint.ConstraintLayout>

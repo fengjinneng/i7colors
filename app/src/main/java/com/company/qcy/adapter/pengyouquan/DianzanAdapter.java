@@ -1,12 +1,7 @@
 
 package com.company.qcy.adapter.pengyouquan;
 
-import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.ImageSpan;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,10 +10,7 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
-import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.MyCommonUtil;
-import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.bean.pengyouquan.DianzantouxiangBean;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 
 import java.util.List;

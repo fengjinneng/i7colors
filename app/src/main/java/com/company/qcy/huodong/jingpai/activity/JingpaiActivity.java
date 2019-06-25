@@ -96,7 +96,7 @@ public class JingpaiActivity extends BaseActivity implements View.OnClickListene
                 refreshListener.onRefresh();
             }
         });
-        mToolbarTitle.setText("竞拍");
+        mToolbarTitle.setText("抢购");
 
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
@@ -114,7 +114,7 @@ public class JingpaiActivity extends BaseActivity implements View.OnClickListene
                 intent.putExtra("id",jingpaiBean.getId()+"");
                 ActivityUtils.startActivity(intent);
 
-                MobclickAgent.onEvent(JingpaiActivity.this,"竞拍_点击了"+jingpaiBean.getShopName());
+                MobclickAgent.onEvent(JingpaiActivity.this,"抢购_点击了"+jingpaiBean.getShopName());
             }
         });
         adapter.setLoadMoreView(new MyLoadMoreView());

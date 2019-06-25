@@ -244,8 +244,6 @@ public class MessageBean {
         //系统消息 进去了messageActivity
         public static final int DIANJIJINQUMESSAGE = 1042;
 
-        //
-        public static final int ASAAAAAAAAAA = 1043;
     }
 
 }

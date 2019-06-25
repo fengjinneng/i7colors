@@ -51,14 +51,14 @@ public class I7colorsApplication extends Application {
         ARouter.init(this); // 尽可能早，推荐在Application中初始化
 
 
-        UMConfigure.init(this, "5cd38537570df39ed3000a4a", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
-//        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO);
+        //发布时放开
+        // UMConfigure.init(this, "5cd38537570df39ed3000a4a", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
 
         JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
 
         UMConfigure.setLogEnabled(false); // 设置开启日志,发布时请关闭日志
 
-        LogUtils.getConfig().setLogSwitch(false);
+        LogUtils.getConfig().setLogSwitch(true);
 
     }
 

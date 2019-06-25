@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/fengexian"
-    tools:context=".ui.activity.chanpindating.ChanpinxiangqingActivity">
-
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/include12"
@@ -15,231 +15,281 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/activity_chanpinxiangqing_chanpinming"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/x80"
-        android:background="@color/baise"
-        android:ellipsize="end"
-        android:gravity="center_vertical"
-        android:paddingLeft="8dp"
-        android:singleLine="true"
-        android:textColor="@color/erjibiaoti"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/activity_chanpinxiangqing_share"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include12" />
-
-    <TextView
-        android:id="@+id/activity_chanpinxiangqing_share"
-        android:layout_width="@dimen/x125"
-        android:layout_height="@dimen/x80"
-        android:background="@color/baise"
-        android:gravity="center"
-        android:text="分享"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include12" />
-
-    <ImageView
-        android:id="@+id/activity_chanpinxiangqing_img"
-        android:layout_width="@dimen/x500"
-        android:layout_height="@dimen/x420"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/shadow_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_chanpinming"
-        app:srcCompat="@mipmap/qiugoudating" />
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/constraintLayout6"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/x210"
-        android:background="@color/baise"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/activity_chanpinxiangqing_img"
-        app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_chanpinming">
-
-        <ImageView
-            android:id="@+id/activity_chanpinxiangqing_shoucang_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25"
-            app:srcCompat="@mipmap/weishouchang" />
-
-        <TextView
-            android:id="@+id/activity_chanpinxiangqing_shoucang_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
-            android:text="收藏"
-
-            app:layout_constraintEnd_toEndOf="@+id/activity_chanpinxiangqing_shoucang_img"
-            app:layout_constraintStart_toStartOf="@+id/activity_chanpinxiangqing_shoucang_img"
-            app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_shoucang_img" />
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/activity_chanpinxiangqing_jiage_layout"
-        android:layout_width="@dimen/x268"
-        android:layout_height="@dimen/x210"
-        android:background="@mipmap/shangpin_jiage"
-        android:orientation="horizontal"
-        android:visibility="invisible"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
-
-        <TextView
-            android:id="@+id/textView53"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="¥"
-            android:textColor="@color/baise"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/activity_chanpinxiangqing_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/baise"
-            android:textSize="@dimen/x42"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView53"
-            app:layout_constraintStart_toEndOf="@+id/textView53" />
-
-        <TextView
-            android:id="@+id/textView56"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="元/KG"
-            android:textColor="@color/baise"
-            app:layout_constraintBaseline_toBaselineOf="@+id/textView53"
-            app:layout_constraintStart_toEndOf="@+id/activity_chanpinxiangqing_price" />
-    </android.support.constraint.ConstraintLayout>
-
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/activity_chanpinxiangqing_yijia_layout"
-        android:layout_width="@dimen/x268"
-        android:layout_height="@dimen/x210"
-        android:background="@mipmap/shangpin_jiage"
-        android:orientation="horizontal"
-
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="议价"
-            android:textColor="@color/baise"
-            android:textSize="@dimen/x36"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </android.support.constraint.ConstraintLayout>
-
-    <com.lijiankun24.shadowlayout.ShadowLayout
-        android:id="@+id/shadow_layout"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/x98"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_jiage_layout"
-        app:shadowColor="#66000000"
-        app:shadowRadius="@dimen/x10"
-        app:shadowSide="bottom">
+        app:layout_constraintTop_toBottomOf="@+id/include12">
 
-        <LinearLayout
-            android:id="@+id/linearLayout3"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x80"
-            android:background="@color/baise"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-            <TextView
-                android:id="@+id/activity_chanpinxiangqing_companyname"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:paddingLeft="8dp"
-                android:singleLine="true" />
-
-        </LinearLayout>
-    </com.lijiankun24.shadowlayout.ShadowLayout>
-
-    <com.lijiankun24.shadowlayout.ShadowLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shadow_layout"
-        app:layout_constraintVertical_bias="0.0"
-        app:shadowColor="#66000000"
-        app:shadowRadius="@dimen/x10"
-        app:shadowSide="bottom|left|right">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="0dp"
+            android:background="@color/fengexian"
+            app:layout_constraintTop_toBottomOf="@id/include12"
+            tools:context=".ui.activity.chanpindating.ChanpinxiangqingActivity">
+
 
             <TextView
-                android:id="@+id/textView57"
+                android:id="@+id/activity_chanpinxiangqing_chanpinming"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/x78"
+                android:layout_height="wrap_content"
                 android:background="@color/baise"
-                android:gravity="center"
-                android:text="基本参数"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:textColor="@color/erjibiaoti"
+                android:textStyle="bold"
+                android:minHeight="@dimen/x80"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textview152"
+            <!--<TextView-->
+                <!--android:id="@+id/activity_chanpinxiangqing_share"-->
+                <!--android:layout_width="@dimen/x125"-->
+                <!--android:layout_height="@dimen/x80"-->
+                <!--android:background="@color/baise"-->
+                <!--android:gravity="center"-->
+                <!--android:text="分享"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <ImageView
+                android:id="@+id/activity_chanpinxiangqing_img"
+                android:layout_width="@dimen/x500"
+                android:layout_height="@dimen/x420"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toTopOf="@+id/shadow_layout"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_chanpinming"
+                app:srcCompat="@drawable/place_500x500" />
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x210"
+                android:background="@color/baise"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/activity_chanpinxiangqing_img"
+                app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_chanpinming">
+
+                <ImageView
+                    android:id="@+id/activity_chanpinxiangqing_shoucang_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.25"
+                    app:srcCompat="@mipmap/weishouchang" />
+
+                <TextView
+                    android:id="@+id/activity_chanpinxiangqing_shoucang_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:text="收藏"
+
+                    app:layout_constraintEnd_toEndOf="@+id/activity_chanpinxiangqing_shoucang_img"
+                    app:layout_constraintStart_toStartOf="@+id/activity_chanpinxiangqing_shoucang_img"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_shoucang_img" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_chanpinxiangqing_jiage_layout"
+                android:layout_width="@dimen/x268"
+                android:layout_height="@dimen/x210"
+                android:background="@mipmap/shangpin_jiage"
+                android:orientation="horizontal"
+                android:visibility="invisible"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+
+                <TextView
+                    android:id="@+id/textView53"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="¥"
+                    android:textColor="@color/baise"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_chanpinxiangqing_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x42"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView53"
+                    app:layout_constraintStart_toEndOf="@+id/textView53" />
+
+                <TextView
+                    android:id="@+id/textView56"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="元/KG"
+                    android:textColor="@color/baise"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView53"
+                    app:layout_constraintStart_toEndOf="@+id/activity_chanpinxiangqing_price" />
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/activity_chanpinxiangqing_yijia_layout"
+                android:layout_width="@dimen/x268"
+                android:layout_height="@dimen/x210"
+                android:background="@mipmap/shangpin_jiage"
+                android:orientation="horizontal"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout6">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="议价"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x36"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </android.support.constraint.ConstraintLayout>
+
+            <com.lijiankun24.shadowlayout.ShadowLayout
+                android:id="@+id/shadow_layout"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_chanpinxiangqing_jiage_layout"
+                app:shadowColor="#66000000"
+                app:shadowRadius="@dimen/x10"
+                app:shadowSide="bottom">
+
+                <LinearLayout
+                    android:id="@+id/linearLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x80"
+                    android:background="@color/baise"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
+
+                    <TextView
+                        android:id="@+id/activity_chanpinxiangqing_companyname"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="8dp"
+                        android:singleLine="true" />
+
+                </LinearLayout>
+            </com.lijiankun24.shadowlayout.ShadowLayout>
+
+            <com.lijiankun24.shadowlayout.ShadowLayout
+                android:id="@+id/shadowLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shadow_layout"
+                app:shadowColor="#66000000"
+                app:shadowRadius="@dimen/x10"
+                app:shadowSide="bottom|left|right">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent">
+
+                    <TextView
+                        android:id="@+id/textView57"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/x78"
+                        android:background="@color/baise"
+                        android:gravity="center"
+                        android:text="基本参数"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/textview152"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/fengexian"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/textView57" />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/activity_chanpinxiangqing_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/baise"
+                        app:layout_constraintEnd_toEndOf="@+id/textView57"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="@+id/textView57"
+                        app:layout_constraintTop_toBottomOf="@+id/textview152" />
+
+
+                </android.support.constraint.ConstraintLayout>
+            </com.lijiankun24.shadowlayout.ShadowLayout>
+
+
+            <TextView
+                android:id="@+id/textView55"
+                android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:background="@color/fengexian"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textView57" />
-
+                app:layout_constraintTop_toTopOf="@+id/activity_chanpinxiangqing_img" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/activity_chanpinxiangqing_recyclerview"
-                android:layout_width="match_parent"
+                android:id="@+id/activity_chanpinxiangqing_detail_img_recyclervew"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:background="@color/baise"
-                app:layout_constraintEnd_toEndOf="@+id/textView57"
-                app:layout_constraintStart_toStartOf="@+id/textView57"
-                app:layout_constraintTop_toBottomOf="@+id/textview152" />
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/shadowLayout" />
+
+            <TextView
+                android:id="@+id/textView120"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/fengexian"
+                app:layout_constraintBottom_toTopOf="@+id/activity_chanpinxiangqing_img"
+                app:layout_constraintEnd_toEndOf="@+id/activity_chanpinxiangqing_chanpinming"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </android.support.constraint.ConstraintLayout>
-    </com.lijiankun24.shadowlayout.ShadowLayout>
 
+    </android.support.v4.widget.NestedScrollView>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout8"
@@ -357,27 +407,11 @@
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/imageView7"
                 app:layout_constraintTop_toTopOf="parent" />
+
         </android.support.constraint.ConstraintLayout>
 
 
     </android.support.constraint.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/textView55"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/fengexian"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/activity_chanpinxiangqing_img" />
-
-    <TextView
-        android:id="@+id/textView120"
-        android:layout_width="1dp"
-        android:layout_height="0dp"
-        android:background="@color/fengexian"
-        app:layout_constraintBottom_toTopOf="@+id/activity_chanpinxiangqing_img"
-        app:layout_constraintEnd_toEndOf="@+id/activity_chanpinxiangqing_chanpinming"
-        app:layout_constraintTop_toBottomOf="@+id/include12" />
 
 </android.support.constraint.ConstraintLayout>

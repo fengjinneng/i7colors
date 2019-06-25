@@ -62,7 +62,7 @@
         android:layout_marginTop="@dimen/x40"
         android:drawableLeft="@mipmap/bitiantupian"
         android:text="我的认领量:"
-
+        android:drawablePadding="@dimen/x10"
         android:textSize="@dimen/x30"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
@@ -73,10 +73,11 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x68"
         android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="@dimen/x10"
         android:text="联系人:"
         android:textSize="@dimen/x30"
-        app:layout_constraintStart_toStartOf="@+id/textView95"
-        app:layout_constraintTop_toBottomOf="@+id/textView95" />
+        app:layout_constraintStart_toStartOf="@+id/textView130"
+        app:layout_constraintTop_toBottomOf="@+id/textView130" />
 
     <TextView
         android:id="@+id/textView108"
@@ -84,7 +85,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x68"
         android:drawableLeft="@mipmap/bitiantupian"
-        android:text="联系人方式:"
+        android:text="联系人手机号:"
+        android:drawablePadding="@dimen/x10"
         android:textSize="@dimen/x30"
         app:layout_constraintStart_toStartOf="@+id/textView106"
         app:layout_constraintTop_toBottomOf="@+id/textView106" />
@@ -96,6 +98,7 @@
         android:layout_marginTop="@dimen/x68"
         android:drawableLeft="@mipmap/bitiantupian"
         android:text="公司名称:"
+        android:drawablePadding="@dimen/x10"
         android:textSize="@dimen/x30"
         app:layout_constraintStart_toStartOf="@+id/textView108"
         app:layout_constraintTop_toBottomOf="@+id/textView108" />
@@ -108,6 +111,7 @@
         android:drawableLeft="@mipmap/bitiantupian"
         android:text="公司所属区域:"
         android:textSize="@dimen/x30"
+        android:drawablePadding="@dimen/x10"
         app:layout_constraintStart_toStartOf="@+id/textView113"
         app:layout_constraintTop_toBottomOf="@+id/textView113" />
 
@@ -115,8 +119,8 @@
         android:id="@+id/textView119"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/x68"
-        android:drawableLeft="@mipmap/bitiantupian"
         android:text="公司详细地址:"
         android:textSize="@dimen/x30"
         app:layout_constraintStart_toStartOf="@+id/textView115"
@@ -157,7 +161,7 @@
         android:layout_height="@dimen/x64"
         android:layout_marginEnd="8dp"
         android:background="@drawable/background_shuruwenbenkuang"
-        android:hint="请输入联系方式"
+        android:hint="请输入联系人手机号"
         android:inputType="phone"
         android:paddingLeft="8dp"
         android:textSize="@dimen/x30"
@@ -184,14 +188,16 @@
     <EditText
         android:id="@+id/activity_woyaotuangou_company_address"
         android:layout_width="0dp"
-        android:layout_height="@dimen/x64"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:background="@drawable/background_shuruwenbenkuang"
         android:hint="请输入公司详细地址"
-        android:inputType="textPersonName"
+        android:minLines="3"
+        android:paddingTop="@dimen/x10"
         android:paddingLeft="8dp"
         android:textSize="@dimen/x30"
-        app:layout_constraintBottom_toBottomOf="@+id/textView119"
+        android:inputType="textMultiLine|textPersonName"
+        android:gravity="top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/activity_woyaotuangou_companyname"
         app:layout_constraintTop_toTopOf="@+id/textView119" />
@@ -228,35 +234,33 @@
         android:id="@+id/activity_woyaotuangou_fanwei"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:textColor="@color/chunhongse"
-        android:textSize="@dimen/x20"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_woyaotuangou_renlingliang"
-        app:layout_constraintStart_toEndOf="@+id/textView132"
-        app:layout_constraintTop_toTopOf="@+id/activity_woyaotuangou_renlingliang"
-        app:layout_constraintVertical_bias="1.0" />
+        android:textSize="@dimen/x24"
+        app:layout_constraintStart_toStartOf="@+id/activity_woyaotuangou_renlingliang"
+        app:layout_constraintTop_toBottomOf="@+id/activity_woyaotuangou_renlingliang" />
 
     <TextView
         android:id="@+id/activity_woyaotuangou_choiceAddress"
-        android:layout_width="@dimen/x228"
+        android:layout_width="wrap_content"
         android:layout_height="@dimen/x64"
         android:background="@drawable/background_wenbenshurubiankuang"
         android:textSize="@dimen/x30"
         android:drawableRight="@mipmap/xialajiantou"
         android:gravity="center"
-        android:paddingRight="8dp"
+        android:paddingRight="@dimen/x20"
+        android:paddingLeft="@dimen/x20"
+        android:drawablePadding="@dimen/x10"
         android:text="请选择"
+        android:minWidth="@dimen/x228"
         app:layout_constraintBottom_toBottomOf="@+id/textView115"
         app:layout_constraintStart_toStartOf="@+id/activity_woyaotuangou_companyname"
         app:layout_constraintTop_toTopOf="@+id/textView115" />
 
     <TextView
-        android:id="@+id/textView132"
+        android:id="@+id/activity_woyaotuangou_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="吨"
+        android:layout_marginStart="8dp"
         android:textSize="@dimen/x30"
         app:layout_constraintBottom_toBottomOf="@+id/activity_woyaotuangou_renlingliang"
         app:layout_constraintStart_toEndOf="@+id/activity_woyaotuangou_renlingliang"
@@ -266,11 +270,12 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/x68"
         android:text="英雄码:"
         android:textSize="@dimen/x30"
-        app:layout_constraintStart_toStartOf="@+id/textView119"
-        app:layout_constraintTop_toBottomOf="@+id/textView119" />
+        app:layout_constraintStart_toStartOf="@+id/textView95"
+        app:layout_constraintTop_toBottomOf="@+id/textView95" />
 
     <EditText
         android:id="@+id/activity_woyaotuangou_yinxiongma"
@@ -282,7 +287,7 @@
         android:paddingLeft="8dp"
         android:textSize="@dimen/x30"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintEnd_toEndOf="@+id/activity_woyaotuangou_choiceAddress"
+        app:layout_constraintEnd_toEndOf="@+id/activity_woyaotuangou_renlingliang"
         app:layout_constraintStart_toStartOf="@+id/activity_woyaotuangou_company_address"
         app:layout_constraintTop_toTopOf="@+id/textView11" />
 
@@ -292,7 +297,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:text="查看使用说明"
-        android:textSize="@dimen/x30"
+        android:textSize="@dimen/x24"
         android:textColor="@color/chunhongse"
         app:layout_constraintBottom_toBottomOf="@+id/activity_woyaotuangou_yinxiongma"
         app:layout_constraintStart_toEndOf="@+id/activity_woyaotuangou_yinxiongma"
@@ -304,9 +309,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x68"
         android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="@dimen/x10"
         android:text="是否需要样品:"
         android:textSize="@dimen/x30"
-        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView95"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <RadioGroup

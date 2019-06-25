@@ -14,9 +14,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/textView124"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView65"
         app:srcCompat="@mipmap/kaifangshangcheng" />
 
     <TextView
@@ -24,19 +24,19 @@
         android:id="@+id/item_chanpindating_productName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_marginEnd="8dp"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/biaoti"
+        android:layout_marginEnd="8dp"
 
-        android:textStyle="bold"
-        android:maxLines="2"
         android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/biaoti"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_chanpindating_img"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView65" />
 
 
     <ImageView
@@ -45,9 +45,9 @@
         android:layout_height="@dimen/x45"
         android:layout_alignBottom="@+id/item_chanpindating_img"
         android:layout_alignParentEnd="true"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView124"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@mipmap/yijianhujiao" />
 
@@ -116,7 +116,6 @@
             android:layout_marginBottom="8dp"
             android:text="¥ "
             android:textColor="@color/chunhongse"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -175,11 +174,12 @@
     </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView124"
+        android:id="@+id/textView65"
         android:layout_width="0dp"
         android:background="@color/fengexian"
-        android:layout_height="@dimen/x10"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

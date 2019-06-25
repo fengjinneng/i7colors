@@ -2,7 +2,10 @@ package com.company.qcy.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -26,6 +29,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.ListUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.vlayout.ChanpinLayoutAdapter;
@@ -41,6 +45,9 @@ import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +63,13 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     private RecyclerView recyclerview;
     private DelegateAdapter delegateAdapter;
     private VirtualLayoutManager virtualLayoutManager;
+    private ConstraintLayout mActivitySearchHistoryLayout;
+    /**
+     * 删除
+     */
+    private TextView mActivitySearchHistoryDelete;
+    private ImageView mHomepageSearchKeywordDelete;
+    private TagFlowLayout mActivitySearchTagFlowLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +79,13 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void initView() {
+        mActivitySearchHistoryLayout = (ConstraintLayout) findViewById(R.id.activity_search_history_layout);
+        mActivitySearchHistoryDelete = (TextView) findViewById(R.id.activity_search_history_delete);
+        mActivitySearchHistoryDelete.setOnClickListener(this);
+        mHomepageSearchKeywordDelete = (ImageView) findViewById(R.id.homepage_search_keyword_delete);
+        mHomepageSearchKeywordDelete.setOnClickListener(this);
+        mActivitySearchTagFlowLayout = (TagFlowLayout) findViewById(R.id.activity_search_tagFlowLayout);
+
         mHomepageSearch = (EditText) findViewById(R.id.homepage_search);
         back = (ImageView) findViewById(R.id.homepage_search_back);
         mHomepageSearch.setOnClickListener(this);
@@ -74,24 +95,123 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    qiugouDatas.clear();
-                    marketDatas.clear();
-                    productDatas.clear();
-                    delegateAdapter.clear();
-                    delegateAdapter = new DelegateAdapter(virtualLayoutManager);
-                    recyclerview.setAdapter(delegateAdapter);
-                    KeyboardUtils.hideSoftInput(SearchActivity.this);
-                    addData();
+                    searchData();
                 }
                 return false;
             }
         });
+
+        mHomepageSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    recyclerview.setVisibility(View.GONE);
+                    if (searchHistoryList.size() > 0) {
+                        mActivitySearchHistoryLayout.setVisibility(View.VISIBLE);
+                    }
+                    mHomepageSearchKeywordDelete.setVisibility(View.GONE);
+                    initSearchHistory();
+                } else {
+                    mActivitySearchHistoryLayout.setVisibility(View.GONE);
+                    mHomepageSearchKeywordDelete.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         recyclerview = (RecyclerView) findViewById(R.id.homepage_search_recyclerview);
         virtualLayoutManager = new VirtualLayoutManager(this);
         recyclerview.setLayoutManager(virtualLayoutManager);
 
         delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
+
+
+        mHomepageSearchKeywordDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHomepageSearch.setText("");
+            }
+        });
+
+
+        mActivitySearchTagFlowLayout.setAdapter( tagAdapter = new TagAdapter<String>(searchHistoryList) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView tv = (TextView) getLayoutInflater().inflate(R.layout.item_search_history,
+                        mActivitySearchTagFlowLayout, false);
+                tv.setText(s);
+                return tv;
+            }
+        });
+
+
+        mActivitySearchTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+
+                mHomepageSearch.setText(searchHistoryList.get(position));
+                mHomepageSearch.setSelection(mHomepageSearch.getText().length());
+                searchData();
+                return false;
+            }
+        });
+        initSearchHistory();
+    }
+
+    private TagAdapter <String> tagAdapter;
+    //搜索的历史记录
+    private ArrayList<String> searchHistoryList = new ArrayList<>();
+
+    private void searchData() {
+
+        if (StringUtils.isTrimEmpty((mHomepageSearch.getText().toString()))) {
+            ToastUtils.showShort("搜索内容不能为空");
+            return;
+        }
+
+        qiugouDatas.clear();
+        marketDatas.clear();
+        productDatas.clear();
+        delegateAdapter.clear();
+        delegateAdapter = new DelegateAdapter(virtualLayoutManager);
+        recyclerview.setAdapter(delegateAdapter);
+        KeyboardUtils.hideSoftInput(SearchActivity.this);
+        addData();
+
+        for (int i = 0; i < searchHistoryList.size(); i++) {
+            if (StringUtils.equals(mHomepageSearch.getText().toString(), searchHistoryList.get(i))) {
+                searchHistoryList.remove(i);
+            }
+        }
+        searchHistoryList.add(0, mHomepageSearch.getText().toString());
+        SPUtils.getInstance("searchHistory").put("all", ListUtil.listToString(searchHistoryList));
+    }
+
+    private void initSearchHistory() {
+
+        String str = "";
+        str = SPUtils.getInstance("searchHistory").getString("all");
+        if (StringUtils.isEmpty(str)) {
+            return;
+        }
+        mActivitySearchHistoryLayout.setVisibility(View.VISIBLE);
+        List<String> stringList = ListUtil.stringToList(str);
+        searchHistoryList.clear();
+
+        searchHistoryList.addAll(stringList);
+
+        tagAdapter.notifyDataChanged();
+
     }
 
     private List<QiugouBean> qiugouDatas = new ArrayList<>();
@@ -100,10 +220,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
 
 
     private void addData() {
-        if (StringUtils.isTrimEmpty((mHomepageSearch.getText().toString()))) {
-            ToastUtils.showShort("搜索内容不能为空");
-            return;
-        }
+
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXSEARCH)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
@@ -115,10 +232,11 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
             public void onSuccess(Response<String> response) {
+                LogUtils.e("INDEXSEARCH", response.body());
 
                 try {
                     if (response.code() == 200) {
-                        LogUtils.e("INDEXSEARCH", response.body());
+                        recyclerview.setVisibility(View.VISIBLE);
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
@@ -260,6 +378,16 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             case R.id.homepage_search_back:
                 KeyboardUtils.hideSoftInput(this);
                 finish();
+                break;
+            case R.id.activity_search_history_delete:
+                mActivitySearchHistoryLayout.setVisibility(View.GONE);
+//                if (!ObjectUtils.isEmpty(mActivitySearchTagContainerLayout)) {
+//                    mActivitySearchTagContainerLayout.removeAllTags();
+//                }
+                searchHistoryList.clear();
+                SPUtils.getInstance("searchHistory").put("all", "");
+                break;
+            case R.id.homepage_search_keyword_delete:
                 break;
         }
     }

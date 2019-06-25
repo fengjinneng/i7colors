@@ -2,9 +2,11 @@ package com.company.qcy.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -25,6 +27,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.ListUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.chanpindating.ChanpindatingRecyclerViewAdapter;
@@ -40,6 +43,9 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.zhy.view.flowlayout.FlowLayout;
+import com.zhy.view.flowlayout.TagAdapter;
+import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +64,13 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
     private KaifangshangchengRecyclerviewAdapter marketAdapter;
     private int isFrom; //1为求购，2为产品，3为开放商城
     private String keyword;
+    /**
+     * 删除
+     */
+    private TextView mActivitySearchHistoryDelete;
+    private ConstraintLayout mActivitySearchHistoryLayout;
+    private TagFlowLayout mActivitySearchTypeTagFlowLayout;
+    private ImageView mActivitySearchDelete;
 
 
     @Override
@@ -69,15 +82,56 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
         initView();
     }
 
+    private TagAdapter<String> tagAdapter;
+    //搜索的历史记录
+    private ArrayList<String> searchHistoryList = new ArrayList<>();
+
+    //搜索的分类
+    private String searchType;
+
+
+    private void setSearchHistory(String key) {
+
+        String str = "";
+        str = SPUtils.getInstance("searchHistory").getString(key);
+        if (StringUtils.isEmpty(str)) {
+            return;
+        }
+        mActivitySearchHistoryLayout.setVisibility(View.VISIBLE);
+        List<String> stringList = ListUtil.stringToList(str);
+        searchHistoryList.clear();
+
+        searchHistoryList.addAll(stringList);
+        tagAdapter.notifyDataChanged();
+    }
+
+    private void searchData() {
+        if (StringUtils.isTrimEmpty((mActivitySearchTypeSearch.getText().toString()))) {
+            ToastUtils.showShort("搜索内容不能为空");
+            return;
+        }
+        pageNo = 0;
+        KeyboardUtils.hideSoftInput(SearchTypeActivity.this);
+        addData();
+
+        for (int i = 0; i < searchHistoryList.size(); i++) {
+            if (StringUtils.equals(mActivitySearchTypeSearch.getText().toString(), searchHistoryList.get(i))) {
+                searchHistoryList.remove(i);
+            }
+        }
+        searchHistoryList.add(0, mActivitySearchTypeSearch.getText().toString());
+        SPUtils.getInstance("searchHistory").put(searchType, ListUtil.listToString(searchHistoryList));
+    }
+
     private void initView() {
         mActivitySearchTypeSearch = (EditText) findViewById(R.id.activity_search_type_search);
-        if (isFrom == 1) {
-            mActivitySearchTypeSearch.setHint("搜索求购相关信息");
-        } else if (isFrom == 2) {
-            mActivitySearchTypeSearch.setHint("搜索产品相关信息");
-        } else if (isFrom == 3) {
-            mActivitySearchTypeSearch.setHint("搜索店铺相关信息");
-        }
+        mActivitySearchTypeTagFlowLayout = (TagFlowLayout) findViewById(R.id.activity_search_type_tagFlowLayout);
+        mActivitySearchDelete = (ImageView) findViewById(R.id.activity_search_delete);
+        mActivitySearchDelete.setOnClickListener(this);
+        mActivitySearchHistoryDelete = (TextView) findViewById(R.id.activity_search_history_delete);
+        mActivitySearchHistoryDelete.setOnClickListener(this);
+        mActivitySearchHistoryLayout = (ConstraintLayout) findViewById(R.id.activity_search_history_layout);
+
         mActivitySearchTypeBack = (ImageView) findViewById(R.id.activity_search_type_back);
         recyclerview = (RecyclerView) findViewById(R.id.activity_search_type_recyclerview);
         LinearLayoutManager manager = new LinearLayoutManager(this);
@@ -88,9 +142,7 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    pageNo = 0;
-                    KeyboardUtils.hideSoftInput(SearchTypeActivity.this);
-                    addData();
+                    searchData();
                 }
                 return false;
             }
@@ -104,8 +156,68 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
             KeyboardUtils.hideSoftInput(SearchTypeActivity.this);
             mActivitySearchTypeSearch.setText(keyword);
             mActivitySearchTypeSearch.setSelection(keyword.length());
-            addData();
+            searchData();
         }
+
+        mActivitySearchTypeTagFlowLayout.setAdapter(tagAdapter = new TagAdapter<String>(searchHistoryList) {
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView tv = (TextView) getLayoutInflater().inflate(R.layout.item_search_history,
+                        mActivitySearchTypeTagFlowLayout, false);
+                tv.setText(s);
+                return tv;
+            }
+        });
+
+
+        mActivitySearchTypeTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+
+                mActivitySearchTypeSearch.setText(searchHistoryList.get(position));
+                mActivitySearchTypeSearch.setSelection(mActivitySearchTypeSearch.getText().length());
+                searchData();
+                return false;
+            }
+        });
+        if (isFrom == 1) {
+            searchType = "qiugou";
+            mActivitySearchTypeSearch.setHint("搜索求购相关信息");
+            setSearchHistory(searchType);
+        } else if (isFrom == 2) {
+            searchType = "chanpin";
+            mActivitySearchTypeSearch.setHint("搜索产品相关信息");
+            setSearchHistory(searchType);
+        } else if (isFrom == 3) {
+            searchType = "dianpu";
+            mActivitySearchTypeSearch.setHint("搜索店铺相关信息");
+            setSearchHistory(searchType);
+        }
+
+        mActivitySearchTypeSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 0) {
+                    recyclerview.setVisibility(View.GONE);
+                    if (searchHistoryList.size() > 0) {
+                        mActivitySearchHistoryLayout.setVisibility(View.VISIBLE);
+                    }
+                    mActivitySearchDelete.setVisibility(View.GONE);
+                    setSearchHistory(searchType);
+                } else {
+                    mActivitySearchDelete.setVisibility(View.VISIBLE);
+                    mActivitySearchHistoryLayout.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     private int pageNo;
@@ -205,10 +317,10 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
             public void onSuccess(Response<String> response) {
-
+                LogUtils.v("DIANPULIEBIAO", response.body());
                 try {
                     if (response.code() == 200) {
-
+                        recyclerview.setVisibility(View.VISIBLE);
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
@@ -255,15 +367,15 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
             public void onSuccess(Response<String> response) {
+                LogUtils.v("GETCHANPINLIEBIAO", response.body());
 
                 try {
                     if (response.code() == 200) {
-
+                        recyclerview.setVisibility(View.VISIBLE);
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONArray data = jsonObject.getJSONArray("data");
-                            LogUtils.v("GETCHANPINLIEBIAO", data);
                             List<ProductBean> productBeans = JSONObject.parseArray(data.toJSONString(), ProductBean.class);
 
                             if (ObjectUtils.isEmpty(productBeans)) {
@@ -307,15 +419,15 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
             public void onSuccess(Response<String> response) {
+                LogUtils.v("QIUGOULIEBIAO", response.body());
 
                 try {
                     if (response.code() == 200) {
-
+                        recyclerview.setVisibility(View.VISIBLE);
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONArray data = jsonObject.getJSONArray("data");
-                            LogUtils.v("QIUGOULIEBIAO", data);
                             List<QiugouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), QiugouBean.class);
 
                             if (ObjectUtils.isEmpty(qiugouBeans)) {
@@ -352,9 +464,17 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
             default:
                 break;
             case R.id.activity_search_type_back:
-
                 finish();
+                break;
+            case R.id.activity_search_history_delete:
 
+                mActivitySearchHistoryLayout.setVisibility(View.GONE);
+                searchHistoryList.clear();
+                SPUtils.getInstance("searchHistory").put(searchType, "");
+
+                break;
+            case R.id.activity_search_delete:
+                mActivitySearchTypeSearch.setText("");
                 break;
         }
     }

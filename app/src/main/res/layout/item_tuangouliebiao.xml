@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/baise"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/baise">
 
     <ImageView
         android:id="@+id/item_tuangouliebiao_img"
@@ -53,7 +53,6 @@
             android:id="@+id/item_tuangouliebiao_yuanjia_danwei"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_yuanjia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -110,11 +109,11 @@
         android:id="@+id/item_tuangouliebiao_productname"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="9dp"
-        android:singleLine="true"
+        android:layout_marginEnd="8dp"
         android:ellipsize="end"
+        android:singleLine="true"
         android:textColor="@color/erjibiaoti"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +146,7 @@
         android:id="@+id/textView97"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="8dp"
         android:text="剩余量:"
         app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_total_danwei"
         app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_total_danwei" />
@@ -171,8 +170,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:background="@drawable/background_tuangou_renlingliang"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15"
         android:text="最小认领量 "
-
+        android:textSize="@dimen/x22"
+        android:paddingTop="@dimen/x5"
+        android:paddingBottom="@dimen/x5"
+        app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_zuidarenling"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_img"
         app:layout_constraintStart_toStartOf="@+id/textView79"
         app:layout_constraintTop_toBottomOf="@+id/textView79" />
 
@@ -180,10 +188,16 @@
         android:id="@+id/item_tuangouliebiao_zuidarenling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:text="最大认领量 "
-
+        android:background="@drawable/background_tuangou_renlingliang"
+        android:paddingLeft="@dimen/x15"
+        android:paddingRight="@dimen/x15"
+        android:textSize="@dimen/x22"
+        android:paddingTop="@dimen/x5"
+        android:paddingBottom="@dimen/x5"
         app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_zuixiaorenling"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_zuixiaorenling" />
 
     <android.support.constraint.ConstraintLayout
@@ -201,8 +215,8 @@
             android:id="@+id/item_tuangouliebiao_time_from"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="2018-09-21"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_to"
@@ -215,8 +229,8 @@
             android:id="@+id/item_tuangouliebiao_time_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:src="@mipmap/tuangou_riqi"
             app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_end"
             app:layout_constraintHorizontal_bias="0.5"
@@ -238,8 +252,8 @@
         android:id="@+id/item_tuangouliebiao_status_layout"
         android:layout_width="229dp"
         android:layout_height="0dp"
-        android:visibility="invisible"
         android:layout_marginEnd="8dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_price_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_productname"
@@ -249,8 +263,8 @@
             android:id="@+id/item_tuangouliebiao_status_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="团购成功!"
             android:textColor="@color/chunhongse"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -265,23 +279,22 @@
             android:id="@+id/item_tuangouliebiao_status_text_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_status_text"
-            app:layout_constraintTop_toTopOf="parent"
-             />
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
 
     <TextView
         android:id="@+id/item_tuangouliebiao_yirenling"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:text="已认领总量 "
 
         app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_seekbar"
@@ -291,8 +304,8 @@
         android:id="@+id/item_tuangouliebiao_baifenbi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -302,8 +315,7 @@
         android:layout_width="@dimen/x110"
         android:layout_height="@dimen/x110"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
         android:id="@+id/item_tuangouliebiao_seekbar"

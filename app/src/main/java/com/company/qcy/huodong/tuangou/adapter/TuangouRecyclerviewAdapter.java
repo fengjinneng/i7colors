@@ -77,6 +77,7 @@ public class TuangouRecyclerviewAdapter extends
             helper.setText(R.id.item_tuangouliebiao_status_text, "团购进行中...");
             smile.setVisibility(View.INVISIBLE);
             statusImg.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+            priceLayout.setBackground(mContext.getResources().getDrawable(R.mipmap.anniujianbian));
         } else if (StringUtils.equals("11", item.getEndCode())) {
             //已开始已领完
             //不考虑库存
@@ -84,6 +85,7 @@ public class TuangouRecyclerviewAdapter extends
                 layout.setVisibility(View.VISIBLE);
                 helper.setText(R.id.item_tuangouliebiao_status_text, "团购进行中...");
                 statusImg.setImageDrawable(mContext.getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+                priceLayout.setBackground(mContext.getResources().getDrawable(R.mipmap.anniujianbian));
             }else {
                 weikaishi.setVisibility(View.INVISIBLE);
                 layout.setVisibility(View.VISIBLE);

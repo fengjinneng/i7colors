@@ -82,7 +82,8 @@ public class InterfaceInfo {
     public static final String DIANPUXIANGQING = "market/getMarket";
     //根据店铺ID获取商品列表
     public static final String KFSCSHANGPINLIEBIAO = "marketProduct/getMarketProductByPage";
-
+    //获取店铺分类
+    public static final String DIANPUTYPE = "market/selectCompanyType";
 
     //产品大厅
     public static final String GETCHANPINLIEBIAO = "product/getProductList";
@@ -94,6 +95,8 @@ public class InterfaceInfo {
     public static final String CANCEFAVORITEPRODUCT = "product/cancelFavoriteProduct";
     //收藏商品
     public static final String ADDFAVORITEPRODUCT = "product/favoriteProduct";
+    //获取所有产品的分类
+    public static final String GETALLPRODUCTTYPE = "product/getShopAllPropByType";
 
 
     //咨讯大厅
@@ -111,8 +114,10 @@ public class InterfaceInfo {
     //团购记录
     public static final String GROUPBUYRECORD = "groupBuyMain/queryGroupBuyerList";
     //我要团购
-    public static final String WOYAOTUANGOU = "groupBuyMain/addGroupBuyer";
+    public static final String WOYAOTUANGOU = "groupBuyMain/addGroupBuyerNew";
 
+    //获取获取默认的地址信息
+    public static final String HUODONGMORENDIZHI = "defaultAddress/queryDefaultAddress";
 
     //消息模块
     //求购报价消息
@@ -239,7 +244,7 @@ public class InterfaceInfo {
     //优惠展销记录
     public static final String YOUHUIZHANXIAORECORD = "sales/querySalesOrderList";
     //我要购买
-    public static final String YOUHUIZHANXIAOBUY = "sales/addSalesOrder";
+    public static final String YOUHUIZHANXIAOBUY = "sales/addSalesOrderNew";
 
 
     //采购联盟
@@ -279,6 +284,6 @@ public class InterfaceInfo {
     //根据竞拍id获取参与记录
     public static final String GETRECORDBYID = "auction/queryAuctionBuyerList";
     //参与竞拍
-    public static final String CANYUJINGPAI = "auction/addAuctionBuyer";
+    public static final String CANYUJINGPAI = "auction/addAuctionBuyerNew";
 
 }

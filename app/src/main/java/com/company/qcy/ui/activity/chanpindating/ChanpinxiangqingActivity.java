@@ -22,18 +22,21 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.adapter.chanpindating.ChanpinCanshuRecyclerviewAdapter;
+import com.company.qcy.adapter.chanpindating.ChanpinImageDetailAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.kaifangshangcheng.ProductBean;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
+import com.company.qcy.ui.activity.pengyouquan.ImagePagerActivity;
 import com.company.qcy.ui.activity.user.LianxikefuActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -51,10 +54,7 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
     //变量名与传参时一致且修饰符为public
     @Autowired
     public String id;//商品ID
-    /**
-     * 分享
-     */
-    private TextView mActivityChanpinxiangqingShare;
+
     private ImageView mActivityChanpinxiangqingImg;
     /**
      * CTC DONGWU Disperse-Cationic Red SD-GRL 100%
@@ -90,6 +90,11 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
     private ConstraintLayout yijianhujiao;
+    private RecyclerView imgRecyclervew;
+    /**
+     * 分享
+     */
+    private TextView mActivityChanpinxiangqingShare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,12 +111,16 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
     private void initView() {
         datas = new ArrayList<>();
         recyclerview = (RecyclerView) findViewById(R.id.activity_chanpinxiangqing_recyclerview);
+        imgRecyclervew = (RecyclerView) findViewById(R.id.activity_chanpinxiangqing_detail_img_recyclervew);
+
         //创建布局管理
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerview.setLayoutManager(layoutManager);
-        mActivityChanpinxiangqingShare = (TextView) findViewById(R.id.activity_chanpinxiangqing_share);
+        mActivityChanpinxiangqingShare = (TextView) findViewById(R.id.toolbar_text);
         mActivityChanpinxiangqingShare.setOnClickListener(this);
+        mActivityChanpinxiangqingShare.setVisibility(View.VISIBLE);
+        mActivityChanpinxiangqingShare.setText("分享");
         mActivityChanpinxiangqingImg = (ImageView) findViewById(R.id.activity_chanpinxiangqing_img);
         mActivityChanpinxiangqingDianpuLayout = (LinearLayout) findViewById(R.id.activity_chanpinxiangqing_dianpu_layout);
         mActivityChanpinxiangqingDianpuLayout.setOnClickListener(this);
@@ -226,7 +235,7 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(ChanpinxiangqingActivity.this,request,this);
+                            SignAndTokenUtil.getSign(ChanpinxiangqingActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -344,6 +353,29 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
             return;
         }
 
+        if (!ObjectUtils.isEmpty(productBean.getDetailPicList())) {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+            imgRecyclervew.setLayoutManager(layoutManager);
+            List<String> lists = new ArrayList<>();
+            lists.addAll(productBean.getDetailPicList());
+            ChanpinImageDetailAdapter chanpinImageDetailAdapter = new ChanpinImageDetailAdapter(R.layout.item_chanpindetail_img, lists);
+            imgRecyclervew.setAdapter(chanpinImageDetailAdapter);
+
+            chanpinImageDetailAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+                    ImagePagerActivity.ImageSize imageSize = new ImagePagerActivity.ImageSize(view.getMeasuredWidth(), view.getMeasuredHeight());
+                    List<String> photoUrls = new ArrayList<String>();
+                    for (int i = 0; i < lists.size(); i++) {
+                        photoUrls.add(lists.get(i));
+                    }
+                    ImagePagerActivity.startImagePagerActivity(ChanpinxiangqingActivity.this, photoUrls, position, imageSize);
+                }
+            });
+        }
+
+
         GlideUtils.loadImage(this, ServerInfo.IMAGE + productBean.getPic(), mActivityChanpinxiangqingImg);
         mActivityChanpinxiangqingChanpinming.setText(productBean.getProductName());
         if (productBean.isDisplayPrice()) {
@@ -364,7 +396,8 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
         switch (v.getId()) {
             default:
                 break;
-            case R.id.activity_chanpinxiangqing_share:
+            //分享
+            case R.id.toolbar_text:
                 if (ObjectUtils.isEmpty(productBean)) {
                     ToastUtils.showShort("分享异常");
                     return;

@@ -13,7 +13,6 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!-- 用于申请调用A-GPS模块 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <!-- 用于申请获取蓝牙信息进行室内定位 -->
@@ -26,8 +25,8 @@
     <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <!--添加权限-->
-    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+    <!-- 添加权限 -->
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
 
     <application
         android:name=".SophixStubApplication"
@@ -46,14 +45,17 @@
 
         <service android:name="com.amap.api.location.APSService" />
 
-        <meta-data android:value="5cd38537570df39ed3000a4a" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="Umeng" android:name="UMENG_CHANNEL"/>
-
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5cd38537570df39ed3000a4a" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" />
 
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustPan|stateHidden">
 
             <!-- Schame -->
@@ -68,38 +70,22 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.chanpindating.ChanpindatingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.chanyezixun.ChanyezixunActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.qiugoudating.QiugoudatingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.kaifangshangcheng.KaifangshangchengActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.chanpindating.ChanpindatingActivity" />
+        <activity android:name=".ui.activity.chanyezixun.ChanyezixunActivity" />
+        <activity android:name=".ui.activity.qiugoudating.QiugoudatingActivity" />
+        <activity android:name=".ui.activity.kaifangshangcheng.KaifangshangchengActivity" />
         <activity
             android:name=".ui.activity.user.LoginActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".ui.activity.user.ForgetPasswordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.user.ResetPasswordActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.user.RegisterActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.user.ForgetPasswordActivity" />
+        <activity android:name=".ui.activity.user.ResetPasswordActivity" />
+        <activity android:name=".ui.activity.user.RegisterActivity" />
         <activity
             android:name=".ui.activity.qiugoudating.FabuqiugouActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity
-            android:name=".ui.activity.qiugoudating.QiugouxiangqingActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".ui.activity.qiugoudating.QiugouxiangqingActivity">
 
             <!-- Schame -->
             <intent-filter>
@@ -115,39 +101,21 @@
         </activity>
         <activity
             android:name=".ui.activity.qiugoudating.CanyubaojiaActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".ui.activity.qiugoudating.WodeqiugouActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.user.SettingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.user.QiehuanshenfenActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.qiugoudating.WodebaojiaActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".base.BaseActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.qiugoudating.WodeqiugouActivity" />
+        <activity android:name=".ui.activity.user.SettingActivity" />
+        <activity android:name=".ui.activity.user.QiehuanshenfenActivity" />
+        <activity android:name=".ui.activity.qiugoudating.WodebaojiaActivity" />
+        <activity android:name=".base.BaseActivity" />
         <activity
             android:name=".base.SearchActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity
-            android:name=".ui.activity.qiugoudating.DaichuliqiugouActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.qiugoudating.DaichulibaojiaActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.kaifangshangcheng.KFSCXiangqingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.chanpindating.ChanpinxiangqingActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".ui.activity.qiugoudating.DaichuliqiugouActivity" />
+        <activity android:name=".ui.activity.qiugoudating.DaichulibaojiaActivity" />
+        <activity android:name=".ui.activity.kaifangshangcheng.KFSCXiangqingActivity" />
+        <activity android:name=".ui.activity.chanpindating.ChanpinxiangqingActivity">
 
             <!-- Schame -->
             <intent-filter>
@@ -161,9 +129,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.chanyezixun.ZixunxiangqingActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".ui.activity.chanyezixun.ZixunxiangqingActivity">
 
             <!-- Schame -->
             <intent-filter>
@@ -177,53 +143,32 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".huodong.tuangou.activity.TuangouliebiaoActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".huodong.tuangou.activity.TuangouliebiaoActivity" />
         <activity
             android:name=".huodong.tuangou.activity.TuangouxiangqingActivity"
-            android:screenOrientation="portrait"
+
             android:theme="@style/TuangouTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
-        <activity
-            android:name=".huodong.tuangou.activity.WoyaotuangouActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".huodong.tuangou.activity.WoyaotuangouActivity" />
         <activity
             android:name=".base.SearchTypeActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="stateVisible|adjustResize" />
-        <activity
-            android:name=".ui.activity.user.LianxikefuActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.tuangou.activity.YingxiongmashuomingActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.user.ZhanghaozhongxinActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.message.MessageDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".base.WebActivity"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".ui.activity.pengyouquan.PubulishPYQActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.DavrenzhengActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.user.LianxikefuActivity" />
+        <activity android:name=".huodong.tuangou.activity.YingxiongmashuomingActivity" />
+        <activity android:name=".ui.activity.user.ZhanghaozhongxinActivity" />
+        <activity android:name=".ui.activity.message.MessageDetailActivity" />
+        <activity android:name=".base.WebActivity" />
+        <activity android:name=".ui.activity.pengyouquan.PubulishPYQActivity" />
+        <activity android:name=".ui.activity.pengyouquan.DavrenzhengActivity" />
         <activity
             android:name=".ui.activity.pengyouquan.ShipinbofangActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.ImagePagerActivity"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize|keyboardHidden" />
+        <activity android:name=".ui.activity.pengyouquan.ImagePagerActivity" />
         <activity
             android:name=".ui.activity.pengyouquan.PengyouquanDetailActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"
-            android:screenOrientation="portrait">
+
+            android:windowSoftInputMode="adjustPan|stateHidden">
 
             <!-- Schame -->
             <intent-filter>
@@ -237,9 +182,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.pengyouquan.PersonInfoActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.pengyouquan.PersonInfoActivity" />
 
         <receiver
             android:name=".Utils.JpushReceiver"
@@ -256,14 +199,22 @@
                 <category android:name="com.company.qcy" />
             </intent-filter>
         </receiver>
+        <receiver android:name=".Utils.NetWorkStateChangeReceiver">
 
+            　　　　
+            <intent-filter>
 
-        <receiver android:name=".Utils.NetWorkStateChangeReceiver" >
-            　　　　<intent-filter>
-            　　　　　　<!-- 监听的动作类型，这里是监听网络连接的状态  -->
-            　　　　　　<action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-            　　　　</intent-filter>
-            　　</receiver>
+                　　　　　　
+                <!-- 监听的动作类型，这里是监听网络连接的状态 -->
+
+                　　　　　　
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                　　　　
+            </intent-filter>
+
+            　　
+        </receiver>
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -284,9 +235,7 @@
                 android:resource="@xml/file_paths_public" />
         </provider>
 
-        <activity
-            android:name=".ui.activity.user.ChangePasswordActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.user.ChangePasswordActivity" />
 
         <!-- 微信分享回调 android:taskAffinity="net.sourceforge.simcpux" -->
         <activity
@@ -295,71 +244,50 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity
-            android:name=".ui.activity.user.BindPhoneActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.MyDyeInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.ChangeNicknameActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.MyPersonInfoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.MyNotReadCommunityActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.user.AboutQCYActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.user.BindPhoneActivity">
+
+
+
+
+        </activity>
+        <activity android:name=".ui.activity.pengyouquan.MyDyeInfoActivity" />
+        <activity android:name=".ui.activity.pengyouquan.ChangeNicknameActivity" />
+        <activity android:name=".ui.activity.pengyouquan.MyPersonInfoActivity" />
+        <activity android:name=".ui.activity.pengyouquan.MyNotReadCommunityActivity" />
+        <activity android:name=".ui.activity.user.AboutQCYActivity" />
         <activity android:name=".MyWelcomeActivity" />
         <activity android:name=".GuideActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/startTheme">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity
-            android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoDetailActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity" />
+        <activity android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoDetailActivity" />
         <activity
             android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoBuyActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".huodong.caigoulianmeng.activity.WoyaodinghuoActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.WodedinghuodanDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.WodegonghuodanDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.caigoulianmeng.activity.WoyaogonghuoActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.WodedinghuodanDetailActivity" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.WodegonghuodanDetailActivity" />
+        <activity android:name=".huodong.caigoulianmeng.activity.WoyaogonghuoActivity" />
         <activity
             android:name=".huodong.caigoulianmeng.activity.AddDinghuoCustomProductActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity
-            android:name=".huodong.toupiao.activity.ToupiaoListActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.CaigoulianmengActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.toupiao.activity.ToupiaoDetailActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".huodong.toupiao.activity.ToupiaoListActivity" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.CaigoulianmengActivity" />
+        <activity android:name=".huodong.toupiao.activity.ToupiaoDetailActivity">
 
             <!-- Schame -->
             <intent-filter>
@@ -373,12 +301,8 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".huodong.toupiao.activity.ToupiaoSearchActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.toupiao.activity.XuanshouDetailActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".huodong.toupiao.activity.ToupiaoSearchActivity" />
+        <activity android:name=".huodong.toupiao.activity.XuanshouDetailActivity">
 
             <!-- Schame -->
             <intent-filter>
@@ -392,87 +316,39 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.HuodanActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.DinghuoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.ZidingyiDinghuoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.GonghuoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.caigoulianmeng2.activity.ZidingyiGonghuoActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".huodong.jingpai.activity.JingpaiActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".huodong.caigoulianmeng2.activity.HuodanActivity" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.DinghuoActivity" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.ZidingyiDinghuoActivity" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.GonghuoActivity" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.ZidingyiGonghuoActivity" />
+        <activity android:name=".huodong.jingpai.activity.JingpaiActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
         <activity
             android:name=".huodong.jingpai.activity.JingpaiDetailActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait" />
+            android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity
             android:name=".huodong.jingpai.activity.CanyujingpaiActivity"
-            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activity.kaifangshangcheng.QiyezizhiActivity"
-            android:configChanges="keyboard|keyboardHidden|screenSize|orientation"
-            android:screenOrientation="portrait" />
+            android:configChanges="keyboard|keyboardHidden|screenSize|orientation" />
         <activity android:name=".ui.activity.pengyouquan.PengyouquanChoiceAddressActivity">
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
         </activity>
-        <activity
-            android:name=".ui.activity.pengyouquan.ChoiceHuatiActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.MapActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.ErjihuatiDetailActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.MyTongunluFriendsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.MessageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.WodepinglunMessageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.WodedianzanMessageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.WodeaiteMessageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.WodehaoyouMessageActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.pengyouquan.ShuikeyikanActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.activity.user.ChoiceHeadImageActivity"
-            android:screenOrientation="portrait" />
-        <activity android:name=".base.WebNoBottomActivity"></activity>
+        <activity android:name=".ui.activity.pengyouquan.ChoiceHuatiActivity" />
+        <activity android:name=".ui.activity.pengyouquan.MapActivity" />
+        <activity android:name=".ui.activity.pengyouquan.ErjihuatiDetailActivity" />
+        <activity android:name=".ui.activity.pengyouquan.MyTongunluFriendsActivity" />
+        <activity android:name=".ui.activity.pengyouquan.MessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodepinglunMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodedianzanMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodeaiteMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.WodehaoyouMessageActivity" />
+        <activity android:name=".ui.activity.pengyouquan.ShuikeyikanActivity" />
+        <activity android:name=".ui.activity.user.ChoiceHeadImageActivity" />
+        <activity android:name=".base.WebNoBottomActivity" />
     </application>
 
 </manifest>

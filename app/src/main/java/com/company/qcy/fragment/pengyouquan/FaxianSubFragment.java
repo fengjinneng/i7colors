@@ -115,12 +115,6 @@ public class FaxianSubFragment extends BaseFragment implements View.OnClickListe
 
         switch (messageBean.getCode()) {
 
-            case MessageBean.Code.ASAAAAAAAAAA:
-
-                LogUtils.e("sdsaxzczxbebef", messageBean.getMeaasge() + "-----" + messageBean.getParam());
-                saveDiscuss("asdsadsadsa", Long.parseLong(messageBean.getMeaasge()), messageBean.getParam());
-                break;
-
             //删除评论成功
             case MessageBean.Code.DELETEPINGLUNCHENGGONG:
                 PengyouquanBean.CommentListBean commentListBean = (PengyouquanBean.CommentListBean) messageBean.getObj();
