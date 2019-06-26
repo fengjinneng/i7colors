@@ -148,17 +148,6 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
             }
         });
 
-        if (StringUtils.isTrimEmpty(keyword)) {
-
-            KeyboardUtils.showSoftInput(this);
-
-        } else {
-            KeyboardUtils.hideSoftInput(SearchTypeActivity.this);
-            mActivitySearchTypeSearch.setText(keyword);
-            mActivitySearchTypeSearch.setSelection(keyword.length());
-            searchData();
-        }
-
         mActivitySearchTypeTagFlowLayout.setAdapter(tagAdapter = new TagAdapter<String>(searchHistoryList) {
             @Override
             public View getView(FlowLayout parent, int position, String s) {
@@ -169,17 +158,6 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
             }
         });
 
-
-        mActivitySearchTypeTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
-            @Override
-            public boolean onTagClick(View view, int position, FlowLayout parent) {
-
-                mActivitySearchTypeSearch.setText(searchHistoryList.get(position));
-                mActivitySearchTypeSearch.setSelection(mActivitySearchTypeSearch.getText().length());
-                searchData();
-                return false;
-            }
-        });
         if (isFrom == 1) {
             searchType = "qiugou";
             mActivitySearchTypeSearch.setHint("搜索求购相关信息");
@@ -193,6 +171,33 @@ public class SearchTypeActivity extends BaseActivity implements View.OnClickList
             mActivitySearchTypeSearch.setHint("搜索店铺相关信息");
             setSearchHistory(searchType);
         }
+
+
+        if (StringUtils.isTrimEmpty(keyword)) {
+
+            KeyboardUtils.showSoftInput(this);
+
+        } else {
+            KeyboardUtils.hideSoftInput(SearchTypeActivity.this);
+            mActivitySearchTypeSearch.setText(keyword);
+            mActivitySearchTypeSearch.setSelection(keyword.length());
+            searchData();
+        }
+
+
+
+
+        mActivitySearchTypeTagFlowLayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+
+                mActivitySearchTypeSearch.setText(searchHistoryList.get(position));
+                mActivitySearchTypeSearch.setSelection(mActivitySearchTypeSearch.getText().length());
+                searchData();
+                return false;
+            }
+        });
+
 
         mActivitySearchTypeSearch.addTextChangedListener(new TextWatcher() {
             @Override
