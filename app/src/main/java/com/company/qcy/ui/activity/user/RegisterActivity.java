@@ -365,6 +365,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 zhiwei.add("技术");
                 zhiwei.add("老板");
                 zhiwei.add("生产");
+                zhiwei.add("其它");
                 choiceString(zhiwei, mActivityRegisterZhiwei);
                 break;
         }

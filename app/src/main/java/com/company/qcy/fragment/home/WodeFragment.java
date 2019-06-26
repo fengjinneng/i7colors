@@ -43,6 +43,7 @@ import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+import com.umeng.analytics.MobclickAgent;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
@@ -176,6 +177,12 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         return inflate;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("我的");
+    }
+
     private void initView(View inflater) {
         mFragmentWodeBuyerZhongxin = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_zhongxin);
         mFragmentWodeSellerZhongxin = (TextView) inflater.findViewById(R.id.fragment_wode_seller_zhongxin);
@@ -286,6 +293,8 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+
+        MobclickAgent.onPageStart("我的");
 
         if (UserUtil.isLogin()) {
             tianxiexinxi();

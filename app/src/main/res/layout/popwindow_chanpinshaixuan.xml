@@ -110,6 +110,7 @@
             android:layout_height="0dp"
             android:gravity="center"
             android:text="重置"
+            android:background="@color/qianhui"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/popwindow_chanpinshaixuan_submit"
             app:layout_constraintHorizontal_bias="0.5"

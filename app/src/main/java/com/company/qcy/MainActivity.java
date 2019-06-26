@@ -3,13 +3,20 @@ package com.company.qcy;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONArray;
@@ -31,6 +38,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.JpushUtil;
+import com.company.qcy.Utils.NetworkUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.base.WebActivity;
@@ -55,6 +63,10 @@ import com.lzy.okgo.request.GetRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushReceiver;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -62,7 +74,7 @@ import cn.jpush.android.api.JPushInterface;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 @Route(path = "/main/entrance")
-public class MainActivity extends BaseActivity implements OnButtonClickListener {
+public class MainActivity extends AppCompatActivity implements OnButtonClickListener {
 
     private BottomNavigationBar mBottomnavigation;
 
@@ -73,11 +85,15 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        EventBus.getDefault().register(this);
 
-//        ShortcutBadger.applyCount(this, 8);
-
+        if (android.os.Build.VERSION.SDK_INT > 19) {
+            StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.baise), true);
+        }
 
         HashMap<String, String> map = (HashMap) getIntent().getSerializableExtra("jpush_data");
 
@@ -103,7 +119,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
 
         //JPUSH推送消息過來的
         if (!ObjectUtils.isEmpty(map)) {
-            JpushUtil.jumpActivity(map,this);
+            JpushUtil.jumpActivity(map, this);
         }
 
     }
@@ -170,14 +186,15 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         MobPush.removePushReceiver(receiver);
     }
 
     private DownloadManager manager;
 
-    @Override
-    public void onReciveMessage(MessageBean msg) {
-        super.onReciveMessage(msg);
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onRec(MessageBean msg) {
         switch (msg.getCode()) {
 
             case MessageBean.JPush.RECIVENOTIFICATION:
@@ -194,6 +211,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
                 if (!xitongXiaoxiMessageItem.isHidden()) {
                     xitongXiaoxiMessageItem.hide();
                 }
+                ShortcutBadger.removeCount(this);
                 break;
 
             //点击进去四个消息的列表，首页的就隐藏
@@ -434,7 +452,7 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
     protected void onResume() {
         super.onResume();
 
-        if(SPUtils.getInstance().getInt("notification")<1){
+        if (SPUtils.getInstance().getInt("notification") < 1) {
             if (!xitongXiaoxiMessageItem.isHidden()) {
                 xitongXiaoxiMessageItem.hide();
             }
@@ -466,6 +484,71 @@ public class MainActivity extends BaseActivity implements OnButtonClickListener 
             fragmentTransaction.commit();
         }
     }
+
+    private AlertDialog dialog;
+    AlertDialog.Builder builder = null;
+
+    /**
+     * 判断网络
+     */
+    protected void isNetWork() {
+        int status = NetworkUtil.getNetworkType(this);
+
+        LogUtils.e("base--status--" + status);
+        if (0 == status) {
+            showPop();
+
+        } else {
+            if (null != dialog && dialog.isShowing()) {
+                dialog.dismiss();
+            }
+        }
+    }
+    /**
+     * 显示无网弹框
+     *
+     * @param
+     */
+    private void showPop() {
+        if (builder == null) {
+
+            builder = new AlertDialog.Builder(this);
+            View view = View.inflate(this, R.layout.toast_newwork_setting_layout, null);
+            view.setPadding(10, 0, 10, 200);
+            builder.setView(view);
+            builder.setCancelable(true);//点击返回是否取消
+            LinearLayout rlParent = view.findViewById(R.id.rl_parent);//
+
+
+            rlParent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (dialog.isShowing()) {
+//                    dialog.dismiss();
+                        NetworkUtil.toSetting(MainActivity.this);
+                    }
+                }
+            });
+        }
+
+        //取消或确定按钮监听事件处理
+        if (dialog == null) {
+            dialog = builder.create();
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.setCanceledOnTouchOutside(true);
+            Window window = dialog.getWindow();
+            window.setDimAmount(0);//设置昏暗度为0
+            window.setBackgroundDrawableResource(android.R.color.transparent);
+            window.setGravity(Gravity.BOTTOM);
+
+        }
+
+        if (!dialog.isShowing()) {
+            dialog.show();
+        }
+    }
+
 
     //隐藏所有的fragment
     private void hideFragment(FragmentTransaction transaction) {

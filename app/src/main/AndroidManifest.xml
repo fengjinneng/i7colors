@@ -204,10 +204,8 @@
             　　　　
             <intent-filter>
 
-                　　　　　　
                 <!-- 监听的动作类型，这里是监听网络连接的状态 -->
 
-                　　　　　　
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
 
                 　　　　

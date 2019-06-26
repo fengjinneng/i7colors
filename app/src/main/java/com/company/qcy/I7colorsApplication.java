@@ -2,6 +2,7 @@ package com.company.qcy;
 
 import android.app.Application;
 import android.content.Context;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -23,13 +24,14 @@ import com.umeng.commonsdk.UMConfigure;
 
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
+
 import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 public class I7colorsApplication extends Application {
-
 
 
     public static I7colorsApplication instance;
@@ -52,21 +54,24 @@ public class I7colorsApplication extends Application {
 
 
         //发布时放开
-        // UMConfigure.init(this, "5cd38537570df39ed3000a4a", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+        UMConfigure.init(this, "5cd38537570df39ed3000a4a", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
+        MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.MANUAL);
 
         JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
 
+
+        //使用集成测试模式请先在程序入口处调用如下代码，打开调试模式：
         UMConfigure.setLogEnabled(false); // 设置开启日志,发布时请关闭日志
 
-        LogUtils.getConfig().setLogSwitch(true);
+        LogUtils.getConfig().setLogSwitch(false); // 设置开启日志,发布时请关闭日志
 
     }
 
-    public static Context getContext(){
+    public static Context getContext() {
         return mContext;
     }
 
-    private static boolean isDebug(){
+    private static boolean isDebug() {
         return true;
     }
 
@@ -77,7 +82,7 @@ public class I7colorsApplication extends Application {
         //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//
         HttpHeaders headers = new HttpHeaders();
 //        headers.put("Authorization", "Basic NjAxMTAwMDE6TlRBMVFVRXpSVEZEUWpJMVJUWXlPRU0xTXpZME56a3dSVEU0TTBaQ1JFVT0=");
-          headers.put("Content-Type", "application/json;charset=UTF-8");
+        headers.put("Content-Type", "application/json;charset=UTF-8");
 //        headers.put("app_id", "6016011000110001");
 //        headers.put("app_key", "NTA1QUEzRTFDQjI1RTYyOEM1MzY0NzkwRTE4M0ZCREU=");
 //        headers.put("token", CacheLoginUtil.getToken());
@@ -129,7 +134,6 @@ public class I7colorsApplication extends Application {
                 .setRetryCount(5)                               //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
                 .addCommonHeaders(headers);                 //全局公共头
     }
-
 
 
     private class SafeHostnameVerifier implements HostnameVerifier {

@@ -129,8 +129,7 @@ public class XitongxiaoxiFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
 
-        SPUtils.getInstance().put("notification",0);
-        EventBus.getDefault().post(new MessageBean(MessageBean.JPush.DELETELUNCHNUMBER));
+
     }
 
     @Override
@@ -198,7 +197,7 @@ public class XitongxiaoxiFragment extends BaseFragment {
                             ActivityUtils.startActivity(ChanyezixunActivity.class);
                         } else {
                             Intent zixunIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
-                            zixunIntent.putExtra("id", systemMeassageBean.getDirectTypeId());
+                            zixunIntent.putExtra("id", systemMeassageBean.getDirectTypeId()+"");
                             ActivityUtils.startActivity(zixunIntent);
 
                         }

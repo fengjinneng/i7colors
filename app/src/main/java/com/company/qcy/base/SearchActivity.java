@@ -194,6 +194,7 @@ public class SearchActivity extends BaseActivity implements View.OnClickListener
             }
         }
         searchHistoryList.add(0, mHomepageSearch.getText().toString());
+
         SPUtils.getInstance("searchHistory").put("all", ListUtil.listToString(searchHistoryList));
     }
 
