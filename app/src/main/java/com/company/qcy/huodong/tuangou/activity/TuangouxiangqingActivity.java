@@ -33,6 +33,7 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
@@ -40,6 +41,7 @@ import com.company.qcy.huodong.tuangou.bean.TuangouBean;
 import com.company.qcy.huodong.tuangou.fragment.JibencanshuFragment;
 import com.company.qcy.huodong.tuangou.fragment.JiluFragment;
 import com.company.qcy.huodong.tuangou.fragment.TuangouxuzhiFragment;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
@@ -243,8 +245,8 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mActivityTuangouxiangqingYuanjia.setText(bean.getOldPrice());
         mActivityTuangouxiangqingTuangoujia.setText(bean.getNewPrice());
         mActivityTuangouxiangqingProductname.setText(bean.getProductName());
-        mActivityTuangouxiangqingTotal.setText(bean.getTotalNum()+bean.getNumUnit());
-        mActivityTuangouxiangqingShengyu.setText(bean.getRemainNum()+bean.getNumUnit());
+        mActivityTuangouxiangqingTotal.setText(bean.getTotalNum() + bean.getNumUnit());
+        mActivityTuangouxiangqingShengyu.setText(bean.getRemainNum() + bean.getNumUnit());
         GlideUtils.loadImage(TuangouxiangqingActivity.this, ServerInfo.IMAGE + bean.getProductPic(), mActivityTuangouxiangqingImg);
         String[] split = bean.getNumPercent().split("%");
         mActivityTuangouxiangqingSeekBar.setProgress(Integer.parseInt(split[0]));
@@ -349,9 +351,13 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
             default:
                 break;
             case R.id.activity_tuangouxiangqing_woyaotuangou:
+                if (ObjectUtils.isEmpty(bean)) {
+                    return;
+                }
                 Intent intent = new Intent(this, WoyaotuangouActivity.class);
                 intent.putExtra("bean", bean);
                 ActivityUtils.startActivity(intent);
+
                 break;
             case R.id.toolbar_back:
                 finish();

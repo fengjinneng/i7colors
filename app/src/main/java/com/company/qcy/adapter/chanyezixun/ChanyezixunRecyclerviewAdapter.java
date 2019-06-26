@@ -4,14 +4,11 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.blankj.utilcode.util.StringUtils;
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.bean.ChanpindatingBean;
 import com.company.qcy.bean.chanyezixun.NewsBean;
 
 import java.util.List;

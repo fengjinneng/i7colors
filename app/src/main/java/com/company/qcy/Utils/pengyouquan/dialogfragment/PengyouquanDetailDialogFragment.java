@@ -133,7 +133,6 @@ public class PengyouquanDetailDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-//                EventBus.getDefault().post(new MessageBean(MessageBean.Code.ASAAAAAAAAAA,String.valueOf(id),position));
                 if(StringUtils.isEmpty(inputComment.getText().toString().trim())){
                     ToastUtils.showShort("不能发表空的信息");
                     return;

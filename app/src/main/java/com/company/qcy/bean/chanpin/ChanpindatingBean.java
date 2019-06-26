@@ -1,4 +1,4 @@
-package com.company.qcy.bean;
+package com.company.qcy.bean.chanpin;
 
 public class ChanpindatingBean {
 

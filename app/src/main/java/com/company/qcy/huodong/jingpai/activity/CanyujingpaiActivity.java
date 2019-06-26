@@ -13,7 +13,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -26,10 +28,16 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyConsrantLayout;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
+import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.huodong.tuangou.activity.WoyaotuangouActivity;
+import com.company.qcy.huodong.tuangou.bean.DefaultAddress;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
 
 import org.greenrobot.eventbus.EventBus;
@@ -38,7 +46,7 @@ import cn.qqtheme.framework.entity.City;
 import cn.qqtheme.framework.entity.County;
 import cn.qqtheme.framework.entity.Province;
 
-public class CanyujingpaiActivity extends AppCompatActivity implements View.OnClickListener {
+public class CanyujingpaiActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题
@@ -107,6 +115,11 @@ public class CanyujingpaiActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_canyujingpai);
+        if (UserUtil.isLogin()) {
+        } else {
+            ActivityUtils.startActivity(LoginActivity.class);
+            finish();
+        }
         auctionId = getIntent().getStringExtra("auctionId");
         jiajiafudu = getIntent().getStringExtra("jiajiafudu");
         priceUnit = getIntent().getStringExtra("priceUnit");
@@ -146,13 +159,13 @@ public class CanyujingpaiActivity extends AppCompatActivity implements View.OnCl
             }
         });
         mActivityCanyujingpaiChoiceAddress.setOnClickListener(this);
-        mToolbarTitle.setText("参与竞拍");
+        mToolbarTitle.setText("参与抢购");
         mActivityCanyujingpaiMaxpriceAndJiajiafudu = (TextView) findViewById(R.id.activity_canyujingpai_maxprice_and_jiajiafudu);
         mActivityCanyujingpaiCancel = (TextView) findViewById(R.id.activity_canyujingpai_cancel);
         mActivityCanyujingpaiCancel.setOnClickListener(this);
         mActivityCanyujingpaiSubmit = (TextView) findViewById(R.id.activity_canyujingpai_submit);
         mActivityCanyujingpaiSubmit.setOnClickListener(this);
-        mActivityCanyujingpaiMaxpriceAndJiajiafudu.setText("当前最高价:" + maxPrice + priceUnit + "  加价幅度:" + jiajiafudu + priceUnit);
+        mActivityCanyujingpaiMaxpriceAndJiajiafudu.setText("当前最高价:" + maxPrice + priceUnit + "\n"+"加价幅度:" + jiajiafudu + priceUnit);
         mActivityYouhuizhanxiaoNumunit.setText(priceUnit);
 
         mActivityCanyujingpaiPrice.addTextChangedListener(new TextWatcher() {
@@ -207,6 +220,91 @@ public class CanyujingpaiActivity extends AppCompatActivity implements View.OnCl
                 mActivityCanyujingpaiButtonLayout.setVisibility(View.VISIBLE);
             }
         });
+
+
+        getDefaultAddress();
+
+    }
+
+    private DefaultAddress defaultAddress;
+
+    private void getDefaultAddress() {
+
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.HUODONGMORENDIZHI)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("token", SPUtils.getInstance().getString("token"));
+
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("HUODONGMORENDIZHI", response.body());
+                try {
+                    if (response.code() == 200) {
+
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            if(ObjectUtils.isEmpty(data)){return;}
+                            defaultAddress = data.toJavaObject(DefaultAddress.class);
+                            setInfo(defaultAddress);
+                            return;
+
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(CanyujingpaiActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+
+    }
+
+    private void setInfo(DefaultAddress defaultAddress) {
+
+        if(ObjectUtils.isEmpty(defaultAddress)){
+            return;
+        }
+
+        if(!StringUtils.isEmpty(defaultAddress.getContact())){
+            mActivityCanyujingpaiLianxiren.setText(defaultAddress.getContact());
+        }
+
+
+        if(!StringUtils.isEmpty(defaultAddress.getPhone())){
+            mActivityCanyujingpaiPhone.setText(defaultAddress.getPhone());
+        }
+
+
+        if(!StringUtils.isEmpty(defaultAddress.getCompanyName())){
+            mActivityCanyujingpaiCompanyname.setText(defaultAddress.getCompanyName());
+        }
+
+
+        if(!StringUtils.isEmpty(defaultAddress.getProvince())||!StringUtils.isEmpty(defaultAddress.getCity())){
+            mActivityCanyujingpaiChoiceAddress.setText(defaultAddress.getProvince()+" "+defaultAddress.getCity());
+            locationProvince = defaultAddress.getProvince();
+            locationCity = defaultAddress.getCity();
+        }
+
+        if(!StringUtils.isEmpty(defaultAddress.getAddress())){
+            mActivityCanyujingpaiCompanyAddress.setText(defaultAddress.getAddress());
+        }
 
     }
 
@@ -269,10 +367,6 @@ public class CanyujingpaiActivity extends AppCompatActivity implements View.OnCl
                     ToastUtils.showShort("请选择地址");
                     return;
                 }
-                if (StringUtils.isTrimEmpty(mActivityCanyujingpaiCompanyAddress.getText().toString())) {
-                    ToastUtils.showShort("请填写公司详细地址");
-                    return;
-                }
                 canyujingpai();
                 break;
         }
@@ -289,6 +383,7 @@ public class CanyujingpaiActivity extends AppCompatActivity implements View.OnCl
 
         HttpParams paras = new HttpParams();
         paras.put("sign", SPUtils.getInstance().getString("sign"));
+        paras.put("token",SPUtils.getInstance().getString("token"));
         paras.put("auctionId", auctionId);
         paras.put("contact", mActivityCanyujingpaiLianxiren.getText().toString());
         paras.put("phone", mActivityCanyujingpaiPhone.getText().toString());

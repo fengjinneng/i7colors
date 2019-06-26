@@ -683,6 +683,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                     Intent intent = new Intent(QiugouxiangqingActivity.this, CanyubaojiaActivity.class);
                     intent.putExtra("enquiryId", enquiryId);
                     intent.putExtra("productName", qiugouBean.getProductName());
+                    intent.putExtra("numUnit", qiugouBean.getNumUnit());
                     ActivityUtils.startActivity(intent);
 
                 }

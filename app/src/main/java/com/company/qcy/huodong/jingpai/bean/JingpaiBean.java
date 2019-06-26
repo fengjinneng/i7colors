@@ -69,6 +69,15 @@ public class JingpaiBean {
     private String auctionDetails1;
     private String detailsValue;
     private String detailsValue1;
+    private String count;
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
 
     public Long getId() {
         return id;

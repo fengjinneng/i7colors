@@ -23,6 +23,8 @@
         app:layout_constraintTop_toBottomOf="@+id/include17">
 
         <android.support.constraint.ConstraintLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -73,8 +75,9 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:drawableLeft="@mipmap/bitiantupian"
-                android:text="我的竞拍报价:"
+                android:text="我的报价:"
                 android:textSize="@dimen/x30"
+                android:drawablePadding="@dimen/x10"
                 app:layout_constraintStart_toStartOf="@+id/constraintLayout12"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout12" />
 
@@ -85,6 +88,7 @@
                 android:layout_marginTop="@dimen/x68"
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:text="联系人:"
+                android:drawablePadding="@dimen/x10"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView130"
                 app:layout_constraintTop_toBottomOf="@+id/textView130" />
@@ -96,6 +100,7 @@
                 android:layout_marginTop="@dimen/x68"
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:text="联系人方式:"
+                android:drawablePadding="@dimen/x10"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView106"
                 app:layout_constraintTop_toBottomOf="@+id/textView106" />
@@ -107,6 +112,7 @@
                 android:layout_marginTop="@dimen/x68"
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:text="公司名称:"
+                android:drawablePadding="@dimen/x10"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView108"
                 app:layout_constraintTop_toBottomOf="@+id/textView108" />
@@ -118,6 +124,7 @@
                 android:layout_marginTop="@dimen/x68"
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:text="公司所属区域:"
+                android:drawablePadding="@dimen/x10"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView113"
                 app:layout_constraintTop_toBottomOf="@+id/textView113" />
@@ -126,6 +133,7 @@
                 android:id="@+id/textView119"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/x68"
                 android:text="公司详细地址:"
                 android:textSize="@dimen/x30"
@@ -192,13 +200,16 @@
             <EditText
                 android:id="@+id/activity_canyujingpai_company_address"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/x64"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="top"
                 android:hint="请输入公司详细地址"
+                android:inputType="textMultiLine"
+                android:minLines="3"
                 android:paddingLeft="8dp"
+                android:paddingTop="@dimen/x10"
                 android:textSize="@dimen/x30"
-                app:layout_constraintBottom_toBottomOf="@+id/textView119"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_companyname"
                 app:layout_constraintTop_toTopOf="@+id/textView119" />
@@ -206,14 +217,17 @@
 
             <TextView
                 android:id="@+id/activity_canyujingpai_choiceAddress"
-                android:layout_width="@dimen/x228"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/x64"
                 android:background="@drawable/background_wenbenshurubiankuang"
                 android:drawableRight="@mipmap/xialajiantou"
                 android:gravity="center"
-                android:paddingRight="8dp"
+                android:paddingRight="@dimen/x20"
                 android:text="请选择"
                 android:textSize="@dimen/x30"
+                android:paddingLeft="@dimen/x20"
+                android:drawablePadding="@dimen/x10"
+                android:minWidth="@dimen/x228"
                 app:layout_constraintBottom_toBottomOf="@+id/textView115"
                 app:layout_constraintStart_toStartOf="@+id/activity_canyujingpai_companyname"
                 app:layout_constraintTop_toTopOf="@+id/textView115" />
@@ -236,6 +250,7 @@
                 android:layout_marginTop="16dp"
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:text="是否需要样品:"
+                android:drawablePadding="@dimen/x10"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView95"
                 app:layout_constraintTop_toBottomOf="@+id/activity_canyujingpai_maxprice_and_jiajiafudu" />

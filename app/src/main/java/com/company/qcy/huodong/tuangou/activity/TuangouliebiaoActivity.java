@@ -84,7 +84,6 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
         adapter.setEnableLoadMore(false);
         recyclerView.setAdapter(adapter);
 
-
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         itemDecoration.setDrawable(getResources().getDrawable(R.drawable.recyclerview_fengexian));
         recyclerView.addItemDecoration(itemDecoration);

@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/baise"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/baise">
 
     <include
         android:id="@+id/include5"
@@ -27,30 +27,29 @@
                 android:id="@+id/activity_register_phone"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x100"
-                android:layout_marginEnd="@dimen/x75"
                 android:layout_marginStart="@dimen/x75"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="@dimen/x75"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请输入手机号(用于登陆/找回密码)"
                 android:inputType="phone"
+                android:maxLength="11"
                 android:paddingLeft="@dimen/x36"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <LinearLayout
-                app:layout_constraintTop_toBottomOf="@id/activity_register_phone"
                 android:id="@+id/activity_register_linnear2"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x100"
-                android:layout_marginTop="@dimen/x28"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_phone"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_phone"
-                >
+                app:layout_constraintTop_toBottomOf="@id/activity_register_phone">
 
 
                 <EditText
@@ -62,8 +61,7 @@
                     android:hint="输入短信验证码"
                     android:inputType="number"
                     android:maxLength="6"
-                    android:paddingLeft="@dimen/x36"
-                     />
+                    android:paddingLeft="@dimen/x36" />
 
 
                 <View
@@ -88,13 +86,12 @@
                 android:id="@+id/activity_register_password_1"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x100"
-                android:layout_marginTop="@dimen/x28"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请输入密码"
                 android:inputType="textPassword"
                 android:maxLength="16"
                 android:paddingLeft="@dimen/x36"
-
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_yaoqingma"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_yaoqingma"
                 app:layout_constraintTop_toBottomOf="@+id/activity_register_yaoqingma" />
@@ -103,26 +100,25 @@
                 android:id="@+id/activity_register_password_2"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x100"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请再次输入密码"
                 android:inputType="textPassword"
-                android:paddingLeft="@dimen/x36"
-
                 android:maxLength="16"
+
+                android:paddingLeft="@dimen/x36"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_password_1"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_password_1"
                 app:layout_constraintTop_toBottomOf="@+id/activity_register_password_1" />
 
 
-
             <Button
                 android:id="@+id/activity_register_submit"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/x98"
                 android:layout_marginTop="16dp"
-                android:background="@mipmap/anniujianbian"
+                android:background="@mipmap/bg"
                 android:text="注册"
                 android:textColor="@color/baise"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_password_2"
@@ -133,8 +129,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
                 android:layout_marginTop="@dimen/x36"
+                android:layout_marginBottom="32dp"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,25 +138,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/activity_register_submit">
 
                 <CheckBox
-                    android:checked="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:gravity="center"
+                    android:id="@+id/activity_register_checkbox"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="阅读并接受"
-                     />
+                    android:checked="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="阅读并接受" />
 
                 <TextView
                     android:id="@+id/activity_register_xieyi"
-                    android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="《七彩云协议》"
-                    android:textColor="@color/chunhongse"
-                     />
+                    android:textColor="@color/chunhongse" />
 
 
             </LinearLayout>
@@ -169,24 +164,25 @@
                 android:id="@+id/activity_register_yaoqingma"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x100"
-                android:layout_marginTop="@dimen/x28"
-                android:paddingLeft="@dimen/x36"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="输入邀请码(非必填)"
-
                 android:inputType="textEmailAddress"
+                app:layout_constraintTop_toBottomOf="@id/activity_register_zhiwei"
                 android:maxLength="6"
+                android:layout_marginTop="8dp"
+                android:paddingLeft="@dimen/x36"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_linnear2"
-                app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear2" />
+                tools:layout_editor_absoluteY="291dp" />
 
             <ImageView
                 android:id="@+id/imageView23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_register_phone"
                 app:layout_constraintEnd_toStartOf="@+id/activity_register_phone"
                 app:layout_constraintTop_toTopOf="@+id/activity_register_phone"
@@ -196,9 +192,9 @@
                 android:id="@+id/imageView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_register_linnear2"
                 app:layout_constraintEnd_toStartOf="@+id/activity_register_linnear2"
                 app:layout_constraintTop_toTopOf="@+id/activity_register_linnear2"
@@ -208,9 +204,9 @@
                 android:id="@+id/imageView27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_register_password_1"
                 app:layout_constraintEnd_toStartOf="@+id/activity_register_password_1"
                 app:layout_constraintTop_toTopOf="@+id/activity_register_password_1"
@@ -220,12 +216,62 @@
                 android:id="@+id/imageView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_register_password_2"
                 app:layout_constraintEnd_toStartOf="@+id/activity_register_password_2"
                 app:layout_constraintTop_toTopOf="@+id/activity_register_password_2"
+                app:srcCompat="@mipmap/bitiantupian" />
+
+            <EditText
+                android:id="@+id/activity_register_companyname"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background_dengluwenbenkuang"
+                android:hint="输入公司名称"
+                android:inputType="textPersonName"
+                android:paddingLeft="@dimen/x36"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_linnear2"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear2" />
+
+            <ImageView
+                android:id="@+id/imageView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_register_companyname"
+                app:layout_constraintEnd_toStartOf="@+id/activity_register_companyname"
+                app:layout_constraintTop_toTopOf="@+id/activity_register_companyname"
+                app:srcCompat="@mipmap/bitiantupian" />
+
+            <TextView
+                android:id="@+id/activity_register_zhiwei"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background_dengluwenbenkuang"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:drawablePadding="@dimen/x36"
+                android:text="请选择职位"
+                android:gravity="center"
+                android:textSize="@dimen/x36"
+                android:minWidth="@dimen/x350"
+                android:paddingLeft="@dimen/x36"
+                android:paddingRight="@dimen/x36"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_companyname"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_companyname" />
+
+            <ImageView
+                android:id="@+id/imageView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_register_zhiwei"
+                app:layout_constraintEnd_toStartOf="@+id/activity_register_zhiwei"
+                app:layout_constraintTop_toTopOf="@+id/activity_register_zhiwei"
                 app:srcCompat="@mipmap/bitiantupian" />
 
 

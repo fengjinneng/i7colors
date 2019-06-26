@@ -2,7 +2,8 @@ package com.company.qcy.ui.activity.qiugoudating;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,6 +84,11 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
+    /**
+     * KG
+     */
+    private TextView mActivityCanyubaojiaNumunit;
+    private String numUnit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +96,12 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_canyubaojia);
         enquiryId = getIntent().getLongExtra("enquiryId", 0);
         productName = getIntent().getStringExtra("productName");
+        numUnit = getIntent().getStringExtra("numUnit");
         initView();
     }
 
     private void initView() {
+        mActivityCanyubaojiaNumunit = (TextView) findViewById(R.id.activity_canyubaojia_numunit);
 
         mActivityCanyubaojiaChanpinming = (TextView) findViewById(R.id.activity_canyubaojia_chanpinming);
         mActivityCanyubaojiaCompanyText = (TextView) findViewById(R.id.activity_canyubaojia_company_text);
@@ -118,6 +126,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
             mActivityCanyubaojiaCompanyText.setText("我的公司名称:");
         }
         mActivityCanyubaojiaChanpinming.setText(productName);
+        mActivityCanyubaojiaNumunit.setText(numUnit);
         mActivityCanyubaojiaFabubaojia = (Button) findViewById(R.id.activity_canyubaojia_fabubaojia);
         mActivityCanyubaojiaFabubaojia.setOnClickListener(this);
         mActivityCanyubaojiaDescription = (EditText) findViewById(R.id.activity_canyubaojia_description);
@@ -125,6 +134,51 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("参与报价");
+
+
+        mActivityCanyubaojiaPrice.addTextChangedListener(new TextWatcher() {
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String text = s.toString();
+                if (text.contains(".")) {
+                    int index = text.indexOf(".");
+                    if (index + 1 == 6) {
+                        text = text.substring(0, index);
+                        mActivityCanyubaojiaPrice.setText(text);
+                        mActivityCanyubaojiaPrice.setSelection(text.length());
+                    } else if (index + 2 < text.length()) {
+                        text = text.substring(0, index + 2);
+                        mActivityCanyubaojiaPrice.setText(text);
+                        mActivityCanyubaojiaPrice.setSelection(text.length());
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s == null) {
+                    return;
+                }
+                if (s.length() == 2) {
+                    if (s.toString().startsWith("0") && !s.toString().substring(1).equals(".")) {
+                        mActivityCanyubaojiaPrice.setText(s.toString().substring(1));
+                        mActivityCanyubaojiaPrice.setSelection(mActivityCanyubaojiaPrice.getText().length());
+                    }
+                }
+
+                // 以小数点开头，前面自动加上 "0"
+                if (s.toString().startsWith(".")) {
+                    mActivityCanyubaojiaPrice.setText("0" + s);
+                    mActivityCanyubaojiaPrice.setSelection(mActivityCanyubaojiaPrice.getText().length());
+                }
+            }
+        });
     }
 
 
@@ -206,7 +260,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
         paras.put("phone", mActivityCanyubaojiaPhone.getText().toString());
         paras.put("validTime", mActivityCanyubaojiaTime.getText().toString());
         paras.put("description", mActivityCanyubaojiaDescription.getText().toString());
-        paras.put("from",getResources().getString(R.string.app_android));
+        paras.put("from", getResources().getString(R.string.app_android));
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUBAOJIA)
                 .tag(this)
                 .params(paras);
@@ -227,7 +281,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(CanyubaojiaActivity.this,request,this);
+                            SignAndTokenUtil.getSign(CanyubaojiaActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);

@@ -1,6 +1,7 @@
 package com.company.qcy.fragment.pengyouquan;
 
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -190,7 +191,6 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
 
             case MessageBean.NetWorkState.YILIANJIE:
 
-                LogUtils.e("saasdsadsadsaaf",loadDataState+"=="+isLoad);
                 if(!loadDataState && !isLoad){
                     getMyInfo();
 
@@ -283,7 +283,7 @@ public class FaxianFragment extends BaseFragment implements View.OnClickListener
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("level", "1");
 
-        StringCallback stringCallback = new StringCallback() {
+        DialogStringCallback stringCallback = new DialogStringCallback(getActivity()) {
             @Override
             public void onSuccess(Response<String> response) {
                 LogUtils.v("QUERYHUATI", response.body());

@@ -24,6 +24,9 @@ import com.company.qcy.fragment.xiaoxi.BaojiaxiaoxiFragment;
 import com.company.qcy.fragment.xiaoxi.QiugouxiaoxiFragment;
 import com.company.qcy.fragment.xiaoxi.XitongxiaoxiFragment;
 import com.githang.statusbar.StatusBarCompat;
+import com.umeng.analytics.MobclickAgent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 import q.rorbin.badgeview.Badge;
@@ -119,6 +122,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onResume() {
         super.onResume();
+        MobclickAgent.onPageStart("消息");
         if(SPUtils.getInstance().getInt("notification")>0&&!ObjectUtils.isEmpty(messageBadge)){
             messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
         }
@@ -164,6 +168,13 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("消息");
     }
 
     @Override
@@ -215,9 +226,12 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
             case R.id.fragment_toutiao_xitongxiaoxi:
 
                 if(!ObjectUtils.isEmpty(messageBadge)){
-                    if (SPUtils.getInstance().getInt("notification") > 0 ) {
-                        messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
-                    } else messageBadge.setBadgeNumber(0);
+//                    if (SPUtils.getInstance().getInt("notification") > 0 ) {
+//                        messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
+//                    } else messageBadge.setBadgeNumber(0);
+                    messageBadge.setBadgeNumber(0);
+                    SPUtils.getInstance().put("notification",0);
+                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.DELETELUNCHNUMBER));
                 }
 
                 if (xitongxiaoxiFragment == null) {

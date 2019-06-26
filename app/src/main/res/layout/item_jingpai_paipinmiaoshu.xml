@@ -11,18 +11,18 @@
         android:layout_width="@dimen/x200"
         android:layout_height="@dimen/x80"
         android:gravity="center"
-
+        app:layout_constraintBottom_toBottomOf="@+id/item_jingpai_paipinmiaoshu_value"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/item_jingpai_paipinmiaoshu_value" />
 
     <TextView
         android:id="@+id/item_jingpai_paipinmiaoshu_value"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:paddingLeft="@dimen/x100"
-
-        app:layout_constraintBottom_toBottomOf="@+id/item_jingpai_paipinmiaoshu_key"
+        android:minHeight="@dimen/x80"
+        android:paddingLeft="@dimen/x50"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView278"
         app:layout_constraintTop_toTopOf="parent"

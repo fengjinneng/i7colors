@@ -132,7 +132,7 @@ public class PengyouquanFragment extends BaseFragment {
             mPopupBubble.setVisibility(View.GONE);
         }
 
-        MobclickAgent.onPageStart("朋友圈页面");
+        MobclickAgent.onPageStart("印染圈");
 
 
     }
@@ -141,7 +141,7 @@ public class PengyouquanFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
 
-        MobclickAgent.onPageEnd("朋友圈页面");
+        MobclickAgent.onPageEnd("印染圈");
 
     }
 

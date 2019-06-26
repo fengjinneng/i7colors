@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/item_system_message_title"
         android:layout_width="0dp"
-        android:layout_height="46dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/background_dengluwenbenkuang_quexia"
         android:paddingLeft="@dimen/x20"
@@ -23,9 +23,10 @@
 
     <ImageView
         android:id="@+id/item_system_message_img"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/x750"
+        android:layout_height="@dimen/x300"
         android:visibility="gone"
+        android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

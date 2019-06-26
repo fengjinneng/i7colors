@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.StringUtils;
+import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
@@ -33,7 +34,8 @@ public class SystemMessageAdapter extends BaseQuickAdapter<SystemMeassageBean, B
 
         if(!StringUtils.isEmpty(item.getPic())){
             imageView.setVisibility(View.VISIBLE);
-            GlideUtils.loadImage(mContext, ServerInfo.IMAGE+item.getPic(),imageView);
+//            GlideUtils.loadImage(mContext, ServerInfo.IMAGE+item.getPic(),imageView);
+            Glide.with(mContext).load(ServerInfo.IMAGE+item.getPic()).into(imageView);
         }else {
             imageView.setVisibility(View.GONE);
         }

@@ -26,6 +26,7 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
@@ -33,6 +34,7 @@ import com.company.qcy.huodong.jingpai.bean.JingpaiDetailBean;
 import com.company.qcy.huodong.jingpai.fragment.ChujiajiluFragment;
 import com.company.qcy.huodong.jingpai.fragment.JingpaixuzhiFragment;
 import com.company.qcy.huodong.jingpai.fragment.PaipinmiaoshuFragment;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
@@ -126,7 +128,7 @@ public class JingpaiDetailActivity extends BaseActivity implements View.OnClickL
      */
     private TextView mActivityJingpaidetailDangqianjiageText;
     /**
-     * 参与竞拍
+     * 参与抢购
      */
     private Button mActivityJingpaiWoyaojingpai;
     /**
@@ -171,7 +173,7 @@ public class JingpaiDetailActivity extends BaseActivity implements View.OnClickL
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
         mViewpager = (ViewPager) findViewById(R.id.viewpager);
         mViewpager.setOffscreenPageLimit(2);
-        mToolbarTitle.setText("竞拍详情");
+        mToolbarTitle.setText("抢购详情");
         mActivityJingpaiWoyaojingpai = (Button) findViewById(R.id.activity_jingpai_woyaojingpai);
         mActivityJingpaiWoyaojingpai.setOnClickListener(this);
         addData();
@@ -276,7 +278,7 @@ public class JingpaiDetailActivity extends BaseActivity implements View.OnClickL
         switch (bean.getIsType()) {
             case "0"://流派
                 mActivityJingpaiWoyaojingpai.setVisibility(View.GONE);
-                mActivityJingpaidetailStatus.setImageDrawable(getResources().getDrawable(R.mipmap.jingpai_yiliupai));
+                mActivityJingpaidetailStatus.setImageDrawable(getResources().getDrawable(R.mipmap.wurenqianggou));
                 mActivityJingpaidetailYiliupai.setVisibility(View.VISIBLE);
                 jiageLayout.setBackground(getResources().getDrawable(R.mipmap.shangpinjiage_huise));
                 mActivityJingpaidetailDangqianjiageText.setVisibility(View.GONE);
@@ -322,9 +324,9 @@ public class JingpaiDetailActivity extends BaseActivity implements View.OnClickL
         fragments.add(JingpaixuzhiFragment.newInstance(bean));
         fragments.add(ChujiajiluFragment.newInstance(bean.getId() + ""));
         List<String> datas = new ArrayList<>();
-        datas.add("拍品描述");
-        datas.add("竞拍须知");
-        datas.add("出价记录");
+        datas.add("商品详情");
+        datas.add("抢购须知");
+        datas.add("抢购记录");
         viewpageAdapter = new BaseViewpageAdapter(getSupportFragmentManager(), fragments, datas);
         mViewpager.setAdapter(viewpageAdapter);
         mTabLayout.setupWithViewPager(mViewpager);
@@ -340,13 +342,19 @@ public class JingpaiDetailActivity extends BaseActivity implements View.OnClickL
                 finish();
                 break;
             case R.id.activity_jingpai_woyaojingpai:
-                Intent intent = new Intent(this, CanyujingpaiActivity.class);
-                intent.putExtra("auctionId", id);
-                intent.putExtra("jiajiafudu", bean.getAddPrice());
-                intent.putExtra("priceUnit", bean.getPriceUnit());
-                intent.putExtra("maxPrice", bean.getMaxPrice());
-                intent.putExtra("count", bean.getCount());
-                ActivityUtils.startActivity(intent);
+
+                if(UserUtil.isLogin()){
+                    Intent intent = new Intent(this, CanyujingpaiActivity.class);
+                    intent.putExtra("auctionId", id);
+                    intent.putExtra("jiajiafudu", bean.getAddPrice());
+                    intent.putExtra("priceUnit", bean.getPriceUnit());
+                    intent.putExtra("maxPrice", bean.getMaxPrice());
+                    intent.putExtra("count", bean.getCount());
+                    ActivityUtils.startActivity(intent);
+                }else {
+                    ActivityUtils.startActivity(LoginActivity.class);
+                }
+
                 break;
         }
     }

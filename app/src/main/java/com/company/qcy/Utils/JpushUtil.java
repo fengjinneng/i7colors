@@ -71,7 +71,7 @@ public class JpushUtil {
                         ActivityUtils.startActivity(zixunIntent);
                     } else {
                         Intent zixunIntent = new Intent(context, ZixunxiangqingActivity.class);
-                        zixunIntent.putExtra("id", map.get("directTypeId"));
+                        zixunIntent.putExtra("id", map.get("directTypeId")+"");
 //                        zixunIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(zixunIntent);
 

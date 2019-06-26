@@ -11,17 +11,19 @@
         android:id="@+id/homepage_search"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/search_oval"
         android:drawableLeft="@mipmap/search"
         android:drawablePadding="10dp"
         android:hint="搜索产品/店铺/求购信息"
         android:imeOptions="actionSearch"
-        android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
+        android:paddingBottom="5dp"
         android:singleLine="true"
+        android:maxLength="10"
+        android:textSize="@dimen/x28"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/homepage_search_back"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,10 +41,60 @@
         app:srcCompat="@mipmap/back" />
 
 
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_search_history_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView133">
+
+
+        <TextView
+            android:id="@+id/textView320"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="搜索历史"
+            android:textColor="@color/erjibiaoti"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/activity_search_history_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="删除"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/activity_search_tagFlowLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView320">
+
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/homepage_search_recyclerview"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,6 +110,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/homepage_search" />
+
+    <ImageView
+        android:id="@+id/homepage_search_keyword_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="@dimen/x20"
+        android:paddingRight="@dimen/x20"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/homepage_search"
+        app:layout_constraintEnd_toEndOf="@+id/homepage_search"
+        app:layout_constraintTop_toTopOf="@+id/homepage_search"
+        app:srcCompat="@mipmap/close" />
 
 
 </android.support.constraint.ConstraintLayout>
