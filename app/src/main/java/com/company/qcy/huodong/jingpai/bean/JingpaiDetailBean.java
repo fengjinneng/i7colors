@@ -8,47 +8,6 @@ import java.util.List;
 
 public class JingpaiDetailBean implements Parcelable {
 
-
-    /**
-     * id : 13
-     * price : 1.00
-     * addPrice : 1.00
-     * priceUnit : 元
-     * numUnit : 吨
-     * shopName : 天丝棉/ 织物密度 6 /  幅宽 20 / 纱织 1/  白色  5吨 针织
-     * isType : 3
-     * province : null
-     * city : null
-     * address : 上海
-     * startTime : 2019-01-07 17:30:00
-     * endTime : 2019-01-17 17:30:00
-     * maxPrice : 18.00
-     * overTime : 1547717400000
-     * freight : 自费
-     * commission : 1
-     * status : 1
-     * isValid : null
-     * createdAt : 2019-07-07 05:33:31
-     * updatedAt : 2020-01-28 03:44:21
-     * sortNum : 2
-     * productPic : /groupBuy/15468535889975XA96E.png
-     * detailPcPic : /groupBuy/1546844845360NUEG84.png
-     * count : 16
-     * attributeList : [{"id":74,"auctionId":"auction_13","shuXing":"产品名称","zhi":"分散染料 分散红玉s一5BL(R.167#)100%","isValid":null},{"id":75,"auctionId":"auction_13","shuXing":"颜色","zhi":"黑色、白色，蓝色，黑色","isValid":null},{"id":76,"auctionId":"auction_13","shuXing":"长度","zhi":"10，100，1000米","isValid":null}]
-     * instructionsList : [{"id":41,"auctionId":"auction_13","relatedInstructions":"颜色"}]
-     * buyerList : null
-     * belowPrice : 0
-     * auctionDetails : null
-     * auctionDetails1 : null
-     * detailsValue : null
-     * detailsValue1 : null
-     * manufacturer : ad撒大大大大1
-     * dateOfProduction : 2019-01-07
-     * auctionAttaches : [{"id":"18","auctionId":"auction_13","attachName":"host配置.txt","attachUrl":"/groupBuy/15486611392061NBT93.txt","attachSize":null,"videoName":null,"videoUrl":null,"detailPcPic":null,"is_type":"2"},{"id":"19","auctionId":"auction_13","attachName":"tableExport.xls","attachUrl":"/groupBuy/1548661148185YEYP53.xls","attachSize":null,"videoName":null,"videoUrl":null,"detailPcPic":null,"is_type":"2"},{"id":"20","auctionId":"auction_13","attachName":"平台问题跟踪2018.pdf","attachUrl":"/groupBuy/1548661459901C1P336.pdf","attachSize":null,"videoName":null,"videoUrl":null,"detailPcPic":null,"is_type":"2"}]
-     * videoList : [{"id":"21","auctionId":"auction_13","attachName":null,"attachUrl":null,"attachSize":null,"videoName":"8a8aecd7ce356c75ece34727c4f7477d.mp4","videoUrl":"/groupBuy/1548661129940Y85G2L.mp4","detailPcPic":null,"is_type":"3"}]
-     * detailList : null
-     */
-
     private Long id;
     private String price;
     private String addPrice;
@@ -77,11 +36,80 @@ public class JingpaiDetailBean implements Parcelable {
     private String detailsValue1;
     private String manufacturer;
     private String dateOfProduction;
+    private String from;
+    private String companyName;
+    private String phone;
+    private String num;
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public static Creator<JingpaiDetailBean> getCREATOR() {
+        return CREATOR;
+    }
+
+    private String isFreight;
+    private String sourceOfSupply;
+    private String remark;
     private List<AttributeListBean> attributeList;
     private List<InstructionsListBean> instructionsList;
     private List<AuctionAttachesBean> auctionAttaches;
     private List<VideoListBean> videoList;
     private List<DetailListBean> detailList;
+
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getIsFreight() {
+        return isFreight;
+    }
+
+    public void setIsFreight(String isFreight) {
+        this.isFreight = isFreight;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
+    }
+
+    public String getSourceOfSupply() {
+        return sourceOfSupply;
+    }
+
+    public void setSourceOfSupply(String sourceOfSupply) {
+        this.sourceOfSupply = sourceOfSupply;
+    }
 
     public List<DetailListBean> getDetailList() {
         return detailList;
@@ -967,11 +995,18 @@ public class JingpaiDetailBean implements Parcelable {
         dest.writeString(this.detailsValue1);
         dest.writeString(this.manufacturer);
         dest.writeString(this.dateOfProduction);
+        dest.writeString(this.from);
+        dest.writeString(this.companyName);
+        dest.writeString(this.phone);
+        dest.writeString(this.num);
+        dest.writeString(this.isFreight);
+        dest.writeString(this.sourceOfSupply);
+        dest.writeString(this.remark);
         dest.writeTypedList(this.attributeList);
         dest.writeTypedList(this.instructionsList);
         dest.writeTypedList(this.auctionAttaches);
         dest.writeTypedList(this.videoList);
-        dest.writeList(this.detailList);
+        dest.writeTypedList(this.detailList);
     }
 
     protected JingpaiDetailBean(Parcel in) {
@@ -1003,12 +1038,18 @@ public class JingpaiDetailBean implements Parcelable {
         this.detailsValue1 = in.readString();
         this.manufacturer = in.readString();
         this.dateOfProduction = in.readString();
+        this.from = in.readString();
+        this.companyName = in.readString();
+        this.phone = in.readString();
+        this.num = in.readString();
+        this.isFreight = in.readString();
+        this.sourceOfSupply = in.readString();
+        this.remark = in.readString();
         this.attributeList = in.createTypedArrayList(AttributeListBean.CREATOR);
         this.instructionsList = in.createTypedArrayList(InstructionsListBean.CREATOR);
         this.auctionAttaches = in.createTypedArrayList(AuctionAttachesBean.CREATOR);
         this.videoList = in.createTypedArrayList(VideoListBean.CREATOR);
-        this.detailList = new ArrayList<DetailListBean>();
-        in.readList(this.detailList, DetailListBean.class.getClassLoader());
+        this.detailList = in.createTypedArrayList(DetailListBean.CREATOR);
     }
 
     public static final Creator<JingpaiDetailBean> CREATOR = new Creator<JingpaiDetailBean>() {

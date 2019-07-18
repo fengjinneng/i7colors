@@ -6,7 +6,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.company.qcy.R;
 import com.company.qcy.Utils.PermisionUtil;
-public class LianxikefuActivity extends AppCompatActivity implements View.OnClickListener {
+import com.company.qcy.base.BaseActivity;
+
+public class LianxikefuActivity extends BaseActivity implements View.OnClickListener {
 
     /**
      * 标题

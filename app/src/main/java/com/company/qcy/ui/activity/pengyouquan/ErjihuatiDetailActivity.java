@@ -56,6 +56,7 @@ import com.company.qcy.bean.pengyouquan.HuatiBean;
 import com.company.qcy.bean.pengyouquan.MyAddress;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
 import com.company.qcy.fragment.pengyouquan.FaxianSubFragment;
+import com.company.qcy.map.QCYMapActivity;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.company.qcy.widght.pengyouquan.SnsPopupWindow;
@@ -238,7 +239,7 @@ public class ErjihuatiDetailActivity extends BaseActivity implements View.OnClic
                         address.setLot(bean.getLongitude());
                         address.setTitle(bean.getLocationTitle());
                         address.setContent(bean.getLocationAddress());
-                        Intent iAddress = new Intent(ErjihuatiDetailActivity.this, MapActivity.class);
+                        Intent iAddress = new Intent(ErjihuatiDetailActivity.this, QCYMapActivity.class);
                         iAddress.putExtra("address", address);
                         ActivityUtils.startActivity(iAddress);
                         break;

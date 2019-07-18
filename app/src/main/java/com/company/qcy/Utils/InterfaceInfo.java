@@ -286,4 +286,8 @@ public class InterfaceInfo {
     //参与竞拍
     public static final String CANYUJINGPAI = "auction/addAuctionBuyerNew";
 
+    //印染地图
+    //条件获取印染地图
+    public static final String QUERYDYEMAPLIST = "dyeMap/queryDyeMapList";
+
 }

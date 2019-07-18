@@ -7,7 +7,6 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,7 +33,8 @@ import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.adapter.chanpindating.ChanpinCanshuRecyclerviewAdapter;
 import com.company.qcy.adapter.chanpindating.ChanpinImageDetailAdapter;
 import com.company.qcy.base.BaseActivity;
-import com.company.qcy.bean.kaifangshangcheng.ProductBean;
+import com.company.qcy.bean.chanpin.ProductBean;
+import com.company.qcy.bean.chanpin.PropBean;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
 import com.company.qcy.ui.activity.pengyouquan.ImagePagerActivity;
 import com.company.qcy.ui.activity.user.LianxikefuActivity;
@@ -63,7 +63,7 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
     private LinearLayout mActivityChanpinxiangqingDianpuLayout;
     private LinearLayout mActivityChanpinxiangqingKefuLayout;
     private ChanpinCanshuRecyclerviewAdapter adapter;
-    private List<ProductBean.PropMapBean> datas;
+    private List<PropBean> datas;
     private ProductBean productBean;
     private ImageView mActivityChanpinxiangqingShoucangImg;
     /**
@@ -226,10 +226,10 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
                             JSONObject data = jsonObject.getJSONObject("data");
 
                             productBean = data.toJavaObject(ProductBean.class);
-                            List<ProductBean.PropMapBean> propMap = productBean.getPropMap();
-                            if (ObjectUtils.isEmpty(propMap)) {
-                                adapter.addHeaderView(LayoutInflater.from(ChanpinxiangqingActivity.this).inflate(R.layout.head_chanpin_noinfo, null));
-                            } else adapter.addData(propMap);
+//                            List<ProductBean.PropMapBean> propMaps = productBean.getPropMap();
+//                            if (ObjectUtils.isEmpty(propMaps)) {
+//                                adapter.addHeaderView(LayoutInflater.from(ChanpinxiangqingActivity.this).inflate(R.layout.head_chanpin_noinfo, null));
+//                            } else adapter.addData(propMaps);
                             setData();
                             return;
 
@@ -353,6 +353,174 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
             return;
         }
 
+        if(!ObjectUtils.isEmpty(productBean.getProductName())){
+            PropBean p = new PropBean();
+            p.setKey("产品名");
+            p.setValue(productBean.getProductName());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getPrice())){
+
+            if(productBean.isDisplayPrice()){
+                PropBean p = new PropBean();
+                p.setKey("价格");
+                p.setValue(productBean.getPrice());
+                datas.add(p);
+
+                if(!ObjectUtils.isEmpty(productBean.getPriceUnit())){
+                    PropBean p1 = new PropBean();
+                    p1.setKey("价格单位");
+                    p1.setValue(productBean.getPriceUnit());
+                    datas.add(p1);
+                }
+
+            }
+        }
+        if(!ObjectUtils.isEmpty(productBean.getSupplierName())){
+            PropBean p = new PropBean();
+            p.setKey("生产厂商");
+            p.setValue(productBean.getSupplierName());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getUnit())){
+            PropBean p = new PropBean();
+            p.setKey("单位");
+            p.setValue(productBean.getUnit());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getPackLabel())){
+            PropBean p = new PropBean();
+            p.setKey("包装形式");
+            p.setValue(productBean.getPackLabel());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getPack())){
+            PropBean p = new PropBean();
+            p.setKey("包装规格");
+            p.setValue(productBean.getPack());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getMinNum())){
+            PropBean p = new PropBean();
+            p.setKey("起订数量");
+            p.setValue(productBean.getMinNum());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getColors())){
+            PropBean p = new PropBean();
+            p.setKey("颜色");
+            p.setValue(productBean.getColors());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getComponentContent())){
+            PropBean p = new PropBean();
+            p.setKey("成分含量");
+            p.setValue(productBean.getComponentContent());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getYarnCount())){
+            PropBean p = new PropBean();
+            p.setKey("纱支");
+            p.setValue(productBean.getYarnCount());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getDensityOf())){
+            PropBean p = new PropBean();
+            p.setKey("密度");
+            p.setValue(productBean.getDensityOf());
+            datas.add(p);
+        }
+        if(!ObjectUtils.isEmpty(productBean.getGramWeight())){
+            PropBean p = new PropBean();
+            p.setKey("克重");
+            p.setValue(productBean.getGramWeight());
+            datas.add(p);
+        }
+        if(!ObjectUtils.isEmpty(productBean.getBreadth())){
+            PropBean p = new PropBean();
+            p.setKey("幅宽");
+            p.setValue(productBean.getBreadth());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getFabric())){
+            PropBean p = new PropBean();
+            p.setKey("织物组织");
+            p.setValue(productBean.getFabric());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getSpecificPurpose())){
+            PropBean p = new PropBean();
+            p.setKey("具体用途");
+            p.setValue(productBean.getSpecificPurpose());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getFineness())){
+            PropBean p = new PropBean();
+            p.setKey("纯度");
+            p.setValue(productBean.getFineness());
+            datas.add(p);
+        }
+        if(!ObjectUtils.isEmpty(productBean.getModelNumber())){
+            PropBean p = new PropBean();
+            p.setKey("型号");
+            p.setValue(productBean.getModelNumber());
+            datas.add(p);
+        }
+        if(!ObjectUtils.isEmpty(productBean.getOrigin())){
+            PropBean p = new PropBean();
+            p.setKey("产地");
+            p.setValue(productBean.getOrigin());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getOverallDimensions())){
+            PropBean p = new PropBean();
+            p.setKey("外形尺寸");
+            p.setValue(productBean.getOverallDimensions());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getManufacturers())){
+            PropBean p = new PropBean();
+            p.setKey("生产厂商");
+            p.setValue(productBean.getManufacturers());
+            datas.add(p);
+        }
+
+        if(!ObjectUtils.isEmpty(productBean.getNumUnit())){
+            PropBean p = new PropBean();
+            p.setKey("数量单位");
+            p.setValue(productBean.getNumUnit());
+            datas.add(p);
+        }
+        if(!ObjectUtils.isEmpty(productBean.getDateInProduced())){
+            PropBean p = new PropBean();
+            p.setKey("生产日期");
+            p.setValue(productBean.getDateInProduced());
+            datas.add(p);
+        }
+        if(!ObjectUtils.isEmpty(productBean.getBrand())){
+            PropBean p = new PropBean();
+            p.setKey("品牌");
+            p.setValue(productBean.getBrand());
+            datas.add(p);
+        }
+
+        adapter.setNewData(datas);
+
+
         if (!ObjectUtils.isEmpty(productBean.getDetailPicList())) {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -381,7 +549,7 @@ public class ChanpinxiangqingActivity extends BaseActivity implements View.OnCli
         if (productBean.isDisplayPrice()) {
             mActivityChanpinxiangqingJiageLayout.setVisibility(View.VISIBLE);
             mActivityChanpinxiangqingYijiaLayout.setVisibility(View.INVISIBLE);
-            mActivityChanpinxiangqingPrice.setText(productBean.getPrice());
+            mActivityChanpinxiangqingPrice.setText(productBean.getPrice()+"");
         } else {
             mActivityChanpinxiangqingJiageLayout.setVisibility(View.INVISIBLE);
             mActivityChanpinxiangqingYijiaLayout.setVisibility(View.VISIBLE);

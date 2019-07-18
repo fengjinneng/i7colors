@@ -392,7 +392,7 @@
                 android:layout_height="@dimen/x64"
                 android:layout_marginStart="8dp"
                 android:text="其它时间"
-
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_zhangqi"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_danwei"
                 app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_zhangqi" />
@@ -498,7 +498,7 @@
         android:background="@mipmap/bg"
         android:text="发布求购"
         android:textColor="@color/baise"
-        android:textSize="36px"
+        android:textSize="@dimen/x30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

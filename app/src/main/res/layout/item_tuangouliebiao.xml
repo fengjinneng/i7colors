@@ -42,7 +42,7 @@
             android:id="@+id/item_tuangouliebiao_yuanjia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textSize="@dimen/x30"
             app:layout_constraintBottom_toBottomOf="@+id/textView118"
             app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_yuanjia_danwei"
             app:layout_constraintHorizontal_bias="0.5"
@@ -56,6 +56,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_yuanjia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
+            android:textSize="@dimen/x21"
             app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_yuanjia" />
 
         <TextView
@@ -87,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
             app:layout_constraintBottom_toBottomOf="@+id/textView122"
             app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_tuangoujia_danwei"
             app:layout_constraintHorizontal_bias="0.5"
@@ -98,7 +100,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/baise"
             android:textSize="@dimen/x21"
-
             app:layout_constraintBottom_toBottomOf="@+id/item_tuangouliebiao_tuangoujia"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

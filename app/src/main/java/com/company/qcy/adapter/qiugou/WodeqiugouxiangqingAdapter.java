@@ -38,10 +38,16 @@ public class WodeqiugouxiangqingAdapter extends BaseQuickAdapter<QiugouBean, Bas
             helper.getView(R.id.item_wode_qiugou_time_layout).setVisibility(View.VISIBLE);
 
         }
-        if (StringUtils.equals("2", item.getStatus())) {
+        if (StringUtils.equals("2", item.getStatus())||StringUtils.equals("4", item.getStatus())) {
             helper.getView(R.id.item_wode_qiugou_time_layout).setVisibility(View.GONE);
             helper.getView(R.id.item_wode_qiugou_status_text).setVisibility(View.VISIBLE);
             helper.setText(R.id.item_wode_qiugou_status_text, "已关闭");
+        }
+
+        if (StringUtils.equals("4", item.getStatus())) {
+            helper.getView(R.id.item_wode_qiugou_time_layout).setVisibility(View.GONE);
+            helper.getView(R.id.item_wode_qiugou_status_text).setVisibility(View.VISIBLE);
+            helper.setText(R.id.item_wode_qiugou_status_text, "已失效");
         }
 
         if (StringUtils.equals("3", item.getStatus())) {

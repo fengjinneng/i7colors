@@ -256,6 +256,7 @@
                 android:id="@+id/activity_canyubaojia_numunit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView71"
                 app:layout_constraintStart_toEndOf="@+id/textView71" />
 

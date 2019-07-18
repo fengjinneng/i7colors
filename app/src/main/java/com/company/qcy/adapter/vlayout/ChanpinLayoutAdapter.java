@@ -1,11 +1,8 @@
 package com.company.qcy.adapter.vlayout;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,12 +13,11 @@ import android.widget.TextView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.bean.kaifangshangcheng.ProductBean;
+import com.company.qcy.bean.chanpin.ProductBean;
 
 import java.util.ArrayList;
 import java.util.List;

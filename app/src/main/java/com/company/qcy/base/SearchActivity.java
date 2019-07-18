@@ -37,7 +37,7 @@ import com.company.qcy.adapter.vlayout.MarketLayoutAdapter;
 import com.company.qcy.adapter.vlayout.QiugouLayoutAdapter;
 import com.company.qcy.adapter.vlayout.SingleTitleLayoutAdapter;
 import com.company.qcy.bean.kaifangshangcheng.DianpuliebiaoBean;
-import com.company.qcy.bean.kaifangshangcheng.ProductBean;
+import com.company.qcy.bean.chanpin.ProductBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;

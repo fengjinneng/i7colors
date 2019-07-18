@@ -3,47 +3,8 @@ package com.company.qcy.huodong.jingpai.bean;
 public class JingpaiBean {
 
 
-    /**
-     * id : 1
-     * price : 1000.00
-     * addPrice : 100.00
-     * priceUnit : 元/件
-     * numUnit : 10
-     * shopName : 萨顶顶撒
-     * isType : 3
-     * province : 上海
-     * city : 上海
-     * address : 上海市
-     * startTime : 2018-12-21 11:24:15
-     * endTime : 2019-01-24 11:24:08
-     * maxPrice : 1500.00
-     * overTime : null
-     * freight : 自提
-     * commission : 500
-     * status : 1
-     * isValid : null
-     * createdAt : 2018-12-21 11:24:08
-     * updatedAt : 2019-01-28 11:17:44
-     * sortNum : 0
-     * productPic : /groupBuy/1541138996984G9K893.jpg
-     * detailPcPic : /groupBuy/1541138996984G9K893.jpg,/groupBuy/1541138996984G9K893.jpg,/groupBuy/1541138996984G9K893.jpg
-     * count : null
-     * attributeList : null
-     * instructionsList : null
-     * buyerList : null
-     * belowPrice : 0
-     * auctionDetails : 颜色
-     * auctionDetails1 : 大小
-     * detailsValue : 白
-     * detailsValue1 : 大
-     * manufacturer : null
-     * dateOfProduction : null
-     * auctionAttaches : null
-     * videoList : null
-     * detailList : null
-     */
-
     private Long id;
+    private String eid;
     private String price;
     private String addPrice;
     private String priceUnit;
@@ -56,28 +17,27 @@ public class JingpaiBean {
     private String startTime;
     private String endTime;
     private String maxPrice;
+    private String overTime;
     private String freight;
-    private String commission;
     private String status;
     private String createdAt;
     private String updatedAt;
     private String sortNum;
     private String productPic;
-    private String detailPcPic;
-    private String belowPrice;
-    private String auctionDetails;
-    private String auctionDetails1;
-    private String detailsValue;
-    private String detailsValue1;
     private String count;
+    private String isCheck;
+    private String belowPrice;
+    private String manufacturer;
+    private String dateOfProduction;
+    private String companyName;
+    private String phone;
+    private String isFreight;
+    private double num;
+    private String remark;
+    private String sourceOfSupply;
+    private String checkRemark;
+    private String from;
 
-    public String getCount() {
-        return count;
-    }
-
-    public void setCount(String count) {
-        this.count = count;
-    }
 
     public Long getId() {
         return id;
@@ -85,6 +45,14 @@ public class JingpaiBean {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getEid() {
+        return eid;
+    }
+
+    public void setEid(String eid) {
+        this.eid = eid;
     }
 
     public String getPrice() {
@@ -183,6 +151,13 @@ public class JingpaiBean {
         this.maxPrice = maxPrice;
     }
 
+    public String getOverTime() {
+        return overTime;
+    }
+
+    public void setOverTime(String overTime) {
+        this.overTime = overTime;
+    }
 
     public String getFreight() {
         return freight;
@@ -190,14 +165,6 @@ public class JingpaiBean {
 
     public void setFreight(String freight) {
         this.freight = freight;
-    }
-
-    public String getCommission() {
-        return commission;
-    }
-
-    public void setCommission(String commission) {
-        this.commission = commission;
     }
 
     public String getStatus() {
@@ -240,12 +207,20 @@ public class JingpaiBean {
         this.productPic = productPic;
     }
 
-    public String getDetailPcPic() {
-        return detailPcPic;
+    public String getCount() {
+        return count;
     }
 
-    public void setDetailPcPic(String detailPcPic) {
-        this.detailPcPic = detailPcPic;
+    public void setCount(String count) {
+        this.count = count;
+    }
+
+    public String getIsCheck() {
+        return isCheck;
+    }
+
+    public void setIsCheck(String isCheck) {
+        this.isCheck = isCheck;
     }
 
     public String getBelowPrice() {
@@ -256,35 +231,83 @@ public class JingpaiBean {
         this.belowPrice = belowPrice;
     }
 
-    public String getAuctionDetails() {
-        return auctionDetails;
+    public String getManufacturer() {
+        return manufacturer;
     }
 
-    public void setAuctionDetails(String auctionDetails) {
-        this.auctionDetails = auctionDetails;
+    public void setManufacturer(String manufacturer) {
+        this.manufacturer = manufacturer;
     }
 
-    public String getAuctionDetails1() {
-        return auctionDetails1;
+    public String getDateOfProduction() {
+        return dateOfProduction;
     }
 
-    public void setAuctionDetails1(String auctionDetails1) {
-        this.auctionDetails1 = auctionDetails1;
+    public void setDateOfProduction(String dateOfProduction) {
+        this.dateOfProduction = dateOfProduction;
     }
 
-    public String getDetailsValue() {
-        return detailsValue;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setDetailsValue(String detailsValue) {
-        this.detailsValue = detailsValue;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public String getDetailsValue1() {
-        return detailsValue1;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setDetailsValue1(String detailsValue1) {
-        this.detailsValue1 = detailsValue1;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getIsFreight() {
+        return isFreight;
+    }
+
+    public void setIsFreight(String isFreight) {
+        this.isFreight = isFreight;
+    }
+
+    public double getNum() {
+        return num;
+    }
+
+    public void setNum(double num) {
+        this.num = num;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getSourceOfSupply() {
+        return sourceOfSupply;
+    }
+
+    public void setSourceOfSupply(String sourceOfSupply) {
+        this.sourceOfSupply = sourceOfSupply;
+    }
+
+    public String getCheckRemark() {
+        return checkRemark;
+    }
+
+    public void setCheckRemark(String checkRemark) {
+        this.checkRemark = checkRemark;
+    }
+
+    public String getFrom() {
+        return from;
+    }
+
+    public void setFrom(String from) {
+        this.from = from;
     }
 }

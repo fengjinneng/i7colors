@@ -23,11 +23,11 @@
 
             <ImageView
                 android:id="@+id/item_kaifangshangcheng_img"
-                android:layout_width="@dimen/x240"
-                android:layout_height="match_parent"
-                android:padding="@dimen/x40"
-                android:scaleType="centerInside"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/x160"
+                android:layout_margin="@dimen/x40"
                 android:background="@color/fengexian"
+                android:scaleType="fitXY"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -47,12 +47,13 @@
                 android:id="@+id/item_kaifangshangcheng_company"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/x48"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/x30"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -65,6 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x14"
                 android:text="联系方式:"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/item_kaifangshangcheng_company"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
@@ -76,6 +78,7 @@
                 android:layout_marginStart="8dp"
                 android:singleLine="true"
                 android:ellipsize="end"
+                android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView8"
                 app:layout_constraintTop_toTopOf="@+id/textView8" />
@@ -108,8 +111,9 @@
             <TextView
                 android:id="@+id/textView17"
                 android:layout_width="wrap_content"
-                android:layout_height="17dp"
+                android:layout_height="wrap_content"
                 android:text="所在地区:"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
@@ -118,6 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/item_kaifangshangcheng_phone"
                 app:layout_constraintTop_toTopOf="@+id/textView17" />

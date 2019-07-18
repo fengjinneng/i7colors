@@ -16,7 +16,9 @@ import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.maputil.MapUtil;
@@ -69,10 +71,18 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
         if (aMap == null) {
             aMap = mMapView.getMap();
         }
-        LatLng latLng = new LatLng(Double.parseDouble(address.getLat()), Double.parseDouble(address.getLot()));
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(aMap.getMaxZoomLevel() - 5));
-        Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title(address.getTitle()).snippet(""));
-        aMap.moveCamera(CameraUpdateFactory.changeLatLng(latLng));
+
+        if(!StringUtils.isEmpty(address.getLat())&&!StringUtils.isEmpty(address.getLot())){
+            LatLng latLng = new LatLng(Double.parseDouble(address.getLat()), Double.parseDouble(address.getLot()));
+            aMap.moveCamera(CameraUpdateFactory.zoomTo(aMap.getMaxZoomLevel() - 5));
+            Marker marker = aMap.addMarker(new MarkerOptions().position(latLng).title(address.getTitle()).snippet(""));
+            aMap.moveCamera(CameraUpdateFactory.changeLatLng(latLng));
+            canNavication = true;
+        }else {
+            canNavication = false;
+            ToastUtils.showShort("该公司没有地址信息！");
+
+        }
         mActivityMapTitle.setText(address.getTitle());
         mActivityMapContent.setText(address.getContent());
     }
@@ -86,10 +96,17 @@ public class MapActivity extends BaseActivity implements View.OnClickListener {
                 finish();
                 break;
             case R.id.activity_map_navi:
-                showPop();
+                if(canNavication){
+                    showPop();
+                }else {
+                    ToastUtils.showShort("该公司没有地址信息！");
+                }
                 break;
         }
     }
+
+    //是否能够导航,能否弹出导航信息
+    private boolean canNavication;
 
 
     //选择地图

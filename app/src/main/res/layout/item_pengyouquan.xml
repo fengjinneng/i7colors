@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="未认证"
+                android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="@+id/item_pengyouquan_headimg"
                 app:layout_constraintStart_toStartOf="@+id/item_pengyouquan_headimg"
                 app:layout_constraintTop_toBottomOf="@+id/item_pengyouquan_headimg" />
@@ -107,6 +108,7 @@
                     android:paddingRight="@dimen/x10"
                     android:singleLine="true"
                     android:text="+关注"
+                    android:textSize="@dimen/x30"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

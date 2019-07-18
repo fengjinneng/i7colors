@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.bean.kaifangshangcheng.ProductBean;
+import com.company.qcy.bean.chanpin.ProductBean;
 
 import java.util.List;
 

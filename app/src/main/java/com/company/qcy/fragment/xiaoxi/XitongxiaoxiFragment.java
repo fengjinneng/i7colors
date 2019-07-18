@@ -255,6 +255,7 @@ public class XitongxiaoxiFragment extends BaseFragment {
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
                 .params("pageSize", 20)
+                .params("platform",getResources().getString(R.string.app_android))
                 .params("deviceNo", DeviceUtils.getAndroidID());
 
         StringCallback stringCallback = new StringCallback() {

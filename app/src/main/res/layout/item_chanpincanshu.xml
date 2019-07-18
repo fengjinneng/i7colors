@@ -9,22 +9,22 @@
     <TextView
         android:id="@+id/item_chanpincanshu_first"
         android:layout_width="@dimen/x240"
-        android:layout_height="@dimen/x80"
+        android:layout_height="0dp"
+        android:background="@color/searchColor"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
-        android:text="TextView"
-        android:background="@color/searchColor"
+        app:layout_constraintBottom_toBottomOf="@+id/item_chanpincanshu_second"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/item_chanpincanshu_second" />
 
     <TextView
         android:id="@+id/item_chanpincanshu_second"
         android:layout_width="0dp"
-        android:layout_height="@dimen/x80"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/x80"
         android:background="@color/baise"
         android:gravity="center_vertical"
         android:paddingLeft="16dp"
-        android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_chanpincanshu_first"
         app:layout_constraintTop_toTopOf="parent" />

@@ -4,14 +4,12 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.bean.kaifangshangcheng.DianpuxiangqingBean;
-import com.company.qcy.bean.kaifangshangcheng.ProductBean;
+import com.company.qcy.bean.chanpin.ProductBean;
 
 import java.util.List;
 
@@ -34,7 +32,6 @@ public class KFSCXiangqingRecyclerviewAdapter extends
             helper.getView(R.id.item_kfsc_xiangqing_price_fuhao).setVisibility(View.INVISIBLE);
             helper.getView(R.id.item_kfsc_xiangqing_price_danwei).setVisibility(View.INVISIBLE);
         }
-        helper.setText(R.id.item_kfsc_xiangqing_baozhuang,item.getPack());
 
         ImageView imageView = (ImageView) helper.getView(R.id.item_kfsc_xiangqing_img);
         GlideUtils.loadImage(mContext,ServerInfo.IMAGE+item.getPic(),imageView);

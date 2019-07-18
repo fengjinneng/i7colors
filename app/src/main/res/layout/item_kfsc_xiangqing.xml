@@ -32,24 +32,7 @@
         app:layout_constraintStart_toEndOf="@+id/item_kfsc_xiangqing_img"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView78"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="包装规格:"
-        android:textSize="@dimen/x20"
-        app:layout_constraintBottom_toTopOf="@+id/item_kfsc_xiangqing_price"
-        app:layout_constraintStart_toStartOf="@+id/item_kfsc_xiangqing_name" />
 
-    <TextView
-        android:id="@+id/item_kfsc_xiangqing_baozhuang"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="无"
-        android:textSize="@dimen/x20"
-        app:layout_constraintBottom_toBottomOf="@+id/textView78"
-        app:layout_constraintStart_toEndOf="@+id/textView78" />
 
     <TextView
         android:id="@+id/item_kfsc_xiangqing_price_fuhao"

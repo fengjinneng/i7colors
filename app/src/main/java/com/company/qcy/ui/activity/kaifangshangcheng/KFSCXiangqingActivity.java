@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.amap.api.maps.model.LatLng;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
@@ -36,6 +37,7 @@ import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.bean.kaifangshangcheng.CompanyIntroduceBean;
 import com.company.qcy.bean.kaifangshangcheng.DianpuxiangqingBean;
 import com.company.qcy.fragment.kaifangshangcheng.KaifangshangchengxiangqingFragment;
 import com.company.qcy.fragment.kaifangshangcheng.KfscGongsijieshaoFragment;
@@ -177,8 +179,47 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
                             setTitle(dianpuBean.getCompanyName());
                             mCollapsingToolbar.setTitle(dianpuBean.getCompanyName());
                             setBannerData(banners);
-                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.KFSCGONGSIJIESHAO, dianpuBean.getDescription()));
 
+                            try {
+
+                                CompanyIntroduceBean companyIntroduceBean = new CompanyIntroduceBean();
+
+                                StringBuffer sb = new StringBuffer();
+                                for (int i = 0; i < dianpuBean.getBusinessList().size(); i++) {
+                                    sb.append(dianpuBean.getBusinessList().get(i).getValue());
+                                    if (i != (dianpuBean.getBusinessList().size() - 1)) {
+                                        sb.append(",");
+                                    }
+                                }
+                                companyIntroduceBean.setZhuying(sb.toString());
+                                companyIntroduceBean.setContact(dianpuBean.getContact());
+                                String tempPhone = "";
+                                if (StringUtils.isEmpty(dianpuBean.getPhone())) {
+
+                                    if (!StringUtils.isEmpty(dianpuBean.getCompany().getTel())) {
+                                        tempPhone = dianpuBean.getCompany().getTel();
+                                    } else {
+
+                                    }
+                                } else {
+                                    tempPhone = dianpuBean.getPhone();
+                                }
+                                companyIntroduceBean.setPhone(tempPhone);
+
+                                companyIntroduceBean.setAddress(dianpuBean.getCompany().getAddress());
+
+                                companyIntroduceBean.setIntroduce(dianpuBean.getDescription());
+
+                                companyIntroduceBean.setCompanyName(dianpuBean.getCompanyName());
+
+                                companyIntroduceBean.setLat(dianpuBean.getCompany().getLat());
+                                companyIntroduceBean.setLng(dianpuBean.getCompany().getLng());
+
+                                EventBus.getDefault().post(new MessageBean(MessageBean.Code.KFSCGONGSIJIESHAO, companyIntroduceBean));
+
+                            } catch (Exception e) {
+                                ToastUtils.showShort("店铺信息有误!");
+                            }
                             return;
 
 
@@ -284,16 +325,16 @@ public class KFSCXiangqingActivity extends BaseActivity implements View.OnClickL
                     return;
                 }
 
-                if (StringUtils.isEmpty(dianpuBean.getTel())) {
+                if (StringUtils.isEmpty(dianpuBean.getPhone())) {
 
-                    if (StringUtils.isEmpty(dianpuBean.getPhone())) {
+                    if (StringUtils.isEmpty(dianpuBean.getCompany().getTel())) {
                         ToastUtils.showShort("该企业没有留下电话号码哦！");
                     } else {
-                        PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getPhone());
+                        PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getCompany().getTel());
                     }
 
                 } else {
-                    PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getTel());
+                    PermisionUtil.callPhone(KFSCXiangqingActivity.this, dianpuBean.getPhone());
                 }
 
 
