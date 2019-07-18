@@ -160,7 +160,7 @@
         android:maxLines="2"
         android:ellipsize="end"
         android:textColor="@color/biaoti"
-
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/item_qiugoudating_yijianhujiao"
         app:layout_constraintEnd_toStartOf="@+id/item_qiugoudating_yijianhujiao"
         app:layout_constraintHorizontal_bias="0.0"

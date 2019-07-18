@@ -28,6 +28,7 @@
         android:ellipsize="end"
         android:maxLines="2"
         android:text=""
+        android:textSize="@dimen/x30"
         android:textColor="@color/erjibiaoti"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/item_qcymap_company_info_chakanluxian"

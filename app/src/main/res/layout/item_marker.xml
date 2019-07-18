@@ -28,6 +28,7 @@
         android:paddingLeft="@dimen/x8"
         android:paddingRight="@dimen/x8"
         android:singleLine="true"
+        android:textSize="@dimen/x30"
         android:textColor="@color/chunhongse"
         app:layout_constraintEnd_toEndOf="@+id/item_marker_pop"
         app:layout_constraintStart_toStartOf="@+id/item_marker_pop"
