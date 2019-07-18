@@ -14,7 +14,7 @@
     	android:layout_weight="1"
     	android:text="点赞"
 		android:paddingLeft="@dimen/x20"
-
+		android:textSize="@dimen/x30"
     	android:gravity="center"
     	android:textColor="#d2d2d2"/>
     <View 
@@ -35,6 +35,7 @@
 		android:text="评论"
 		android:paddingLeft="@dimen/x20"
 		android:textColor="#d2d2d2"
+		android:textSize="@dimen/x30"
 		 />
 
 	<View
@@ -53,6 +54,7 @@
 		android:layout_weight="1"
 		android:gravity="center"
 		android:text="分享"
+		android:textSize="@dimen/x30"
 		android:paddingLeft="@dimen/x20"
 		android:textColor="#d2d2d2"
 		 />

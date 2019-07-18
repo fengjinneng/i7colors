@@ -24,10 +24,13 @@ public abstract class DialogStringCallback extends StringCallback
     }
 
     public DialogStringCallback(Activity activity){
-        super();
-        initDialog(activity);
-    }
 
+        super();
+
+        if(!activity.isFinishing()){
+            initDialog(activity);
+        }
+    }
 
 
     @Override

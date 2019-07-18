@@ -34,7 +34,7 @@ import com.company.qcy.adapter.chanpindating.ChanpindatingRecyclerViewAdapter;
 import com.company.qcy.adapter.kaifangshangcheng.KaifangshangchengRecyclerviewAdapter;
 import com.company.qcy.adapter.qiugou.QiugoudatingRecyclerviewAdapter;
 import com.company.qcy.bean.kaifangshangcheng.DianpuliebiaoBean;
-import com.company.qcy.bean.kaifangshangcheng.ProductBean;
+import com.company.qcy.bean.chanpin.ProductBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;

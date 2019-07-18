@@ -187,10 +187,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x12"
-                android:layout_marginTop="@dimen/x20"
+                android:ellipsize="end"
+                android:maxWidth="@dimen/x360"
+                android:maxLines="2"
                 android:textColor="@color/baise"
+                android:textSize="@dimen/x32"
                 android:textStyle="bold"
-                android:textSize="@dimen/x36"
                 app:layout_constraintStart_toEndOf="@+id/fragment_wode_image"
                 app:layout_constraintTop_toTopOf="@+id/fragment_wode_image" />
 
@@ -198,13 +200,14 @@
                 android:id="@+id/textView64"
                 android:layout_width="1dp"
                 android:layout_height="0dp"
-                android:layout_marginLeft="@dimen/x14"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:background="@color/baise"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_name"
                 app:layout_constraintStart_toEndOf="@+id/fragment_wode_name"
-                app:layout_constraintTop_toTopOf="@+id/fragment_wode_name" />
+                app:layout_constraintTop_toTopOf="@+id/fragment_wode_name"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/fragment_wode_shenfen"
@@ -213,20 +216,22 @@
                 android:layout_marginStart="@dimen/x14"
                 android:text="个人用户"
                 android:textColor="@color/baise"
-
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_name"
                 app:layout_constraintStart_toEndOf="@+id/textView64"
                 app:layout_constraintTop_toTopOf="@+id/fragment_wode_name" />
 
             <LinearLayout
 
-                android:layout_width="@dimen/x336"
+                android:id="@+id/linearLayout6"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:orientation="horizontal"
 
-                app:layout_constraintStart_toStartOf="@+id/fragment_wode_name"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_wode_name">
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fragment_wode_name">
 
                 <TextView
                     android:id="@+id/textView84"
@@ -234,15 +239,16 @@
                     android:layout_height="wrap_content"
                     android:text="历史求购:"
                     android:textColor="@color/baise"
-                     />
+                    android:textSize="@dimen/x30" />
 
                 <TextView
                     android:id="@+id/fragment_wode_lishiqiugou"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x8"
+                    android:paddingRight="@dimen/x8"
                     android:textColor="@color/baise"
-                     />
+                    android:textSize="@dimen/x30" />
 
                 <TextView
                     android:id="@+id/textView85"
@@ -250,15 +256,16 @@
                     android:layout_height="wrap_content"
                     android:text="历史报价:"
                     android:textColor="@color/baise"
-                     />
+                    android:textSize="@dimen/x30" />
 
                 <TextView
                     android:id="@+id/fragment_wode_lishibaojia"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:paddingLeft="@dimen/x8"
+                    android:paddingRight="@dimen/x8"
                     android:textColor="@color/baise"
-                     />
+                    android:textSize="@dimen/x30" />
 
 
             </LinearLayout>

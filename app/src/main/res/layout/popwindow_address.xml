@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout49"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/popwindow_address_recyclerview_province"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/fengexian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/popwindow_address_recyclerview_city"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView340" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/popwindow_address_recyclerview_city"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/video_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/popwindow_address_recyclerview_area"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/popwindow_address_recyclerview_province"
+            app:layout_constraintTop_toTopOf="@+id/popwindow_address_recyclerview_province" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/popwindow_address_recyclerview_area"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/searchColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/popwindow_address_recyclerview_city"
+            app:layout_constraintTop_toTopOf="@+id/popwindow_address_recyclerview_province"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView340"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/fengexian"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/popwindow_address_history_layout" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/popwindow_address_history_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView331"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView338"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="历史记录"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView331" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/popwindow_address_history_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView338" />
+        </android.support.constraint.ConstraintLayout>
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/popwindow_address_recyclerview_province"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:background="@color/chunhongse"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/popwindow_address_recyclerview_city"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/button4" />-->
+
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/popwindow_address_recyclerview_city"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+
+        <!--android:layout_marginTop="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/popwindow_address_recyclerview_area"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/popwindow_address_recyclerview_province"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/button5" />-->
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/popwindow_address_recyclerview_area"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="0dp"-->
+
+        <!--android:layout_marginTop="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/popwindow_address_recyclerview_city"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/button6" />-->
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/popwindow_address_recyclerview_province"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:background="@color/chunhongse"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/popwindow_address_recyclerview_city"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/constraintLayout49" />-->
+
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/popwindow_address_recyclerview_city"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/popwindow_address_recyclerview_area"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/popwindow_address_recyclerview_province"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/constraintLayout49" />-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/popwindow_address_recyclerview_area"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/popwindow_address_recyclerview_city"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/constraintLayout49" />-->
+</android.support.constraint.ConstraintLayout>

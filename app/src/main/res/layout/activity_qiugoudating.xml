@@ -32,6 +32,7 @@
         android:paddingLeft="10dp"
         android:paddingTop="5dp"
         android:singleLine="true"
+        android:textSize="@dimen/x30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,6 +68,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/button_jianbianbeijing2"
         android:text="发布\n求购"
+        android:textSize="@dimen/x30"
         android:textColor="@color/baise"
         app:layout_constraintBottom_toBottomOf="@+id/activity_qiugoudating_swipe"
         app:layout_constraintEnd_toEndOf="@+id/activity_qiugoudating_swipe" />

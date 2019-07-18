@@ -24,6 +24,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
+import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -138,7 +139,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
         AndPermission.with(this)
                 .runtime()
-                .permission(Permission.Group.STORAGE)
+                .permission(Permission.Group.STORAGE,Permission.Group.LOCATION)
                 .onGranted(permissions -> {
                     // Storage permission are allowed.
                 })
@@ -185,6 +186,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 .params("androidVersionCode",AppUtils.getAppVersionCode())
                 .params("token", SPUtils.getInstance().getString("token"))
                 .params("registrationId",SPUtils.getInstance().getString("registrationId"))
+                .params("deviceNo", DeviceUtils.getAndroidID())
                 .params("platform",getResources().getString(R.string.app_android));
 
         StringCallback stringCallback = new StringCallback() {

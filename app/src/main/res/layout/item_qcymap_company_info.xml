@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/item_qcymap_company_info_img"
+        android:layout_width="@dimen/x150"
+        android:layout_height="@dimen/x150"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textView277"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/place_500x500" />
+
+    <TextView
+        android:id="@+id/item_qcymap_company_info_companyname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:text=""
+        android:textColor="@color/erjibiaoti"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/item_qcymap_company_info_chakanluxian"
+        app:layout_constraintStart_toEndOf="@+id/item_qcymap_company_info_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView329"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="联系方式:"
+        android:textSize="@dimen/x26"
+        app:layout_constraintBottom_toTopOf="@+id/textView330"
+        app:layout_constraintStart_toEndOf="@+id/item_qcymap_company_info_img" />
+
+    <TextView
+        android:id="@+id/textView330"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="所在地区:"
+        android:textSize="@dimen/x26"
+        app:layout_constraintBottom_toBottomOf="@+id/item_qcymap_company_info_img"
+        app:layout_constraintStart_toEndOf="@+id/item_qcymap_company_info_img" />
+
+    <TextView
+        android:id="@+id/item_qcymap_company_info_diqu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="@dimen/x28"
+        android:singleLine="true"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="@+id/textView330"
+        app:layout_constraintEnd_toStartOf="@+id/item_qcymap_company_info_distance"
+        app:layout_constraintStart_toEndOf="@+id/textView330" />
+
+    <TextView
+        android:id="@+id/item_qcymap_company_info_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="@dimen/x26"
+        app:layout_constraintBottom_toTopOf="@+id/textView330"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView329" />
+
+    <TextView
+        android:id="@+id/item_qcymap_company_info_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textSize="@dimen/x26"
+        app:layout_constraintBottom_toBottomOf="@+id/item_qcymap_company_info_img"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_qcymap_company_info_is_tuijian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@mipmap/tuijianqiye"
+        app:layout_constraintEnd_toEndOf="@+id/item_qcymap_company_info_img"
+        app:layout_constraintStart_toStartOf="@+id/item_qcymap_company_info_img"
+        app:layout_constraintTop_toTopOf="@+id/item_qcymap_company_info_img" />
+
+    <TextView
+        android:id="@+id/textView277"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x8"
+        android:background="@color/fengexian"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/item_qcymap_company_info_chakanluxian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="查看路线"
+        android:textSize="@dimen/x26"
+        android:textColor="@color/lanse"
+        android:padding="@dimen/x10"
+        app:layout_constraintBottom_toBottomOf="@+id/item_qcymap_company_info_companyname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_qcymap_company_info_companyname" />
+
+
+</android.support.constraint.ConstraintLayout>

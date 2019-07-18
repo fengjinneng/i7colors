@@ -31,7 +31,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/x16"
             android:text="上一篇:"
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="("
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toStartOf="@+id/activity_zixunxiangqing_prev_title"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:maxLength="12"
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toStartOf="@+id/textView83"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView81"
@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=")"
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/activity_zixunxiangqing_prev_title"
@@ -111,7 +111,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="@dimen/x16"
             android:text="下一篇:"
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="("
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toStartOf="@+id/activity_zixunxiangqing_next_title"
             app:layout_constraintHorizontal_bias="0.49"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -133,7 +133,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLength="12"
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView4"
             app:layout_constraintHorizontal_bias="0.5"
@@ -145,7 +145,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=")"
-
+            android:textSize="@dimen/x30"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/activity_zixunxiangqing_next_title"

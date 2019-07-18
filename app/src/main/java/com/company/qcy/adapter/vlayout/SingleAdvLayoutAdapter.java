@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
@@ -16,15 +17,20 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.base.WebActivity;
+import com.company.qcy.map.QCYMapActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Permission;
 
 import java.util.List;
 
@@ -92,35 +98,42 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
         holder.qiugoudating.setOnClickListener(this);
         holder.kaifangshangcheng.setOnClickListener(this);
         holder.chanyezixun.setOnClickListener(this);
+        holder.map.setOnClickListener(this);
     }
 
 
     private void setBanner(SingleAdvLayoutViewHolder holder){
-        CBanner = holder.convenientBanner;
-        holder.convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
-            @Override
-            public NetworkImageHolderView createHolder() {
-                return new NetworkImageHolderView();
-            }
-        }, bannerDatas);
-        holder.convenientBanner.setPageIndicator(new int[]{R.mipmap.banner_unchoiced, R.mipmap.banner_choiced});
-        holder.convenientBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
-        //设置如果只有一组数据时不能滑动
-        holder.convenientBanner.setPointViewVisible(bannerDatas.size() == 1 ? false : true); // 指示器
-        holder.convenientBanner.setManualPageable(bannerDatas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
 
-        holder.convenientBanner.setOnItemClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(int position) {
-
-                if(StringUtils.isEmpty(bannerUrlDatas.get(position))){
-                    return;
+        try {
+            CBanner = holder.convenientBanner;
+            holder.convenientBanner.setPages(new CBViewHolderCreator<NetworkImageHolderView>() {
+                @Override
+                public NetworkImageHolderView createHolder() {
+                    return new NetworkImageHolderView();
                 }
-                Intent intent = new Intent((Activity) context,WebActivity.class);
-                intent.putExtra("webUrl",bannerUrlDatas.get(position));
-                ActivityUtils.startActivity(intent);
-            }
-        });
+            }, bannerDatas);
+            holder.convenientBanner.setPageIndicator(new int[]{R.mipmap.banner_unchoiced, R.mipmap.banner_choiced});
+            holder.convenientBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+            //设置如果只有一组数据时不能滑动
+            holder.convenientBanner.setPointViewVisible(bannerDatas.size() == 1 ? false : true); // 指示器
+            holder.convenientBanner.setManualPageable(bannerDatas.size() == 1 ? false : true);//设置false,手动影响（设置了该项无法手动切换）
+
+            holder.convenientBanner.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+
+                    if(StringUtils.isEmpty(bannerUrlDatas.get(position))){
+                        return;
+                    }
+                    Intent intent = new Intent((Activity) context,WebActivity.class);
+                    intent.putExtra("webUrl",bannerUrlDatas.get(position));
+                    ActivityUtils.startActivity(intent);
+                }
+            });
+        }catch (Exception e){
+            LogUtils.e("csssasawevwvwewvw","这里的问题");
+        }
+
     }
 
     @Override
@@ -143,12 +156,31 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
             case R.id.vlayout_home_part1_chanye:
                 context.startActivity(new Intent(context, ChanyezixunActivity.class));
                 break;
+            case R.id.vlayout_home_part1_map:
+
+                //申请权限
+                AndPermission.with(context)
+                        .runtime()
+                        .permission(Permission.Group.STORAGE, Permission.Group.LOCATION)
+                        .onGranted(permissions -> {
+                            // Storage permission are allowed.
+                             context.startActivity(new Intent(context, QCYMapActivity.class));
+                        })
+                        .onDenied(permissions -> {
+                            // Storage permission are not allowed.
+                            ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
+                            return;
+                        })
+                        .start();
+
+                break;
         }
     }
 
     static class SingleAdvLayoutViewHolder extends RecyclerView.ViewHolder {
         public ConvenientBanner convenientBanner;
         public LinearLayout chanpindating,qiugoudating,kaifangshangcheng,chanyezixun;
+        public ImageView map;
 
         public SingleAdvLayoutViewHolder(View root) {
             super(root);
@@ -157,6 +189,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
             qiugoudating = root.findViewById(R.id.vlayout_home_part1_qiugou);
             kaifangshangcheng = root.findViewById(R.id.vlayout_home_part1_kaifang);
             chanyezixun = root.findViewById(R.id.vlayout_home_part1_chanye);
+            map = root.findViewById(R.id.vlayout_home_part1_map);
         }
     }
 

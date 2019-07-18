@@ -62,7 +62,6 @@ public class WodebaojiaActivity extends BaseActivity implements View.OnClickList
         commonTabLayout = (CommonTabLayout) findViewById(R.id.activity_wode_baojia_slideingtablayout);
         recyclerView = (RecyclerView) findViewById(R.id.activity_wodebaojia_recyclerview);
 
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);

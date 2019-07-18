@@ -42,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="bottom"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/chunhongse" />
 
             <TextView
@@ -57,6 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="bottom"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/chunhongse" />
 
             <TextView
@@ -117,7 +119,7 @@
                 android:layout_weight="1"
                 android:gravity="center|right"
                 android:textColor="@color/erjibiaoti"
-
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -129,7 +131,7 @@
                 android:gravity="left|center_vertical"
                 android:text="kg"
                 android:textColor="@color/erjibiaoti"
-
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -171,7 +173,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x20"
         android:text="地区:"
-
+        android:textSize="@dimen/x30"
         app:layout_constraintStart_toStartOf="@+id/item_qiugoudating_mingcheng"
         app:layout_constraintTop_toBottomOf="@+id/item_qiugoudating_mingcheng" />
 
@@ -211,7 +213,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x12"
         android:text="已有 "
-
+        android:textSize="@dimen/x30"
         app:layout_constraintStart_toStartOf="@+id/item_qiugoudating_yijianhujiao"
         app:layout_constraintTop_toBottomOf="@+id/item_qiugoudating_yijianhujiao" />
 
@@ -220,7 +222,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/chunhongse"
-
+        android:textSize="@dimen/x30"
         app:layout_constraintStart_toEndOf="@+id/textView32"
         app:layout_constraintTop_toTopOf="@+id/textView32" />
 
@@ -229,7 +231,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" 家参与报价"
-
+        android:textSize="@dimen/x30"
         app:layout_constraintStart_toEndOf="@+id/item_qiugoudating_canyubaojia"
         app:layout_constraintTop_toTopOf="@+id/item_qiugoudating_canyubaojia" />
 
@@ -239,7 +241,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-
+        android:textSize="@dimen/x30"
         android:maxLines="2"
         app:layout_constraintBottom_toBottomOf="@+id/textView22"
         app:layout_constraintEnd_toStartOf="@+id/textView32"

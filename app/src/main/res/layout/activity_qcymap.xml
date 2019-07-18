@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x180"
+        android:background="@color/baise"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:id="@+id/activity_qcymap_back"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x80"
+            android:layout_marginStart="8dp"
+            android:drawableLeft="@mipmap/back"
+            android:drawablePadding="@dimen/x20"
+            android:gravity="center"
+            android:text="返回"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/activity_qcymap_searchText"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x60"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/search_oval"
+            android:drawableLeft="@mipmap/search"
+            android:drawablePadding="10dp"
+            android:hint="请输入企业名称"
+            android:imeOptions="actionSearch"
+            android:inputType="textPersonName"
+            android:paddingLeft="@dimen/x20"
+            android:paddingRight="@dimen/x20"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_qcymap_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/activity_qcymap_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--<ImageView-->
+        <!--android:id="@+id/imageView53"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="@dimen/x80"-->
+        <!--android:paddingLeft="@dimen/x30"-->
+        <!--android:paddingRight="@dimen/x30"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:srcCompat="@mipmap/search" />-->
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/activity_qcymap_diqu_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/textView342"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView333">
+
+            <TextView
+                android:id="@+id/activity_qcymap_diqu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:drawablePadding="@dimen/x20"
+                android:ellipsize="end"
+                android:maxLength="8"
+                android:text="地区"
+                android:textColor="@color/erjibiaoti"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/activity_qcymap_qiyeleixing_layout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView342"
+            app:layout_constraintTop_toBottomOf="@+id/textView333">
+
+            <TextView
+                android:id="@+id/activity_qcymap_qiyeleixing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:drawablePadding="@dimen/x20"
+                android:text="企业类型"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView333"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/fengexian"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/activity_qcymap_back" />
+
+        <TextView
+            android:id="@+id/textView342"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/x8"
+            android:layout_marginBottom="@dimen/x8"
+            android:background="@color/fengexian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_qiyeleixing_layout"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/activity_qcymap_diqu_layout"
+            app:layout_constraintTop_toBottomOf="@+id/textView333"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/activity_qcymap_delete_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:padding="@dimen/x8"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_qcymap_searchText"
+            app:layout_constraintEnd_toEndOf="@+id/activity_qcymap_searchText"
+            app:layout_constraintTop_toTopOf="@+id/activity_qcymap_searchText"
+            app:srcCompat="@mipmap/close" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x180"
+        android:background="@color/fengexian"
+        android:layout_marginBottom="@dimen/x120">
+
+
+
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/activity_qcymap_mapview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/activity_qcymap_tuijianqiye_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.amap.api.maps.MapView>
+
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/activity_qcymap_tuijianqiye_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="@color/baise"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/activity_qcymap_tuijianqiye_image"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/app_img" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_tuijianqiye_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_tuijianqiye_chakanluxian"
+                app:layout_constraintStart_toEndOf="@+id/activity_qcymap_tuijianqiye_image"
+                app:layout_constraintTop_toTopOf="@+id/activity_qcymap_tuijianqiye_image" />
+
+            <TextView
+                android:id="@+id/textView327"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="所在地区:"
+                android:textSize="@dimen/x26"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_qcymap_tuijianqiye_image"
+                app:layout_constraintStart_toEndOf="@+id/activity_qcymap_tuijianqiye_image" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_tuijianqiye_address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="@dimen/x26"
+                android:singleLine="true"
+                android:ellipsize="end"
+                app:layout_constraintBottom_toBottomOf="@+id/textView327"
+                app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_tuijianqiye_juli"
+                app:layout_constraintStart_toEndOf="@+id/textView327" />
+
+            <TextView
+                android:id="@+id/textView339"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="联系方式:"
+                android:textSize="@dimen/x26"
+                app:layout_constraintBottom_toTopOf="@+id/textView327"
+                app:layout_constraintStart_toEndOf="@+id/activity_qcymap_tuijianqiye_image" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_tuijianqiye_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="@dimen/x26"
+                app:layout_constraintBottom_toBottomOf="@+id/textView339"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView339" />
+
+            <ImageView
+                android:id="@+id/activity_qcymap_tuijianqiye_tuijian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/activity_qcymap_tuijianqiye_image"
+                app:layout_constraintStart_toStartOf="@+id/activity_qcymap_tuijianqiye_image"
+                app:layout_constraintTop_toTopOf="@+id/activity_qcymap_tuijianqiye_image"
+                app:srcCompat="@mipmap/tuijianqiye" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_tuijianqiye_juli"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:textSize="@dimen/x26"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_tuijianqiye_chakanluxian"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="查看路线"
+                android:textColor="@color/lanse"
+                android:textSize="@dimen/x26"
+                android:padding="@dimen/x10"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_qcymap_tuijianqiye_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/activity_qcymap_tuijianqiye_name" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/activity_qcymap_yijiandaohang_layout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x170"
+            android:layout_marginStart="@dimen/x12"
+            android:layout_marginEnd="@dimen/x12"
+            android:layout_marginBottom="@dimen/x8"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/activity_qcymap_tuijianqiye_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <!--<TextView-->
+            <!--android:id="@+id/activity_qcymap_yijiandaohang"-->
+            <!--android:layout_width="@dimen/x140"-->
+            <!--android:layout_height="@dimen/x70"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:background="@mipmap/bg"-->
+            <!--android:text="一键导航"-->
+            <!--android:gravity="center"-->
+            <!--android:paddingLeft="@dimen/x10"-->
+            <!--android:paddingRight="@dimen/x10"-->
+            <!--android:textColor="@color/baise"-->
+            <!--android:textSize="@dimen/x30"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <TextView
+                android:id="@+id/activity_qcymap_yijiandaohang_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toTopOf="@+id/activity_qcymap_yijiandaohang_content"
+                app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_yijiandaohang_navi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="spread" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_yijiandaohang_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="@dimen/x26"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_yijiandaohang_navi"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_qcymap_yijiandaohang_title" />
+
+            <ImageView
+                android:id="@+id/activity_qcymap_yijiandaohang_navi"
+                android:layout_width="@dimen/x200"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/yijiandaohang"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_qcymap_yijiandaohang_back" />
+
+            <ImageView
+                android:id="@+id/activity_qcymap_yijiandaohang_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:padding="@dimen/x20"
+                android:src="@mipmap/icon_close"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/activity_qcymap_yijiandaohang"
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/x70"
+                android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/daohang_img" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.constraint.ConstraintLayout>
+
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:id="@+id/activity_qcymap_bottom_sheet_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y1000"
+        android:background="@color/baise"
+        android:orientation="vertical"
+        app:behavior_hideable="false"
+        app:behavior_peekHeight="@dimen/x120"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/activity_qcymap_jieguo_layout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x120">
+
+            <TextView
+                android:id="@+id/textView326"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="已展示"
+                android:textStyle="bold"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_jieguo_search_count"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_jieguo_search_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x36"
+                android:textStyle="bold"
+                android:text="0"
+                app:layout_constraintBottom_toBottomOf="@+id/textView326"
+                app:layout_constraintEnd_toStartOf="@+id/textView335"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView326" />
+
+            <TextView
+                android:id="@+id/textView335"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="条结果"
+                android:textSize="@dimen/x30"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView326"
+                app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_jieguo_total_count"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/activity_qcymap_jieguo_search_count" />
+
+            <ImageView
+                android:id="@+id/imageView54"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/hengxian" />
+
+            <TextView
+                android:id="@+id/activity_qcymap_jieguo_total_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView335"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView335" />
+
+            <TextView
+                android:id="@+id/textView341"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:background="@color/fengexian"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/activity_qcymap_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+
+</android.support.design.widget.CoordinatorLayout>

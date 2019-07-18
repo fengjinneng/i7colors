@@ -56,6 +56,7 @@ import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.pengyouquan.ActionItem;
 import com.company.qcy.bean.pengyouquan.MyAddress;
 import com.company.qcy.bean.pengyouquan.PengyouquanBean;
+import com.company.qcy.map.QCYMapActivity;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.pengyouquan.ErjihuatiDetailActivity;
 import com.company.qcy.ui.activity.pengyouquan.MapActivity;
@@ -338,7 +339,7 @@ public class GuanzhuFragment extends BaseFragment implements View.OnClickListene
                         address.setLot(bean.getLongitude());
                         address.setTitle(bean.getLocationTitle());
                         address.setContent(bean.getLocationAddress());
-                        Intent iAddress = new Intent(getActivity(), MapActivity.class);
+                        Intent iAddress = new Intent(getActivity(), QCYMapActivity.class);
                         iAddress.putExtra("address", address);
                         ActivityUtils.startActivity(iAddress);
                         break;

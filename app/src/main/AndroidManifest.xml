@@ -25,6 +25,7 @@
     <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+
     <!-- 添加权限 -->
     <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
 
@@ -55,7 +56,6 @@
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-
             android:windowSoftInputMode="adjustPan|stateHidden">
 
             <!-- Schame -->
@@ -76,14 +76,12 @@
         <activity android:name=".ui.activity.kaifangshangcheng.KaifangshangchengActivity" />
         <activity
             android:name=".ui.activity.user.LoginActivity"
-
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.activity.user.ForgetPasswordActivity" />
         <activity android:name=".ui.activity.user.ResetPasswordActivity" />
         <activity android:name=".ui.activity.user.RegisterActivity" />
         <activity
             android:name=".ui.activity.qiugoudating.FabuqiugouActivity"
-
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".ui.activity.qiugoudating.QiugouxiangqingActivity">
 
@@ -101,7 +99,6 @@
         </activity>
         <activity
             android:name=".ui.activity.qiugoudating.CanyubaojiaActivity"
-
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".ui.activity.qiugoudating.WodeqiugouActivity" />
         <activity android:name=".ui.activity.user.SettingActivity" />
@@ -110,7 +107,6 @@
         <activity android:name=".base.BaseActivity" />
         <activity
             android:name=".base.SearchActivity"
-
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".ui.activity.qiugoudating.DaichuliqiugouActivity" />
         <activity android:name=".ui.activity.qiugoudating.DaichulibaojiaActivity" />
@@ -146,13 +142,11 @@
         <activity android:name=".huodong.tuangou.activity.TuangouliebiaoActivity" />
         <activity
             android:name=".huodong.tuangou.activity.TuangouxiangqingActivity"
-
             android:theme="@style/TuangouTheme"
             android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity android:name=".huodong.tuangou.activity.WoyaotuangouActivity" />
         <activity
             android:name=".base.SearchTypeActivity"
-
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".ui.activity.user.LianxikefuActivity" />
         <activity android:name=".huodong.tuangou.activity.YingxiongmashuomingActivity" />
@@ -167,7 +161,6 @@
         <activity android:name=".ui.activity.pengyouquan.ImagePagerActivity" />
         <activity
             android:name=".ui.activity.pengyouquan.PengyouquanDetailActivity"
-
             android:windowSoftInputMode="adjustPan|stateHidden">
 
             <!-- Schame -->
@@ -200,18 +193,12 @@
             </intent-filter>
         </receiver>
         <receiver android:name=".Utils.NetWorkStateChangeReceiver">
-
-            　　　　
             <intent-filter>
 
                 <!-- 监听的动作类型，这里是监听网络连接的状态 -->
 
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
-
-                　　　　
             </intent-filter>
-
-            　　
         </receiver>
 
         <provider
@@ -242,12 +229,7 @@
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ui.activity.user.BindPhoneActivity">
-
-
-
-
-        </activity>
+        <activity android:name=".ui.activity.user.BindPhoneActivity" />
         <activity android:name=".ui.activity.pengyouquan.MyDyeInfoActivity" />
         <activity android:name=".ui.activity.pengyouquan.ChangeNicknameActivity" />
         <activity android:name=".ui.activity.pengyouquan.MyPersonInfoActivity" />
@@ -258,30 +240,25 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@style/startTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity" />
         <activity android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoDetailActivity" />
         <activity
             android:name=".huodong.youhuizhanxiao.activity.YouhuizhanxiaoBuyActivity"
-
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".huodong.caigoulianmeng.activity.WoyaodinghuoActivity"
-
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".huodong.caigoulianmeng2.activity.WodedinghuodanDetailActivity" />
         <activity android:name=".huodong.caigoulianmeng2.activity.WodegonghuodanDetailActivity" />
         <activity android:name=".huodong.caigoulianmeng.activity.WoyaogonghuoActivity" />
         <activity
             android:name=".huodong.caigoulianmeng.activity.AddDinghuoCustomProductActivity"
-
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".huodong.toupiao.activity.ToupiaoListActivity" />
         <activity android:name=".huodong.caigoulianmeng2.activity.CaigoulianmengActivity" />
@@ -319,22 +296,17 @@
         <activity android:name=".huodong.caigoulianmeng2.activity.ZidingyiDinghuoActivity" />
         <activity android:name=".huodong.caigoulianmeng2.activity.GonghuoActivity" />
         <activity android:name=".huodong.caigoulianmeng2.activity.ZidingyiGonghuoActivity" />
-        <activity android:name=".huodong.jingpai.activity.JingpaiActivity">
-
-        </activity>
+        <activity android:name=".huodong.jingpai.activity.JingpaiActivity" />
         <activity
             android:name=".huodong.jingpai.activity.JingpaiDetailActivity"
             android:configChanges="orientation|screenSize|keyboardHidden" />
         <activity
             android:name=".huodong.jingpai.activity.CanyujingpaiActivity"
-
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.activity.kaifangshangcheng.QiyezizhiActivity"
             android:configChanges="keyboard|keyboardHidden|screenSize|orientation" />
-        <activity android:name=".ui.activity.pengyouquan.PengyouquanChoiceAddressActivity">
-
-        </activity>
+        <activity android:name=".ui.activity.pengyouquan.PengyouquanChoiceAddressActivity" />
         <activity android:name=".ui.activity.pengyouquan.ChoiceHuatiActivity" />
         <activity android:name=".ui.activity.pengyouquan.MapActivity" />
         <activity android:name=".ui.activity.pengyouquan.ErjihuatiDetailActivity" />
@@ -347,6 +319,10 @@
         <activity android:name=".ui.activity.pengyouquan.ShuikeyikanActivity" />
         <activity android:name=".ui.activity.user.ChoiceHeadImageActivity" />
         <activity android:name=".base.WebNoBottomActivity" />
+        <activity
+            android:name=".map.QCYMapActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name=".map.NoMarketCompanyActivity"></activity>
     </application>
 
 </manifest>

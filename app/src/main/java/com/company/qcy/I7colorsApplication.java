@@ -56,9 +56,8 @@ public class I7colorsApplication extends Application {
         //发布时放开
         UMConfigure.init(this, "5cd38537570df39ed3000a4a", "Umeng", UMConfigure.DEVICE_TYPE_PHONE, null);
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.MANUAL);
-
+//
         JPushInterface.setDebugMode(false); // 设置开启日志,发布时请关闭日志
-
 
         //使用集成测试模式请先在程序入口处调用如下代码，打开调试模式：
         UMConfigure.setLogEnabled(false); // 设置开启日志,发布时请关闭日志

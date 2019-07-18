@@ -17,7 +17,6 @@
         android:ellipsize="end"
         android:gravity="center"
         android:singleLine="true"
-        android:text="标题"
         android:textColor="@color/biaoti"
         android:textSize="@dimen/x36"
         app:layout_constraintBottom_toBottomOf="parent"

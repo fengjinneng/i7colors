@@ -77,4 +77,14 @@ public class MyAddress implements Parcelable {
             return new MyAddress[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "MyAddress{" +
+                "lat='" + lat + '\'' +
+                ", lot='" + lot + '\'' +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

@@ -8,7 +8,7 @@
         <RelativeLayout
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="@dimen/x60"
             android:layout_marginEnd="24dp"
             android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +31,8 @@
                     android:layout_alignLeft="@+id/view20"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
+                    android:textColor="@color/erjibiaoti"
+                    android:textStyle="bold"
                     android:text="" />
 
                 <TextView
