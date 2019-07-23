@@ -73,7 +73,62 @@ public class TuangouBean implements Parcelable {
     private String description;
     private String sortNum;
     private String isConsiderStock;
+    private String num;
+    private String isCutPrice;//当前团购是否可以砍价（是否参与砍价），1可以砍价；0不可砍价
+    private String hasCutPrice;//当前认购已砍价格
+    private String remainCutPrice;//单前认购还可砍的价格
+    private Long buyerId;//认购id
+    private String loginUserHasBuy;  //1,当前登陆用户已认购。0当前用户没有认购过，或者没有登录
 
+
+
+    public String getLoginUserHasBuy() {
+        return loginUserHasBuy;
+    }
+
+    public void setLoginUserHasBuy(String loginUserHasBuy) {
+        this.loginUserHasBuy = loginUserHasBuy;
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
+    }
+
+    public String getIsCutPrice() {
+        return isCutPrice;
+    }
+
+    public void setIsCutPrice(String isCutPrice) {
+        this.isCutPrice = isCutPrice;
+    }
+
+    public String getHasCutPrice() {
+        return hasCutPrice;
+    }
+
+    public void setHasCutPrice(String hasCutPrice) {
+        this.hasCutPrice = hasCutPrice;
+    }
+
+    public String getRemainCutPrice() {
+        return remainCutPrice;
+    }
+
+    public void setRemainCutPrice(String remainCutPrice) {
+        this.remainCutPrice = remainCutPrice;
+    }
+
+    public Long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
+    }
 
     public Long getId() {
         return id;
@@ -323,6 +378,9 @@ public class TuangouBean implements Parcelable {
         this.isConsiderStock = isConsiderStock;
     }
 
+    public TuangouBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -361,9 +419,12 @@ public class TuangouBean implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.sortNum);
         dest.writeString(this.isConsiderStock);
-    }
-
-    public TuangouBean() {
+        dest.writeString(this.num);
+        dest.writeString(this.isCutPrice);
+        dest.writeString(this.hasCutPrice);
+        dest.writeString(this.remainCutPrice);
+        dest.writeValue(this.buyerId);
+        dest.writeString(this.loginUserHasBuy);
     }
 
     protected TuangouBean(Parcel in) {
@@ -398,9 +459,15 @@ public class TuangouBean implements Parcelable {
         this.description = in.readString();
         this.sortNum = in.readString();
         this.isConsiderStock = in.readString();
+        this.num = in.readString();
+        this.isCutPrice = in.readString();
+        this.hasCutPrice = in.readString();
+        this.remainCutPrice = in.readString();
+        this.buyerId = (Long) in.readValue(Long.class.getClassLoader());
+        this.loginUserHasBuy = in.readString();
     }
 
-    public static final Parcelable.Creator<TuangouBean> CREATOR = new Parcelable.Creator<TuangouBean>() {
+    public static final Creator<TuangouBean> CREATOR = new Creator<TuangouBean>() {
         @Override
         public TuangouBean createFromParcel(Parcel source) {
             return new TuangouBean(source);

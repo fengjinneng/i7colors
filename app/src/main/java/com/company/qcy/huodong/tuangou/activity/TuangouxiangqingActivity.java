@@ -1,14 +1,18 @@
 package com.company.qcy.huodong.tuangou.activity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyCharacterMap;
@@ -16,6 +20,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -43,6 +48,7 @@ import com.company.qcy.huodong.tuangou.fragment.JiluFragment;
 import com.company.qcy.huodong.tuangou.fragment.TuangouxuzhiFragment;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
@@ -286,6 +292,9 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
             mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
         }
 
+        if(StringUtils.equals("1",bean.getLoginUserHasBuy())){
+            mActivityTuangouxiangqingWoyaotuangou.setVisibility(View.GONE);
+        }
 
     }
 
@@ -295,17 +304,22 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         super.onReciveMessage(msg);
         switch (msg.getCode()) {
             case MessageBean.Code.TUANGOUCHENGGONG:
-
                 break;
         }
-
     }
 
     private void addData() {
+
+        HttpParams httpParams = new HttpParams();
+
+        httpParams.put("sign",SPUtils.getInstance().getString("sign"));
+        httpParams.put("id",id);
+        if(UserUtil.isLogin()){
+            httpParams.put("token",SPUtils.getInstance().getString("token"));
+        }
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYDETAIL)
                 .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", id);
+                .params(httpParams);
 
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
@@ -345,18 +359,25 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         request.execute(stringCallback);
     }
 
+
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
             case R.id.activity_tuangouxiangqing_woyaotuangou:
-                if (ObjectUtils.isEmpty(bean)) {
-                    return;
-                }
-                Intent intent = new Intent(this, WoyaotuangouActivity.class);
-                intent.putExtra("bean", bean);
-                ActivityUtils.startActivity(intent);
+//                if (ObjectUtils.isEmpty(bean)) {
+//                    return;
+//                }
+//                Intent intent = new Intent(this, WoyaotuangouActivity.class);
+//                intent.putExtra("bean", bean);
+//                ActivityUtils.startActivity(intent);
+
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                TuangouchenggongDialogFragment dialog = new TuangouchenggongDialogFragment();
+                dialog.show(fragmentManager,"dialog");
 
                 break;
             case R.id.toolbar_back:

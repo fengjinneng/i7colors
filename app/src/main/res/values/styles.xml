@@ -33,7 +33,7 @@
 
     <style name="custom_seekbar" parent="@android:style/Widget.SeekBar">
 
-        <item name="android:maxHeight">@dimen/x8</item>
+        <item name="android:maxHeight">@dimen/x28</item>
 
         <item name="android:indeterminateOnly">false</item>
 

@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -27,11 +26,13 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
-import com.company.qcy.huodong.tuangou.adapter.TuangouRecyclerviewAdapter;
+import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.BannerBean;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.huodong.tuangou.adapter.TuangouRecyclerviewAdapter;
 import com.company.qcy.huodong.tuangou.bean.TuangouBean;
+import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -58,6 +59,10 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
     private List<TuangouBean> datas;
     private SwipeRefreshLayout refreshLayout;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
+    /**
+     * 查看我的团购
+     */
+    private TextView mActiityTuangouliebiaoChakantuangou;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +77,8 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
         mToolbarText = (TextView) findViewById(R.id.toolbar_text);
         recyclerView = (RecyclerView) findViewById(R.id.actiity_tuangouliebiao_recycleriew);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.actiity_tuangouliebiao_swipeRefreshLayout);
-
+        mActiityTuangouliebiaoChakantuangou = (TextView) findViewById(R.id.actiity_tuangouliebiao_chakantuangou);
+        mActiityTuangouliebiaoChakantuangou.setOnClickListener(this);
 
         //创建布局管理
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -92,8 +98,8 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onRefresh() {
 
-                if(isFirstIn){
-                    adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+                if (isFirstIn) {
+                    adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
                 }
 
                 //下拉业务
@@ -127,7 +133,7 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
                 intent.putExtra("id", tuangouBean.getId());
                 ActivityUtils.startActivity(intent);
 
-                MobclickAgent.onEvent(TuangouliebiaoActivity.this,"团购_点击了"+tuangouBean.getProductName());
+                MobclickAgent.onEvent(TuangouliebiaoActivity.this, "团购_点击了" + tuangouBean.getProductName());
             }
         });
 
@@ -136,14 +142,15 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("七彩云团购惠");
         addAdvData();
-        if(isFirstIn){
-        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
-        isFirstIn = true;
+        if (isFirstIn) {
+            adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
+            isFirstIn = true;
         }
+
 
     }
 
-    private boolean isFirstIn ;
+    private boolean isFirstIn;
     private List<String> advDatas = new ArrayList<>();
 
 
@@ -151,7 +158,7 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
 
         View inflate = LayoutInflater.from(this).inflate(R.layout.head_img_huodong, null);
         ImageView img = inflate.findViewById(R.id.head_img_huodong_img);
-        GlideUtils.loadImageRct(context,advDatas.get(0),img);
+        GlideUtils.loadImageRct(context, advDatas.get(0), img);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -206,7 +213,7 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(TuangouliebiaoActivity.this,request,this);
+                            SignAndTokenUtil.getSign(TuangouliebiaoActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -279,7 +286,7 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(TuangouliebiaoActivity.this,request,this);
+                            SignAndTokenUtil.getSign(TuangouliebiaoActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -292,7 +299,7 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
             @Override
             public void onError(Response<String> response) {
                 super.onError(response);
-                adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+                adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
                 refreshLayout.setRefreshing(false);
                 ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
             }
@@ -309,6 +316,15 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
                 break;
             case R.id.toolbar_back:
                 finish();
+                break;
+            case R.id.actiity_tuangouliebiao_chakantuangou:
+
+                if (UserUtil.isLogin()) {
+                    ActivityUtils.startActivity(WodeTuangouListActivity.class);
+
+                } else {
+                    ActivityUtils.startActivity(LoginActivity.class);
+                }
                 break;
         }
     }

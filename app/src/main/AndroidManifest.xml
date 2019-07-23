@@ -25,7 +25,6 @@
     <!-- 用于访问GPS定位 -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-
     <!-- 添加权限 -->
     <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
 
@@ -321,8 +320,11 @@
         <activity android:name=".base.WebNoBottomActivity" />
         <activity
             android:name=".map.QCYMapActivity"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".map.NoMarketCompanyActivity"></activity>
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".map.NoMarketCompanyActivity" />
+        <activity android:name=".huodong.tuangou.activity.WodeTuangouListActivity" />
+        <activity android:name=".huodong.tuangou.activity.ShareDetailActivity" />
+        <activity android:name=".huodong.tuangou.activity.KanjiaActivity"></activity>
     </application>
 
 </manifest>
