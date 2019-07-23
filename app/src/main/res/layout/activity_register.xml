@@ -34,6 +34,7 @@
                 android:hint="请输入手机号(用于登陆/找回密码)"
                 android:inputType="phone"
                 android:maxLength="11"
+                android:textSize="@dimen/x30"
                 android:paddingLeft="@dimen/x36"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +62,7 @@
                     android:hint="输入短信验证码"
                     android:inputType="number"
                     android:maxLength="6"
+                    android:textSize="@dimen/x30"
                     android:paddingLeft="@dimen/x36" />
 
 
@@ -91,6 +93,7 @@
                 android:hint="请输入密码"
                 android:inputType="textPassword"
                 android:maxLength="16"
+                android:textSize="@dimen/x30"
                 android:paddingLeft="@dimen/x36"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_yaoqingma"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_yaoqingma"
@@ -105,7 +108,7 @@
                 android:hint="请再次输入密码"
                 android:inputType="textPassword"
                 android:maxLength="16"
-
+                android:textSize="@dimen/x30"
                 android:paddingLeft="@dimen/x36"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_password_1"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -120,6 +123,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@mipmap/bg"
                 android:text="注册"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/baise"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_password_2"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_password_2"
@@ -147,6 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
+                    android:textSize="@dimen/x30"
                     android:text="阅读并接受" />
 
                 <TextView
@@ -155,6 +160,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="《七彩云协议》"
+                    android:textSize="@dimen/x30"
                     android:textColor="@color/chunhongse" />
 
 
@@ -169,6 +175,7 @@
                 android:inputType="textEmailAddress"
                 app:layout_constraintTop_toBottomOf="@id/activity_register_zhiwei"
                 android:maxLength="6"
+                android:textSize="@dimen/x30"
                 android:layout_marginTop="8dp"
                 android:paddingLeft="@dimen/x36"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
@@ -233,6 +240,8 @@
                 android:hint="输入公司名称"
                 android:inputType="textPersonName"
                 android:paddingLeft="@dimen/x36"
+                android:textSize="@dimen/x30"
+
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
                 app:layout_constraintStart_toStartOf="@+id/activity_register_linnear2"
                 app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear2" />
@@ -257,7 +266,7 @@
                 android:drawablePadding="@dimen/x36"
                 android:text="请选择职位"
                 android:gravity="center"
-                android:textSize="@dimen/x36"
+                android:textSize="@dimen/x30"
                 android:minWidth="@dimen/x350"
                 android:paddingLeft="@dimen/x36"
                 android:paddingRight="@dimen/x36"
