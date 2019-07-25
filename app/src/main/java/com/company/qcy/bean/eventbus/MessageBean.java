@@ -244,6 +244,9 @@ public class MessageBean {
         //系统消息 进去了messageActivity
         public static final int DIANJIJINQUMESSAGE = 1042;
 
+        //团购砍价成功
+        public static final int TUANGOUKANJIACHENGGONG = 1043;
+
     }
 
 }

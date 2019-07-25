@@ -16,12 +16,17 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyLoadMoreView;
+import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.huodong.tuangou.adapter.KanjiajiluAdapter;
 import com.company.qcy.huodong.tuangou.bean.KanjiajiluBean;
@@ -34,6 +39,8 @@ import com.lzy.okgo.request.GetRequest;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.iwgang.countdownview.CountdownView;
+
 public class ShareDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private RecyclerView recyclerView;
@@ -43,6 +50,7 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
     private TuangouBean tuangouBean;
+    private SwipeRefreshLayout.OnRefreshListener refreshListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +80,44 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
 
         mToolbarTitle.setText("我发起的砍价");
 
-        addHeadView();
+        refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
 
-        addData();
+//                if (isFirstIn) {
+//                    adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout, null));
+//                }
+
+                //下拉业务
+                isReflash = true;
+                pageNo = 0;
+                addData();
+            }
+        };
+        refreshLayout.setOnRefreshListener(refreshListener);
+        refreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+            }
+        });
+
+        adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
+            @Override
+            public void onLoadMoreRequested() {
+                addData();
+            }
+        }, recyclerView);
+
+        recyclerView.addItemDecoration(new RecyclerviewDisplayDecoration(this));
+
+        refreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
+                android.R.color.holo_green_light, android.R.color.holo_blue_light);
+
+        adapter.setLoadMoreView(new MyLoadMoreView());
+
+        addHeadView();
 
     }
 
@@ -87,8 +130,8 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("token", SPUtils.getInstance().getString("token"))
-                .params("mainId",tuangouBean.getId())//团购id
-                .params("buyerId",tuangouBean.getBuyerId())//认购id
+                .params("mainId", tuangouBean.getId())//团购id
+                .params("buyerId", tuangouBean.getBuyerId())//认购id
                 .params("pageNo", pageNo)
                 .params("pageSize", 20);
 
@@ -107,32 +150,32 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONArray data = jsonObject.getJSONArray("data");
 
-//                            if (ObjectUtils.isEmpty(data)) {
-//                                adapter.loadMoreEnd();
-//                                return;
-//                            }
-//                            List<TuangouBean> qiugouBeans = JSONObject.parseArray(data.toJSONString(), TuangouBean.class);
-//                            if (isReflash) {
-//                                datas.clear();
-//                                datas.addAll(qiugouBeans);
-//                                adapter.setNewData(datas);
-//                                isReflash = false;
-//                                adapter.loadMoreComplete();
-//                                return;
-//                            }
-//
-//                            datas.addAll(qiugouBeans);
-//                            adapter.setNewData(datas);
-//                            adapter.loadMoreComplete();
-//                            adapter.disableLoadMoreIfNotFullPage();
-//                            return;
-//
-//                        }
-//                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-//                            SignAndTokenUtil.getSign(TuangouliebiaoActivity.this, request, this);
-//                            return;
+                            if (ObjectUtils.isEmpty(data)) {
+                                adapter.loadMoreEnd();
+                                return;
+                            }
+                            List<KanjiajiluBean> kanjiajiluBeans = JSONObject.parseArray(data.toJSONString(), KanjiajiluBean.class);
+                            if (isReflash) {
+                                datas.clear();
+                                datas.addAll(kanjiajiluBeans);
+                                adapter.setNewData(datas);
+                                isReflash = false;
+                                adapter.loadMoreComplete();
+                                adapter.disableLoadMoreIfNotFullPage();
+                                return;
+                            }
+
+                            datas.addAll(kanjiajiluBeans);
+                            adapter.setNewData(datas);
+                            adapter.loadMoreComplete();
+                            return;
+
                         }
-//                        ToastUtils.showShort(msg);
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(ShareDetailActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -158,6 +201,7 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
 
         if (!ObjectUtils.isEmpty(tuangouBean)) {
 
+            ImageView mKanjiaTuangouStatus  =inflate.findViewById(R.id.headview_kanjia_share_tuangou_status);
             ImageView img = inflate.findViewById(R.id.headview_kanjia_share_img);
             TextView name = inflate.findViewById(R.id.headview_kanjia_share_name);
             TextView goumailiang = inflate.findViewById(R.id.headview_kanjia_share_goumailiang);
@@ -166,12 +210,41 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
             TextView priceUnit = inflate.findViewById(R.id.headview_kanjia_share_price_unit);
             TextView kucun = inflate.findViewById(R.id.headview_kanjia_share_kucun);
             TextView yikanjiage = inflate.findViewById(R.id.headview_kanjia_share_yikanjiage);
-            SeekBar seekBar = inflate.findViewById(R.id.activity_tuangouxiangqing_seekBar);
+            SeekBar seekBar = inflate.findViewById(R.id.headview_kanjia_share_seekBar);
             TextView shengyukanjia = inflate.findViewById(R.id.headview_kanjia_share_shengyukanjia);
             TextView fenxiangkanjia = inflate.findViewById(R.id.headview_kanjia_share_fenxiangkanjia);
             TextView kucunUnit = inflate.findViewById(R.id.headview_kanjia_share_kucun_unit);
             TextView yikanjiageUnit = inflate.findViewById(R.id.headview_kanjia_share_yikanjiage_unit);
             TextView shengyukanjiaUnit = inflate.findViewById(R.id.headview_kanjia_share_shengyukanjia_unit);
+            CountdownView countdownView = inflate.findViewById(R.id.headview_kanjia_share_countdownView);
+
+            if (StringUtils.equals("00", tuangouBean.getEndCode())) {
+                //团购未开始
+                countdownView.start(Long.parseLong(tuangouBean.getStartTimeStamp()) - TimeUtils.getNowMills());
+                mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_weikaishi));
+            } else if (StringUtils.equals("10", tuangouBean.getEndCode())) {
+                //已开始未领完
+                countdownView.start(Long.parseLong(tuangouBean.getEndTimeStamp()) - TimeUtils.getNowMills());
+                mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+            } else if (StringUtils.equals("11", tuangouBean.getEndCode())) {
+                //已开始已领完
+                if (StringUtils.equals("0", tuangouBean.getIsConsiderStock())) {
+                    countdownView.start(Long.parseLong(tuangouBean.getEndTimeStamp()) - TimeUtils.getNowMills());
+                    mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+                } else {
+                    countdownView.start(0);
+                    mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+                }
+            } else if (StringUtils.equals("20", tuangouBean.getEndCode())) {
+                //已结束未领完
+                countdownView.start(0);
+                mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+            } else if (StringUtils.equals("21", tuangouBean.getEndCode())) {
+                //已结束已领完
+                countdownView.start(0);
+                mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+            }
+
 
             if (!StringUtils.isEmpty(tuangouBean.getProductPic())) {
                 Glide.with(this).load(ServerInfo.IMAGE + tuangouBean.getProductPic()).into(img);
@@ -182,8 +255,8 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
             name.setText(tuangouBean.getProductName());
             goumailiang.setText(tuangouBean.getNum());
             goumailiangUnit.setText(tuangouBean.getNumUnit());
-            price.setText(tuangouBean.getNewPrice());
-            priceUnit.setText("元/"+tuangouBean.getPriceUnit());
+            price.setText(tuangouBean.getRealPrice());
+            priceUnit.setText("元/" + tuangouBean.getPriceUnit());
             kucun.setText(tuangouBean.getRemainNum());
             kucunUnit.setText(tuangouBean.getNumUnit());
             yikanjiage.setText(tuangouBean.getHasCutPrice());
@@ -191,9 +264,13 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
             fenxiangkanjia.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    ShareUtil.shareKanjia(ShareDetailActivity.this,
+                            tuangouBean.getProductName(), tuangouBean.getProductPic(), tuangouBean.getId(), tuangouBean.getBuyerId());
                 }
             });
+
+            String[] split = tuangouBean.getCutPricePercent().split("%");
+            seekBar.setProgress(Integer.parseInt(split[0]));
         }
 
         adapter.addHeaderView(inflate);

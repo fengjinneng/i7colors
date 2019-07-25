@@ -32,6 +32,7 @@ import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.tuangou.bean.DefaultAddress;
 import com.company.qcy.huodong.tuangou.bean.TuangouBean;
+import com.company.qcy.huodong.tuangou.bean.TuangouRecordBean;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -436,9 +437,11 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                            ToastUtils.showShort(msg);
+
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            TuangouRecordBean tuangouRecordBean = data.toJavaObject(TuangouRecordBean.class);
                             finish();
-                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.TUANGOUCHENGGONG));
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.TUANGOUCHENGGONG,tuangouRecordBean));
                             return;
 
                         }

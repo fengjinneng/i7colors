@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="团购价: ¥"
+                android:text="当前价格: ¥"
                 android:textColor="@color/chunhongse"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/headview_kanjia_share_img"
@@ -109,6 +109,14 @@
                 android:textSize="@dimen/x30"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView358"
                 app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_goumailiang" />
+
+            <ImageView
+                android:id="@+id/headview_kanjia_share_tuangou_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/headview_kanjia_share_img"
+                app:srcCompat="@mipmap/tuangou_weikaishi" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
@@ -174,9 +182,9 @@
         <cn.iwgang.countdownview.CountdownView
             android:id="@+id/headview_kanjia_share_countdownView"
             android:layout_width="0dp"
-            android:layout_height="34dp"
+            android:layout_height="@dimen/x80"
             android:layout_marginTop="8dp"
-            app:isHideTimeBackground="false"
+            app:isHideTimeBackground="true"
             app:isShowDay="true"
             app:isShowHour="true"
             app:isShowMinute="true"
@@ -194,8 +202,8 @@
             app:timeBgColor="@color/chunhongse"
             app:timeBgRadius="5dp"
             app:timeBgSize="@dimen/x48"
-            app:timeTextColor="@color/baise"
-            app:timeTextSize="@dimen/x30" />
+            app:timeTextColor="@color/chunhongse"
+            app:timeTextSize="@dimen/x36" />
 
         <ImageView
             android:id="@+id/imageView3"

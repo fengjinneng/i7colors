@@ -29,58 +29,88 @@
 
 
                 <TextView
-                    android:id="@+id/textView35"
+                    android:id="@+id/bg_kanjiachenggong_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="@dimen/x150"
                     android:layout_marginEnd="8dp"
-                    android:text="团购下单成功"
+                    android:text="砍价成功"
+                    android:textColor="@color/erjibiaoti"
                     android:textSize="@dimen/x36"
                     android:textStyle="bold"
-                    android:textColor="@color/erjibiaoti"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView356"
+                    android:id="@+id/bg_kanjiachenggong_status_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
-                    android:text="立刻分享，好友助力砍价，还能享受比当前团购价更优惠的价格！"
+                    android:text="恭喜您，成功帮好友砍掉"
                     android:textSize="@dimen/x30"
+                    android:gravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView35" />
+                    app:layout_constraintTop_toBottomOf="@+id/bg_kanjiachenggong_status" />
+
 
                 <TextView
-                    android:id="@+id/bg_tuangouchenggong_tuangoujiagoumai"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/x98"
-                    android:gravity="center"
-                    android:text="团购价购买"
-                    android:textSize="@dimen/x36"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/bg_tuangouchenggong_share"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/bg_tuangouchenggong_share"
+                    android:id="@+id/bg_kanjiachenggong_submit"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/x98"
                     android:background="@mipmap/bg"
                     android:gravity="center"
-                    android:text="分享砍价"
+                    android:text="确认"
                     android:textColor="@color/baise"
                     android:textSize="@dimen/x36"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/bg_tuangouchenggong_tuangoujiagoumai" />
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView360"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:text="¥ "
+                    android:textColor="@color/chunhongse"
+                    android:textSize="@dimen/x30"
+                    app:layout_constraintEnd_toStartOf="@+id/bg_kanjiachenggong_price"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bg_kanjiachenggong_status_text" />
+
+                <TextView
+                    android:id="@+id/bg_kanjiachenggong_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="55"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/x40"
+                    android:textColor="@color/chunhongse"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView360"
+                    app:layout_constraintEnd_toStartOf="@+id/bg_kanjiachenggong_price_unit"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/textView360" />
+
+                <TextView
+                    android:id="@+id/bg_kanjiachenggong_price_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 元"
+                    android:textSize="@dimen/x30"
+                    android:textColor="@color/chunhongse"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView360"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/bg_kanjiachenggong_price" />
             </android.support.constraint.ConstraintLayout>
 
         </LinearLayout>

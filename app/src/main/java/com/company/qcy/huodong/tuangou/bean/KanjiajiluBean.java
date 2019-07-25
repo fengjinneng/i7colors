@@ -2,23 +2,23 @@ package com.company.qcy.huodong.tuangou.bean;
 
 public class KanjiajiluBean {
 
-    private String name;
+    private String nickName;
 
-    private String price;
+    private String cutPrice;
 
-    public String getName() {
-        return name;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
-    public String getPrice() {
-        return price;
+    public String getCutPrice() {
+        return cutPrice;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setCutPrice(String cutPrice) {
+        this.cutPrice = cutPrice;
     }
 }

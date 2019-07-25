@@ -6,12 +6,72 @@
     android:layout_height="match_parent"
     android:background="@color/fengexian">
 
-    <include
-        android:id="@+id/include48"
-        layout="@layout/toolbar"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x82"
+        android:background="@color/baise"
+        android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/acticity_kanjia_title"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerInParent="true"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="好友帮砍价"
+            android:textColor="@color/biaoti"
+            android:textSize="@dimen/x36"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/acticity_kanjia_share"
+            app:layout_constraintStart_toEndOf="@+id/acticity_kanjia_back"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/acticity_kanjia_back"
+            android:layout_width="@dimen/x120"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/x50"
+            android:paddingRight="@dimen/x50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/back" />
+
+        <View
+            android:id="@+id/view9"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/fengexian"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/acticity_kanjia_share"
+            android:layout_width="@dimen/x120"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:textSize="@dimen/x40"
+            android:textStyle="bold"
+            android:text="···"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintLayout51"
@@ -22,7 +82,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include48">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout">
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
@@ -60,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="团购价: ¥"
+                android:text="当前价格: ¥"
                 android:textColor="@color/chunhongse"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/kanjia_img"
@@ -116,6 +176,14 @@
                 android:textSize="@dimen/x30"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textView358"
                 app:layout_constraintStart_toEndOf="@+id/kanjia_goumailiang" />
+
+            <ImageView
+                android:id="@+id/kanjia_tuangou_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@+id/kanjia_img"
+                app:layout_constraintTop_toTopOf="@+id/kanjia_img"
+                app:srcCompat="@mipmap/tuangou_weikaishi" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
@@ -181,9 +249,9 @@
         <cn.iwgang.countdownview.CountdownView
             android:id="@+id/kanjia_countdownView"
             android:layout_width="0dp"
-            android:layout_height="34dp"
+            android:layout_height="@dimen/x80"
             android:layout_marginTop="8dp"
-            app:isHideTimeBackground="false"
+            app:isHideTimeBackground="true"
             app:isShowDay="true"
             app:isShowHour="true"
             app:isShowMinute="true"
@@ -201,8 +269,8 @@
             app:timeBgColor="@color/chunhongse"
             app:timeBgRadius="5dp"
             app:timeBgSize="@dimen/x48"
-            app:timeTextColor="@color/baise"
-            app:timeTextSize="@dimen/x30" />
+            app:timeTextColor="@color/chunhongse"
+            app:timeTextSize="@dimen/x36" />
 
         <ImageView
             android:id="@+id/imageView3"
@@ -289,15 +357,18 @@
             app:layout_constraintEnd_toStartOf="@+id/kanjia_shengyukanjia" />
 
         <TextView
-            android:id="@+id/kanjia_fenxiangkanjia"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/x98"
+            android:id="@+id/kanjia_kanjia"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:background="@color/chunhongse"
+            android:background="@drawable/background_yuanxingbiankuang_red"
+            android:gravity="center"
+            android:padding="@dimen/x20"
             android:paddingLeft="@dimen/x36"
             android:paddingRight="@dimen/x36"
-            android:gravity="center"
             android:text="砍价"
             android:textColor="@color/baise"
             android:textSize="@dimen/x36"
@@ -307,6 +378,19 @@
             app:layout_constraintTop_toBottomOf="@+id/kanjia_seekBar" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/kanjia_woyaocanyu"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@mipmap/bg"
+        android:gravity="center"
+        android:text="我也要参与"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

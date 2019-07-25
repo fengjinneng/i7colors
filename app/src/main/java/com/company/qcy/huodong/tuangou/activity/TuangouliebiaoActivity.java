@@ -175,6 +175,7 @@ public class TuangouliebiaoActivity extends BaseActivity implements View.OnClick
         switch (msg.getCode()) {
             case MessageBean.Code.TUANGOUCHENGGONG:
                 isReflash = true;
+                pageNo=0;
                 addData();
                 break;
         }

@@ -79,8 +79,45 @@ public class TuangouBean implements Parcelable {
     private String remainCutPrice;//单前认购还可砍的价格
     private Long buyerId;//认购id
     private String loginUserHasBuy;  //1,当前登陆用户已认购。0当前用户没有认购过，或者没有登录
+    private String cutPricePercent;
+    private String loginUserHasCut;
+    private String realPrice;
+
+    private String stopCutPrice;
 
 
+
+    public String getStopCutPrice() {
+        return stopCutPrice;
+    }
+
+    public void setStopCutPrice(String stopCutPrice) {
+        this.stopCutPrice = stopCutPrice;
+    }
+
+    public String getRealPrice() {
+        return realPrice;
+    }
+
+    public void setRealPrice(String realPrice) {
+        this.realPrice = realPrice;
+    }
+
+    public String getLoginUserHasCut() {
+        return loginUserHasCut;
+    }
+
+    public void setLoginUserHasCut(String loginUserHasCut) {
+        this.loginUserHasCut = loginUserHasCut;
+    }
+
+    public String getCutPricePercent() {
+        return cutPricePercent;
+    }
+
+    public void setCutPricePercent(String cutPricePercent) {
+        this.cutPricePercent = cutPricePercent;
+    }
 
     public String getLoginUserHasBuy() {
         return loginUserHasBuy;
@@ -425,6 +462,10 @@ public class TuangouBean implements Parcelable {
         dest.writeString(this.remainCutPrice);
         dest.writeValue(this.buyerId);
         dest.writeString(this.loginUserHasBuy);
+        dest.writeString(this.cutPricePercent);
+        dest.writeString(this.loginUserHasCut);
+        dest.writeString(this.realPrice);
+        dest.writeString(this.stopCutPrice);
     }
 
     protected TuangouBean(Parcel in) {
@@ -465,6 +506,10 @@ public class TuangouBean implements Parcelable {
         this.remainCutPrice = in.readString();
         this.buyerId = (Long) in.readValue(Long.class.getClassLoader());
         this.loginUserHasBuy = in.readString();
+        this.cutPricePercent = in.readString();
+        this.loginUserHasCut = in.readString();
+        this.realPrice = in.readString();
+        this.stopCutPrice = in.readString();
     }
 
     public static final Creator<TuangouBean> CREATOR = new Creator<TuangouBean>() {

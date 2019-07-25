@@ -324,7 +324,20 @@
         <activity android:name=".map.NoMarketCompanyActivity" />
         <activity android:name=".huodong.tuangou.activity.WodeTuangouListActivity" />
         <activity android:name=".huodong.tuangou.activity.ShareDetailActivity" />
-        <activity android:name=".huodong.tuangou.activity.KanjiaActivity"></activity>
+        <activity android:name=".huodong.tuangou.activity.KanjiaActivity">
+
+            <intent-filter>
+            <data
+                android:host="m.i7colors.cut"
+                android:scheme="arouter" />
+
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+        </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
