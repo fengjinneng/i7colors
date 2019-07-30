@@ -17,9 +17,6 @@ public class ProductBean {
     private String price;
     private String priceUnit;
     private String supplierName;
-    private String packLabel;
-    private String minNum;
-    private String pack;
     private String unit;
     private String phone;
     private String detailHtml;
@@ -44,7 +41,62 @@ public class ProductBean {
     private List<String> tagList;
     private List<String> detailPicList;
 
+    private String pack;
+    private String packLable;
+    private String provinceName;
+    private String minNum;
+    private List<PropMap> propMap;
 
+    public List<PropMap> getPropMap() {
+        return propMap;
+    }
+
+    public void setPropMap(List<PropMap> propMapBeans) {
+        this.propMap = propMapBeans;
+    }
+
+    public static class PropMap {
+        /**
+         * key : 所在地区
+         * value : 上海市
+         */
+
+        private String key;
+        private String value;
+
+        public String getKey() {
+            return key;
+        }
+
+        public void setKey(String key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
+
+
+    public String getPackLable() {
+        return packLable;
+    }
+
+    public void setPackLable(String packLable) {
+        this.packLable = packLable;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
 
     public String getPriceUnit() {
         return priceUnit;
@@ -62,13 +114,6 @@ public class ProductBean {
         this.supplierName = supplierName;
     }
 
-    public String getPackLabel() {
-        return packLabel;
-    }
-
-    public void setPackLabel(String packLabel) {
-        this.packLabel = packLabel;
-    }
 
     public String getMinNum() {
         return minNum;

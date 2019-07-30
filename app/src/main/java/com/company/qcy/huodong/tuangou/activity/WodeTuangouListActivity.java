@@ -132,6 +132,8 @@ public class WodeTuangouListActivity extends BaseActivity implements View.OnClic
         refreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
 
+        adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+
     }
 
     private boolean isReflash;

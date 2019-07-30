@@ -123,14 +123,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
      */
     private TextView mActivityWoyaotuangouChoiceAddress;
     private TuangouBean bean;
-    /**
-     * 推荐人英雄码
-     */
-    private EditText mActivityWoyaotuangouYinxiongma;
-    /**
-     * 查看使用说明
-     */
-    private TextView mActivityWoyaotuangouYinxiongmaShuoming;
+
     private RadioGroup mActivityWoyaotuangouYangpinGroup;
     /**
      * 吨
@@ -224,9 +217,6 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         mActivityWoyaotuangouCancel.setOnClickListener(this);
         mActivityWoyaotuangouChoiceAddress = (TextView) findViewById(R.id.activity_woyaotuangou_choiceAddress);
         mActivityWoyaotuangouChoiceAddress.setOnClickListener(this);
-        mActivityWoyaotuangouYinxiongma = (EditText) findViewById(R.id.activity_woyaotuangou_yinxiongma);
-        mActivityWoyaotuangouYinxiongmaShuoming = (TextView) findViewById(R.id.activity_woyaotuangou_yinxiongma_shuoming);
-        mActivityWoyaotuangouYinxiongmaShuoming.setOnClickListener(this);
         mActivityWoyaotuangouYangpinGroup = (RadioGroup) findViewById(R.id.activity_woyaotuangou_yangpin_group);
         mActivityWoyaotuangouYangpinGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -374,9 +364,6 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
             case R.id.activity_woyaotuangou_choiceAddress:
                 choiceAddress(mActivityWoyaotuangouChoiceAddress);
                 break;
-            case R.id.activity_woyaotuangou_yinxiongma_shuoming:
-                ActivityUtils.startActivity(YingxiongmashuomingActivity.class);
-                break;
             case R.id.toolbar_back:
                 KeyboardUtils.hideSoftInput(this);
                 finish();
@@ -417,8 +404,6 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         paras.put("address", mActivityWoyaotuangouCompanyAddress.getText().toString());
 
         paras.put("isSendSample", xuyaoyangpin);
-
-        paras.put("invitationCode", mActivityWoyaotuangouYinxiongma.getText().toString());
 
         paras.put("from", getResources().getString(R.string.app_android));
 

@@ -247,14 +247,15 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/textView363"
             app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_yikanjiage" />
 
-        <SeekBar
-            android:id="@+id/headview_kanjia_share_seekBar"
+        <ProgressBar
+            android:id="@+id/headview_kanjia_share_progressBar"
             style="@style/custom_seekbar"
             android:layout_width="0dp"
             android:layout_height="@dimen/x28"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView363" />
@@ -303,7 +304,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/headview_kanjia_share_seekBar" />
+            app:layout_constraintTop_toBottomOf="@+id/headview_kanjia_share_progressBar" />
 
     </android.support.constraint.ConstraintLayout>
 

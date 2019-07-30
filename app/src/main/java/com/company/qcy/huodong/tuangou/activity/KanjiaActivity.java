@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -55,7 +56,7 @@ public class KanjiaActivity extends BaseActivity implements View.OnClickListener
     private CountdownView countdownView;
     private TextView mKanjiaYikanjiage;
     private TextView mKanjiaYikanjiageUnit;
-    private SeekBar mKanjiaSeekBar;
+    private ProgressBar mKanjiaProgressBar;
     private TextView mKanjiaShengyukanjiaUnit;
     private TextView mKanjiaShengyukanjia;
     /**
@@ -112,7 +113,7 @@ public class KanjiaActivity extends BaseActivity implements View.OnClickListener
         countdownView = (CountdownView) findViewById(R.id.kanjia_countdownView);
         mKanjiaYikanjiage = (TextView) findViewById(R.id.kanjia_yikanjiage);
         mKanjiaYikanjiageUnit = (TextView) findViewById(R.id.kanjia_yikanjiage_unit);
-        mKanjiaSeekBar = (SeekBar) findViewById(R.id.kanjia_seekBar);
+        mKanjiaProgressBar = (ProgressBar) findViewById(R.id.kanjia_progressBar);
         mKanjiaShengyukanjiaUnit = (TextView) findViewById(R.id.kanjia_shengyukanjia_unit);
         mKanjiaShengyukanjia = (TextView) findViewById(R.id.kanjia_shengyukanjia);
         mKanjia = (TextView) findViewById(R.id.kanjia_kanjia);
@@ -215,7 +216,25 @@ public class KanjiaActivity extends BaseActivity implements View.OnClickListener
                         }
                     }
                 } else {
-                    ActivityUtils.startActivity(LoginActivity.class);
+
+                    if (StringUtils.equals("20", tuangouBean.getEndCode()) ||
+                            StringUtils.equals("21", tuangouBean.getEndCode())) {
+                        //已经结束
+                        share();
+
+                    } else if (StringUtils.equals("11", tuangouBean.getEndCode())) {
+
+                        if (StringUtils.equals("0", tuangouBean.getIsConsiderStock())) {
+                            //不考虑库存
+                            ActivityUtils.startActivity(LoginActivity.class);
+                        } else {
+                            share();
+
+                        }
+                    } else {
+                        ActivityUtils.startActivity(LoginActivity.class);
+                    }
+
                 }
 
                 break;
@@ -359,11 +378,29 @@ public class KanjiaActivity extends BaseActivity implements View.OnClickListener
 
             }
         } else {
-            mKanjia.setText("点我登录,帮好友砍价!");
+
+            if (StringUtils.equals("20", tuangouBean.getEndCode()) ||
+                    StringUtils.equals("21", tuangouBean.getEndCode())) {
+                //已经结束
+                mKanjia.setText("团购已经结束,帮好友分享!");
+
+            } else if (StringUtils.equals("11", tuangouBean.getEndCode())) {
+
+                if (StringUtils.equals("0", tuangouBean.getIsConsiderStock())) {
+                    //不考虑库存
+                    mKanjia.setText("点我登录,帮好友砍价!");
+                } else {
+                    mKanjia.setText("团购已经结束,帮好友分享!");
+
+                }
+            } else {
+                mKanjia.setText("点我登录,帮好友砍价!");
+            }
         }
 
+
         String[] split = tuangouBean.getCutPricePercent().split("%");
-        mKanjiaSeekBar.setProgress(Integer.parseInt(split[0]));
+        mKanjiaProgressBar.setProgress(Integer.parseInt(split[0]));
 
 
         if (StringUtils.equals("00", tuangouBean.getEndCode())) {
@@ -374,11 +411,13 @@ public class KanjiaActivity extends BaseActivity implements View.OnClickListener
             //已开始未领完
             countdownView.start(Long.parseLong(tuangouBean.getEndTimeStamp()) - TimeUtils.getNowMills());
             mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+            mKanjiaWoyaocanyu.setVisibility(View.VISIBLE);
         } else if (StringUtils.equals("11", tuangouBean.getEndCode())) {
             //已开始已领完
             if (StringUtils.equals("0", tuangouBean.getIsConsiderStock())) {
                 countdownView.start(Long.parseLong(tuangouBean.getEndTimeStamp()) - TimeUtils.getNowMills());
                 mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
+                mKanjiaWoyaocanyu.setVisibility(View.VISIBLE);
             } else {
                 countdownView.start(0);
                 mKanjiaTuangouStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));

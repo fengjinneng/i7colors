@@ -21,4 +21,6 @@ public class PropBean {
     public void setValue(String value) {
         this.value = value;
     }
+
+
 }

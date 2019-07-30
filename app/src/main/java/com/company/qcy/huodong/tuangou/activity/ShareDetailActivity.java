@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -210,7 +211,7 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
             TextView priceUnit = inflate.findViewById(R.id.headview_kanjia_share_price_unit);
             TextView kucun = inflate.findViewById(R.id.headview_kanjia_share_kucun);
             TextView yikanjiage = inflate.findViewById(R.id.headview_kanjia_share_yikanjiage);
-            SeekBar seekBar = inflate.findViewById(R.id.headview_kanjia_share_seekBar);
+            ProgressBar progressBar = inflate.findViewById(R.id.headview_kanjia_share_progressBar);
             TextView shengyukanjia = inflate.findViewById(R.id.headview_kanjia_share_shengyukanjia);
             TextView fenxiangkanjia = inflate.findViewById(R.id.headview_kanjia_share_fenxiangkanjia);
             TextView kucunUnit = inflate.findViewById(R.id.headview_kanjia_share_kucun_unit);
@@ -270,7 +271,7 @@ public class ShareDetailActivity extends BaseActivity implements View.OnClickLis
             });
 
             String[] split = tuangouBean.getCutPricePercent().split("%");
-            seekBar.setProgress(Integer.parseInt(split[0]));
+            progressBar.setProgress(Integer.parseInt(split[0]));
         }
 
         adapter.addHeaderView(inflate);

@@ -314,8 +314,8 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/textView363"
             app:layout_constraintStart_toEndOf="@+id/kanjia_yikanjiage" />
 
-        <SeekBar
-            android:id="@+id/kanjia_seekBar"
+        <ProgressBar
+            android:id="@+id/kanjia_progressBar"
             style="@style/custom_seekbar"
             android:layout_width="0dp"
             android:layout_height="@dimen/x28"
@@ -375,7 +375,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kanjia_seekBar" />
+            app:layout_constraintTop_toBottomOf="@+id/kanjia_progressBar" />
 
     </android.support.constraint.ConstraintLayout>
 
@@ -386,6 +386,7 @@
         android:background="@mipmap/bg"
         android:gravity="center"
         android:text="我也要参与"
+        android:visibility="gone"
         android:textColor="@color/baise"
         android:textSize="@dimen/x36"
         app:layout_constraintBottom_toBottomOf="parent"

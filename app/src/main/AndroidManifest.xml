@@ -148,7 +148,6 @@
             android:name=".base.SearchTypeActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity android:name=".ui.activity.user.LianxikefuActivity" />
-        <activity android:name=".huodong.tuangou.activity.YingxiongmashuomingActivity" />
         <activity android:name=".ui.activity.user.ZhanghaozhongxinActivity" />
         <activity android:name=".ui.activity.message.MessageDetailActivity" />
         <activity android:name=".base.WebActivity" />
@@ -260,7 +259,9 @@
             android:name=".huodong.caigoulianmeng.activity.AddDinghuoCustomProductActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".huodong.toupiao.activity.ToupiaoListActivity" />
-        <activity android:name=".huodong.caigoulianmeng2.activity.CaigoulianmengActivity" />
+        <activity android:name=".huodong.caigoulianmeng2.activity.CaigoulianmengActivity" >
+
+        </activity>
         <activity android:name=".huodong.toupiao.activity.ToupiaoDetailActivity">
 
             <!-- Schame -->
@@ -325,19 +326,18 @@
         <activity android:name=".huodong.tuangou.activity.WodeTuangouListActivity" />
         <activity android:name=".huodong.tuangou.activity.ShareDetailActivity" />
         <activity android:name=".huodong.tuangou.activity.KanjiaActivity">
-
             <intent-filter>
-            <data
-                android:host="m.i7colors.cut"
-                android:scheme="arouter" />
+                <data
+                    android:host="m.i7colors.cut"
+                    android:scheme="arouter" />
 
-            <action android:name="android.intent.action.VIEW" />
+                <action android:name="android.intent.action.VIEW" />
 
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-        </intent-filter>
-
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
         </activity>
+        <activity android:name=".ShareDispatchActivity"></activity>
     </application>
 
 </manifest>

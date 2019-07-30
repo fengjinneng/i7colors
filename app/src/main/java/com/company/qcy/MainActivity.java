@@ -1,7 +1,6 @@
 package com.company.qcy;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
@@ -17,7 +16,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -28,10 +26,8 @@ import com.azhon.appupdate.config.UpdateConfiguration;
 import com.azhon.appupdate.listener.OnButtonClickListener;
 import com.azhon.appupdate.manager.DownloadManager;
 import com.blankj.utilcode.util.ActivityUtils;
-import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -40,8 +36,6 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.JpushUtil;
 import com.company.qcy.Utils.NetworkUtil;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.base.BaseActivity;
-import com.company.qcy.base.WebActivity;
 import com.company.qcy.bean.BannerBean;
 import com.company.qcy.bean.UpdateBean;
 import com.company.qcy.bean.eventbus.MessageBean;
@@ -49,11 +43,6 @@ import com.company.qcy.fragment.home.HomeFragment;
 import com.company.qcy.fragment.home.PengyouquanFragment;
 import com.company.qcy.fragment.home.XiaoxiFragment;
 import com.company.qcy.fragment.home.WodeFragment;
-import com.company.qcy.huodong.tuangou.activity.TuangouxiangqingActivity;
-import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
-import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
-import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
-import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
@@ -62,14 +51,11 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushReceiver;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.HashMap;
 import java.util.List;
-
 import cn.jpush.android.api.JPushInterface;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
@@ -232,7 +218,6 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
 
             case MessageBean.Code.NEEDUPDATEAPP:
                 UpdateBean updateBean = (UpdateBean) msg.getObj();
-                LogUtils.e("onReciveMessage", updateBean);
                 /*
                  * 整个库允许配置的内容
                  * 非必选

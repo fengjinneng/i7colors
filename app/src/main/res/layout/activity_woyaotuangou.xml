@@ -266,42 +266,6 @@
         app:layout_constraintStart_toEndOf="@+id/activity_woyaotuangou_renlingliang"
         app:layout_constraintTop_toTopOf="@+id/activity_woyaotuangou_renlingliang" />
 
-    <TextView
-        android:id="@+id/textView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/x68"
-        android:text="英雄码:"
-        android:textSize="@dimen/x30"
-        app:layout_constraintStart_toStartOf="@+id/textView95"
-        app:layout_constraintTop_toBottomOf="@+id/textView95" />
-
-    <EditText
-        android:id="@+id/activity_woyaotuangou_yinxiongma"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/x64"
-        android:background="@drawable/background_shuruwenbenkuang"
-        android:hint="推荐人英雄码"
-        android:inputType="textPersonName"
-        android:paddingLeft="8dp"
-        android:textSize="@dimen/x30"
-        app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintEnd_toEndOf="@+id/activity_woyaotuangou_renlingliang"
-        app:layout_constraintStart_toStartOf="@+id/activity_woyaotuangou_company_address"
-        app:layout_constraintTop_toTopOf="@+id/textView11" />
-
-    <TextView
-        android:id="@+id/activity_woyaotuangou_yinxiongma_shuoming"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:text="查看使用说明"
-        android:textSize="@dimen/x24"
-        android:textColor="@color/chunhongse"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_woyaotuangou_yinxiongma"
-        app:layout_constraintStart_toEndOf="@+id/activity_woyaotuangou_yinxiongma"
-        app:layout_constraintTop_toTopOf="@+id/activity_woyaotuangou_yinxiongma" />
 
     <TextView
         android:id="@+id/textView130"
@@ -313,7 +277,7 @@
         android:text="是否需要样品:"
         android:textSize="@dimen/x30"
         app:layout_constraintStart_toStartOf="@+id/textView95"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView95" />
 
     <RadioGroup
         android:id="@+id/activity_woyaotuangou_yangpin_group"
@@ -321,7 +285,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/textView130"
-        app:layout_constraintStart_toStartOf="@+id/activity_woyaotuangou_yinxiongma"
+        app:layout_constraintStart_toStartOf="@+id/activity_woyaotuangou_renlingliang"
         app:layout_constraintTop_toTopOf="@+id/textView130">
 
         <RadioButton

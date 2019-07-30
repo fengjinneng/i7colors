@@ -181,7 +181,7 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
             if (!StringUtils.isEmpty(shareAddress.getLat()) && !StringUtils.isEmpty(shareAddress.getLot())) {
                 LatLng latLng = new LatLng(Double.parseDouble(shareAddress.getLat()), Double.parseDouble(shareAddress.getLot()));
                 shareMarker = aMap.addMarker(new MarkerOptions().position(latLng).title(shareAddress.getTitle()).snippet(""));
-                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, aMap.getMaxZoomLevel() - 8));
+                aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                 canNavication = true;
                 LatLog2Address(Double.parseDouble(shareAddress.getLat()), Double.parseDouble(shareAddress.getLot()));
             } else {
@@ -395,7 +395,7 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
         if (!isLocationEnabled()) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
             dialog.setTitle("提示!");
-            dialog.setMessage("需要打开您的位置信息！");
+            dialog.setMessage("请打开GPS定位开关，,以便获取更精准的推荐！");
             dialog.setPositiveButton("去设置", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -814,7 +814,7 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
                                         LatLng latLng = new LatLng(Double.parseDouble(shareAddress.getLat()),
                                                 Double.parseDouble(shareAddress.getLot()));
                                         shareMarker = aMap.addMarker(new MarkerOptions().position(latLng).title(shareAddress.getTitle()).snippet(""));
-                                        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, aMap.getMaxZoomLevel() - 8));
+                                        aMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
                                         shareMarker.setToTop();
                                     }
 
@@ -1255,7 +1255,7 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
 
         myLocationStyle.showMyLocation(false);
 
-        aMap.moveCamera(CameraUpdateFactory.zoomTo(aMap.getMaxZoomLevel() - 8));
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(10));
     }
 
 
