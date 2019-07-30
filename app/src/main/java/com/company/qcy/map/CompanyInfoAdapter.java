@@ -51,16 +51,19 @@ public class CompanyInfoAdapter extends BaseQuickAdapter<MarketMapBean, BaseView
             helper.getView(R.id.item_qcymap_company_info_is_tuijian).setVisibility(View.GONE);
         }
 
+        ImageView imageView = (ImageView) helper.getView(R.id.item_qcymap_company_info_img);
+
 
         if (!ObjectUtils.isEmpty(item.getMarket())) {
             if (!StringUtils.isEmpty(item.getMarket().getPhone())) {
                 helper.setText(R.id.item_qcymap_company_info_phone, item.getMarket().getPhone());
             }
             if (!StringUtils.isEmpty(item.getMarket().getLogo())) {
-                ImageView imageView = (ImageView) helper.getView(R.id.item_qcymap_company_info_img);
 
                 Glide.with(mContext).
                         load(ServerInfo.IMAGE + item.getMarket().getLogo()).into(imageView);
+            }else {
+                imageView.setImageDrawable(mContext.getResources().getDrawable(R.drawable.place_500x500));
             }
 
         }

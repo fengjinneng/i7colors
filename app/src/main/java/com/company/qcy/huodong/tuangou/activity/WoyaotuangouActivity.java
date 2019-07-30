@@ -32,6 +32,7 @@ import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.tuangou.bean.DefaultAddress;
 import com.company.qcy.huodong.tuangou.bean.TuangouBean;
+import com.company.qcy.huodong.tuangou.bean.TuangouRecordBean;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
@@ -122,14 +123,7 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
      */
     private TextView mActivityWoyaotuangouChoiceAddress;
     private TuangouBean bean;
-    /**
-     * 推荐人英雄码
-     */
-    private EditText mActivityWoyaotuangouYinxiongma;
-    /**
-     * 查看使用说明
-     */
-    private TextView mActivityWoyaotuangouYinxiongmaShuoming;
+
     private RadioGroup mActivityWoyaotuangouYangpinGroup;
     /**
      * 吨
@@ -223,9 +217,6 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
         mActivityWoyaotuangouCancel.setOnClickListener(this);
         mActivityWoyaotuangouChoiceAddress = (TextView) findViewById(R.id.activity_woyaotuangou_choiceAddress);
         mActivityWoyaotuangouChoiceAddress.setOnClickListener(this);
-        mActivityWoyaotuangouYinxiongma = (EditText) findViewById(R.id.activity_woyaotuangou_yinxiongma);
-        mActivityWoyaotuangouYinxiongmaShuoming = (TextView) findViewById(R.id.activity_woyaotuangou_yinxiongma_shuoming);
-        mActivityWoyaotuangouYinxiongmaShuoming.setOnClickListener(this);
         mActivityWoyaotuangouYangpinGroup = (RadioGroup) findViewById(R.id.activity_woyaotuangou_yangpin_group);
         mActivityWoyaotuangouYangpinGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -373,9 +364,6 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
             case R.id.activity_woyaotuangou_choiceAddress:
                 choiceAddress(mActivityWoyaotuangouChoiceAddress);
                 break;
-            case R.id.activity_woyaotuangou_yinxiongma_shuoming:
-                ActivityUtils.startActivity(YingxiongmashuomingActivity.class);
-                break;
             case R.id.toolbar_back:
                 KeyboardUtils.hideSoftInput(this);
                 finish();
@@ -417,8 +405,6 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
 
         paras.put("isSendSample", xuyaoyangpin);
 
-        paras.put("invitationCode", mActivityWoyaotuangouYinxiongma.getText().toString());
-
         paras.put("from", getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.WOYAOTUANGOU)
@@ -436,9 +422,11 @@ public class WoyaotuangouActivity extends BaseActivity implements View.OnClickLi
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                            ToastUtils.showShort(msg);
+
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            TuangouRecordBean tuangouRecordBean = data.toJavaObject(TuangouRecordBean.class);
                             finish();
-                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.TUANGOUCHENGGONG));
+                            EventBus.getDefault().post(new MessageBean(MessageBean.Code.TUANGOUCHENGGONG,tuangouRecordBean));
                             return;
 
                         }

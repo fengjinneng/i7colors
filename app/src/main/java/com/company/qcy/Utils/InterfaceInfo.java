@@ -110,11 +110,21 @@ public class InterfaceInfo {
     //团购列表
     public static final String GROUPBUYLIST = "groupBuyMain/queryGroupBuyMainList";
     //团购详情
-    public static final String GROUPBUYDETAIL = "groupBuyMain/getGroupBuyMainById";
+    public static final String GROUPBUYDETAIL = "groupBuyMain/getGroupBuyMainByIdNew";
     //团购记录
     public static final String GROUPBUYRECORD = "groupBuyMain/queryGroupBuyerList";
     //我要团购
-    public static final String WOYAOTUANGOU = "groupBuyMain/addGroupBuyerNew";
+    public static final String WOYAOTUANGOU = "groupBuyMain/addGroupBuyerNew2";
+
+    //我的团购列表
+    public static final String WODETUANGOULIST = "groupBuyMain/queryMyGroupBuyMainList";
+    //获取为我的某个认购进行砍价的用户列表
+    public static final String KANJIAYONGHULIST = "groupBuyMainCutPrice/queryMyGroupBuyCutPriceList";
+
+    //进入砍价页面獲取信息
+    public static final String KANJIAINFO = "groupBuyMain/getGroupBuyCutPriceById";
+    //砍價
+    public static final String KANJIA = "groupBuyMainCutPrice/groupBuyCutPrice";
 
     //获取获取默认的地址信息
     public static final String HUODONGMORENDIZHI = "defaultAddress/queryDefaultAddress";

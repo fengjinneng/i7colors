@@ -31,6 +31,8 @@
             android:layout_alignLeft="@+id/vlayout_home_part1_view1"
             android:layout_marginLeft="10dp"
             android:gravity="center"
+            android:textColor="@color/erjibiaoti"
+            android:textStyle="bold"
             android:text="促销活动" />
 
 

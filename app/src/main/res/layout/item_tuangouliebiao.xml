@@ -201,60 +201,59 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_zuixiaorenling" />
 
-    <android.support.constraint.ConstraintLayout
-        android:id="@+id/item_tuangouliebiao_status_time_layout"
-        android:layout_width="229dp"
-        android:layout_height="0dp"
-        android:layout_marginEnd="16dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_price_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_productname"
-        app:layout_constraintTop_toBottomOf="@+id/item_tuangouliebiao_zuixiaorenling">
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/item_tuangouliebiao_status_time_layout"-->
+        <!--android:layout_width="229dp"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--android:visibility="invisible"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_price_layout"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_productname"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/item_tuangouliebiao_zuixiaorenling">-->
 
-        <TextView
-            android:id="@+id/item_tuangouliebiao_time_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="2018-09-21"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_to"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--<TextView-->
+            <!--android:id="@+id/item_tuangouliebiao_time_from"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:text="2018-09-21"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_to"-->
+            <!--app:layout_constraintHorizontal_bias="0.5"-->
+            <!--app:layout_constraintHorizontal_chainStyle="packed"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-        <ImageView
-            android:id="@+id/item_tuangouliebiao_time_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:src="@mipmap/tuangou_riqi"
-            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_end"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_time_from"
-            app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_time_from" />
+        <!--<ImageView-->
+            <!--android:id="@+id/item_tuangouliebiao_time_to"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:src="@mipmap/tuangou_riqi"-->
+            <!--app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_time_end"-->
+            <!--app:layout_constraintHorizontal_bias="0.5"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_time_from"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_time_from" />-->
 
-        <TextView
-            android:id="@+id/item_tuangouliebiao_time_end"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2018-10-27"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_time_to"
-            app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_time_from" />
-    </android.support.constraint.ConstraintLayout>
+        <!--<TextView-->
+            <!--android:id="@+id/item_tuangouliebiao_time_end"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="2018-10-27"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.5"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_time_to"-->
+            <!--app:layout_constraintTop_toTopOf="@+id/item_tuangouliebiao_time_from" />-->
+    <!--</android.support.constraint.ConstraintLayout>-->
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/item_tuangouliebiao_status_layout"
         android:layout_width="229dp"
         android:layout_height="0dp"
         android:layout_marginEnd="8dp"
-        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/item_tuangouliebiao_price_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/item_tuangouliebiao_productname"
@@ -265,29 +264,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="团购成功!"
+            android:text="团购进行中!"
             android:textColor="@color/chunhongse"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/item_tuangouliebiao_status_text_img"
-            app:layout_constraintHorizontal_bias="0.3"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/item_tuangouliebiao_status_text_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_status_text"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!--<ImageView-->
+            <!--android:id="@+id/item_tuangouliebiao_status_text_img"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:layout_marginBottom="8dp"-->
+            <!--android:src="@mipmap/tuangou_fail"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.5"-->
+            <!--app:layout_constraintStart_toEndOf="@+id/item_tuangouliebiao_status_text"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
     </android.support.constraint.ConstraintLayout>
 
     <TextView

@@ -31,61 +31,39 @@ public class TuangouRecordBean {
      * baseNumId : null
      */
 
-    private Object id;
-    private int mainId;
-    private Object groupBuyMain;
-    private Object productName;
+    private Long id;
+    private Long mainId;
+    private String productName;
     private String number;
     private String contact;
     private String phone;
     private String companyName;
     private String num;
-    private Object realNum;
     private String numUnit;
     private String province;
     private String city;
-    private Object address;
-    private Object from;
-    private String isSendSample;
-    private Object isValid;
-    private String createdAt;
-    private Object createdBy;
-    private String updatedAt;
-    private Object updatedBy;
-    private String status;
-    private Object invitationCode;
-    private Object invitationCodeId;
-    private Object baseNumId;
 
-    public Object getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Object id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getMainId() {
+    public Long getMainId() {
         return mainId;
     }
 
-    public void setMainId(int mainId) {
+    public void setMainId(Long mainId) {
         this.mainId = mainId;
     }
 
-    public Object getGroupBuyMain() {
-        return groupBuyMain;
-    }
-
-    public void setGroupBuyMain(Object groupBuyMain) {
-        this.groupBuyMain = groupBuyMain;
-    }
-
-    public Object getProductName() {
+    public String getProductName() {
         return productName;
     }
 
-    public void setProductName(Object productName) {
+    public void setProductName(String productName) {
         this.productName = productName;
     }
 
@@ -129,14 +107,6 @@ public class TuangouRecordBean {
         this.num = num;
     }
 
-    public Object getRealNum() {
-        return realNum;
-    }
-
-    public void setRealNum(Object realNum) {
-        this.realNum = realNum;
-    }
-
     public String getNumUnit() {
         return numUnit;
     }
@@ -159,101 +129,5 @@ public class TuangouRecordBean {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public Object getAddress() {
-        return address;
-    }
-
-    public void setAddress(Object address) {
-        this.address = address;
-    }
-
-    public Object getFrom() {
-        return from;
-    }
-
-    public void setFrom(Object from) {
-        this.from = from;
-    }
-
-    public String getIsSendSample() {
-        return isSendSample;
-    }
-
-    public void setIsSendSample(String isSendSample) {
-        this.isSendSample = isSendSample;
-    }
-
-    public Object getIsValid() {
-        return isValid;
-    }
-
-    public void setIsValid(Object isValid) {
-        this.isValid = isValid;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public Object getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(Object createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public Object getUpdatedBy() {
-        return updatedBy;
-    }
-
-    public void setUpdatedBy(Object updatedBy) {
-        this.updatedBy = updatedBy;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Object getInvitationCode() {
-        return invitationCode;
-    }
-
-    public void setInvitationCode(Object invitationCode) {
-        this.invitationCode = invitationCode;
-    }
-
-    public Object getInvitationCodeId() {
-        return invitationCodeId;
-    }
-
-    public void setInvitationCodeId(Object invitationCodeId) {
-        this.invitationCodeId = invitationCodeId;
-    }
-
-    public Object getBaseNumId() {
-        return baseNumId;
-    }
-
-    public void setBaseNumId(Object baseNumId) {
-        this.baseNumId = baseNumId;
     }
 }

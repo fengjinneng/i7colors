@@ -6,7 +6,6 @@ public class ServerInfo {
 //    public static final String SERVER = "http://192.168.11.54:9919/app-web/";
 //    public static final String IMAGE ="http://192.168.0.76";
 
-
 //    线上测试
 //    public static final String SERVER = "https://i7apptest.i7colors.com/app-web/";
 //    public static final String IMAGE ="http://static1.i7colors.com";

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fengexian">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout51"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/baise">
+
+            <ImageView
+                android:id="@+id/headview_kanjia_share_img"
+                android:layout_width="@dimen/x240"
+                android:layout_height="@dimen/x240"
+                android:scaleType="fitXY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/place_500x500" />
+
+            <TextView
+                android:id="@+id/headview_kanjia_share_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x36"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_img"
+                app:layout_constraintTop_toTopOf="@+id/headview_kanjia_share_img" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="当前价格: ¥"
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toBottomOf="@+id/headview_kanjia_share_img"
+                app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_img" />
+
+            <TextView
+                android:id="@+id/headview_kanjia_share_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x40"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView9"
+                app:layout_constraintStart_toEndOf="@+id/textView9" />
+
+            <TextView
+                android:id="@+id/headview_kanjia_share_price_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBaseline_toBaselineOf="@+id/headview_kanjia_share_price"
+                app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_price" />
+
+            <TextView
+                android:id="@+id/textView358"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="我的购买量:"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toTopOf="@+id/textView9"
+                app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_img" />
+
+            <TextView
+                android:id="@+id/headview_kanjia_share_goumailiang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textSize="@dimen/x40"
+                android:textStyle="bold"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView358"
+                app:layout_constraintStart_toEndOf="@+id/textView358" />
+
+            <TextView
+                android:id="@+id/headview_kanjia_share_goumailiang_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textView358"
+                app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_goumailiang" />
+
+            <ImageView
+                android:id="@+id/headview_kanjia_share_tuangou_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/headview_kanjia_share_img"
+                app:srcCompat="@mipmap/tuangou_weikaishi" />
+
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout52"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_kanjia"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout51">
+
+        <TextView
+            android:id="@+id/textView359"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x36"
+            android:text="平台库存量: "
+            android:textSize="@dimen/x30"
+            app:layout_constraintEnd_toStartOf="@+id/headview_kanjia_share_kucun"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/headview_kanjia_share_kucun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:textSize="@dimen/x40"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView359"
+            app:layout_constraintEnd_toStartOf="@+id/headview_kanjia_share_kucun_unit"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/textView359" />
+
+        <TextView
+            android:id="@+id/headview_kanjia_share_kucun_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView359"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_kucun" />
+
+        <TextView
+            android:id="@+id/textView362"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="距离结束:"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="@+id/headview_kanjia_share_countdownView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/headview_kanjia_share_countdownView" />
+
+        <cn.iwgang.countdownview.CountdownView
+            android:id="@+id/headview_kanjia_share_countdownView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x80"
+            android:layout_marginTop="8dp"
+            app:isHideTimeBackground="true"
+            app:isShowDay="true"
+            app:isShowHour="true"
+            app:isShowMinute="true"
+            app:isShowSecond="true"
+            app:isTimeTextBold="true"
+            app:layout_constraintStart_toStartOf="@+id/textView359"
+            app:layout_constraintTop_toBottomOf="@+id/textView359"
+            app:suffixDay="天"
+            app:suffixGravity="center"
+            app:suffixHour="时"
+            app:suffixMinute="分"
+            app:suffixSecond="秒"
+            app:suffixTextColor="#000000"
+            app:suffixTextSize="12sp"
+            app:timeBgColor="@color/chunhongse"
+            app:timeBgRadius="5dp"
+            app:timeBgSize="@dimen/x48"
+            app:timeTextColor="@color/chunhongse"
+            app:timeTextSize="@dimen/x36" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headview_kanjia_share_countdownView"
+            app:srcCompat="@mipmap/kanjia_detail_fengexian" />
+
+        <TextView
+            android:id="@+id/textView363"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="32dp"
+            android:text="已砍"
+            android:textSize="@dimen/x30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/headview_kanjia_share_yikanjiage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x40"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView363"
+            app:layout_constraintStart_toEndOf="@+id/textView363" />
+
+        <TextView
+            android:id="@+id/headview_kanjia_share_yikanjiage_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBaseline_toBaselineOf="@+id/textView363"
+            app:layout_constraintStart_toEndOf="@+id/headview_kanjia_share_yikanjiage" />
+
+        <ProgressBar
+            android:id="@+id/headview_kanjia_share_progressBar"
+            style="@style/custom_seekbar"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x28"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:clickable="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView363" />
+
+        <TextView
+            android:id="@+id/headview_kanjia_share_shengyukanjia_unit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="24dp"
+            android:textSize="@dimen/x30"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+        <TextView
+            android:id="@+id/headview_kanjia_share_shengyukanjia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x40"
+            app:layout_constraintBaseline_toBaselineOf="@+id/headview_kanjia_share_shengyukanjia_unit"
+            app:layout_constraintEnd_toStartOf="@+id/headview_kanjia_share_shengyukanjia_unit" />
+
+        <TextView
+            android:id="@+id/textView368"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="还可以砍"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBaseline_toBaselineOf="@+id/headview_kanjia_share_shengyukanjia_unit"
+            app:layout_constraintEnd_toStartOf="@+id/headview_kanjia_share_shengyukanjia" />
+
+        <TextView
+            android:id="@+id/headview_kanjia_share_fenxiangkanjia"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/x98"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:background="@mipmap/anniujianbian_round"
+            android:gravity="center"
+            android:text="分享给好友,帮你砍价更优惠!"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x36"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/headview_kanjia_share_progressBar" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView370"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/baise"
+        android:gravity="center"
+        android:paddingTop="@dimen/x16"
+        android:paddingBottom="@dimen/x16"
+        android:text="好友帮记录"
+        android:textSize="@dimen/x30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout52" />
+
+    <TextView
+        android:id="@+id/textView371"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="昵称"
+        android:background="@color/bg_no_photo"
+        android:gravity="center"
+        android:padding="@dimen/x8"
+        android:textSize="@dimen/x30"
+        app:layout_constraintEnd_toStartOf="@+id/textView373"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView370" />
+
+    <TextView
+        android:id="@+id/textView373"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="砍价金额"
+        android:gravity="center"
+        android:padding="@dimen/x8"
+        android:textSize="@dimen/x30"
+        android:background="@color/bg_no_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView371"
+        app:layout_constraintTop_toBottomOf="@+id/textView370" />
+</android.support.constraint.ConstraintLayout>

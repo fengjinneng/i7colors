@@ -26,6 +26,7 @@
             android:layout_marginTop="8dp"
             android:background="@mipmap/bg"
             android:gravity="center"
+            android:visibility="gone"
             android:text="添加自定义商品"
             android:textColor="@color/baise"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,8 +37,9 @@
             android:id="@+id/imageView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/woyaodinghuo_foot_layout_add_product"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/woyaodinghuo_foot_layout_add_product"
             app:srcCompat="@mipmap/xiaoshuxian" />
 

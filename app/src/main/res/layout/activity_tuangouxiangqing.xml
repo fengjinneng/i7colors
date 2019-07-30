@@ -18,7 +18,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/activity_tuangouxiangqing_woyaotuangou"
+        app:layout_constraintBottom_toTopOf="@+id/activity_tuangouxiangqing_status_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include28">
@@ -367,12 +367,41 @@
                             app:layout_constraintEnd_toEndOf="parent" />
 
                         <TextView
+                            android:id="@+id/textView361"
                             android:layout_width="0dp"
-                            android:layout_height="@dimen/x20"
-                            android:background="@color/baise"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@color/fengexian"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/activity_tuangouxiangqing_dacheng" />
+
+                        <ImageView
+                            android:id="@+id/activity_tuangouxiangqing_is_cut_img"
+                            android:layout_width="@dimen/x180"
+                            android:layout_height="@dimen/x120"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="4dp"
+                            android:src="@mipmap/fenxiangkanjia"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView361" />
+
+                        <TextView
+                            android:id="@+id/activity_tuangouxiangqing_is_cut_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:text="此团购还可以参与砍价，微信分享给好 友并成功砍价，还能拿到更低的价格！"
+                            android:textSize="@dimen/x30"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="@+id/activity_tuangouxiangqing_is_cut_img"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_is_cut_img"
+                            app:layout_constraintTop_toTopOf="@+id/activity_tuangouxiangqing_is_cut_img" />
+
+
 
                     </android.support.constraint.ConstraintLayout>
 
@@ -414,16 +443,46 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <Button
-        android:id="@+id/activity_tuangouxiangqing_woyaotuangou"
+
+    <LinearLayout
+        android:id="@+id/activity_tuangouxiangqing_status_layout"
         android:layout_width="0dp"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/anniujianbian"
-        android:text="我要团购"
-        android:textColor="@color/baise"
+        android:layout_height="@dimen/x98"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/activity_tuangouxiangqing_yicantuan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/fengexian"
+            android:gravity="center"
+            android:text="已参团"
+            android:visibility="gone"
+            android:layout_weight="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/activity_tuangouxiangqing_status_name"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/activity_tuangouxiangqing_status_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@mipmap/bg"
+            android:text="我要团购"
+            android:layout_weight="2"
+            android:textColor="@color/baise"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/activity_tuangouxiangqing_yicantuan"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+
 
 </android.support.constraint.ConstraintLayout>

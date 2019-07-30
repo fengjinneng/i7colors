@@ -1,21 +1,28 @@
 package com.company.qcy.huodong.tuangou.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -27,6 +34,7 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.company.qcy.I7colorsApplication;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.GlideUtils;
@@ -34,15 +42,19 @@ import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.adapter.BaseViewpageAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.huodong.tuangou.bean.TuangouBean;
+import com.company.qcy.huodong.tuangou.bean.TuangouRecordBean;
 import com.company.qcy.huodong.tuangou.fragment.JibencanshuFragment;
 import com.company.qcy.huodong.tuangou.fragment.JiluFragment;
+import com.company.qcy.huodong.tuangou.fragment.TuangouchenggongDialogFragment;
 import com.company.qcy.huodong.tuangou.fragment.TuangouxuzhiFragment;
 import com.company.qcy.ui.activity.user.LoginActivity;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
@@ -112,12 +124,22 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
     /**
      * 我要团购
      */
-    private Button mActivityTuangouxiangqingWoyaotuangou;
+    private Button mActivityTuangouxiangqingStatusName;
     /**
      * 标题
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
+    /**
+     * 已参团
+     */
+    private TextView mActivityTuangouxiangqingYicantuan;
+    private LinearLayout mActivityTuangouxiangqingStatusLayout;
+    private ImageView mActivityTuangouxiangqingIsCutImg;
+    /**
+     * 此团购还可以参与砍价，微信分享给好 友并成功砍价，还能拿到更低的价格！
+     */
+    private TextView mActivityTuangouxiangqingIsCutText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,6 +177,68 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         return result;
     }
 
+    private static WindowManager wm;
+
+    public static boolean isShowNavBar(Context context) {
+        if (null == context) {
+            return false;
+        }
+        /**
+         * 获取应用区域高度
+         */
+        Rect outRect1 = new Rect();
+        try {
+
+            ((Activity) context).getWindow().getDecorView().getWindowVisibleDisplayFrame(outRect1);
+
+        } catch (ClassCastException e) {
+            e.printStackTrace();
+            return false;
+        }
+        int activityHeight = outRect1.height();
+
+        int result = 0;
+
+        int resourceId = I7colorsApplication.getContext().getResources().getIdentifier("status_bar_height", "dimen", "android");
+
+        if (resourceId > 0) {
+
+            result = I7colorsApplication.getContext().getResources().getDimensionPixelSize(resourceId);
+        }
+        /**
+         * 获取状态栏高度
+         */
+        int statuBarHeight = result;
+
+        /**
+         * 屏幕物理高度 减去 状态栏高度
+         */
+        if (null == wm) {
+
+            wm = (WindowManager)
+                    I7colorsApplication.getContext().getSystemService(Context.WINDOW_SERVICE);
+        }
+
+        Point point = new Point();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+
+            wm.getDefaultDisplay().getRealSize(point);
+
+        } else {
+            wm.getDefaultDisplay().getSize(point);
+        }
+        int remainHeight = point.y - statuBarHeight;
+        /**
+         * 剩余高度跟应用区域高度相等 说明导航栏没有显示 否则相反
+         */
+        if (activityHeight == remainHeight) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 
     private void initView() {
         mActivityTuangouxiangqingImg = (ImageView) findViewById(R.id.activity_tuangouxiangqing_img);
@@ -165,8 +249,10 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mActivityTuangouxiangqingShengyu = (TextView) findViewById(R.id.activity_tuangouxiangqing_shengyu);
         mActivityTuangouxiangqingTotal = (TextView) findViewById(R.id.activity_tuangouxiangqing_total);
         mActivityTuangouxiangqingYirenling = (TextView) findViewById(R.id.activity_tuangouxiangqing_yirenling);
-
-        addData();
+        mActivityTuangouxiangqingYicantuan = (TextView) findViewById(R.id.activity_tuangouxiangqing_yicantuan);
+        mActivityTuangouxiangqingIsCutImg = (ImageView) findViewById(R.id.activity_tuangouxiangqing_is_cut_img);
+        mActivityTuangouxiangqingIsCutText = (TextView) findViewById(R.id.activity_tuangouxiangqing_is_cut_text);
+        mActivityTuangouxiangqingStatusLayout = (LinearLayout) findViewById(R.id.activity_tuangouxiangqing_status_layout);
 
         mActivityTuangouxiangqingSeekBar = (SeekBar) findViewById(R.id.activity_tuangouxiangqing_seekBar);
         mActivityTuangouxiangqingDanyonghucaigou = (TextView) findViewById(R.id.activity_tuangouxiangqing_danyonghucaigou);
@@ -200,24 +286,27 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
 //        });
 
         mActivityTuangouxiangqingShengyushijianText = (TextView) findViewById(R.id.activity_tuangouxiangqing_shengyushijian_text);
-        mActivityTuangouxiangqingWoyaotuangou = (Button) findViewById(R.id.activity_tuangouxiangqing_woyaotuangou);
-        mActivityTuangouxiangqingWoyaotuangou.setOnClickListener(this);
-        if (isNavigationBarAvailable()) {
-//            ViewGroup.MarginLayoutParams margin=new ViewGroup.MarginLayoutParams(mActivityTuangouxiangqingWoyaotuangou.getLayoutParams());
-//            margin.setMargins(0,0, margin.topMargin, 0);
-//            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(margin);
-//            mActivityTuangouxiangqingWoyaotuangou.setLayoutParams(layoutParams);
-
-            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mActivityTuangouxiangqingWoyaotuangou.getLayoutParams();
-            //设置各个方向上的间距
-            params.setMargins(0, 0, 0, getNavigationBarHeight(this));
-            //改变控件的属性
-            mActivityTuangouxiangqingWoyaotuangou.setLayoutParams(params);
-        }
+        mActivityTuangouxiangqingStatusName = (Button) findViewById(R.id.activity_tuangouxiangqing_status_name);
+        mActivityTuangouxiangqingStatusName.setOnClickListener(this);
+//        if (isShowNavBar(this)) {
+////            ViewGroup.MarginLayoutParams margin=new ViewGroup.MarginLayoutParams(mActivityTuangouxiangqingWoyaotuangou.getLayoutParams());
+////            margin.setMargins(0,0, margin.topMargin, 0);
+////            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(margin);
+////            mActivityTuangouxiangqingWoyaotuangou.setLayoutParams(layoutParams);
+//
+//            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) mActivityTuangouxiangqingWoyaotuangou.getLayoutParams();
+//            //设置各个方向上的间距
+//            params.setMargins(0, 0, 0, getNavigationBarHeight(this));
+//            //改变控件的属性
+//            mActivityTuangouxiangqingWoyaotuangou.setLayoutParams(params);
+//        }
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("团购详情");
+        addData();
+
+
     }
 
 
@@ -255,40 +344,81 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         mActivityTuangouxiangqingYuanjiaDanwie.setText("元/" + bean.getPriceUnit());
         mActivityTuangouxiangqingTuangoujiaDanwei.setText("元/" + bean.getPriceUnit());
 
+        if (StringUtils.equals("1", bean.getIsCutPrice())) {
+            //可以砍价
+            mActivityTuangouxiangqingIsCutImg.setVisibility(View.VISIBLE);
+            mActivityTuangouxiangqingIsCutText.setVisibility(View.VISIBLE);
+        }
+
+        checkStatu();
+
+    }
+
+    private void checkStatu() {
 
         if (StringUtils.equals("00", bean.getEndCode())) {
             //团购未开始
             mActivityTuangouxiangqingShengyushijianText.setText("距离团购开始还有:");
             mCountdownView.start(Long.parseLong(bean.getStartTimeStamp()) - TimeUtils.getNowMills());
             mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_weikaishi));
+            mActivityTuangouxiangqingStatusLayout.setVisibility(View.GONE);
         } else if (StringUtils.equals("10", bean.getEndCode())) {
             //已开始未领完
             mCountdownView.start(Long.parseLong(bean.getEndTimeStamp()) - TimeUtils.getNowMills());
             mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
-            mActivityTuangouxiangqingWoyaotuangou.setVisibility(View.VISIBLE);
+
+            if (UserUtil.isLogin()) {
+
+                if (StringUtils.equals("1", bean.getLoginUserHasBuy())) {
+                    // 1,当前登陆用户已认购
+                    mActivityTuangouxiangqingYicantuan.setVisibility(View.VISIBLE);
+
+                    if (StringUtils.equals("1", bean.getIsCutPrice())) {
+                        //可以砍价
+                        mActivityTuangouxiangqingStatusName.setText("分享砍价");
+                    } else {
+                        mActivityTuangouxiangqingStatusName.setVisibility(View.GONE);
+                    }
+                }
+            }
+
         } else if (StringUtils.equals("11", bean.getEndCode())) {
             //已开始已领完
             if (StringUtils.equals("0", bean.getIsConsiderStock())) {
                 mCountdownView.start(Long.parseLong(bean.getEndTimeStamp()) - TimeUtils.getNowMills());
                 mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yikaishi));
-                mActivityTuangouxiangqingWoyaotuangou.setVisibility(View.VISIBLE);
+                if (UserUtil.isLogin()) {
+
+                    if (StringUtils.equals("1", bean.getLoginUserHasBuy())) {
+                        // 1,当前登陆用户已认购
+                        mActivityTuangouxiangqingYicantuan.setVisibility(View.VISIBLE);
+
+                        if (StringUtils.equals("1", bean.getIsCutPrice())) {
+                            //可以砍价
+                            mActivityTuangouxiangqingStatusName.setText("分享砍价");
+                        } else {
+                            mActivityTuangouxiangqingStatusName.setVisibility(View.GONE);
+                        }
+                    }
+                }
             } else {
                 mCountdownView.start(0);
                 mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+                mActivityTuangouxiangqingStatusLayout.setVisibility(View.GONE);
             }
         } else if (StringUtils.equals("20", bean.getEndCode())) {
             //已结束未领完
             mCountdownView.start(0);
             mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+            mActivityTuangouxiangqingStatusLayout.setVisibility(View.GONE);
         } else if (StringUtils.equals("21", bean.getEndCode())) {
             //已结束已领完
             mCountdownView.start(0);
             mActivityTuangouxiangqingStatus.setImageDrawable(getResources().getDrawable(R.mipmap.tuangou_yijieshu));
+            mActivityTuangouxiangqingStatusLayout.setVisibility(View.GONE);
         }
 
-
     }
-
 
     @Override
     public void onReciveMessage(MessageBean msg) {
@@ -296,16 +426,59 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         switch (msg.getCode()) {
             case MessageBean.Code.TUANGOUCHENGGONG:
 
-                break;
-        }
+                TuangouRecordBean tuangouRecordBean = (TuangouRecordBean) msg.getObj();
 
+                mActivityTuangouxiangqingYicantuan.setVisibility(View.VISIBLE);
+
+                if (StringUtils.equals("1", bean.getIsCutPrice())) {
+                    bean.setLoginUserHasBuy("1");
+                    //可以砍价
+                    mActivityTuangouxiangqingStatusName.setText("分享砍价");
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    TuangouchenggongDialogFragment myDialogFragment = new TuangouchenggongDialogFragment();
+                    bean.setBuyerId(tuangouRecordBean.getId());
+                    myDialogFragment.setTuangouBean(bean);
+                    myDialogFragment.setStatus(1);
+                    myDialogFragment.setCutPrice("");
+
+//                  myDialogFragment.show(fragmentManager, "dialog");
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.add(myDialogFragment, "dialog");
+                    fragmentTransaction.commitAllowingStateLoss();
+
+                } else {
+                    mActivityTuangouxiangqingStatusName.setVisibility(View.GONE);
+                }
+                break;
+
+            case MessageBean.Code.DELU:
+                loginReturn = true;
+                addData();
+                break;
+            case MessageBean.Code.WXLOGIN:
+                loginReturn = true;
+                addData();
+                break;
+
+
+        }
     }
 
+    private boolean loginReturn;
+
     private void addData() {
+
+        HttpParams httpParams = new HttpParams();
+
+        httpParams.put("sign", SPUtils.getInstance().getString("sign"));
+        httpParams.put("id", id);
+        if (UserUtil.isLogin()) {
+            httpParams.put("token", SPUtils.getInstance().getString("token"));
+        }
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GROUPBUYDETAIL)
                 .tag(this)
-                .params("sign", SPUtils.getInstance().getString("sign"))
-                .params("id", id);
+                .params(httpParams);
 
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
@@ -319,7 +492,11 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONObject data = jsonObject.getJSONObject("data");
                             bean = data.toJavaObject(TuangouBean.class);
-                            setInfo(bean);
+                            if (loginReturn) {
+                                checkStatu();
+                            } else {
+                                setInfo(bean);
+                            }
                             return;
 
                         }
@@ -345,18 +522,39 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
         request.execute(stringCallback);
     }
 
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
-            case R.id.activity_tuangouxiangqing_woyaotuangou:
+            case R.id.activity_tuangouxiangqing_status_name:
                 if (ObjectUtils.isEmpty(bean)) {
                     return;
                 }
-                Intent intent = new Intent(this, WoyaotuangouActivity.class);
-                intent.putExtra("bean", bean);
-                ActivityUtils.startActivity(intent);
+
+                if (UserUtil.isLogin()) {
+
+                    if (StringUtils.equals("1", bean.getLoginUserHasBuy())) {
+
+                        if (StringUtils.equals("1", bean.getIsCutPrice())) {
+                            //可以砍价
+                            ShareUtil.shareKanjia(TuangouxiangqingActivity.this,
+                                    bean.getProductName(), bean.getProductPic(), bean.getId(), bean.getBuyerId());
+                        }
+
+                    } else {
+                        Intent intent = new Intent(this, WoyaotuangouActivity.class);
+                        intent.putExtra("bean", bean);
+                        ActivityUtils.startActivity(intent);
+                    }
+
+                } else {
+
+                    ActivityUtils.startActivity(LoginActivity.class);
+                }
+
+//
 
                 break;
             case R.id.toolbar_back:

@@ -11,15 +11,15 @@ import com.company.qcy.bean.chanpin.PropBean;
 import java.util.List;
 
 public class ChanpinCanshuRecyclerviewAdapter extends
-        BaseQuickAdapter<PropBean, BaseViewHolder> {
+        BaseQuickAdapter<ProductBean.PropMap, BaseViewHolder> {
 
 
-    public ChanpinCanshuRecyclerviewAdapter(int layoutResId, @Nullable List<PropBean> data) {
+    public ChanpinCanshuRecyclerviewAdapter(int layoutResId, @Nullable List<ProductBean.PropMap> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, PropBean item) {
+    protected void convert(BaseViewHolder helper, ProductBean.PropMap item) {
         helper.setText(R.id.item_chanpincanshu_first, item.getKey());
         helper.setText(R.id.item_chanpincanshu_second, item.getValue());
     }

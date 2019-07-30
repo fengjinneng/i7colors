@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_centerInParent="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/x140"
+            android:orientation="vertical">
+
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x500"
+                android:layout_marginLeft="@dimen/x50"
+                android:layout_marginRight="@dimen/x50"
+                android:background="@drawable/background_kanjia">
+
+
+                <TextView
+                    android:id="@+id/bg_kanjiachenggong_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="@dimen/x150"
+                    android:layout_marginEnd="8dp"
+                    android:text="砍价成功"
+                    android:textColor="@color/erjibiaoti"
+                    android:textSize="@dimen/x36"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/bg_kanjiachenggong_status_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="恭喜您，成功帮好友砍掉"
+                    android:textSize="@dimen/x30"
+                    android:gravity="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bg_kanjiachenggong_status" />
+
+
+                <TextView
+                    android:id="@+id/bg_kanjiachenggong_submit"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/x98"
+                    android:background="@mipmap/bg"
+                    android:gravity="center"
+                    android:text="确认"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x36"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView360"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="24dp"
+                    android:text="¥ "
+                    android:textColor="@color/chunhongse"
+                    android:textSize="@dimen/x30"
+                    app:layout_constraintEnd_toStartOf="@+id/bg_kanjiachenggong_price"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/bg_kanjiachenggong_status_text" />
+
+                <TextView
+                    android:id="@+id/bg_kanjiachenggong_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="55"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/x40"
+                    android:textColor="@color/chunhongse"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView360"
+                    app:layout_constraintEnd_toStartOf="@+id/bg_kanjiachenggong_price_unit"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/textView360" />
+
+                <TextView
+                    android:id="@+id/bg_kanjiachenggong_price_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 元"
+                    android:textSize="@dimen/x30"
+                    android:textColor="@color/chunhongse"
+                    app:layout_constraintBaseline_toBaselineOf="@+id/textView360"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/bg_kanjiachenggong_price" />
+            </android.support.constraint.ConstraintLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/close"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x400"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:src="@mipmap/kanjiachenggong" />
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
