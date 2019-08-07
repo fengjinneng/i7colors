@@ -412,7 +412,6 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
 
             }
         });
-
     }
 
     //记录用户首次点击返回键的时间

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/item_zhuji_fangan_companyname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/item_zhuji_fangan_caina"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/x30"
+        android:textColor="@color/erjibiaoti"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/item_zhuji_fangan_caina"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="采纳"
+        android:minWidth="@dimen/x100"
+        android:gravity="center"
+        android:background="@drawable/background_yuanxingbiankuang_red"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x26"
+        android:paddingLeft="@dimen/x10"
+        android:paddingRight="@dimen/x10"
+        android:paddingTop="@dimen/x4"
+        android:paddingBottom="@dimen/x4"
+        app:layout_constraintBottom_toBottomOf="@+id/item_zhuji_fangan_companyname"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/item_zhuji_fangan_companyname" />
+
+    <TextView
+        android:id="@+id/textView367"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/fengexian"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_zhuji_fangan_companyname" />
+
+    <TextView
+        android:id="@+id/textView378"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="供应产品名称:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView367" />
+
+    <TextView
+        android:id="@+id/item_zhuji_fangan_chanpinming"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x100"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView378"
+        app:layout_constraintTop_toTopOf="@+id/textView378" />
+
+    <TextView
+        android:id="@+id/textView385"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="需要提供样品:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_zhuji_fangan_chanpinming" />
+
+    <TextView
+        android:id="@+id/item_zhuji_fangan_yangpin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_zhuji_fangan_chanpinming"
+        app:layout_constraintTop_toTopOf="@+id/textView385" />
+
+    <TextView
+        android:id="@+id/textView390"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="应用工艺描述:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_zhuji_fangan_yangpin" />
+
+    <TextView
+        android:id="@+id/item_zhuji_fangan_gongyimiaoshu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_zhuji_fangan_yangpin"
+        app:layout_constraintTop_toTopOf="@+id/textView390" />
+
+    <TextView
+        android:id="@+id/textView395"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="提交时间:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_zhuji_fangan_gongyimiaoshu" />
+
+    <TextView
+        android:id="@+id/item_zhuji_fangan_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_zhuji_fangan_gongyimiaoshu"
+        app:layout_constraintTop_toTopOf="@+id/textView395" />
+</android.support.constraint.ConstraintLayout>

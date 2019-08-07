@@ -300,4 +300,37 @@ public class InterfaceInfo {
     //条件获取印染地图
     public static final String QUERYDYEMAPLIST = "dyeMap/queryDyeMapList";
 
+
+    //助剂定制
+
+    //获取助剂定制列表
+    public static final String ZHUJILIST = "zhujiDiy/queryZhujiDiyList";
+
+    //获取我的助剂定制列表
+    public static final String WODEZHUJILIST = "zhujiDiy/getMyZhujiDiyList";
+
+    //获取我的助剂定制详情
+    public static final String WODEZHUJIDETAIL = "zhujiDiy/getMyZhujiDiyDetail";
+
+    //获取我的助剂定制解决方案列表
+    public static final String WODEJIEJUEFANGANLIST = "zhujiDiy/getMyZhujiDiySolutionList";
+
+    //获取我的助剂定制解决方案详情
+    public static final String WODEJIEJUEFANGANDETAIL = "zhujiDiy/getMyZhujiDiySolutionDetail";
+
+    //发布助剂定制
+    public static final String FABUZHUJIDINGZHI = "zhujiDiy/addZhujiDiy";
+
+    //获取助剂分类
+    public static final String ZHUJITYPE = "zhujiDiy/getZhujiDiyClassList";
+
+    //发补助及定制解决方案
+    public static final String FABUJIEJUEFANGAN = "zhujiDiy/addZhujiDiySolution";
+
+    //关闭我的助剂定制
+    public static final String CLOSEZHUJIDIY = "zhujiDiy/updateZhujiDiyStatus";
+
+    //采纳方案
+    public static final String CAINAFANGAN = "zhujiDiy/acceptZhujiDiySolution";
 }
+

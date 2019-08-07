@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -20,10 +22,8 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
-import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyCommonUtil;
-import com.company.qcy.Utils.MyStatusBarUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.UserUtil;
@@ -37,8 +37,9 @@ import com.company.qcy.ui.activity.qiugoudating.WodeqiugouActivity;
 import com.company.qcy.ui.activity.user.LianxikefuActivity;
 import com.company.qcy.ui.activity.user.SettingActivity;
 import com.company.qcy.ui.activity.user.ZhanghaozhongxinActivity;
+import com.company.qcy.ui.activity.zhuji.WodeJiejuefanganListActivity;
+import com.company.qcy.ui.activity.zhuji.WodeZhujiListActivity;
 import com.githang.statusbar.StatusBarCompat;
-import com.jaeger.library.StatusBarUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -47,8 +48,6 @@ import com.umeng.analytics.MobclickAgent;
 
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
-
-import static com.blankj.utilcode.util.BarUtils.getStatusBarHeight;
 
 public class WodeFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
@@ -137,6 +136,23 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
      * 采购联盟
      */
     private Button mCaigoulianmeng;
+    /**
+     * 助剂定制
+     */
+    private TextView mFragmentWodeZhujidingzhiText;
+    /**
+     * 查看全部
+     */
+    private TextView mFragmentWodeZhujidingzhiChakanquanbu;
+    /**
+     * 试样中
+     */
+    private TextView mFragmentWodeZhujidingzhiStatus;
+    /**
+     * 2
+     */
+    private TextView mFragmentWodeZhujidingzhiNumber;
+    private ImageView mFragmentWodeZhujidingzhiImg;
 
     public WodeFragment() {
     }
@@ -155,15 +171,15 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
         }
-        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse), false);
 
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
-            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse),false);
+        if (!hidden) {
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse), false);
         }
     }
 
@@ -172,9 +188,13 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View inflate = inflater.inflate(R.layout.fragment_wode, null, false);
-        initView(inflate);
-        return inflate;
+        return inflater.inflate(R.layout.fragment_wode, null, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        initView(view);
     }
 
     @Override
@@ -223,17 +243,17 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         mFragmentWodeMaijiajieshouText = (TextView) inflater.findViewById(R.id.fragment_wode_maijiajieshou_text);
         mFragmentWodeMaijiajieshouImg.setOnClickListener(this);
         mFragmentWodeMaijiajieshouText.setOnClickListener(this);
-        xunpan = new QBadgeView(getContext()).bindTarget(mFragmentWodeXunpanzhongImg)
-                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
-
-        daiquerenbaojia = new QBadgeView(getContext()).bindTarget(mFragmentWodeDaiquerenbaojiaImg)
-                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
-
-        jijiangguoqi = new QBadgeView(getContext()).bindTarget(mFragmentWodeJijiangguoqiImg)
-                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
-
-        maijiajieshou = new QBadgeView(getContext()).bindTarget(mFragmentWodeMaijiajieshouImg)
-                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
+//        xunpan = new QBadgeView(getContext()).bindTarget(mFragmentWodeXunpanzhongImg)
+//                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
+//
+//        daiquerenbaojia = new QBadgeView(getContext()).bindTarget(mFragmentWodeDaiquerenbaojiaImg)
+//                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
+//
+//        jijiangguoqi = new QBadgeView(getContext()).bindTarget(mFragmentWodeJijiangguoqiImg)
+//                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
+//
+//        maijiajieshou = new QBadgeView(getContext()).bindTarget(mFragmentWodeMaijiajieshouImg)
+//                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
         mFragmentWodeConstraintlayoutSeller = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_constraintlayout_seller);
         mFragmentWodeConstraintlayoutBuyer = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_constraintlayout_buyer);
         mFragmentWodeAllQiugouSell = (TextView) inflater.findViewById(R.id.fragment_wode_all_qiugou_sell);
@@ -252,6 +272,14 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 //        mYouhuizhanxiao.setOnClickListener(this);
 //        mCaigoulianmeng = (Button) inflater.findViewById(R.id.caigoulianmeng);
 //        mCaigoulianmeng.setOnClickListener(this);
+        mFragmentWodeZhujidingzhiText = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_text);
+        mFragmentWodeZhujidingzhiChakanquanbu = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_chakanquanbu);
+        mFragmentWodeZhujidingzhiChakanquanbu.setOnClickListener(this);
+        mFragmentWodeZhujidingzhiStatus = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_status);
+        mFragmentWodeZhujidingzhiNumber = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_number);
+        mFragmentWodeZhujidingzhiImg = (ImageView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_img);
+        mFragmentWodeZhujidingzhiText.setOnClickListener(this);
+        mFragmentWodeZhujidingzhiImg.setOnClickListener(this);
     }
 
     @Override
@@ -280,15 +308,15 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 tianxiexinxi();
                 break;
             case MessageBean.Code.CHANGEPERSONHEADIMG:
-                MyCommonUtil.jiazaitouxiang(getActivity(),messageBean.getMeaasge(),mFragmentWodeImage);
+                MyCommonUtil.jiazaitouxiang(getActivity(), messageBean.getMeaasge(), mFragmentWodeImage);
                 break;
         }
     }
 
-    private Badge xunpan;
-    private Badge daiquerenbaojia;
-    private Badge jijiangguoqi;
-    private Badge maijiajieshou;
+//    private Badge xunpan;
+//    private Badge daiquerenbaojia;
+//    private Badge jijiangguoqi;
+//    private Badge maijiajieshou;
 
     @Override
     public void onResume() {
@@ -299,7 +327,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         if (UserUtil.isLogin()) {
             tianxiexinxi();
 
-            MyCommonUtil.jiazaitouxiang(getActivity(),SPUtils.getInstance().getString("photo"),mFragmentWodeImage);
+            MyCommonUtil.jiazaitouxiang(getActivity(), SPUtils.getInstance().getString("photo"), mFragmentWodeImage);
             getAllCount();
             //买家
             if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "1")) {
@@ -307,18 +335,22 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 mFragmentWodeConstraintlayoutSeller.setVisibility(View.INVISIBLE);
                 mFragmentWodeBuyerZhongxin.setTextSize(18);
                 mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
+
+
+                mFragmentWodeZhujidingzhiText.setText("助剂定制");
                 //卖家
             } else if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "2")) {
                 mFragmentWodeConstraintlayoutSeller.setVisibility(View.VISIBLE);
                 mFragmentWodeConstraintlayoutBuyer.setVisibility(View.INVISIBLE);
                 mFragmentWodeSellerZhongxin.setTextSize(18);
                 mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
+
+
+                mFragmentWodeZhujidingzhiText.setText("助剂定制方案");
             }
 
         }
     }
-
-
 
 
     private void getAllCount() {
@@ -340,10 +372,12 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                         if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
                             JSONObject data = jsonObject.getJSONObject("data");
                             NumberBean numberBean = data.toJavaObject(NumberBean.class);
-                            xunpan.setBadgeNumber(numberBean.getIsEnquiryCount());
-                            daiquerenbaojia.setBadgeNumber(numberBean.getWaitSureCount());
-                            jijiangguoqi.setBadgeNumber(numberBean.getMyExpireCount());
-                            maijiajieshou.setBadgeNumber(numberBean.getMyAcceptOfferCount());
+
+                            setNumberInfo(numberBean);
+//                            xunpan.setBadgeNumber(numberBean.getIsEnquiryCount());
+//                            daiquerenbaojia.setBadgeNumber(numberBean.getWaitSureCount());
+//                            jijiangguoqi.setBadgeNumber(numberBean.getMyExpireCount());
+//                            maijiajieshou.setBadgeNumber(numberBean.getMyAcceptOfferCount());
                             mFragmentWodeLishibaojia.setText(numberBean.getOfferTimes() + "");
                             mFragmentWodeLishiqiugou.setText(numberBean.getEnquiryTimes() + "");
                             return;
@@ -368,6 +402,48 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         };
 
         request.execute(stringCallback);
+
+    }
+
+    private void setNumberInfo(NumberBean numberBean) {
+
+        //询盘中
+        if(numberBean.getIsEnquiryCount()==0){
+            mFragmentWodeXunpanzhongImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_black));
+        }else {
+            mFragmentWodeXunpanzhongImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_red));
+        }
+
+        //待确认报价
+        if(numberBean.getWaitSureCount()==0){
+            mFragmentWodeDaiquerenbaojiaImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_black));
+        }else {
+            mFragmentWodeDaiquerenbaojiaImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_red));
+        }
+
+        //即将过期
+        if(numberBean.getMyExpireCount()==0){
+            mFragmentWodeJijiangguoqiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_black));
+        }else {
+            mFragmentWodeJijiangguoqiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_red));
+        }
+
+
+        //定制中
+        if(numberBean.getZhujiDiyingCount()==0){
+            mFragmentWodeZhujidingzhiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_black));
+        }else {
+            mFragmentWodeZhujidingzhiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_res));
+        }
+
+        //待接收方案
+        if(numberBean.getZhujiSolutionAcceptCount()==0){
+
+        }else {
+
+        }
+
+
 
     }
 
@@ -441,9 +517,12 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 mFragmentWodeWodeqiugou.setText("我的求购");
                 mFragmentWodeBuyerZhongxin.setTextSize(18);
                 mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
-
                 mFragmentWodeSellerZhongxin.setTextSize(15);
                 mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.putongwenben));
+
+
+                mFragmentWodeZhujidingzhiText.setText("助剂定制");
+
                 break;
 
             case R.id.fragment_wode_seller_layout:
@@ -455,9 +534,12 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 mFragmentWodeWodeqiugou.setText("我的报价");
                 mFragmentWodeSellerZhongxin.setTextSize(18);
                 mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
-
                 mFragmentWodeBuyerZhongxin.setTextSize(15);
                 mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.putongwenben));
+
+
+                mFragmentWodeZhujidingzhiText.setText("助剂定制方案");
+
                 break;
 //            case R.id.youhuizhanxiao:
 //                ActivityUtils.startActivity(YouhuizhanxiaoActivity.class);
@@ -465,7 +547,30 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 //            case R.id.caigoulianmeng:
 //                ActivityUtils.startActivity(CaigoulianmengActivity.class);
 //                break;
+            case R.id.fragment_wode_zhujidingzhi_chakanquanbu:
+                if (StringUtils.equals("1", SPUtils.getInstance().getString("identity"))) {
+                    ActivityUtils.startActivity(WodeZhujiListActivity.class);
+                } else if (StringUtils.equals("2", SPUtils.getInstance().getString("identity"))) {
+                    ActivityUtils.startActivity(WodeJiejuefanganListActivity.class);
+                }
+
+                break;
+            case R.id.fragment_wode_zhujidingzhi_text:
+                if (StringUtils.equals("1", SPUtils.getInstance().getString("identity"))) {
+                    ToastUtils.showShort("买家");
+                } else if (StringUtils.equals("2", SPUtils.getInstance().getString("identity"))) {
+                    ToastUtils.showShort("卖家");
+                }
+                break;
+            case R.id.fragment_wode_zhujidingzhi_img:
+                if (StringUtils.equals("1", SPUtils.getInstance().getString("identity"))) {
+                    ToastUtils.showShort("买家");
+                } else if (StringUtils.equals("2", SPUtils.getInstance().getString("identity"))) {
+                    ToastUtils.showShort("卖家");
+                }
+                break;
         }
+
     }
 
 

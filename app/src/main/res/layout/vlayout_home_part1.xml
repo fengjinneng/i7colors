@@ -81,7 +81,32 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vlayout_home_part1_zhuji"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/vlayout_home_part1_icon5"
+                android:layout_width="match_parent"
+                android:src="@mipmap/zhujidingzhi"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/vlayout_home_part1_title5"
+                android:text="助剂定制"
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/vlayout_home_part1_chanye"
             android:gravity="center"

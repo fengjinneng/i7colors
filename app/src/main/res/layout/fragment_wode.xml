@@ -74,7 +74,7 @@
             android:layout_marginTop="@dimen/x10"
             android:paddingTop="@dimen/x20"
             android:scaleType="center"
-            android:src="@mipmap/maijiajieshou"
+            android:src="@mipmap/wode_maijiayijieshou_black"
             app:layout_constraintBottom_toTopOf="@+id/fragment_wode_maijiajieshou_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -477,7 +477,6 @@
             android:drawableRight="@mipmap/youjiantou"
             android:text="查看全部"
             android:gravity="center"
-
             app:layout_constraintBottom_toTopOf="@+id/textView94"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -499,7 +498,7 @@
             android:layout_marginTop="@dimen/x10"
             android:paddingTop="@dimen/x20"
             android:scaleType="center"
-            android:src="@mipmap/wode_xunpan_checked"
+            android:src="@mipmap/wode_qiugouzhong_black"
             app:layout_constraintBottom_toTopOf="@+id/fragment_wode_xunpanzhong_text"
             app:layout_constraintEnd_toEndOf="@+id/fragment_wode_xunpanzhong_text"
             app:layout_constraintStart_toStartOf="@+id/fragment_wode_xunpanzhong_text"
@@ -526,7 +525,7 @@
             android:layout_marginTop="@dimen/x10"
             android:paddingTop="@dimen/x20"
             android:scaleType="center"
-            android:src="@mipmap/wode_baojia_checked"
+            android:src="@mipmap/wode_daiqurenbaojia_black"
             app:layout_constraintBottom_toTopOf="@+id/fragment_wode_daiquerenbaojia_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -556,7 +555,7 @@
             android:layout_marginTop="@dimen/x10"
             android:scaleType="center"
             android:paddingTop="@dimen/x20"
-            android:src="@mipmap/wode_jijiangguoqi_unchecked"
+            android:src="@mipmap/wode_jijiangguoqi_black"
             app:layout_constraintBottom_toTopOf="@+id/fragment_wode_jijiangguoqi_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView94" />
@@ -584,15 +583,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_wode_constraintlayout_seller">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout56">
 
         <ImageView
             android:id="@+id/imageView32"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_marginStart="@dimen/x98"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:src="@mipmap/wode_kefu_uncheck"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -613,13 +612,125 @@
             android:id="@+id/imageView33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="@dimen/x64"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="@dimen/x64"
+            android:layout_marginBottom="8dp"
             android:src="@mipmap/youjiantou"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout56"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x220"
+        android:layout_marginTop="8dp"
+        android:background="@color/baise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_wode_constraintlayout_buyer">
+
+        <ImageView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x110"
+            android:layout_marginTop="@dimen/x20"
+            android:src="@mipmap/wode_zhuji_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_wode_zhujidingzhi_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/x46"
+            android:text="助剂定制"
+            android:textColor="@color/erjibiaoti"
+            app:layout_constraintBottom_toBottomOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/textView11" />
+
+        <TextView
+            android:id="@+id/fragment_wode_zhujidingzhi_chakanquanbu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="@dimen/x64"
+            android:drawableRight="@mipmap/youjiantou"
+            android:drawablePadding="8dp"
+            android:padding="@dimen/x10"
+            android:text="查看全部"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_zhujidingzhi_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/bg_no_photo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_wode_zhujidingzhi_chakanquanbu">
+
+            <TextView
+                android:id="@+id/fragment_wode_zhujidingzhi_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="试样中"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView372"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/fragment_wode_zhujidingzhi_img" />
+
+            <TextView
+                android:id="@+id/textView372"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="("
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_zhujidingzhi_status"
+                app:layout_constraintEnd_toStartOf="@+id/fragment_wode_zhujidingzhi_number"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_wode_zhujidingzhi_status" />
+
+            <TextView
+                android:id="@+id/fragment_wode_zhujidingzhi_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2"
+                app:layout_constraintBottom_toBottomOf="@+id/textView372"
+                app:layout_constraintEnd_toStartOf="@+id/textView382"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textView372" />
+
+            <TextView
+                android:id="@+id/textView382"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=")"
+                app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_zhujidingzhi_number"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/fragment_wode_zhujidingzhi_number" />
+
+            <ImageView
+                android:id="@+id/fragment_wode_zhujidingzhi_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:src="@mipmap/wode_shiyangzhong_black"
+                app:layout_constraintBottom_toTopOf="@+id/fragment_wode_zhujidingzhi_status"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+        </android.support.constraint.ConstraintLayout>
     </android.support.constraint.ConstraintLayout>
 
     <!--<android.support.constraint.ConstraintLayout-->
