@@ -72,54 +72,16 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
      */
     private TextView mFragmentWodeLishibaojia;
 
-    private TextView mFragmentWodeAllQiugou;
-    private ImageView mFragmentWodeXunpanzhongImg;
-    /**
-     * 询盘中
-     */
-    private TextView mFragmentWodeXunpanzhongText;
-    private ImageView mFragmentWodeDaiquerenbaojiaImg;
-    /**
-     * 待确认报价
-     */
-    private TextView mFragmentWodeDaiquerenbaojiaText;
-    private ImageView mFragmentWodeJijiangguoqiImg;
-    /**
-     * 即将过期
-     */
-    private TextView mFragmentWodeJijiangguoqiText;
-    private ConstraintLayout mFragmentWodeLixikefu;
+
     /**
      * 设置
      */
     private TextView mToolbarText;
 
-    /**
-     * 我的求购
-     */
-    private TextView mFragmentWodeWodeqiugou;
-    private ConstraintLayout mToolbarLayout;
-
-    private Activity activity;
-    private ImageView mFragmentWodeMaijiajieshouImg;
-    /**
-     * 卖家已接受
-     */
-    private TextView mFragmentWodeMaijiajieshouText;
-    private ConstraintLayout mFragmentWodeConstraintlayoutSeller;
-    private ConstraintLayout mFragmentWodeConstraintlayoutBuyer;
-    /**
-     * 查看全部
-     */
-    private TextView mFragmentWodeAllQiugouSell;
-
-    /**
-     * 标题
-     */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
-    private ConstraintLayout mFragmentWodeBuyerLayout;
-    private ConstraintLayout mFragmentWodeSellerLayout;
+    private Activity activity;
+
     /**
      * 买家中心
      */
@@ -128,31 +90,6 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
      * 卖家中心
      */
     private TextView mFragmentWodeSellerZhongxin;
-    /**
-     * 优惠展销
-     */
-    private Button mYouhuizhanxiao;
-    /**
-     * 采购联盟
-     */
-    private Button mCaigoulianmeng;
-    /**
-     * 助剂定制
-     */
-    private TextView mFragmentWodeZhujidingzhiText;
-    /**
-     * 查看全部
-     */
-    private TextView mFragmentWodeZhujidingzhiChakanquanbu;
-    /**
-     * 试样中
-     */
-    private TextView mFragmentWodeZhujidingzhiStatus;
-    /**
-     * 2
-     */
-    private TextView mFragmentWodeZhujidingzhiNumber;
-    private ImageView mFragmentWodeZhujidingzhiImg;
 
     public WodeFragment() {
     }
@@ -212,37 +149,17 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         mFragmentWodeShenfen = (TextView) inflater.findViewById(R.id.fragment_wode_shenfen);
         mFragmentWodeLishiqiugou = (TextView) inflater.findViewById(R.id.fragment_wode_lishiqiugou);
         mFragmentWodeLishibaojia = (TextView) inflater.findViewById(R.id.fragment_wode_lishibaojia);
-        mFragmentWodeAllQiugou = (TextView) inflater.findViewById(R.id.fragment_wode_all_qiugou);
-        mFragmentWodeXunpanzhongImg = (ImageView) inflater.findViewById(R.id.fragment_wode_xunpanzhong_img);
-        mFragmentWodeXunpanzhongText = (TextView) inflater.findViewById(R.id.fragment_wode_xunpanzhong_text);
-        mFragmentWodeDaiquerenbaojiaImg = (ImageView) inflater.findViewById(R.id.fragment_wode_daiquerenbaojia_img);
-        mFragmentWodeDaiquerenbaojiaText = (TextView) inflater.findViewById(R.id.fragment_wode_daiquerenbaojia_text);
-        mFragmentWodeJijiangguoqiImg = (ImageView) inflater.findViewById(R.id.fragment_wode_jijiangguoqi_img);
-        mFragmentWodeJijiangguoqiText = (TextView) inflater.findViewById(R.id.fragment_wode_jijiangguoqi_text);
-        mFragmentWodeLixikefu = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_lixikefu);
-        mFragmentWodeBuyerLayout = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_buyer_layout);
-        mFragmentWodeSellerLayout = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_seller_layout);
-        mFragmentWodeBuyerLayout.setOnClickListener(this);
-        mFragmentWodeSellerLayout.setOnClickListener(this);
-        mFragmentWodeXunpanzhongImg.setOnClickListener(this);
-        mFragmentWodeXunpanzhongText.setOnClickListener(this);
 
-        mFragmentWodeDaiquerenbaojiaImg.setOnClickListener(this);
-        mFragmentWodeDaiquerenbaojiaText.setOnClickListener(this);
 
-        mFragmentWodeJijiangguoqiImg.setOnClickListener(this);
-        mFragmentWodeJijiangguoqiText.setOnClickListener(this);
-
-        mFragmentWodeAllQiugou.setOnClickListener(this);
         mToolbarText = inflater.findViewById(R.id.toolbar_text);
         mToolbarText.setVisibility(View.VISIBLE);
         mToolbarText.setOnClickListener(this);
-        mFragmentWodeWodeqiugou = (TextView) inflater.findViewById(R.id.fragment_wode_wodeqiugou);
-        mToolbarLayout = (ConstraintLayout) inflater.findViewById(R.id.include8);
-        mFragmentWodeMaijiajieshouImg = (ImageView) inflater.findViewById(R.id.fragment_wode_maijiajieshou_img);
-        mFragmentWodeMaijiajieshouText = (TextView) inflater.findViewById(R.id.fragment_wode_maijiajieshou_text);
-        mFragmentWodeMaijiajieshouImg.setOnClickListener(this);
-        mFragmentWodeMaijiajieshouText.setOnClickListener(this);
+        mToolbarTitle = (TextView) inflater.findViewById(R.id.toolbar_title);
+        mToolbarBack = (ImageView) inflater.findViewById(R.id.toolbar_back);
+        mToolbarBack.setVisibility(View.INVISIBLE);
+        mToolbarTitle.setText("个人中心");
+
+
 //        xunpan = new QBadgeView(getContext()).bindTarget(mFragmentWodeXunpanzhongImg)
 //                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
 //
@@ -254,33 +171,96 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 //
 //        maijiajieshou = new QBadgeView(getContext()).bindTarget(mFragmentWodeMaijiajieshouImg)
 //                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(8, true);
-        mFragmentWodeConstraintlayoutSeller = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_constraintlayout_seller);
-        mFragmentWodeConstraintlayoutBuyer = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_constraintlayout_buyer);
-        mFragmentWodeAllQiugouSell = (TextView) inflater.findViewById(R.id.fragment_wode_all_qiugou_sell);
-        mFragmentWodeAllQiugouSell.setOnClickListener(this);
-        mFragmentWodeLixikefu = (ConstraintLayout) inflater.findViewById(R.id.fragment_wode_lixikefu);
-        mFragmentWodeLixikefu.setOnClickListener(this);
-        mToolbarTitle = (TextView) inflater.findViewById(R.id.toolbar_title);
-        mToolbarBack = (ImageView) inflater.findViewById(R.id.toolbar_back);
-        mToolbarBack.setVisibility(View.INVISIBLE);
-        mToolbarText = (TextView) inflater.findViewById(R.id.toolbar_text);
-        mToolbarText.setOnClickListener(this);
-        mToolbarTitle.setText("个人中心");
 
 
-//        mYouhuizhanxiao = (Button) inflater.findViewById(R.id.youhuizhanxiao);
-//        mYouhuizhanxiao.setOnClickListener(this);
-//        mCaigoulianmeng = (Button) inflater.findViewById(R.id.caigoulianmeng);
-//        mCaigoulianmeng.setOnClickListener(this);
-        mFragmentWodeZhujidingzhiText = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_text);
-        mFragmentWodeZhujidingzhiChakanquanbu = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_chakanquanbu);
-        mFragmentWodeZhujidingzhiChakanquanbu.setOnClickListener(this);
-        mFragmentWodeZhujidingzhiStatus = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_status);
-        mFragmentWodeZhujidingzhiNumber = (TextView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_number);
-        mFragmentWodeZhujidingzhiImg = (ImageView) inflater.findViewById(R.id.fragment_wode_zhujidingzhi_img);
-        mFragmentWodeZhujidingzhiText.setOnClickListener(this);
-        mFragmentWodeZhujidingzhiImg.setOnClickListener(this);
+        allQiuGou = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_qiugou_all);
+        allQiuGou.setOnClickListener(this);
+        qiugouXunpanzhongText = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_qiugou_xunpanzhong_text);
+        qiugouXunpanzhongImage = (ImageView) inflater.findViewById(R.id.fragment_wode_buyer_qiugou_xunpanzhong_img);
+        qiugouXunpanzhongText.setOnClickListener(this);
+        qiugouXunpanzhongImage.setOnClickListener(this);
+
+        qiugouDaiquerenbaojiaText = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_qiugou_daiquerenbaojia_text);
+        qiugouDaiquerenbaojiaImage = (ImageView) inflater.findViewById(R.id.fragment_wode_buyer_qiugou_daiquerenbaojia_img);
+        qiugouDaiquerenbaojiaText.setOnClickListener(this);
+        qiugouDaiquerenbaojiaImage.setOnClickListener(this);
+
+        qiugouJijiangguoqiText = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_qiugou_jijiangguoqi_text);
+        qiugouJijiangguoqiImage = (ImageView) inflater.findViewById(R.id.fragment_wode_buyer_qiugou_jijiangguoqi_img);
+        qiugouJijiangguoqiText.setOnClickListener(this);
+        qiugouJijiangguoqiImage.setOnClickListener(this);
+
+        allZhujiDingzhi = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_zhujidingzhi_all);
+        allZhujiDingzhi.setOnClickListener(this);
+
+        zhujidingzhiShiyangzhongText = (TextView) inflater.findViewById(R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_text);
+        zhujidingzhiShiyangzhongImage = (ImageView) inflater.findViewById(R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_img);
+
+        zhujidingzhiShiyangzhongText.setOnClickListener(this);
+        zhujidingzhiShiyangzhongImage.setOnClickListener(this);
+
+        allBaojia = (TextView) inflater.findViewById(R.id.fragment_wode_seller_baojia_all);
+        allBaojia.setOnClickListener(this);
+
+        baojiaMaijiajieshouText = (TextView) inflater.findViewById(R.id.fragment_wode_seller_baojia_maijiayijieshou_text);
+        baojiaMaijiajieshouImage = inflater.findViewById(R.id.fragment_wode_seller_baojia_maijiayijieshou_img);
+        baojiaMaijiajieshouText.setOnClickListener(this);
+        baojiaMaijiajieshouImage.setOnClickListener(this);
+
+        allFangan = (TextView) inflater.findViewById(R.id.fragment_wode_seller_zhujidingzhifangan_all_fangan);
+        allFangan.setOnClickListener(this);
+
+        fanganMaijiajieshouText = inflater.findViewById(R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_text);
+        fanganMaijiajieshouImage = inflater.findViewById(R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_img);
+        fanganMaijiajieshouText.setOnClickListener(this);
+        fanganMaijiajieshouImage.setOnClickListener(this);
+
+        buyerLayout = inflater.findViewById(R.id.fragment_wode_buyer);
+        sellerLayout = inflater.findViewById(R.id.fragment_wode_seller);
+
+        buyerZhongxin = inflater.findViewById(R.id.fragment_wode_buyer_layout);
+        sellerZhongxin = inflater.findViewById(R.id.fragment_wode_seller_layout);
+        buyerZhongxin.setOnClickListener(this);
+        sellerZhongxin.setOnClickListener(this);
+
+        lianxikefu = inflater.findViewById(R.id.fragment_wode_lianxikefu);
+        lianxikefu.setOnClickListener(this);
     }
+
+    private TextView allQiuGou;
+    private TextView qiugouXunpanzhongText;
+    private ImageView qiugouXunpanzhongImage;
+
+    private TextView qiugouDaiquerenbaojiaText;
+    private ImageView qiugouDaiquerenbaojiaImage;
+
+    private TextView qiugouJijiangguoqiText;
+    private ImageView qiugouJijiangguoqiImage;
+
+    private TextView allZhujiDingzhi;
+
+    private TextView zhujidingzhiShiyangzhongText;
+
+    private ImageView zhujidingzhiShiyangzhongImage;
+
+    private TextView allBaojia;
+
+    private TextView baojiaMaijiajieshouText;
+    private ImageView baojiaMaijiajieshouImage;
+
+    private TextView allFangan;
+
+    private TextView fanganMaijiajieshouText;
+    private ImageView fanganMaijiajieshouImage;
+
+    private ConstraintLayout buyerLayout;
+    private ConstraintLayout sellerLayout;
+
+    private ConstraintLayout buyerZhongxin;
+    private ConstraintLayout sellerZhongxin;
+    private ConstraintLayout lianxikefu;
+
+
 
     @Override
     public void onDestroy() {
@@ -331,22 +311,20 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             getAllCount();
             //买家
             if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "1")) {
-                mFragmentWodeConstraintlayoutBuyer.setVisibility(View.VISIBLE);
-                mFragmentWodeConstraintlayoutSeller.setVisibility(View.INVISIBLE);
+                buyerLayout.setVisibility(View.VISIBLE);
+                sellerLayout.setVisibility(View.INVISIBLE);
                 mFragmentWodeBuyerZhongxin.setTextSize(18);
                 mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
 
 
-                mFragmentWodeZhujidingzhiText.setText("助剂定制");
                 //卖家
             } else if (StringUtils.equals(SPUtils.getInstance().getString("identity"), "2")) {
-                mFragmentWodeConstraintlayoutSeller.setVisibility(View.VISIBLE);
-                mFragmentWodeConstraintlayoutBuyer.setVisibility(View.INVISIBLE);
+                sellerLayout.setVisibility(View.VISIBLE);
+                buyerLayout.setVisibility(View.INVISIBLE);
                 mFragmentWodeSellerZhongxin.setTextSize(18);
                 mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
 
 
-                mFragmentWodeZhujidingzhiText.setText("助剂定制方案");
             }
 
         }
@@ -408,42 +386,59 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
     private void setNumberInfo(NumberBean numberBean) {
 
         //询盘中
-        if(numberBean.getIsEnquiryCount()==0){
-            mFragmentWodeXunpanzhongImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_black));
-        }else {
-            mFragmentWodeXunpanzhongImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_red));
+        if (numberBean.getIsEnquiryCount() == 0) {
+            qiugouXunpanzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_black));
+        } else {
+            qiugouXunpanzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_red));
+            qiugouXunpanzhongText.setText("询盘中"+"("+numberBean.getIsEnquiryCount()+")");
+            qiugouXunpanzhongText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
         //待确认报价
-        if(numberBean.getWaitSureCount()==0){
-            mFragmentWodeDaiquerenbaojiaImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_black));
-        }else {
-            mFragmentWodeDaiquerenbaojiaImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_red));
+        if (numberBean.getWaitSureCount() == 0) {
+            qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_black));
+        } else {
+            qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_red));
+            qiugouDaiquerenbaojiaText.setText("待确认报价"+"("+numberBean.getWaitSureCount()+")");
+            qiugouDaiquerenbaojiaText.setTextColor(getResources().getColor(R.color.chunhongse));
+
         }
 
         //即将过期
-        if(numberBean.getMyExpireCount()==0){
-            mFragmentWodeJijiangguoqiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_black));
-        }else {
-            mFragmentWodeJijiangguoqiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_red));
+        if (numberBean.getMyExpireCount() == 0) {
+            qiugouJijiangguoqiImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_black));
+        } else {
+            qiugouJijiangguoqiImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_red));
+            qiugouJijiangguoqiText.setText("即将过期"+"("+numberBean.getMyExpireCount()+")");
+            qiugouJijiangguoqiText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
+        //买家已接受
+        if (numberBean.getMyAcceptOfferCount() == 0) {
+            qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_black));
+        } else {
+            qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_red));
+            qiugouDaiquerenbaojiaText.setText("买家已接受"+"("+numberBean.getMyAcceptOfferCount()+")");
+            qiugouDaiquerenbaojiaText.setTextColor(getResources().getColor(R.color.chunhongse));
+        }
 
         //定制中
-        if(numberBean.getZhujiDiyingCount()==0){
-            mFragmentWodeZhujidingzhiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_black));
-        }else {
-            mFragmentWodeZhujidingzhiImg.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_res));
+        if (numberBean.getZhujiDiyingCount() == 0) {
+            zhujidingzhiShiyangzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_black));
+        } else {
+            zhujidingzhiShiyangzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_res));
+            zhujidingzhiShiyangzhongText.setText("试样中"+"("+numberBean.getZhujiDiyingCount()+")");
+            zhujidingzhiShiyangzhongText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
         //待接收方案
-        if(numberBean.getZhujiSolutionAcceptCount()==0){
-
-        }else {
-
+        if (numberBean.getZhujiSolutionAcceptCount() == 0) {
+            fanganMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_black));
+        } else {
+            fanganMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_red));
+            fanganMaijiajieshouText.setText("买家已接受"+"("+numberBean.getZhujiSolutionAcceptCount()+")");
+            fanganMaijiajieshouText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
-
-
 
     }
 
@@ -467,36 +462,36 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.fragment_wode_image:
                 ActivityUtils.startActivity(ZhanghaozhongxinActivity.class);
                 break;
-            case R.id.fragment_wode_xunpanzhong_img:
+            case R.id.fragment_wode_buyer_qiugou_xunpanzhong_img:
                 jumpToDaichuli(1);
                 break;
-            case R.id.fragment_wode_xunpanzhong_text:
+            case R.id.fragment_wode_buyer_qiugou_xunpanzhong_text:
                 jumpToDaichuli(1);
                 break;
-            case R.id.fragment_wode_daiquerenbaojia_img:
+            case R.id.fragment_wode_buyer_qiugou_daiquerenbaojia_img:
                 jumpToDaichuli(2);
                 break;
-            case R.id.fragment_wode_daiquerenbaojia_text:
+            case R.id.fragment_wode_buyer_qiugou_daiquerenbaojia_text:
                 jumpToDaichuli(2);
                 break;
-            case R.id.fragment_wode_jijiangguoqi_img:
+            case R.id.fragment_wode_buyer_qiugou_jijiangguoqi_img:
                 jumpToDaichuli(3);
                 break;
-            case R.id.fragment_wode_jijiangguoqi_text:
+            case R.id.fragment_wode_buyer_qiugou_jijiangguoqi_text:
                 jumpToDaichuli(3);
                 break;
-            case R.id.fragment_wode_maijiajieshou_img:
+            case R.id.fragment_wode_seller_baojia_maijiayijieshou_img:
                 jumpToMaijiajieshou();
                 break;
-            case R.id.fragment_wode_maijiajieshou_text:
+            case R.id.fragment_wode_seller_baojia_maijiayijieshou_text:
                 jumpToMaijiajieshou();
                 break;
             //我的全部报价
-            case R.id.fragment_wode_all_qiugou_sell:
+            case R.id.fragment_wode_seller_baojia_all:
                 ActivityUtils.startActivity(WodebaojiaActivity.class);
                 break;
             //我的求购
-            case R.id.fragment_wode_all_qiugou:
+            case R.id.fragment_wode_buyer_qiugou_all:
                 ActivityUtils.startActivity(WodeqiugouActivity.class);
                 break;
             //设置
@@ -504,71 +499,52 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 ActivityUtils.startActivity(SettingActivity.class);
                 break;
 
-            case R.id.fragment_wode_lixikefu:
+            case R.id.fragment_wode_lianxikefu:
                 ActivityUtils.startActivity(LianxikefuActivity.class);
                 break;
 
             case R.id.fragment_wode_buyer_layout:
-//                mFragmentWodeBuyerLayout.setBackgroundColor(getResources().getColor(R.color.fengexian));
-//                mFragmentWodeSellerLayout.setBackgroundColor(getResources().getColor(R.color.baise));
-                mFragmentWodeConstraintlayoutBuyer.setVisibility(View.VISIBLE);
-                mFragmentWodeConstraintlayoutSeller.setVisibility(View.INVISIBLE);
+                buyerLayout.setVisibility(View.VISIBLE);
+                sellerLayout.setVisibility(View.INVISIBLE);
                 SPUtils.getInstance().put("identity", "1");
-                mFragmentWodeWodeqiugou.setText("我的求购");
                 mFragmentWodeBuyerZhongxin.setTextSize(18);
                 mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
                 mFragmentWodeSellerZhongxin.setTextSize(15);
                 mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.putongwenben));
 
-
-                mFragmentWodeZhujidingzhiText.setText("助剂定制");
-
                 break;
 
             case R.id.fragment_wode_seller_layout:
-//                mFragmentWodeSellerLayout.setBackgroundColor(getResources().getColor(R.color.fengexian));
-//                mFragmentWodeSellerLayout.setBackgroundColor(getResources().getColor(R.color.baise));
-                mFragmentWodeConstraintlayoutSeller.setVisibility(View.VISIBLE);
-                mFragmentWodeConstraintlayoutBuyer.setVisibility(View.INVISIBLE);
+                sellerLayout.setVisibility(View.VISIBLE);
+                buyerLayout.setVisibility(View.INVISIBLE);
                 SPUtils.getInstance().put("identity", "2");
-                mFragmentWodeWodeqiugou.setText("我的报价");
                 mFragmentWodeSellerZhongxin.setTextSize(18);
                 mFragmentWodeSellerZhongxin.setTextColor(getContext().getResources().getColor(R.color.chunhongse));
                 mFragmentWodeBuyerZhongxin.setTextSize(15);
                 mFragmentWodeBuyerZhongxin.setTextColor(getContext().getResources().getColor(R.color.putongwenben));
 
-
-                mFragmentWodeZhujidingzhiText.setText("助剂定制方案");
-
                 break;
-//            case R.id.youhuizhanxiao:
-//                ActivityUtils.startActivity(YouhuizhanxiaoActivity.class);
-//                break;
-//            case R.id.caigoulianmeng:
-//                ActivityUtils.startActivity(CaigoulianmengActivity.class);
-//                break;
-            case R.id.fragment_wode_zhujidingzhi_chakanquanbu:
-                if (StringUtils.equals("1", SPUtils.getInstance().getString("identity"))) {
-                    ActivityUtils.startActivity(WodeZhujiListActivity.class);
-                } else if (StringUtils.equals("2", SPUtils.getInstance().getString("identity"))) {
-                    ActivityUtils.startActivity(WodeJiejuefanganListActivity.class);
-                }
+
+            case R.id.fragment_wode_buyer_zhujidingzhi_all:
+                ActivityUtils.startActivity(WodeZhujiListActivity.class);
 
                 break;
-            case R.id.fragment_wode_zhujidingzhi_text:
-                if (StringUtils.equals("1", SPUtils.getInstance().getString("identity"))) {
-                    ToastUtils.showShort("买家");
-                } else if (StringUtils.equals("2", SPUtils.getInstance().getString("identity"))) {
-                    ToastUtils.showShort("卖家");
-                }
+
+            case R.id.fragment_wode_seller_zhujidingzhifangan_all_fangan:
+
+                ActivityUtils.startActivity(WodeJiejuefanganListActivity.class);
                 break;
-            case R.id.fragment_wode_zhujidingzhi_img:
-                if (StringUtils.equals("1", SPUtils.getInstance().getString("identity"))) {
-                    ToastUtils.showShort("买家");
-                } else if (StringUtils.equals("2", SPUtils.getInstance().getString("identity"))) {
-                    ToastUtils.showShort("卖家");
-                }
+
+            case R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_img:
                 break;
+            case R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_text:
+                break;
+
+            case R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_text:
+                break;
+            case R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_img:
+                break;
+
         }
 
     }
