@@ -20,15 +20,14 @@ import com.blankj.utilcode.util.SPUtils;
 import com.company.qcy.R;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
-import com.company.qcy.fragment.xiaoxi.BaojiaxiaoxiFragment;
-import com.company.qcy.fragment.xiaoxi.QiugouxiaoxiFragment;
+import com.company.qcy.fragment.xiaoxi.SellerxiaoxiFragment;
+import com.company.qcy.fragment.xiaoxi.BuyerxiaoxiFragment;
 import com.company.qcy.fragment.xiaoxi.XitongxiaoxiFragment;
 import com.githang.statusbar.StatusBarCompat;
 import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
-import me.leolin.shortcutbadger.ShortcutBadger;
 import q.rorbin.badgeview.Badge;
 import q.rorbin.badgeview.QBadgeView;
 
@@ -95,8 +94,8 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     }
 
 
-    private QiugouxiaoxiFragment qiugouxiaoxiFragment;
-    private BaojiaxiaoxiFragment baojiaxiaoxiFragment;
+    private BuyerxiaoxiFragment buyerxiFragment;
+    private SellerxiaoxiFragment sellerxiaoxiFragment;
     private XitongxiaoxiFragment xitongxiaoxiFragment;
 
     private Badge messageBadge;
@@ -145,10 +144,10 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         mFragmentToutiaoXitongxiaoxi.setOnClickListener(this);
         container = inflate.findViewById(R.id.fragment_toutiao_container);
 
-        qiugouxiaoxiFragment = new QiugouxiaoxiFragment();
+        buyerxiFragment = new BuyerxiaoxiFragment();
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_toutiao_container, qiugouxiaoxiFragment);
+        fragmentTransaction.add(R.id.fragment_toutiao_container, buyerxiFragment);
         fragmentTransaction.commit();
         mFragmentToutiaoBuyer.setOnClickListener(this);
 
@@ -183,44 +182,44 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (v.getId()) {
             case R.id.fragment_toutiao_buyer:
-                if (qiugouxiaoxiFragment == null) {
-                    qiugouxiaoxiFragment = new QiugouxiaoxiFragment();
-                    fragmentTransaction.add(R.id.fragment_toutiao_container, qiugouxiaoxiFragment);
+                if (buyerxiFragment == null) {
+                    buyerxiFragment = new BuyerxiaoxiFragment();
+                    fragmentTransaction.add(R.id.fragment_toutiao_container, buyerxiFragment);
                 }
                 hideFragment(fragmentTransaction);
-                fragmentTransaction.show(qiugouxiaoxiFragment);
+                fragmentTransaction.show(buyerxiFragment);
 
-                mFragmentToutiaoBuyerImg.setImageDrawable(getResources().getDrawable(R.mipmap.buyer_white));
-                mFragmentToutiaoBuyerText.setTextColor(getResources().getColor(R.color.baise));
-                mFragmentToutiaoBuyer.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang_red));
+                mFragmentToutiaoBuyerImg.setImageDrawable(getResources().getDrawable(R.mipmap.buyer_img_red));
+                mFragmentToutiaoBuyerText.setTextColor(getResources().getColor(R.color.chunhongse));
+                mFragmentToutiaoBuyer.setBackgroundColor(getResources().getColor(R.color.baise));
 
                 mFragmentToutiaoSellerImg.setImageDrawable(getResources().getDrawable(R.mipmap.sell));
                 mFragmentToutiaoSellerText.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mFragmentToutiaoSeller.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                mFragmentToutiaoSeller.setBackgroundColor(getResources().getColor(R.color.bg_no_photo));
 
                 mFragmentToutiaoXitongxiaoxiImg.setImageDrawable(getResources().getDrawable(R.mipmap.xitongxiaoxi));
                 mFragmentToutiaoXitongxiaoxiText.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mFragmentToutiaoXitongxiaoxi.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                mFragmentToutiaoXitongxiaoxi.setBackgroundColor(getResources().getColor(R.color.bg_no_photo));
 
                 break;
             case R.id.fragment_toutiao_seller:
-                if (baojiaxiaoxiFragment == null) {
-                    baojiaxiaoxiFragment = new BaojiaxiaoxiFragment();
-                    fragmentTransaction.add(R.id.fragment_toutiao_container, baojiaxiaoxiFragment);
+                if (sellerxiaoxiFragment == null) {
+                    sellerxiaoxiFragment = new SellerxiaoxiFragment();
+                    fragmentTransaction.add(R.id.fragment_toutiao_container, sellerxiaoxiFragment);
                 }
                 hideFragment(fragmentTransaction);
-                fragmentTransaction.show(baojiaxiaoxiFragment);
-                mFragmentToutiaoSellerImg.setImageDrawable(getResources().getDrawable(R.mipmap.seller_white));
-                mFragmentToutiaoSellerText.setTextColor(getResources().getColor(R.color.baise));
-                mFragmentToutiaoSeller.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang_red));
+                fragmentTransaction.show(sellerxiaoxiFragment);
+                mFragmentToutiaoSellerImg.setImageDrawable(getResources().getDrawable(R.mipmap.seller_img_red));
+                mFragmentToutiaoSellerText.setTextColor(getResources().getColor(R.color.chunhongse));
+                mFragmentToutiaoSeller.setBackgroundColor(getResources().getColor(R.color.baise));
 
                 mFragmentToutiaoBuyerImg.setImageDrawable(getResources().getDrawable(R.mipmap.buy));
                 mFragmentToutiaoBuyerText.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mFragmentToutiaoBuyer.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                mFragmentToutiaoBuyer.setBackgroundColor(getResources().getColor(R.color.bg_no_photo));
 
                 mFragmentToutiaoXitongxiaoxiImg.setImageDrawable(getResources().getDrawable(R.mipmap.xitongxiaoxi));
                 mFragmentToutiaoXitongxiaoxiText.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mFragmentToutiaoXitongxiaoxi.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                mFragmentToutiaoXitongxiaoxi.setBackgroundColor(getResources().getColor(R.color.bg_no_photo));
 
                 break;
             case R.id.fragment_toutiao_xitongxiaoxi:
@@ -241,17 +240,17 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
                 hideFragment(fragmentTransaction);
                 fragmentTransaction.show(xitongxiaoxiFragment);
 
-                mFragmentToutiaoXitongxiaoxiImg.setImageDrawable(getResources().getDrawable(R.mipmap.xitongxiaoxi_white));
-                mFragmentToutiaoXitongxiaoxiText.setTextColor(getResources().getColor(R.color.baise));
-                mFragmentToutiaoXitongxiaoxi.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang_red));
+                mFragmentToutiaoXitongxiaoxiImg.setImageDrawable(getResources().getDrawable(R.mipmap.xitongxiaoxi_img_red));
+                mFragmentToutiaoXitongxiaoxiText.setTextColor(getResources().getColor(R.color.chunhongse));
+                mFragmentToutiaoXitongxiaoxi.setBackgroundColor(getResources().getColor(R.color.baise));
 
                 mFragmentToutiaoSellerImg.setImageDrawable(getResources().getDrawable(R.mipmap.sell));
                 mFragmentToutiaoSellerText.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mFragmentToutiaoSeller.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                mFragmentToutiaoSeller.setBackgroundColor(getResources().getColor(R.color.bg_no_photo));
 
                 mFragmentToutiaoBuyerImg.setImageDrawable(getResources().getDrawable(R.mipmap.buy));
                 mFragmentToutiaoBuyerText.setTextColor(getResources().getColor(R.color.erjibiaoti));
-                mFragmentToutiaoBuyer.setBackground(getResources().getDrawable(R.drawable.background_yuanxingbiankuang));
+                mFragmentToutiaoBuyer.setBackgroundColor(getResources().getColor(R.color.bg_no_photo));
                 break;
         }
         fragmentTransaction.commit();
@@ -260,15 +259,15 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
 
     private void hideFragment(android.support.v4.app.FragmentTransaction transaction) {
 
-        if (qiugouxiaoxiFragment != null) {
+        if (buyerxiFragment != null) {
 
-            transaction.hide(qiugouxiaoxiFragment);
+            transaction.hide(buyerxiFragment);
 
         }
 
-        if (baojiaxiaoxiFragment != null) {
+        if (sellerxiaoxiFragment != null) {
 
-            transaction.hide(baojiaxiaoxiFragment);
+            transaction.hide(sellerxiaoxiFragment);
 
         }
 

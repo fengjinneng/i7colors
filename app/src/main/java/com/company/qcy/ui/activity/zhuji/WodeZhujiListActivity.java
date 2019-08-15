@@ -25,11 +25,14 @@ public class WodeZhujiListActivity extends BaseActivity implements View.OnClickL
     private ImageView mToolbarBack;
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;
+    //跳转到哪一个tab
+    private int page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wode_zhuji_list);
+        page = getIntent().getIntExtra("page",0);
         initView();
     }
 
@@ -62,9 +65,10 @@ public class WodeZhujiListActivity extends BaseActivity implements View.OnClickL
         arr[3] = "已关闭";
         arr[4] = "已过期";
 
-
         viewPager.setAdapter(new BaseViewpageAdapter(getSupportFragmentManager(), fragments));
         slidingTabLayout.setViewPager(viewPager, arr);
+
+        slidingTabLayout.setCurrentTab(page);
 
     }
 

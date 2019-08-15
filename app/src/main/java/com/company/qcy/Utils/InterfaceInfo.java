@@ -27,7 +27,11 @@ public class InterfaceInfo {
     //注册短信验证码
     public static final String SENDSMSREGISTER = "user/send_sms_code_register";
     //注册
-    public static final String REGISTER = "user/register";
+    public static final String REGISTER = "user/registerNew";
+
+    //完善注册信息
+    public static final String REGISTERINFO = "user/updateUserInfo";
+
     //重置密码
     public static final String RESETPASSWORD = "user/updatePassword";
     //校验短信验证码
@@ -130,10 +134,11 @@ public class InterfaceInfo {
     public static final String HUODONGMORENDIZHI = "defaultAddress/queryDefaultAddress";
 
     //消息模块
-    //求购报价消息
-    public static final String GETENQUIRYINFORMLIST = "user/getMallEnquiryInformList";
-    //求购报价消息详情
-    public static final String GETENQUIRYINFORMDETAIL = "user/getMallEnquiryInformDetail";
+    //买家消息   type=seller卖家消息  type=buyer,获取买家消息
+    public static final String GETBUYERANDSELLERMESSAGEINFORMLIST = "vMallInform/getVMallInformList";
+
+    //获取消息详情 workType=enquiry求购消息；workType=zhujiDiy助剂定制消息
+    public static final String GETBUYERANDSELLERMESSAGEDETAIL = "vMallInform/getVmallInformDetail";
     //系统消息
     public static final String SYSTEMINFORMLIST = "user/getSystemInformList";
     //未读消息

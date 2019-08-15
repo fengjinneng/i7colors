@@ -62,15 +62,6 @@ public class WodejiejuefanganFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment WodejiejuefanganFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static WodejiejuefanganFragment newInstance(String param1, String param2) {
         WodejiejuefanganFragment fragment = new WodejiejuefanganFragment();
         Bundle args = new Bundle();
@@ -116,14 +107,12 @@ public class WodejiejuefanganFragment extends Fragment {
 
         datas = new ArrayList<>();
         adapter = new WodeFanganListAdapter(R.layout.item_zhujidingzhi_list, datas);
-
         recyclerView.setAdapter(adapter);
 
         refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 //下拉业务
-                isReflash = true;
                 pageNo = 0;
                 addData(mParam1);
             }
@@ -157,7 +146,6 @@ public class WodejiejuefanganFragment extends Fragment {
         });
     }
 
-    private boolean isReflash;
     private int pageNo;
 
     private void addData(String status) {
@@ -189,7 +177,7 @@ public class WodejiejuefanganFragment extends Fragment {
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
                             RequestBackUtil.parseArray(jsonObject.getJSONArray("data"),
-                                    datas, pageNo, adapter, isReflash, FangAnBean.class);
+                                    datas, pageNo, adapter, FangAnBean.class);
 
                             return;
                         }

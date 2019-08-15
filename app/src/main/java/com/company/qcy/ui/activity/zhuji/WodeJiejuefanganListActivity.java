@@ -24,11 +24,13 @@ public class WodeJiejuefanganListActivity extends BaseActivity implements View.O
     private ImageView mToolbarBack;
     private SlidingTabLayout slidingTabLayout;
     private ViewPager viewPager;
-
+    //跳转到哪一个tab
+    private int page;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wode_jiejuefangan_list);
+        page = getIntent().getIntExtra("page",0);
         initView();
     }
 
@@ -61,7 +63,7 @@ public class WodeJiejuefanganListActivity extends BaseActivity implements View.O
 
         viewPager.setAdapter(new BaseViewpageAdapter(getSupportFragmentManager(), fragments));
         slidingTabLayout.setViewPager(viewPager, arr);
-
+        slidingTabLayout.setCurrentTab(page);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package com.company.qcy.ui.activity.user;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -17,6 +19,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.DeviceUtils;
 import com.blankj.utilcode.util.EncryptUtils;
+import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
@@ -94,15 +97,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     /**
      * 输入邀请码(非必填)
      */
-    private EditText mActivityRegisterYaoqingma;
-    /**
-     * 输入公司名称
-     */
-    private EditText mActivityRegisterCompanyname;
-    /**
-     * 请选择职位
-     */
-    private TextView mActivityRegisterZhiwei;
     private CheckBox mActivityRegisterCheckbox;
     private boolean checkBoxChecked = true;
 
@@ -118,7 +112,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void initView() {
-        mActivityRegisterYaoqingma = (EditText) findViewById(R.id.activity_register_yaoqingma);
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarText = (TextView) findViewById(R.id.toolbar_text);
@@ -142,9 +135,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("欢迎注册");
         mActivityRegisterXieyi.setOnClickListener(this);
-        mActivityRegisterCompanyname = (EditText) findViewById(R.id.activity_register_companyname);
-        mActivityRegisterZhiwei = (TextView) findViewById(R.id.activity_register_zhiwei);
-        mActivityRegisterZhiwei.setOnClickListener(this);
         mActivityRegisterCheckbox = (CheckBox) findViewById(R.id.activity_register_checkbox);
 
         mActivityRegisterCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -195,18 +185,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 break;
             case R.id.activity_register_submit:
 
+                KeyboardUtils.hideSoftInput(this);
+
                 if (StringUtils.isEmpty(mActivityRegisterPhone.getText().toString()) || !RegexUtils.isMobileSimple(mActivityRegisterPhone.getText().toString())) {
                     ToastUtils.showShort("请填写正确的手机号码");
                     return;
 
                 } else if (StringUtils.length(mActivityRegisterSms.getText().toString().trim()) != 6) {
                     ToastUtils.showShort("请填写正确的短信验证码");
-                    return;
-                } else if (StringUtils.isEmpty(mActivityRegisterCompanyname.getText().toString())) {
-                    ToastUtils.showShort("请填写公司名称");
-                    return;
-                } else if (StringUtils.equals("请选择职位", mActivityRegisterZhiwei.getText().toString())) {
-                    ToastUtils.showShort("请选择职位");
                     return;
                 } else if (StringUtils.isEmpty(mActivityRegisterPassword1.getText().toString())) {
                     ToastUtils.showShort("请填写密码");
@@ -217,20 +203,17 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 } else if (!StringUtils.equals(mActivityRegisterPassword1.getText().toString().trim(), mActivityRegisterPassword2.getText().toString().trim())) {
                     ToastUtils.showShort("两次输入的密码不同");
                     return;
-                }else if(!checkBoxChecked){
+                } else if (!checkBoxChecked) {
                     ToastUtils.showShort("请阅读并勾选七彩云协议");
                     return;
                 }
 
                 PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.REGISTER)
                         .tag(this)
-                        .params("inviteCode", mActivityRegisterYaoqingma.getText().toString())
                         .params("smsCode", mActivityRegisterSms.getText().toString().trim())
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("phone", mActivityRegisterPhone.getText().toString().trim())
                         .params("from", getResources().getString(R.string.app_android))
-                        .params("company", mActivityRegisterCompanyname.getText().toString())
-                        .params("positionName", mActivityRegisterZhiwei.getText().toString())
                         .params("password", new String(EncryptUtils.encryptAES2Base64(mActivityRegisterPassword1.getText().toString().trim().getBytes(),
                                 "LnhtI(bt490B74Je".getBytes(), "AES/ECB/PKCS5Padding", null)));
 
@@ -245,7 +228,38 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                 JSONObject jsonObject = JSONObject.parseObject(response.body());
                                 String msg = jsonObject.getString("msg");
                                 if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                                    finish();
+                                    JSONObject object = jsonObject.getJSONObject("data");
+                                    String token = object.getString("token");
+                                    LogUtils.e("asdsaxxz", token);
+
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                                    builder.setTitle("注册成功!");
+                                    builder.setPositiveButton("立即登录", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            finish();
+                                        }
+                                    });
+                                    builder.setNegativeButton("完善信息", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+
+                                            if (!StringUtils.isEmpty(token)) {
+
+                                                Intent intent = new Intent(RegisterActivity.this, RegisterInfoActivity.class);
+                                                intent.putExtra("token", token);
+                                                ActivityUtils.startActivity(intent);
+                                                finish();
+                                            } else {
+                                                finish();
+
+                                            }
+                                        }
+                                    });
+
+                                    builder.show();
+
+
                                     return;
 
                                 }
@@ -351,6 +365,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 //                getCaptcha();
 //                break;
             case R.id.toolbar_back:
+                KeyboardUtils.hideSoftInput(this);
                 finish();
                 break;
             case R.id.activity_register_xieyi:
@@ -358,32 +373,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 intent.putExtra("webUrl", "http://mobile.i7colors.com/groupBuyMobile/secret.html");
                 ActivityUtils.startActivity(intent);
                 break;
-            case R.id.activity_register_zhiwei:
-                List<String> zhiwei = new ArrayList<>();
-                zhiwei.add("采购");
-                zhiwei.add("销售");
-                zhiwei.add("技术");
-                zhiwei.add("老板");
-                zhiwei.add("生产");
-                zhiwei.add("其它");
-                choiceString(zhiwei, mActivityRegisterZhiwei);
-                break;
+
         }
-    }
-
-
-    //单选
-    private void choiceString(final List data, final TextView tv) {
-        SinglePicker<String> picker = new SinglePicker<String>(this, data);
-        picker.setTitleText("请选择");
-        picker.setCycleDisable(true);
-        picker.show();
-        picker.setOnItemPickListener(new SinglePicker.OnItemPickListener<String>() {
-            @Override
-            public void onItemPicked(int i, String s) {
-                tv.setText(s);
-            }
-        });
     }
 
 

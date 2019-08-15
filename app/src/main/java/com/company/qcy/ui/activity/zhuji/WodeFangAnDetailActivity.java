@@ -18,6 +18,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.zhuji.WodeFangAnDetailFangAnAdapter;
@@ -197,34 +198,8 @@ public class WodeFangAnDetailActivity extends BaseActivity implements View.OnCli
             hou.setText("");
             houUnit.setText("");
         } else {
-            Date date = TimeUtils.millis2Date(TimeUtils.string2Millis(bean.getEndTimeStamp()) - System.currentTimeMillis());
-            if (date.getDay() > 0) {
-                qian.setText(date.getDay() + "");
-                qianUnit.setText("天");
-                hou.setText(date.getHours() + "");
-                houUnit.setText("时");
-            } else {
-                if (date.getHours() > 0) {
-                    qian.setText(date.getHours() + "");
-                    qianUnit.setText("时");
-                    hou.setText(date.getMinutes() + "");
-                    houUnit.setText("分");
-
-                } else {
-                    if (date.getMinutes() > 0) {
-                        qian.setText(date.getMinutes() + "");
-                        qianUnit.setText("分");
-                        hou.setText(date.getSeconds() + "");
-                        houUnit.setText("秒");
-                    } else {
-                        qian.setText("0");
-                        qianUnit.setText("分");
-                        hou.setText(date.getSeconds() + "");
-                        houUnit.setText("秒");
-
-                    }
-                }
-            }
+            MyCommonUtil.setDaojishiDate(bean.getEndTimeStamp(),
+                    qian, qianUnit, hou, houUnit);
         }
 
 

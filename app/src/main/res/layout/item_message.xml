@@ -5,22 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@color/baise"
-    android:layout_height="@dimen/x180">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/item_message_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/x16"
         android:layout_marginEnd="8dp"
-        android:singleLine="true"
         android:ellipsize="end"
+        android:singleLine="true"
+        android:text="sadsadsadsadsadsad"
         android:textColor="@color/erjibiaoti"
         app:layout_constraintEnd_toStartOf="@+id/item_message_time"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/item_message_status"
-        app:layout_constraintTop_toBottomOf="@+id/textView317" />
+        tools:layout_editor_absoluteY="12dp" />
 
     <ImageView
         android:id="@+id/item_message_img"
@@ -43,6 +43,7 @@
         android:layout_marginTop="@dimen/x8"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:text="阿达瓦所多撒多群多无群无群多无群翁群二王文强无群二去"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_message_status"
@@ -54,22 +55,18 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="@dimen/x16"
-        android:layout_marginBottom="8dp"
         android:text="未读"
         android:textColor="@color/chunhongse"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView317" />
+        tools:layout_editor_absoluteY="60dp" />
 
     <TextView
         android:id="@+id/item_message_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:text="2018/10/18"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_message_title" />
+        tools:layout_editor_absoluteX="277dp"
+        tools:layout_editor_absoluteY="12dp" />
 
     <TextView
         android:id="@+id/textView317"

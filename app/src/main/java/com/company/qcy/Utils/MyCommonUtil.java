@@ -23,11 +23,13 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.ui.activity.pengyouquan.ImagePagerActivity;
 
 import java.io.File;
+import java.util.Date;
 
 public class MyCommonUtil {
 
@@ -42,6 +44,41 @@ public class MyCommonUtil {
                 GlideUtils.loadCircleImage(mContext, imgUrl, target);
             } else {
                 GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + imgUrl, target);
+            }
+        }
+    }
+
+
+    //几天几时几分几秒的时间设置
+    public static void setDaojishiDate(String endTimeStamp,
+                                       TextView qian,TextView qianUnit,
+                                       TextView hou,TextView houUnit) {
+        Date date = TimeUtils.millis2Date(TimeUtils.string2Millis(endTimeStamp)-System.currentTimeMillis());
+        if (date.getDay() > 0) {
+            qian.setText(date.getDay() + "");
+            qianUnit.setText("天");
+            hou.setText(date.getHours() + "");
+            houUnit.setText("时");
+        } else {
+            if (date.getHours() > 0) {
+                qian.setText(date.getHours() + "");
+                qianUnit.setText("时");
+                hou.setText(date.getMinutes() + "");
+                houUnit.setText("分");
+
+            } else {
+                if(date.getMinutes()>0){
+                    qian.setText(date.getMinutes() + "");
+                    qianUnit.setText("分");
+                    hou.setText(date.getSeconds() + "");
+                    houUnit.setText("秒");
+                }else {
+                    qian.setText("0");
+                    qianUnit.setText("分");
+                    hou.setText(date.getSeconds() + "");
+                    houUnit.setText("秒");
+
+                }
             }
         }
     }

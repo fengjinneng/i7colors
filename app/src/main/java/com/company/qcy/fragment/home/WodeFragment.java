@@ -388,6 +388,8 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         //询盘中
         if (numberBean.getIsEnquiryCount() == 0) {
             qiugouXunpanzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_black));
+            qiugouXunpanzhongText.setText("询盘中(0)");
+            qiugouXunpanzhongText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             qiugouXunpanzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_red));
             qiugouXunpanzhongText.setText("询盘中"+"("+numberBean.getIsEnquiryCount()+")");
@@ -397,6 +399,8 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         //待确认报价
         if (numberBean.getWaitSureCount() == 0) {
             qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_black));
+            qiugouDaiquerenbaojiaText.setText("待确认报价(0)");
+            qiugouDaiquerenbaojiaText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_red));
             qiugouDaiquerenbaojiaText.setText("待确认报价"+"("+numberBean.getWaitSureCount()+")");
@@ -407,6 +411,8 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         //即将过期
         if (numberBean.getMyExpireCount() == 0) {
             qiugouJijiangguoqiImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_black));
+            qiugouJijiangguoqiText.setText("即将过期(0)");
+            qiugouJijiangguoqiText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             qiugouJijiangguoqiImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_red));
             qiugouJijiangguoqiText.setText("即将过期"+"("+numberBean.getMyExpireCount()+")");
@@ -415,16 +421,20 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 
         //买家已接受
         if (numberBean.getMyAcceptOfferCount() == 0) {
-            qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_black));
+            baojiaMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_black));
+            baojiaMaijiajieshouText.setText("买家已接受(0)");
+            baojiaMaijiajieshouText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
-            qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_red));
-            qiugouDaiquerenbaojiaText.setText("买家已接受"+"("+numberBean.getMyAcceptOfferCount()+")");
-            qiugouDaiquerenbaojiaText.setTextColor(getResources().getColor(R.color.chunhongse));
+            baojiaMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_red));
+            baojiaMaijiajieshouText.setText("买家已接受"+"("+numberBean.getMyAcceptOfferCount()+")");
+            baojiaMaijiajieshouText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
         //定制中
         if (numberBean.getZhujiDiyingCount() == 0) {
             zhujidingzhiShiyangzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_black));
+            zhujidingzhiShiyangzhongText.setText("试样中(0)");
+            zhujidingzhiShiyangzhongText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             zhujidingzhiShiyangzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_res));
             zhujidingzhiShiyangzhongText.setText("试样中"+"("+numberBean.getZhujiDiyingCount()+")");
@@ -434,6 +444,8 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
         //待接收方案
         if (numberBean.getZhujiSolutionAcceptCount() == 0) {
             fanganMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_black));
+            fanganMaijiajieshouText.setText("买家已接受(0)");
+            fanganMaijiajieshouText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             fanganMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_red));
             fanganMaijiajieshouText.setText("买家已接受"+"("+numberBean.getZhujiSolutionAcceptCount()+")");
@@ -536,13 +548,29 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 break;
 
             case R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_img:
+
+                Intent i1 = new Intent(getActivity(),WodeZhujiListActivity.class);
+                i1.putExtra("page",1);
+                ActivityUtils.startActivity(i1);
+
                 break;
             case R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_text:
+                Intent i2 = new Intent(getActivity(),WodeZhujiListActivity.class);
+                i2.putExtra("page",1);
+                ActivityUtils.startActivity(i2);
                 break;
 
             case R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_text:
+
+                Intent i3 = new Intent(getActivity(),WodeJiejuefanganListActivity.class);
+                i3.putExtra("page",2);
+                ActivityUtils.startActivity(i3);
                 break;
             case R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_img:
+
+                Intent i4 = new Intent(getActivity(),WodeJiejuefanganListActivity.class);
+                i4.putExtra("page",2);
+                ActivityUtils.startActivity(i4);
                 break;
 
         }

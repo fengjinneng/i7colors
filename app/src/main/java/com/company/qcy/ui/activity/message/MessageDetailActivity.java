@@ -70,11 +70,12 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
     }
 
     private void addData() {
-
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMDETAIL)
+        //业务类型，workType=enquiry求购消息；workType=zhujiDiy助剂定制消息
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETBUYERANDSELLERMESSAGEDETAIL)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("id", id)
+                .params("workType","")
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(this) {

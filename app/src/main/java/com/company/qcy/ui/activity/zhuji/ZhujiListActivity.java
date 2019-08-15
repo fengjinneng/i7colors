@@ -90,7 +90,6 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onRefresh() {
                 //下拉业务
-                isReflash = true;
                 pageNo = 0;
                 addData();
             }
@@ -142,7 +141,6 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
 
             case MessageBean.Zhuji.FABUZHUJIDINGZHICHENGGONG:
 
-                isReflash = true;
                 pageNo = 0;
                 addData();
 
@@ -150,7 +148,6 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private boolean isReflash;
     private int pageNo;
 
     private void addData() {
@@ -181,8 +178,7 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
                             RequestBackUtil.parseArray(jsonObject.getJSONArray("data"),
-                                    datas, pageNo, adapter, isReflash, ZhujiBean.class);
-
+                                    datas, pageNo, adapter, ZhujiBean.class);
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -217,7 +213,7 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.activity_zhuji_list_fabu:
-                if(!NetworkUtil.isNetworkAvailable(ZhujiListActivity.this)){
+                if (!NetworkUtil.isNetworkAvailable(ZhujiListActivity.this)) {
                     ToastUtils.showShort("当前网络不可用!");
                     return;
                 }

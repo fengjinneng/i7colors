@@ -86,18 +86,19 @@
 
             <EditText
                 android:id="@+id/activity_register_password_1"
-                android:layout_width="0dp"
+                android:layout_width="288dp"
                 android:layout_height="@dimen/x100"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请输入密码"
                 android:inputType="textPassword"
                 android:maxLength="16"
-                android:textSize="@dimen/x30"
                 android:paddingLeft="@dimen/x36"
-                app:layout_constraintEnd_toEndOf="@+id/activity_register_yaoqingma"
-                app:layout_constraintStart_toStartOf="@+id/activity_register_yaoqingma"
-                app:layout_constraintTop_toBottomOf="@+id/activity_register_yaoqingma" />
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
+                app:layout_constraintStart_toEndOf="@+id/imageView26"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear2" />
 
             <EditText
                 android:id="@+id/activity_register_password_2"
@@ -166,23 +167,6 @@
 
             </LinearLayout>
 
-            <EditText
-                android:id="@+id/activity_register_yaoqingma"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/x100"
-                android:background="@drawable/background_dengluwenbenkuang"
-                android:hint="输入邀请码(非必填)"
-                android:inputType="textEmailAddress"
-                app:layout_constraintTop_toBottomOf="@id/activity_register_zhiwei"
-                android:maxLength="6"
-                android:textSize="@dimen/x30"
-                android:layout_marginTop="8dp"
-                android:paddingLeft="@dimen/x36"
-                app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/activity_register_linnear2"
-                tools:layout_editor_absoluteY="291dp" />
-
             <ImageView
                 android:id="@+id/imageView23"
                 android:layout_width="wrap_content"
@@ -229,58 +213,6 @@
                 app:layout_constraintBottom_toBottomOf="@+id/activity_register_password_2"
                 app:layout_constraintEnd_toStartOf="@+id/activity_register_password_2"
                 app:layout_constraintTop_toTopOf="@+id/activity_register_password_2"
-                app:srcCompat="@mipmap/bitiantupian" />
-
-            <EditText
-                android:id="@+id/activity_register_companyname"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/x100"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/background_dengluwenbenkuang"
-                android:hint="输入公司名称"
-                android:inputType="textPersonName"
-                android:paddingLeft="@dimen/x36"
-                android:textSize="@dimen/x30"
-
-                app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
-                app:layout_constraintStart_toStartOf="@+id/activity_register_linnear2"
-                app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear2" />
-
-            <ImageView
-                android:id="@+id/imageView47"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/activity_register_companyname"
-                app:layout_constraintEnd_toStartOf="@+id/activity_register_companyname"
-                app:layout_constraintTop_toTopOf="@+id/activity_register_companyname"
-                app:srcCompat="@mipmap/bitiantupian" />
-
-            <TextView
-                android:id="@+id/activity_register_zhiwei"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/x100"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/background_dengluwenbenkuang"
-                android:drawableRight="@mipmap/xialajiantou"
-                android:drawablePadding="@dimen/x36"
-                android:text="请选择职位"
-                android:gravity="center"
-                android:textSize="@dimen/x30"
-                android:minWidth="@dimen/x350"
-                android:paddingLeft="@dimen/x36"
-                android:paddingRight="@dimen/x36"
-                app:layout_constraintStart_toStartOf="@+id/activity_register_companyname"
-                app:layout_constraintTop_toBottomOf="@+id/activity_register_companyname" />
-
-            <ImageView
-                android:id="@+id/imageView48"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/activity_register_zhiwei"
-                app:layout_constraintEnd_toStartOf="@+id/activity_register_zhiwei"
-                app:layout_constraintTop_toTopOf="@+id/activity_register_zhiwei"
                 app:srcCompat="@mipmap/bitiantupian" />
 
 

@@ -24,6 +24,7 @@
         app:layout_constraintTop_toBottomOf="@+id/include52"
         app:tl_textSelectColor="@color/chunhongse"
         app:tl_textUnselectColor="@color/putongwenben"
+        app:tl_tab_space_equal="true"
         app:tl_underline_color="@color/chunhongse" />
 
     <android.support.v4.view.ViewPager

@@ -101,6 +101,7 @@ public class WodeZhujiLsitFragment extends Fragment {
 
         datas = new ArrayList<>();
         adapter = new ZhujiListAdapter(R.layout.item_zhujidingzhi_list, datas);
+        adapter.setSelf(true);
 
         recyclerView.setAdapter(adapter);
 
@@ -108,7 +109,6 @@ public class WodeZhujiLsitFragment extends Fragment {
             @Override
             public void onRefresh() {
                 //下拉业务
-                isReflash = true;
                 pageNo = 0;
                 addData(mParam1);
             }
@@ -142,7 +142,6 @@ public class WodeZhujiLsitFragment extends Fragment {
         });
     }
 
-    private boolean isReflash;
     private int pageNo;
 
     private void addData(String status) {
@@ -174,7 +173,7 @@ public class WodeZhujiLsitFragment extends Fragment {
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
 
                             RequestBackUtil.parseArray(jsonObject.getJSONArray("data"),
-                                    datas, pageNo, adapter, isReflash, ZhujiBean.class);
+                                    datas, pageNo, adapter, ZhujiBean.class);
 
                             return;
                         }

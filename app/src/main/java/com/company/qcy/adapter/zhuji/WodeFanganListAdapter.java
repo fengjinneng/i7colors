@@ -11,13 +11,13 @@ import com.blankj.utilcode.util.TimeUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.company.qcy.R;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.bean.zhuji.FangAnBean;
 
 import java.util.Date;
 import java.util.List;
 
-public class WodeFanganListAdapter  extends BaseQuickAdapter<FangAnBean, BaseViewHolder> {
-
+public class WodeFanganListAdapter extends BaseQuickAdapter<FangAnBean, BaseViewHolder> {
 
 
     public WodeFanganListAdapter(int layoutResId, @Nullable List<FangAnBean> data) {
@@ -40,7 +40,7 @@ public class WodeFanganListAdapter  extends BaseQuickAdapter<FangAnBean, BaseVie
         if (ObjectUtils.isEmpty(item.getZhujiDiy().getSolution_num())) {
             helper.setText(R.id.item_zhujidingzhi_list_number, 0);
         } else {
-            helper.setText(R.id.item_zhujidingzhi_list_number, zhujiDiyBean.getSolution_num()+"");
+            helper.setText(R.id.item_zhujidingzhi_list_number, zhujiDiyBean.getSolution_num() + "");
         }
 
         if (StringUtils.isEmpty(zhujiDiyBean.getClassName())) {
@@ -49,7 +49,7 @@ public class WodeFanganListAdapter  extends BaseQuickAdapter<FangAnBean, BaseVie
             helper.setText(R.id.item_zhujidingzhi_list_type, zhujiDiyBean.getClassName());
         }
 
-        TextView shenfen = (TextView) helper.getView(R.id.item_zhujidingzhi_list_shenfen);
+//        TextView shenfen = (TextView) helper.getView(R.id.item_zhujidingzhi_list_shenfen);
 //        if (StringUtils.isEmpty(item.getPublishType())) {
 //            shenfen.setVisibility(View.GONE);
 //        } else {
@@ -96,35 +96,10 @@ public class WodeFanganListAdapter  extends BaseQuickAdapter<FangAnBean, BaseVie
             hou.setText("");
             houUnit.setText("");
         } else {
-            Date date = TimeUtils.millis2Date(TimeUtils.string2Millis(zhujiDiyBean.getEndTimeStamp())-System.currentTimeMillis());
-            if (date.getDay() > 0) {
-                qian.setText(date.getDay() + "");
-                qianUnit.setText("天");
-                hou.setText(date.getHours() + "");
-                houUnit.setText("时");
-            } else {
-                if (date.getHours() > 0) {
-                    qian.setText(date.getHours() + "");
-                    qianUnit.setText("时");
-                    hou.setText(date.getMinutes() + "");
-                    houUnit.setText("分");
 
-                } else {
-                    if(date.getMinutes()>0){
-                        qian.setText(date.getMinutes() + "");
-                        qianUnit.setText("分");
-                        hou.setText(date.getSeconds() + "");
-                        houUnit.setText("秒");
-                    }else {
-                        qian.setText("0");
-                        qianUnit.setText("分");
-                        hou.setText(date.getSeconds() + "");
-                        houUnit.setText("秒");
+            MyCommonUtil.setDaojishiDate(zhujiDiyBean.getEndTimeStamp(),
+                    qian, qianUnit, hou, houUnit);
 
-                    }
-                }
-            }
         }
-
     }
 }
