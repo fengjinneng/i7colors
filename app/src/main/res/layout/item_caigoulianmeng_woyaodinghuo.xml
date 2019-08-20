@@ -47,7 +47,7 @@
         android:layout_width="@dimen/x210"
         android:layout_height="@dimen/x45"
         android:background="@drawable/background_wenbenshurubiankuang"
-        android:inputType="number"
+        android:inputType="numberDecimal"
         android:gravity="center"
         android:textSize="@dimen/x30"
         app:layout_constraintBottom_toBottomOf="@+id/textView204"

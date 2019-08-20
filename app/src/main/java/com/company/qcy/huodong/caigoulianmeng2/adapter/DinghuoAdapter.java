@@ -36,15 +36,15 @@ public class DinghuoAdapter extends BaseQuickAdapter<ProductBean, BaseViewHolder
 
         helper.addOnClickListener(R.id.item_caigoulianmeng_woyaodinghuo_checkBox);
 
-        if(StringUtils.equals("1",item.getDiyShop())){
+        if (StringUtils.equals("1", item.getDiyShop())) {
             //自定义商品
             helper.getView(R.id.item_caigoulianmeng_woyaodinghuo_zidingyishangpin).setVisibility(View.VISIBLE);
-        }else {
+        } else {
             helper.getView(R.id.item_caigoulianmeng_woyaodinghuo_zidingyishangpin).setVisibility(View.GONE);
         }
 
         helper.addOnClickListener(R.id.item_caigoulianmeng_woyaodinghuo_cankaobiaozhun);
-        if(StringUtils.equals("1",item.getDiyShop())){
+        if (StringUtils.equals("1", item.getDiyShop())) {
             item.setChecked(true);
             checkBox.setClickable(true);
             checkBox.setEnabled(true);
@@ -63,7 +63,32 @@ public class DinghuoAdapter extends BaseQuickAdapter<ProductBean, BaseViewHolder
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //删除.后面超过两位的数字
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > 2) {
+                        s = s.toString().subSequence(0,
+                                s.toString().indexOf(".") + 3);
+                        yudingliang.setText(s);
+                        yudingliang.setSelection(s.length());
+                    }
+                }
 
+                //如果.在起始位置,则起始位置自动补0
+                if (s.toString().trim().substring(0).equals(".")) {
+                    s = "0" + s;
+                    yudingliang.setText(s);
+                    yudingliang.setSelection(2);
+                }
+
+                //如果起始位置为0并且第二位跟的不是".",则无法后续输入
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() > 1) {
+                    if (!s.toString().substring(1, 2).equals(".")) {
+                        yudingliang.setText(s.subSequence(0, 1));
+                        yudingliang.setSelection(1);
+                        return;
+                    }
+                }
             }
 
             @Override
@@ -90,10 +115,12 @@ public class DinghuoAdapter extends BaseQuickAdapter<ProductBean, BaseViewHolder
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
             }
+
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 if (!StringUtils.equals("请选择", s)) {
