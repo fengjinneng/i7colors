@@ -109,9 +109,11 @@ public class SellerxiaoxiFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 MessageBean messageBean = (MessageBean) adapter.getData().get(position);
+                messageBean.setIsRead("1");
+                adapter.notifyItemChanged(position);
                 Intent intent = new Intent(getContext(), MessageDetailActivity.class);
                 intent.putExtra("id", messageBean.getId());
-                intent.putExtra("isfrom", "baojia");
+                intent.putExtra("workType", messageBean.getWorkType());
                 ActivityUtils.startActivity(intent);
             }
         });
@@ -168,6 +170,7 @@ public class SellerxiaoxiFragment extends BaseFragment {
                 refreshListener.onRefresh();
                 break;
 
+
         }
     }
 
@@ -193,33 +196,33 @@ public class SellerxiaoxiFragment extends BaseFragment {
                 try {
                     if (response.code() == 200) {
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
-//                        String msg = jsonObject.getString("msg");
+                        String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-//                            JSONArray data = jsonObject.getJSONArray("data");
-//                            List<MessageBean> messageBeans = JSONObject.parseArray(data.toJSONString(), MessageBean.class);
-//                            if (ObjectUtils.isEmpty(messageBeans)) {
-//                                adapter.loadMoreEnd();
-//                                return;
-//                            }
-//                            if (isReflash) {
-//                                datas.clear();
-//                                datas.addAll(messageBeans);
-//                                adapter.setNewData(datas);
-//                                isReflash = false;
-//                                adapter.loadMoreComplete();
-//                                return;
-//                            }
-//                            adapter.addData(messageBeans);
-//                            adapter.setNewData(datas);
-//                            adapter.loadMoreComplete();
-//                            adapter.disableLoadMoreIfNotFullPage();
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            List<MessageBean> messageBeans = JSONObject.parseArray(data.toJSONString(), MessageBean.class);
+                            if (ObjectUtils.isEmpty(messageBeans)) {
+                                adapter.loadMoreEnd();
+                                return;
+                            }
+                            if (isReflash) {
+                                datas.clear();
+                                datas.addAll(messageBeans);
+                                adapter.setNewData(datas);
+                                isReflash = false;
+                                adapter.loadMoreComplete();
+                                adapter.disableLoadMoreIfNotFullPage();
+                                return;
+                            }
+                            adapter.addData(messageBeans);
+                            adapter.setNewData(datas);
+                            adapter.loadMoreComplete();
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
                             SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
-//                        ToastUtils.showShort(msg);
+                        ToastUtils.showShort(msg);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

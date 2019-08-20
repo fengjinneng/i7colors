@@ -138,7 +138,7 @@ public class InterfaceInfo {
     public static final String GETBUYERANDSELLERMESSAGEINFORMLIST = "vMallInform/getVMallInformList";
 
     //获取消息详情 workType=enquiry求购消息；workType=zhujiDiy助剂定制消息
-    public static final String GETBUYERANDSELLERMESSAGEDETAIL = "vMallInform/getVmallInformDetail";
+    public static final String GETBUYERANDSELLERMESSAGEDETAIL = "vMallInform/getVMallInformDetail";
     //系统消息
     public static final String SYSTEMINFORMLIST = "user/getSystemInformList";
     //未读消息

@@ -32,7 +32,6 @@ import okhttp3.OkHttpClient;
 
 public class I7colorsApplication extends Application {
 
-
     public static I7colorsApplication instance;
     private static Context mContext;
 

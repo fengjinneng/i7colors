@@ -80,7 +80,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse), false);
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), false);
 
     }
 
@@ -89,7 +89,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.chunhongse), false);
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), false);
         }
     }
 
@@ -145,12 +145,15 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         container = inflate.findViewById(R.id.fragment_toutiao_container);
 
         buyerxiFragment = new BuyerxiaoxiFragment();
+
+        mFragmentToutiaoBuyerImg.setImageDrawable(getResources().getDrawable(R.mipmap.buyer_img_red));
+        mFragmentToutiaoBuyerText.setTextColor(getResources().getColor(R.color.chunhongse));
+        mFragmentToutiaoBuyer.setBackgroundColor(getResources().getColor(R.color.baise));
+
         android.support.v4.app.FragmentManager fragmentManager = getFragmentManager();
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_toutiao_container, buyerxiFragment);
         fragmentTransaction.commit();
-        mFragmentToutiaoBuyer.setOnClickListener(this);
-
 
         messageBadge = new QBadgeView(getContext()).bindTarget(mFragmentToutiaoXitongxiaoxi)
                 .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(10, true).setExactMode(false);

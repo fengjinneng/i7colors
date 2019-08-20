@@ -137,9 +137,11 @@ public class BuyerxiaoxiFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 MessageBean messageBean = (MessageBean) adapter.getData().get(position);
+                messageBean.setIsRead("1");
+                adapter.notifyItemChanged(position);
                 Intent intent = new Intent(getContext(), MessageDetailActivity.class);
                 intent.putExtra("id", messageBean.getId());
-                intent.putExtra("isfrom", "qiugou");
+                intent.putExtra("workType", messageBean.getWorkType());
                 ActivityUtils.startActivity(intent);
             }
         });
@@ -208,13 +210,12 @@ public class BuyerxiaoxiFragment extends BaseFragment {
                                 adapter.setNewData(datas);
                                 isReflash = false;
                                 adapter.loadMoreComplete();
+                                adapter.disableLoadMoreIfNotFullPage();
                                 return;
                             }
-
                             adapter.addData(messageBeans);
                             adapter.setNewData(datas);
                             adapter.loadMoreComplete();
-                            adapter.disableLoadMoreIfNotFullPage();
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {

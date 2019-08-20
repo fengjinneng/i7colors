@@ -30,7 +30,6 @@
             android:id="@+id/fragment_toutiao_buyer"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/baise"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/textView72"
             app:layout_constraintHorizontal_bias="0.5"

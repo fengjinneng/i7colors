@@ -31,6 +31,24 @@ public class MessageBean {
     private String createdAt;
     private Object updatedAt;
     private String title;
+    private Long zhujiDiyId;
+    private Long zhujiDiySolutionId;
+
+    public Long getZhujiDiyId() {
+        return zhujiDiyId;
+    }
+
+    public void setZhujiDiyId(Long zhujiDiyId) {
+        this.zhujiDiyId = zhujiDiyId;
+    }
+
+    public Long getZhujiDiySolutionId() {
+        return zhujiDiySolutionId;
+    }
+
+    public void setZhujiDiySolutionId(Long zhujiDiySolutionId) {
+        this.zhujiDiySolutionId = zhujiDiySolutionId;
+    }
 
     public Long getId() {
         return id;

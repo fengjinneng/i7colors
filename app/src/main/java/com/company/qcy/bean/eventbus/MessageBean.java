@@ -261,6 +261,12 @@ public class MessageBean {
         //团购砍价成功
         public static final int TUANGOUKANJIACHENGGONG = 1043;
 
+        //需要刷新买家消息
+        public static final int NEEDREFRESHBUYERMESSAGE = 1044;
+
+        //需要刷新买家消息
+        public static final int NEEDREFRESHSELLERMESSAGE = 1045;
+
     }
 
 }

@@ -91,7 +91,6 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
      */
     private Button mActivityQiugouxiangqingCanyubaojia;
 
-    private int isWode;//判断是否从我的页面转过来
     /**
      * 关闭求购
      */
@@ -102,7 +101,6 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
     private TextView mActivityQiugouxiangqingWodefabu;
 
 
-    private String qiugouStatus;
     private TextView mActivityQiugouxiangqingLishiqiugou;
     /**
      * 标题
@@ -120,9 +118,6 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qiugouxiangqing);
 
-        isWode = getIntent().getIntExtra("wode", 0);
-        isCharger = getIntent().getStringExtra("isCharger");
-        qiugouStatus = getIntent().getStringExtra("status");
         wodeBaojiaID = getIntent().getLongExtra("enquiryOfferId", 0);
 
         Uri data = getIntent().getData();
@@ -199,7 +194,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         mActivityQiugouxiangqingRecyclerview.setLayoutManager(layoutManager);
 
         //创建适配器
-        adapter = new QiugouxiangqingRecyclerviewAdapter(R.layout.item_qiugouxiangqing_recyclerview, datas, isWode, isCharger, qiugouStatus);
+        adapter = new QiugouxiangqingRecyclerviewAdapter(R.layout.item_qiugouxiangqing_recyclerview, datas);
 
         adapter.addHeaderView(getHeadView(), 0);
         DividerItemDecoration itemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -209,7 +204,6 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         //给RecyclerView设置适配器
         mActivityQiugouxiangqingRecyclerview.setAdapter(adapter);
         addQiugouxiangqingData();
-        addBaojialiebiaoData();
         mActivityQiugouxiangqingCanyubaojia = (Button) findViewById(R.id.activity_qiugouxiangqing_canyubaojia);
         mActivityQiugouxiangqingCanyubaojia.setOnClickListener(this);
         mActivityQiugouxiangqingGuanbiqiugo = (Button) findViewById(R.id.activity_qiugouxiangqing_guanbiqiugo);
@@ -382,8 +376,6 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         }
     }
 
-    private String isCharger;
-
     private void reflashQiugouxinxi() {
         if (ObjectUtils.isEmpty(qiugouBean)) {
             return;
@@ -474,6 +466,8 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
             mQiugouxiangqingHeadviewSecondTime.setText(qiugouBean.getSurplusHour());
         }
 
+        addBaojialiebiaoData();
+
     }
 
 
@@ -543,11 +537,13 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONArray data = jsonObject.getJSONArray("data");
 
-                            List<BaojiaBean> qiugoudatingBeans = JSONObject.parseArray(data.toJSONString(), BaojiaBean.class);
+                            List<BaojiaBean> baojiaBeans = JSONObject.parseArray(data.toJSONString(), BaojiaBean.class);
                             if (isReflash) {
                                 datas.clear();
                             }
-                            adapter.addData(qiugoudatingBeans);
+                            adapter.setIsCharger(qiugouBean.getIsCharger());
+                            adapter.setQiugouStatus(qiugouBean.getStatus());
+                            adapter.addData(baojiaBeans);
                             return;
 
                         }

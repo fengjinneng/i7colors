@@ -20,16 +20,34 @@ public class NormalMessageAdapter extends BaseQuickAdapter<MessageBean, BaseView
     @Override
     protected void convert(BaseViewHolder helper, MessageBean item) {
 
-        helper.setText(R.id.item_message_title,item.getProductName());
-        helper.setText(R.id.item_message_content,item.getContent());
-        if(StringUtils.equals("0",item.getIsRead())){
-            helper.setText(R.id.item_message_status,"未读");
-            helper.setTextColor(R.id.item_message_status,mContext.getResources().getColor(R.color.chunhongse));
-        }else {
-            helper.setText(R.id.item_message_status,"已读");
-            helper.setTextColor(R.id.item_message_status,mContext.getResources().getColor(R.color.putongwenben));
+        if (!StringUtils.isEmpty(item.getWorkType())) {
+            if (StringUtils.equals("enquiry", item.getWorkType())) {
+                helper.setText(R.id.item_message_type, "求购消息");
+            }
+            if (StringUtils.equals("zhujiDiy", item.getWorkType())) {
+
+                helper.setText(R.id.item_message_type, "助剂定制");
+            }
         }
-        helper.setText(R.id.item_message_time,item.getCreatedAt().substring(0,10));
+
+
+        if (StringUtils.isEmpty(item.getProductName())) {
+            helper.setText(R.id.item_message_title, item.getZhujiName());
+        } else {
+            helper.setText(R.id.item_message_title, item.getProductName());
+        }
+
+        helper.setText(R.id.item_message_content, item.getContent());
+
+        if (StringUtils.equals("0", item.getIsRead())) {
+            helper.setText(R.id.item_message_status, "未读");
+            helper.setTextColor(R.id.item_message_status, mContext.getResources().getColor(R.color.chunhongse));
+        } else {
+            helper.setText(R.id.item_message_status, "已读");
+            helper.setTextColor(R.id.item_message_status, mContext.getResources().getColor(R.color.putongwenben));
+        }
+//        helper.setText(R.id.item_message_time,item.getCreatedAt().substring(0,10));
+        helper.setText(R.id.item_message_time, item.getCreatedAt());
 
     }
 }
