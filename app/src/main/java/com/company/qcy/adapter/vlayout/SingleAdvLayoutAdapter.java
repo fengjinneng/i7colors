@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -184,7 +185,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
 
     static class SingleAdvLayoutViewHolder extends RecyclerView.ViewHolder {
         public ConvenientBanner convenientBanner;
-        public LinearLayout chanpindating,qiugoudating,kaifangshangcheng,chanyezixun,zhujidingzhi;
+        public ConstraintLayout chanpindating,qiugoudating,kaifangshangcheng,chanyezixun,zhujidingzhi;
         public ImageView map;
 
         public SingleAdvLayoutViewHolder(View root) {

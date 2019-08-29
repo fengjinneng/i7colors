@@ -386,7 +386,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
         paras.put("endTime", mActivityFabuqiugouJieshuriqi.getText().toString());
         paras.put("paymentType", mActivityFabuqiugouFukuanfangshi.getText().toString());
         paras.put("description", mActivityFabuqiugouXiangxishuoming.getText().toString());
-        paras.put("from",getResources().getString(R.string.app_android));
+        paras.put("from", getResources().getString(R.string.app_android));
 
         PostRequest<String> request = OkGo.<String>post(ServerInfo.SERVER + InterfaceInfo.FABUQIUGOU)
                 .tag(this)
@@ -412,7 +412,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(FabuqiugouActivity.this,request,this);
+                            SignAndTokenUtil.getSign(FabuqiugouActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -467,7 +467,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(FabuqiugouActivity.this,request,this);
+                            SignAndTokenUtil.getSign(FabuqiugouActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -580,7 +580,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
     private int endtime_day;
     private boolean ischoiceEndtime;
 
-    private void onJiaohuoPicker( TextView time) {
+    private void onJiaohuoPicker(TextView time) {
         final DatePicker picker = new DatePicker(this);
         picker.setCycleDisable(true);
         picker.setTopPadding(15);
@@ -614,35 +614,45 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
     }
 
 
-    private void setBigyue(DatePicker picker){
-        if(31-CalendarUtil.getDay()<3){
-            if(CalendarUtil.getMonth()==12){
-                picker.setRangeStart(CalendarUtil.getYear(),1,(CalendarUtil.getDay()+3)-31);
+    private void setBigyue(DatePicker picker) {
+        if (31 - CalendarUtil.getDay() < 3) {
+            if (CalendarUtil.getMonth() == 12) {
+                picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 31);
+                picker.setRangeEnd(CalendarUtil.getYear(), 2, (CalendarUtil.getDay() + 3) - 31);
+            } else {
+                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 31);
+                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 31);
             }
-            else {
-                picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth()+1,(CalendarUtil.getDay()+3)-31);
-            }
-        }else picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth(),CalendarUtil.getDay()+3);
+        } else {
+            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+        }
     }
 
-    private void setXiaoyue(DatePicker picker){
-        if(30-CalendarUtil.getDay()<3){
-            if(CalendarUtil.getMonth()==12){
-                picker.setRangeStart(CalendarUtil.getYear(),1,(CalendarUtil.getDay()+3)-30);
-            }else {
-                picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth()+1,(CalendarUtil.getDay()+3)-30);
+    private void setXiaoyue(DatePicker picker) {
+        if (30 - CalendarUtil.getDay() < 3) {
+            if (CalendarUtil.getMonth() == 12) {
+                picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 30);
+                picker.setRangeEnd(CalendarUtil.getYear(), 2, (CalendarUtil.getDay() + 3) - 30);
+            } else {
+                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 30);
+                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 30);
             }
-        }else picker.setRangeStart(CalendarUtil.getYear(),CalendarUtil.getMonth(),CalendarUtil.getDay()+3);
+        } else {
+
+            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+        }
     }
 
-    private void onEndtimePicker( TextView time) {
+    private void onEndtimePicker(TextView time) {
         DatePicker endTimePicker = new DatePicker(this);
         endTimePicker.setCycleDisable(true);
         endTimePicker.setTopPadding(15);
 
-        switch (CalendarUtil.getMonth()){
+        switch (CalendarUtil.getMonth()) {
             case 1:
-                 setBigyue(endTimePicker);
+                setBigyue(endTimePicker);
                 break;
             case 3:
                 setBigyue(endTimePicker);
@@ -683,11 +693,11 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onDatePicked(String year, String month, String day) {
                 time.setText(year + "-" + month + "-" + day);
-                    ischoiceEndtime = true;
-                    endtime_year = Integer.parseInt(year);
-                    endtime_month = Integer.parseInt(month);
-                    endtime_day = Integer.parseInt(day);
-                    mActivityFabuqiugouJiaohuoriqi.setText("选择交货日期");
+                ischoiceEndtime = true;
+                endtime_year = Integer.parseInt(year);
+                endtime_month = Integer.parseInt(month);
+                endtime_day = Integer.parseInt(day);
+                mActivityFabuqiugouJiaohuoriqi.setText("选择交货日期");
             }
         });
         endTimePicker.setOnWheelListener(new DatePicker.OnWheelListener() {

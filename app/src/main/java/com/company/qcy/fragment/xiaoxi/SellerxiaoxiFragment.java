@@ -170,7 +170,10 @@ public class SellerxiaoxiFragment extends BaseFragment {
                 refreshListener.onRefresh();
                 break;
 
-
+            case com.company.qcy.bean.eventbus.MessageBean.JPush.NEEDRESETSELLERMESSAGE:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
         }
     }
 

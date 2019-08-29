@@ -258,6 +258,8 @@ public class WodeZhujiDingzhiDetailActivity extends BaseActivity implements View
                 }
                 adapter.notifyDataSetChanged();
                 break;
+
+
         }
     }
 
@@ -277,12 +279,13 @@ public class WodeZhujiDingzhiDetailActivity extends BaseActivity implements View
         TextView ransewendu = view.findViewById(R.id.activity_zhuji_detail_ransewendu);
         TextView xianyongchanpinshuoming = view.findViewById(R.id.activity_zhuji_detail_xianyongchanpinmingcheng);
         TextView shengchanchangjia = view.findViewById(R.id.activity_zhuji_detail_shengchanchangjia);
-        TextView xuqiuliang = view.findViewById(R.id.activity_zhuji_detail_xuqiuliang);
+        TextView meiyueyongliang = view.findViewById(R.id.activity_zhuji_detail_meiyueyongliang);
         TextView xingnengmiaoshu = view.findViewById(R.id.activity_zhuji_detail_xingnengmiaoshu);
         TextView qian = view.findViewById(R.id.activity_zhuji_detail_qian);
         TextView qianUnit = view.findViewById(R.id.activity_zhuji_detail_qian_unit);
         TextView hou = view.findViewById(R.id.activity_zhuji_detail_hou);
         TextView houUnit = view.findViewById(R.id.activity_zhuji_detail_hou_unit);
+        TextView xuqiuliang  = view.findViewById(R.id.activity_zhuji_detail_xuqiuliang);
         TextView noData = view.findViewById(R.id.headview_wode_zhuji_detail_no_solution);
         yiwancheng = view.findViewById(R.id.activity_zhuji_detail_yiwancheng);
         if (ObjectUtils.isEmpty(bean.getSolutionList())) {
@@ -300,9 +303,9 @@ public class WodeZhujiDingzhiDetailActivity extends BaseActivity implements View
         ransewendu.setText(StringUtils.isEmpty(bean.getTemperature()) ? "暂无" : bean.getTemperature());
         xianyongchanpinshuoming.setText(StringUtils.isEmpty(bean.getProductName()) ? "暂无" : bean.getProductName());
         shengchanchangjia.setText(StringUtils.isEmpty(bean.getProducer()) ? "暂无" : bean.getProducer());
-        xuqiuliang.setText(ObjectUtils.isEmpty(bean.getNum()) ? "暂无" : bean.getProducer() + "");
+        meiyueyongliang.setText(ObjectUtils.isEmpty(bean.getUseNumStr()) ? "暂无" : bean.getUseNumStr());
         xingnengmiaoshu.setText(StringUtils.isEmpty(bean.getDescription()) ? "暂无" : bean.getDescription());
-
+        xuqiuliang.setText(StringUtils.isEmpty(bean.getDiyNumStr()) ? "暂无" : bean.getDiyNumStr());
         TextView text = view.findViewById(R.id.textView364);
 
         text.setText("收到的解决方案");

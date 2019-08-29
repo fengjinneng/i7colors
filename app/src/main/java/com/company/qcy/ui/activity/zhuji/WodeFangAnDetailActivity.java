@@ -156,13 +156,14 @@ public class WodeFangAnDetailActivity extends BaseActivity implements View.OnCli
         TextView ransewendu = view. findViewById(R.id.activity_zhuji_detail_ransewendu);
         TextView xianyongchanpinshuoming =view.findViewById(R.id.activity_zhuji_detail_xianyongchanpinmingcheng);
         TextView shengchanchangjia = view.findViewById(R.id.activity_zhuji_detail_shengchanchangjia);
-        TextView xuqiuliang =view.findViewById(R.id.activity_zhuji_detail_xuqiuliang);
+        TextView meiyueyongliang =view.findViewById(R.id.activity_zhuji_detail_meiyueyongliang);
         TextView xingnengmiaoshu = view.findViewById(R.id.activity_zhuji_detail_xingnengmiaoshu);
         TextView yiwancheng  = view.findViewById(R.id.activity_zhuji_detail_yiwancheng);
         TextView qian = view.findViewById(R.id.activity_zhuji_detail_qian);
         TextView qianUnit = view.findViewById(R.id.activity_zhuji_detail_qian_unit);
         TextView hou = view.findViewById(R.id.activity_zhuji_detail_hou);
         TextView houUnit = view.findViewById(R.id.activity_zhuji_detail_hou_unit);
+        TextView xuqiuliang  = view.findViewById(R.id.activity_zhuji_detail_xuqiuliang);
 
         zhujimingcheng.setText(StringUtils.isEmpty(bean.getZhujiName()) ? "暂无" : bean.getZhujiName());
         type.setText(StringUtils.isEmpty(bean.getClassName()) ? "暂无" : bean.getClassName());
@@ -175,8 +176,9 @@ public class WodeFangAnDetailActivity extends BaseActivity implements View.OnCli
         ransewendu.setText(StringUtils.isEmpty(bean.getTemperature()) ? "暂无" : bean.getTemperature());
         xianyongchanpinshuoming.setText(StringUtils.isEmpty(bean.getProductName()) ? "暂无" : bean.getProductName());
         shengchanchangjia.setText(StringUtils.isEmpty(bean.getProducer()) ? "暂无" : bean.getProducer());
-        xuqiuliang.setText(ObjectUtils.isEmpty(bean.getNum()) ? "暂无" : bean.getProducer() + "");
+        meiyueyongliang.setText(StringUtils.isEmpty(bean.getUseNumStr()) ? "暂无" : bean.getUseNumStr() );
         xingnengmiaoshu.setText(StringUtils.isEmpty(bean.getDescription()) ? "暂无" : bean.getDescription());
+        xuqiuliang.setText(StringUtils.isEmpty(bean.getDiyNumStr()) ? "暂无" : bean.getDiyNumStr());
 
         TextView text  = view.findViewById(R.id.textView364);
 

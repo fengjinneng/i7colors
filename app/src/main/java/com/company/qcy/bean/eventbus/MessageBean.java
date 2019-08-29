@@ -117,6 +117,20 @@ public class MessageBean {
         //收到系统消息的通知了
         public static final int RECIVENOTIFICATION=4003;
 
+        //需要重制首页的消息数量
+        public static final int NEEDRESETMESSAGECOUNT=4004;
+
+        //需要刷新买家消息
+        public static final int NEEDRESETBUYERMESSAGE=4005;
+
+
+        //需要刷新卖家消息
+        public static final int NEEDRESETSELLERMESSAGE=4006;
+
+
+        //需要刷新系统消息
+        public static final int NEEDRESETSYSTEMMESSAGE=4007;
+
     }
 
 

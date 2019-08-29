@@ -122,9 +122,16 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 ZhujiBean zhujiBean = (ZhujiBean) adapter.getData().get(position);
-                Intent intent = new Intent(ZhujiListActivity.this, ZhujiDetailActivity.class);
-                intent.putExtra("zhujiBean", zhujiBean);
-                ActivityUtils.startActivity(intent);
+                if(StringUtils.equals("1",zhujiBean.getIsCharger())){
+                    Intent intent = new Intent(ZhujiListActivity.this, WodeZhujiDingzhiDetailActivity.class);
+                    intent.putExtra("id", zhujiBean.getId());
+                    ActivityUtils.startActivity(intent);
+                }else {
+                    Intent intent = new Intent(ZhujiListActivity.this, ZhujiDetailActivity.class);
+                    intent.putExtra("id", zhujiBean.getId());
+                    ActivityUtils.startActivity(intent);
+                }
+
             }
         });
 
@@ -144,6 +151,16 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
                 pageNo = 0;
                 addData();
 
+                break;
+
+            case MessageBean.Code.DELU:
+                pageNo = 0;
+                addData();
+                break;
+
+            case MessageBean.Code.WXLOGIN:
+                pageNo = 0;
+                addData();
                 break;
         }
     }

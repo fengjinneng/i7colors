@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ZhujiBean implements Parcelable {
+public class ZhujiBean {
 
 
 
@@ -31,7 +31,6 @@ public class ZhujiBean implements Parcelable {
     private String temperature;
     private String productName;
     private String producer;
-    private String num;
     private String description;
     private String phone;
 //    private Object isValid;
@@ -41,8 +40,25 @@ public class ZhujiBean implements Parcelable {
     private String creditLevel;
     private String vipLevel;
     private String publishType;
+    private String diyNumStr;
+    private String useNumStr;
     private List<SolutionListBean> solutionList;
 
+    public String getUseNumStr() {
+        return useNumStr;
+    }
+
+    public void setUseNumStr(String useNumStr) {
+        this.useNumStr = useNumStr;
+    }
+
+    public String getDiyNumStr() {
+        return diyNumStr;
+    }
+
+    public void setDiyNumStr(String diyNumStr) {
+        this.diyNumStr = diyNumStr;
+    }
 
     public Long getId() {
         return id;
@@ -180,14 +196,6 @@ public class ZhujiBean implements Parcelable {
         this.producer = producer;
     }
 
-    public String getNum() {
-        return num;
-    }
-
-    public void setNum(String num) {
-        this.num = num;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -252,7 +260,7 @@ public class ZhujiBean implements Parcelable {
         this.solutionList = solutionList;
     }
 
-    public static class SolutionListBean implements Parcelable {
+    public static class SolutionListBean {
 
 
 
@@ -397,7 +405,7 @@ public class ZhujiBean implements Parcelable {
             this.attachList = attachList;
         }
 
-        public static class ZhujiDiyBean implements Parcelable {
+        public static class ZhujiDiyBean  {
 
 
 
@@ -411,37 +419,10 @@ public class ZhujiBean implements Parcelable {
                 this.id = id;
             }
 
-            @Override
-            public int describeContents() {
-                return 0;
-            }
 
-            @Override
-            public void writeToParcel(Parcel dest, int flags) {
-                dest.writeValue(this.id);
-            }
-
-            public ZhujiDiyBean() {
-            }
-
-            protected ZhujiDiyBean(Parcel in) {
-                this.id = (Long) in.readValue(Long.class.getClassLoader());
-            }
-
-            public static final Creator<ZhujiDiyBean> CREATOR = new Creator<ZhujiDiyBean>() {
-                @Override
-                public ZhujiDiyBean createFromParcel(Parcel source) {
-                    return new ZhujiDiyBean(source);
-                }
-
-                @Override
-                public ZhujiDiyBean[] newArray(int size) {
-                    return new ZhujiDiyBean[size];
-                }
-            };
         }
 
-        public static class AttachListBean implements Parcelable {
+        public static class AttachListBean  {
 
 
             /**
@@ -483,176 +464,11 @@ public class ZhujiBean implements Parcelable {
                 this.attachUrl = attachUrl;
             }
 
-            @Override
-            public int describeContents() {
-                return 0;
-            }
 
-            @Override
-            public void writeToParcel(Parcel dest, int flags) {
-                dest.writeValue(this.zhujiDiySolutionId);
-                dest.writeString(this.attachName);
-                dest.writeString(this.attachUrl);
-            }
-
-            public AttachListBean() {
-            }
-
-            protected AttachListBean(Parcel in) {
-                this.zhujiDiySolutionId = (Long) in.readValue(Long.class.getClassLoader());
-                this.attachName = in.readString();
-                this.attachUrl = in.readString();
-            }
-
-            public static final Creator<AttachListBean> CREATOR = new Creator<AttachListBean>() {
-                @Override
-                public AttachListBean createFromParcel(Parcel source) {
-                    return new AttachListBean(source);
-                }
-
-                @Override
-                public AttachListBean[] newArray(int size) {
-                    return new AttachListBean[size];
-                }
-            };
         }
 
-        @Override
-        public int describeContents() {
-            return 0;
-        }
 
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeValue(this.id);
-            dest.writeValue(this.zhujiDiyId);
-            dest.writeString(this.companyName);
-            dest.writeString(this.companyName2);
-            dest.writeString(this.status);
-            dest.writeString(this.phone);
-            dest.writeString(this.productName);
-            dest.writeString(this.num);
-            dest.writeString(this.numUnit);
-            dest.writeString(this.description);
-            dest.writeString(this.attachUrl);
-            dest.writeString(this.isValid);
-            dest.writeString(this.createdAt);
-            dest.writeParcelable(this.zhujiDiy, flags);
-            dest.writeList(this.attachList);
-        }
 
-        public SolutionListBean() {
-        }
-
-        protected SolutionListBean(Parcel in) {
-            this.id = (Long) in.readValue(Long.class.getClassLoader());
-            this.zhujiDiyId = (Long) in.readValue(Long.class.getClassLoader());
-            this.companyName = in.readString();
-            this.companyName2 = in.readString();
-            this.status = in.readString();
-            this.phone = in.readString();
-            this.productName = in.readString();
-            this.num = in.readString();
-            this.numUnit = in.readString();
-            this.description = in.readString();
-            this.attachUrl = in.readString();
-            this.isValid = in.readString();
-            this.createdAt = in.readString();
-            this.zhujiDiy = in.readParcelable(ZhujiDiyBean.class.getClassLoader());
-            this.attachList = new ArrayList<AttachListBean>();
-            in.readList(this.attachList, AttachListBean.class.getClassLoader());
-        }
-
-        public static final Creator<SolutionListBean> CREATOR = new Creator<SolutionListBean>() {
-            @Override
-            public SolutionListBean createFromParcel(Parcel source) {
-                return new SolutionListBean(source);
-            }
-
-            @Override
-            public SolutionListBean[] newArray(int size) {
-                return new SolutionListBean[size];
-            }
-        };
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeValue(this.id);
-        dest.writeValue(this.classId);
-        dest.writeString(this.className);
-        dest.writeString(this.zhujiName);
-        dest.writeString(this.endTimeStamp);
-        dest.writeString(this.status);
-        dest.writeString(this.companyName);
-        dest.writeString(this.companyName2);
-        dest.writeString(this.isCharger);
-        dest.writeString(this.material);
-        dest.writeString(this.purpose);
-        dest.writeString(this.requirement);
-        dest.writeString(this.equipment);
-        dest.writeString(this.dye);
-        dest.writeString(this.temperature);
-        dest.writeString(this.productName);
-        dest.writeString(this.producer);
-        dest.writeString(this.num);
-        dest.writeString(this.description);
-        dest.writeString(this.phone);
-        dest.writeString(this.createdAt);
-        dest.writeValue(this.solution_num);
-        dest.writeString(this.creditLevel);
-        dest.writeString(this.vipLevel);
-        dest.writeString(this.publishType);
-        dest.writeList(this.solutionList);
-    }
-
-    public ZhujiBean() {
-    }
-
-    protected ZhujiBean(Parcel in) {
-        this.id = (Long) in.readValue(Long.class.getClassLoader());
-        this.classId = (Long) in.readValue(Long.class.getClassLoader());
-        this.className = in.readString();
-        this.zhujiName = in.readString();
-        this.endTimeStamp = in.readString();
-        this.status = in.readString();
-        this.companyName = in.readString();
-        this.companyName2 = in.readString();
-        this.isCharger = in.readString();
-        this.material = in.readString();
-        this.purpose = in.readString();
-        this.requirement = in.readString();
-        this.equipment = in.readString();
-        this.dye = in.readString();
-        this.temperature = in.readString();
-        this.productName = in.readString();
-        this.producer = in.readString();
-        this.num = in.readString();
-        this.description = in.readString();
-        this.phone = in.readString();
-        this.createdAt = in.readString();
-        this.solution_num = (Integer) in.readValue(Integer.class.getClassLoader());
-        this.creditLevel = in.readString();
-        this.vipLevel = in.readString();
-        this.publishType = in.readString();
-        this.solutionList = new ArrayList<SolutionListBean>();
-        in.readList(this.solutionList, SolutionListBean.class.getClassLoader());
-    }
-
-    public static final Parcelable.Creator<ZhujiBean> CREATOR = new Parcelable.Creator<ZhujiBean>() {
-        @Override
-        public ZhujiBean createFromParcel(Parcel source) {
-            return new ZhujiBean(source);
-        }
-
-        @Override
-        public ZhujiBean[] newArray(int size) {
-            return new ZhujiBean[size];
-        }
-    };
 }

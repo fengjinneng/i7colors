@@ -482,13 +482,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="需求量:"
+                android:text="每月用量:"
                 android:textSize="@dimen/x26"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/activity_zhuji_detail_shengchanchangjia" />
 
             <TextView
-                android:id="@+id/activity_zhuji_detail_xuqiuliang"
+                android:id="@+id/activity_zhuji_detail_meiyueyongliang"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -532,6 +532,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView441" />
+
+            <TextView
+                android:id="@+id/activity_zhuji_detail_xuqiuliang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="@dimen/x26"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/activity_zhuji_detail_meiyueyongliang"
+                app:layout_constraintTop_toTopOf="@+id/textView372" />
+
+            <TextView
+                android:id="@+id/textView372"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="定制需求量:"
+                android:textSize="@dimen/x26"
+                app:layout_constraintStart_toStartOf="@+id/textView438"
+                app:layout_constraintTop_toBottomOf="@+id/activity_zhuji_detail_meiyueyongliang" />
 
 
         </android.support.constraint.ConstraintLayout>

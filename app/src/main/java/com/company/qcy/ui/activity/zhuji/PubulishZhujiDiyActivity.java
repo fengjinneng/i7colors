@@ -26,6 +26,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.base.KeyboardChangeListener;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.bean.zhuji.ZhujiCaizhiBean;
 import com.company.qcy.bean.zhuji.ZhujiTypeBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
@@ -56,7 +57,7 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
     /**
      * 例如：涤纶
      */
-    private EditText mActicityPubulishZhujiCaizhi;
+    private TextView mActicityPubulishZhujiCaizhi;
     /**
      * 例如：用于工厂工人装面料
      */
@@ -88,6 +89,10 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
      * 公司名称:
      */
     private TextView mActicityPubulishZhujiCompanynameText;
+    /**
+     * 例如：1吨
+     */
+    private EditText mActicityPubulishZhujiDiyMeiyueyongliang;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +109,8 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
         mActicityPubulishZhujiDiyType = (TextView) findViewById(R.id.acticity_pubulish_zhuji_diy_type);
         mActicityPubulishZhujiDiyType.setOnClickListener(this);
         mActicityPubulishZhujiDiyName = (EditText) findViewById(R.id.acticity_pubulish_zhuji_diy_name);
-        mActicityPubulishZhujiCaizhi = (EditText) findViewById(R.id.acticity_pubulish_zhuji_caizhi);
+        mActicityPubulishZhujiCaizhi = findViewById(R.id.acticity_pubulish_zhuji_caizhi);
+        mActicityPubulishZhujiCaizhi.setOnClickListener(this);
         mActicityPubulishZhujiChengpinyongtu = (EditText) findViewById(R.id.acticity_pubulish_zhuji_chengpinyongtu);
         mActicityPubulishZhujiHuanbaoyaoqiu = (EditText) findViewById(R.id.acticity_pubulish_zhuji_huanbaoyaoqiu);
         mActicityPubulishZhujiShebei = (EditText) findViewById(R.id.acticity_pubulish_zhuji_shebei);
@@ -119,6 +125,7 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
         mToolbarTitle.setText("发布助剂定制");
         mActicityPubulishZhujiJieshushijian = (TextView) findViewById(R.id.acticity_pubulish_zhuji_jieshushijian);
         mActicityPubulishZhujiJieshushijian.setOnClickListener(this);
+        mActicityPubulishZhujiDiyMeiyueyongliang = (EditText) findViewById(R.id.acticity_pubulish_zhuji_diy_meiyueyongliang);
 
         mActicityPubulishZhujiCompanyname = (EditText) findViewById(R.id.acticity_pubulish_zhuji_companyname);
         mActicityPubulishZhujiCompanynameText = (TextView) findViewById(R.id.acticity_pubulish_zhuji_companyname_text);
@@ -144,6 +151,7 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
                 }
             }
         });
+
     }
 
     @Override
@@ -163,6 +171,15 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
                     choiceZhujiType(zhujiTypeBeans, mActicityPubulishZhujiDiyType);
                 }
                 break;
+            case R.id.acticity_pubulish_zhuji_caizhi:
+
+                if (ObjectUtils.isEmpty(zhujiCaizhiBeans)) {
+                    getZhujiCaizhi();
+                } else {
+                    choiceZhujiCaizhi(zhujiCaizhiBeans, mActicityPubulishZhujiCaizhi);
+                }
+
+                break;
             case R.id.acticity_pubulish_zhuji_fabu:
                 fabu();
                 break;
@@ -176,22 +193,31 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
         if (31 - CalendarUtil.getDay() < 3) {
             if (CalendarUtil.getMonth() == 12) {
                 picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 31);
+                picker.setRangeEnd(CalendarUtil.getYear(), 2, (CalendarUtil.getDay() + 3) - 31);
             } else {
                 picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 31);
+                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 31);
             }
-        } else
+        } else {
             picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+        }
     }
 
     private void setXiaoyue(DatePicker picker) {
         if (30 - CalendarUtil.getDay() < 3) {
             if (CalendarUtil.getMonth() == 12) {
                 picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 30);
+                picker.setRangeEnd(CalendarUtil.getYear(), 2, (CalendarUtil.getDay() + 3) - 30);
             } else {
                 picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 30);
+                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 30);
             }
-        } else
+        } else {
+
             picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+        }
     }
 
     private void onEndtimePicker(TextView time) {
@@ -269,6 +295,7 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
 
 
     private List<ZhujiTypeBean> zhujiTypeBeans;
+    private List<ZhujiCaizhiBean> zhujiCaizhiBeans;
 
     private void getZhujiType() {
 
@@ -314,6 +341,74 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
 
         request.execute(stringCallback);
 
+    }
+
+    private void getZhujiCaizhi() {
+
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.ZHUJICAIZHI)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"));
+        DialogStringCallback stringCallback = new DialogStringCallback(PubulishZhujiDiyActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("ZHUJICAIZHI", response.body());
+
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), "SUCCESS")) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
+                            }
+                            zhujiCaizhiBeans = JSONObject.parseArray(jsonObject.getJSONArray("data").toString(), ZhujiCaizhiBean.class);
+                            choiceZhujiCaizhi(zhujiCaizhiBeans, mActicityPubulishZhujiCaizhi);
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(PubulishZhujiDiyActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+
+    }
+
+
+    //单选
+    private void choiceZhujiCaizhi(List<ZhujiCaizhiBean> data, final TextView tv) {
+
+        List<String> nameList = new ArrayList<>();
+
+        for (int i = 0; i < data.size(); i++) {
+            nameList.add(data.get(i).getName());
+        }
+
+        SinglePicker<String> picker = new SinglePicker<String>(this, nameList);
+        picker.setTitleText("请选择");
+        picker.setCycleDisable(true);
+        picker.show();
+        picker.setOnItemPickListener(new SinglePicker.OnItemPickListener<String>() {
+            @Override
+            public void onItemPicked(int i, String s) {
+                tv.setText(s);
+            }
+        });
     }
 
     //单选
@@ -363,8 +458,8 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
             return;
 
         }
-        if (StringUtils.isEmpty(mActicityPubulishZhujiCaizhi.getText().toString())) {
-            ToastUtils.showShort("请填写材质");
+        if (StringUtils.equals("请选择材质", mActicityPubulishZhujiCaizhi.getText().toString())) {
+            ToastUtils.showShort("请选择材质");
             return;
 
         }
@@ -377,6 +472,12 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
 
         if (StringUtils.isEmpty(mActicityPubulishZhujiHuanbaoyaoqiu.getText().toString())) {
             ToastUtils.showShort("请填写环保要求");
+            return;
+
+        }
+
+        if (StringUtils.isEmpty(mActicityPubulishZhujiXuqiuliang.getText().toString())) {
+            ToastUtils.showShort("请填写定制需求量");
             return;
 
         }
@@ -412,7 +513,9 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
 
         paras.put("productName", mActicityPubulishZhujiXianyongchanpinmingcheng.getText().toString());
 
-        paras.put("num", mActicityPubulishZhujiXuqiuliang.getText().toString());
+        paras.put("useNumStr", mActicityPubulishZhujiDiyMeiyueyongliang.getText().toString());
+        paras.put("diyNumStr", mActicityPubulishZhujiXuqiuliang.getText().toString());
+        paras.put("producer", mActicityPubulishZhujiChangjia.getText().toString());
 
         paras.put("from", getResources().getString(R.string.app_android));
 

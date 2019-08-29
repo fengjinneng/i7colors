@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.bigkoo.convenientbanner.holder.Holder;
+import com.bumptech.glide.Glide;
 
 //banner工具类
 
@@ -20,8 +21,9 @@ public class NetworkImageHolderView implements Holder<String> {
 
     @Override
     public void UpdateUI(Context context, int position, String data) {
-        GlideUtils.loadImageRct(context,data,imageView);
+//        GlideUtils.loadImageRct(context,data,imageView);
 
+        Glide.with(context).load(data).into(imageView);
     }
 }
 

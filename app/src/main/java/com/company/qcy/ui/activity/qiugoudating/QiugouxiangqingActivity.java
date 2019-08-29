@@ -373,6 +373,16 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                 mActivityQiugouxiangqingStatus.setVisibility(View.VISIBLE);
                 addBaojialiebiaoData();
                 break;
+
+            case MessageBean.Code.DELU:
+                isReflash = true;
+                addQiugouxiangqingData();
+                break;
+
+            case MessageBean.Code.WXLOGIN:
+                isReflash = true;
+                addQiugouxiangqingData();
+                break;
         }
     }
 

@@ -49,7 +49,7 @@ public class TijiaofanganActivity extends BaseActivity implements View.OnClickLi
     /**
      * 请输入数量
      */
-    private TextView mActivityTijiaofanganNum;
+    private EditText mActivityTijiaofanganNum;
     /**
      * 请输入描述内容，50字内
      */
@@ -58,14 +58,7 @@ public class TijiaofanganActivity extends BaseActivity implements View.OnClickLi
      * KG
      */
     private TextView mActivityTijiaofanganNumUnit;
-    /**
-     * 其它\n单位
-     */
-    private CheckBox mActivityTijiaofanganCheckBox;
-    /**
-     * 输入单位
-     */
-    private EditText mActivityTijiaofanganQitaUnit;
+
     /**
      * 提交方案
      */
@@ -86,51 +79,14 @@ public class TijiaofanganActivity extends BaseActivity implements View.OnClickLi
         mToolbarBack.setOnClickListener(this);
         mActivityTijiaofanganPhone = (EditText) findViewById(R.id.activity_tijiaofangan_phone);
         mActivityTijiaofanganProductname = (TextView) findViewById(R.id.activity_tijiaofangan_productname);
-        mActivityTijiaofanganNum = (TextView) findViewById(R.id.activity_tijiaofangan_num);
+        mActivityTijiaofanganNum = (EditText) findViewById(R.id.activity_tijiaofangan_num);
         mActivityTijiaofanganMiaoshu = (EditText) findViewById(R.id.activity_tijiaofangan_miaoshu);
         mActivityTijiaofanganNumUnit = (TextView) findViewById(R.id.activity_tijiaofangan_num_unit);
-        mActivityTijiaofanganCheckBox = (CheckBox) findViewById(R.id.activity_tijiaofangan_checkBox);
-        mActivityTijiaofanganCheckBox.setOnClickListener(this);
-        mActivityTijiaofanganQitaUnit = (EditText) findViewById(R.id.activity_tijiaofangan_qita_unit);
         mActivityTijiaofanganSubmit = (Button) findViewById(R.id.activity_tijiaofangan_submit);
         mActivityTijiaofanganSubmit.setOnClickListener(this);
         mToolbarTitle.setText("提交方案");
+        EditTextUtils.setEditTextInhibitInputSpace(mActivityTijiaofanganNum);
 
-        mActivityTijiaofanganCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mActivityTijiaofanganQitaUnit.setEnabled(true);
-                } else {
-                    mActivityTijiaofanganQitaUnit.setEnabled(false);
-                    mActivityTijiaofanganQitaUnit.setText("");
-                    mActivityTijiaofanganNumUnit.setText("KG");
-                }
-            }
-        });
-
-        EditTextUtils.setEditTextInhibitInputSpaceAndLength(mActivityTijiaofanganQitaUnit,4);
-
-        mActivityTijiaofanganQitaUnit.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {
-                    mActivityTijiaofanganNumUnit.setText(s.toString());
-                } else {
-                    mActivityTijiaofanganNumUnit.setText("KG");
-                }
-            }
-        });
     }
 
     @Override
@@ -168,14 +124,17 @@ public class TijiaofanganActivity extends BaseActivity implements View.OnClickLi
         paras.put("phone", mActivityTijiaofanganPhone.getText().toString());
         paras.put("productName", mActivityTijiaofanganProductname.getText().toString());
 
-        if(StringUtils.isTrimEmpty(mActivityTijiaofanganNum.getText().toString())){
+        if (StringUtils.isTrimEmpty(mActivityTijiaofanganNum.getText().toString())) {
 
             paras.put("num", "");
             paras.put("numUnit", "");
-        }else {
+
+        } else {
             paras.put("num", mActivityTijiaofanganNum.getText().toString());
-            paras.put("numUnit", mActivityTijiaofanganNumUnit.getText().toString());
+            paras.put("numUnit", "KG");
+
         }
+
         paras.put("description", mActivityTijiaofanganMiaoshu.getText().toString());
         paras.put("from", getResources().getString(R.string.app_android));
 

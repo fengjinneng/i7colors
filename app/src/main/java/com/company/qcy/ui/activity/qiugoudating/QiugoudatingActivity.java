@@ -180,6 +180,14 @@ public class QiugoudatingActivity extends BaseActivity implements View.OnClickLi
                 refreshLayout.setRefreshing(true);
                 refreshListener.onRefresh();
                 break;
+            case MessageBean.Code.DELU:
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
+            case MessageBean.Code.WXLOGIN:
+                refreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
         }
     }
 

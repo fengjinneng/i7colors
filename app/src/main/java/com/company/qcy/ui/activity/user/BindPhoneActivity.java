@@ -1,5 +1,6 @@
 package com.company.qcy.ui.activity.user;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.RegexUtils;
@@ -60,18 +62,6 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
 
 
     private UserBean userBean;
-    /**
-     * 邀请码（选填）
-     */
-    private EditText mActivityBindPhoneInvitecode;
-    /**
-     * 请填写公司名称
-     */
-    private EditText mActivityBindPhoneCompanyName;
-    /**
-     * 请选择职位
-     */
-    private TextView mActivityBindPhoneZhiwei;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,10 +80,6 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
         mActivityBindPhoneCancle.setOnClickListener(this);
         mActivityBindPhoneCommit = (Button) findViewById(R.id.activity_bind_phone_commit);
         mActivityBindPhoneCommit.setOnClickListener(this);
-        mActivityBindPhoneInvitecode = (EditText) findViewById(R.id.activity_bind_phone_invitecode);
-        mActivityBindPhoneCompanyName = (EditText) findViewById(R.id.activity_bind_phone_companyName);
-        mActivityBindPhoneZhiwei = (TextView) findViewById(R.id.activity_bind_phone_zhiwei);
-        mActivityBindPhoneZhiwei.setOnClickListener(this);
     }
 
 
@@ -173,16 +159,6 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
                     return;
                 }
 
-                if (StringUtils.equals("请选择职位", mActivityBindPhoneZhiwei.getText().toString())) {
-                    ToastUtils.showShort("请选择职位");
-                    return;
-                }
-
-                if (StringUtils.isEmpty(mActivityBindPhoneCompanyName.getText().toString())) {
-                    ToastUtils.showShort("请填写公司名称");
-                    return;
-                }
-
                 if (mActivityBindPhoneVerifycode.getText().toString().length() != 6) {
                     ToastUtils.showShort("请填写正确的验证码");
                     return;
@@ -191,10 +167,7 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
                         .tag(this)
                         .params("sign", SPUtils.getInstance().getString("sign"))
                         .params("phone", mActivityBindPhonePhone.getText().toString())
-                        .params("inviteCode", mActivityBindPhoneInvitecode.getText().toString())
                         .params("token", SPUtils.getInstance().getString("token"))
-                        .params("company",mActivityBindPhoneCompanyName.getText().toString())
-                        .params("positionName",mActivityBindPhoneZhiwei.getText().toString())
                         .params("from", getResources().getString(R.string.app_android))
                         .params("registrationId", SPUtils.getInstance().getString("registrationId"))
                         .params("smsCode", mActivityBindPhoneVerifycode.getText().toString());
@@ -213,6 +186,10 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
                                 UserBean user = data.toJavaObject(UserBean.class);
                                 EventBus.getDefault().post(new MessageBean(MessageBean.Code.WXLOGIN, user));
                                 finish();
+
+                                Intent i = new Intent(BindPhoneActivity.this,RegisterInfoActivity.class);
+                                i.putExtra("token",user.getToken());
+                                ActivityUtils.startActivity(i);
                                 return;
                             }
                             if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -235,30 +212,8 @@ public class BindPhoneActivity extends BaseActivity implements View.OnClickListe
 
                 postRequest.execute(dialogStringCallback);
                 break;
-            case R.id.activity_bind_phone_zhiwei:
-                List<String> zhiwei = new ArrayList<>();
-                zhiwei.add("采购");
-                zhiwei.add("销售");
-                zhiwei.add("技术");
-                zhiwei.add("老板");
-                zhiwei.add("生产");
-                choiceString(zhiwei, mActivityBindPhoneZhiwei);
-                break;
+
         }
     }
-
-    private void choiceString(final List data, final TextView tv) {
-        SinglePicker<String> picker = new SinglePicker<String>(this, data);
-        picker.setTitleText("请选择");
-        picker.setCycleDisable(true);
-        picker.show();
-        picker.setOnItemPickListener(new SinglePicker.OnItemPickListener<String>() {
-            @Override
-            public void onItemPicked(int i, String s) {
-                tv.setText(s);
-            }
-        });
-    }
-
 
 }

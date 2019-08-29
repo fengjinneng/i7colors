@@ -337,9 +337,7 @@
         </activity>
         <activity android:name=".ShareDispatchActivity" />
         <activity android:name=".ui.activity.zhuji.ZhujiListActivity" />
-        <activity
-            android:name=".ui.activity.zhuji.PubulishZhujiDiyActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity android:name=".ui.activity.zhuji.PubulishZhujiDiyActivity" />
         <activity android:name=".ui.activity.zhuji.ZhujiDetailActivity" />
         <activity android:name=".ui.activity.zhuji.TijiaofanganActivity" />
         <activity android:name=".ui.activity.zhuji.WodeZhujiListActivity" />

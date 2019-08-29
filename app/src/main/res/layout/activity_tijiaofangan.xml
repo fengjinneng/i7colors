@@ -101,14 +101,14 @@
 
     <EditText
         android:id="@+id/activity_tijiaofangan_num"
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/x200"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/x50"
         android:background="@drawable/background_shuruwenbenkuang"
         android:hint="输入数量"
         android:maxLength="10"
+        android:gravity="center"
         android:minWidth="@dimen/x140"
-        android:paddingLeft="@dimen/x10"
         android:paddingTop="@dimen/x10"
         android:paddingBottom="@dimen/x10"
         android:textSize="@dimen/x28"
@@ -149,37 +149,11 @@
         android:id="@+id/activity_tijiaofangan_num_unit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="KG"
-        android:layout_marginLeft="@dimen/x8"
         android:textSize="@dimen/x28"
         app:layout_constraintBottom_toBottomOf="@+id/activity_tijiaofangan_num"
         app:layout_constraintStart_toEndOf="@+id/activity_tijiaofangan_num"
-        app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_num" />
-
-    <CheckBox
-        android:id="@+id/activity_tijiaofangan_checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="其它\n单位"
-        android:textSize="@dimen/x22"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_tijiaofangan_num"
-        app:layout_constraintStart_toEndOf="@+id/activity_tijiaofangan_num_unit"
-        app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_num" />
-
-    <EditText
-        android:id="@+id/activity_tijiaofangan_qita_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background_shuruwenbenkuang"
-        android:enabled="false"
-        android:hint="输入单位"
-        android:padding="@dimen/x10"
-        android:textSize="@dimen/x28"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_tijiaofangan_num"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/activity_tijiaofangan_checkBox"
         app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_num" />
 
     <Button

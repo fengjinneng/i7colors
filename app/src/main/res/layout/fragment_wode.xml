@@ -456,8 +456,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x110"
-                android:layout_marginTop="@dimen/x20"
                 android:src="@mipmap/wode_zhuji_img"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout57"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -466,10 +466,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/x46"
+                android:layout_marginTop="-1dp"
                 android:text="助剂定制"
-                android:textColor="@color/erjibiaoti"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_buyer_dingzhi_img"
-                app:layout_constraintStart_toEndOf="@+id/fragment_wode_buyer_dingzhi_img" />
+                app:layout_constraintTop_toTopOf="@+id/fragment_wode_buyer_dingzhi_img"
+                android:textColor="@color/erjibiaoti"
+                app:layout_constraintStart_toEndOf="@+id/fragment_wode_buyer_dingzhi_img"
+                 />
 
             <TextView
                 android:id="@+id/fragment_wode_buyer_zhujidingzhi_all"
@@ -486,6 +489,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout57"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
@@ -647,8 +651,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x110"
-                android:layout_marginTop="@dimen/x20"
                 android:src="@mipmap/wode_zhuji_img"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout20"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -659,8 +663,9 @@
                 android:layout_marginStart="@dimen/x46"
                 android:text="我的助剂定制方案"
                 android:textColor="@color/erjibiaoti"
+                app:layout_constraintStart_toEndOf="@+id/fragment_wode_seller_dingzhi_img"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_wode_seller_dingzhi_img"
-                app:layout_constraintStart_toEndOf="@+id/fragment_wode_seller_dingzhi_img" />
+                app:layout_constraintTop_toTopOf="@+id/fragment_wode_seller_dingzhi_img" />
 
             <TextView
                 android:id="@+id/fragment_wode_seller_zhujidingzhifangan_all_fangan"
@@ -677,6 +682,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout20"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x140"
                 android:layout_marginTop="8dp"

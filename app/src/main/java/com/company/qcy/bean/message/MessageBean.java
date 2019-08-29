@@ -33,6 +33,15 @@ public class MessageBean {
     private String title;
     private Long zhujiDiyId;
     private Long zhujiDiySolutionId;
+    private String directType;
+
+    public String getDirectType() {
+        return directType;
+    }
+
+    public void setDirectType(String directType) {
+        this.directType = directType;
+    }
 
     public Long getZhujiDiyId() {
         return zhujiDiyId;

@@ -16,12 +16,14 @@ import android.view.ViewGroup;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.zhuji.ZhujiListAdapter;
@@ -140,6 +142,18 @@ public class WodeZhujiLsitFragment extends Fragment {
                 ActivityUtils.startActivity(intent);
             }
         });
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.item_zhujidingzhi_list_yijianhujiao:
+                        PermisionUtil.callKefu(getActivity());
+                        break;
+                }
+            }
+        });
+
     }
 
     private int pageNo;

@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.company.qcy.R;
@@ -80,7 +81,7 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), false);
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), true);
 
     }
 
@@ -89,31 +90,41 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (!hidden) {
-            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), false);
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), true);
         }
     }
-
 
     private BuyerxiaoxiFragment buyerxiFragment;
     private SellerxiaoxiFragment sellerxiaoxiFragment;
     private XitongxiaoxiFragment xitongxiaoxiFragment;
 
     private Badge messageBadge;
-
+    private Badge buyerBadge;
+    private Badge sellerBadge;
 
     @Override
     public void onRec(MessageBean messageBean) {
         super.onRec(messageBean);
 
         switch (messageBean.getCode()) {
-            case MessageBean.JPush.DELETELUNCHNUMBER:
-                messageBadge.setBadgeNumber(0);
-                break;
 
             case MessageBean.JPush.RECIVENOTIFICATION:
-                messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
-                break;
+                messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("appSystemInform"));
+                buyerBadge.setBadgeNumber(SPUtils.getInstance().getInt("vMallInformBuyer"));
+                sellerBadge.setBadgeNumber(SPUtils.getInstance().getInt("vMallInformSeller"));
 
+                if(SPUtils.getInstance().getInt("appSystemInform")>0){
+                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.NEEDRESETSYSTEMMESSAGE));
+                }
+
+                if(SPUtils.getInstance().getInt("vMallInformBuyer")>0){
+                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.NEEDRESETBUYERMESSAGE));
+                }
+
+                if(SPUtils.getInstance().getInt("vMallInformSeller")>0){
+                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.NEEDRESETSELLERMESSAGE));
+                }
+                break;
         }
     }
 
@@ -122,13 +133,20 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
     public void onResume() {
         super.onResume();
         MobclickAgent.onPageStart("消息");
-        if(SPUtils.getInstance().getInt("notification")>0&&!ObjectUtils.isEmpty(messageBadge)){
-            messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
+        if (SPUtils.getInstance().getInt("appSystemInform") > 0 && !ObjectUtils.isEmpty(messageBadge)) {
+            messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("appSystemInform"));
+        }
+
+        if (SPUtils.getInstance().getInt("vMallInformBuyer") > 0 && !ObjectUtils.isEmpty(buyerBadge)) {
+            buyerBadge.setBadgeNumber(SPUtils.getInstance().getInt("vMallInformBuyer"));
+        }
+
+        if (SPUtils.getInstance().getInt("vMallInformSeller") > 0 && !ObjectUtils.isEmpty(sellerBadge)) {
+            sellerBadge.setBadgeNumber(SPUtils.getInstance().getInt("vMallInformSeller"));
         }
     }
 
     private void initView(View inflate) {
-
 
         mFragmentToutiaoBuyerImg = (ImageView) inflate.findViewById(R.id.fragment_toutiao_buyer_img);
         mFragmentToutiaoBuyerText = (TextView) inflate.findViewById(R.id.fragment_toutiao_buyer_text);
@@ -156,11 +174,23 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         fragmentTransaction.commit();
 
         messageBadge = new QBadgeView(getContext()).bindTarget(mFragmentToutiaoXitongxiaoxi)
+                .setGravityOffset(getResources().getDimension(R.dimen.x50),getResources().getDimension(R.dimen.x10),false)
                 .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(10, true).setExactMode(false);
         messageBadge.setBadgeBackgroundColor(getResources().getColor(R.color.chunhongse));
         messageBadge.setBadgeTextColor(getResources().getColor(R.color.baise));
-    }
 
+        buyerBadge = new QBadgeView(getContext()).bindTarget(mFragmentToutiaoBuyer)
+                .setGravityOffset(getResources().getDimension(R.dimen.x50),getResources().getDimension(R.dimen.x10),false)
+                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(10, true).setExactMode(false);
+        buyerBadge.setBadgeBackgroundColor(getResources().getColor(R.color.chunhongse));
+        buyerBadge.setBadgeTextColor(getResources().getColor(R.color.baise));
+
+        sellerBadge = new QBadgeView(getContext()).bindTarget(mFragmentToutiaoSeller)
+                .setGravityOffset(getResources().getDimension(R.dimen.x50),getResources().getDimension(R.dimen.x10),false)
+                .setBadgeGravity(Gravity.END | Gravity.TOP).setBadgeTextSize(10, true).setExactMode(false);
+        sellerBadge.setBadgeBackgroundColor(getResources().getColor(R.color.chunhongse));
+        sellerBadge.setBadgeTextColor(getResources().getColor(R.color.baise));
+    }
 
     public void setActivity(Activity activity) {
         this.activity = activity;
@@ -185,6 +215,13 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
         android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         switch (v.getId()) {
             case R.id.fragment_toutiao_buyer:
+
+                if (!ObjectUtils.isEmpty(buyerBadge)) {
+                    buyerBadge.setBadgeNumber(0);
+                    SPUtils.getInstance().put("vMallInformBuyer", 0);
+                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.NEEDRESETMESSAGECOUNT));
+                }
+
                 if (buyerxiFragment == null) {
                     buyerxiFragment = new BuyerxiaoxiFragment();
                     fragmentTransaction.add(R.id.fragment_toutiao_container, buyerxiFragment);
@@ -206,6 +243,13 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
 
                 break;
             case R.id.fragment_toutiao_seller:
+
+                if (!ObjectUtils.isEmpty(buyerBadge)) {
+                    sellerBadge.setBadgeNumber(0);
+                    SPUtils.getInstance().put("vMallInformSeller", 0);
+                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.NEEDRESETMESSAGECOUNT));
+                }
+
                 if (sellerxiaoxiFragment == null) {
                     sellerxiaoxiFragment = new SellerxiaoxiFragment();
                     fragmentTransaction.add(R.id.fragment_toutiao_container, sellerxiaoxiFragment);
@@ -227,13 +271,10 @@ public class XiaoxiFragment extends BaseFragment implements View.OnClickListener
                 break;
             case R.id.fragment_toutiao_xitongxiaoxi:
 
-                if(!ObjectUtils.isEmpty(messageBadge)){
-//                    if (SPUtils.getInstance().getInt("notification") > 0 ) {
-//                        messageBadge.setBadgeNumber(SPUtils.getInstance().getInt("notification"));
-//                    } else messageBadge.setBadgeNumber(0);
+                if (!ObjectUtils.isEmpty(messageBadge)) {
                     messageBadge.setBadgeNumber(0);
-                    SPUtils.getInstance().put("notification",0);
-                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.DELETELUNCHNUMBER));
+                    SPUtils.getInstance().put("appSystemInform", 0);
+                    EventBus.getDefault().post(new MessageBean(MessageBean.JPush.NEEDRESETMESSAGECOUNT));
                 }
 
                 if (xitongxiaoxiFragment == null) {

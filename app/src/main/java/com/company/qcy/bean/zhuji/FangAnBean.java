@@ -171,7 +171,6 @@ public class FangAnBean {
         private String temperature;
         private String productName;
         private String producer;
-        private Double num;
         private String useNumStr;
         private String description;
         //        private Object from;
@@ -180,11 +179,19 @@ public class FangAnBean {
         private String createdAt;
         //        private Object updatedAt;
         private Integer solution_num;
-//        private Object creditLevel;
+        //        private Object creditLevel;
 //        private Object vipLevel;
 //        private Object publishType;
 //        private Object solutionList;
+        private String diyNumStr;
 
+        public String getDiyNumStr() {
+            return diyNumStr;
+        }
+
+        public void setDiyNumStr(String diyNumStr) {
+            this.diyNumStr = diyNumStr;
+        }
 
         public Long getId() {
             return id;
@@ -298,14 +305,6 @@ public class FangAnBean {
             this.producer = producer;
         }
 
-        public Double getNum() {
-            return num;
-        }
-
-        public void setNum(Double num) {
-            this.num = num;
-        }
-
         public String getUseNumStr() {
             return useNumStr;
         }
@@ -347,52 +346,52 @@ public class FangAnBean {
         }
     }
 
-        public static class AttachListBean {
-            /**
-             * id : null
-             * zhujiDiySolutionId : 2
-             * attachName : null
-             * attachUrl : null
-             * isValid : null
-             */
+    public static class AttachListBean {
+        /**
+         * id : null
+         * zhujiDiySolutionId : 2
+         * attachName : null
+         * attachUrl : null
+         * isValid : null
+         */
 
-            private Long id;
-            private Long zhujiDiySolutionId;
-            private String attachName;
-            private String attachUrl;
+        private Long id;
+        private Long zhujiDiySolutionId;
+        private String attachName;
+        private String attachUrl;
 //        private Object isValid;
 
 
-            public Long getId() {
-                return id;
-            }
+        public Long getId() {
+            return id;
+        }
 
-            public void setId(Long id) {
-                this.id = id;
-            }
+        public void setId(Long id) {
+            this.id = id;
+        }
 
-            public Long getZhujiDiySolutionId() {
-                return zhujiDiySolutionId;
-            }
+        public Long getZhujiDiySolutionId() {
+            return zhujiDiySolutionId;
+        }
 
-            public void setZhujiDiySolutionId(Long zhujiDiySolutionId) {
-                this.zhujiDiySolutionId = zhujiDiySolutionId;
-            }
+        public void setZhujiDiySolutionId(Long zhujiDiySolutionId) {
+            this.zhujiDiySolutionId = zhujiDiySolutionId;
+        }
 
-            public String getAttachName() {
-                return attachName;
-            }
+        public String getAttachName() {
+            return attachName;
+        }
 
-            public void setAttachName(String attachName) {
-                this.attachName = attachName;
-            }
+        public void setAttachName(String attachName) {
+            this.attachName = attachName;
+        }
 
-            public String getAttachUrl() {
-                return attachUrl;
-            }
+        public String getAttachUrl() {
+            return attachUrl;
+        }
 
-            public void setAttachUrl(String attachUrl) {
-                this.attachUrl = attachUrl;
-            }
+        public void setAttachUrl(String attachUrl) {
+            this.attachUrl = attachUrl;
+        }
     }
 }

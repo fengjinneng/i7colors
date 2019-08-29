@@ -9,7 +9,8 @@
 
     <include
         android:id="@+id/include5"
-        layout="@layout/toolbar" />
+        layout="@layout/toolbar"
+        />
 
     <ScrollView
         android:layout_width="match_parent"

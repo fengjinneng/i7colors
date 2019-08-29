@@ -1,8 +1,6 @@
 package com.company.qcy.ui.activity.user;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -11,10 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.blankj.utilcode.util.EncryptUtils;
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.LogUtils;
-import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -23,6 +19,7 @@ import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.base.BaseActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
@@ -32,7 +29,7 @@ import java.util.List;
 
 import cn.qqtheme.framework.picker.SinglePicker;
 
-public class RegisterInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterInfoActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
@@ -54,12 +51,13 @@ public class RegisterInfoActivity extends AppCompatActivity implements View.OnCl
     private TextView mActivityRegisterInfoZhiwei;
 
     private String token;
+    private TextView mToolbarText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_info);
-        token  = getIntent().getStringExtra("token");
+        token = getIntent().getStringExtra("token");
         initView();
     }
 
@@ -76,6 +74,11 @@ public class RegisterInfoActivity extends AppCompatActivity implements View.OnCl
 
         mToolbarTitle.setText("完善信息");
 
+        mToolbarText = (TextView) findViewById(R.id.toolbar_text);
+        mToolbarText.setOnClickListener(this);
+        mToolbarText.setVisibility(View.VISIBLE);
+
+        mToolbarText.setText("跳过");
     }
 
     @Override
@@ -148,7 +151,6 @@ public class RegisterInfoActivity extends AppCompatActivity implements View.OnCl
                 request.execute(stringCallback);
 
 
-
                 break;
             case R.id.activity_register_info_zhiwei:
 
@@ -160,6 +162,10 @@ public class RegisterInfoActivity extends AppCompatActivity implements View.OnCl
                 zhiwei.add("生产");
                 zhiwei.add("其它");
                 choiceString(zhiwei, mActivityRegisterInfoZhiwei);
+                break;
+            case R.id.toolbar_text:
+                KeyboardUtils.hideSoftInput(this);
+                finish();
                 break;
         }
     }

@@ -314,6 +314,9 @@ public class InterfaceInfo {
     //获取我的助剂定制列表
     public static final String WODEZHUJILIST = "zhujiDiy/getMyZhujiDiyList";
 
+    //获取助剂定制详情
+    public static final String ZHUJIDETAIL = "zhujiDiy/queryZhujiDiyDetail";
+
     //获取我的助剂定制详情
     public static final String WODEZHUJIDETAIL = "zhujiDiy/getMyZhujiDiyDetail";
 
@@ -328,6 +331,9 @@ public class InterfaceInfo {
 
     //获取助剂分类
     public static final String ZHUJITYPE = "zhujiDiy/getZhujiDiyClassList";
+
+    //获取助剂材质
+    public static final String ZHUJICAIZHI = "zhujiDiy/getZhujiDiyMaterialList";
 
     //发补助及定制解决方案
     public static final String FABUJIEJUEFANGAN = "zhujiDiy/addZhujiDiySolution";

@@ -123,7 +123,14 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
     }
 
     private void setData(MessageBean messageBean) {
-        mActivityMessageDetailTitle.setText(messageBean.getProductName());
+        if(StringUtils.equals("enquiry",workType)){
+            mActivityMessageDetailTitle.setText(messageBean.getProductName());
+
+        }
+        if(StringUtils.equals("zhujiDiy",workType)){
+            mActivityMessageDetailTitle.setText(messageBean.getZhujiName());
+
+        }
         mActivityMessageDetailTime.setText(messageBean.getCreatedAt());
         mActivityMessageDetailContent.setText(messageBean.getContent());
 

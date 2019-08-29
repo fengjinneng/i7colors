@@ -93,6 +93,10 @@ public class BuyerxiaoxiFragment extends BaseFragment {
                 refreshListener.onRefresh();
                 break;
 
+            case com.company.qcy.bean.eventbus.MessageBean.JPush.NEEDRESETBUYERMESSAGE:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
         }
     }
 

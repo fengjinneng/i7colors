@@ -22,6 +22,7 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.zhuji.WodeFanganListAdapter;
@@ -142,6 +143,17 @@ public class WodejiejuefanganFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),WodeFangAnDetailActivity.class);
                 intent.putExtra("id",fangAnBean.getId());
                 ActivityUtils.startActivity(intent);
+            }
+        });
+
+        adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
+            @Override
+            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
+                switch (view.getId()){
+                    case R.id.item_zhujidingzhi_list_yijianhujiao:
+                        PermisionUtil.callKefu(getActivity());
+                        break;
+                }
             }
         });
     }
