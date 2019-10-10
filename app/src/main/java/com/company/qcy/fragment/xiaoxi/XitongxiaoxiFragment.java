@@ -120,15 +120,16 @@ public class XitongxiaoxiFragment extends BaseFragment {
         super.onRec(messageBean);
         //签名失效
         switch (messageBean.getCode()) {
-
+            case com.company.qcy.bean.eventbus.MessageBean.JPush.NEEDRESETSYSTEMMESSAGE:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
         }
     }
-
 
     @Override
     public void onResume() {
         super.onResume();
-
 
     }
 

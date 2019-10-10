@@ -132,6 +132,10 @@
             "areaName": "红桥区"
           },
           {
+            "areaId": "120116",
+            "areaName": "滨海新区"
+          },
+          {
             "areaId": "120110",
             "areaName": "东丽区"
           },
@@ -156,10 +160,6 @@
             "areaName": "宝坻区"
           },
           {
-            "areaId": "120116",
-            "areaName": "滨海新区"
-          },
-          {
             "areaId": "120221",
             "areaName": "宁河县"
           },
@@ -179,13 +179,11 @@
     "areaId": "130000",
     "areaName": "河北省",
     "cities": [
-
       {
         "areaId": "139100",
         "areaName": "全省",
         "counties": []
-          },
-
+      },
       {
         "areaId": "130100",
         "areaName": "石家庄市",
@@ -292,7 +290,6 @@
         "areaId": "130200",
         "areaName": "唐山市",
         "counties": [
-
           {
             "areaId": "130292",
             "areaName": "全市"
@@ -322,10 +319,6 @@
             "areaName": "丰润区"
           },
           {
-            "areaId": "130209",
-            "areaName": "曹妃甸区"
-          },
-          {
             "areaId": "130223",
             "areaName": "滦县"
           },
@@ -344,6 +337,10 @@
           {
             "areaId": "130229",
             "areaName": "玉田县"
+          },
+          {
+            "areaId": "130230",
+            "areaName": "唐海县"
           },
           {
             "areaId": "130281",
@@ -574,7 +571,7 @@
             "areaName": "全市"
           },
           {
-            "areaId": "130602",
+            "areaId": "130600",
             "areaName": "新市区"
           },
           {
@@ -886,10 +883,6 @@
         "areaName": "廊坊市",
         "counties": [
           {
-            "areaId": "131092",
-            "areaName": "全市"
-          },
-          {
             "areaId": "131002",
             "areaName": "安次区"
           },
@@ -935,10 +928,6 @@
         "areaId": "131100",
         "areaName": "衡水市",
         "counties": [
-          {
-            "areaId": "131192",
-            "areaName": "全市"
-          },
           {
             "areaId": "131102",
             "areaName": "桃城区"
@@ -994,7 +983,8 @@
       {
         "areaId": "149100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "140100",
         "areaName": "太原市",
@@ -1587,12 +1577,11 @@
     "areaId": "150000",
     "areaName": "内蒙古自治区",
     "cities": [
-
       {
         "areaId": "159100",
         "areaName": "全省",
-        "counties": []},
-
+        "counties": []
+      },
       {
         "areaId": "150100",
         "areaName": "呼和浩特市",
@@ -1643,7 +1632,6 @@
         "areaId": "150200",
         "areaName": "包头市",
         "counties": [
-
           {
             "areaId": "150292",
             "areaName": "全市"
@@ -1690,7 +1678,6 @@
         "areaId": "150300",
         "areaName": "乌海市",
         "counties": [
-
           {
             "areaId": "150392",
             "areaName": "全市"
@@ -1713,7 +1700,6 @@
         "areaId": "150400",
         "areaName": "赤峰市",
         "counties": [
-
           {
             "areaId": "150492",
             "areaName": "全市"
@@ -1772,7 +1758,6 @@
         "areaId": "150500",
         "areaName": "通辽市",
         "counties": [
-
           {
             "areaId": "150592",
             "areaName": "全市"
@@ -1815,7 +1800,6 @@
         "areaId": "150600",
         "areaName": "鄂尔多斯市",
         "counties": [
-
           {
             "areaId": "150692",
             "areaName": "全市"
@@ -1858,7 +1842,6 @@
         "areaId": "150700",
         "areaName": "呼伦贝尔市",
         "counties": [
-
           {
             "areaId": "150792",
             "areaName": "全市"
@@ -1866,10 +1849,6 @@
           {
             "areaId": "150702",
             "areaName": "海拉尔区"
-          },
-          {
-            "areaId": "150703",
-            "areaName": "扎赉诺尔区"
           },
           {
             "areaId": "150721",
@@ -1925,7 +1904,6 @@
         "areaId": "150800",
         "areaName": "巴彦淖尔市",
         "counties": [
-
           {
             "areaId": "150892",
             "areaName": "全市"
@@ -1964,7 +1942,6 @@
         "areaId": "150900",
         "areaName": "乌兰察布市",
         "counties": [
-
           {
             "areaId": "150992",
             "areaName": "全市"
@@ -2019,7 +1996,6 @@
         "areaId": "152200",
         "areaName": "兴安盟",
         "counties": [
-
           {
             "areaId": "152292",
             "areaName": "全市"
@@ -2054,7 +2030,6 @@
         "areaId": "152500",
         "areaName": "锡林郭勒盟",
         "counties": [
-
           {
             "areaId": "152592",
             "areaName": "全市"
@@ -2113,7 +2088,6 @@
         "areaId": "152900",
         "areaName": "阿拉善盟",
         "counties": [
-
           {
             "areaId": "152992",
             "areaName": "全市"
@@ -2141,7 +2115,8 @@
       {
         "areaId": "219100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "210100",
         "areaName": "沈阳市",
@@ -2201,18 +2176,6 @@
           {
             "areaId": "210181",
             "areaName": "新民市"
-          },
-          {
-            "areaId": "210184",
-            "areaName": "沈北区"
-          },
-          {
-            "areaId": "210198",
-            "areaName": "新城子区(沈北新区)"
-          },
-          {
-            "areaId": "210199",
-            "areaName": "浑南新区(东陵区)"
           }
         ]
       },
@@ -2414,7 +2377,6 @@
         "areaId": "210700",
         "areaName": "锦州市",
         "counties": [
-
           {
             "areaId": "210792",
             "areaName": "全市"
@@ -2453,7 +2415,6 @@
         "areaId": "210800",
         "areaName": "营口市",
         "counties": [
-
           {
             "areaId": "210892",
             "areaName": "全市"
@@ -2488,7 +2449,6 @@
         "areaId": "210900",
         "areaName": "阜新市",
         "counties": [
-
           {
             "areaId": "210992",
             "areaName": "全市"
@@ -2527,7 +2487,6 @@
         "areaId": "211000",
         "areaName": "辽阳市",
         "counties": [
-
           {
             "areaId": "211092",
             "areaName": "全市"
@@ -2566,7 +2525,6 @@
         "areaId": "211100",
         "areaName": "盘锦市",
         "counties": [
-
           {
             "areaId": "211192",
             "areaName": "全市"
@@ -2705,11 +2663,11 @@
     "areaId": "220000",
     "areaName": "吉林省",
     "cities": [
-
       {
         "areaId": "229100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "220100",
         "areaName": "长春市",
@@ -2914,11 +2872,7 @@
           },
           {
             "areaId": "220602",
-            "areaName": "浑江区"
-          },
-          {
-            "areaId": "220605",
-            "areaName": "江源区"
+            "areaName": "八道江区"
           },
           {
             "areaId": "220621",
@@ -2931,6 +2885,10 @@
           {
             "areaId": "220623",
             "areaName": "长白朝鲜族自治县"
+          },
+          {
+            "areaId": "220605",
+            "areaName": "江源区"
           },
           {
             "areaId": "220681",
@@ -2963,8 +2921,8 @@
             "areaName": "乾安县"
           },
           {
-            "areaId": "220781",
-            "areaName": "扶余市"
+            "areaId": "220724",
+            "areaName": "扶余县"
           }
         ]
       },
@@ -3046,11 +3004,11 @@
     "areaId": "230000",
     "areaName": "黑龙江省",
     "cities": [
-
       {
         "areaId": "239100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "230100",
         "areaName": "哈尔滨市",
@@ -3072,6 +3030,10 @@
             "areaName": "道外区"
           },
           {
+            "areaId": "230110",
+            "areaName": "香坊区"
+          },
+          {
             "areaId": "230108",
             "areaName": "平房区"
           },
@@ -3080,16 +3042,8 @@
             "areaName": "松北区"
           },
           {
-            "areaId": "230110",
-            "areaName": "香坊区"
-          },
-          {
             "areaId": "230111",
             "areaName": "呼兰区"
-          },
-          {
-            "areaId": "230112",
-            "areaName": "阿城区"
           },
           {
             "areaId": "230123",
@@ -3118,6 +3072,10 @@
           {
             "areaId": "230129",
             "areaName": "延寿县"
+          },
+          {
+            "areaId": "230112",
+            "areaName": "阿城区"
           },
           {
             "areaId": "230182",
@@ -3690,6 +3648,22 @@
           {
             "areaId": "232723",
             "areaName": "漠河县"
+          },
+          {
+            "areaId": "232701",
+            "areaName": "加格达奇区"
+          },
+          {
+            "areaId": "232702",
+            "areaName": "松岭区"
+          },
+          {
+            "areaId": "232703",
+            "areaName": "新林区"
+          },
+          {
+            "areaId": "232704",
+            "areaName": "呼中区"
           }
         ]
       }
@@ -3703,7 +3677,6 @@
         "areaId": "310000",
         "areaName": "上海市",
         "counties": [
-
           {
             "areaId": "310191",
             "areaName": "全市"
@@ -3711,6 +3684,10 @@
           {
             "areaId": "310101",
             "areaName": "黄浦区"
+          },
+          {
+            "areaId": "310103",
+            "areaName": "卢湾区"
           },
           {
             "areaId": "310104",
@@ -3773,10 +3750,6 @@
             "areaName": "奉贤区"
           },
           {
-            "areaId": "310199",
-            "areaName": "卢湾区(黄浦区)"
-          },
-          {
             "areaId": "310230",
             "areaName": "崇明县"
           }
@@ -3788,12 +3761,11 @@
     "areaId": "320000",
     "areaName": "江苏省",
     "cities": [
-
       {
         "areaId": "329100",
         "areaName": "全省",
-        "counties": []},
-
+        "counties": []
+      },
       {
         "areaId": "320100",
         "areaName": "南京市",
@@ -3807,6 +3779,10 @@
             "areaName": "玄武区"
           },
           {
+            "areaId": "320103",
+            "areaName": "白下区"
+          },
+          {
             "areaId": "320104",
             "areaName": "秦淮区"
           },
@@ -3817,6 +3793,10 @@
           {
             "areaId": "320106",
             "areaName": "鼓楼区"
+          },
+          {
+            "areaId": "320107",
+            "areaName": "下关区"
           },
           {
             "areaId": "320111",
@@ -3839,12 +3819,12 @@
             "areaName": "六合区"
           },
           {
-            "areaId": "320117",
-            "areaName": "溧水区"
+            "areaId": "320124",
+            "areaName": "溧水县"
           },
           {
-            "areaId": "320118",
-            "areaName": "高淳区"
+            "areaId": "320125",
+            "areaName": "高淳县"
           }
         ]
       },
@@ -3915,16 +3895,16 @@
             "areaName": "泉山区"
           },
           {
-            "areaId": "320312",
-            "areaName": "铜山区"
-          },
-          {
             "areaId": "320321",
             "areaName": "丰县"
           },
           {
             "areaId": "320322",
             "areaName": "沛县"
+          },
+          {
+            "areaId": "320312",
+            "areaName": "铜山区"
           },
           {
             "areaId": "320324",
@@ -3987,6 +3967,18 @@
             "areaName": "全市"
           },
           {
+            "areaId": "320502",
+            "areaName": "沧浪区"
+          },
+          {
+            "areaId": "320503",
+            "areaName": "平江区"
+          },
+          {
+            "areaId": "320504",
+            "areaName": "金阊区"
+          },
+          {
             "areaId": "320505",
             "areaName": "虎丘区"
           },
@@ -3999,14 +3991,6 @@
             "areaName": "相城区"
           },
           {
-            "areaId": "320508",
-            "areaName": "姑苏区"
-          },
-          {
-            "areaId": "320509",
-            "areaName": "吴江区"
-          },
-          {
             "areaId": "320581",
             "areaName": "常熟市"
           },
@@ -4017,6 +4001,10 @@
           {
             "areaId": "320583",
             "areaName": "昆山市"
+          },
+          {
+            "areaId": "320584",
+            "areaName": "吴江市"
           },
           {
             "areaId": "320585",
@@ -4041,10 +4029,6 @@
             "areaName": "港闸区"
           },
           {
-            "areaId": "320612",
-            "areaName": "通州区"
-          },
-          {
             "areaId": "320621",
             "areaName": "海安县"
           },
@@ -4059,6 +4043,10 @@
           {
             "areaId": "320682",
             "areaName": "如皋市"
+          },
+          {
+            "areaId": "320612",
+            "areaName": "通州区"
           },
           {
             "areaId": "320684",
@@ -4118,7 +4106,7 @@
           },
           {
             "areaId": "320803",
-            "areaName": "淮安区"
+            "areaName": "楚州区"
           },
           {
             "areaId": "320804",
@@ -4209,8 +4197,8 @@
             "areaName": "邗江区"
           },
           {
-            "areaId": "321012",
-            "areaName": "江都区"
+            "areaId": "321011",
+            "areaName": "维扬区"
           },
           {
             "areaId": "321023",
@@ -4223,6 +4211,10 @@
           {
             "areaId": "321084",
             "areaName": "高邮市"
+          },
+          {
+            "areaId": "321088",
+            "areaName": "江都市"
           }
         ]
       },
@@ -4277,10 +4269,6 @@
             "areaName": "高港区"
           },
           {
-            "areaId": "321204",
-            "areaName": "姜堰区"
-          },
-          {
             "areaId": "321281",
             "areaName": "兴化市"
           },
@@ -4291,6 +4279,10 @@
           {
             "areaId": "321283",
             "areaName": "泰兴市"
+          },
+          {
+            "areaId": "321284",
+            "areaName": "姜堰市"
           }
         ]
       },
@@ -4333,7 +4325,8 @@
       {
         "areaId": "339100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "330100",
         "areaName": "杭州市",
@@ -4513,10 +4506,6 @@
             "areaName": "全市"
           },
           {
-            "areaId": "330402",
-            "areaName": "南湖区"
-          },
-          {
             "areaId": "330411",
             "areaName": "秀洲区"
           },
@@ -4539,6 +4528,10 @@
           {
             "areaId": "330483",
             "areaName": "桐乡市"
+          },
+          {
+            "areaId": "330402",
+            "areaName": "南湖区"
           }
         ]
       },
@@ -4813,7 +4806,8 @@
       {
         "areaId": "349100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "340100",
         "areaName": "合肥市",
@@ -4849,14 +4843,6 @@
           {
             "areaId": "340123",
             "areaName": "肥西县"
-          },
-          {
-            "areaId": "340124",
-            "areaName": "庐江县"
-          },
-          {
-            "areaId": "340181",
-            "areaName": "巢湖市"
           }
         ]
       },
@@ -4873,20 +4859,16 @@
             "areaName": "镜湖区"
           },
           {
+            "areaId": "340208",
+            "areaName": "三山区"
+          },
+          {
             "areaId": "340203",
             "areaName": "弋江区"
           },
           {
             "areaId": "340207",
             "areaName": "鸠江区"
-          },
-          {
-            "areaId": "340208",
-            "areaName": "三山区"
-          },
-          {
-            "areaId": "340221",
-            "areaName": "芜湖县"
           },
           {
             "areaId": "340222",
@@ -4897,8 +4879,8 @@
             "areaName": "南陵县"
           },
           {
-            "areaId": "340225",
-            "areaName": "无为县"
+            "areaId": "340221",
+            "areaName": "芜湖县"
           }
         ]
       },
@@ -4983,6 +4965,10 @@
             "areaName": "全市"
           },
           {
+            "areaId": "340502",
+            "areaName": "金家庄区"
+          },
+          {
             "areaId": "340503",
             "areaName": "花山区"
           },
@@ -4991,20 +4977,8 @@
             "areaName": "雨山区"
           },
           {
-            "areaId": "340506",
-            "areaName": "博望区"
-          },
-          {
             "areaId": "340521",
             "areaName": "当涂县"
-          },
-          {
-            "areaId": "340522",
-            "areaName": "含山县"
-          },
-          {
-            "areaId": "340523",
-            "areaName": "和县"
           }
         ]
       },
@@ -5267,6 +5241,36 @@
         ]
       },
       {
+        "areaId": "341400",
+        "areaName": "巢湖市",
+        "counties": [
+          {
+            "areaId": "341492",
+            "areaName": "全市"
+          },
+          {
+            "areaId": "341402",
+            "areaName": "居巢区"
+          },
+          {
+            "areaId": "341421",
+            "areaName": "庐江县"
+          },
+          {
+            "areaId": "341422",
+            "areaName": "无为县"
+          },
+          {
+            "areaId": "341423",
+            "areaName": "含山县"
+          },
+          {
+            "areaId": "341424",
+            "areaName": "和县"
+          }
+        ]
+      },
+      {
         "areaId": "341500",
         "areaName": "六安市",
         "counties": [
@@ -5403,7 +5407,8 @@
       {
         "areaId": "359100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "350100",
         "areaName": "福州市",
@@ -5843,7 +5848,8 @@
       {
         "areaId": "369100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "360100",
         "areaName": "南昌市",
@@ -6363,7 +6369,8 @@
       {
         "areaId": "379100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "370100",
         "areaName": "济南市",
@@ -6377,7 +6384,7 @@
             "areaName": "历下区"
           },
           {
-            "areaId": "370103",
+            "areaId": "370101",
             "areaName": "市中区"
           },
           {
@@ -6411,14 +6418,6 @@
           {
             "areaId": "370181",
             "areaName": "章丘市"
-          },
-          {
-            "areaId": "370198",
-            "areaName": "高新区(历下区)"
-          },
-          {
-            "areaId": "370199",
-            "areaName": "高新区(历城区)"
           }
         ]
       },
@@ -6437,6 +6436,10 @@
           {
             "areaId": "370203",
             "areaName": "市北区"
+          },
+          {
+            "areaId": "370205",
+            "areaName": "四方区"
           },
           {
             "areaId": "370211",
@@ -6465,6 +6468,10 @@
           {
             "areaId": "370283",
             "areaName": "平度市"
+          },
+          {
+            "areaId": "370284",
+            "areaName": "胶南市"
           },
           {
             "areaId": "370285",
@@ -6873,7 +6880,7 @@
             "areaName": "罗庄区"
           },
           {
-            "areaId": "371312",
+            "areaId": "371301",
             "areaName": "河东区"
           },
           {
@@ -7103,7 +7110,8 @@
       {
         "areaId": "419100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "410100",
         "areaName": "郑州市",
@@ -7507,6 +7515,10 @@
             "areaName": "温县"
           },
           {
+            "areaId": "419001",
+            "areaName": "济源市"
+          },
+          {
             "areaId": "410882",
             "areaName": "沁阳市"
           },
@@ -7766,7 +7778,7 @@
           },
           {
             "areaId": "411502",
-            "areaName": "负忧"
+            "areaName": "浉河区"
           },
           {
             "areaId": "411503",
@@ -7905,16 +7917,6 @@
             "areaName": "新蔡县"
           }
         ]
-      },
-      {
-        "areaId": "419000",
-        "areaName": "省直辖县级行政区划",
-        "counties": [
-          {
-            "areaId": "419001",
-            "areaName": "济源市"
-          }
-        ]
       }
     ]
   },
@@ -7925,7 +7927,8 @@
       {
         "areaId": "429100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "420100",
         "areaName": "武汉市",
@@ -7985,22 +7988,6 @@
           {
             "areaId": "420117",
             "areaName": "新洲区"
-          },
-          {
-            "areaId": "420196",
-            "areaName": "经济技术开发区(蔡甸区)"
-          },
-          {
-            "areaId": "420197",
-            "areaName": "经济技术开发区(汉阳区)"
-          },
-          {
-            "areaId": "420198",
-            "areaName": "东湖高新区(洪山区)"
-          },
-          {
-            "areaId": "420199",
-            "areaName": "东湖高新区(江夏区)"
           }
         ]
       },
@@ -8144,7 +8131,7 @@
       },
       {
         "areaId": "420600",
-        "areaName": "襄阳市",
+        "areaName": "襄樊市",
         "counties": [
           {
             "areaId": "420692",
@@ -8160,7 +8147,7 @@
           },
           {
             "areaId": "420607",
-            "areaName": "襄州区"
+            "areaName": "襄阳区"
           },
           {
             "areaId": "420624",
@@ -8417,12 +8404,12 @@
             "areaName": "曾都区"
           },
           {
-            "areaId": "421321",
-            "areaName": "随县"
-          },
-          {
             "areaId": "421381",
             "areaName": "广水市"
+          },
+          {
+            "areaId": "421321",
+            "areaName": "随县"
           }
         ]
       },
@@ -8499,7 +8486,8 @@
       {
         "areaId": "439100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "430100",
         "areaName": "长沙市",
@@ -8529,12 +8517,12 @@
             "areaName": "雨花区"
           },
           {
-            "areaId": "430112",
-            "areaName": "望城区"
-          },
-          {
             "areaId": "430121",
             "areaName": "长沙县"
+          },
+          {
+            "areaId": "430122",
+            "areaName": "望城县"
           },
           {
             "areaId": "430124",
@@ -8953,10 +8941,6 @@
             "areaName": "全市"
           },
           {
-            "areaId": "431102",
-            "areaName": "零陵区"
-          },
-          {
             "areaId": "431103",
             "areaName": "冷水滩区"
           },
@@ -8995,6 +8979,10 @@
           {
             "areaId": "431129",
             "areaName": "江华瑶族自治县"
+          },
+          {
+            "areaId": "431102",
+            "areaName": "零陵区"
           }
         ]
       },
@@ -9137,7 +9125,8 @@
       {
         "areaId": "449100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "440100",
         "areaName": "广州市",
@@ -9145,6 +9134,10 @@
           {
             "areaId": "440193",
             "areaName": "全市"
+          },
+          {
+            "areaId": "440115",
+            "areaName": "南沙区"
           },
           {
             "areaId": "440103",
@@ -9163,6 +9156,10 @@
             "areaName": "天河区"
           },
           {
+            "areaId": "440116",
+            "areaName": "萝岗区"
+          },
+          {
             "areaId": "440111",
             "areaName": "白云区"
           },
@@ -9177,14 +9174,6 @@
           {
             "areaId": "440114",
             "areaName": "花都区"
-          },
-          {
-            "areaId": "440115",
-            "areaName": "南沙区"
-          },
-          {
-            "areaId": "440116",
-            "areaName": "萝岗区"
           },
           {
             "areaId": "440183",
@@ -9277,22 +9266,6 @@
           {
             "areaId": "440308",
             "areaName": "盐田区"
-          },
-          {
-            "areaId": "440396",
-            "areaName": "坪山新区(龙岗区)"
-          },
-          {
-            "areaId": "440397",
-            "areaName": "大鹏新区(龙岗区)"
-          },
-          {
-            "areaId": "440398",
-            "areaName": "光明新区(宝安区)"
-          },
-          {
-            "areaId": "440399",
-            "areaName": "龙华新区(宝安区)"
           }
         ]
       },
@@ -9717,10 +9690,6 @@
             "areaName": "清城区"
           },
           {
-            "areaId": "441803",
-            "areaName": "清新区"
-          },
-          {
             "areaId": "441821",
             "areaName": "佛冈县"
           },
@@ -9735,6 +9704,10 @@
           {
             "areaId": "441826",
             "areaName": "连南瑶族自治县"
+          },
+          {
+            "areaId": "441827",
+            "areaName": "清新县"
           },
           {
             "areaId": "441881",
@@ -10015,8 +9988,8 @@
             "areaName": "湘桥区"
           },
           {
-            "areaId": "445103",
-            "areaName": "潮安区"
+            "areaId": "445121",
+            "areaName": "潮安县"
           },
           {
             "areaId": "445122",
@@ -10037,8 +10010,8 @@
             "areaName": "榕城区"
           },
           {
-            "areaId": "445203",
-            "areaName": "揭东区"
+            "areaId": "445221",
+            "areaName": "揭东县"
           },
           {
             "areaId": "445222",
@@ -10093,7 +10066,8 @@
       {
         "areaId": "459100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "450100",
         "areaName": "南宁市",
@@ -10231,12 +10205,12 @@
             "areaName": "雁山区"
           },
           {
-            "areaId": "450312",
-            "areaName": "临桂区"
-          },
-          {
             "areaId": "450321",
             "areaName": "阳朔县"
+          },
+          {
+            "areaId": "450322",
+            "areaName": "临桂县"
           },
           {
             "areaId": "450323",
@@ -10272,7 +10246,7 @@
           },
           {
             "areaId": "450331",
-            "areaName": "荔浦县"
+            "areaName": "荔蒲县"
           },
           {
             "areaId": "450332",
@@ -10293,12 +10267,12 @@
             "areaName": "万秀区"
           },
           {
-            "areaId": "450405",
-            "areaName": "长洲区"
+            "areaId": "450404",
+            "areaName": "蝶山区"
           },
           {
-            "areaId": "450406",
-            "areaName": "龙圩区"
+            "areaId": "450405",
+            "areaName": "长洲区"
           },
           {
             "areaId": "450421",
@@ -10439,10 +10413,6 @@
             "areaName": "玉州区"
           },
           {
-            "areaId": "450903",
-            "areaName": "福绵区"
-          },
-          {
             "areaId": "450921",
             "areaName": "容县"
           },
@@ -10545,6 +10515,10 @@
           {
             "areaId": "451123",
             "areaName": "富川瑶族自治县"
+          },
+          {
+            "areaId": "451119",
+            "areaName": "平桂管理区"
           }
         ]
       },
@@ -10646,7 +10620,7 @@
           },
           {
             "areaId": "451402",
-            "areaName": "江州区"
+            "areaName": "江洲区"
           },
           {
             "areaId": "451421",
@@ -10683,7 +10657,8 @@
       {
         "areaId": "469100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "460100",
         "areaName": "海口市",
@@ -10769,32 +10744,9 @@
         ]
       },
       {
-        "areaId": "460300",
-        "areaName": "三沙市",
-        "counties": [
-          {
-            "areaId": "460395",
-            "areaName": "全市"
-          },
-          {
-            "areaId": "460321",
-            "areaName": "西沙群岛"
-          },
-          {
-            "areaId": "460322",
-            "areaName": "南沙群岛"
-          },
-          {
-            "areaId": "460323",
-            "areaName": "中沙群岛的岛礁及其海域"
-          }
-        ]
-      },
-      {
         "areaId": "469000",
         "areaName": "省直辖县级行政区划",
         "counties": [
-
           {
             "areaId": "469001",
             "areaName": "五指山市"
@@ -10913,11 +10865,11 @@
           },
           {
             "areaId": "500110",
-            "areaName": "綦江区"
+            "areaName": "万盛区"
           },
           {
             "areaId": "500111",
-            "areaName": "大足区"
+            "areaName": "双桥区"
           },
           {
             "areaId": "500112",
@@ -10936,20 +10888,8 @@
             "areaName": "长寿区"
           },
           {
-            "areaId": "500116",
-            "areaName": "江津区"
-          },
-          {
-            "areaId": "500117",
-            "areaName": "合川区"
-          },
-          {
-            "areaId": "500118",
-            "areaName": "永川区"
-          },
-          {
-            "areaId": "500119",
-            "areaName": "南川区"
+            "areaId": "500222",
+            "areaName": "綦江县"
           },
           {
             "areaId": "500223",
@@ -10958,6 +10898,10 @@
           {
             "areaId": "500224",
             "areaName": "铜梁县"
+          },
+          {
+            "areaId": "500225",
+            "areaName": "大足县"
           },
           {
             "areaId": "500226",
@@ -11026,6 +10970,22 @@
           {
             "areaId": "500243",
             "areaName": "彭水苗族土家族自治县"
+          },
+          {
+            "areaId": "500116",
+            "areaName": "江津区"
+          },
+          {
+            "areaId": "500117",
+            "areaName": "合川区"
+          },
+          {
+            "areaId": "500118",
+            "areaName": "永川区"
+          },
+          {
+            "areaId": "500119",
+            "areaName": "南川区"
           }
         ]
       }
@@ -11038,7 +10998,8 @@
       {
         "areaId": "519100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "510100",
         "areaName": "成都市",
@@ -11122,14 +11083,6 @@
           {
             "areaId": "510184",
             "areaName": "崇州市"
-          },
-          {
-            "areaId": "510198",
-            "areaName": "高新区(武侯区)"
-          },
-          {
-            "areaId": "510199",
-            "areaName": "高新西区(郫县)"
           }
         ]
       },
@@ -11324,8 +11277,8 @@
             "areaName": "全市"
           },
           {
-            "areaId": "510802",
-            "areaName": "利州区"
+            "areaId": "511002",
+            "areaName": "市中区"
           },
           {
             "areaId": "510811",
@@ -11350,6 +11303,10 @@
           {
             "areaId": "510824",
             "areaName": "苍溪县"
+          },
+          {
+            "areaId": "510802",
+            "areaName": "利州区"
           }
         ]
       },
@@ -11560,12 +11517,12 @@
             "areaName": "翠屏区"
           },
           {
-            "areaId": "511503",
-            "areaName": "南溪区"
-          },
-          {
             "areaId": "511521",
             "areaName": "宜宾县"
+          },
+          {
+            "areaId": "511522",
+            "areaName": "南溪县"
           },
           {
             "areaId": "511523",
@@ -11610,10 +11567,6 @@
             "areaName": "广安区"
           },
           {
-            "areaId": "511603",
-            "areaName": "前锋区"
-          },
-          {
             "areaId": "511621",
             "areaName": "岳池县"
           },
@@ -11644,8 +11597,8 @@
             "areaName": "通川区"
           },
           {
-            "areaId": "511703",
-            "areaName": "达川区"
+            "areaId": "511721",
+            "areaName": "达县"
           },
           {
             "areaId": "511722",
@@ -11682,8 +11635,8 @@
             "areaName": "雨城区"
           },
           {
-            "areaId": "511803",
-            "areaName": "名山区"
+            "areaId": "511821",
+            "areaName": "名山县"
           },
           {
             "areaId": "511822",
@@ -11722,10 +11675,6 @@
           {
             "areaId": "511902",
             "areaName": "巴州区"
-          },
-          {
-            "areaId": "511903",
-            "areaName": "恩阳区"
           },
           {
             "areaId": "511921",
@@ -11998,7 +11947,8 @@
       {
         "areaId": "529100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "520100",
         "areaName": "贵阳市",
@@ -12028,8 +11978,8 @@
             "areaName": "白云区"
           },
           {
-            "areaId": "520115",
-            "areaName": "观山湖区"
+            "areaId": "520114",
+            "areaName": "小河区"
           },
           {
             "areaId": "520121",
@@ -12177,93 +12127,93 @@
       },
       {
         "areaId": "520500",
-        "areaName": "毕节市",
+        "areaName": "毕节地区",
         "counties": [
           {
             "areaId": "520592",
             "areaName": "全市"
           },
           {
-            "areaId": "520502",
-            "areaName": "七星关区"
+            "areaId": "522401",
+            "areaName": "毕节市"
           },
           {
-            "areaId": "520521",
+            "areaId": "522422",
             "areaName": "大方县"
           },
           {
-            "areaId": "520522",
+            "areaId": "522423",
             "areaName": "黔西县"
           },
           {
-            "areaId": "520523",
+            "areaId": "522424",
             "areaName": "金沙县"
           },
           {
-            "areaId": "520524",
+            "areaId": "522425",
             "areaName": "织金县"
           },
           {
-            "areaId": "520525",
+            "areaId": "522426",
             "areaName": "纳雍县"
           },
           {
-            "areaId": "520526",
+            "areaId": "522427",
             "areaName": "威宁彝族回族苗族自治县"
           },
           {
-            "areaId": "520527",
+            "areaId": "522428",
             "areaName": "赫章县"
           }
         ]
       },
       {
         "areaId": "520600",
-        "areaName": "铜仁市",
+        "areaName": "铜仁地区",
         "counties": [
           {
             "areaId": "520692",
             "areaName": "全市"
           },
           {
-            "areaId": "520602",
-            "areaName": "碧江区"
+            "areaId": "522201",
+            "areaName": "铜仁市"
           },
           {
-            "areaId": "520603",
-            "areaName": "万山区"
-          },
-          {
-            "areaId": "520621",
+            "areaId": "522222",
             "areaName": "江口县"
           },
           {
-            "areaId": "520622",
+            "areaId": "522223",
             "areaName": "玉屏侗族自治县"
           },
           {
-            "areaId": "520623",
+            "areaId": "522224",
             "areaName": "石阡县"
           },
           {
-            "areaId": "520624",
+            "areaId": "522225",
             "areaName": "思南县"
           },
           {
-            "areaId": "520625",
+            "areaId": "522226",
             "areaName": "印江土家族苗族自治县"
           },
           {
-            "areaId": "520626",
+            "areaId": "522227",
             "areaName": "德江县"
           },
           {
-            "areaId": "520627",
+            "areaId": "522228",
             "areaName": "沿河土家族自治县"
           },
           {
-            "areaId": "520628",
+            "areaId": "522229",
             "areaName": "松桃苗族自治县"
+          },
+          {
+            "areaId": "522230",
+            "areaName": "万山特区"
           }
         ]
       },
@@ -12450,7 +12400,8 @@
       {
         "areaId": "539100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "530100",
         "areaName": "昆明市",
@@ -12480,8 +12431,8 @@
             "areaName": "东川区"
           },
           {
-            "areaId": "530114",
-            "areaName": "呈贡区"
+            "areaId": "530121",
+            "areaName": "呈贡县"
           },
           {
             "areaId": "530122",
@@ -12886,10 +12837,6 @@
             "areaName": "蒙自市"
           },
           {
-            "areaId": "532504",
-            "areaName": "弥勒市"
-          },
-          {
             "areaId": "532523",
             "areaName": "屏边苗族自治县"
           },
@@ -12900,6 +12847,10 @@
           {
             "areaId": "532525",
             "areaName": "石屏县"
+          },
+          {
+            "areaId": "532526",
+            "areaName": "弥勒县"
           },
           {
             "areaId": "532527",
@@ -12936,8 +12887,8 @@
             "areaName": "全市"
           },
           {
-            "areaId": "532601",
-            "areaName": "文山市"
+            "areaId": "532621",
+            "areaName": "文山县"
           },
           {
             "areaId": "532622",
@@ -13136,7 +13087,8 @@
       {
         "areaId": "549100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "540100",
         "areaName": "拉萨市",
@@ -13420,10 +13372,6 @@
           {
             "areaId": "542430",
             "areaName": "尼玛县"
-          },
-          {
-            "areaId": "542431",
-            "areaName": "双湖县"
           }
         ]
       },
@@ -13512,7 +13460,8 @@
       {
         "areaId": "619100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "610100",
         "areaName": "西安市",
@@ -14050,7 +13999,8 @@
       {
         "areaId": "629100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "620100",
         "areaName": "兰州市",
@@ -14188,10 +14138,6 @@
             "areaName": "秦州区"
           },
           {
-            "areaId": "620503",
-            "areaName": "麦积区"
-          },
-          {
             "areaId": "620521",
             "areaName": "清水县"
           },
@@ -14210,6 +14156,10 @@
           {
             "areaId": "620525",
             "areaName": "张家川回族自治县"
+          },
+          {
+            "areaId": "620503",
+            "areaName": "麦积区"
           }
         ]
       },
@@ -14328,10 +14278,6 @@
             "areaName": "金塔县"
           },
           {
-            "areaId": "620922",
-            "areaName": "瓜州县"
-          },
-          {
             "areaId": "620923",
             "areaName": "肃北蒙古族自治县"
           },
@@ -14346,6 +14292,10 @@
           {
             "areaId": "620982",
             "areaName": "敦煌市"
+          },
+          {
+            "areaId": "620922",
+            "areaName": "瓜州县"
           }
         ]
       },
@@ -14568,7 +14518,8 @@
       {
         "areaId": "639100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "630100",
         "areaName": "西宁市",
@@ -14609,34 +14560,34 @@
       },
       {
         "areaId": "630200",
-        "areaName": "海东市",
+        "areaName": "海东地区",
         "counties": [
           {
             "areaId": "630292",
             "areaName": "全市"
           },
           {
-            "areaId": "630202",
-            "areaName": "乐都区"
-          },
-          {
-            "areaId": "630221",
+            "areaId": "632121",
             "areaName": "平安县"
           },
           {
-            "areaId": "630222",
+            "areaId": "632122",
             "areaName": "民和回族土族自治县"
           },
           {
-            "areaId": "630223",
+            "areaId": "632123",
+            "areaName": "乐都县"
+          },
+          {
+            "areaId": "632126",
             "areaName": "互助土族自治县"
           },
           {
-            "areaId": "630224",
+            "areaId": "632127",
             "areaName": "化隆回族自治县"
           },
           {
-            "areaId": "630225",
+            "areaId": "632128",
             "areaName": "循化撒拉族自治县"
           }
         ]
@@ -14766,8 +14717,8 @@
             "areaName": "全市"
           },
           {
-            "areaId": "632701",
-            "areaName": "玉树市"
+            "areaId": "632721",
+            "areaName": "玉树县"
           },
           {
             "areaId": "632722",
@@ -14830,7 +14781,8 @@
       {
         "areaId": "649100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "640100",
         "areaName": "银川市",
@@ -14900,10 +14852,6 @@
             "areaName": "利通区"
           },
           {
-            "areaId": "640303",
-            "areaName": "红寺堡区"
-          },
-          {
             "areaId": "640323",
             "areaName": "盐池县"
           },
@@ -14914,6 +14862,10 @@
           {
             "areaId": "640381",
             "areaName": "青铜峡市"
+          },
+          {
+            "areaId": "640303",
+            "areaName": "红寺堡区"
           }
         ]
       },
@@ -14978,7 +14930,8 @@
       {
         "areaId": "659100",
         "areaName": "全省",
-        "counties": []},
+        "counties": []
+      },
       {
         "areaId": "650100",
         "areaName": "乌鲁木齐市",
@@ -15140,10 +15093,6 @@
           {
             "areaId": "652701",
             "areaName": "博乐市"
-          },
-          {
-            "areaId": "652702",
-            "areaName": "阿拉山口市"
           },
           {
             "areaId": "652722",
@@ -15504,10 +15453,6 @@
         "areaName": "自治区直辖县级行政区划",
         "counties": [
           {
-            "areaId": "659092",
-            "areaName": "全市"
-          },
-          {
             "areaId": "659001",
             "areaName": "石河子市"
           },
@@ -15526,243 +15471,243 @@
         ]
       }
     ]
-  },
-  {
-    "areaId": "700000",
-    "areaName": "其他",
-    "cities": [
-      {
-        "areaId": "800000",
-        "areaName": "台湾",
-        "counties": [
-          {
-            "areaId": "800001",
-            "areaName": "台北市"
-          },
-          {
-            "areaId": "800002",
-            "areaName": "高雄市"
-          },
-          {
-            "areaId": "800003",
-            "areaName": "台北县"
-          },
-          {
-            "areaId": "800004",
-            "areaName": "桃园县"
-          },
-          {
-            "areaId": "800005",
-            "areaName": "新竹县"
-          },
-          {
-            "areaId": "800006",
-            "areaName": "苗栗县"
-          },
-          {
-            "areaId": "800007",
-            "areaName": "台中县"
-          },
-          {
-            "areaId": "800008",
-            "areaName": "彰化县"
-          },
-          {
-            "areaId": "800009",
-            "areaName": "南投县"
-          },
-          {
-            "areaId": "800010",
-            "areaName": "云林县"
-          },
-          {
-            "areaId": "800011",
-            "areaName": "嘉义县"
-          },
-          {
-            "areaId": "800012",
-            "areaName": "台南县"
-          },
-          {
-            "areaId": "800013",
-            "areaName": "高雄县"
-          },
-          {
-            "areaId": "800014",
-            "areaName": "屏东县"
-          },
-          {
-            "areaId": "800015",
-            "areaName": "宜兰县"
-          },
-          {
-            "areaId": "800016",
-            "areaName": "花莲县"
-          },
-          {
-            "areaId": "800017",
-            "areaName": "台东县"
-          },
-          {
-            "areaId": "800018",
-            "areaName": "澎湖县"
-          },
-          {
-            "areaId": "800019",
-            "areaName": "基隆市"
-          },
-          {
-            "areaId": "800020",
-            "areaName": "新竹市"
-          },
-          {
-            "areaId": "800021",
-            "areaName": "台中市"
-          },
-          {
-            "areaId": "800022",
-            "areaName": "嘉义市"
-          },
-          {
-            "areaId": "800023",
-            "areaName": "台南市"
-          },
-          {
-            "areaId": "800024",
-            "areaName": "其他"
-          }
-        ]
-      },
-      {
-        "areaId": "810000",
-        "areaName": "香港",
-        "counties": [
-          {
-            "areaId": "810001",
-            "areaName": "中西区"
-          },
-          {
-            "areaId": "810002",
-            "areaName": "湾仔区"
-          },
-          {
-            "areaId": "810003",
-            "areaName": "东区"
-          },
-          {
-            "areaId": "810004",
-            "areaName": "南区"
-          },
-          {
-            "areaId": "810005",
-            "areaName": "油尖旺区"
-          },
-          {
-            "areaId": "810006",
-            "areaName": "深水埗区"
-          },
-          {
-            "areaId": "810007",
-            "areaName": "九龙城区"
-          },
-          {
-            "areaId": "810008",
-            "areaName": "黄大仙区"
-          },
-          {
-            "areaId": "810009",
-            "areaName": "观塘区"
-          },
-          {
-            "areaId": "810010",
-            "areaName": "荃湾区"
-          },
-          {
-            "areaId": "810011",
-            "areaName": "屯门区"
-          },
-          {
-            "areaId": "810012",
-            "areaName": "元朗区"
-          },
-          {
-            "areaId": "810013",
-            "areaName": "北区"
-          },
-          {
-            "areaId": "810014",
-            "areaName": "大埔区"
-          },
-          {
-            "areaId": "810015",
-            "areaName": "西贡区"
-          },
-          {
-            "areaId": "810016",
-            "areaName": "沙田区"
-          },
-          {
-            "areaId": "810017",
-            "areaName": "葵青区"
-          },
-          {
-            "areaId": "810018",
-            "areaName": "离岛区"
-          }
-        ]
-      },
-      {
-        "areaId": "820000",
-        "areaName": "澳门",
-        "counties": [
-          {
-            "areaId": "820001",
-            "areaName": "花地玛堂区"
-          },
-          {
-            "areaId": "820002",
-            "areaName": "花王堂区"
-          },
-          {
-            "areaId": "820003",
-            "areaName": "望德堂区"
-          },
-          {
-            "areaId": "820004",
-            "areaName": "大堂区"
-          },
-          {
-            "areaId": "820005",
-            "areaName": "风顺堂区"
-          },
-          {
-            "areaId": "820006",
-            "areaName": "嘉模堂区"
-          },
-          {
-            "areaId": "820007",
-            "areaName": "路凼填海区"
-          },
-          {
-            "areaId": "820008",
-            "areaName": "圣方济各堂区"
-          }
-        ]
-      },
-      {
-        "areaId": "830000",
-        "areaName": "海外",
-        "counties": [
-          {
-            "areaId": "830001",
-            "areaName": "海外"
-          },
-          {
-            "areaId": "830002",
-            "areaName": "钓鱼岛是中国的"
-          }
-        ]
-      }
-    ]
   }
+  //, {
+  //    "areaId": "700000",
+  //    "areaName": "其他",
+  //    "cities": [
+  //      {
+  //        "areaId": "800000",
+  //        "areaName": "台湾",
+  //        "counties": [
+  //          {
+  //            "areaId": "800001",
+  //            "areaName": "台北市"
+  //          },
+  //          {
+  //            "areaId": "800002",
+  //            "areaName": "高雄市"
+  //          },
+  //          {
+  //            "areaId": "800003",
+  //            "areaName": "台北县"
+  //          },
+  //          {
+  //            "areaId": "800004",
+  //            "areaName": "桃园县"
+  //          },
+  //          {
+  //            "areaId": "800005",
+  //            "areaName": "新竹县"
+  //          },
+  //          {
+  //            "areaId": "800006",
+  //            "areaName": "苗栗县"
+  //          },
+  //          {
+  //            "areaId": "800007",
+  //            "areaName": "台中县"
+  //          },
+  //          {
+  //            "areaId": "800008",
+  //            "areaName": "彰化县"
+  //          },
+  //          {
+  //            "areaId": "800009",
+  //            "areaName": "南投县"
+  //          },
+  //          {
+  //            "areaId": "800010",
+  //            "areaName": "云林县"
+  //          },
+  //          {
+  //            "areaId": "800011",
+  //            "areaName": "嘉义县"
+  //          },
+  //          {
+  //            "areaId": "800012",
+  //            "areaName": "台南县"
+  //          },
+  //          {
+  //            "areaId": "800013",
+  //            "areaName": "高雄县"
+  //          },
+  //          {
+  //            "areaId": "800014",
+  //            "areaName": "屏东县"
+  //          },
+  //          {
+  //            "areaId": "800015",
+  //            "areaName": "宜兰县"
+  //          },
+  //          {
+  //            "areaId": "800016",
+  //            "areaName": "花莲县"
+  //          },
+  //          {
+  //            "areaId": "800017",
+  //            "areaName": "台东县"
+  //          },
+  //          {
+  //            "areaId": "800018",
+  //            "areaName": "澎湖县"
+  //          },
+  //          {
+  //            "areaId": "800019",
+  //            "areaName": "基隆市"
+  //          },
+  //          {
+  //            "areaId": "800020",
+  //            "areaName": "新竹市"
+  //          },
+  //          {
+  //            "areaId": "800021",
+  //            "areaName": "台中市"
+  //          },
+  //          {
+  //            "areaId": "800022",
+  //            "areaName": "嘉义市"
+  //          },
+  //          {
+  //            "areaId": "800023",
+  //            "areaName": "台南市"
+  //          },
+  //          {
+  //            "areaId": "800024",
+  //            "areaName": "其他"
+  //          }
+  //        ]
+  //      },
+  //      {
+  //        "areaId": "810000",
+  //        "areaName": "香港",
+  //        "counties": [
+  //          {
+  //            "areaId": "810001",
+  //            "areaName": "中西区"
+  //          },
+  //          {
+  //            "areaId": "810002",
+  //            "areaName": "湾仔区"
+  //          },
+  //          {
+  //            "areaId": "810003",
+  //            "areaName": "东区"
+  //          },
+  //          {
+  //            "areaId": "810004",
+  //            "areaName": "南区"
+  //          },
+  //          {
+  //            "areaId": "810005",
+  //            "areaName": "油尖旺区"
+  //          },
+  //          {
+  //            "areaId": "810006",
+  //            "areaName": "深水埗区"
+  //          },
+  //          {
+  //            "areaId": "810007",
+  //            "areaName": "九龙城区"
+  //          },
+  //          {
+  //            "areaId": "810008",
+  //            "areaName": "黄大仙区"
+  //          },
+  //          {
+  //            "areaId": "810009",
+  //            "areaName": "观塘区"
+  //          },
+  //          {
+  //            "areaId": "810010",
+  //            "areaName": "荃湾区"
+  //          },
+  //          {
+  //            "areaId": "810011",
+  //            "areaName": "屯门区"
+  //          },
+  //          {
+  //            "areaId": "810012",
+  //            "areaName": "元朗区"
+  //          },
+  //          {
+  //            "areaId": "810013",
+  //            "areaName": "北区"
+  //          },
+  //          {
+  //            "areaId": "810014",
+  //            "areaName": "大埔区"
+  //          },
+  //          {
+  //            "areaId": "810015",
+  //            "areaName": "西贡区"
+  //          },
+  //          {
+  //            "areaId": "810016",
+  //            "areaName": "沙田区"
+  //          },
+  //          {
+  //            "areaId": "810017",
+  //            "areaName": "葵青区"
+  //          },
+  //          {
+  //            "areaId": "810018",
+  //            "areaName": "离岛区"
+  //          }
+  //        ]
+  //      },
+  //      {
+  //        "areaId": "820000",
+  //        "areaName": "澳门",
+  //        "counties": [
+  //          {
+  //            "areaId": "820001",
+  //            "areaName": "花地玛堂区"
+  //          },
+  //          {
+  //            "areaId": "820002",
+  //            "areaName": "花王堂区"
+  //          },
+  //          {
+  //            "areaId": "820003",
+  //            "areaName": "望德堂区"
+  //          },
+  //          {
+  //            "areaId": "820004",
+  //            "areaName": "大堂区"
+  //          },
+  //          {
+  //            "areaId": "820005",
+  //            "areaName": "风顺堂区"
+  //          },
+  //          {
+  //            "areaId": "820006",
+  //            "areaName": "嘉模堂区"
+  //          },
+  //          {
+  //            "areaId": "820007",
+  //            "areaName": "路凼填海区"
+  //          },
+  //          {
+  //            "areaId": "820008",
+  //            "areaName": "圣方济各堂区"
+  //          }
+  //        ]
+  //      },
+  //      {
+  //        "areaId": "830000",
+  //        "areaName": "海外",
+  //        "counties": [
+  //          {
+  //            "areaId": "830001",
+  //            "areaName": "海外"
+  //          },
+  //          {
+  //            "areaId": "830002",
+  //            "areaName": "钓鱼岛是中国的"
+  //          }
+  //        ]
+  //      }
+  //    ]
+  //  }
 ]

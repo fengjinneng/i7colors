@@ -2,11 +2,8 @@ package com.company.qcy.fragment.xiaoxi;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +20,6 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
-import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
@@ -32,9 +28,7 @@ import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.adapter.message.NormalMessageAdapter;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.message.MessageBean;
-import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.message.MessageDetailActivity;
-import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -43,7 +37,7 @@ import com.lzy.okgo.request.GetRequest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaojiaxiaoxiFragment extends BaseFragment {
+public class SellerxiaoxiFragment extends BaseFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -58,14 +52,14 @@ public class BaojiaxiaoxiFragment extends BaseFragment {
     private NormalMessageAdapter adapter;
     private List<MessageBean> datas;
 
-    public BaojiaxiaoxiFragment() {
+    public SellerxiaoxiFragment() {
     }
 
     private SwipeRefreshLayout swipeRefreshLayout;
     private SwipeRefreshLayout.OnRefreshListener refreshListener;
 
-    public static BaojiaxiaoxiFragment newInstance(String param1, String param2) {
-        BaojiaxiaoxiFragment fragment = new BaojiaxiaoxiFragment();
+    public static SellerxiaoxiFragment newInstance(String param1, String param2) {
+        SellerxiaoxiFragment fragment = new SellerxiaoxiFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -115,9 +109,11 @@ public class BaojiaxiaoxiFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 MessageBean messageBean = (MessageBean) adapter.getData().get(position);
+                messageBean.setIsRead("1");
+                adapter.notifyItemChanged(position);
                 Intent intent = new Intent(getContext(), MessageDetailActivity.class);
                 intent.putExtra("id", messageBean.getId());
-                intent.putExtra("isfrom", "baojia");
+                intent.putExtra("workType", messageBean.getWorkType());
                 ActivityUtils.startActivity(intent);
             }
         });
@@ -174,6 +170,10 @@ public class BaojiaxiaoxiFragment extends BaseFragment {
                 refreshListener.onRefresh();
                 break;
 
+            case com.company.qcy.bean.eventbus.MessageBean.JPush.NEEDRESETSELLERMESSAGE:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
         }
     }
 
@@ -182,7 +182,7 @@ public class BaojiaxiaoxiFragment extends BaseFragment {
     private void addData() {
 
         pageNo++;
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETBUYERANDSELLERMESSAGEINFORMLIST)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
@@ -195,11 +195,11 @@ public class BaojiaxiaoxiFragment extends BaseFragment {
             @Override
             public void onSuccess(Response<String> response) {
                 swipeRefreshLayout.setRefreshing(false);
-                LogUtils.v("GETENQUIRYINFORMLIST", response.body());
+                LogUtils.v("GETSELLERMESSAGEINFORMLIST", response.body());
                 try {
                     if (response.code() == 200) {
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
-//                        String msg = jsonObject.getString("msg");
+                        String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONArray data = jsonObject.getJSONArray("data");
                             List<MessageBean> messageBeans = JSONObject.parseArray(data.toJSONString(), MessageBean.class);
@@ -213,19 +213,19 @@ public class BaojiaxiaoxiFragment extends BaseFragment {
                                 adapter.setNewData(datas);
                                 isReflash = false;
                                 adapter.loadMoreComplete();
+                                adapter.disableLoadMoreIfNotFullPage();
                                 return;
                             }
                             adapter.addData(messageBeans);
                             adapter.setNewData(datas);
                             adapter.loadMoreComplete();
-                            adapter.disableLoadMoreIfNotFullPage();
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
                             SignAndTokenUtil.getSign(getActivity(), request, this);
                             return;
                         }
-//                        ToastUtils.showShort(msg);
+                        ToastUtils.showShort(msg);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

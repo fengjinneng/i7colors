@@ -84,8 +84,6 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
             @Override
             public void onLoadMoreRequested() {
                 addData();
-
-
             }
         }, recyclerView);
 
@@ -102,6 +100,9 @@ public class DaichulibaojiaActivity extends BaseActivity implements View.OnClick
             }
         });
         adapter.setEmptyView(getLayoutInflater().inflate(R.layout.empty_layout,null));
+
+        mActivityDaichulibaojiaTitle.setText("买家已接受");
+        mActivityDdaichulibaojiaStatus.setVisibility(View.GONE);
     }
 
 

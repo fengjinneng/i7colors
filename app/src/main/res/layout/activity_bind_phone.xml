@@ -41,13 +41,13 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/x100"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/background_wenbenshurubiankuang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_bind_phone_invitecode">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout22">
 
         <EditText
             android:id="@+id/activity_bind_phone_verifycode"
@@ -75,8 +75,8 @@
             android:paddingLeft="@dimen/x20"
             android:paddingRight="@dimen/x20"
             android:text="发送验证码"
-            android:textSize="@dimen/x30"
             android:textColor="@color/chunhongse"
+            android:textSize="@dimen/x30"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -134,65 +134,14 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/x98"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:background="@mipmap/anniujianbian_round"
         android:text="确认"
-        android:textSize="@dimen/x30"
         android:textColor="@color/baise"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_bind_phone_companyName" />
-
-    <EditText
-        android:id="@+id/activity_bind_phone_invitecode"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/x100"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_wenbenshurubiankuang"
-        android:gravity="center_vertical"
-        android:hint="邀请码（选填）"
-        android:inputType="textPersonName"
-        android:maxLength="11"
-        android:paddingLeft="8dp"
-        android:textSize="@dimen/x30"
-        app:layout_constraintEnd_toEndOf="@+id/constraintLayout22"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout22"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout22" />
-
-    <EditText
-        android:id="@+id/activity_bind_phone_companyName"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/x100"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/background_wenbenshurubiankuang"
-        android:hint="请填写公司名称"
-        android:inputType="textPersonName"
-        android:paddingLeft="8dp"
         android:textSize="@dimen/x30"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_bind_phone_zhiwei" />
-
-    <TextView
-        android:id="@+id/activity_bind_phone_zhiwei"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/x100"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/background_wenbenshurubiankuang"
-        android:drawableRight="@mipmap/xialajiantou"
-        android:drawablePadding="@dimen/x20"
-        android:gravity="center"
-        android:minWidth="@dimen/x200"
-        android:paddingLeft="@dimen/x20"
-        android:paddingRight="@dimen/x20"
-        android:textSize="@dimen/x30"
-        android:text="请选择职位"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout25" />
 
@@ -214,26 +163,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/constraintLayout25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/constraintLayout25"
-        app:srcCompat="@mipmap/bitiantupian" />
-
-    <ImageView
-        android:id="@+id/imageView51"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_bind_phone_companyName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/activity_bind_phone_companyName"
-        app:srcCompat="@mipmap/bitiantupian" />
-
-    <ImageView
-        android:id="@+id/imageView52"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_bind_phone_zhiwei"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/activity_bind_phone_zhiwei"
         app:srcCompat="@mipmap/bitiantupian" />
 
 

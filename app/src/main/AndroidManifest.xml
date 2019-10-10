@@ -259,9 +259,7 @@
             android:name=".huodong.caigoulianmeng.activity.AddDinghuoCustomProductActivity"
             android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity android:name=".huodong.toupiao.activity.ToupiaoListActivity" />
-        <activity android:name=".huodong.caigoulianmeng2.activity.CaigoulianmengActivity" >
-
-        </activity>
+        <activity android:name=".huodong.caigoulianmeng2.activity.CaigoulianmengActivity" />
         <activity android:name=".huodong.toupiao.activity.ToupiaoDetailActivity">
 
             <!-- Schame -->
@@ -337,7 +335,16 @@
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
         </activity>
-        <activity android:name=".ShareDispatchActivity"></activity>
+        <activity android:name=".ShareDispatchActivity" />
+        <activity android:name=".ui.activity.zhuji.ZhujiListActivity" />
+        <activity android:name=".ui.activity.zhuji.PubulishZhujiDiyActivity" />
+        <activity android:name=".ui.activity.zhuji.ZhujiDetailActivity" />
+        <activity android:name=".ui.activity.zhuji.TijiaofanganActivity" />
+        <activity android:name=".ui.activity.zhuji.WodeZhujiListActivity" />
+        <activity android:name=".ui.activity.zhuji.WodeJiejuefanganListActivity" />
+        <activity android:name=".ui.activity.zhuji.WodeZhujiDingzhiDetailActivity" />
+        <activity android:name=".ui.activity.zhuji.WodeFangAnDetailActivity" />
+        <activity android:name=".ui.activity.user.RegisterInfoActivity"></activity>
     </application>
 
 </manifest>

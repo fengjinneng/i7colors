@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.zhuji.TijiaofanganActivity">
+
+    <include
+        android:id="@+id/include50"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:background="@drawable/biankuang_canyubaojia_tishi"
+        android:textSize="@dimen/x30"
+        android:textColor="@color/chunhongse"
+        android:id="@+id/textView400"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:padding="@dimen/x10"
+        android:text="【提醒】提交定制方案后将会第一时间通过短信的方式告知采购需方！"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include50" />
+
+    <TextView
+        android:id="@+id/textView401"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="@dimen/x10"
+        android:text="手机号:"
+        android:textSize="@dimen/x28"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_tijiaofangan_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_phone" />
+
+    <EditText
+        android:id="@+id/activity_tijiaofangan_phone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/x50"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_shuruwenbenkuang"
+        android:hint="请输入联系人手机号"
+        android:padding="@dimen/x10"
+        android:textSize="@dimen/x28"
+        android:inputType="number"
+        android:maxLength="11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView403"
+        app:layout_constraintTop_toBottomOf="@+id/textView400" />
+
+    <TextView
+        android:id="@+id/textView403"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:drawableLeft="@mipmap/bitiantupian"
+        android:drawablePadding="@dimen/x10"
+        android:maxWidth="@dimen/x180"
+        android:text="供应产品名称:"
+        android:textSize="@dimen/x28"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_tijiaofangan_productname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_productname" />
+
+    <EditText
+        android:id="@+id/activity_tijiaofangan_productname"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x50"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_shuruwenbenkuang"
+        android:hint="请输入供应商产品全称"
+        android:padding="@dimen/x10"
+        android:textSize="@dimen/x28"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/activity_tijiaofangan_phone"
+        app:layout_constraintTop_toBottomOf="@+id/activity_tijiaofangan_phone" />
+
+    <TextView
+        android:id="@+id/textView410"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="需方提供样品:"
+        android:textSize="@dimen/x28"
+        android:maxWidth="@dimen/x180"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_tijiaofangan_num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_num" />
+
+    <EditText
+        android:id="@+id/activity_tijiaofangan_num"
+        android:layout_width="@dimen/x200"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x50"
+        android:background="@drawable/background_shuruwenbenkuang"
+        android:hint="输入数量"
+        android:maxLength="10"
+        android:gravity="center"
+        android:minWidth="@dimen/x140"
+        android:paddingTop="@dimen/x10"
+        android:paddingBottom="@dimen/x10"
+        android:textSize="@dimen/x28"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toStartOf="@+id/activity_tijiaofangan_productname"
+        app:layout_constraintTop_toBottomOf="@+id/activity_tijiaofangan_productname" />
+
+    <TextView
+        android:id="@+id/textView414"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="产品应用工艺描述:"
+        android:textSize="@dimen/x28"
+        android:maxWidth="@dimen/x180"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_miaoshu" />
+
+    <EditText
+        android:id="@+id/activity_tijiaofangan_miaoshu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x50"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_shuruwenbenkuang"
+        android:gravity="start"
+        android:hint="请输入描述内容，50字内"
+        android:maxLength="50"
+        android:minLines="4"
+        android:padding="@dimen/x10"
+        android:textSize="@dimen/x28"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/activity_tijiaofangan_num"
+        app:layout_constraintTop_toBottomOf="@+id/activity_tijiaofangan_num" />
+
+    <TextView
+        android:id="@+id/activity_tijiaofangan_num_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="KG"
+        android:textSize="@dimen/x28"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_tijiaofangan_num"
+        app:layout_constraintStart_toEndOf="@+id/activity_tijiaofangan_num"
+        app:layout_constraintTop_toTopOf="@+id/activity_tijiaofangan_num" />
+
+    <Button
+        android:id="@+id/activity_tijiaofangan_submit"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:text="提交方案"
+        android:textSize="@dimen/x30"
+        android:textColor="@color/baise"
+        android:background="@mipmap/bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

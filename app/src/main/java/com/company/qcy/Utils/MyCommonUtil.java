@@ -14,6 +14,7 @@ import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.format.DateUtils;
 import android.text.style.ImageSpan;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,11 +24,15 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
+import com.blankj.utilcode.util.TimeUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.ui.activity.pengyouquan.ImagePagerActivity;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MyCommonUtil {
 
@@ -42,6 +47,49 @@ public class MyCommonUtil {
                 GlideUtils.loadCircleImage(mContext, imgUrl, target);
             } else {
                 GlideUtils.loadCircleImage(mContext, ServerInfo.IMAGE + imgUrl, target);
+            }
+        }
+    }
+
+
+    //几天几时几分几秒的时间设置
+    public static void setDaojishiDate(String endTimeStamp,
+                                       TextView qian,TextView qianUnit,
+                                       TextView hou,TextView houUnit) {
+        int ss = 1000;
+        int mi = ss * 60;
+        int hh = mi * 60;
+        int dd = hh * 24;
+        long ms = Long.parseLong(endTimeStamp)-System.currentTimeMillis();
+        long day = ms / dd;
+        long hour = (ms - day * dd) / hh;
+        long minute = (ms - day * dd - hour * hh) / mi;
+        long second = (ms - day * dd - hour * hh - minute * mi) / ss;
+        if (day > 0) {
+            qian.setText(day + "");
+            qianUnit.setText("天");
+            hou.setText(hour + "");
+            houUnit.setText("时");
+        } else {
+            if (hour > 0) {
+                qian.setText(hour + "");
+                qianUnit.setText("时");
+                hou.setText(minute + "");
+                houUnit.setText("分");
+
+            } else {
+                if(minute>0){
+                    qian.setText(minute + "");
+                    qianUnit.setText("分");
+                    hou.setText(second + "");
+                    houUnit.setText("秒");
+                }else {
+                    qian.setText("0");
+                    qianUnit.setText("分");
+                    hou.setText(second + "");
+                    houUnit.setText("秒");
+
+                }
             }
         }
     }

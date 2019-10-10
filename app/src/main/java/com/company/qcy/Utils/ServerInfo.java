@@ -19,4 +19,5 @@ public class ServerInfo {
     public static final String SERVER = "https://i7app.i7colors.com/app-web/";
     public static final String IMAGE ="http://static.i7colors.com";
 
+
 }

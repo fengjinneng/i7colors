@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.zhuji.WodeZhujiListActivity">
+
+    <include
+        android:id="@+id/include52"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.flyco.tablayout.SlidingTabLayout
+        android:id="@+id/activity_wode_zhuji_list_slidingTabLayout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x70"
+        android:background="@color/baise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include52"
+        app:tl_textSelectColor="@color/chunhongse"
+        app:tl_tab_space_equal="true"
+        app:tl_textUnselectColor="@color/putongwenben"
+        app:tl_underline_color="@color/chunhongse" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/activity_wode_zhuji_list_viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_wode_zhuji_list_slidingTabLayout" />
+
+</android.support.constraint.ConstraintLayout>

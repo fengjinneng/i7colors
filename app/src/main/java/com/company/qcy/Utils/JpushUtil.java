@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.base.WebActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouxiangqingActivity;
@@ -12,13 +14,15 @@ import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ZixunxiangqingActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
+import com.company.qcy.ui.activity.zhuji.WodeFangAnDetailActivity;
+import com.company.qcy.ui.activity.zhuji.WodeZhujiDingzhiDetailActivity;
 
 import java.util.HashMap;
 
 public class JpushUtil {
 
 
-    public static void jumpActivity(HashMap<String, String> map, Context context){
+    public static void jumpActivity(HashMap<String, String> map, Context context) {
         if (StringUtils.equals("html", map.get("workType"))) {
             Intent htmlIntent = new Intent(context, WebActivity.class);
             htmlIntent.putExtra("webUrl", map.get("url"));
@@ -71,7 +75,7 @@ public class JpushUtil {
                         ActivityUtils.startActivity(zixunIntent);
                     } else {
                         Intent zixunIntent = new Intent(context, ZixunxiangqingActivity.class);
-                        zixunIntent.putExtra("id", map.get("directTypeId")+"");
+                        zixunIntent.putExtra("id", map.get("directTypeId") + "");
 //                        zixunIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(zixunIntent);
 
@@ -96,6 +100,41 @@ public class JpushUtil {
                 i.putExtra("webUrl", map.get("url"));
 //                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 ActivityUtils.startActivity(i);
+            }
+        } else if (StringUtils.equals("vMallInform", map.get("workType"))) {
+
+            if (StringUtils.equals("buyer", map.get("type"))) {
+
+                if (StringUtils.equals("zhujiDiy", map.get("directType"))) {
+
+                    if (!ObjectUtils.isEmpty(map.get("zhujiDiyId"))) {
+                        Intent zhujiDiyIdIntent = new Intent(context, WodeZhujiDingzhiDetailActivity.class);
+                        zhujiDiyIdIntent.putExtra("id", Long.parseLong(map.get("zhujiDiyId")));
+                        ActivityUtils.startActivity(zhujiDiyIdIntent);
+                    }
+                } else if (StringUtils.equals("enquiry", map.get("directType"))) {
+                    if (!ObjectUtils.isEmpty(map.get("enquiryId"))) {
+                        Intent enquiryIntent = new Intent(context, QiugouxiangqingActivity.class);
+                        enquiryIntent.putExtra("enquiryId", Long.parseLong(map.get("enquiryId")));
+                        ActivityUtils.startActivity(enquiryIntent);
+                    }
+                }
+
+            } else if (StringUtils.equals("seller", map.get("type"))) {
+                if (StringUtils.equals("zhujiDiy", map.get("directType"))) {
+                    if (!ObjectUtils.isEmpty(map.get("zhujiDiySolutionId"))) {
+                        Intent zhujiDiyIdIntent = new Intent(context, WodeFangAnDetailActivity.class);
+                        zhujiDiyIdIntent.putExtra("id", Long.parseLong(map.get("zhujiDiySolutionId")));
+                        ActivityUtils.startActivity(zhujiDiyIdIntent);
+                    }
+                } else if (StringUtils.equals("enquiry", map.get("directType"))) {
+                    if (!ObjectUtils.isEmpty(map.get("enquiryId"))) {
+                        Intent enquiryIntent = new Intent(context, QiugouxiangqingActivity.class);
+                        enquiryIntent.putExtra("enquiryId", Long.parseLong(map.get("enquiryId")));
+                        ActivityUtils.startActivity(enquiryIntent);
+                    }
+                }
+
             }
         }
     }

@@ -17,6 +17,8 @@ import com.company.qcy.MainActivity;
 import com.company.qcy.R;
 import com.company.qcy.base.BaseActivity;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
 
     /**
@@ -76,6 +78,7 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                         SPUtils.getInstance().put("isFirstIn",  "1");
                         ActivityUtils.finishAllActivities();
                         ActivityUtils.startActivity(MainActivity.class);
+                        JPushInterface.clearAllNotifications(SettingActivity.this);
                     }
                 });
                 dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {

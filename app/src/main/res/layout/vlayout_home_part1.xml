@@ -14,96 +14,207 @@
 
     </com.bigkoo.convenientbanner.ConvenientBanner>
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:orientation="horizontal"
-        android:layout_height="70dp">
+        android:layout_height="70dp"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/vlayout_home_part1_kaifang"
-            android:gravity="center"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vlayout_home_part1_qiugou"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/vlayout_home_part1_icon1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/kaifangshangcheng"
-                android:layout_height="wrap_content" />
+                app:layout_constraintBottom_toTopOf="@+id/vlayout_home_part1_title1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
             <TextView
-                android:layout_marginTop="4dp"
                 android:id="@+id/vlayout_home_part1_title1"
-                android:text="开放商城"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
+                android:text="开放商城"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vlayout_home_part1_icon1" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/vlayout_home_part1_qiugou"
-            android:gravity="center"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vlayout_home_part1_chanpin"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vlayout_home_part1_kaifang"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/vlayout_home_part1_icon2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/qiugoudating"
-                android:layout_height="wrap_content" />
+                app:layout_constraintBottom_toTopOf="@+id/vlayout_home_part1_title2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
             <TextView
                 android:id="@+id/vlayout_home_part1_title2"
-                android:text="求购大厅"
-                android:layout_marginTop="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
+                android:text="求购大厅"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vlayout_home_part1_icon2" />
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/vlayout_home_part1_chanpin"
-            android:gravity="center"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vlayout_home_part1_zhuji"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vlayout_home_part1_qiugou"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/vlayout_home_part1_icon3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/canpindating"
-                android:layout_height="wrap_content" />
+                app:layout_constraintBottom_toTopOf="@+id/vlayout_home_part1_title3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
             <TextView
-                android:text="产品大厅"
-                android:layout_marginTop="4dp"
                 android:id="@+id/vlayout_home_part1_title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
                 android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/vlayout_home_part1_chanye"
-            android:gravity="center"
+                android:text="产品大厅"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vlayout_home_part1_icon3" />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/vlayout_home_part1_zhuji"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vlayout_home_part1_chanye"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vlayout_home_part1_chanpin"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/vlayout_home_part1_icon5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/zhujidingzhi"
+                app:layout_constraintBottom_toTopOf="@+id/vlayout_home_part1_title5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <TextView
+                android:id="@+id/vlayout_home_part1_title5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
+                android:gravity="center"
+                android:text="助剂定制"
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vlayout_home_part1_icon5" />
+
+            <ImageView
+                android:id="@+id/imageView28"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@+id/vlayout_home_part1_icon5"
+                app:layout_constraintStart_toEndOf="@+id/vlayout_home_part1_icon5"
+                app:srcCompat="@mipmap/hot" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/vlayout_home_part1_chanye"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/vlayout_home_part1_zhuji"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/vlayout_home_part1_icon4"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/canyezixun"
-                android:layout_height="wrap_content" />
+                app:layout_constraintBottom_toTopOf="@+id/vlayout_home_part1_title4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed" />
+
             <TextView
-                android:gravity="center"
                 android:id="@+id/vlayout_home_part1_title4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
+                android:gravity="center"
                 android:text="产业资讯"
-                android:layout_marginTop="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </LinearLayout>
+                android:textSize="@dimen/x30"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vlayout_home_part1_icon4" />
+        </android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
     <View
         android:background="@color/fengexian"

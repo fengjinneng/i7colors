@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise">
+
+    <include
+        android:id="@+id/include5"
+        layout="@layout/toolbar"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            tools:context=".ui.activity.user.RegisterActivity">
+
+
+            <Button
+                android:id="@+id/activity_register_info_submit"
+                android:layout_width="288dp"
+                android:layout_height="@dimen/x98"
+                android:layout_marginTop="32dp"
+                android:background="@mipmap/bg"
+                android:text="确认"
+                android:textColor="@color/baise"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_info_yaoqingma"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_info_yaoqingma"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_info_yaoqingma" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x36"
+                android:layout_marginBottom="32dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_info_submit">
+
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/activity_register_info_yaoqingma"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background_dengluwenbenkuang"
+                android:hint="输入邀请码(非必填)"
+                android:inputType="textEmailAddress"
+                android:maxLength="6"
+                android:paddingLeft="@dimen/x36"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_info_zhiwei"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_info_zhiwei"
+                app:layout_constraintTop_toBottomOf="@id/activity_register_info_zhiwei" />
+
+            <EditText
+                android:id="@+id/activity_register_info_companyname"
+                android:layout_width="288dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_dengluwenbenkuang"
+                android:hint="输入公司名称"
+
+                android:inputType="textPersonName"
+                android:paddingLeft="@dimen/x36"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView47"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_register_info_companyname"
+                app:layout_constraintEnd_toStartOf="@+id/activity_register_info_companyname"
+                app:layout_constraintTop_toTopOf="@+id/activity_register_info_companyname"
+                app:srcCompat="@mipmap/bitiantupian" />
+
+            <TextView
+                android:id="@+id/activity_register_info_zhiwei"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x100"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/background_dengluwenbenkuang"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:drawablePadding="@dimen/x36"
+                android:gravity="center"
+                android:minWidth="@dimen/x350"
+                android:paddingLeft="@dimen/x36"
+                android:paddingRight="@dimen/x36"
+                android:text="请选择职位"
+                android:textSize="@dimen/x30"
+                app:layout_constraintEnd_toEndOf="@+id/activity_register_info_companyname"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_info_companyname"
+                app:layout_constraintTop_toBottomOf="@+id/activity_register_info_companyname" />
+
+            <ImageView
+                android:id="@+id/imageView48"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/activity_register_info_zhiwei"
+                app:layout_constraintEnd_toStartOf="@+id/activity_register_info_zhiwei"
+                app:layout_constraintTop_toTopOf="@+id/activity_register_info_zhiwei"
+                app:srcCompat="@mipmap/bitiantupian" />
+
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+
+</RelativeLayout>

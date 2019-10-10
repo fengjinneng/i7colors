@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -51,11 +52,14 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.mob.pushsdk.MobPush;
 import com.mob.pushsdk.MobPushReceiver;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.HashMap;
 import java.util.List;
+
 import cn.jpush.android.api.JPushInterface;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
@@ -99,8 +103,14 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
         if (SPUtils.getInstance().getInt("pengyouquanNews") <= -1) {
             SPUtils.getInstance().put("pengyouquanNews", 0);
         }
-        if (SPUtils.getInstance().getInt("notification") <= -1) {
-            SPUtils.getInstance().put("notification", 0);
+        if (SPUtils.getInstance().getInt("appSystemInform") <= -1) {
+            SPUtils.getInstance().put("appSystemInform", 0);
+        }
+        if (SPUtils.getInstance().getInt("vMallInformBuyer") <= -1) {
+            SPUtils.getInstance().put("vMallInformBuyer", 0);
+        }
+        if (SPUtils.getInstance().getInt("vMallInformSeller") <= -1) {
+            SPUtils.getInstance().put("vMallInformSeller", 0);
         }
 
         //JPUSH推送消息過來的
@@ -184,20 +194,14 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
         switch (msg.getCode()) {
 
             case MessageBean.JPush.RECIVENOTIFICATION:
-
-//                ShortcutBadger.removeCount(this);
-                ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("notification"));
+                ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("appSystemInform")
+                        + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller"));
                 if (xitongXiaoxiMessageItem.isHidden()) {
                     xitongXiaoxiMessageItem.show();
                 }
-                xitongXiaoxiMessageItem.setText(SPUtils.getInstance().getInt("notification") + "");
-                break;
+                xitongXiaoxiMessageItem.setText((SPUtils.getInstance().getInt("appSystemInform")
+                        + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller")) + "");
 
-            case MessageBean.JPush.DELETELUNCHNUMBER:
-                if (!xitongXiaoxiMessageItem.isHidden()) {
-                    xitongXiaoxiMessageItem.hide();
-                }
-                ShortcutBadger.removeCount(this);
                 break;
 
             //点击进去四个消息的列表，首页的就隐藏
@@ -214,6 +218,26 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
                 }
                 pengyouquanMessageItem.setText(SPUtils.getInstance().getInt("pengyouquanNews") + "");
 
+                break;
+
+            case MessageBean.JPush.NEEDRESETMESSAGECOUNT:
+                xitongXiaoxiMessageItem.setText((SPUtils.getInstance().getInt("appSystemInform")
+                        + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller")) + "");
+
+
+                ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("appSystemInform")
+                        + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller"));
+
+                if (SPUtils.getInstance().getInt("appSystemInform")
+                        + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller") <= 0) {
+                    ShortcutBadger.removeCount(this);
+                    if (!xitongXiaoxiMessageItem.isHidden()) {
+                        xitongXiaoxiMessageItem.hide();
+                    }
+                } else {
+                    ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("appSystemInform")
+                            + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller"));
+                }
                 break;
 
             case MessageBean.Code.NEEDUPDATEAPP:
@@ -306,6 +330,7 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
 
     //初始化底部导航栏
     private void initBottomNavigation() {
+
         pengyouquanMessageItem = new TextBadgeItem();
         xitongXiaoxiMessageItem = new TextBadgeItem();
 
@@ -332,9 +357,15 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
 
         xitongXiaoxiMessageItem.setHideOnSelect(false);
         xiaoxiItem.setBadgeItem(xitongXiaoxiMessageItem);
-        if (SPUtils.getInstance().getInt("notification") > 0) {
-            xitongXiaoxiMessageItem.setText(SPUtils.getInstance().getInt("notification") + "");
-            ShortcutBadger.applyCount(this, SPUtils.getInstance().getInt("notification"));
+        if (SPUtils.getInstance().getInt("appSystemInform") > 0
+                || SPUtils.getInstance().getInt("vMallInformBuyer") > 0
+                || SPUtils.getInstance().getInt("vMallInformSeller") > 0) {
+
+            xitongXiaoxiMessageItem.setText((SPUtils.getInstance().getInt("appSystemInform")
+                    + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller")) + "");
+
+            ShortcutBadger.applyCount(this, (SPUtils.getInstance().getInt("appSystemInform")
+                    + SPUtils.getInstance().getInt("vMallInformBuyer") + SPUtils.getInstance().getInt("vMallInformSeller")));
         } else {
             xitongXiaoxiMessageItem.hide();
         }
@@ -412,7 +443,6 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
 
             }
         });
-
     }
 
     //记录用户首次点击返回键的时间
@@ -437,7 +467,9 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
     protected void onResume() {
         super.onResume();
 
-        if (SPUtils.getInstance().getInt("notification") < 1) {
+        if ((SPUtils.getInstance().getInt("appSystemInform")
+                + SPUtils.getInstance().getInt("vMallInformBuyer")
+                + SPUtils.getInstance().getInt("vMallInformSeller")) < 1) {
             if (!xitongXiaoxiMessageItem.isHidden()) {
                 xitongXiaoxiMessageItem.hide();
             }
@@ -489,6 +521,7 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
             }
         }
     }
+
     /**
      * 显示无网弹框
      *

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
+import com.company.qcy.ui.activity.zhuji.ZhujiListActivity;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
@@ -98,6 +100,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
         holder.qiugoudating.setOnClickListener(this);
         holder.kaifangshangcheng.setOnClickListener(this);
         holder.chanyezixun.setOnClickListener(this);
+        holder.zhujidingzhi.setOnClickListener(this);
         holder.map.setOnClickListener(this);
     }
 
@@ -156,6 +159,9 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
             case R.id.vlayout_home_part1_chanye:
                 context.startActivity(new Intent(context, ChanyezixunActivity.class));
                 break;
+            case R.id.vlayout_home_part1_zhuji:
+                context.startActivity(new Intent(context, ZhujiListActivity.class));
+                break;
             case R.id.vlayout_home_part1_map:
 
                 //申请权限
@@ -179,7 +185,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
 
     static class SingleAdvLayoutViewHolder extends RecyclerView.ViewHolder {
         public ConvenientBanner convenientBanner;
-        public LinearLayout chanpindating,qiugoudating,kaifangshangcheng,chanyezixun;
+        public ConstraintLayout chanpindating,qiugoudating,kaifangshangcheng,chanyezixun,zhujidingzhi;
         public ImageView map;
 
         public SingleAdvLayoutViewHolder(View root) {
@@ -189,6 +195,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
             qiugoudating = root.findViewById(R.id.vlayout_home_part1_qiugou);
             kaifangshangcheng = root.findViewById(R.id.vlayout_home_part1_kaifang);
             chanyezixun = root.findViewById(R.id.vlayout_home_part1_chanye);
+            zhujidingzhi = root.findViewById(R.id.vlayout_home_part1_zhuji);
             map = root.findViewById(R.id.vlayout_home_part1_map);
         }
     }

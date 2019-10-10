@@ -10,7 +10,9 @@ import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.SPUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.MainActivity;
+import com.company.qcy.R;
 import com.company.qcy.bean.eventbus.MessageBean;
 
 
@@ -55,8 +57,28 @@ public class JpushReceiver extends BroadcastReceiver {
                 LogUtils.d(TAG, "[MyReceiver] 接收到推送下来的通知");
                 int notificationId = bundle.getInt(JPushInterface.EXTRA_NOTIFICATION_ID);
 
-                SPUtils.getInstance().put("notification", SPUtils.getInstance().getInt("notification") + 1);
+                JSONObject json = new JSONObject(bundle.getString(JPushInterface.EXTRA_EXTRA));
+
+                String workType = json.getString("workType");
+
+                if (StringUtils.equals("appSystemInform", workType)) {
+
+                    SPUtils.getInstance().put("appSystemInform", SPUtils.getInstance().getInt("appSystemInform") + 1);
+
+                } else if (StringUtils.equals("vMallInform", workType)) {
+
+                    if (StringUtils.equals("buyer", json.getString("type"))) {
+                        SPUtils.getInstance().put("vMallInformBuyer", SPUtils.getInstance().getInt("vMallInformBuyer") + 1);
+                    }
+
+                    if (StringUtils.equals("seller", json.getString("type"))) {
+                        SPUtils.getInstance().put("vMallInformSeller", SPUtils.getInstance().getInt("vMallInformSeller") + 1);
+
+                    }
+
+                }
                 EventBus.getDefault().post(new MessageBean(MessageBean.JPush.RECIVENOTIFICATION));
+
 
             } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
                 LogUtils.d(TAG, "[MyReceiver] 用户点击打开了通知");
@@ -82,16 +104,13 @@ public class JpushReceiver extends BroadcastReceiver {
 
                 }
 
-                if (SPUtils.getInstance().getInt("notification") > 0) {
-                    SPUtils.getInstance().put("notification", SPUtils.getInstance().getInt("notification") - 1);
-                }
+
 
                 if (AppUtils.isAppForeground(AppUtils.getAppPackageName())) {
                     JpushUtil.jumpActivity(map, context);
                 } else {
                     Intent mainIntent = new Intent(context, MainActivity.class);
                     mainIntent.putExtra("jpush_data", map);
-                    mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     ActivityUtils.startActivity(mainIntent);
                 }
 
@@ -106,7 +125,7 @@ public class JpushReceiver extends BroadcastReceiver {
                 LogUtils.d(TAG, "[MyReceiver] Unhandled intent - " + intent.getAction());
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
     }

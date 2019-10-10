@@ -71,6 +71,11 @@ public class QiugoudatingRecyclerviewAdapter
 
                 if (StringUtils.isEmpty(item.getSurplusMin())) {
 
+                    helper.setText(R.id.item_qiugoudating_firsttime, "0");
+                    helper.setText(R.id.item_qiugoudating_secondtime, item.getSurplusSec());
+                    helper.setText(R.id.item_qiugoudating_firsttime_text, "分");
+                    helper.setText(R.id.item_qiugoudating_secondtime_text, "秒");
+
                 } else {
                     helper.setText(R.id.item_qiugoudating_firsttime, item.getSurplusMin());
                     helper.setText(R.id.item_qiugoudating_secondtime, item.getSurplusSec());
@@ -88,7 +93,8 @@ public class QiugoudatingRecyclerviewAdapter
             }
 
         } else {
-
+            helper.setText(R.id.item_qiugoudating_firsttime_text, "天");
+            helper.setText(R.id.item_qiugoudating_secondtime_text, "小时");
             helper.setText(R.id.item_qiugoudating_firsttime, item.getSurplusDay());
             helper.setText(R.id.item_qiugoudating_secondtime, item.getSurplusHour());
 

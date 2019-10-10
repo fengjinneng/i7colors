@@ -18,17 +18,20 @@ import java.util.List;
 public class QiugouxiangqingRecyclerviewAdapter
         extends BaseQuickAdapter<BaojiaBean, BaseViewHolder> {
 
-    private int wode;
     private String isCharger;
     private String qiugouStatus;
 
-    public QiugouxiangqingRecyclerviewAdapter(int layoutResId, @Nullable List<BaojiaBean> data, int wode, String isCharger, String qiugouStatus) {
+    public QiugouxiangqingRecyclerviewAdapter(int layoutResId, @Nullable List<BaojiaBean> data) {
         super(layoutResId, data);
-        this.wode = wode;
-        this.isCharger = isCharger;
-        this.qiugouStatus = qiugouStatus;
     }
 
+    public void setIsCharger(String isCharger) {
+        this.isCharger = isCharger;
+    }
+
+    public void setQiugouStatus(String qiugouStatus) {
+        this.qiugouStatus = qiugouStatus;
+    }
 
     @Override
     protected void convert(BaseViewHolder helper, BaojiaBean item) {
@@ -117,7 +120,7 @@ public class QiugouxiangqingRecyclerviewAdapter
         TextView beizhu = (TextView) helper.getView(R.id.item_qiugouxiangqing_recyclerview_beizhu);
         TextView havePostage = (TextView) helper.getView(R.id.item_qiugouxiangqing_recyclerview_postage_text);
 
-        if (wode == 1 || StringUtils.equals("1", isCharger)) {
+        if ( StringUtils.equals("1", isCharger)) {
             //求购中
             if (StringUtils.equals("1", qiugouStatus)) {
 

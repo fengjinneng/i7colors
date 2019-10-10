@@ -84,9 +84,23 @@ public class MessageBean {
     }
 
 
+
+
+    public static class Zhuji{
+        //发布助剂定制成功
+        public static final int FABUZHUJIDINGZHICHENGGONG=6001;
+
+        //关闭助剂定制成功
+        public static final int CLOSEZHUJIDIY=6002;
+
+        //采纳方案成功
+        public static final int CAINAFANGAN=6003;
+
+    }
+
     public static class NetWorkState{
         //网络已连接
-        public static final int YILIANJIE=2001;
+        public static final int YILIANJIE=5001;
 
 
     }
@@ -94,38 +108,52 @@ public class MessageBean {
 
     public static class JPush{
         //發送的系統消息
-        public static final int XITONGXIAOXI=1001;
+        public static final int XITONGXIAOXI=4001;
 
         //清除lunch数字
-        public static final int DELETELUNCHNUMBER=1002;
+        public static final int DELETELUNCHNUMBER=4002;
 
 
         //收到系统消息的通知了
-        public static final int RECIVENOTIFICATION=1003;
+        public static final int RECIVENOTIFICATION=4003;
+
+        //需要重制首页的消息数量
+        public static final int NEEDRESETMESSAGECOUNT=4004;
+
+        //需要刷新买家消息
+        public static final int NEEDRESETBUYERMESSAGE=4005;
+
+
+        //需要刷新卖家消息
+        public static final int NEEDRESETSELLERMESSAGE=4006;
+
+
+        //需要刷新系统消息
+        public static final int NEEDRESETSYSTEMMESSAGE=4007;
 
     }
 
 
     public static class RemenCode{
         //删除评论成功
-        public static final int DELETEPINGLUNCHENGGONG=1013;
+        public static final int DELETEPINGLUNCHENGGONG=3001;
         //发布朋友圈成功
-        public static final int FABUPENGYOUQUANCHENGGONG=1014;
+        public static final int FABUPENGYOUQUANCHENGGONG=3002;
         //朋友圈需要刷新
-        public static final int PENGYOUQUANNEEDREFLUSH=1020;
+        public static final int PENGYOUQUANNEEDREFLUSH=3003;
         //详情页点赞成功需要刷新
-        public static final int XIANGQINGYEDIANZANCHENGGONG=1022;
+        public static final int XIANGQINGYEDIANZANCHENGGONG=3004;
     }
 
     public static class GuanzhuCode{
         //删除评论成功
-        public static final int DELETEPINGLUNCHENGGONG=1013;
+        public static final int DELETEPINGLUNCHENGGONG=2001;
         //发布朋友圈成功
-        public static final int FABUPENGYOUQUANCHENGGONG=1014;
+        public static final int FABUPENGYOUQUANCHENGGONG=2002;
         //朋友圈需要刷新
-        public static final int PENGYOUQUANNEEDREFLUSH=1020;
+        public static final int PENGYOUQUANNEEDREFLUSH=2003;
         //详情页点赞成功需要刷新
-        public static final int XIANGQINGYEDIANZANCHENGGONG=1022;
+        public static final int XIANGQINGYEDIANZANCHENGGONG=2004;
     }
 
     public static class Code {
@@ -246,6 +274,12 @@ public class MessageBean {
 
         //团购砍价成功
         public static final int TUANGOUKANJIACHENGGONG = 1043;
+
+        //需要刷新买家消息
+        public static final int NEEDREFRESHBUYERMESSAGE = 1044;
+
+        //需要刷新买家消息
+        public static final int NEEDREFRESHSELLERMESSAGE = 1045;
 
     }
 

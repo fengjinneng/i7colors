@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
-import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MyLoadMoreView;
 import com.company.qcy.Utils.RecyclerviewDisplayDecoration;
@@ -45,10 +43,10 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
  * to handle interaction events.
- * Use the {@link QiugouxiaoxiFragment#newInstance} factory method to
+ * Use the {@link BuyerxiaoxiFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class QiugouxiaoxiFragment extends BaseFragment {
+public class BuyerxiaoxiFragment extends BaseFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -58,11 +56,11 @@ public class QiugouxiaoxiFragment extends BaseFragment {
     private List<MessageBean> datas;
     private NormalMessageAdapter adapter;
 
-    public QiugouxiaoxiFragment() {
+    public BuyerxiaoxiFragment() {
     }
 
-    public static QiugouxiaoxiFragment newInstance(String param1, String param2) {
-        QiugouxiaoxiFragment fragment = new QiugouxiaoxiFragment();
+    public static BuyerxiaoxiFragment newInstance(String param1, String param2) {
+        BuyerxiaoxiFragment fragment = new BuyerxiaoxiFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -95,6 +93,10 @@ public class QiugouxiaoxiFragment extends BaseFragment {
                 refreshListener.onRefresh();
                 break;
 
+            case com.company.qcy.bean.eventbus.MessageBean.JPush.NEEDRESETBUYERMESSAGE:
+                swipeRefreshLayout.setRefreshing(true);
+                refreshListener.onRefresh();
+                break;
         }
     }
 
@@ -139,9 +141,11 @@ public class QiugouxiaoxiFragment extends BaseFragment {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 MessageBean messageBean = (MessageBean) adapter.getData().get(position);
+                messageBean.setIsRead("1");
+                adapter.notifyItemChanged(position);
                 Intent intent = new Intent(getContext(), MessageDetailActivity.class);
                 intent.putExtra("id", messageBean.getId());
-                intent.putExtra("isfrom", "qiugou");
+                intent.putExtra("workType", messageBean.getWorkType());
                 ActivityUtils.startActivity(intent);
             }
         });
@@ -178,7 +182,7 @@ public class QiugouxiaoxiFragment extends BaseFragment {
 
     private void addData() {
         pageNo++;
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMLIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETBUYERANDSELLERMESSAGEINFORMLIST)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", pageNo)
@@ -191,7 +195,7 @@ public class QiugouxiaoxiFragment extends BaseFragment {
             @Override
             public void onSuccess(Response<String> response) {
                 swipeRefreshLayout.setRefreshing(false);
-                LogUtils.v("GETENQUIRYINFORMLIST", response.body());
+                LogUtils.v("GETBUYERMESSAGEINFORMLIST", response.body());
                 try {
                     if (response.code() == 200) {
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
@@ -210,13 +214,12 @@ public class QiugouxiaoxiFragment extends BaseFragment {
                                 adapter.setNewData(datas);
                                 isReflash = false;
                                 adapter.loadMoreComplete();
+                                adapter.disableLoadMoreIfNotFullPage();
                                 return;
                             }
-
                             adapter.addData(messageBeans);
                             adapter.setNewData(datas);
                             adapter.loadMoreComplete();
-                            adapter.disableLoadMoreIfNotFullPage();
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {

@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.zhuji.PubulishZhujiDiyActivity">
+
+    <include
+        android:id="@+id/include48"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/x98"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include48"
+        app:layout_constraintVertical_bias="1.0">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/baise">
+
+            <TextView
+                android:id="@+id/acticity_pubulish_zhuji_diy_type"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:gravity="center"
+                android:padding="@dimen/x15"
+                android:text="请选择分类"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView123"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_companyname"
+                app:layout_goneMarginTop="@dimen/x32" />
+
+            <TextView
+                android:id="@+id/textView123"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x5"
+                android:maxWidth="@dimen/x200"
+                android:text="印染助剂定制分类:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_diy_type"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_diy_type" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_diy_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                android:hint="例如：仿蜡印增调剂"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_diy_type"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_diy_type" />
+
+            <TextView
+                android:id="@+id/acticity_pubulish_zhuji_caizhi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:gravity="center"
+                android:padding="@dimen/x15"
+                android:text="请选择材质"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/textView376"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_diy_name"
+                app:layout_constraintTop_toTopOf="@+id/textView376" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_chengpinyongtu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                android:hint="例如：用于工厂工人装面料"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_caizhi"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_caizhi" />
+
+            <TextView
+                android:id="@+id/acticity_pubulish_zhuji_jieshushijian"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_wenbenshurubiankuang"
+                android:drawableRight="@mipmap/xialajiantou"
+                android:gravity="center"
+                android:padding="@dimen/x15"
+                android:text="选择结束时间"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_chengpinyongtu"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_xingnengmiaoshu" />
+
+            <TextView
+                android:id="@+id/textView374"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x5"
+                android:maxWidth="@dimen/x200"
+                android:text="定制助剂名称:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_diy_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_diy_name" />
+
+            <TextView
+                android:id="@+id/textView375"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="纺织品属性"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_diy_name" />
+
+            <TextView
+                android:id="@+id/textView376"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x10"
+                android:maxWidth="@dimen/x180"
+                android:text="材质(基材):"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView319" />
+
+            <TextView
+                android:id="@+id/textView377"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x10"
+                android:maxWidth="@dimen/x180"
+                android:text="成品用途:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_chengpinyongtu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_chengpinyongtu" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_huanbaoyaoqiu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_chengpinyongtu"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_chengpinyongtu" />
+
+            <TextView
+                android:id="@+id/textView379"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x10"
+                android:maxWidth="@dimen/x180"
+                android:text="环保要求："
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_huanbaoyaoqiu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_huanbaoyaoqiu" />
+
+            <TextView
+                android:id="@+id/textView380"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="染整工艺要求"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_huanbaoyaoqiu" />
+
+            <TextView
+                android:id="@+id/textView381"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawablePadding="@dimen/x10"
+                android:maxWidth="@dimen/x180"
+                android:text="设备:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_shebei"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_shebei" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_shebei"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_huanbaoyaoqiu"
+                app:layout_constraintTop_toBottomOf="@+id/textView383" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_ranliao"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_shebei"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_shebei" />
+
+            <TextView
+                android:id="@+id/textView384"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="染料:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_ranliao"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_ranliao" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_ransewendu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_ranliao"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_ranliao" />
+
+            <TextView
+                android:id="@+id/textView386"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="染色温度:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_ransewendu"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_ransewendu" />
+
+            <TextView
+                android:id="@+id/textView387"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:text="现用产品说明"
+                android:textColor="@color/erjibiaoti"
+                android:textStyle="bold"
+                android:textSize="@dimen/x30"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_ransewendu" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_xianyongchanpinmingcheng"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_ransewendu"
+                app:layout_constraintTop_toBottomOf="@+id/textView388" />
+
+            <TextView
+                android:id="@+id/textView389"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxWidth="@dimen/x200"
+                android:text="现用产品名称:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_xianyongchanpinmingcheng"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_xianyongchanpinmingcheng" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_changjia"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_xianyongchanpinmingcheng"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_xianyongchanpinmingcheng" />
+
+            <TextView
+                android:id="@+id/textView391"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="生产厂家:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_changjia"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_changjia" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_xuqiuliang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                android:hint="例如：1吨"
+                android:padding="@dimen/x15"
+                android:singleLine="true"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_changjia"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_diy_meiyueyongliang" />
+
+            <TextView
+                android:id="@+id/textView393"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:maxWidth="@dimen/x200"
+                android:text="定制需求量"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x5"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_xuqiuliang"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_xuqiuliang" />
+
+            <TextView
+                android:id="@+id/textView394"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/x40"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x5"
+                android:maxWidth="@dimen/x200"
+                android:text="助剂性能描述:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_xuqiuliang" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_xingnengmiaoshu"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="start"
+                android:maxLength="50"
+                android:minLines="4"
+                android:padding="@dimen/x10"
+                android:hint="50字以内......"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_xuqiuliang"
+                app:layout_constraintTop_toTopOf="@+id/textView394" />
+
+            <TextView
+                android:id="@+id/textView396"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x5"
+                android:text="结束时间:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_jieshushijian"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_jieshushijian" />
+
+            <TextView
+                android:id="@+id/textView398"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:text="（结束时间不能小于3天 不能大于30天）"
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/acticity_pubulish_zhuji_jieshushijian"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_jieshushijian"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_jieshushijian" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_companyname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:hint="请输入公司名称"
+                android:padding="@dimen/x15"
+                android:visibility="gone"
+                android:textSize="@dimen/x28"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:gravity="center_vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView123"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/acticity_pubulish_zhuji_companyname_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="公司名称:"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x5"
+                android:textSize="@dimen/x28"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_companyname"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_companyname" />
+
+            <TextView
+                android:id="@+id/textView317"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每月用量:"
+                android:textSize="@dimen/x28"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_diy_meiyueyongliang"
+                app:layout_constraintStart_toStartOf="@+id/textView393"
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_diy_meiyueyongliang" />
+
+            <EditText
+                android:id="@+id/acticity_pubulish_zhuji_diy_meiyueyongliang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_shuruwenbenkuang"
+                android:hint="例如：1吨"
+                android:padding="@dimen/x15"
+                android:singleLine="true"
+                android:textSize="@dimen/x28"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_changjia"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_changjia" />
+
+            <TextView
+                android:id="@+id/textView319"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView375" />
+
+            <TextView
+                android:id="@+id/textView383"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:background="@color/fengexian"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView380" />
+
+            <TextView
+                android:id="@+id/textView388"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/fengexian"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView387" />
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+
+    <TextView
+        android:id="@+id/acticity_pubulish_zhuji_fabu"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@mipmap/bg"
+        android:gravity="center"
+        android:text="发布助剂定制"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nestedScrollView" />
+
+
+</android.support.constraint.ConstraintLayout>

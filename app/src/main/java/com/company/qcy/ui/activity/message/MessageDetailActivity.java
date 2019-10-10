@@ -24,9 +24,13 @@ import com.company.qcy.bean.message.MessageBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugouxiangqingActivity;
+import com.company.qcy.ui.activity.zhuji.WodeFangAnDetailActivity;
+import com.company.qcy.ui.activity.zhuji.WodeZhujiDingzhiDetailActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
+
+import org.greenrobot.eventbus.EventBus;
 
 public class MessageDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -57,7 +61,7 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
 
     private MessageBean messageBean;
 
-    private String isfrom;
+    private String workType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,22 +69,23 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
         setContentView(R.layout.activity_message_detail);
         initView();
         id = getIntent().getLongExtra("id", 0);
-        isfrom = getIntent().getStringExtra("isfrom");
+        workType = getIntent().getStringExtra("workType");
         addData();
     }
 
     private void addData() {
-
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETENQUIRYINFORMDETAIL)
+        //业务类型，workType=enquiry求购消息；workType=zhujiDiy助剂定制消息
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.GETBUYERANDSELLERMESSAGEDETAIL)
                 .tag(this)
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("id", id)
+                .params("workType", workType)
                 .params("token", SPUtils.getInstance().getString("token"));
 
         DialogStringCallback stringCallback = new DialogStringCallback(this) {
             @Override
             public void onSuccess(Response<String> response) {
-                LogUtils.v("GETENQUIRYINFORMDETAIL", response.body());
+                LogUtils.v("GETBUYERANDSELLERMESSAGEDETAIL", response.body());
                 try {
                     if (response.code() == 200) {
 
@@ -88,7 +93,7 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
                             JSONObject data = jsonObject.getJSONObject("data");
-                            LogUtils.v("GETENQUIRYINFORMDETAIL", data);
+                            LogUtils.v("GETBUYERANDSELLERMESSAGEDETAIL", data);
                             messageBean = data.toJavaObject(MessageBean.class);
                             setData(messageBean);
                             return;
@@ -118,7 +123,14 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
     }
 
     private void setData(MessageBean messageBean) {
-        mActivityMessageDetailTitle.setText(messageBean.getProductName());
+        if(StringUtils.equals("enquiry",workType)){
+            mActivityMessageDetailTitle.setText(messageBean.getProductName());
+
+        }
+        if(StringUtils.equals("zhujiDiy",workType)){
+            mActivityMessageDetailTitle.setText(messageBean.getZhujiName());
+
+        }
         mActivityMessageDetailTime.setText(messageBean.getCreatedAt());
         mActivityMessageDetailContent.setText(messageBean.getContent());
 
@@ -131,7 +143,7 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
         mActivityMessageDetailTitle = (TextView) findViewById(R.id.activity_message_detail_title);
         mActivityMessageDetailContent = (TextView) findViewById(R.id.activity_message_detail_content);
         mActivityMessageDetailTime = (TextView) findViewById(R.id.activity_message_detail_time);
-        mToolbarTitle.setText("求购报价详情");
+        mToolbarTitle.setText("消息详情");
 
         mActivityMessageDetailChakan = (TextView) findViewById(R.id.activity_message_detail_chakan);
         mActivityMessageDetailChakan.setOnClickListener(this);
@@ -147,20 +159,44 @@ public class MessageDetailActivity extends BaseActivity implements View.OnClickL
                 break;
             case R.id.activity_message_detail_chakan:
 
-                if (!ObjectUtils.isEmpty(messageBean)) {
+                if (ObjectUtils.isEmpty(messageBean) || StringUtils.isEmpty(workType)) {
+                    return;
+                }
 
+                if (StringUtils.equals("enquiry", workType)) {
                     Intent intent = new Intent(this, QiugouxiangqingActivity.class);
                     intent.putExtra("enquiryId", messageBean.getEnquiryId());
-                    intent.putExtra("isCharger", "1");//是本人
-                    if (StringUtils.equals("qiugou", isfrom)) {
-                        intent.putExtra("status", "1");//正在求购中的状态
-
-                    } else if (StringUtils.equals("baojia", isfrom)) {
-                        intent.putExtra("status", "3");//买家接受报价的状态
-                    }
                     ActivityUtils.startActivity(intent);
 
                 }
+
+                if (StringUtils.equals("zhujiDiy", workType)) {
+                    if (StringUtils.equals("buyer", messageBean.getType())) {
+                        Intent intent = new Intent(this, WodeZhujiDingzhiDetailActivity.class);
+                        intent.putExtra("id", messageBean.getZhujiDiyId());
+                        ActivityUtils.startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(this, WodeFangAnDetailActivity.class);
+                        intent.putExtra("id", messageBean.getZhujiDiySolutionId());
+                        ActivityUtils.startActivity(intent);
+                    }
+                }
+
+
+//                if (!ObjectUtils.isEmpty(messageBean)) {
+//
+//                    Intent intent = new Intent(this, QiugouxiangqingActivity.class);
+//                    intent.putExtra("enquiryId", messageBean.getEnquiryId());
+//                    intent.putExtra("isCharger", "1");//是本人
+//                    if (StringUtils.equals("qiugou", isfrom)) {
+//                        intent.putExtra("status", "1");//正在求购中的状态
+//
+//                    } else if (StringUtils.equals("baojia", isfrom)) {
+//                        intent.putExtra("status", "3");//买家接受报价的状态
+//                    }
+//                    ActivityUtils.startActivity(intent);
+//
+//                }
 
                 break;
         }

@@ -20,7 +20,9 @@ public class MessageBean {
     private Long id;
     private Object userId;
     private Long enquiryId;
-    private Object type;
+    private String type;
+    private String workType;
+    private String zhujiName;
     private String productName;
     private String content;
     private String isRead;
@@ -29,13 +31,32 @@ public class MessageBean {
     private String createdAt;
     private Object updatedAt;
     private String title;
+    private Long zhujiDiyId;
+    private Long zhujiDiySolutionId;
+    private String directType;
 
-    public String getIsRead() {
-        return isRead;
+    public String getDirectType() {
+        return directType;
     }
 
-    public void setIsRead(String isRead) {
-        this.isRead = isRead;
+    public void setDirectType(String directType) {
+        this.directType = directType;
+    }
+
+    public Long getZhujiDiyId() {
+        return zhujiDiyId;
+    }
+
+    public void setZhujiDiyId(Long zhujiDiyId) {
+        this.zhujiDiyId = zhujiDiyId;
+    }
+
+    public Long getZhujiDiySolutionId() {
+        return zhujiDiySolutionId;
+    }
+
+    public void setZhujiDiySolutionId(Long zhujiDiySolutionId) {
+        this.zhujiDiySolutionId = zhujiDiySolutionId;
     }
 
     public Long getId() {
@@ -62,12 +83,28 @@ public class MessageBean {
         this.enquiryId = enquiryId;
     }
 
-    public Object getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Object type) {
+    public void setType(String type) {
         this.type = type;
+    }
+
+    public String getWorkType() {
+        return workType;
+    }
+
+    public void setWorkType(String workType) {
+        this.workType = workType;
+    }
+
+    public String getZhujiName() {
+        return zhujiName;
+    }
+
+    public void setZhujiName(String zhujiName) {
+        this.zhujiName = zhujiName;
     }
 
     public String getProductName() {
@@ -86,7 +123,13 @@ public class MessageBean {
         this.content = content;
     }
 
+    public String getIsRead() {
+        return isRead;
+    }
 
+    public void setIsRead(String isRead) {
+        this.isRead = isRead;
+    }
 
     public Object getStatus() {
         return status;
@@ -112,19 +155,19 @@ public class MessageBean {
         this.createdAt = createdAt;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public Object getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(Object updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }

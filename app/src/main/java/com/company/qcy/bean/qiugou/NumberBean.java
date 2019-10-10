@@ -18,6 +18,10 @@ public class NumberBean {
     private Integer isEnquiryCount;
     private Integer myAcceptOfferCount;
 
+    private Integer zhujiSolutionAcceptCount;//买家已接受
+    private Integer zhujiDiyingCount;//试样中
+
+
     public Integer getMyAcceptOfferCount() {
         return myAcceptOfferCount;
     }
@@ -64,5 +68,21 @@ public class NumberBean {
 
     public void setIsEnquiryCount(Integer isEnquiryCount) {
         this.isEnquiryCount = isEnquiryCount;
+    }
+
+    public Integer getZhujiSolutionAcceptCount() {
+        return zhujiSolutionAcceptCount;
+    }
+
+    public void setZhujiSolutionAcceptCount(Integer zhujiSolutionAcceptCount) {
+        this.zhujiSolutionAcceptCount = zhujiSolutionAcceptCount;
+    }
+
+    public Integer getZhujiDiyingCount() {
+        return zhujiDiyingCount;
+    }
+
+    public void setZhujiDiyingCount(Integer zhujiDiyingCount) {
+        this.zhujiDiyingCount = zhujiDiyingCount;
     }
 }

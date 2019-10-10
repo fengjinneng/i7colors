@@ -27,7 +27,11 @@ public class InterfaceInfo {
     //注册短信验证码
     public static final String SENDSMSREGISTER = "user/send_sms_code_register";
     //注册
-    public static final String REGISTER = "user/register";
+    public static final String REGISTER = "user/registerNew";
+
+    //完善注册信息
+    public static final String REGISTERINFO = "user/updateUserInfo";
+
     //重置密码
     public static final String RESETPASSWORD = "user/updatePassword";
     //校验短信验证码
@@ -130,10 +134,11 @@ public class InterfaceInfo {
     public static final String HUODONGMORENDIZHI = "defaultAddress/queryDefaultAddress";
 
     //消息模块
-    //求购报价消息
-    public static final String GETENQUIRYINFORMLIST = "user/getMallEnquiryInformList";
-    //求购报价消息详情
-    public static final String GETENQUIRYINFORMDETAIL = "user/getMallEnquiryInformDetail";
+    //买家消息   type=seller卖家消息  type=buyer,获取买家消息
+    public static final String GETBUYERANDSELLERMESSAGEINFORMLIST = "vMallInform/getVMallInformList";
+
+    //获取消息详情 workType=enquiry求购消息；workType=zhujiDiy助剂定制消息
+    public static final String GETBUYERANDSELLERMESSAGEDETAIL = "vMallInform/getVMallInformDetail";
     //系统消息
     public static final String SYSTEMINFORMLIST = "user/getSystemInformList";
     //未读消息
@@ -300,4 +305,43 @@ public class InterfaceInfo {
     //条件获取印染地图
     public static final String QUERYDYEMAPLIST = "dyeMap/queryDyeMapList";
 
+
+    //助剂定制
+
+    //获取助剂定制列表
+    public static final String ZHUJILIST = "zhujiDiy/queryZhujiDiyList";
+
+    //获取我的助剂定制列表
+    public static final String WODEZHUJILIST = "zhujiDiy/getMyZhujiDiyList";
+
+    //获取助剂定制详情
+    public static final String ZHUJIDETAIL = "zhujiDiy/queryZhujiDiyDetail";
+
+    //获取我的助剂定制详情
+    public static final String WODEZHUJIDETAIL = "zhujiDiy/getMyZhujiDiyDetail";
+
+    //获取我的助剂定制解决方案列表
+    public static final String WODEJIEJUEFANGANLIST = "zhujiDiy/getMyZhujiDiySolutionList";
+
+    //获取我的助剂定制解决方案详情
+    public static final String WODEJIEJUEFANGANDETAIL = "zhujiDiy/getMyZhujiDiySolutionDetail";
+
+    //发布助剂定制
+    public static final String FABUZHUJIDINGZHI = "zhujiDiy/addZhujiDiy";
+
+    //获取助剂分类
+    public static final String ZHUJITYPE = "zhujiDiy/getZhujiDiyClassList";
+
+    //获取助剂材质
+    public static final String ZHUJICAIZHI = "zhujiDiy/getZhujiDiyMaterialList";
+
+    //发补助及定制解决方案
+    public static final String FABUJIEJUEFANGAN = "zhujiDiy/addZhujiDiySolution";
+
+    //关闭我的助剂定制
+    public static final String CLOSEZHUJIDIY = "zhujiDiy/updateZhujiDiyStatus";
+
+    //采纳方案
+    public static final String CAINAFANGAN = "zhujiDiy/acceptZhujiDiySolution";
 }
+
