@@ -1,6 +1,11 @@
 package com.company.qcy.bean;
 
-public class BannerBean {
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class BannerBean implements Parcelable {
+
 
 
     /**
@@ -12,27 +17,43 @@ public class BannerBean {
      * updated_by : null
      * offset : null
      * limit : null
-     * plate_code : XCX_Index_Banner
-     * ad_name : 小程序首页banner1
-     * ad_url : null
-     * ad_image : /ad/1521013857170CEH9XK.png
+     * plate_code : APP_Start_Pic
+     * ad_name : 01
+     * ad_url : https://www.baidu.com
+     * is_show : null
+     * ad_image : /ad/1564123175875NV5WJ1.png
      * ad_num : 1
      * ad_class : null
+     * type : html
+     * directType : enquiry
+     * directTypeId : 48
      */
 
     private Long id;
     private String plate_code;
     private String ad_name;
     private String ad_url;
+    private String is_show;
     private String ad_image;
-    private String ad_num;
+    private Integer ad_num;
+    private String type;
+    private String directType;
+    private String directTypeId;
 
-    public String getAd_num() {
-        return ad_num;
-    }
-
-    public void setAd_num(String ad_num) {
-        this.ad_num = ad_num;
+    @Override
+    public String toString() {
+        return "BannerBean{" +
+                "id=" + id +
+                ", plate_code='" + plate_code + '\'' +
+                ", ad_name='" + ad_name + '\'' +
+                ", ad_url='" + ad_url + '\'' +
+                ", is_show='" + is_show + '\'' +
+                ", ad_image='" + ad_image + '\'' +
+                ", ad_num=" + ad_num +
+                ", type='" + type + '\'' +
+                ", directType='" + directType + '\'' +
+                ", directTypeId='" + directTypeId + '\'' +
+                '}';
     }
 
     public Long getId() {
@@ -42,7 +63,6 @@ public class BannerBean {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getPlate_code() {
         return plate_code;
@@ -68,6 +88,14 @@ public class BannerBean {
         this.ad_url = ad_url;
     }
 
+    public String getIs_show() {
+        return is_show;
+    }
+
+    public void setIs_show(String is_show) {
+        this.is_show = is_show;
+    }
+
     public String getAd_image() {
         return ad_image;
     }
@@ -76,4 +104,83 @@ public class BannerBean {
         this.ad_image = ad_image;
     }
 
+    public Integer getAd_num() {
+        return ad_num;
+    }
+
+    public void setAd_num(Integer ad_num) {
+        this.ad_num = ad_num;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDirectType() {
+        return directType;
+    }
+
+    public void setDirectType(String directType) {
+        this.directType = directType;
+    }
+
+    public String getDirectTypeId() {
+        return directTypeId;
+    }
+
+    public void setDirectTypeId(String directTypeId) {
+        this.directTypeId = directTypeId;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.id);
+        dest.writeString(this.plate_code);
+        dest.writeString(this.ad_name);
+        dest.writeString(this.ad_url);
+        dest.writeString(this.is_show);
+        dest.writeString(this.ad_image);
+        dest.writeValue(this.ad_num);
+        dest.writeString(this.type);
+        dest.writeString(this.directType);
+        dest.writeString(this.directTypeId);
+    }
+
+    public BannerBean() {
+    }
+
+    protected BannerBean(Parcel in) {
+        this.id = (Long) in.readValue(Long.class.getClassLoader());
+        this.plate_code = in.readString();
+        this.ad_name = in.readString();
+        this.ad_url = in.readString();
+        this.is_show = in.readString();
+        this.ad_image = in.readString();
+        this.ad_num = (Integer) in.readValue(Integer.class.getClassLoader());
+        this.type = in.readString();
+        this.directType = in.readString();
+        this.directTypeId = in.readString();
+    }
+
+    public static final Parcelable.Creator<BannerBean> CREATOR = new Parcelable.Creator<BannerBean>() {
+        @Override
+        public BannerBean createFromParcel(Parcel source) {
+            return new BannerBean(source);
+        }
+
+        @Override
+        public BannerBean[] newArray(int size) {
+            return new BannerBean[size];
+        }
+    };
 }
+

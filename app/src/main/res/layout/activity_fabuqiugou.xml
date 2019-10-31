@@ -36,7 +36,6 @@
             app:layout_constraintTop_toBottomOf="@+id/include6">
 
             <TextView
-
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -54,25 +53,25 @@
                 android:id="@+id/activity_fabuqiugou_company_name"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x64"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="@dimen/x250"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
-                android:textSize="@dimen/x30"
-                android:maxLength="30"
                 android:hint="请输入公司名称"
+                android:maxLength="30"
                 android:paddingLeft="16dp"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView12"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView12" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView25"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="产品分类:"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
@@ -80,25 +79,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView26"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="产品名称:"
-                android:textSize="@dimen/x30"
                 android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView25"
                 app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView27"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="包装规格:"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
@@ -106,12 +105,12 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView28"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="求购数量:"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
@@ -119,25 +118,25 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView29"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
-                android:textSize="@dimen/x30"
-                android:textColor="@color/erjibiaoti"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="付款方式:"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView28"
                 app:layout_constraintTop_toBottomOf="@+id/textView28" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView30"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x66"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="账期:"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
@@ -145,26 +144,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView31"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="需方所在地:"
                 android:layout_marginTop="@dimen/x64"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
+                android:text="需方所在地:"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView30"
                 app:layout_constraintTop_toBottomOf="@+id/activity_fabuqiugou_shoudongzhangqi" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView33"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="结束时间:"
                 android:layout_marginTop="@dimen/x66"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
+                android:text="结束时间:"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView31"
@@ -178,9 +177,9 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:hint="请输入产品名称"
+                android:maxLength="50"
                 android:paddingLeft="16dp"
                 android:textSize="@dimen/x30"
-                android:maxLength="50"
                 app:layout_constraintBottom_toBottomOf="@+id/textView26"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_company_name"
@@ -206,8 +205,8 @@
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:drawableRight="@mipmap/xialajiantou"
                 android:gravity="center"
-                android:text="请选择分类"
                 android:paddingRight="@dimen/x10"
+                android:text="请选择分类"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView25"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_company_name"
@@ -260,8 +259,8 @@
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:drawableRight="@mipmap/xialajiantou"
                 android:gravity="center"
-                android:text="请选择"
                 android:paddingRight="@dimen/x10"
+                android:text="请选择"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView29"
                 app:layout_constraintEnd_toEndOf="@+id/activity_fabuqiugou_qiugoushuliang"
@@ -275,8 +274,8 @@
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:drawableRight="@mipmap/xialajiantou"
                 android:gravity="center"
-                android:text="请选择"
                 android:paddingRight="@dimen/x10"
+                android:text="请选择"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView30"
                 app:layout_constraintEnd_toEndOf="@+id/activity_fabuqiugou_fukuanfangshi"
@@ -290,8 +289,8 @@
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:drawableRight="@mipmap/xialajiantou"
                 android:gravity="center"
-                android:text="请选择"
                 android:paddingRight="@dimen/x10"
+                android:text="请选择"
 
                 app:layout_constraintBottom_toBottomOf="@+id/textView31"
                 app:layout_constraintEnd_toEndOf="@+id/activity_fabuqiugou_zhangqi"
@@ -323,20 +322,20 @@
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:drawableRight="@mipmap/xialajiantou"
                 android:gravity="center"
-                android:text="选择结束日期"
                 android:paddingRight="@dimen/x10"
+                android:text="选择结束日期"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView33"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_address"
                 app:layout_constraintTop_toTopOf="@+id/textView33" />
 
             <TextView
-                android:drawablePadding="@dimen/x8"
-                android:drawableLeft="@mipmap/bitiantupian"
                 android:id="@+id/textView47"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x36"
+                android:drawableLeft="@mipmap/bitiantupian"
+                android:drawablePadding="@dimen/x8"
                 android:text="交货日期:"
                 android:textColor="@color/erjibiaoti"
                 android:textSize="@dimen/x30"
@@ -350,8 +349,8 @@
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:drawableRight="@mipmap/xialajiantou"
                 android:gravity="center"
-                android:text="选择交货日期"
                 android:paddingRight="@dimen/x10"
+                android:text="选择交货日期"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/textView47"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_jieshuriqi"
@@ -361,25 +360,25 @@
                 android:id="@+id/textView34"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x36"
                 android:text="详细说明:"
                 android:textColor="@color/erjibiaoti"
-                android:layout_marginTop="@dimen/x36"
                 android:textSize="@dimen/x30"
                 app:layout_constraintStart_toStartOf="@+id/textView47"
-                app:layout_constraintTop_toBottomOf="@+id/textView23" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_fabuqiugou_zhitongche_radiogroup" />
 
             <EditText
                 android:id="@+id/activity_fabuqiugou_xiangxishuoming"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
                 android:layout_marginEnd="8dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/background_shuruwenbenkuang"
-                android:maxLength="200"
                 android:gravity="top"
-                android:padding="10dp"
                 android:hint="说明在200字以内..."
+                android:maxLength="200"
                 android:minLines="3"
+                android:padding="10dp"
                 android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -401,14 +400,14 @@
                 android:id="@+id/activity_fabuqiugou_shoudongzhangqi"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x64"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="@dimen/x30"
+                android:layout_marginEnd="8dp"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:hint="勾选其它时间后可手动输入账期"
-                android:paddingLeft="16dp"
                 android:inputType="textPersonName"
-                android:textSize="@dimen/x30"
                 android:maxLength="20"
+                android:paddingLeft="16dp"
+                android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_zhangqi"
                 app:layout_constraintTop_toBottomOf="@+id/activity_fabuqiugou_zhangqi" />
@@ -430,11 +429,11 @@
                 android:id="@+id/textView23"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="@dimen/x10"
+                android:layout_marginEnd="8dp"
                 android:text="(交货日期不能小于结束日期)"
-                android:textSize="@dimen/x30"
                 android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/activity_fabuqiugou_jiaohuoriqi"
                 app:layout_constraintTop_toBottomOf="@+id/activity_fabuqiugou_jiaohuoriqi" />
@@ -444,9 +443,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:gravity="center"
+                android:paddingLeft="@dimen/x10"
                 android:text=""
                 android:textSize="@dimen/x30"
-                android:paddingLeft="@dimen/x10"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_qiugoushuliang"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_qiugoushuliang"
                 app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_qiugoushuliang" />
@@ -455,21 +454,21 @@
                 android:id="@+id/activity_fabuqiugou_zongliangwei"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:gravity="center"
                 android:text=""
                 android:textSize="@dimen/x30"
-                android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_danwei_text"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_danwei_text"
                 app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_danwei_text" />
 
             <TextView
-                android:textColor="@color/chunhongse"
                 android:id="@+id/activity_fabuqiugou_zongliang"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:textSize="@dimen/x30"
                 android:gravity="center"
                 android:text=""
+                android:textColor="@color/chunhongse"
+                android:textSize="@dimen/x30"
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_zongliangwei"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_zongliangwei"
                 app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_zongliangwei" />
@@ -484,6 +483,52 @@
                 app:layout_constraintBottom_toBottomOf="@+id/activity_fabuqiugou_zongliangwei"
                 app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_zongliang"
                 app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_zongliangwei" />
+
+            <TextView
+                android:id="@+id/textView392"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="求购直通车:"
+                android:layout_marginTop="@dimen/x16"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x30"
+                app:layout_constraintStart_toStartOf="@+id/textView47"
+                app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_zhitongche_radiogroup" />
+
+            <RadioGroup
+                android:id="@+id/activity_fabuqiugou_zhitongche_radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintStart_toStartOf="@+id/textView23"
+                app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+                <RadioButton
+                    android:id="@+id/activity_fabuqiugou_zhitongche_radiobutton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="同意平台推荐供应商直接联系"
+                    android:checked="true"
+                    android:textSize="@dimen/x24" />
+
+                <RadioButton
+                    android:id="@+id/activity_fabuqiugou_zhitongche_radiobutton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="不同意平台推荐供应商直接联系"
+                    android:textSize="@dimen/x24" />
+            </RadioGroup>
+
+            <ImageView
+                android:id="@+id/activity_fabuqiugou_zhitongche_wenhao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/x20"
+                android:paddingRight="8dp"
+                android:paddingBottom="8dp"
+                app:layout_constraintStart_toEndOf="@+id/activity_fabuqiugou_zhitongche_radiogroup"
+                app:layout_constraintTop_toTopOf="@+id/activity_fabuqiugou_zhitongche_radiogroup"
+                app:srcCompat="@mipmap/zhitongche_wenhao" />
 
 
         </android.support.constraint.ConstraintLayout>

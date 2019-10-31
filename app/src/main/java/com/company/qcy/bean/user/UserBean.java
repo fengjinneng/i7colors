@@ -24,6 +24,16 @@ public class UserBean implements Parcelable {
     private String loginName;
     private String communityPhoto;
     private Boolean needPhone;
+    private String userType;
+
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public Boolean getCompany() {
         return isCompany;
@@ -106,6 +116,9 @@ public class UserBean implements Parcelable {
     }
 
 
+    public UserBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -122,9 +135,7 @@ public class UserBean implements Parcelable {
         dest.writeString(this.loginName);
         dest.writeString(this.communityPhoto);
         dest.writeValue(this.needPhone);
-    }
-
-    public UserBean() {
+        dest.writeString(this.userType);
     }
 
     protected UserBean(Parcel in) {
@@ -137,9 +148,10 @@ public class UserBean implements Parcelable {
         this.loginName = in.readString();
         this.communityPhoto = in.readString();
         this.needPhone = (Boolean) in.readValue(Boolean.class.getClassLoader());
+        this.userType = in.readString();
     }
 
-    public static final Parcelable.Creator<UserBean> CREATOR = new Parcelable.Creator<UserBean>() {
+    public static final Creator<UserBean> CREATOR = new Creator<UserBean>() {
         @Override
         public UserBean createFromParcel(Parcel source) {
             return new UserBean(source);

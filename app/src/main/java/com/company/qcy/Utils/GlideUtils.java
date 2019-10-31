@@ -26,6 +26,17 @@ public class GlideUtils {
 
     // public static final int soWhite = R.color.white;
 
+
+    public static void loadImageDefault(Context context, String url, ImageView imageView) {
+        RequestOptions options = new RequestOptions()
+                .placeholder(R.drawable.place_500x500) //占位图
+                .error(R.drawable.place_500x500)       //错误图
+                // .priority(Priority.HIGH)
+                .diskCacheStrategy(DiskCacheStrategy.ALL);
+        Glide.with(context).load(url).apply(options).into(imageView);
+
+    }
+
     /*
      *加载图片(默认)
      */

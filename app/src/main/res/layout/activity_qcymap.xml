@@ -14,15 +14,15 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
-        <TextView
+        <ImageView
             android:id="@+id/activity_qcymap_back"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/x80"
-            android:layout_marginStart="8dp"
-            android:drawableLeft="@mipmap/back"
+            android:layout_height="@dimen/x100"
             android:drawablePadding="@dimen/x20"
-            android:gravity="center"
-            android:text="返回"
+            android:paddingLeft="@dimen/x30"
+            android:paddingRight="@dimen/x30"
+            android:src="@mipmap/back"
+            app:layout_constraintBottom_toTopOf="@+id/textView333"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,8 +41,9 @@
             android:paddingLeft="@dimen/x20"
             android:paddingRight="@dimen/x20"
             android:textSize="@dimen/x30"
+            android:maxLength="11"
             app:layout_constraintBottom_toBottomOf="@+id/activity_qcymap_back"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/activity_qcymap_join_us"
             app:layout_constraintStart_toEndOf="@+id/activity_qcymap_back"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -110,7 +111,6 @@
             android:id="@+id/textView333"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="8dp"
             android:background="@color/fengexian"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +141,16 @@
             app:layout_constraintEnd_toEndOf="@+id/activity_qcymap_searchText"
             app:layout_constraintTop_toTopOf="@+id/activity_qcymap_searchText"
             app:srcCompat="@mipmap/close" />
+
+        <TextView
+            android:id="@+id/activity_qcymap_join_us"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="加入我们"
+            app:layout_constraintBottom_toBottomOf="@+id/activity_qcymap_searchText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/activity_qcymap_searchText" />
 
     </android.support.constraint.ConstraintLayout>
 

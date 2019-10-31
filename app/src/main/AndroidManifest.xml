@@ -344,7 +344,10 @@
         <activity android:name=".ui.activity.zhuji.WodeJiejuefanganListActivity" />
         <activity android:name=".ui.activity.zhuji.WodeZhujiDingzhiDetailActivity" />
         <activity android:name=".ui.activity.zhuji.WodeFangAnDetailActivity" />
-        <activity android:name=".ui.activity.user.RegisterInfoActivity"></activity>
+        <activity android:name=".ui.activity.user.RegisterInfoActivity" />
+        <activity android:name=".ui.activity.kaifangshangcheng.KFSCVipActivity" />
+        <activity android:name=".ui.activity.user.QiyerenzhengActivity" />
+        <activity android:name=".ui.activity.zhuji.ZhujiQiyeListActivity" />
     </application>
 
 </manifest>

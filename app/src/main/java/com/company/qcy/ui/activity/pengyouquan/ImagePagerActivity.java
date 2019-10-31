@@ -27,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.blankj.utilcode.util.ImageUtils;
+import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SDCardUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
@@ -229,28 +231,36 @@ public class ImagePagerActivity extends BaseActivity implements View.OnClickList
                 imageView.setOnLongClickListener(new View.OnLongClickListener() {
                     @Override
                     public boolean onLongClick(View v) {
-                        chooseHeadDialog = new Dialog(context, R.style.BottomDialog);
-                        View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_save_img, null);
-                        chooseHeadDialog.setContentView(contentView);
-                        ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
-                        layoutParams.width = context.getResources().getDisplayMetrics().widthPixels;
-                        // layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                        contentView.setLayoutParams(layoutParams);
-                        chooseHeadDialog.getWindow().setGravity(Gravity.BOTTOM);
-                        chooseHeadDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
-                        chooseHeadDialog.setCancelable(true);
-                        chooseHeadDialog.setCanceledOnTouchOutside(true);
-                        chooseHeadDialog.show();
+                        if (ObjectUtils.isEmpty(chooseHeadDialog)) {
+                            chooseHeadDialog = new Dialog(context, R.style.BottomDialog);
+                            View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_save_img, null);
+                            chooseHeadDialog.setContentView(contentView);
+                            ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();
+                            layoutParams.width = context.getResources().getDisplayMetrics().widthPixels;
+                            // layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                            contentView.setLayoutParams(layoutParams);
+                            chooseHeadDialog.getWindow().setGravity(Gravity.BOTTOM);
+                            chooseHeadDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+                            chooseHeadDialog.setCancelable(true);
+                            chooseHeadDialog.setCanceledOnTouchOutside(true);
+                            contentView.findViewById(R.id.dialog_save_img_save).setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    chooseHeadDialog.dismiss();  // 选择之后，关闭dialog
+                                    MyCommonUtil.saveImageToSysAlbum(ImagePagerActivity.this, imageView);
 
-                        contentView.findViewById(R.id.dialog_save_img_save).setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                chooseHeadDialog.dismiss();  // 选择之后，关闭dialog
-                               MyCommonUtil.saveImageToSysAlbum(ImagePagerActivity.this,imageView);
 
-
+                                }
+                            });
+                        }
+                        if (!chooseHeadDialog.isShowing()) {
+                            try {
+                                chooseHeadDialog.show();
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-                        });
+                        }
+
                         return false;
                     }
                 });

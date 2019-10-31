@@ -33,7 +33,6 @@ allprojects {
             url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }
 
-        maven { url 'https://dl.bintray.com/umsdk/release' }
 
     }
 }

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.ObjectUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -28,15 +30,23 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
+import com.company.qcy.Utils.NetworkUtil;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
-import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.Utils.SignAndTokenUtil;
+import com.company.qcy.Utils.UserUtil;
+import com.company.qcy.Utils.share.ShareUtil;
 import com.company.qcy.adapter.qiugou.QiugouxiangqingRecyclerviewAdapter;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.BaojiaBean;
 import com.company.qcy.bean.qiugou.QiugouBean;
+import com.company.qcy.ui.activity.kaifangshangcheng.KFSCVipActivity;
+import com.company.qcy.ui.activity.kaifangshangcheng.QiyezizhiActivity;
+import com.company.qcy.ui.activity.pengyouquan.DavrenzhengActivity;
 import com.company.qcy.ui.activity.user.LoginActivity;
+import com.company.qcy.ui.activity.user.QiyerenzhengActivity;
+import com.company.qcy.ui.activity.user.ZhanghaozhongxinActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
@@ -74,6 +84,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
     private ImageView mActivityQiugouxiangqingThirdStar;
     private ImageView mActivityQiugouxiangqingSecondStar;
     private ImageView mActivityQiugouxiangqingFirstStar;
+    private ConstraintLayout zhitongcheLayout;
     /**
      * 暂无信息！
      */
@@ -112,6 +123,11 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
      * 设置
      */
     private TextView mToolbarText;
+    /**
+     * 查看联系方式
+     */
+    private TextView mActivityQiugouxiangqingChakan;
+    private ConstraintLayout mActivityQiugouxiangqingConstraintLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -241,6 +257,9 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         mToolbarText.setOnClickListener(this);
         mToolbarText.setVisibility(View.VISIBLE);
         mToolbarText.setText("分享");
+        mActivityQiugouxiangqingChakan = (TextView) findViewById(R.id.activity_qiugouxiangqing_chakan);
+        mActivityQiugouxiangqingChakan.setOnClickListener(this);
+        mActivityQiugouxiangqingConstraintLayout = (ConstraintLayout) findViewById(R.id.activity_qiugouxiangqing_constraintLayout);
     }
 
     private Long enquiryOfferId;
@@ -271,7 +290,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this,request,this);
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -357,6 +376,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         switch (msg.getCode()) {
             case MessageBean.Code.BAOJIACHENGGONG:
                 isReflash = true;
+                qiugouBean.setLoginUserRemainOfferCount(qiugouBean.getLoginUserRemainOfferCount() - 1);
                 addBaojialiebiaoData();
                 break;
 
@@ -405,55 +425,62 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         mActivityQiugouxiangqingShuoming.setText(qiugouBean.getDescription());
         mActivityQiugouxiangqingLishiqiugou.setText(qiugouBean.getEnquiryTimes() + "");
 
+
         //判断是本人吗？是
         if (StringUtils.equals("1", qiugouBean.getIsCharger())) {
             mActivityQiugouxiangqingWodefabu.setVisibility(View.VISIBLE);
             if (StringUtils.equals(getResources().getString(R.string.qiyefabu), qiugouBean.getPublishType())) {
-                mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
-                mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.qiyeyonghu));
                 mActivityQiugouxiangqingWodefabu.setBackground(getResources().getDrawable(R.drawable.background_wodefabu_qiye));
                 mActivityQiugouxiangqingCompany.setText(qiugouBean.getCompanyName());
             } else {
                 mActivityQiugouxiangqingWodefabu.setBackground(getResources().getDrawable(R.drawable.background_wodefabu_geren));
-                mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
-                mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.gerenfabu));
                 mActivityQiugouxiangqingCompany.setText(qiugouBean.getCompanyName2());
             }
 
-            mActivityQiugouxiangqingCanyubaojia.setVisibility(View.GONE);
             if (StringUtils.equals(qiugouBean.getStatus(), "1")) {
+                mActivityQiugouxiangqingConstraintLayout.setVisibility(View.VISIBLE);
                 mActivityQiugouxiangqingStatus.setVisibility(View.GONE);
                 mActivityQiugouxiangqingGuanbiqiugo.setVisibility(View.VISIBLE);
             } else {
-                mActivityQiugouxiangqingCanyubaojia.setVisibility(View.GONE);
+                mActivityQiugouxiangqingConstraintLayout.setVisibility(View.GONE);
                 mActivityQiugouxiangqingStatus.setVisibility(View.VISIBLE);
             }
 
+        }
 
+        if (StringUtils.equals(getResources().getString(R.string.qiyefabu), qiugouBean.getPublishType())) {
+            mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
+            mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.qiyeyonghu));
+        } else {
+            mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
+            mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.gerenfabu));
         }
 
         if (StringUtils.equals("0", qiugouBean.getIsCharger())) {
             mActivityQiugouxiangqingWodefabu.setVisibility(View.GONE);
             if (StringUtils.equals(getResources().getString(R.string.qiyefabu), qiugouBean.getPublishType())) {
-                mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
-                mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.qiyeyonghu));
-                mActivityQiugouxiangqingCompany.setText("********公司");
             } else {
                 mActivityQiugouxiangqingWodefabu.setBackground(getResources().getDrawable(R.drawable.background_wodefabu_geren));
-                mActivityQiugouxiangqingYonghushenfen.setText(qiugouBean.getPublishType());
-                mActivityQiugouxiangqingYonghushenfen.setBackground(getResources().getDrawable(R.mipmap.gerenfabu));
-                mActivityQiugouxiangqingCompany.setText("********公司");
             }
+            mActivityQiugouxiangqingCompany.setText("********公司");
 
             if (StringUtils.equals(qiugouBean.getStatus(), "1")) {
+                mActivityQiugouxiangqingConstraintLayout.setVisibility(View.VISIBLE);
                 mActivityQiugouxiangqingCanyubaojia.setVisibility(View.VISIBLE);
                 mActivityQiugouxiangqingStatus.setVisibility(View.GONE);
             } else {
-                mActivityQiugouxiangqingCanyubaojia.setVisibility(View.GONE);
+                mActivityQiugouxiangqingConstraintLayout.setVisibility(View.GONE);
                 mActivityQiugouxiangqingStatus.setVisibility(View.VISIBLE);
             }
 
         }
+
+        if (StringUtils.equals("1", qiugouBean.getShowInfo())) {
+            zhitongcheLayout.setVisibility(View.VISIBLE);
+            mActivityQiugouxiangqingChakan.setVisibility(View.VISIBLE);
+            mActivityQiugouxiangqingConstraintLayout.setVisibility(View.VISIBLE);
+        }
+
 
         //设置求购时间
         if (StringUtils.isEmpty(qiugouBean.getSurplusDay())) {
@@ -558,7 +585,7 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
-                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this,request,this);
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this, request, this);
                             return;
                         }
                         ToastUtils.showShort(msg);
@@ -670,8 +697,19 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
         mActivityQiugouxiangqingThirdStar = (ImageView) view.findViewById(R.id.activity_qiugouxiangqing_third_star);
         mActivityQiugouxiangqingSecondStar = (ImageView) view.findViewById(R.id.activity_qiugouxiangqing_second_star);
         mActivityQiugouxiangqingFirstStar = (ImageView) view.findViewById(R.id.activity_qiugouxiangqing_first_star);
+        zhitongcheLayout = view.findViewById(R.id.activity_qiugouxiangqing_zhitongche);
         return view;
     }
+
+    private AlertDialog.Builder baojiaBuilder;
+    private AlertDialog baojiaDialog;
+    private ImageView baojiaDialogClose;
+    private TextView baojiaDialogContent;
+    private TextView baojiaDialogCancle;
+    private TextView baojiaDialogCommit;
+    //需要升级到企业用户或者升级到付费用户
+    //1为升级企业，2位升级付费用户
+    private int baojiaDialogStatus = 0;
 
     @Override
     public void onClick(View v) {
@@ -681,16 +719,106 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
 
             //参与报价
             case R.id.activity_qiugouxiangqing_canyubaojia:
+
+
                 if (StringUtils.isEmpty(SPUtils.getInstance().getString("isLogin"))) {
                     ActivityUtils.startActivity(LoginActivity.class);
-
                 } else {
 
-                    Intent intent = new Intent(QiugouxiangqingActivity.this, CanyubaojiaActivity.class);
-                    intent.putExtra("enquiryId", enquiryId);
-                    intent.putExtra("productName", qiugouBean.getProductName());
-                    intent.putExtra("numUnit", qiugouBean.getNumUnit());
-                    ActivityUtils.startActivity(intent);
+                    if (ObjectUtils.isEmpty(baojiaBuilder)) {
+                        baojiaBuilder = new AlertDialog.Builder(QiugouxiangqingActivity.this);
+                        View inflate = LayoutInflater.from(QiugouxiangqingActivity.this).inflate(R.layout.dialog_tongyong, null);
+                        baojiaBuilder.setView(inflate);
+                        baojiaDialog = baojiaBuilder.create();
+
+                        baojiaDialogClose = inflate.findViewById(R.id.dialog_tongyong_close);
+                        baojiaDialogContent = inflate.findViewById(R.id.dialog_tongyong_content);
+                        baojiaDialogCancle = inflate.findViewById(R.id.dialog_tongyong_button1);
+                        baojiaDialogCommit = inflate.findViewById(R.id.dialog_tongyong_button2);
+
+                        baojiaDialogClose.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                baojiaDialog.dismiss();
+                            }
+                        });
+
+                        baojiaDialogCancle.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                baojiaDialog.dismiss();
+                            }
+                        });
+
+                        baojiaDialogCommit.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                switch (baojiaDialogStatus) {
+                                    case 1:
+                                        ActivityUtils.startActivity(ZhanghaozhongxinActivity.class);
+                                        break;
+                                    case 2:
+                                        ActivityUtils.startActivity(KFSCVipActivity.class);
+                                        break;
+                                }
+
+                            }
+                        });
+                    }
+
+                    if (StringUtils.equals(getResources().getString(R.string.geren), SPUtils.getInstance().getString("userType"))) {
+
+                        if (!ObjectUtils.isEmpty(qiugouBean.getLoginUserRemainOfferCount())) {
+
+                            if (qiugouBean.getLoginUserRemainOfferCount() > 0) {
+                                Intent intent = new Intent(QiugouxiangqingActivity.this, CanyubaojiaActivity.class);
+                                intent.putExtra("enquiryId", enquiryId);
+                                intent.putExtra("productName", qiugouBean.getProductName());
+                                intent.putExtra("numUnit", qiugouBean.getNumUnit());
+                                ActivityUtils.startActivity(intent);
+
+                            } else {
+                                baojiaDialogStatus = 1;
+                                baojiaDialogContent.setText("您的报价次数不足,请升级为企业用户!");
+                                baojiaDialogCancle.setText("取消");
+                                baojiaDialogCommit.setText("升级企业用户");
+                                if (!baojiaDialog.isShowing()) {
+                                    baojiaDialog.show();
+                                }
+                            }
+                        }
+
+
+                    } else if (StringUtils.equals(getResources().getString(R.string.putongqiye), SPUtils.getInstance().getString("userType"))) {
+
+                        if (!ObjectUtils.isEmpty(qiugouBean.getLoginUserRemainOfferCount())) {
+
+                            if (qiugouBean.getLoginUserRemainOfferCount() > 0) {
+                                Intent intent = new Intent(QiugouxiangqingActivity.this, CanyubaojiaActivity.class);
+                                intent.putExtra("enquiryId", enquiryId);
+                                intent.putExtra("productName", qiugouBean.getProductName());
+                                intent.putExtra("numUnit", qiugouBean.getNumUnit());
+                                ActivityUtils.startActivity(intent);
+
+                            } else {
+
+                                baojiaDialogStatus = 2;
+                                baojiaDialogContent.setText("您的报价次数不足,请升级为付费企业用户!");
+                                baojiaDialogCancle.setText("取消");
+                                baojiaDialogCommit.setText("升级付费企业用户");
+                                if (!baojiaDialog.isShowing()) {
+                                    baojiaDialog.show();
+                                }
+                            }
+                        }
+
+                    } else {
+                        Intent intent = new Intent(QiugouxiangqingActivity.this, CanyubaojiaActivity.class);
+                        intent.putExtra("enquiryId", enquiryId);
+                        intent.putExtra("productName", qiugouBean.getProductName());
+                        intent.putExtra("numUnit", qiugouBean.getNumUnit());
+                        ActivityUtils.startActivity(intent);
+                    }
 
                 }
                 break;
@@ -721,13 +849,238 @@ public class QiugouxiangqingActivity extends BaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.toolbar_text:
-                if(ObjectUtils.isEmpty(qiugouBean)){
+                if (ObjectUtils.isEmpty(qiugouBean)) {
                     ToastUtils.showShort("分享异常");
                     return;
                 }
-                ShareUtil.shareEnquiry(QiugouxiangqingActivity.this,"【求购】"+qiugouBean.getProductName(),
-                        "地区:"+qiugouBean.getLocationProvince() + " " + qiugouBean.getLocationCity()+"\n"+"求购重量:"+qiugouBean.getNum()+"kg",qiugouBean.getId());
+                ShareUtil.shareEnquiry(QiugouxiangqingActivity.this, "【求购】" + qiugouBean.getProductName(),
+                        "地区:" + qiugouBean.getLocationProvince() + " " +
+                                qiugouBean.getLocationCity() + "\n" + "求购重量:" + qiugouBean.getNum() + "kg", qiugouBean.getId());
                 break;
+            case R.id.activity_qiugouxiangqing_chakan:
+
+                if (NetworkUtil.isNetworkAvailable(this)) {
+
+                    if (UserUtil.isLogin()) {
+                        checkedPhone();
+                    } else {
+                        ActivityUtils.startActivity(LoginActivity.class);
+                    }
+                } else {
+                    ToastUtils.showShort("当前网络不可用!");
+                }
+
         }
+
     }
+
+
+    AlertDialog.Builder zhitongcheBuilder;
+    TextView zhitongcheTitle;
+    TextView zhitongcheText;
+    TextView zhitongcheHujiao;
+    TextView zhitongcheFufei;
+    AlertDialog alertDialog;
+    //查看联系方式后获得的电话
+    private String callPhone;
+
+
+    //查看联系方式后，付费会员展示确定按钮
+    private boolean sure;
+
+    private void checkedPhone() {
+
+        View inflate;
+        ImageView close;
+
+        if (ObjectUtils.isEmpty(zhitongcheBuilder)) {
+            zhitongcheBuilder = new AlertDialog.Builder(QiugouxiangqingActivity.this);
+            inflate = LayoutInflater.from(QiugouxiangqingActivity.this).inflate(R.layout.dialog_tongyong, null);
+            zhitongcheBuilder.setView(inflate);
+            alertDialog = zhitongcheBuilder.create();
+
+            close = inflate.findViewById(R.id.dialog_tongyong_close);
+            zhitongcheTitle = inflate.findViewById(R.id.dialog_tongyong_title);
+            zhitongcheText = inflate.findViewById(R.id.dialog_tongyong_content);
+            zhitongcheFufei = inflate.findViewById(R.id.dialog_tongyong_button2);
+            zhitongcheHujiao = inflate.findViewById(R.id.dialog_tongyong_button1);
+
+            close.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    alertDialog.dismiss();
+                }
+            });
+
+            zhitongcheFufei.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (sure) {
+                        alertDialog.dismiss();
+                    } else {
+                        ActivityUtils.startActivity(KFSCVipActivity.class);
+                    }
+                }
+            });
+
+            zhitongcheHujiao.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (StringUtils.isEmpty(callPhone)) {
+                        PermisionUtil.callKefu(QiugouxiangqingActivity.this);
+                    } else {
+                        PermisionUtil.callPhone(QiugouxiangqingActivity.this, callPhone);
+                    }
+                }
+            });
+        }
+
+        //已经查看过该求购了
+        if (StringUtils.equals("1", qiugouBean.getLoginUserIsShowInfo())) {
+            zhitongcheTitle.setText("本次查看信息不扣除剩余次数!");
+            requestPhone();
+
+        } else {
+
+            if (StringUtils.equals(getResources().getString(R.string.geren), SPUtils.getInstance().getString("userType")) ||
+                    StringUtils.equals(getResources().getString(R.string.putongqiye), SPUtils.getInstance().getString("userType"))) {
+
+                //个人用户和普通认证账户
+                zhitongcheText.setText("您还不是付费会员，无法查看。如果您已是付费会员无法查看，请联系客服!");
+                zhitongcheHujiao.setText("联系客服");
+                zhitongcheFufei.setText("付费会员");
+                zhitongcheHujiao.setVisibility(View.VISIBLE);
+                zhitongcheFufei.setVisibility(View.VISIBLE);
+                alertDialog.show();
+            } else if (StringUtils.equals(getResources().getString(R.string.fufeiqiye), SPUtils.getInstance().getString("userType"))) {
+
+                if (!ObjectUtils.isEmpty(qiugouBean.getLoginUserRemainShowInfoCount())) {
+
+                    if (qiugouBean.getLoginUserRemainShowInfoCount() <= 0) {
+                        //没有查看机会了
+                        zhitongcheText.setText("您本月的查看次数已用完!");
+                        zhitongcheHujiao.setVisibility(View.GONE);
+                        zhitongcheFufei.setText("确定");
+                        zhitongcheFufei.setVisibility(View.VISIBLE);
+                        sure =true;
+                        alertDialog.show();
+                    } else if (qiugouBean.getLoginUserRemainShowInfoCount() > 0) {
+
+                        isSureCheck();
+
+                    }
+                }
+            }
+        }
+
+    }
+
+
+    //是否确认要查看的弹窗
+    private void isSureCheck() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View inflate = LayoutInflater.from(QiugouxiangqingActivity.this).inflate(R.layout.dialog_tongyong, null);
+        builder.setView(inflate);
+        AlertDialog isSureDialog = builder.create();
+
+        ImageView close = inflate.findViewById(R.id.dialog_tongyong_close);
+        TextView content = inflate.findViewById(R.id.dialog_tongyong_content);
+        TextView button1 = inflate.findViewById(R.id.dialog_tongyong_button1);
+        TextView button2 = inflate.findViewById(R.id.dialog_tongyong_button2);
+
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isSureDialog.dismiss();
+            }
+        });
+
+        content.setText("本次查看将会消耗一次机会,是否确定查看?");
+
+        button1.setText("取消");
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isSureDialog.dismiss();
+            }
+        });
+
+        button2.setText("确定");
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestPhone();
+                isSureDialog.dismiss();
+                alertDialog.show();
+            }
+        });
+
+        isSureDialog.show();
+
+    }
+
+
+    private void requestPhone() {
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.ZHITONGCHEINFO)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("token", SPUtils.getInstance().getString("token"))
+                .params("enquiryId", enquiryId);
+
+        DialogStringCallback stringCallback = new DialogStringCallback(this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("ZHITONGCHEINFO", response.body());
+
+                try {
+                    if (response.code() == 200) {
+
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+
+                            if (!ObjectUtils.isEmpty(data)) {
+                                String phone = data.getString("phone");
+                                Integer remainCount = data.getInteger("remainCount");
+                                if (remainCount == null) {
+                                    return;
+                                }
+
+                                if (remainCount >= 0) {
+                                    callPhone = phone;
+                                    zhitongcheText.setText("查看成功，您本月剩余 " + remainCount + " 次查看采购商联系方式的机会！");
+                                    //设置成已经查看过了
+                                    qiugouBean.setLoginUserIsShowInfo("1");
+                                    zhitongcheFufei.setVisibility(View.GONE);
+                                    zhitongcheHujiao.setText("一键呼叫");
+                                    zhitongcheHujiao.setVisibility(View.VISIBLE);
+                                    alertDialog.show();
+                                }
+                            }
+
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(QiugouxiangqingActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+    }
+
 }

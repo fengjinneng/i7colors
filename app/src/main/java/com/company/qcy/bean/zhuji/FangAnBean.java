@@ -184,6 +184,24 @@ public class FangAnBean {
 //        private Object publishType;
 //        private Object solutionList;
         private String diyNumStr;
+        private String treatmentProcess;
+        private String pH;
+
+        public String getTreatmentProcess() {
+            return treatmentProcess;
+        }
+
+        public void setTreatmentProcess(String treatmentProcess) {
+            this.treatmentProcess = treatmentProcess;
+        }
+
+        public String getpH() {
+            return pH;
+        }
+
+        public void setpH(String pH) {
+            this.pH = pH;
+        }
 
         public String getDiyNumStr() {
             return diyNumStr;

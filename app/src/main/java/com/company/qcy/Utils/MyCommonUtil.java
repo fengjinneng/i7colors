@@ -21,7 +21,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SDCardUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.TimeUtils;
@@ -35,6 +37,19 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MyCommonUtil {
+
+
+
+    //判断是企业还是个人用户
+    public static boolean isCompany() {
+
+        if(ObjectUtils.isEmpty(SPUtils.getInstance().getBoolean("isCompany"))){
+            return false;
+        }
+
+        return SPUtils.getInstance().getBoolean("isCompany");
+    }
+
 
 
     //加载朋友圈头像

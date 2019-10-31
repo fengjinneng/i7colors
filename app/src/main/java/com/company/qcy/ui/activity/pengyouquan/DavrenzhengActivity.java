@@ -139,18 +139,18 @@ public class DavrenzhengActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.activity_davrenzhen_img:
                 AndPermission.with(this)
-                        .runtime()
-                        .permission(Permission.Group.STORAGE, Permission.Group.CAMERA)
-                        .onGranted(permissions -> {
-                            // Storage permission are allowed.
-                            MatisseImageUtil.chooseOnlyOnePhoto(this, REQUEST_CODE_CHOOSE);
+                    .runtime()
+                    .permission(Permission.Group.STORAGE, Permission.Group.CAMERA)
+                    .onGranted(permissions -> {
+                        // Storage permission are allowed.
+                        MatisseImageUtil.chooseOnlyOnePhoto(this, REQUEST_CODE_CHOOSE);
 
-                        })
-                        .onDenied(permissions -> {
-                            // Storage permission are not allowed.
-                            ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
-                        })
-                        .start();
+                    })
+                    .onDenied(permissions -> {
+                        // Storage permission are not allowed.
+                        ToastUtils.showShort("权限申请失败,您可能无法使用某些功能");
+                    })
+                    .start();
 
                 break;
         }

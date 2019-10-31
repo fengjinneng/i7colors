@@ -36,6 +36,42 @@ public class QiugouBean {
     private String surplusMin;
     private String surplusSec;
     private String isCharger;
+    private String showInfo;
+    private String loginUserIsShowInfo;
+    private Integer loginUserRemainOfferCount;
+    private Integer loginUserRemainShowInfoCount;
+
+    public Integer getLoginUserRemainOfferCount() {
+        return loginUserRemainOfferCount;
+    }
+
+    public void setLoginUserRemainOfferCount(Integer loginUserRemainOfferCount) {
+        this.loginUserRemainOfferCount = loginUserRemainOfferCount;
+    }
+
+    public Integer getLoginUserRemainShowInfoCount() {
+        return loginUserRemainShowInfoCount;
+    }
+
+    public void setLoginUserRemainShowInfoCount(Integer loginUserRemainShowInfoCount) {
+        this.loginUserRemainShowInfoCount = loginUserRemainShowInfoCount;
+    }
+
+    public String getLoginUserIsShowInfo() {
+        return loginUserIsShowInfo;
+    }
+
+    public void setLoginUserIsShowInfo(String loginUserIsShowInfo) {
+        this.loginUserIsShowInfo = loginUserIsShowInfo;
+    }
+
+    public String getShowInfo() {
+        return showInfo;
+    }
+
+    public void setShowInfo(String showInfo) {
+        this.showInfo = showInfo;
+    }
 
     public String getIsCharger() {
         return isCharger;

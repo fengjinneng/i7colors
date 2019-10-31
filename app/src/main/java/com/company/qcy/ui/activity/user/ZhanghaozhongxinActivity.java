@@ -1,25 +1,9 @@
 package com.company.qcy.ui.activity.user;
 
-import android.Manifest;
-import android.app.Dialog;
-import android.content.ContentValues;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,38 +16,24 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.MainActivity;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
-import com.company.qcy.Utils.GifSizeFilter;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.MatisseImageUtil;
 import com.company.qcy.Utils.MyCommonUtil;
-import com.company.qcy.Utils.MyGlideEngine;
+import com.company.qcy.Utils.PermisionUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
-import com.company.qcy.ui.activity.pengyouquan.MyDyeInfoActivity;
-import com.company.qcy.ui.activity.pengyouquan.PubulishPYQActivity;
 import com.githang.statusbar.StatusBarCompat;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
+import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.Permission;
-import com.zhihu.matisse.Matisse;
-import com.zhihu.matisse.MimeType;
-import com.zhihu.matisse.engine.impl.GlideEngine;
-import com.zhihu.matisse.filter.Filter;
-import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import id.zelory.compressor.Compressor;
 
 public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnClickListener {
 
@@ -103,7 +73,7 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhanghaozhongxin);
-        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.chunhongse),false);
+        StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.chunhongse), false);
         initView();
     }
 
@@ -118,7 +88,13 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
                 ActivityUtils.startActivity(MainActivity.class);
                 break;
             case MessageBean.Code.CHANGEPERSONHEADIMG:
-                MyCommonUtil.jiazaitouxiang(this,msg.getMeaasge(),mActivityZhanghaozhongxinImg);
+                MyCommonUtil.jiazaitouxiang(this, msg.getMeaasge(), mActivityZhanghaozhongxinImg);
+                break;
+
+            //盛情了企业认证
+            case MessageBean.Code.QIYERENZHENG:
+                renzhengStatus = 2;
+                mActivityZhanghaozhongxinShenqing.setText("正在申请中...");
                 break;
         }
     }
@@ -165,6 +141,104 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
             mActivityZhanghaozhongxinShenfen2.setTextColor(getResources().getColor(R.color.lanse));
             mActivityZhanghaozhongxinShenqing.setVisibility(View.VISIBLE);
         }
+
+        if (StringUtils.equals(getResources().getString(R.string.geren), SPUtils.getInstance().getString("userType"))) {
+            getQiyeRengzhengStatu();
+            mActivityZhanghaozhongxinShenqing.setVisibility(View.VISIBLE);
+        } else {
+            mActivityZhanghaozhongxinShenqing.setVisibility(View.INVISIBLE);
+        }
+
+    }
+
+    private int renzhengStatus;
+
+    //企业信息ID
+    private String qiyexinxiId;
+
+    //企业用户ID
+    private String companyId;
+
+    //企业认证名字
+    private String companyName;
+
+    private void getQiyeRengzhengStatu() {
+
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QIYERENZHENSTATUS)
+                .tag(this)
+                .params("token", SPUtils.getInstance().getString("token"))
+                .params("sign", SPUtils.getInstance().getString("sign"));
+
+        DialogStringCallback stringCallback = new DialogStringCallback(ZhanghaozhongxinActivity.this) {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.e("QIYERENZHENSTATUS", response.body());
+
+                try {
+                    JSONObject jsonObject = JSONObject.parseObject(response.body());
+                    String msg = jsonObject.getString("msg");
+                    if (response.code() == 200) {
+
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONObject data = jsonObject.getJSONObject("data");
+                            //status=empty,未进行企业认证status= wait_audit,审核中；status=checked;已锁定；status=audit_fail,审核未通过；status=audit审核通过
+                            String status = data.getString("status");
+                            if (StringUtils.isEmpty(status)) {
+                                return;
+                            }
+
+                            switch (status) {
+                                //未进行企业认证
+                                case "empty":
+                                    mActivityZhanghaozhongxinShenqing.setText("申请成为企业账户");
+                                    renzhengStatus = 1;
+                                    break;
+                                //审核中
+                                case "wait_audit":
+                                    mActivityZhanghaozhongxinShenqing.setText("正在审核中...");
+                                    renzhengStatus = 2;
+                                    break;
+                                //已锁定
+                                case "checked":
+                                    mActivityZhanghaozhongxinShenqing.setText("已锁定,请联系客服");
+                                    renzhengStatus = 3;
+                                    break;
+                                //审核未通过
+                                case "audit_fail":
+                                    mActivityZhanghaozhongxinShenqing.setText("审核未通过,点击重新申请");
+                                    renzhengStatus = 4;
+                                    qiyexinxiId = data.getString("id");
+                                    companyId = data.getString("companyId");
+                                    companyName = data.getString("companyName");
+                                    break;
+                                //审核通过
+                                case "audit":
+                                    mActivityZhanghaozhongxinShenqing.setText("审核通过,重新启动APP生效!");
+                                    break;
+                            }
+
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(ZhanghaozhongxinActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+
     }
 
     @Override
@@ -178,10 +252,10 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
             default:
                 break;
             case R.id.activity_zhanghaozhongxin_img:
-                Intent i = new Intent(this,ChoiceHeadImageActivity.class);
-                i.putExtra("imgUrl",SPUtils.getInstance().getString("photo"));
-                i.putExtra("from","mine");
-                i.putExtra("iszhanghaozhongxin","1");
+                Intent i = new Intent(this, ChoiceHeadImageActivity.class);
+                i.putExtra("imgUrl", SPUtils.getInstance().getString("photo"));
+                i.putExtra("from", "mine");
+                i.putExtra("iszhanghaozhongxin", "1");
                 ActivityUtils.startActivity(i);
 
                 break;
@@ -190,7 +264,44 @@ public class ZhanghaozhongxinActivity extends BaseActivity implements View.OnCli
 
                 break;
             case R.id.activity_zhanghaozhongxin_shenqing:
+                switch (renzhengStatus) {
+                    //未进行企业认证
+                    case 1:
+                        Intent intent1 = new Intent(ZhanghaozhongxinActivity.this, QiyerenzhengActivity.class);
+                        intent1.putExtra("status", 1);
+                        ActivityUtils.startActivity(intent1);
 
+                        break;
+
+                    //审核中
+                    case 2:
+                        Intent intent2 = new Intent(ZhanghaozhongxinActivity.this, QiyerenzhengActivity.class);
+                        intent2.putExtra("status", 2);
+                        ActivityUtils.startActivity(intent2);
+                        break;
+
+                    //已锁定
+                    case 3:
+                        PermisionUtil.callKefu(ZhanghaozhongxinActivity.this);
+                        break;
+
+                    //审核未通过
+                    case 4:
+                        Intent intent4 = new Intent(ZhanghaozhongxinActivity.this, QiyerenzhengActivity.class);
+                        intent4.putExtra("status", 4);
+
+                        if(StringUtils.isEmpty(qiyexinxiId)||StringUtils.isEmpty(companyId)||StringUtils.isEmpty(companyName)){
+                            ToastUtils.showShort("信息有误，请稍候重试!");
+                            return;
+                        }
+
+                        intent4.putExtra("qiyexinxiId", qiyexinxiId);
+                        intent4.putExtra("companyId", companyId);
+                        intent4.putExtra("companyName", companyName);
+                        ActivityUtils.startActivity(intent4);
+                        break;
+
+                }
                 break;
             case R.id.activity_zhanghaozhongxin_back:
                 finish();

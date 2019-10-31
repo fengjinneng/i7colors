@@ -3,11 +3,12 @@ package com.company.qcy.fragment.home;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.util.VersionInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,9 +31,7 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.blankj.utilcode.util.Utils;
 import com.company.qcy.R;
-import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
@@ -42,7 +41,6 @@ import com.company.qcy.adapter.vlayout.QiugouLayoutAdapter;
 import com.company.qcy.adapter.vlayout.SingleAdvLayoutAdapter;
 import com.company.qcy.adapter.vlayout.SingleAdvLayoutAdapter2;
 import com.company.qcy.adapter.vlayout.SingleTitleLayoutAdapter;
-import com.company.qcy.base.BaseActivity;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.base.SearchActivity;
 import com.company.qcy.bean.BannerBean;
@@ -67,7 +65,6 @@ import com.yanzhenjie.permission.Permission;
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -106,16 +103,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if(!hidden){
-            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise),true);
+        if (!hidden) {
+            StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), true);
         }
     }
+
+    private boolean alreadyLoadData;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise),true);
+        StatusBarCompat.setStatusBarColor(getActivity(), getActivity().getResources().getColor(R.color.baise), true);
     }
 
     @Override
@@ -139,7 +138,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
         AndPermission.with(this)
                 .runtime()
-                .permission(Permission.Group.STORAGE,Permission.Group.LOCATION)
+                .permission(Permission.Group.STORAGE, Permission.Group.LOCATION)
                 .onGranted(permissions -> {
                     // Storage permission are allowed.
                 })
@@ -183,11 +182,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 .params("sign", SPUtils.getInstance().getString("sign"))
                 .params("pageNo", 1)
                 .params("pageSize", 8)
-                .params("androidVersionCode",AppUtils.getAppVersionCode())
+                .params("androidVersionCode", AppUtils.getAppVersionCode())
                 .params("token", SPUtils.getInstance().getString("token"))
-                .params("registrationId",SPUtils.getInstance().getString("registrationId"))
+                .params("registrationId", SPUtils.getInstance().getString("registrationId"))
                 .params("deviceNo", DeviceUtils.getAndroidID())
-                .params("platform",getResources().getString(R.string.app_android));
+                .params("platform", getResources().getString(R.string.app_android));
 
         StringCallback stringCallback = new StringCallback() {
             @Override
@@ -204,6 +203,18 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                             if (ObjectUtils.isEmpty(data)) {
                                 return;
                             }
+                            if (!StringUtils.isEmpty(data.getString("userType"))) {
+                                SPUtils.getInstance().put("userType", data.getString("userType"));
+                            }
+
+                            if (!StringUtils.isEmpty(data.getString("companyName"))) {
+                                SPUtils.getInstance().put("companyName", data.getString("companyName"));
+                            }
+
+                            if (!ObjectUtils.isEmpty(data.getBoolean("isCompany"))) {
+                                SPUtils.getInstance().put("isCompany", data.getBoolean("isCompany"));
+                            }
+
                             String login_status = data.getString("login_status");
                             if (StringUtils.equals(getResources().getString(R.string.NO_LOGIN), login_status)) {
                                 SPUtils.getInstance().clear();
@@ -226,9 +237,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
                             UpdateBean updateBean = androidVersion.toJavaObject(UpdateBean.class);
 
-                            if(StringUtils.equals("1",updateBean.getHasUpdate())){
-                                EventBus.getDefault().post(new MessageBean(MessageBean.Code.NEEDUPDATEAPP, updateBean));
+
+                            if (!alreadyLoadData) {
+                                if (StringUtils.equals("1", updateBean.getHasUpdate())) {
+                                    EventBus.getDefault().post(new MessageBean(MessageBean.Code.NEEDUPDATEAPP, updateBean));
+                                } else {
+                                    addHuodongDialog();
+                                }
                             }
+
+                            alreadyLoadData = true;
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -259,6 +277,54 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         SingleLayoutHelper helper = new SingleLayoutHelper();
         advAdapter = new SingleAdvLayoutAdapter2(context, helper, 1, advDatas);
         delegateAdapter.addAdapter(advAdapter);
+    }
+
+
+    private void addHuodongDialog() {
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "APP_Index_Ad");
+
+
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("APP_Index_Ad", response.body());
+
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+//                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
+                            }
+                            List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+
+                            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                            AdDialogFragment myDialogFragment = AdDialogFragment.newInstance(bannerBeans.get(0));
+
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.add(myDialogFragment, "dialog");
+                            fragmentTransaction.commitAllowingStateLoss();
+
+
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+            }
+        };
+
+        request.execute(stringCallback);
     }
 
     private void addAdvData() {
@@ -418,7 +484,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private void setBannerData() {
         SingleLayoutHelper helper = new SingleLayoutHelper();
-        bannerAdapter = new SingleAdvLayoutAdapter(context, helper, 1, bannerDatas,bannerUrlDatas);
+        bannerAdapter = new SingleAdvLayoutAdapter(context, helper, 1, bannerDatas, bannerUrlDatas);
         delegateAdapter.addAdapter(bannerAdapter);
     }
 

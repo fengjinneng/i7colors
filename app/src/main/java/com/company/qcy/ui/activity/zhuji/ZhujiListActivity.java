@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,11 +14,13 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.NetworkUtil;
 import com.company.qcy.Utils.PermisionUtil;
@@ -53,10 +56,17 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
      */
     private Button mActivityZhujiListFabu;
 
+    private Long specialId;
+    private String imgUrl;
+    private String name;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_zhuji_list);
+        specialId = getIntent().getLongExtra("specialId",0);
+        imgUrl = getIntent().getStringExtra("imgUrl");
+        name = getIntent().getStringExtra("name");
         initView();
     }
 
@@ -135,9 +145,22 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
             }
         });
 
-
+        addHeadView();
         mToolbarTitle.setText("助剂定制");
 
+    }
+
+
+    private void addHeadView() {
+        if(StringUtils.isEmpty(imgUrl)){
+            return;
+        }
+
+        View inflate = LayoutInflater.from(this).inflate(R.layout.head_img_huodong, null);
+        ImageView img = inflate.findViewById(R.id.head_img_huodong_img);
+        GlideUtils.loadImageRct(context, imgUrl, img);
+
+        adapter.addHeaderView(inflate);
     }
 
     @Override
@@ -175,9 +198,10 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
         params.put("sign", SPUtils.getInstance().getString("sign"));
         params.put("token", SPUtils.getInstance().getString("token"));
         params.put("pageNo", pageNo);
+        params.put("specialId",specialId);
         params.put("pageSize", 20);
 
-        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.ZHUJILIST)
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.SPECIALZHUJILIST)
                 .tag(this)
                 .params(params);
 
@@ -185,7 +209,7 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onSuccess(Response<String> response) {
                 refreshLayout.setRefreshing(false);
-                LogUtils.v("ZHUJILIST", response.body());
+                LogUtils.v("SPECIALZHUJILIST", response.body());
 
                 try {
                     if (response.code() == 200) {
@@ -235,7 +259,14 @@ public class ZhujiListActivity extends BaseActivity implements View.OnClickListe
                     return;
                 }
                 if (UserUtil.isLogin()) {
-                    ActivityUtils.startActivity(PubulishZhujiDiyActivity.class);
+                    Intent intent = new Intent(this,PubulishZhujiDiyActivity.class);
+                    if(StringUtils.isEmpty(name)||ObjectUtils.isEmpty(specialId)){
+                        ToastUtils.showShort("数据错误！");
+                        return;
+                    }
+                    intent.putExtra("name",name);
+                    intent.putExtra("specialId",specialId);
+                    ActivityUtils.startActivity(intent);
                 } else {
                     ActivityUtils.startActivity(LoginActivity.class);
                 }

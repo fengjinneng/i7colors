@@ -101,7 +101,7 @@
         android:layout_width="0dp"
         android:layout_height="26dp"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/item_chanpindating_yijianhujiao"
         app:layout_constraintEnd_toStartOf="@+id/item_chanpindating_yijianhujiao"
         app:layout_constraintStart_toEndOf="@+id/item_chanpindating_img"
@@ -136,7 +136,6 @@
             android:id="@+id/textView125"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:text="元/KG"
             android:textColor="@color/chunhongse"
 

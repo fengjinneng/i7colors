@@ -1,21 +1,26 @@
 package com.company.qcy.ui.activity.qiugoudating;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
@@ -128,10 +133,21 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
      */
     private TextView mToolbarTitle;
     private ImageView mToolbarBack;
-
     /**
-     * 发布求购
+     * 同意平台推荐供应商直接联系
      */
+    private ImageView mActivityFabuqiugouZhitongcheWenhao;
+
+
+    //是否参与直通车  1参与直通车，0不参与
+    private int zhitongche = 1;
+    /**
+     * 同意平台推荐供应商直接联系
+     */
+    /**
+     * 不同意平台推荐供应商直接联系
+     */
+    private RadioGroup mActivityFabuqiugouZhitongcheRadiogroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +191,8 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
         mActivityFabuqiugouZongliangkg = (TextView) findViewById(R.id.activity_fabuqiugou_zongliangkg);
         mActivityFabuqiugouDanweiText = (TextView) findViewById(R.id.activity_fabuqiugou_danwei_text);
         mActivityFabuqiugouShoudongzhangqi.setEnabled(false);
+
+        mActivityFabuqiugouZhitongcheRadiogroup = (RadioGroup) findViewById(R.id.activity_fabuqiugou_zhitongche_radiogroup);
 
         mActivityFabuqiugouWeight.addTextChangedListener(new TextWatcher() {
             @Override
@@ -220,6 +238,23 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);
         mToolbarBack.setOnClickListener(this);
         mToolbarTitle.setText("发布求购");
+        mActivityFabuqiugouZhitongcheWenhao = (ImageView) findViewById(R.id.activity_fabuqiugou_zhitongche_wenhao);
+        mActivityFabuqiugouZhitongcheWenhao.setOnClickListener(this);
+
+        mActivityFabuqiugouZhitongcheRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.activity_fabuqiugou_zhitongche_radiobutton1:
+                        zhitongche = 1;
+                        break;
+                    case R.id.activity_fabuqiugou_zhitongche_radiobutton2:
+                        zhitongche = 0;
+                        break;
+                }
+            }
+        });
+
     }
 
 
@@ -336,9 +371,28 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
             case R.id.toolbar_back:
                 finish();
                 break;
+            case R.id.activity_fabuqiugou_zhitongche_wenhao:
+
+                if (ObjectUtils.isEmpty(zhitongcheAlert)) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(FabuqiugouActivity.this);
+                    builder.setView(LayoutInflater.from(FabuqiugouActivity.this).inflate(R.layout.dialog_zhitongche, null));
+                    zhitongcheAlert = builder.create();
+                    zhitongcheAlert.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                        @Override
+                        public void onCancel(DialogInterface dialog) {
+                            zhitongcheAlert.dismiss();
+                        }
+                    });
+                }
+                if (!zhitongcheAlert.isShowing()) {
+                    zhitongcheAlert.show();
+                }
+
+                break;
         }
     }
 
+    private AlertDialog zhitongcheAlert;
 
     //请求参数
 
@@ -359,6 +413,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
 
     private void fabuqiugou() {
 
+
         HttpParams paras = new HttpParams();
         paras.put("sign", SPUtils.getInstance().getString("sign"));
         paras.put("token", SPUtils.getInstance().getString("token"));
@@ -375,6 +430,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
         paras.put("numUnit", "KG");
         paras.put("locationProvince", locationProvince);
         paras.put("locationCity", locationCity);
+        paras.put("showInfo", zhitongche);
         if (checkedQitashijan) {
             if (StringUtils.isTrimEmpty(mActivityFabuqiugouShoudongzhangqi.getText().toString())) {
                 ToastUtils.showShort("请填写账期");

@@ -41,9 +41,10 @@
 
 
     <string name="app_android">app_android</string>
-    <string name="title_activity_pengyouquan_choice_address2">PengyouquanChoiceAddressActivity2
+    <string name="title_activity_pengyouquan_choice_address2">PengyouquanChoiceAddressActivity2</string>
 
-
-    </string>
+    <string name="geren">PERSONAL_USER</string>
+    <string name="putongqiye">NORMAL_COMPANY_USER</string>
+    <string name="fufeiqiye">FEE_COMPANY_USER</string>
 
 </resources>

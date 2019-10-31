@@ -1,8 +1,6 @@
 package com.company.qcy.ui.activity.user;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -22,14 +20,12 @@ import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
-import com.company.qcy.Utils.DialogBitmapcallback;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
-import com.company.qcy.bean.pengyouquan.User;
 import com.company.qcy.bean.user.UserBean;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.Response;
@@ -39,13 +35,6 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.greenrobot.eventbus.EventBus;
-
-import java.util.HashMap;
-
-import cn.sharesdk.framework.Platform;
-import cn.sharesdk.framework.PlatformActionListener;
-import cn.sharesdk.framework.ShareSDK;
-import cn.sharesdk.wechat.friends.Wechat;
 
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
@@ -235,6 +224,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         SPUtils.getInstance().put("communityPhoto", user.getCommunityPhoto());
         SPUtils.getInstance().put("isCompany", user.getIsCompany());
         SPUtils.getInstance().put("isLogin", "true");
+        SPUtils.getInstance().put("userType", user.getUserType());
         SPUtils.getInstance().put("identity", "1");//1为买家 2为卖家
         EventBus.getDefault().post(new MessageBean(MessageBean.Code.DELU));
         ActivityUtils.finishActivity(LoginActivity.this);
@@ -302,6 +292,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                     SPUtils.getInstance().put("communityPhoto", user.getCommunityPhoto());
                                     SPUtils.getInstance().put("isCompany", user.getIsCompany());
                                     SPUtils.getInstance().put("isLogin", "true");
+                                    SPUtils.getInstance().put("userType", user.getUserType());
                                     SPUtils.getInstance().put("identity", "1");//1为买家 2为卖家
                                     EventBus.getDefault().post(new MessageBean(MessageBean.Code.DELU));
                                     ActivityUtils.finishActivity(LoginActivity.this);
