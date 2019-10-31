@@ -262,16 +262,17 @@
         app:layout_constraintTop_toTopOf="@+id/item_qiugoudating_linnear2" />
 
     <TextView
-        android:visibility="gone"
         android:id="@+id/item_qiugoudating_wodefabu"
         android:layout_width="@dimen/x120"
         android:layout_height="@dimen/x36"
-        android:text="我的发布"
-        android:layout_marginLeft="8dp"
-        android:gravity="center"
-        android:textSize="@dimen/x20"
+        android:layout_marginStart="@dimen/x8"
         android:background="@drawable/background_wodefabu_qiye"
-        app:layout_constraintStart_toEndOf="@+id/item_qiugoudating_shenfen"
+        android:gravity="center"
+        android:text="我的发布"
+        android:visibility="gone"
+        android:textColor="@color/chunhongse"
+        android:textSize="@dimen/x20"
+        app:layout_constraintStart_toEndOf="@+id/item_qiugoudating_zhitongche"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -282,5 +283,39 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/item_qiugoudating_zhitongche"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x36"
+        android:layout_marginStart="@dimen/x8"
+        android:paddingLeft="@dimen/x20"
+        android:visibility="gone"
+        android:paddingRight="@dimen/x20"
+        android:background="@drawable/background_qiugouzhitongche"
+        app:layout_constraintStart_toEndOf="@+id/item_qiugoudating_shenfen"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/icon_zhitongche" />
+
+        <TextView
+            android:id="@+id/textView409"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="求购直通车"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x20"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
+    </android.support.constraint.ConstraintLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
@@ -42,6 +43,7 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
         mWebview.setWebViewClient(new WebViewClient());
         mWebview.getSettings().setLoadWithOverviewMode(true);
         mWebview.getSettings().setJavaScriptEnabled(true);
+        mWebview.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
         mWebview.loadUrl(webUrl);
         mToolbarTitle = (TextView) findViewById(R.id.toolbar_title);
         mToolbarBack = (ImageView) findViewById(R.id.toolbar_back);

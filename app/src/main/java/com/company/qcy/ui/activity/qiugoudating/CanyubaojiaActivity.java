@@ -1,9 +1,11 @@
 package com.company.qcy.ui.activity.qiugoudating;
 
+import android.app.AlertDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
@@ -28,6 +31,9 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.ui.activity.kaifangshangcheng.KFSCVipActivity;
+import com.company.qcy.ui.activity.user.QiyerenzhengActivity;
+import com.company.qcy.ui.activity.user.ZhanghaozhongxinActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
@@ -243,7 +249,65 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
     }
 
 
+
+    private AlertDialog.Builder builder;
+    private AlertDialog baojiaDialog;
+    private ImageView baojiaDialogClose;
+    private TextView baojiaDialogContent;
+    private TextView baojiaDialogCancle;
+    private TextView baojiaDialogCommit;
+    //1为升级企业，2位升级付费用户
+    private int baojiaDialogStatus = 0;
+
+
     private void tijiaobaojia() {
+
+        if(ObjectUtils.isEmpty(builder)){
+            builder = new AlertDialog.Builder(CanyubaojiaActivity.this);
+            View inflate = LayoutInflater.from(CanyubaojiaActivity.this).inflate(R.layout.dialog_tongyong, null);
+            builder.setView(inflate);
+            baojiaDialog = builder.create();
+
+            baojiaDialogClose = inflate.findViewById(R.id.dialog_tongyong_close);
+            baojiaDialogContent = inflate.findViewById(R.id.dialog_tongyong_content);
+            baojiaDialogCancle = inflate.findViewById(R.id.dialog_tongyong_button1);
+            baojiaDialogCommit = inflate.findViewById(R.id.dialog_tongyong_button2);
+
+            baojiaDialogClose.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    baojiaDialog.dismiss();
+                    ActivityUtils.finishActivity(CanyubaojiaActivity.class);
+
+                }
+            });
+
+            baojiaDialogCancle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    baojiaDialog.dismiss();
+                    ActivityUtils.finishActivity(CanyubaojiaActivity.class);
+
+                }
+            });
+
+            baojiaDialogCommit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (baojiaDialogStatus) {
+                        case 1:
+                            ActivityUtils.startActivity(ZhanghaozhongxinActivity.class);
+                            break;
+                        case 2:
+                            ActivityUtils.startActivity(KFSCVipActivity.class);
+                            break;
+                    }
+                    baojiaDialog.dismiss();
+                    ActivityUtils.finishActivity(CanyubaojiaActivity.class);
+
+                }
+            });
+        }
 
 
         HttpParams paras = new HttpParams();
@@ -271,13 +335,37 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
             public void onSuccess(Response<String> response) {
 
                 try {
-                    LogUtils.v("tijiaobaojia", response.body());
+                    LogUtils.v("FABUBAOJIA", response.body());
                     if (response.code() == 200) {
                         JSONObject jsonObject = JSONObject.parseObject(response.body());
                         String msg = jsonObject.getString("msg");
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
-                            ActivityUtils.finishActivity(CanyubaojiaActivity.class);
                             EventBus.getDefault().post(new MessageBean(MessageBean.Code.BAOJIACHENGGONG));
+
+                            Integer data = jsonObject.getInteger("data");
+                            if(!ObjectUtils.isEmpty(data)){
+
+                                baojiaDialogCancle.setText("取消");
+
+                                if(StringUtils.equals(getResources().getString(R.string.geren),SPUtils.getInstance().getString("userType"))){
+                                    baojiaDialogStatus = 1;
+                                    baojiaDialogContent.setText("您的剩余可报价次数为 "+data+" 次,升级为企业用户可获得更多的报价次数!");
+                                    baojiaDialogCommit.setText("升级为企业用户");
+                                }
+                                if(StringUtils.equals(getResources().getString(R.string.putongqiye),SPUtils.getInstance().getString("userType"))){
+                                    baojiaDialogStatus = 2;
+                                    baojiaDialogContent.setText("您的剩余可报价次数为 "+data+" 次,升级为付费企业用户可获得更多的报价次数!");
+                                    baojiaDialogCommit.setText("升级付费企业");
+                                }
+
+                                if(StringUtils.equals(getResources().getString(R.string.fufeiqiye),SPUtils.getInstance().getString("userType"))){
+                                    baojiaDialogContent.setText("您已经报价成功！");
+                                    baojiaDialogCancle.setVisibility(View.GONE);
+                                    baojiaDialogCommit.setText("确定");
+                                }
+                                baojiaDialog.show();
+                            }
+
                             return;
                         }
                         if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {

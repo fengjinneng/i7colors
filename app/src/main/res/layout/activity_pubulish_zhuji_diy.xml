@@ -232,14 +232,14 @@
                 android:layout_marginStart="8dp"
                 android:drawablePadding="@dimen/x10"
                 android:maxWidth="@dimen/x180"
-                android:text="设备:"
+                android:text="工作浴pH值:"
                 android:textSize="@dimen/x28"
-                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_shebei"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_ph"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_shebei" />
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_ph" />
 
             <EditText
-                android:id="@+id/acticity_pubulish_zhuji_shebei"
+                android:id="@+id/acticity_pubulish_zhuji_ph"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -252,7 +252,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView383" />
 
             <EditText
-                android:id="@+id/acticity_pubulish_zhuji_ranliao"
+                android:id="@+id/acticity_pubulish_zhuji_chuligongyi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x40"
@@ -261,19 +261,19 @@
                 android:padding="@dimen/x15"
                 android:textSize="@dimen/x28"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_shebei"
-                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_shebei" />
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_ph"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_ph" />
 
             <TextView
                 android:id="@+id/textView384"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="染料:"
+                android:text="处理工艺:"
                 android:textSize="@dimen/x28"
-                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_ranliao"
+                app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_chuligongyi"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_ranliao" />
+                app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_chuligongyi" />
 
             <EditText
                 android:id="@+id/acticity_pubulish_zhuji_ransewendu"
@@ -286,8 +286,8 @@
                 android:padding="@dimen/x15"
                 android:textSize="@dimen/x28"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_ranliao"
-                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_ranliao" />
+                app:layout_constraintStart_toStartOf="@+id/acticity_pubulish_zhuji_chuligongyi"
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_chuligongyi" />
 
             <TextView
                 android:id="@+id/textView386"
@@ -459,15 +459,15 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:hint="请输入公司名称"
-                android:padding="@dimen/x15"
-                android:visibility="gone"
-                android:textSize="@dimen/x28"
                 android:background="@drawable/background_shuruwenbenkuang"
                 android:gravity="center_vertical"
+                android:hint="请输入公司名称"
+                android:padding="@dimen/x15"
+                android:textSize="@dimen/x28"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView123"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/acticity_pubulish_zhuji_tishi" />
 
             <TextView
                 android:id="@+id/acticity_pubulish_zhuji_companyname_text"
@@ -478,7 +478,6 @@
                 android:drawableLeft="@mipmap/bitiantupian"
                 android:drawablePadding="@dimen/x5"
                 android:textSize="@dimen/x28"
-                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/acticity_pubulish_zhuji_companyname"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/acticity_pubulish_zhuji_companyname" />
@@ -543,6 +542,24 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView387" />
+
+            <TextView
+                android:id="@+id/acticity_pubulish_zhuji_tishi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/background_publish_zhuji_tishi"
+                android:paddingLeft="@dimen/x50"
+                android:paddingTop="@dimen/x10"
+                android:paddingRight="@dimen/x50"
+                android:paddingBottom="@dimen/x10"
+                android:textSize="@dimen/x30"
+                android:text="提示！"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
     </android.support.v4.widget.NestedScrollView>

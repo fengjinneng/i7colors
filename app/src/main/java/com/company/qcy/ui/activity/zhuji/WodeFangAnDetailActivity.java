@@ -151,8 +151,8 @@ public class WodeFangAnDetailActivity extends BaseActivity implements View.OnCli
         TextView caizhi = view. findViewById(R.id.activity_zhuji_detail_caizhi);
         TextView chengpinyongtu = view.findViewById(R.id.activity_zhuji_detail_chengpinyongtu);
         TextView huanbaoyaoqiu = view.findViewById(R.id.activity_zhuji_detail_huanbaoyaoqiu);
-        TextView shebei =view.findViewById(R.id.activity_zhuji_detail_shebei);
-        TextView ranliao = view. findViewById(R.id.activity_zhuji_detail_ranliao);
+        TextView ph =view.findViewById(R.id.activity_zhuji_detail_ph);
+        TextView chuligongyi = view. findViewById(R.id.activity_zhuji_detail_chuligongyi);
         TextView ransewendu = view. findViewById(R.id.activity_zhuji_detail_ransewendu);
         TextView xianyongchanpinshuoming =view.findViewById(R.id.activity_zhuji_detail_xianyongchanpinmingcheng);
         TextView shengchanchangjia = view.findViewById(R.id.activity_zhuji_detail_shengchanchangjia);
@@ -171,8 +171,8 @@ public class WodeFangAnDetailActivity extends BaseActivity implements View.OnCli
         caizhi.setText(StringUtils.isEmpty(bean.getMaterial()) ? "暂无" : bean.getMaterial());
         chengpinyongtu.setText(StringUtils.isEmpty(bean.getPurpose()) ? "暂无" : bean.getPurpose());
         huanbaoyaoqiu.setText(StringUtils.isEmpty(bean.getRequirement()) ? "暂无" : bean.getRequirement());
-        shebei.setText(StringUtils.isEmpty(bean.getEquipment()) ? "暂无" : bean.getEquipment());
-        ranliao.setText(StringUtils.isEmpty(bean.getDye()) ? "暂无" : bean.getDye());
+        ph.setText(StringUtils.isEmpty(bean.getpH()) ? "暂无" : bean.getpH());
+        chuligongyi.setText(StringUtils.isEmpty(bean.getTreatmentProcess()) ? "暂无" : bean.getTreatmentProcess());
         ransewendu.setText(StringUtils.isEmpty(bean.getTemperature()) ? "暂无" : bean.getTemperature());
         xianyongchanpinshuoming.setText(StringUtils.isEmpty(bean.getProductName()) ? "暂无" : bean.getProductName());
         shengchanchangjia.setText(StringUtils.isEmpty(bean.getProducer()) ? "暂无" : bean.getProducer());

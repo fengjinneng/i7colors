@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.pengyouquan.DavrenzhengActivity">
+
+    <include
+        android:id="@+id/include21"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView164"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="@dimen/x24"
+        android:layout_marginEnd="8dp"
+        android:drawablePadding="8dp"
+        android:text="企业三证合一"
+        android:textSize="@dimen/x28"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_qiyerenzheng_pwd2" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout19"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x300"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="@dimen/x80"
+        android:layout_marginEnd="@dimen/x80"
+        android:background="@color/baise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView164">
+
+        <ImageView
+            android:id="@+id/activity_qiyerenzheng_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/davrenzheng_jiahao" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView168"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="说明：申请的企业账户将会自动生产一个全新的账户，此账户的登录名为企业名称，在电脑端您也可以使用企业认证账户登录！"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout19"
+        app:layout_constraintStart_toEndOf="@+id/imageView38"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout19" />
+
+    <Button
+        android:id="@+id/activity_qiyerenzheng_commit"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@mipmap/anniujianbian_round"
+        android:text="提交申请"
+        android:visibility="gone"
+        android:textColor="@color/baise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView168" />
+
+    <EditText
+        android:id="@+id/activity_qiyerenzheng_name"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:layout_marginTop="8dp"
+        android:textSize="@dimen/x30"
+        android:layout_marginStart="@dimen/x80"
+        android:layout_marginEnd="@dimen/x80"
+        android:background="@color/baise"
+        android:drawableLeft="@mipmap/denglutouxiang"
+        android:drawablePadding="@dimen/x20"
+        android:hint="请输入企业名称"
+        android:paddingLeft="@dimen/x50"
+        android:singleLine="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include21" />
+
+    <EditText
+        android:id="@+id/activity_qiyerenzheng_pwd1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:layout_marginTop="@dimen/x26"
+        android:background="@color/baise"
+        android:drawableLeft="@mipmap/mimasuo"
+        android:drawablePadding="@dimen/x20"
+        android:minLines="3"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:paddingLeft="@dimen/x50"
+        android:hint="用于企业号登录密码"
+        android:textSize="@dimen/x30"
+        app:layout_constraintEnd_toEndOf="@+id/activity_qiyerenzheng_name"
+        app:layout_constraintStart_toStartOf="@+id/activity_qiyerenzheng_name"
+        app:layout_constraintTop_toBottomOf="@+id/activity_qiyerenzheng_name" />
+
+    <EditText
+        android:id="@+id/activity_qiyerenzheng_pwd2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:layout_marginTop="@dimen/x26"
+        android:background="@color/baise"
+        android:drawableLeft="@mipmap/mimasuo"
+        android:drawablePadding="@dimen/x20"
+        android:lines="3"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:paddingLeft="@dimen/x50"
+        android:hint="请再次输入密码"
+        android:textSize="@dimen/x30"
+        app:layout_constraintEnd_toEndOf="@+id/activity_qiyerenzheng_pwd1"
+        app:layout_constraintStart_toStartOf="@+id/activity_qiyerenzheng_pwd1"
+        app:layout_constraintTop_toBottomOf="@+id/activity_qiyerenzheng_pwd1" />
+
+    <ImageView
+        android:id="@+id/imageView38"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout19"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout19"
+        app:srcCompat="@mipmap/qiyerenzheng_gantanhao" />
+
+</android.support.constraint.ConstraintLayout>

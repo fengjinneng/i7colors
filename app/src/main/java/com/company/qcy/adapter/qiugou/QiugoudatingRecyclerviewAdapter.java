@@ -44,6 +44,13 @@ public class QiugoudatingRecyclerviewAdapter
             yiwancheng.setVisibility(View.VISIBLE);
         }
 
+        if(StringUtils.equals("1",item.getShowInfo())){
+            helper.getView(R.id.item_qiugoudating_zhitongche).setVisibility(View.VISIBLE);
+        }else {
+            helper.getView(R.id.item_qiugoudating_zhitongche).setVisibility(View.GONE);
+        }
+
+
         shenfen.setText(item.getPublishType());
         if (StringUtils.equals(item.getPublishType(), "企业发布")) {
             shenfen.setBackground(mContext.getResources().getDrawable(R.mipmap.qiyeyonghu));

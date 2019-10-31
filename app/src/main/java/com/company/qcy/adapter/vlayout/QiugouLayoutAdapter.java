@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -92,6 +93,12 @@ public class QiugouLayoutAdapter extends DelegateAdapter.Adapter<QiugouLayoutAda
             holder.yiwancheng.setVisibility(View.VISIBLE);
         }
 
+        if(StringUtils.equals("1",item.getShowInfo())){
+            holder.zhitongcheLayout.setVisibility(View.VISIBLE);
+        }else {
+            holder.zhitongcheLayout.setVisibility(View.GONE);
+        }
+
         holder.shenfen.setText(item.getPublishType());
         if (StringUtils.equals(item.getPublishType(), "企业发布")) {
             holder.shenfen.setBackground(context.getResources().getDrawable(R.mipmap.qiyeyonghu));
@@ -120,19 +127,14 @@ public class QiugouLayoutAdapter extends DelegateAdapter.Adapter<QiugouLayoutAda
         });
 
         if (StringUtils.isEmpty(item.getSurplusDay())) {
-
             if (StringUtils.isEmpty(item.getSurplusHour())) {
-
-
                 if (StringUtils.isEmpty(item.getSurplusMin())) {
-
                 } else {
                     holder.firstTime.setText(item.getSurplusMin());
                     holder.secondTime.setText(item.getSurplusSec());
                     holder.firstTimeDanwei.setText("分");
                     holder.secondTimeDanwei.setText("秒");
                 }
-
             } else {
                 holder.firstTime.setText(item.getSurplusHour());
                 holder.secondTime.setText(item.getSurplusMin());
@@ -173,6 +175,8 @@ public class QiugouLayoutAdapter extends DelegateAdapter.Adapter<QiugouLayoutAda
         private TextView firstTimeDanwei;
         private TextView secondTimeDanwei;
 
+        private ConstraintLayout zhitongcheLayout;
+
         public QiugouLayoutViewHolder(View root) {
             super(root);
             firstTime = root.findViewById(R.id.item_qiugoudating_firsttime);
@@ -191,6 +195,7 @@ public class QiugouLayoutAdapter extends DelegateAdapter.Adapter<QiugouLayoutAda
             wodefabu = root.findViewById(R.id.item_qiugoudating_wodefabu);
             firstTimeDanwei = root.findViewById(R.id.item_qiugoudating_firsttime_text);
             secondTimeDanwei = root.findViewById(R.id.item_qiugoudating_secondtime_text);
+            zhitongcheLayout = root.findViewById(R.id.item_qiugoudating_zhitongche);
         }
     }
 

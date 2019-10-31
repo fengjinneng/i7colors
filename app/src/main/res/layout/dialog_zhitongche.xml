@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView397"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:gravity="center"
+        android:text="同意平台推荐供应商直接联系！ 快速求购完成交易"
+        android:textSize="15sp"
+        android:background="@mipmap/bg"
+        android:paddingLeft="@dimen/x100"
+        android:paddingRight="@dimen/x100"
+        android:textColor="@color/baise"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView402"
+        android:layout_width="0dp"
+        android:background="@color/baise"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/x60"
+        android:paddingBottom="@dimen/x60"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x30"
+        android:text="【1】选择&quot;同意&quot; ,优质供应商将可直接查看到你的联系方式。 \n\n【2】选择&quot;不同意&quot; ,则平台所有会员都不能查看其联系方式。"
+        app:layout_constraintEnd_toEndOf="@+id/textView397"
+        app:layout_constraintStart_toStartOf="@+id/textView397"
+        app:layout_constraintTop_toBottomOf="@+id/textView397" />
+</android.support.constraint.ConstraintLayout>

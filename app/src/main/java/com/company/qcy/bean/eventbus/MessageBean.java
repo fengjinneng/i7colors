@@ -281,6 +281,9 @@ public class MessageBean {
         //需要刷新买家消息
         public static final int NEEDREFRESHSELLERMESSAGE = 1045;
 
+        //申请企业认证
+        public static final int QIYERENZHENG = 1046;
+
     }
 
 }

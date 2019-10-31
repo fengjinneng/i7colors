@@ -50,11 +50,11 @@ public class InterfaceInfo {
     //求购分类
     public static final String QIUGOUFENLEI = "enquiry/getClassification";
     //求购详情
-    public static final String QIUGOUXIANGQING = "enquiry/getEnquiryDetail";
+    public static final String QIUGOUXIANGQING = "enquiry/getEnquiryDetailNew";
     //报价列表
     public static final String BAOJIALIEBIAO = "enquiryOffer/getEnquiryOfferList";
     //发布报价
-    public static final String FABUBAOJIA = "enquiryOffer/addEnquiryOffer";
+    public static final String FABUBAOJIA = "enquiryOffer/addEnquiryOfferNew";
     //我的求购列表
     public static final String MYQIUGOU = "enquiry/getMyEnuqiryList";
     //我的报价列表
@@ -77,7 +77,10 @@ public class InterfaceInfo {
     public static final String SEARCHENQUIRY = "enquiry/getEnquiryListByKeyword";
     //报价消息已读
     public static final String READMYACCEPTOFFER = "enquiryOffer/readMyAcceptOffer";
-
+    //查看直通车信息
+    public static final String ZHITONGCHEINFO = "enquiry/queryEnquiryInformation";
+    //求购大厅跳转付费广告
+    public static final String TOFEEADRECORD = "enquiry/toFeeAdRecord";
 
     //开放商城
     //获取店铺列表
@@ -248,6 +251,18 @@ public class InterfaceInfo {
     //大V
     //申请打V认真
     public static final String DAVRENZHEN = "user/CertV";
+    //申请企业认真
+    public static final String QIYERENZHEN = "user/registerCompany";
+
+    //重新申请企业认真
+    public static final String RESETQIYERENZHEN = "user/resetCompany";
+
+    //获取企业认证状态
+    public static final String QIYERENZHENSTATUS = "user/getCompanyInfoStatus";
+
+    //获取企业认证详情
+    public static final String QIYERENZHENSTATUSDETAIL = "user/getCompanyInfoDetail";
+
 
 
     //优惠展销
@@ -308,6 +323,12 @@ public class InterfaceInfo {
 
     //助剂定制
 
+    //获取助剂定制企业列表
+    public static final String ZHUJIQIYELIST = "zhujiDiy/queryZhujiDiySpecialList";
+
+    //根据专场id获取助剂定制列表
+    public static final String SPECIALZHUJILIST = "zhujiDiy/queryZhujiDiyListNew";
+
     //获取助剂定制列表
     public static final String ZHUJILIST = "zhujiDiy/queryZhujiDiyList";
 
@@ -327,7 +348,7 @@ public class InterfaceInfo {
     public static final String WODEJIEJUEFANGANDETAIL = "zhujiDiy/getMyZhujiDiySolutionDetail";
 
     //发布助剂定制
-    public static final String FABUZHUJIDINGZHI = "zhujiDiy/addZhujiDiy";
+    public static final String FABUZHUJIDINGZHI = "zhujiDiy/addZhujiDiyNew";
 
     //获取助剂分类
     public static final String ZHUJITYPE = "zhujiDiy/getZhujiDiyClassList";

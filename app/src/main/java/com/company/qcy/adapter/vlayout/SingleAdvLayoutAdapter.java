@@ -31,6 +31,7 @@ import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
 import com.company.qcy.ui.activity.kaifangshangcheng.KaifangshangchengActivity;
 import com.company.qcy.ui.activity.qiugoudating.QiugoudatingActivity;
 import com.company.qcy.ui.activity.zhuji.ZhujiListActivity;
+import com.company.qcy.ui.activity.zhuji.ZhujiQiyeListActivity;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Permission;
 
@@ -160,7 +161,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
                 context.startActivity(new Intent(context, ChanyezixunActivity.class));
                 break;
             case R.id.vlayout_home_part1_zhuji:
-                context.startActivity(new Intent(context, ZhujiListActivity.class));
+                context.startActivity(new Intent(context, ZhujiQiyeListActivity.class));
                 break;
             case R.id.vlayout_home_part1_map:
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dialog_tongyong_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x80"
+        android:layout_marginTop="@dimen/x80"
+        android:layout_marginEnd="@dimen/x80"
+        android:gravity="center"
+        android:textSize="@dimen/x30"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout58" />
+
+    <TextView
+        android:id="@+id/dialog_tongyong_button2"
+        android:layout_width="@dimen/x250"
+        android:layout_height="@dimen/x70"
+        android:layout_marginTop="@dimen/x54"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/background_yuanxingbiankuang_red"
+        android:gravity="center"
+        android:textSize="@dimen/x30"
+        android:text="确定"
+        android:textColor="@color/baise"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/dialog_tongyong_button1"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_tongyong_content" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/constraintLayout58"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@mipmap/bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/dialog_tongyong_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="提示!"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/dialog_tongyong_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:padding="@dimen/x8"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@mipmap/close_white" />
+    </android.support.constraint.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/dialog_tongyong_button1"
+        android:layout_width="@dimen/x250"
+        android:layout_height="@dimen/x70"
+        android:layout_marginTop="@dimen/x54"
+        android:layout_marginBottom="24dp"
+        android:textSize="@dimen/x30"
+        android:textColor="@color/chunhongse"
+        android:background="@drawable/background_qiyezhanghu_yuanxing_anniu"
+        android:gravity="center"
+        android:text="取消"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dialog_tongyong_button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_tongyong_content" />
+
+
+</android.support.constraint.ConstraintLayout>

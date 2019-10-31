@@ -76,6 +76,7 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.Utils.maputil.MapUtil;
 import com.company.qcy.base.BaseActivity;
+import com.company.qcy.base.WebActivity;
 import com.company.qcy.bean.kaifangshangcheng.CompanyIntroduceBean;
 import com.company.qcy.bean.pengyouquan.MyAddress;
 import com.company.qcy.ui.activity.kaifangshangcheng.KFSCXiangqingActivity;
@@ -122,7 +123,7 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
     /**
      * 返回
      */
-    private TextView mActivityQcymapBack;
+    private ImageView mActivityQcymapBack;
     /**
      * 请输入企业名称
      */
@@ -159,6 +160,10 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
      */
     private TextView mActivityQcymapTuijianqiyeChakanluxian;
     private ImageView mActivityQcymapDeleteSearch;
+    /**
+     * 加入我们
+     */
+    private TextView mActivityQcymapJoinUs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -623,7 +628,7 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
         gps_presenter = new GPSPresenter(this, this);
         mActivityQcymapTuijianqiyeAddress = (TextView) findViewById(R.id.activity_qcymap_tuijianqiye_address);
         mActivityQcymapTuijianqiyePhone = (TextView) findViewById(R.id.activity_qcymap_tuijianqiye_phone);
-        mActivityQcymapBack = (TextView) findViewById(R.id.activity_qcymap_back);
+        mActivityQcymapBack = (ImageView) findViewById(R.id.activity_qcymap_back);
         mActivityQcymapBack.setOnClickListener(this);
         mActivityQcymapSearchText = (EditText) findViewById(R.id.activity_qcymap_searchText);
         mActivityQcymapJieguoSearchCount = (TextView) findViewById(R.id.activity_qcymap_jieguo_search_count);
@@ -654,6 +659,8 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
 
         mActivityQcymapTuijianqiyeChakanluxian.setOnClickListener(this);
 
+        mActivityQcymapJoinUs = (TextView) findViewById(R.id.activity_qcymap_join_us);
+        mActivityQcymapJoinUs.setOnClickListener(this);
     }
 
 
@@ -773,7 +780,6 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
 
     private void addData() {
 
-        LogUtils.e("dadsdwqdqwdwq", upLoadProvice + upLoadCity + upLoadArea);
         pageNo++;
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.QUERYDYEMAPLIST)
                 .tag(this)
@@ -1403,6 +1409,11 @@ public class QCYMapActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.activity_qcymap_delete_search:
+                break;
+            case R.id.activity_qcymap_join_us:
+                Intent intent = new Intent(this,WebActivity.class);
+                intent.putExtra("webUrl","https://c.eqxiu.com/s/pJjgBfWy");
+                ActivityUtils.startActivity(intent);
                 break;
         }
     }

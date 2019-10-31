@@ -355,13 +355,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="设备:"
+                android:text="工作浴pH值:"
                 android:textSize="@dimen/x26"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView425" />
 
             <TextView
-                android:id="@+id/activity_zhuji_detail_shebei"
+                android:id="@+id/activity_zhuji_detail_ph"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -376,19 +376,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="染料:"
+                android:text="处理工艺:"
                 android:textSize="@dimen/x26"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_zhuji_detail_shebei" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_zhuji_detail_ph" />
 
             <TextView
-                android:id="@+id/activity_zhuji_detail_ranliao"
+                android:id="@+id/activity_zhuji_detail_chuligongyi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:textSize="@dimen/x26"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/activity_zhuji_detail_shebei"
+                app:layout_constraintStart_toStartOf="@+id/activity_zhuji_detail_ph"
                 app:layout_constraintTop_toTopOf="@+id/textView428" />
 
             <TextView
@@ -400,7 +400,7 @@
                 android:text="染色温度:"
                 android:textSize="@dimen/x26"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/activity_zhuji_detail_ranliao" />
+                app:layout_constraintTop_toBottomOf="@+id/activity_zhuji_detail_chuligongyi" />
 
             <TextView
                 android:id="@+id/activity_zhuji_detail_ransewendu"
@@ -409,7 +409,7 @@
                 android:layout_marginEnd="8dp"
                 android:textSize="@dimen/x26"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/activity_zhuji_detail_ranliao"
+                app:layout_constraintStart_toStartOf="@+id/activity_zhuji_detail_chuligongyi"
                 app:layout_constraintTop_toTopOf="@+id/textView430" />
 
             <TextView

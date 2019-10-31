@@ -2,6 +2,9 @@ package com.company.qcy.ui.activity.zhuji;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,9 +21,8 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.CalendarUtil;
 import com.company.qcy.Utils.DialogStringCallback;
-import com.company.qcy.Utils.InputWindowListener;
 import com.company.qcy.Utils.InterfaceInfo;
-import com.company.qcy.Utils.MyConsrantLayout;
+import com.company.qcy.Utils.MyCommonUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
@@ -63,8 +65,6 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
      */
     private EditText mActicityPubulishZhujiChengpinyongtu;
     private EditText mActicityPubulishZhujiHuanbaoyaoqiu;
-    private EditText mActicityPubulishZhujiShebei;
-    private EditText mActicityPubulishZhujiRanliao;
     private EditText mActicityPubulishZhujiRansewendu;
     private EditText mActicityPubulishZhujiXianyongchanpinmingcheng;
     private EditText mActicityPubulishZhujiChangjia;
@@ -93,11 +93,21 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
      * 例如：1吨
      */
     private EditText mActicityPubulishZhujiDiyMeiyueyongliang;
+    private EditText mActicityPubulishZhujiPh;
+    private EditText mActicityPubulishZhujiChuligongyi;
+
+    //企业的名称
+    private String name;
+
+    private Long specialId;
+    private TextView mActicityPubulishZhujiTishi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pubulish_zhuji_diy);
+        name = getIntent().getStringExtra("name");
+        specialId = getIntent().getLongExtra("specialId", 0);
         initView();
     }
 
@@ -113,8 +123,6 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
         mActicityPubulishZhujiCaizhi.setOnClickListener(this);
         mActicityPubulishZhujiChengpinyongtu = (EditText) findViewById(R.id.acticity_pubulish_zhuji_chengpinyongtu);
         mActicityPubulishZhujiHuanbaoyaoqiu = (EditText) findViewById(R.id.acticity_pubulish_zhuji_huanbaoyaoqiu);
-        mActicityPubulishZhujiShebei = (EditText) findViewById(R.id.acticity_pubulish_zhuji_shebei);
-        mActicityPubulishZhujiRanliao = (EditText) findViewById(R.id.acticity_pubulish_zhuji_ranliao);
         mActicityPubulishZhujiRansewendu = (EditText) findViewById(R.id.acticity_pubulish_zhuji_ransewendu);
         mActicityPubulishZhujiXianyongchanpinmingcheng = (EditText) findViewById(R.id.acticity_pubulish_zhuji_xianyongchanpinmingcheng);
         mActicityPubulishZhujiChangjia = (EditText) findViewById(R.id.acticity_pubulish_zhuji_changjia);
@@ -123,20 +131,19 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
         mActicityPubulishZhujiFabu = (TextView) findViewById(R.id.acticity_pubulish_zhuji_fabu);
         mActicityPubulishZhujiFabu.setOnClickListener(this);
         mToolbarTitle.setText("发布助剂定制");
+        mActicityPubulishZhujiTishi = (TextView) findViewById(R.id.acticity_pubulish_zhuji_tishi);
+
         mActicityPubulishZhujiJieshushijian = (TextView) findViewById(R.id.acticity_pubulish_zhuji_jieshushijian);
         mActicityPubulishZhujiJieshushijian.setOnClickListener(this);
         mActicityPubulishZhujiDiyMeiyueyongliang = (EditText) findViewById(R.id.acticity_pubulish_zhuji_diy_meiyueyongliang);
-
+        mActicityPubulishZhujiPh = (EditText) findViewById(R.id.acticity_pubulish_zhuji_ph);
+        mActicityPubulishZhujiChuligongyi = (EditText) findViewById(R.id.acticity_pubulish_zhuji_chuligongyi);
         mActicityPubulishZhujiCompanyname = (EditText) findViewById(R.id.acticity_pubulish_zhuji_companyname);
         mActicityPubulishZhujiCompanynameText = (TextView) findViewById(R.id.acticity_pubulish_zhuji_companyname_text);
-        if (StringUtils.isEmpty(SPUtils.getInstance().getString("companyName"))) {
-            //个人用户
-            mActicityPubulishZhujiCompanyname.setVisibility(View.VISIBLE);
-            mActicityPubulishZhujiCompanynameText.setVisibility(View.VISIBLE);
-        } else {
-            mActicityPubulishZhujiCompanyname.setVisibility(View.GONE);
-            mActicityPubulishZhujiCompanynameText.setVisibility(View.GONE);
 
+        if(MyCommonUtil.isCompany()){
+            mActicityPubulishZhujiCompanyname.setText(SPUtils.getInstance().getString("companyName"));
+            mActicityPubulishZhujiCompanyname.setEnabled(false);
         }
 
         KeyboardChangeListener keyboardChangeListener = new KeyboardChangeListener(this);
@@ -152,7 +159,14 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
             }
         });
 
+        SpannableString spannableString = new SpannableString("您正在向\""+name+"\"发起一对一助剂专场定制,但是也能收到其它供应商助剂定制方案!");
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(Color.parseColor("#FF771C"));
+        spannableString.setSpan(colorSpan, 4, spannableString.length()-30, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+        mActicityPubulishZhujiTishi.setText(spannableString);
+
     }
+
 
     @Override
     public void onClick(View v) {
@@ -506,9 +520,10 @@ public class PubulishZhujiDiyActivity extends BaseActivity implements View.OnCli
         paras.put("purpose", mActicityPubulishZhujiChengpinyongtu.getText().toString());
         paras.put("requirement", mActicityPubulishZhujiHuanbaoyaoqiu.getText().toString());
 
-        paras.put("equipment", mActicityPubulishZhujiShebei.getText().toString());
+        paras.put("treatmentProcess", mActicityPubulishZhujiChuligongyi.getText().toString());
+        paras.put("specialId", specialId);
 
-        paras.put("dye", mActicityPubulishZhujiRanliao.getText().toString());
+        paras.put("pH", mActicityPubulishZhujiPh.getText().toString());
         paras.put("temperature", mActicityPubulishZhujiRansewendu.getText().toString());
 
         paras.put("productName", mActicityPubulishZhujiXianyongchanpinmingcheng.getText().toString());

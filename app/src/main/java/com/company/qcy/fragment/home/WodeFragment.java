@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,9 +43,6 @@ import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 import com.umeng.analytics.MobclickAgent;
-
-import q.rorbin.badgeview.Badge;
-import q.rorbin.badgeview.QBadgeView;
 
 public class WodeFragment extends BaseFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
@@ -261,7 +256,6 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
     private ConstraintLayout lianxikefu;
 
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -392,7 +386,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             qiugouXunpanzhongText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             qiugouXunpanzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_qiugouzhong_red));
-            qiugouXunpanzhongText.setText("询盘中"+"("+numberBean.getIsEnquiryCount()+")");
+            qiugouXunpanzhongText.setText("询盘中" + "(" + numberBean.getIsEnquiryCount() + ")");
             qiugouXunpanzhongText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
@@ -403,7 +397,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             qiugouDaiquerenbaojiaText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             qiugouDaiquerenbaojiaImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_daiqurenbaojia_red));
-            qiugouDaiquerenbaojiaText.setText("待确认报价"+"("+numberBean.getWaitSureCount()+")");
+            qiugouDaiquerenbaojiaText.setText("待确认报价" + "(" + numberBean.getWaitSureCount() + ")");
             qiugouDaiquerenbaojiaText.setTextColor(getResources().getColor(R.color.chunhongse));
 
         }
@@ -415,7 +409,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             qiugouJijiangguoqiText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             qiugouJijiangguoqiImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_jijiangguoqi_red));
-            qiugouJijiangguoqiText.setText("即将过期"+"("+numberBean.getMyExpireCount()+")");
+            qiugouJijiangguoqiText.setText("即将过期" + "(" + numberBean.getMyExpireCount() + ")");
             qiugouJijiangguoqiText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
@@ -426,7 +420,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             baojiaMaijiajieshouText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             baojiaMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_red));
-            baojiaMaijiajieshouText.setText("买家已接受"+"("+numberBean.getMyAcceptOfferCount()+")");
+            baojiaMaijiajieshouText.setText("买家已接受" + "(" + numberBean.getMyAcceptOfferCount() + ")");
             baojiaMaijiajieshouText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
@@ -437,7 +431,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             zhujidingzhiShiyangzhongText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             zhujidingzhiShiyangzhongImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_shiyangzhong_res));
-            zhujidingzhiShiyangzhongText.setText("试样中"+"("+numberBean.getZhujiDiyingCount()+")");
+            zhujidingzhiShiyangzhongText.setText("试样中" + "(" + numberBean.getZhujiDiyingCount() + ")");
             zhujidingzhiShiyangzhongText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
@@ -448,19 +442,20 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
             fanganMaijiajieshouText.setTextColor(getResources().getColor(R.color.putongwenben));
         } else {
             fanganMaijiajieshouImage.setImageDrawable(getResources().getDrawable(R.mipmap.wode_maijiayijieshou_red));
-            fanganMaijiajieshouText.setText("买家已接受"+"("+numberBean.getZhujiSolutionAcceptCount()+")");
+            fanganMaijiajieshouText.setText("买家已接受" + "(" + numberBean.getZhujiSolutionAcceptCount() + ")");
             fanganMaijiajieshouText.setTextColor(getResources().getColor(R.color.chunhongse));
         }
 
     }
 
     private void tianxiexinxi() {
-        if (StringUtils.isEmpty(SPUtils.getInstance().getString("companyName"))) {
-            mFragmentWodeName.setText(SPUtils.getInstance().getString("loginName"));
-            mFragmentWodeShenfen.setText("个人用户");
-        } else {
-            mFragmentWodeName.setText(SPUtils.getInstance().getString("loginName"));
+
+        mFragmentWodeName.setText(SPUtils.getInstance().getString("loginName"));
+
+        if (SPUtils.getInstance().getBoolean("isCompany")) {
             mFragmentWodeShenfen.setText("企业用户");
+        } else {
+            mFragmentWodeShenfen.setText("个人用户");
         }
 
     }
@@ -508,6 +503,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
                 break;
             //设置
             case R.id.toolbar_text:
+
                 ActivityUtils.startActivity(SettingActivity.class);
                 break;
 
@@ -549,27 +545,27 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 
             case R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_img:
 
-                Intent i1 = new Intent(getActivity(),WodeZhujiListActivity.class);
-                i1.putExtra("page",1);
+                Intent i1 = new Intent(getActivity(), WodeZhujiListActivity.class);
+                i1.putExtra("page", 1);
                 ActivityUtils.startActivity(i1);
 
                 break;
             case R.id.fragment_wode_buyer_zhujidingzhi_shiyangzhong_text:
-                Intent i2 = new Intent(getActivity(),WodeZhujiListActivity.class);
-                i2.putExtra("page",1);
+                Intent i2 = new Intent(getActivity(), WodeZhujiListActivity.class);
+                i2.putExtra("page", 1);
                 ActivityUtils.startActivity(i2);
                 break;
 
             case R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_text:
 
-                Intent i3 = new Intent(getActivity(),WodeJiejuefanganListActivity.class);
-                i3.putExtra("page",2);
+                Intent i3 = new Intent(getActivity(), WodeJiejuefanganListActivity.class);
+                i3.putExtra("page", 2);
                 ActivityUtils.startActivity(i3);
                 break;
             case R.id.fragment_wode_seller_zhujidingzhifangan_maijiajieshou_img:
 
-                Intent i4 = new Intent(getActivity(),WodeJiejuefanganListActivity.class);
-                i4.putExtra("page",2);
+                Intent i4 = new Intent(getActivity(), WodeJiejuefanganListActivity.class);
+                i4.putExtra("page", 2);
                 ActivityUtils.startActivity(i4);
                 break;
 

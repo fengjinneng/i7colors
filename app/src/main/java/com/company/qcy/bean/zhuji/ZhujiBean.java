@@ -28,6 +28,10 @@ public class ZhujiBean {
     private String requirement;
     private String equipment;
     private String dye;
+
+    private String treatmentProcess;
+    private String pH;
+
     private String temperature;
     private String productName;
     private String producer;
@@ -42,6 +46,23 @@ public class ZhujiBean {
     private String publishType;
     private String diyNumStr;
     private String useNumStr;
+
+    public String getTreatmentProcess() {
+        return treatmentProcess;
+    }
+
+    public void setTreatmentProcess(String treatmentProcess) {
+        this.treatmentProcess = treatmentProcess;
+    }
+
+    public String getpH() {
+        return pH;
+    }
+
+    public void setpH(String pH) {
+        this.pH = pH;
+    }
+
     private List<SolutionListBean> solutionList;
 
     public String getUseNumStr() {

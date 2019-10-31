@@ -32,6 +32,8 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.JpushUtil;
@@ -40,6 +42,7 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.BannerBean;
 import com.company.qcy.bean.UpdateBean;
 import com.company.qcy.bean.eventbus.MessageBean;
+import com.company.qcy.fragment.home.AdDialogFragment;
 import com.company.qcy.fragment.home.HomeFragment;
 import com.company.qcy.fragment.home.PengyouquanFragment;
 import com.company.qcy.fragment.home.XiaoxiFragment;
@@ -121,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
     }
 
 
+    //起始页广告
     private void addAdvData() {
 
         GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
@@ -144,10 +148,27 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
                                 return;
                             }
                             List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+
+                            if (!StringUtils.isEmpty(bannerBeans.get(0).getType())) {
+
+                                if (StringUtils.equals("inner", bannerBeans.get(0).getType())) {
+                                    SPUtils.getInstance().put("adv_directType", bannerBeans.get(0).getDirectType());
+                                    SPUtils.getInstance().put("adv_directTypeId", bannerBeans.get(0).getDirectTypeId());
+                                } else {
+                                    SPUtils.getInstance().put("adv_directType", "");
+                                    SPUtils.getInstance().put("advUrl", bannerBeans.get(0).getAd_url());
+                                }
+
+                            } else {
+                                SPUtils.getInstance().put("adv_directType", "");
+                                SPUtils.getInstance().put("advUrl", bannerBeans.get(0).getAd_url());
+                            }
+
                             SPUtils.getInstance().put("adv", bannerBeans.get(0).getAd_image());
-                            SPUtils.getInstance().put("advUrl", bannerBeans.get(0).getAd_url());
+
                             GlideUtils.loadImageWithStartPage(MainActivity.this,
                                     ServerInfo.IMAGE + bannerBeans.get(0).getAd_image(), mImageView17);
+
 
                         }
 //                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
@@ -266,6 +287,7 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
 
                         //设置对话框按钮的点击监听
                         .setButtonClickListener(this);
+
                 //设置下载过程的监听
 //                        .setOnDownloadListener(this);
                 if (StringUtils.equals("1", updateBean.getIsForce())) {
@@ -289,6 +311,7 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
                         .setAuthorities(getPackageName() + ".demo.provider")
                         .setApkDescription(updateBean.getDescription())
                         .download();
+
                 break;
 
         }
@@ -296,7 +319,58 @@ public class MainActivity extends AppCompatActivity implements OnButtonClickList
 
     @Override
     public void onButtonClick(int id) {
+        //点击了×
+        if (id == 1) {
+            addHuodongDialog();
+        }
+    }
 
+
+    private void addHuodongDialog() {
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "APP_Index_Ad");
+
+
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("APP_Index_Ad", response.body());
+
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+//                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
+                            }
+                            List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+
+                            FragmentManager fragmentManager = getSupportFragmentManager();
+                            AdDialogFragment myDialogFragment = AdDialogFragment.newInstance(bannerBeans.get(0));
+
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                            fragmentTransaction.add(myDialogFragment, "dialog");
+                            fragmentTransaction.commitAllowingStateLoss();
+
+
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+            }
+        };
+
+        request.execute(stringCallback);
     }
 
     private void initView() {

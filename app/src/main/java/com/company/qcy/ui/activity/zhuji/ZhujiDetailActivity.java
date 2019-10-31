@@ -39,8 +39,6 @@ public class ZhujiDetailActivity extends BaseActivity implements View.OnClickLis
     private TextView mActivityZhujiDetailCaizhi;
     private TextView mActivityZhujiDetailChengpinyongtu;
     private TextView mActivityZhujiDetailHuanbaoyaoqiu;
-    private TextView mActivityZhujiDetailShebei;
-    private TextView mActivityZhujiDetailRanliao;
     private TextView mActivityZhujiDetailRansewendu;
     private TextView mActivityZhujiDetailXianyongchanpinshuoming;
     private TextView mActivityZhujiDetailShengchanchangjia;
@@ -74,6 +72,8 @@ public class ZhujiDetailActivity extends BaseActivity implements View.OnClickLis
     private ZhujiBean bean;
     private TextView mActivityZhujiDetailMeiyueyongliang;
     private TextView mActivityZhujiDetailXuqiuliang;
+    private TextView mActivityZhujiDetailPh;
+    private TextView mActivityZhujiDetailChuligongyi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,9 +124,9 @@ public class ZhujiDetailActivity extends BaseActivity implements View.OnClickLis
 
         mActivityZhujiDetailHuanbaoyaoqiu.setText(StringUtils.isEmpty(bean.getRequirement()) ? "暂无" : bean.getRequirement());
 
-        mActivityZhujiDetailShebei.setText(StringUtils.isEmpty(bean.getEquipment()) ? "暂无" : bean.getEquipment());
+        mActivityZhujiDetailPh.setText(StringUtils.isEmpty(bean.getpH()) ? "暂无" : bean.getpH());
 
-        mActivityZhujiDetailRanliao.setText(StringUtils.isEmpty(bean.getDye()) ? "暂无" : bean.getDye());
+        mActivityZhujiDetailChuligongyi.setText(StringUtils.isEmpty(bean.getTreatmentProcess()) ? "暂无" : bean.getTreatmentProcess());
 
         mActivityZhujiDetailRansewendu.setText(StringUtils.isEmpty(bean.getTemperature()) ? "暂无" : bean.getTemperature());
 
@@ -210,8 +210,9 @@ public class ZhujiDetailActivity extends BaseActivity implements View.OnClickLis
         mActivityZhujiDetailCaizhi = (TextView) findViewById(R.id.activity_zhuji_detail_caizhi);
         mActivityZhujiDetailChengpinyongtu = (TextView) findViewById(R.id.activity_zhuji_detail_chengpinyongtu);
         mActivityZhujiDetailHuanbaoyaoqiu = (TextView) findViewById(R.id.activity_zhuji_detail_huanbaoyaoqiu);
-        mActivityZhujiDetailShebei = (TextView) findViewById(R.id.activity_zhuji_detail_shebei);
-        mActivityZhujiDetailRanliao = (TextView) findViewById(R.id.activity_zhuji_detail_ranliao);
+        mActivityZhujiDetailXuqiuliang = (TextView) findViewById(R.id.activity_zhuji_detail_xuqiuliang);
+        mActivityZhujiDetailPh = (TextView) findViewById(R.id.activity_zhuji_detail_ph);
+        mActivityZhujiDetailChuligongyi = (TextView) findViewById(R.id.activity_zhuji_detail_chuligongyi);
         mActivityZhujiDetailRansewendu = (TextView) findViewById(R.id.activity_zhuji_detail_ransewendu);
         mActivityZhujiDetailXianyongchanpinshuoming = (TextView) findViewById(R.id.activity_zhuji_detail_xianyongchanpinmingcheng);
         mActivityZhujiDetailShengchanchangjia = (TextView) findViewById(R.id.activity_zhuji_detail_shengchanchangjia);
@@ -231,7 +232,7 @@ public class ZhujiDetailActivity extends BaseActivity implements View.OnClickLis
         mActivityZhujiDetailMeiyueyongliang = (TextView) findViewById(R.id.activity_zhuji_detail_meiyueyongliang);
 
         addData();
-        mActivityZhujiDetailXuqiuliang = (TextView) findViewById(R.id.activity_zhuji_detail_xuqiuliang);
+
     }
 
 

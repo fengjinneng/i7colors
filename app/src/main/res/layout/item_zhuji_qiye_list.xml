@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/baise"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_height="@dimen/x260">
+
+    <ImageView
+        android:id="@+id/item_zhuji_qiye_list_img"
+        android:layout_width="@dimen/x240"
+        android:layout_height="@dimen/x240"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view10"
+        app:srcCompat="@drawable/place_500x500" />
+
+    <TextView
+        android:id="@+id/item_zhuji_qiye_list_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:ellipsize="end"
+        android:lines="2"
+        android:textColor="@color/biaoti"
+        android:textSize="@dimen/x30"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view11"
+        app:layout_constraintTop_toTopOf="@+id/item_zhuji_qiye_list_img" />
+
+    <TextView
+        android:id="@+id/item_zhuji_qiye_list_content"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:lines="4"
+        android:textSize="@dimen/x24"
+        app:layout_constraintEnd_toEndOf="@+id/item_zhuji_qiye_list_name"
+        app:layout_constraintStart_toStartOf="@+id/item_zhuji_qiye_list_name"
+        app:layout_constraintTop_toBottomOf="@+id/view12" />
+
+    <View
+        android:id="@+id/view10"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x10"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view11"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:background="@color/fengexian"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_zhuji_qiye_list_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/view12"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/fengexian"
+        app:layout_constraintEnd_toEndOf="@+id/item_zhuji_qiye_list_name"
+        app:layout_constraintStart_toStartOf="@+id/item_zhuji_qiye_list_name"
+        app:layout_constraintTop_toBottomOf="@+id/item_zhuji_qiye_list_name" />
+</android.support.constraint.ConstraintLayout>
