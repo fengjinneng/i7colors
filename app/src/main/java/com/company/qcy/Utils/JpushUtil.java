@@ -9,6 +9,7 @@ import com.blankj.utilcode.util.ObjectUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.base.WebActivity;
+import com.company.qcy.huodong.caigoulianmeng2.activity.CaigoulianmengActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiDetailActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
@@ -103,9 +104,7 @@ public class JpushUtil {
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(tuangouIntent);
                     }
-                }
-
-                else if (StringUtils.equals("auction", map.get("directType"))) {
+                } else if (StringUtils.equals("auction", map.get("directType"))) {
                     if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
                         Intent jingpaiIntent = new Intent(context, JingpaiActivity.class);
 //                          tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -117,9 +116,7 @@ public class JpushUtil {
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(jingpaiIntent);
                     }
-                }
-
-                else if (StringUtils.equals("zhuji", map.get("directType"))) {
+                } else if (StringUtils.equals("zhuji", map.get("directType"))) {
                     if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
                         Intent zhujiIntent = new Intent(context, ZhujiQiyeListActivity.class);
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -131,6 +128,11 @@ public class JpushUtil {
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(zhujiIntent);
                     }
+                } else if (StringUtils.equals("meeting", map.get("directType"))) {
+                    Intent zhujiIntent = new Intent(context, CaigoulianmengActivity.class);
+//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    ActivityUtils.startActivity(zhujiIntent);
+
                 }
 
             } else if (StringUtils.equals("html", map.get("type"))) {

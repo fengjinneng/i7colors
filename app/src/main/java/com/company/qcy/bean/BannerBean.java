@@ -39,21 +39,14 @@ public class BannerBean implements Parcelable {
     private String type;
     private String directType;
     private String directTypeId;
+    private String ad_desc;
 
-    @Override
-    public String toString() {
-        return "BannerBean{" +
-                "id=" + id +
-                ", plate_code='" + plate_code + '\'' +
-                ", ad_name='" + ad_name + '\'' +
-                ", ad_url='" + ad_url + '\'' +
-                ", is_show='" + is_show + '\'' +
-                ", ad_image='" + ad_image + '\'' +
-                ", ad_num=" + ad_num +
-                ", type='" + type + '\'' +
-                ", directType='" + directType + '\'' +
-                ", directTypeId='" + directTypeId + '\'' +
-                '}';
+    public String getAd_desc() {
+        return ad_desc;
+    }
+
+    public void setAd_desc(String ad_desc) {
+        this.ad_desc = ad_desc;
     }
 
     public Long getId() {
@@ -136,6 +129,9 @@ public class BannerBean implements Parcelable {
         this.directTypeId = directTypeId;
     }
 
+    public BannerBean() {
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -153,9 +149,7 @@ public class BannerBean implements Parcelable {
         dest.writeString(this.type);
         dest.writeString(this.directType);
         dest.writeString(this.directTypeId);
-    }
-
-    public BannerBean() {
+        dest.writeString(this.ad_desc);
     }
 
     protected BannerBean(Parcel in) {
@@ -169,9 +163,10 @@ public class BannerBean implements Parcelable {
         this.type = in.readString();
         this.directType = in.readString();
         this.directTypeId = in.readString();
+        this.ad_desc = in.readString();
     }
 
-    public static final Parcelable.Creator<BannerBean> CREATOR = new Parcelable.Creator<BannerBean>() {
+    public static final Creator<BannerBean> CREATOR = new Creator<BannerBean>() {
         @Override
         public BannerBean createFromParcel(Parcel source) {
             return new BannerBean(source);

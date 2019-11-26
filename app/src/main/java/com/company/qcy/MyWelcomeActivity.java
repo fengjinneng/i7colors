@@ -16,6 +16,7 @@ import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
 import com.company.qcy.base.WebActivity;
 import com.company.qcy.bean.BannerBean;
+import com.company.qcy.huodong.caigoulianmeng2.activity.CaigoulianmengActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiDetailActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
@@ -172,6 +173,12 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             ActivityUtils.startActivity(zhujiIntent);
                         }
+                    }
+                    else if (StringUtils.equals("meeting", SPUtils.getInstance().getString("adv_directType"))) {
+                        Intent zhujiIntent = new Intent(context, CaigoulianmengActivity.class);
+//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        ActivityUtils.startActivity(zhujiIntent);
+
                     }
                 } else
 

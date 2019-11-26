@@ -40,6 +40,7 @@ import com.company.qcy.adapter.vlayout.MarketLayoutAdapter;
 import com.company.qcy.adapter.vlayout.QiugouLayoutAdapter;
 import com.company.qcy.adapter.vlayout.SingleAdvLayoutAdapter;
 import com.company.qcy.adapter.vlayout.SingleAdvLayoutAdapter2;
+import com.company.qcy.adapter.vlayout.SingleIconLayoutAdapter;
 import com.company.qcy.adapter.vlayout.SingleTitleLayoutAdapter;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.base.SearchActivity;
@@ -129,6 +130,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
         setBannerData();
+        setIconData();
         setAdvData();
         addTitle("热门求购");
         addQiugou();
@@ -148,6 +150,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 })
                 .start();
 
+    }
+
+
+    private List<BannerBean> iconDatas = new ArrayList<>();
+    private SingleIconLayoutAdapter singleIconLayoutAdapter;
+
+    private void setIconData() {
+        SingleLayoutHelper helper = new SingleLayoutHelper();
+        singleIconLayoutAdapter = new SingleIconLayoutAdapter(context, helper, 1, iconDatas);
+        delegateAdapter.addAdapter(singleIconLayoutAdapter);
     }
 
     private void addBottom() {
@@ -402,13 +414,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                             List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
                             if (isRefresh) {
                                 bannerDatas.clear();
-                                bannerUrlDatas.clear();
                             }
 
-                            for (int i = 0; i < bannerBeans.size(); i++) {
-                                bannerDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
-                                bannerUrlDatas.add(bannerBeans.get(i).getAd_url());
-                            }
+                            bannerDatas.addAll(bannerBeans);
                             bannerAdapter.notifyDataSetChanged();
                             return;
                         }
@@ -478,13 +486,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     //banner的adapter
-    private List<String> bannerDatas = new ArrayList<>();
-    private List<String> bannerUrlDatas = new ArrayList<>();
+//    private List<String> bannerDatas = new ArrayList<>();
+//    private List<String> bannerUrlDatas = new ArrayList<>();
+    private List<BannerBean> bannerDatas = new ArrayList<>();
     private SingleAdvLayoutAdapter bannerAdapter;
 
     private void setBannerData() {
         SingleLayoutHelper helper = new SingleLayoutHelper();
-        bannerAdapter = new SingleAdvLayoutAdapter(context, helper, 1, bannerDatas, bannerUrlDatas);
+        bannerAdapter = new SingleAdvLayoutAdapter(context, helper, 1, bannerDatas);
         delegateAdapter.addAdapter(bannerAdapter);
     }
 
@@ -509,7 +518,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private void initView(View view) {
         mRecyclerview = view.findViewById(R.id.fragment_home_recyclerview);
         mSwipeRefreshlayout = view.findViewById(R.id.fragment_home_swipe_refreshlayout);
-
         virtualLayoutManager = new VirtualLayoutManager(context);
         mRecyclerview.setLayoutManager(virtualLayoutManager);
 
@@ -528,6 +536,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 addbannerData();
                 addAdvData();
                 addData();
+                addIconData();
             }
         };
         mSwipeRefreshlayout.setOnRefreshListener(refreshListener);
@@ -542,6 +551,59 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
         mFragmentHomeSearch = (TextView) view.findViewById(R.id.fragment_home_search);
         mFragmentHomeSearch.setOnClickListener(this);
+    }
+
+
+
+
+    private void addIconData() {
+
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "APP_Index_Plate");
+
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("INDEXBANNER", response.body());
+
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
+                            }
+                            List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+                            iconDatas.addAll(bannerBeans);
+                            singleIconLayoutAdapter.notifyDataSetChanged();
+                            return;
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(getActivity(), request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+        request.execute(stringCallback);
+
+
     }
 
     @Override
