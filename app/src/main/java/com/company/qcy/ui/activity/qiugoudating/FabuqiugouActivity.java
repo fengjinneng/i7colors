@@ -244,7 +244,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
         mActivityFabuqiugouZhitongcheRadiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch (checkedId){
+                switch (checkedId) {
                     case R.id.activity_fabuqiugou_zhitongche_radiobutton1:
                         zhitongche = 1;
                         break;
@@ -674,30 +674,59 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
         if (31 - CalendarUtil.getDay() < 3) {
             if (CalendarUtil.getMonth() == 12) {
                 picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 31);
-                picker.setRangeEnd(CalendarUtil.getYear(), 2, (CalendarUtil.getDay() + 3) - 31);
+                picker.setRangeEnd(CalendarUtil.getYear()+1, 2, (CalendarUtil.getDay() + 3) - 31);
             } else {
-                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 31);
-                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 31);
+
+                if (CalendarUtil.getMonth() == 11) {
+                    picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 31);
+                    picker.setRangeEnd(CalendarUtil.getYear()+1, 1, (CalendarUtil.getDay() + 3) - 31);
+                } else {
+                    picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 31);
+                    picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 31);
+
+                }
             }
         } else {
-            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
-            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+
+            if(CalendarUtil.getMonth() == 12){
+                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+                picker.setRangeEnd(CalendarUtil.getYear()+1,  1, CalendarUtil.getDay() + 3);
+            }else {
+
+                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+            }
         }
     }
 
     private void setXiaoyue(DatePicker picker) {
+
         if (30 - CalendarUtil.getDay() < 3) {
             if (CalendarUtil.getMonth() == 12) {
                 picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 30);
-                picker.setRangeEnd(CalendarUtil.getYear(), 2, (CalendarUtil.getDay() + 3) - 30);
+                picker.setRangeEnd(CalendarUtil.getYear() + 1, 2, (CalendarUtil.getDay() + 3) - 30);
             } else {
-                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 30);
-                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 30);
+
+                if (CalendarUtil.getMonth() == 11) {
+                    picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 30);
+                    picker.setRangeEnd(CalendarUtil.getYear() + 1, 1, (CalendarUtil.getDay() + 3) - 30);
+                } else {
+                    picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, (CalendarUtil.getDay() + 3) - 30);
+                    picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 2, (CalendarUtil.getDay() + 3) - 30);
+                }
+
             }
         } else {
 
-            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
-            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+            if (CalendarUtil.getMonth() == 12) {
+                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+                picker.setRangeEnd(CalendarUtil.getYear() + 1, 1, CalendarUtil.getDay() + 3);
+
+            } else {
+                picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay() + 3);
+                picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() + 3);
+            }
+
         }
     }
 
@@ -742,6 +771,8 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
                 break;
             case 11:
                 setXiaoyue(endTimePicker);
+
+
                 break;
         }
         endTimePicker.setLineColor(Color.BLACK);
@@ -772,7 +803,12 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
                 endTimePicker.setTitleText(endTimePicker.getSelectedYear() + "-" + endTimePicker.getSelectedMonth() + "-" + day);
             }
         });
-        endTimePicker.show();
+        try {
+            endTimePicker.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
     }
 
 
