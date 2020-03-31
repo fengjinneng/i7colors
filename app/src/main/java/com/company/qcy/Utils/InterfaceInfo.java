@@ -364,5 +364,30 @@ public class InterfaceInfo {
 
     //采纳方案
     public static final String CAINAFANGAN = "zhujiDiy/acceptZhujiDiySolution";
+
+
+
+    //代销
+    //代销列表
+    public static final String DAIXIAOLIST = "proxyMarket/queryProxyMarketList";
+
+    //代销列表
+    public static final String DAIXIAODETAIL = "proxyMarket/getProxyMarketById";
+
+    //代销索样
+    public static final String DAIXIAOSUOYANG = "proxyMarket/addProxyMarketBuy";
+
+
+    //直播
+
+    //获取课程列表
+    public static final String CLASSLIST = "schoolLiveClass/querySchoolLiveClassListForApp";
+
+    //获取课程详情
+    public static final String CLASSDETAIL = "schoolLiveClass/querySchoolLiveClassDetailForApp";
+
+    //购买课程
+    public static final String CLASSPAY = "wxpay/unifiedOrder";
+
 }
 

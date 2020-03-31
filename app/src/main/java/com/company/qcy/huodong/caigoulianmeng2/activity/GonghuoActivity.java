@@ -118,6 +118,7 @@ public class GonghuoActivity extends BaseActivity implements View.OnClickListene
             }
         });
 
+        recyclerView.setItemViewCacheSize(100);
 
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override

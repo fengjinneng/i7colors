@@ -16,7 +16,7 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/activity_jingpai_woyaojingpai"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/include40">
@@ -60,9 +60,10 @@
 
                         <ImageView
                             android:id="@+id/activity_jingpaidetail_img"
-                            android:layout_width="@dimen/x500"
-                            android:layout_height="@dimen/x500"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/x750"
                             android:src="@drawable/place_500x500"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/include15" />
 
@@ -78,6 +79,7 @@
                             android:id="@+id/constraintLayout9"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
+
                             app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.5"
@@ -85,41 +87,8 @@
                             app:layout_constraintTop_toBottomOf="@+id/include15"
                             app:layout_constraintVertical_chainStyle="packed">
 
-
-                            <TextView
-                                android:id="@+id/activity_jingpaidetail_chujiacishu"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="0"
-                                android:textColor="@color/hongse"
-                                android:textSize="@dimen/x55"
-                                app:layout_constraintBaseline_toBaselineOf="@+id/textView262"
-                                app:layout_constraintEnd_toStartOf="@+id/textView262"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintHorizontal_chainStyle="packed"
-                                app:layout_constraintStart_toStartOf="parent" />
-
-                            <TextView
-                                android:id="@+id/textView262"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="次抢购"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintHorizontal_bias="0.5"
-                                app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_chujiacishu"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:layout_editor_absoluteY="42dp" />
                         </android.support.constraint.ConstraintLayout>
 
-                        <View
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:background="@color/fengexian"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
-                            app:layout_constraintTop_toTopOf="@+id/constraintLayout10" />
 
                         <android.support.constraint.ConstraintLayout
                             android:id="@+id/constraintLayout10"
@@ -132,44 +101,6 @@
                             app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
 
-                            <TextView
-                                android:id="@+id/textView263"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="8dp"
-                                android:text="最低价:"
-
-                                app:layout_constraintBottom_toTopOf="@+id/activity_jingpaidetail_qipaijiage"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_chainStyle="packed" />
-
-                            <TextView
-                                android:id="@+id/activity_jingpaidetail_qipaijiage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="8dp"
-                                android:textSize="@dimen/x50"
-                                app:layout_constraintBottom_toTopOf="@+id/activity_jingpaidetail_qipaijiage_unit"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/textView263" />
-
-                            <TextView
-                                android:id="@+id/activity_jingpaidetail_qipaijiage_unit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="8dp"
-                                android:text="元/KG"
-
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_qipaijiage" />
                         </android.support.constraint.ConstraintLayout>
 
 
@@ -181,81 +112,12 @@
                             app:layout_constraintStart_toStartOf="@+id/constraintLayout10"
                             app:layout_constraintTop_toTopOf="@+id/constraintLayout11" />
 
-                        <android.support.constraint.ConstraintLayout
-                            android:id="@+id/constraintLayout11"
-                            android:layout_width="@dimen/x268"
-                            android:layout_height="0dp"
-                            android:background="@mipmap/shangpin_jiage"
-                            app:layout_constraintBottom_toBottomOf="@+id/activity_jingpaidetail_img"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="1.0"
-                            app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_img"
-                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
-
-
-                            <TextView
-                                android:id="@+id/activity_jingpaidetail_dangqianjiage_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="8dp"
-                                android:text="现价:"
-                                android:textColor="@color/baise"
-
-                                app:layout_constraintBottom_toTopOf="@+id/activity_jingpaidetail_dangqianjiage"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintVertical_chainStyle="packed" />
-
-                            <TextView
-                                android:id="@+id/activity_jingpaidetail_dangqianjiage"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="8dp"
-                                android:textColor="@color/baise"
-                                android:textSize="@dimen/x50"
-                                app:layout_constraintBottom_toTopOf="@+id/activity_jingpaidetail_dangqianjiage_unit"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_dangqianjiage_text" />
-
-                            <TextView
-                                android:id="@+id/activity_jingpaidetail_dangqianjiage_unit"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginStart="8dp"
-                                android:text="元/KG"
-                                android:textColor="@color/baise"
-
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_dangqianjiage" />
-
-                            <TextView
-                                android:id="@+id/activity_jingpaidetail_yiliupai"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="8dp"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="8dp"
-                                android:text="拍卖已流拍，\n无人参拍！"
-                                android:textColor="@color/baise"
-                                android:visibility="gone"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-                        </android.support.constraint.ConstraintLayout>
 
                         <android.support.constraint.ConstraintLayout
                             android:id="@+id/activity_jingpaidetail_faqiren_layout"
                             android:layout_width="0dp"
-                            android:visibility="gone"
                             android:layout_height="wrap_content"
+                            android:visibility="gone"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_img">
@@ -313,18 +175,18 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/x20"
                             android:text="距离结束:"
-                            android:visibility="gone"
                             android:textSize="@dimen/x30"
+                            android:visibility="gone"
                             app:layout_constraintStart_toStartOf="@+id/activity_jingpaidetail_productname"
                             app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_productname" />
 
                         <cn.iwgang.countdownview.CountdownView
-                            android:visibility="gone"
                             android:id="@+id/activity_jingpaidetail_countdownView"
                             android:layout_width="0dp"
                             android:layout_height="34dp"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:visibility="gone"
                             app:isHideTimeBackground="true"
                             app:isShowDay="true"
                             app:isShowHour="true"
@@ -364,14 +226,14 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginTop="8dp"
-                            android:text="价差: ¥ "
+                            android:text="现价: ¥ "
                             android:textColor="@color/hongse"
                             android:textSize="@dimen/x30"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView273" />
 
                         <TextView
-                            android:id="@+id/activity_jingpaidetail_jiajiafudu"
+                            android:id="@+id/activity_jingpaidetail_xianjia"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/hongse"
@@ -387,9 +249,9 @@
                             android:layout_marginTop="@dimen/x8"
                             android:text="是否含运费:"
                             android:textSize="@dimen/x30"
-                            app:layout_goneMarginTop="@dimen/x8"
                             app:layout_constraintStart_toStartOf="@+id/guideline3"
-                            app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_totalNum_text" />
+                            app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_totalNum_text"
+                            app:layout_goneMarginTop="@dimen/x8" />
 
                         <android.support.constraint.Guideline
                             android:id="@+id/guideline3"
@@ -402,8 +264,8 @@
                             android:id="@+id/activity_jingpaidetail_yunfei"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:textSize="@dimen/x30"
@@ -425,8 +287,8 @@
                             android:id="@+id/activity_jingpaidetail_changjia"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:text="暂无"
@@ -441,17 +303,17 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/x8"
                             android:text="生产日期:"
-                            app:layout_goneMarginTop="@dimen/x8"
                             android:textSize="@dimen/x30"
                             app:layout_constraintStart_toStartOf="@+id/activity_jingpaidetail_is_contains_yunfei"
-                            app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_is_contains_yunfei" />
+                            app:layout_constraintTop_toBottomOf="@+id/activity_jingpaidetail_is_contains_yunfei"
+                            app:layout_goneMarginTop="@dimen/x8" />
 
                         <TextView
                             android:id="@+id/activity_jingpaidetail_riqi"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
                             android:textSize="@dimen/x30"
@@ -507,12 +369,12 @@
                             android:id="@+id/activity_jingpaidetail_zidingyi1_value"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
                             android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:visibility="gone"
                             android:textSize="@dimen/x30"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@+id/activity_jingpaidetail_zidingyi1_key"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_zidingyi1_key" />
@@ -524,8 +386,8 @@
                             android:layout_marginStart="8dp"
                             android:ellipsize="end"
                             android:maxLines="1"
-                            android:visibility="gone"
                             android:textSize="@dimen/x30"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="@+id/activity_jingpaidetail_zidingyi2_key"
                             app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_zidingyi2_key" />
 
@@ -533,8 +395,8 @@
                             android:id="@+id/textView219"
                             android:layout_width="0dp"
                             android:layout_height="@dimen/x10"
-                            android:layout_marginBottom="@dimen/x8"
                             android:layout_marginEnd="@dimen/x8"
+                            android:layout_marginBottom="@dimen/x8"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -545,8 +407,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/x8"
-                            android:textSize="@dimen/x30"
                             android:text="电话:"
+                            android:textSize="@dimen/x30"
                             app:layout_constraintStart_toStartOf="@+id/textView283"
                             app:layout_constraintTop_toBottomOf="@+id/textView283" />
 
@@ -556,9 +418,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:text="暂无"
-                            android:singleLine="true"
                             android:ellipsize="end"
+                            android:singleLine="true"
+                            android:text="暂无"
                             app:layout_constraintBottom_toBottomOf="@+id/textView355"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/textView355" />
@@ -580,12 +442,21 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
-                            android:singleLine="true"
                             android:ellipsize="end"
+                            android:singleLine="true"
                             android:textSize="@dimen/x30"
                             app:layout_constraintBottom_toBottomOf="@+id/activity_jingpaidetail_totalNum_text"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_totalNum_text" />
+
+                        <TextView
+                            android:id="@+id/activity_jingpaidetail_xianjiaUnit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/hongse"
+                            android:textSize="@dimen/x30"
+                            app:layout_constraintBottom_toBottomOf="@+id/textView274"
+                            app:layout_constraintStart_toEndOf="@+id/activity_jingpaidetail_xianjia" />
 
 
                     </android.support.constraint.ConstraintLayout>
@@ -614,16 +485,6 @@
     </android.support.design.widget.CoordinatorLayout>
 
 
-    <Button
-        android:id="@+id/activity_jingpai_woyaojingpai"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/x98"
-        android:background="@mipmap/bg"
-        android:text="参与抢购"
-        android:visibility="gone"
-        android:textColor="@color/baise"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

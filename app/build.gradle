@@ -65,7 +65,7 @@ android {
         release {
             keyAlias 'i7colors'
             keyPassword 'pass@i7'
-            storeFile file('C:/Users/ThinkPad/Desktop/app相关信息/i7colors.keystore.jks')
+            storeFile file('C:/Users/ThinkPad/Desktop/i7colors_app/i7colors.keystore.jks')
             storePassword 'pass@i7'
         }
     }
@@ -74,8 +74,8 @@ android {
         applicationId "com.company.qcy"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 14
-        versionName "1.8.0"
+        versionCode 16
+        versionName "1.9.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
             annotationProcessorOptions {

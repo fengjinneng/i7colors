@@ -27,9 +27,6 @@ public class JingpaiListAdapter extends BaseQuickAdapter<JingpaiBean, BaseViewHo
     protected void convert(BaseViewHolder helper, JingpaiBean item) {
 
         helper.setText(R.id.item_jingpai_list_name, item.getShopName());
-        helper.setText(R.id.item_jingpai_list_chujiacishu, item.getCount());
-
-        helper.setText(R.id.item_jingpai_list_qipaijiage, item.getPrice());
         helper.setText(R.id.item_jingpai_list_dangqianjiage, item.getMaxPrice());
 
         ImageView img = (ImageView) helper.getView(R.id.item_jingpai_list_img);
@@ -38,16 +35,14 @@ public class JingpaiListAdapter extends BaseQuickAdapter<JingpaiBean, BaseViewHo
 
         GlideUtils.loadImage(mContext, ServerInfo.IMAGE + item.getProductPic(), img);
 
-        helper.setText(R.id.item_jingpai_list_qipaijiage_unit, item.getPriceUnit());
-
         helper.setText(R.id.item_jingpai_list_dangqianjiage_unit, item.getPriceUnit());
 
         Resources resources = mContext.getResources();
 
         switch (item.getIsType()) {
             case "0"://流派
-                statusImg.setImageDrawable(resources.getDrawable(R.mipmap.wurenqianggou));
-                statusText.setText("无人抢购 ！");
+                statusImg.setImageDrawable(resources.getDrawable(R.mipmap.toupiao_yijieshu));
+                statusText.setText("抢购结束 ！");
                 statusText.setTextColor(resources.getColor(R.color.baise));
                 statusText.setBackgroundColor(resources.getColor(R.color.shenhui));
                 break;
@@ -69,9 +64,7 @@ public class JingpaiListAdapter extends BaseQuickAdapter<JingpaiBean, BaseViewHo
                 statusText.setTextColor(resources.getColor(R.color.baise));
                 statusText.setBackgroundColor(resources.getColor(R.color.lanse));
                 break;
-
         }
-
 
         if(StringUtils.isEmpty(item.getAddress())){
             if(StringUtils.isEmpty(item.getSourceOfSupply())){

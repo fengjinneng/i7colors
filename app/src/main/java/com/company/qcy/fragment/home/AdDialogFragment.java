@@ -19,9 +19,11 @@ import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
+import com.company.qcy.Utils.JumpUtil;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.WebActivity;
 import com.company.qcy.bean.BannerBean;
+import com.company.qcy.huodong.caigoulianmeng2.activity.CaigoulianmengActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiDetailActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
@@ -99,7 +101,7 @@ public class AdDialogFragment extends DialogFragment {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parse();
+                JumpUtil.jumpActivty(bannerBean,getActivity());
                 dismiss();
             }
         });
@@ -117,127 +119,6 @@ public class AdDialogFragment extends DialogFragment {
     }
 
 
-    private void parse() {
 
-        if (StringUtils.isEmpty(bannerBean.getType()) ||
-                StringUtils.equals("html", bannerBean
-                        .getType())) {
-            Intent intent = new Intent(getActivity(), WebActivity.class);
-            intent.putExtra("webUrl", bannerBean
-                    .getAd_url());
-            ActivityUtils.startActivity(intent);
-        } else if (StringUtils.equals("inner", bannerBean
-                .getType())) {
-
-            if (!StringUtils.isEmpty(bannerBean
-                    .getDirectType())) {
-
-                if (StringUtils.equals("enquiry", bannerBean
-                        .getDirectType())) {
-
-                    if (StringUtils.isEmpty(bannerBean
-                            .getDirectTypeId())) {
-                        Intent enquiryIntent = new Intent(getActivity(), QiugoudatingActivity.class);
-                        ActivityUtils.startActivity(enquiryIntent);
-                    } else {
-                        Intent enquiryIntent = new Intent(getActivity(), QiugouxiangqingActivity.class);
-                        enquiryIntent.putExtra("enquiryId", Long.parseLong(bannerBean
-                                .getDirectTypeId()));
-                        ActivityUtils.startActivity(enquiryIntent);
-                    }
-                } else if (StringUtils.equals("market", bannerBean
-                        .getDirectType())) {
-                    if (StringUtils.isEmpty(bannerBean
-                            .getDirectTypeId())) {
-                        Intent marketIntent = new Intent(getActivity(), KaifangshangchengActivity.class);
-//                        marketIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(marketIntent);
-                    } else {
-                        Intent marketIntent = new Intent(getActivity(), KFSCXiangqingActivity.class);
-                        marketIntent.putExtra("id", Long.parseLong(bannerBean
-                                .getDirectTypeId()));
-//                        marketIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(marketIntent);
-                    }
-                } else if (StringUtils.equals("product", bannerBean
-                        .getDirectType())) {
-                    if (StringUtils.isEmpty(bannerBean
-                            .getDirectTypeId())) {
-                        Intent productIntent = new Intent(getActivity(), ChanpindatingActivity.class);
-//                        productIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(productIntent);
-
-                    } else {
-                        Intent productIntent = new Intent(getActivity(), ChanpinxiangqingActivity.class);
-                        productIntent.putExtra("id", bannerBean
-                                .getDirectTypeId() + "m");
-//                        productIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(productIntent);
-                    }
-                } else if (StringUtils.equals("information", bannerBean
-                        .getDirectType())) {
-                    if (StringUtils.isEmpty(bannerBean
-                            .getDirectTypeId())) {
-                        Intent zixunIntent = new Intent(getActivity(), ChanyezixunActivity.class);
-//                        zixunIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(zixunIntent);
-                    } else {
-                        Intent zixunIntent = new Intent(getActivity(), ZixunxiangqingActivity.class);
-                        zixunIntent.putExtra("id", bannerBean
-                                .getDirectTypeId());
-//                        zixunIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(zixunIntent);
-
-                    }
-
-                } else if (StringUtils.equals("groupBuy", bannerBean
-                        .getDirectType())) {
-                    if (StringUtils.isEmpty(bannerBean
-                            .getDirectTypeId())) {
-                        Intent tuangouIntent = new Intent(getActivity(), TuangouliebiaoActivity.class);
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(tuangouIntent);
-
-                    } else {
-                        Intent tuangouIntent = new Intent(getActivity(), TuangouxiangqingActivity.class);
-                        tuangouIntent.putExtra("id", Long.parseLong(bannerBean
-                                .getDirectTypeId()));
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(tuangouIntent);
-                    }
-                } else if (StringUtils.equals("auction", bannerBean
-                        .getDirectType())) {
-                    if (StringUtils.isEmpty(bannerBean
-                            .getDirectTypeId())) {
-                        Intent jingpaiIntent = new Intent(getActivity(), JingpaiActivity.class);
-//                          tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(jingpaiIntent);
-
-                    } else {
-                        Intent jingpaiIntent = new Intent(getActivity(), JingpaiDetailActivity.class);
-                        jingpaiIntent.putExtra("id", bannerBean
-                                .getDirectTypeId());
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(jingpaiIntent);
-                    }
-                } else if (StringUtils.equals("zhuji", bannerBean
-                        .getDirectType())) {
-                    if (StringUtils.isEmpty(bannerBean
-                            .getDirectTypeId())) {
-                        Intent zhujiIntent = new Intent(getActivity(), ZhujiQiyeListActivity.class);
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(zhujiIntent);
-
-                    } else {
-                        Intent zhujiIntent = new Intent(getActivity(), ZhujiDetailActivity.class);
-                        zhujiIntent.putExtra("id", Long.parseLong(bannerBean
-                                .getDirectTypeId()));
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        ActivityUtils.startActivity(zhujiIntent);
-                    }
-                }
-            }
-        }
-    }
 
 }

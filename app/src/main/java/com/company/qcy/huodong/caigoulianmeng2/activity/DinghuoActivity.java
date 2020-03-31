@@ -112,6 +112,8 @@ public class DinghuoActivity extends BaseActivity implements View.OnClickListene
             }
         });
 
+        recyclerView.setItemViewCacheSize(100);
+
         adapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {

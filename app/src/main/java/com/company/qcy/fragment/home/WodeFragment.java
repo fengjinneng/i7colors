@@ -28,6 +28,7 @@ import com.company.qcy.Utils.UserUtil;
 import com.company.qcy.base.BaseFragment;
 import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.qiugou.NumberBean;
+import com.company.qcy.live.LiveListActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichulibaojiaActivity;
 import com.company.qcy.ui.activity.qiugoudating.DaichuliqiugouActivity;
 import com.company.qcy.ui.activity.qiugoudating.WodebaojiaActivity;
@@ -509,6 +510,7 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 
             case R.id.fragment_wode_lianxikefu:
                 ActivityUtils.startActivity(LianxikefuActivity.class);
+//                ActivityUtils.startActivity(LiveListActivity.class);
                 break;
 
             case R.id.fragment_wode_buyer_layout:

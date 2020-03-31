@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <include
+        android:id="@+id/include57"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@color/fengexian"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="@dimen/x108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include57">
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@+id/include57"
+            tools:context=".live.LiveDetailActivity">
+
+
+            <ImageView
+                android:id="@+id/activity_live_detail_img"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/place_500x500" />
+
+
+            <android.support.constraint.ConstraintLayout
+                android:id="@+id/constraintLayout63"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@color/baise"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/activity_live_detail_img">
+
+
+                <TextView
+                    android:id="@+id/activity_live_detail_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/background_huatibiankuang"
+                    android:paddingLeft="@dimen/x20"
+                    android:paddingRight="@dimen/x20"
+                    android:textSize="@dimen/x24"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_live_detail_title" />
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout62"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/activity_live_detail_time">
+
+                    <TextView
+                        android:id="@+id/textView443"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="剩余时间:"
+                        android:textColor="@color/erjibiaoti"
+                        android:textSize="@dimen/x24"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <cn.iwgang.countdownview.CountdownView
+                        android:id="@+id/activity_live_detail_countdownView"
+                        android:layout_width="0dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="32dp"
+                        android:layout_marginTop="8dp"
+                        app:isHideTimeBackground="false"
+                        app:isShowDay="true"
+                        app:isShowHour="true"
+                        app:isShowMinute="true"
+                        app:isShowSecond="true"
+                        app:isTimeTextBold="true"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView443"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:suffixDay="天"
+                        app:suffixGravity="center"
+                        app:suffixHour="时"
+                        app:suffixMinute="分"
+                        app:suffixSecond="秒"
+                        app:suffixTextColor="#000000"
+                        app:suffixTextSize="12sp"
+                        app:timeBgColor="@color/chunhongse"
+                        app:timeBgRadius="5dp"
+                        app:timeBgSize="@dimen/x48"
+                        app:timeTextColor="@color/baise"
+                        app:timeTextSize="@dimen/x30" />
+
+                </android.support.constraint.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/activity_live_detail_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:textColor="@color/biaoti"
+                    android:textSize="@dimen/x40"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/activity_live_detail_teacher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textSize="@dimen/x24"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView444"
+                    app:layout_constraintStart_toEndOf="@+id/textView444" />
+
+                <TextView
+                    android:id="@+id/textView444"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="讲师:"
+                    android:textSize="@dimen/x24"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout62" />
+            </android.support.constraint.ConstraintLayout>
+
+
+            <TextView
+                android:id="@+id/textView442"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/x80"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/baise"
+                android:gravity="center"
+                android:text="详情介绍"
+                android:textColor="@color/erjibiaoti"
+                android:textSize="@dimen/x36"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout63" />
+
+            <WebView
+                android:id="@+id/activity_live_detail_webView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                app:layout_constraintEnd_toEndOf="@+id/textView442"
+                app:layout_constraintStart_toStartOf="@+id/textView442"
+                app:layout_constraintTop_toBottomOf="@+id/textView442" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+
+
+
+    <Button
+        android:id="@+id/activity_live_detail_button1"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@color/startcolor"
+        android:text="短信预约提醒"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/activity_live_detail_button2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <Button
+        android:id="@+id/activity_live_detail_button2"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@color/chunhongse"
+        android:text="99 支付观看"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/activity_live_detail_button1" />
+
+</android.support.constraint.ConstraintLayout>
