@@ -453,9 +453,6 @@ public class TuangouxiangqingActivity extends BaseActivity implements View.OnCli
                 break;
 
             case MessageBean.Code.DELU:
-                loginReturn = true;
-                addData();
-                break;
             case MessageBean.Code.WXLOGIN:
                 loginReturn = true;
                 addData();

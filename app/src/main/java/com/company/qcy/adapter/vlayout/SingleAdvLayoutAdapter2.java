@@ -18,6 +18,7 @@ import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.bean.BannerBean;
 import com.company.qcy.huodong.caigoulianmeng2.activity.CaigoulianmengActivity;
+import com.company.qcy.huodong.daixiao.DaixiaoListActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.toupiao.activity.ToupiaoListActivity;
 import com.company.qcy.huodong.youhuizhanxiao.activity.YouhuizhanxiaoActivity;
@@ -234,6 +235,10 @@ public class SingleAdvLayoutAdapter2 extends DelegateAdapter.Adapter<SingleAdvLa
             //竞拍
             case "auction":
                 ActivityUtils.startActivity(JingpaiActivity.class);
+                break;
+            //代销
+            case "proxy_market":
+                ActivityUtils.startActivity(DaixiaoListActivity.class);
                 break;
         }
 

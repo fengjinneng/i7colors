@@ -284,6 +284,9 @@ public class MessageBean {
         //申请企业认证
         public static final int QIYERENZHENG = 1046;
 
+        //代销购买成功
+        public static final int DAIXIAOBUYSUCESS = 1047;
+
     }
 
 }

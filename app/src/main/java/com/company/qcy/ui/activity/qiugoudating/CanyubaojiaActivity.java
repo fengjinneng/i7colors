@@ -47,6 +47,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
 
 
     /**
+     *
      */
     private TextView mActivityCanyubaojiaChanpinming;
     /**
@@ -206,7 +207,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
                 break;
             case R.id.activity_canyubaojia_time:
 
-                onYearMonthDayPicker(mActivityCanyubaojiaTime);
+                onEndtimePicker(mActivityCanyubaojiaTime);
                 break;
             case R.id.toolbar_back:
                 finish();
@@ -214,40 +215,101 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
         }
     }
 
+    private void onEndtimePicker(TextView time) {
+        DatePicker endTimePicker = new DatePicker(this);
+        endTimePicker.setCycleDisable(true);
+        endTimePicker.setTopPadding(15);
 
-    //选择年月
-    private void onYearMonthDayPicker(final TextView time) {
-        final DatePicker picker = new DatePicker(this);
-        picker.setCycleDisable(true);
-        picker.setTopPadding(15);
-        picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
-        picker.setRangeEnd(2020, 1, 1);
-        picker.setLineColor(Color.BLACK);
-        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+        switch (CalendarUtil.getMonth()) {
+            case 1:
+                setBigyue(endTimePicker);
+                break;
+            case 3:
+                setBigyue(endTimePicker);
+                break;
+            case 5:
+                setBigyue(endTimePicker);
+                break;
+            case 7:
+                setBigyue(endTimePicker);
+                break;
+            case 8:
+                setBigyue(endTimePicker);
+                break;
+            case 10:
+                setBigyue(endTimePicker);
+                break;
+            case 12:
+                setBigyue(endTimePicker);
+                break;
+            case 2:
+                setXiaoyue(endTimePicker);
+                break;
+            case 4:
+                setXiaoyue(endTimePicker);
+                break;
+            case 6:
+                setXiaoyue(endTimePicker);
+                break;
+            case 9:
+                setXiaoyue(endTimePicker);
+                break;
+            case 11:
+                setXiaoyue(endTimePicker);
+
+
+                break;
+        }
+        endTimePicker.setLineColor(Color.BLACK);
+        endTimePicker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
-                mActivityCanyubaojiaTime.setText(year + "-" + month + "-" + day);
+                time.setText(year + "-" + month + "-" + day);
             }
         });
-        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+        endTimePicker.setOnWheelListener(new DatePicker.OnWheelListener() {
             @Override
             public void onYearWheeled(int index, String year) {
-                picker.setTitleText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+                endTimePicker.setTitleText(year + "-" + endTimePicker.getSelectedMonth() + "-" + endTimePicker.getSelectedDay());
             }
 
             @Override
             public void onMonthWheeled(int index, String month) {
-                picker.setTitleText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+                endTimePicker.setTitleText(endTimePicker.getSelectedYear() + "-" + month + "-" + endTimePicker.getSelectedDay());
             }
 
             @Override
             public void onDayWheeled(int index, String day) {
-                picker.setTitleText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+                endTimePicker.setTitleText(endTimePicker.getSelectedYear() + "-" + endTimePicker.getSelectedMonth() + "-" + day);
             }
         });
-        picker.show();
+        try {
+            endTimePicker.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
     }
 
+
+    private void setBigyue(DatePicker picker) {
+//        if (31 - CalendarUtil.getDay() < 3) {
+        if (CalendarUtil.getMonth() == 12) {
+            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
+            picker.setRangeEnd(CalendarUtil.getYear() + 1, 1, CalendarUtil.getDay() - 1);
+        } else {
+            picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
+            picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth() + 1, CalendarUtil.getDay() - 1);
+        }
+    }
+
+    private void setXiaoyue(DatePicker picker) {
+
+        picker.setRangeStart(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
+        picker.setRangeEnd(CalendarUtil.getYear(), CalendarUtil.getMonth(), CalendarUtil.getDay());
+
+
+    }
 
 
     private AlertDialog.Builder builder;
@@ -262,7 +324,7 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
 
     private void tijiaobaojia() {
 
-        if(ObjectUtils.isEmpty(builder)){
+        if (ObjectUtils.isEmpty(builder)) {
             builder = new AlertDialog.Builder(CanyubaojiaActivity.this);
             View inflate = LayoutInflater.from(CanyubaojiaActivity.this).inflate(R.layout.dialog_tongyong, null);
             builder.setView(inflate);
@@ -343,22 +405,22 @@ public class CanyubaojiaActivity extends BaseActivity implements View.OnClickLis
                             EventBus.getDefault().post(new MessageBean(MessageBean.Code.BAOJIACHENGGONG));
 
                             Integer data = jsonObject.getInteger("data");
-                            if(!ObjectUtils.isEmpty(data)){
+                            if (!ObjectUtils.isEmpty(data)) {
 
                                 baojiaDialogCancle.setText("取消");
 
-                                if(StringUtils.equals(getResources().getString(R.string.geren),SPUtils.getInstance().getString("userType"))){
+                                if (StringUtils.equals(getResources().getString(R.string.geren), SPUtils.getInstance().getString("userType"))) {
                                     baojiaDialogStatus = 1;
-                                    baojiaDialogContent.setText("您的剩余可报价次数为 "+data+" 次,升级为企业用户可获得更多的报价次数!");
+                                    baojiaDialogContent.setText("您的剩余可报价次数为 " + data + " 次,升级为企业用户可获得更多的报价次数!");
                                     baojiaDialogCommit.setText("升级为企业用户");
                                 }
-                                if(StringUtils.equals(getResources().getString(R.string.putongqiye),SPUtils.getInstance().getString("userType"))){
+                                if (StringUtils.equals(getResources().getString(R.string.putongqiye), SPUtils.getInstance().getString("userType"))) {
                                     baojiaDialogStatus = 2;
-                                    baojiaDialogContent.setText("您的剩余可报价次数为 "+data+" 次,升级为付费企业用户可获得更多的报价次数!");
+                                    baojiaDialogContent.setText("您的剩余可报价次数为 " + data + " 次,升级为付费企业用户可获得更多的报价次数!");
                                     baojiaDialogCommit.setText("升级付费企业");
                                 }
 
-                                if(StringUtils.equals(getResources().getString(R.string.fufeiqiye),SPUtils.getInstance().getString("userType"))){
+                                if (StringUtils.equals(getResources().getString(R.string.fufeiqiye), SPUtils.getInstance().getString("userType"))) {
                                     baojiaDialogContent.setText("您已经报价成功！");
                                     baojiaDialogCancle.setVisibility(View.GONE);
                                     baojiaDialogCommit.setText("确定");

@@ -673,7 +673,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
     private void setBigyue(DatePicker picker) {
         if (31 - CalendarUtil.getDay() < 3) {
             if (CalendarUtil.getMonth() == 12) {
-                picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 31);
+                picker.setRangeStart(CalendarUtil.getYear()+1, 1, (CalendarUtil.getDay() + 3) - 31);
                 picker.setRangeEnd(CalendarUtil.getYear()+1, 2, (CalendarUtil.getDay() + 3) - 31);
             } else {
 
@@ -703,7 +703,7 @@ public class FabuqiugouActivity extends BaseActivity implements View.OnClickList
 
         if (30 - CalendarUtil.getDay() < 3) {
             if (CalendarUtil.getMonth() == 12) {
-                picker.setRangeStart(CalendarUtil.getYear(), 1, (CalendarUtil.getDay() + 3) - 30);
+                picker.setRangeStart(CalendarUtil.getYear()+1, 1, (CalendarUtil.getDay() + 3) - 30);
                 picker.setRangeEnd(CalendarUtil.getYear() + 1, 2, (CalendarUtil.getDay() + 3) - 30);
             } else {
 
