@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/include28"
+        layout="@layout/toolbar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_daixiao_detail_suoquyangpin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include28">
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:theme="@style/ToolbarTheme">
+
+            <android.support.design.widget.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:contentScrim="@color/baise"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fitsSystemWindows="true"
+                    android:orientation="vertical"
+                    android:scaleType="centerInside"
+                    app:layout_collapseMode="parallax">
+
+                    <android.support.constraint.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/baise"
+                        tools:context=".huodong.tuangou.activity.TuangouxiangqingActivity">
+
+                        <View
+                            android:id="@+id/include15"
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+
+                        <ImageView
+                            android:id="@+id/activity_daixiao_detail_img"
+                            android:layout_width="@dimen/x500"
+                            android:layout_height="@dimen/x500"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/include15" />
+
+                        <android.support.constraint.ConstraintLayout
+                            android:id="@+id/constraintLayout9"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toTopOf="@+id/constraintLayout10"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/activity_daixiao_detail_img"
+                            app:layout_constraintTop_toBottomOf="@+id/include15"
+                            app:layout_constraintVertical_chainStyle="spread">
+
+
+                            <TextView
+                                android:id="@+id/activity_daixiao_detail_subscribedNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/x8"
+                                android:textColor="@color/chunhongse"
+                                android:textSize="@dimen/x36"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/activity_daixiao_detail_subscribedNum_danwie"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintHorizontal_chainStyle="packed"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView133" />
+
+
+                            <TextView
+                                android:id="@+id/activity_daixiao_detail_subscribedNum_danwie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/x24"
+                                app:layout_constraintBaseline_toBaselineOf="@+id/activity_daixiao_detail_subscribedNum"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/activity_daixiao_detail_subscribedNum" />
+
+                            <TextView
+                                android:id="@+id/textView133"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="已售量:"
+                                android:textSize="@dimen/x24"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_daixiao_detail_subscribedNum"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
+
+                        </android.support.constraint.ConstraintLayout>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="@color/fengexian"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/constraintLayout9"
+                            app:layout_constraintTop_toTopOf="@+id/constraintLayout10" />
+
+                        <android.support.constraint.ConstraintLayout
+                            android:id="@+id/constraintLayout10"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            app:layout_constraintBottom_toTopOf="@+id/constraintLayout11"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toEndOf="@+id/activity_daixiao_detail_img"
+                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
+
+                            <TextView
+                                android:id="@+id/activity_daixiao_detail_remainNum"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/x8"
+                                android:textSize="@dimen/x36"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@+id/activity_daixiao_detail_remainNum_danwie"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintHorizontal_chainStyle="packed"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView132" />
+
+
+                            <TextView
+                                android:id="@+id/activity_daixiao_detail_remainNum_danwie"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/x24"
+                                app:layout_constraintBaseline_toBaselineOf="@+id/activity_daixiao_detail_remainNum"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/activity_daixiao_detail_remainNum" />
+
+                            <TextView
+                                android:id="@+id/textView132"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="库存量:"
+                                android:textSize="@dimen/x24"
+                                app:layout_constraintBottom_toTopOf="@+id/activity_daixiao_detail_remainNum"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
+                        </android.support.constraint.ConstraintLayout>
+
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:background="@color/fengexian"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="@+id/constraintLayout10"
+                            app:layout_constraintTop_toTopOf="@+id/constraintLayout11" />
+
+                        <android.support.constraint.ConstraintLayout
+                            android:id="@+id/constraintLayout11"
+                            android:layout_width="@dimen/x268"
+                            android:layout_height="0dp"
+                            android:background="@mipmap/shangpin_jiage"
+                            app:layout_constraintBottom_toBottomOf="@+id/activity_daixiao_detail_img"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="1.0"
+                            app:layout_constraintStart_toEndOf="@+id/activity_daixiao_detail_img"
+                            app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
+
+                            <TextView
+                                android:id="@+id/textView112"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginEnd="8dp"
+                                android:text="销售价:"
+                                android:textColor="@color/baise"
+                                android:textSize="@dimen/x24"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/activity_daixiao_detail_price"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/baise"
+                                android:textSize="@dimen/x36"
+                                android:textStyle="bold"
+                                app:layout_constraintEnd_toStartOf="@+id/activity_daixiao_detail_price_danwei"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintHorizontal_chainStyle="packed"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView112" />
+
+                            <TextView
+                                android:id="@+id/activity_daixiao_detail_price_danwei"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/baise"
+                                android:textSize="@dimen/x24"
+                                app:layout_constraintBaseline_toBaselineOf="@+id/activity_daixiao_detail_price"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.5"
+                                app:layout_constraintStart_toEndOf="@+id/activity_daixiao_detail_price" />
+                        </android.support.constraint.ConstraintLayout>
+
+                        <TextView
+                            android:id="@+id/activity_daixiao_detail_productname"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:textColor="@color/erjibiaoti"
+                            android:textSize="@dimen/x36"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/activity_daixiao_detail_img" />
+
+
+                    </android.support.constraint.ConstraintLayout>
+
+
+                </LinearLayout>
+
+            </android.support.design.widget.CollapsingToolbarLayout>
+
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_list_item"
+                app:tabIndicatorColor="@color/chunhongse"
+                app:tabIndicatorFullWidth="false"
+                app:tabSelectedTextColor="@color/chunhongse"
+                app:tabTextColor="#A7A7A7" />
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <Button
+        android:id="@+id/activity_daixiao_detail_buy"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@mipmap/bg"
+        android:text="我要购买"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/activity_daixiao_detail_suoquyangpin"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </Button>
+
+    <Button
+        android:id="@+id/activity_daixiao_detail_suoquyangpin"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x98"
+        android:background="@color/startcolor"
+        android:text="索取样品"
+        android:textColor="@color/baise"
+        android:textSize="@dimen/x36"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/activity_daixiao_detail_buy">
+
+    </Button>
+
+
+</android.support.constraint.ConstraintLayout>

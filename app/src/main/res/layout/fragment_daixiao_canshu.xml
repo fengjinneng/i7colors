@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fengexian"
+    tools:context=".huodong.daixiao.fragment.DaixiaoCanshuFragment">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/fragment_daixiao_canshu_recyclerview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/x24"
+        android:layout_marginEnd="@dimen/x24"
+        android:background="@drawable/background_wenbenshurubiankuang"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView427" />
+
+    <TextView
+        android:id="@+id/textView418"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/x80"
+        android:layout_marginStart="@dimen/x24"
+        android:layout_marginTop="@dimen/x24"
+        android:layout_marginEnd="@dimen/x24"
+        android:text="基本参数"
+        android:gravity="center"
+        android:textSize="@dimen/x24"
+        android:textColor="@color/biaoti"
+        android:textStyle="bold"
+        android:background="@color/baise"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView427"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/textView418"
+        app:layout_constraintStart_toStartOf="@+id/textView418"
+        app:layout_constraintTop_toBottomOf="@+id/textView418" />
+</android.support.constraint.ConstraintLayout>
