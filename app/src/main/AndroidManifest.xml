@@ -12,20 +12,13 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-    <!-- 用于申请调用A-GPS模块 -->
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于申请调用A-GPS模块 -->
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!-- 用于访问GPS定位 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <!-- 添加权限 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 添加权限 -->
     <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE" />
 
     <application
@@ -39,6 +32,28 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:name">
+        <activity android:name=".live.LiveDetailActivity"></activity>
+        <activity android:name=".live.LiveListActivity">
+
+        </activity>
+        <activity android:name=".huodong.daixiao.ShenqingyangpinActivity" />
+        <activity android:name=".huodong.daixiao.DaixiaoDetailActivity" >
+
+            <!-- Schame -->
+            <intent-filter>
+                <data
+                    android:host="m.i7colors.proxymarket"
+                    android:scheme="arouter" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".huodong.daixiao.DaixiaoListActivity" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="606d096e18eca2fe305960b21949bf68" />
@@ -218,9 +233,7 @@
                 android:resource="@xml/file_paths_public" />
         </provider>
 
-        <activity android:name=".ui.activity.user.ChangePasswordActivity" />
-
-        <!-- 微信分享回调 android:taskAffinity="net.sourceforge.simcpux" -->
+        <activity android:name=".ui.activity.user.ChangePasswordActivity" /> <!-- 微信分享回调 android:taskAffinity="net.sourceforge.simcpux" -->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
@@ -348,6 +361,21 @@
         <activity android:name=".ui.activity.kaifangshangcheng.KFSCVipActivity" />
         <activity android:name=".ui.activity.user.QiyerenzhengActivity" />
         <activity android:name=".ui.activity.zhuji.ZhujiQiyeListActivity" />
+
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="wx63410989373f8975" />
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>

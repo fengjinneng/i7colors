@@ -106,34 +106,6 @@
     </android.support.constraint.ConstraintLayout>
 
     <TextView
-        android:id="@+id/item_jingpai_list_qipaijiage_unit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:textSize="@dimen/x26"
-        app:layout_constraintBottom_toBottomOf="@+id/item_jingpai_list_qipaijiage"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/item_jingpai_list_qipaijiage" />
-
-    <TextView
-        android:id="@+id/item_jingpai_list_qipaijiage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:textSize="@dimen/x36"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout31"
-        app:layout_constraintEnd_toStartOf="@+id/item_jingpai_list_qipaijiage_unit" />
-
-    <TextView
-        android:id="@+id/textView269"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="最低价: ¥"
-        android:textSize="@dimen/x26"
-        app:layout_constraintBottom_toBottomOf="@+id/item_jingpai_list_qipaijiage_unit"
-        app:layout_constraintEnd_toStartOf="@+id/item_jingpai_list_qipaijiage" />
-
-    <TextView
         android:id="@+id/textView270"
         android:layout_width="0dp"
         android:layout_height="1dp"
@@ -147,10 +119,10 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/x80"
         android:gravity="center"
-        android:textSize="@dimen/x30"
         android:text="尚未开始（活动时间:2018-12-11至2019-01-10）"
+        android:textSize="@dimen/x24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/item_jingpai_list_img"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_jingpai_list_img" />
 
     <TextView
@@ -161,41 +133,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/item_jingpai_list_status_text" />
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView272"
-        app:layout_constraintEnd_toStartOf="@+id/item_jingpai_list_status_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_jingpai_list_img">
-
-        <TextView
-            android:id="@+id/item_jingpai_list_chujiacishu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:textColor="@color/chunhongse"
-            android:textSize="@dimen/x44"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView325"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView325"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="次抢购"
-            app:layout_constraintBottom_toBottomOf="@+id/item_jingpai_list_chujiacishu"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/item_jingpai_list_chujiacishu" />
-    </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/item_jingpai_list_faqiren_layout"
