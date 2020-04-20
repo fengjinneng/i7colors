@@ -104,8 +104,6 @@ public class JpushReceiver extends BroadcastReceiver {
 
                 }
 
-
-
                 if (AppUtils.isAppForeground(AppUtils.getAppPackageName())) {
                     JpushUtil.jumpActivity(map, context);
                 } else {

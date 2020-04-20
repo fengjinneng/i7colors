@@ -65,7 +65,7 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
             @Override
             public void onTick(long millisUntilFinished) {
                 SimpleDateFormat sdf = new SimpleDateFormat("ss");
-                mActivityWelcomeText.setText("跳过" + sdf.format(new Date(millisUntilFinished)) + "S");
+                mActivityWelcomeText.setText(sdf.format(new Date(millisUntilFinished)) + "S 跳过");
             }
 
             @Override
@@ -109,7 +109,7 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
 //                        marketIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             ActivityUtils.startActivity(marketIntent);
                         }
-                    } else if (StringUtils.equals("product",  SPUtils.getInstance().getString("adv_directType"))) {
+                    } else if (StringUtils.equals("product", SPUtils.getInstance().getString("adv_directType"))) {
                         if (StringUtils.isEmpty(SPUtils.getInstance().getString("adv_directTypeId"))) {
                             Intent productIntent = new Intent(context, ChanpindatingActivity.class);
 //                        productIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -121,7 +121,7 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
 //                        productIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             ActivityUtils.startActivity(productIntent);
                         }
-                    } else if (StringUtils.equals("information",  SPUtils.getInstance().getString("adv_directType"))) {
+                    } else if (StringUtils.equals("information", SPUtils.getInstance().getString("adv_directType"))) {
                         if (StringUtils.isEmpty(SPUtils.getInstance().getString("adv_directTypeId"))) {
                             Intent zixunIntent = new Intent(context, ChanyezixunActivity.class);
 //                        zixunIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -134,7 +134,7 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
 
                         }
 
-                    } else if (StringUtils.equals("groupBuy",  SPUtils.getInstance().getString("adv_directType"))) {
+                    } else if (StringUtils.equals("groupBuy", SPUtils.getInstance().getString("adv_directType"))) {
                         if (StringUtils.isEmpty(SPUtils.getInstance().getString("adv_directTypeId"))) {
                             Intent tuangouIntent = new Intent(context, TuangouliebiaoActivity.class);
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -146,8 +146,7 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             ActivityUtils.startActivity(tuangouIntent);
                         }
-                    }
-                    else if (StringUtils.equals("auction",  SPUtils.getInstance().getString("adv_directType"))) {
+                    } else if (StringUtils.equals("auction", SPUtils.getInstance().getString("adv_directType"))) {
                         if (StringUtils.isEmpty(SPUtils.getInstance().getString("adv_directTypeId"))) {
                             Intent jingpaiIntent = new Intent(context, JingpaiActivity.class);
 //                          tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -159,9 +158,7 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             ActivityUtils.startActivity(jingpaiIntent);
                         }
-                    }
-
-                    else if (StringUtils.equals("zhuji",  SPUtils.getInstance().getString("adv_directType"))) {
+                    } else if (StringUtils.equals("zhuji", SPUtils.getInstance().getString("adv_directType"))) {
                         if (StringUtils.isEmpty(SPUtils.getInstance().getString("adv_directTypeId"))) {
                             Intent zhujiIntent = new Intent(context, ZhujiQiyeListActivity.class);
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -173,17 +170,13 @@ public class MyWelcomeActivity extends BaseActivity implements View.OnClickListe
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             ActivityUtils.startActivity(zhujiIntent);
                         }
-                    }
-                    else if (StringUtils.equals("meeting", SPUtils.getInstance().getString("adv_directType"))) {
+                    } else if (StringUtils.equals("meeting", SPUtils.getInstance().getString("adv_directType"))) {
                         Intent zhujiIntent = new Intent(context, CaigoulianmengActivity.class);
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(zhujiIntent);
 
                     }
-                } else
-
-                   if (!StringUtils.isEmpty(SPUtils.getInstance().getString("advUrl")) && SPUtils.getInstance().getString("advUrl").length() > 4)
-                {
+                } else if (!StringUtils.isEmpty(SPUtils.getInstance().getString("advUrl")) && SPUtils.getInstance().getString("advUrl").length() > 4) {
                     isClick = true;
                     timer.cancel();
                     Intent intent = new Intent(MyWelcomeActivity.this, WebActivity.class);

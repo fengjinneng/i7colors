@@ -389,5 +389,14 @@ public class InterfaceInfo {
     //购买课程
     public static final String CLASSPAY = "wxpay/unifiedOrder";
 
+    //预约课程
+    public static final String yuyueClass = "schoolLiveClass/createSchoolLiveClassReserveForApp";
+
+    //取消预约课程
+    public static final String cancleClass = "schoolLiveClass/updateSchoolLiveClassReserveForApp";
+
+    //检测支付状态
+    public static final String checkPayStatus = "wxpay/checkPayStatus";
+
 }
 

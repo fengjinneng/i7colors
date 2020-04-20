@@ -12,6 +12,8 @@ import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiDetailActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouxiangqingActivity;
+import com.company.qcy.live.LiveDetailActivity;
+import com.company.qcy.live.LiveListActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
@@ -171,6 +173,20 @@ public class JumpUtil {
                                 , CaigoulianmengActivity.class);
 //                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(zhujiIntent);
+                    }
+                } else if (StringUtils.equals("schoolLiveClass", bannerBean
+                        .getDirectType())) {
+                    if (StringUtils.isEmpty(bannerBean
+                            .getDirectTypeId())) {
+
+                        ActivityUtils.startActivity(LiveListActivity.class);
+                    } else {
+                        Intent zhiboIntent = new Intent(context
+                                , LiveDetailActivity.class);
+                        zhiboIntent.putExtra("id", Long.parseLong(bannerBean
+                                .getDirectTypeId()));
+                        ActivityUtils.startActivity(zhiboIntent);
+
                     }
                 }
             }

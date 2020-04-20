@@ -3,6 +3,8 @@ package com.company.qcy.live;
 public class LiveBean {
 
     private Long id;
+    private Long articleId;
+    private Long videoId;
     private String channelId;
     private String loginUserIsBuy;
     private String title;
@@ -17,6 +19,50 @@ public class LiveBean {
     private String isEnd;
     private String isCheck;
     private String isDefaultBanner;
+    private String loginUserIsReserve;
+    private String videoUrl;
+    private String videoHdUrl;
+    private String videoLdUrl;
+
+    public Long getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(Long videoId) {
+        this.videoId = videoId;
+    }
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
+    }
+
+    public String getVideoHdUrl() {
+        return videoHdUrl;
+    }
+
+    public void setVideoHdUrl(String videoHdUrl) {
+        this.videoHdUrl = videoHdUrl;
+    }
+
+    public String getVideoLdUrl() {
+        return videoLdUrl;
+    }
+
+    public void setVideoLdUrl(String videoLdUrl) {
+        this.videoLdUrl = videoLdUrl;
+    }
+
+    public String getLoginUserIsReserve() {
+        return loginUserIsReserve;
+    }
+
+    public void setLoginUserIsReserve(String loginUserIsReserve) {
+        this.loginUserIsReserve = loginUserIsReserve;
+    }
 
     public Long getId() {
         return id;
@@ -136,5 +182,14 @@ public class LiveBean {
 
     public void setIsDefaultBanner(String isDefaultBanner) {
         this.isDefaultBanner = isDefaultBanner;
+    }
+
+
+    public Long getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(Long articleId) {
+        this.articleId = articleId;
     }
 }

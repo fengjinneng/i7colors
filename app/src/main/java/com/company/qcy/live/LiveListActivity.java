@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.blankj.utilcode.util.ActivityUtils;
@@ -20,15 +22,19 @@ import com.blankj.utilcode.util.ToastUtils;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
+import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.InterfaceInfo;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.Utils.SignAndTokenUtil;
 import com.company.qcy.base.BaseActivity;
+import com.company.qcy.bean.BannerBean;
+import com.company.qcy.huodong.daixiao.DaixiaoListActivity;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.GetRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LiveListActivity extends BaseActivity implements View.OnClickListener {
@@ -54,7 +60,7 @@ public class LiveListActivity extends BaseActivity implements View.OnClickListen
         recyclerView = (RecyclerView) findViewById(R.id.activity_live_list_recyclerView);
         refreshLayout = (SwipeRefreshLayout) findViewById(R.id.activity_live_list_swipeRefreshLayout);
 
-        mToolbarTitle.setText("在线直播!");
+        mToolbarTitle.setText("在线直播");
 
         //创建布局管理
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -83,6 +89,7 @@ public class LiveListActivity extends BaseActivity implements View.OnClickListen
                 refreshListener.onRefresh();
             }
         });
+
         adapter.setOnLoadMoreListener(new BaseQuickAdapter.RequestLoadMoreListener() {
             @Override
             public void onLoadMoreRequested() {
@@ -101,16 +108,85 @@ public class LiveListActivity extends BaseActivity implements View.OnClickListen
                 intent.putExtra("id", liveBean.getId());
 
                 ActivityUtils.startActivity(intent);
-
             }
         });
 
         refreshLayout.setColorSchemeResources(android.R.color.holo_red_light,
                 android.R.color.holo_green_light, android.R.color.holo_blue_light);
-
-//        addAdvData();
+        addAdvData();
 
     }
+
+    private void addHeadView() {
+
+        View inflate = LayoutInflater.from(this).inflate(R.layout.head_img_huodong, null);
+        ImageView img = inflate.findViewById(R.id.head_img_huodong_img);
+        GlideUtils.loadImageRct(context, advDatas.get(0), img);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        adapter.addHeaderView(inflate);
+    }
+
+
+    private List<String> advDatas = new ArrayList<>();
+    private void addAdvData() {
+
+        GetRequest<String> request = OkGo.<String>get(ServerInfo.SERVER + InterfaceInfo.INDEXBANNER)
+                .tag(this)
+                .params("sign", SPUtils.getInstance().getString("sign"))
+                .params("plate_code", "school_live_class_mobile_banner");
+
+
+        StringCallback stringCallback = new StringCallback() {
+            @Override
+            public void onSuccess(Response<String> response) {
+                LogUtils.v("INDEXBANNER", response.body());
+
+                try {
+                    if (response.code() == 200) {
+                        JSONObject jsonObject = JSONObject.parseObject(response.body());
+                        String msg = jsonObject.getString("msg");
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.success))) {
+                            JSONArray data = jsonObject.getJSONArray("data");
+                            if (ObjectUtils.isEmpty(data)) {
+                                return;
+                            }
+                            List<BannerBean> bannerBeans = JSONObject.parseArray(data.toJSONString(), BannerBean.class);
+                            for (int i = 0; i < bannerBeans.size(); i++) {
+                                advDatas.add(ServerInfo.IMAGE + bannerBeans.get(i).getAd_image());
+                            }
+                            addHeadView();
+                            return;
+
+                        }
+                        if (StringUtils.equals(jsonObject.getString("code"), getResources().getString(R.string.qianmingshixiao))) {
+                            SignAndTokenUtil.getSign(LiveListActivity.this, request, this);
+                            return;
+                        }
+                        ToastUtils.showShort(msg);
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(Response<String> response) {
+                super.onError(response);
+                ToastUtils.showShort(getResources().getString(R.string.NETEXCEPTION));
+            }
+        };
+
+
+        request.execute(stringCallback);
+
+    }
+
 
     private boolean isReflash;
     private int pageNo;
@@ -148,8 +224,7 @@ public class LiveListActivity extends BaseActivity implements View.OnClickListen
                                 adapter.loadMoreComplete();
                                 return;
                             }
-//
-                            adapter.setNewData(liveBeans);
+                            adapter.addData(liveBeans);
                             adapter.loadMoreComplete();
                             adapter.disableLoadMoreIfNotFullPage();
                             return;

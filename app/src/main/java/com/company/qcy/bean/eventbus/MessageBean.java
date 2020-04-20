@@ -287,6 +287,9 @@ public class MessageBean {
         //代销购买成功
         public static final int DAIXIAOBUYSUCESS = 1047;
 
+        //直播
+        public static final int payLiveOrderSuccess = 1048;
+
     }
 
 }

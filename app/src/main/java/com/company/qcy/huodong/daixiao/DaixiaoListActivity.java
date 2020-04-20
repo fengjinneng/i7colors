@@ -170,7 +170,7 @@ public class DaixiaoListActivity extends BaseActivity implements View.OnClickLis
                                 return;
                             }
 //
-                            adapter.setNewData(daixiaoBeans);
+                            adapter.addData(daixiaoBeans);
                             adapter.loadMoreComplete();
                             adapter.disableLoadMoreIfNotFullPage();
                             return;

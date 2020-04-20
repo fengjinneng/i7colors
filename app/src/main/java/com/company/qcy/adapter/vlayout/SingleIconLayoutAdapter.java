@@ -29,6 +29,7 @@ import com.company.qcy.Utils.NetworkImageHolderView;
 import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.WebActivity;
 import com.company.qcy.bean.BannerBean;
+import com.company.qcy.live.LiveListActivity;
 import com.company.qcy.map.QCYMapActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
@@ -219,6 +220,8 @@ public class SingleIconLayoutAdapter extends DelegateAdapter.Adapter<SingleIconL
             ActivityUtils.startActivity(ChanyezixunActivity.class);
         } else if (StringUtils.equals("zhuji_diy", iconDatas.get(position).getAd_name())) {
             ActivityUtils.startActivity(ZhujiListActivity.class);
+        }else if (StringUtils.equals("school_live_class", iconDatas.get(position).getAd_name())) {
+            ActivityUtils.startActivity(LiveListActivity.class);
         }
     }
 

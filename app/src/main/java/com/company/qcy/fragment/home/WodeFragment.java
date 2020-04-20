@@ -510,7 +510,6 @@ public class WodeFragment extends BaseFragment implements View.OnClickListener {
 
             case R.id.fragment_wode_lianxikefu:
                 ActivityUtils.startActivity(LianxikefuActivity.class);
-//                ActivityUtils.startActivity(LiveListActivity.class);
                 break;
 
             case R.id.fragment_wode_buyer_layout:

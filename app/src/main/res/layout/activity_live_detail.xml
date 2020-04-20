@@ -39,6 +39,7 @@
                 android:id="@+id/activity_live_detail_img"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/x500"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -61,7 +62,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/background_huatibiankuang"
                     android:paddingLeft="@dimen/x20"
                     android:paddingRight="@dimen/x20"
                     android:textSize="@dimen/x24"
@@ -70,7 +70,7 @@
 
 
                 <android.support.constraint.ConstraintLayout
-                    android:id="@+id/constraintLayout62"
+                    android:id="@+id/activity_live_detail_countdownView_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -154,7 +154,7 @@
                     android:textSize="@dimen/x24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout62" />
+                    app:layout_constraintTop_toBottomOf="@+id/activity_live_detail_countdownView_layout" />
             </android.support.constraint.ConstraintLayout>
 
 
@@ -174,20 +174,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout63" />
 
-            <WebView
-                android:id="@+id/activity_live_detail_webView"
+            <TextView
+                android:id="@+id/activity_live_detail_describe"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
+                android:background="@color/baise"
+                android:padding="10dp"
+                android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="@+id/textView442"
                 app:layout_constraintStart_toStartOf="@+id/textView442"
                 app:layout_constraintTop_toBottomOf="@+id/textView442" />
 
+            <ImageView
+                android:id="@+id/activity_live_detail_img_status"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/x80"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/live_zhibozhong" />
+
         </android.support.constraint.ConstraintLayout>
 
     </ScrollView>
-
-
 
 
     <Button
@@ -195,7 +204,7 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/x98"
         android:background="@color/startcolor"
-        android:text="短信预约提醒"
+        android:text="预约课程"
         android:textColor="@color/baise"
         android:textSize="@dimen/x36"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -209,7 +218,6 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/x98"
         android:background="@color/chunhongse"
-        android:text="99 支付观看"
         android:textColor="@color/baise"
         android:textSize="@dimen/x36"
         app:layout_constraintBottom_toBottomOf="parent"

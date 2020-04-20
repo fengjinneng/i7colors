@@ -4,29 +4,15 @@ import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.VideoView;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.StringUtils;
-import com.bumptech.glide.Glide;
 import com.company.qcy.R;
 import com.company.qcy.Utils.GlideUtils;
 import com.company.qcy.Utils.MyNicePlayerController;
-import com.company.qcy.Utils.ServerInfo;
 import com.company.qcy.base.BaseActivity;
 import com.xiao.nicevideoplayer.NiceVideoPlayer;
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager;
-import com.xiao.nicevideoplayer.TxVideoPlayerController;
-
-import java.net.URL;
-
-import cn.jzvd.JZMediaManager;
-import cn.jzvd.Jzvd;
-import cn.jzvd.JzvdStd;
-import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 public class ShipinbofangActivity extends BaseActivity {
 
