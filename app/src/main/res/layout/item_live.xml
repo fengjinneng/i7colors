@@ -8,10 +8,11 @@
 
     <ImageView
         android:id="@+id/item_live_img"
-        android:layout_width="@dimen/x180"
+        android:layout_width="@dimen/x270"
         android:layout_height="@dimen/x180"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/x30"
+        android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/place_500x500" />
@@ -27,7 +28,7 @@
         android:maxLines="2"
         android:text="针织节能减排技术新进展针织节能减排技术新进展针织节能减排技术新进展针织节能减排技术新进展"
         android:textColor="@color/erjibiaoti"
-        android:textSize="@dimen/x36"
+        android:textSize="@dimen/x30"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_live_img"
@@ -46,4 +47,63 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/item_live_img"
         app:layout_constraintTop_toBottomOf="@+id/item_live_title" />
+
+    <TextView
+        android:id="@+id/textView262"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x20"
+        android:text="讲师 : "
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/item_live_describe" />
+
+    <TextView
+        android:id="@+id/item_live_author"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/x24"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toBottomOf="@+id/textView262"
+        app:layout_constraintEnd_toStartOf="@+id/item_live_status"
+        app:layout_constraintStart_toEndOf="@+id/textView262" />
+
+    <TextView
+        android:id="@+id/item_live_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥ "
+        android:textColor="@color/chunhongse"
+        android:textSize="@dimen/x24"
+        app:layout_constraintBottom_toBottomOf="@+id/textView262"
+        app:layout_constraintEnd_toStartOf="@+id/item_live_price"
+        app:layout_goneMarginRight="@dimen/x16" />
+
+    <TextView
+        android:id="@+id/item_live_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/chunhongse"
+        android:textSize="@dimen/x30"
+        app:layout_constraintBaseline_toBaselineOf="@+id/item_live_status"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/item_live_img_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@+id/item_live_img"
+        app:layout_constraintTop_toTopOf="@+id/item_live_img"
+        app:srcCompat="@mipmap/live_zhibozhong" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/item_live_img"
+        app:layout_constraintEnd_toEndOf="@+id/item_live_img"
+        app:layout_constraintStart_toStartOf="@+id/item_live_img"
+        app:layout_constraintTop_toTopOf="@+id/item_live_img"
+        app:srcCompat="@mipmap/live_bofang" />
 </android.support.constraint.ConstraintLayout>

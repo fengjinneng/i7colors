@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.company.qcy.R;
+import com.company.qcy.bean.eventbus.MessageBean;
 import com.tencent.mm.opensdk.constants.ConstantsAPI;
 import com.tencent.mm.opensdk.modelbase.BaseReq;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
@@ -13,11 +14,12 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
 
     private IWXAPI api;
-
 
     @Override
 
@@ -27,13 +29,11 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
         setContentView(R.layout.pay_result);
 
-
         api = WXAPIFactory.createWXAPI(this, "wx63410989373f8975");
 
         api.handleIntent(getIntent(), this);
 
     }
-
 
     @Override
 
@@ -47,13 +47,11 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     }
 
-
     @Override
 
     public void onReq(BaseReq req) {
 
     }
-
 
     @Override
 
@@ -62,9 +60,8 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
 
             if (resp.errCode == 0) {
+                EventBus.getDefault().post(new MessageBean(MessageBean.Code.payLiveOrderSuccess));
 
-//                EventBus.getDefault().post(new EventBusMessageBean(EventBusMessageBean.Order.payOrderSuccess));
-//
 //                ActivityUtils.finishActivity(CheckStandActivity.class);
 //                //成功
 //                ActivityUtils.startActivity(PaySuccessActivity.class);

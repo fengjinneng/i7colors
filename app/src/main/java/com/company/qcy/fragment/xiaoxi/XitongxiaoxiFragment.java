@@ -35,6 +35,8 @@ import com.company.qcy.bean.eventbus.MessageBean;
 import com.company.qcy.bean.message.SystemMeassageBean;
 import com.company.qcy.huodong.daixiao.DaixiaoDetailActivity;
 import com.company.qcy.huodong.daixiao.DaixiaoListActivity;
+import com.company.qcy.live.LiveDetailActivity;
+import com.company.qcy.live.LiveListActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
@@ -225,13 +227,12 @@ public class XitongxiaoxiFragment extends BaseFragment {
                         }
                     }else if (StringUtils.equals("schoolLiveClass", systemMeassageBean.getDirectType())) {
                         if (ObjectUtils.isEmpty(systemMeassageBean.getDirectTypeId())) {
-//                        Intent daixiaoIntent = new Intent(context, DaixiaoListActivity.class);
-//                        ActivityUtils.startActivity(daixiaoIntent);
+                            ActivityUtils.startActivity(LiveListActivity.class);
 
                         } else {
-//                        Intent daixiaoIntent = new Intent(context, DaixiaoDetailActivity.class);
-//                        daixiaoIntent.putExtra("id", Long.parseLong(map.get("directTypeId")));
-//                        ActivityUtils.startActivity(daixiaoIntent);
+                            Intent daixiaoIntent = new Intent(getActivity(), LiveDetailActivity.class);
+                            daixiaoIntent.putExtra("id", systemMeassageBean.getDirectTypeId());
+                            ActivityUtils.startActivity(daixiaoIntent);
                         }
                     }
 

@@ -80,7 +80,6 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
         }
     }
 
-
     @Override
     public LayoutHelper onCreateLayoutHelper() {
         return layoutHelper;
@@ -126,7 +125,7 @@ public class SingleAdvLayoutAdapter extends DelegateAdapter.Adapter<SingleAdvLay
                 }
             });
         } catch (Exception e) {
-//            LogUtils.e("csssasawevwvwewvw", "这里的问题");
+            e.printStackTrace();
         }
 
     }

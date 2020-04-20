@@ -16,6 +16,8 @@ import com.company.qcy.huodong.jingpai.activity.JingpaiActivity;
 import com.company.qcy.huodong.jingpai.activity.JingpaiDetailActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouliebiaoActivity;
 import com.company.qcy.huodong.tuangou.activity.TuangouxiangqingActivity;
+import com.company.qcy.live.LiveDetailActivity;
+import com.company.qcy.live.LiveListActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpindatingActivity;
 import com.company.qcy.ui.activity.chanpindating.ChanpinxiangqingActivity;
 import com.company.qcy.ui.activity.chanyezixun.ChanyezixunActivity;
@@ -130,30 +132,26 @@ public class JpushUtil {
                     }
                 } else if (StringUtils.equals("meeting", map.get("directType"))) {
                     Intent zhujiIntent = new Intent(context, CaigoulianmengActivity.class);
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     ActivityUtils.startActivity(zhujiIntent);
 
                 } else if (StringUtils.equals("proxyMarket", map.get("directType"))) {
                     if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
                         Intent daixiaoIntent = new Intent(context, DaixiaoListActivity.class);
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(daixiaoIntent);
 
                     } else {
                         Intent daixiaoIntent = new Intent(context, DaixiaoDetailActivity.class);
                         daixiaoIntent.putExtra("id", Long.parseLong(map.get("directTypeId")));
-//                        tuangouIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         ActivityUtils.startActivity(daixiaoIntent);
                     }
-                }else if (StringUtils.equals("schoolLiveClass", map.get("directType"))) {
+                } else if (StringUtils.equals("schoolLiveClass", map.get("directType"))) {
                     if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
-//                        Intent daixiaoIntent = new Intent(context, DaixiaoListActivity.class);
-//                        ActivityUtils.startActivity(daixiaoIntent);
+                        ActivityUtils.startActivity(LiveListActivity.class);
 
                     } else {
-//                        Intent daixiaoIntent = new Intent(context, DaixiaoDetailActivity.class);
-//                        daixiaoIntent.putExtra("id", Long.parseLong(map.get("directTypeId")));
-//                        ActivityUtils.startActivity(daixiaoIntent);
+                        Intent daixiaoIntent = new Intent(context, LiveDetailActivity.class);
+                        daixiaoIntent.putExtra("id", Long.parseLong(map.get("directTypeId")));
+                        ActivityUtils.startActivity(daixiaoIntent);
                     }
                 }
 
@@ -196,9 +194,21 @@ public class JpushUtil {
                         ActivityUtils.startActivity(enquiryIntent);
                     }
                 }
+            }
+        } else if (StringUtils.equals("schoolLiveClass", map.get("workType"))) {
+            if (StringUtils.equals("inner", map.get("type"))) {
+                if (StringUtils.equals("schoolLiveClass", map.get("directType"))) {
+                    if (ObjectUtils.isEmpty(map.get("directTypeId"))) {
+                        ActivityUtils.startActivity(LiveListActivity.class);
 
+                    } else {
+                        Intent daixiaoIntent = new Intent(context, LiveDetailActivity.class);
+                        daixiaoIntent.putExtra("id", Long.parseLong(map.get("directTypeId")));
+                        ActivityUtils.startActivity(daixiaoIntent);
+                    }
+                }
             }
         }
     }
-
 }
+
