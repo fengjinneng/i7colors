@@ -1,26 +1,42 @@
 package com.company.qcy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.githang.statusbar.StatusBarCompat;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-public class GuideActivity extends AppCompatActivity {
+public class GuideActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private ConvenientBanner activityShopBanner;
+    private CheckBox mActivityGuideCheckbox;
+    /**
+     * 《用户服务协议》
+     */
+    private TextView mTextViactivityGuideFuwuxieyi;
+    /**
+     * 《隐私政策》
+     */
+    private TextView mTextViactivityGuideYinsizhengce;
+    private WebView mActivityGuideWebview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +49,12 @@ public class GuideActivity extends AppCompatActivity {
         }
 
         activityShopBanner = (ConvenientBanner) findViewById(R.id.activity_guide_banner);
+        mActivityGuideCheckbox = (CheckBox) findViewById(R.id.activity_guide_checkbox);
+        mTextViactivityGuideFuwuxieyi = (TextView) findViewById(R.id.textViactivity_guide_fuwuxieyi);
+        mTextViactivityGuideFuwuxieyi.setOnClickListener(this);
+        mTextViactivityGuideYinsizhengce = (TextView) findViewById(R.id.textViactivity_guide_yinsizhengce);
+        mTextViactivityGuideYinsizhengce.setOnClickListener(this);
+        mActivityGuideWebview = (WebView) findViewById(R.id.activity_guide_webview);
 
         initView();
 
@@ -69,12 +91,29 @@ public class GuideActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 if (position == localImages.size() - 1) {
+
+                    if (!isCheck) {
+                        ToastUtils.showShort("请勾选同意用户协议和隐私政策！");
+                        return;
+                    }
+
                     ActivityUtils.startActivity(MainActivity.class);
                     finish();
                 }
             }
         });
+
+
+        mActivityGuideCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isCheck = isChecked;
+            }
+        });
+
     }
+
+    private boolean isCheck;
 
 
     /**
@@ -91,6 +130,24 @@ public class GuideActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            default:
+                break;
+            case R.id.textViactivity_guide_fuwuxieyi:
+                Intent intent = new Intent(this, AgreementActivity.class);
+                intent.putExtra("name", "yonghuxieyi");
+                ActivityUtils.startActivity(intent);
+                break;
+            case R.id.textViactivity_guide_yinsizhengce:
+                Intent intent2 = new Intent(this, AgreementActivity.class);
+                intent2.putExtra("name", "yinsizhengce");
+                ActivityUtils.startActivity(intent2);
+                break;
         }
     }
 

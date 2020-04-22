@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.StringUtils;
 import com.company.qcy.R;
 
 public class WebNoBottomActivity extends BaseActivity implements View.OnClickListener {
@@ -28,11 +30,14 @@ public class WebNoBottomActivity extends BaseActivity implements View.OnClickLis
      */
     private TextView mActivityWebNoBottomTv;
 
+    private String from;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_no_bottom);
         webUrl = getIntent().getStringExtra("webUrl");
+        from = getIntent().getStringExtra("from");
         initView();
     }
 
@@ -60,6 +65,10 @@ public class WebNoBottomActivity extends BaseActivity implements View.OnClickLis
                 mActivityWebProgressbar.setVisibility(View.GONE);
             }
         });
+
+        if(StringUtils.equals("agreement",from)){
+            mActivityWebNoBottomTv.setVisibility(View.GONE);
+        }
 
     }
 

@@ -25,6 +25,7 @@ import com.blankj.utilcode.util.RegexUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.StringUtils;
 import com.blankj.utilcode.util.ToastUtils;
+import com.company.qcy.AgreementActivity;
 import com.company.qcy.R;
 import com.company.qcy.Utils.DialogStringCallback;
 import com.company.qcy.Utils.InterfaceInfo;
@@ -37,11 +38,7 @@ import com.lzy.okgo.model.Response;
 import com.lzy.okgo.request.PostRequest;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
-import cn.qqtheme.framework.picker.SinglePicker;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -99,6 +96,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
      */
     private CheckBox mActivityRegisterCheckbox;
     private boolean checkBoxChecked = true;
+    /**
+     * 《隐私政策》
+     */
+    private TextView mActivityRegisterYinsizhengce;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +145,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             }
         });
 
+        mActivityRegisterYinsizhengce = (TextView) findViewById(R.id.activity_register_yinsizhengce);
+        mActivityRegisterYinsizhengce.setOnClickListener(this);
     }
 
 //    private void getCaptcha() {
@@ -374,6 +377,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 ActivityUtils.startActivity(intent);
                 break;
 
+            case R.id.activity_register_yinsizhengce:
+                Intent intent2 = new Intent(this, AgreementActivity.class);
+                intent2.putExtra("name", "yinsizhengce");
+                ActivityUtils.startActivity(intent2);
+                break;
         }
     }
 

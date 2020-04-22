@@ -32,10 +32,11 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:name">
+        <activity android:name=".AgreementActivity"></activity>
         <activity
             android:name=".live.LiveReplayActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".live.LiveWebActivity" />
         <activity android:name=".live.LiveDetailActivity" />
         <activity android:name=".live.LiveListActivity" />

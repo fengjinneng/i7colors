@@ -88,7 +88,6 @@
                 android:id="@+id/activity_register_password_1"
                 android:layout_width="288dp"
                 android:layout_height="@dimen/x100"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/background_dengluwenbenkuang"
                 android:hint="请输入密码"
@@ -97,7 +96,7 @@
                 android:paddingLeft="@dimen/x36"
                 android:textSize="@dimen/x30"
                 app:layout_constraintEnd_toEndOf="@+id/activity_register_linnear2"
-                app:layout_constraintStart_toEndOf="@+id/imageView26"
+                app:layout_constraintStart_toStartOf="@+id/activity_register_linnear2"
                 app:layout_constraintTop_toBottomOf="@+id/activity_register_linnear2" />
 
             <EditText
@@ -132,8 +131,9 @@
 
 
             <LinearLayout
+                android:id="@+id/linearLayout7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/x98"
                 android:layout_marginTop="@dimen/x36"
                 android:layout_marginBottom="32dp"
                 android:orientation="horizontal"
@@ -152,17 +152,34 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:textSize="@dimen/x30"
-                    android:text="阅读并接受" />
+                    android:text="阅读并接受"
+                    android:textSize="@dimen/x30" />
 
                 <TextView
                     android:id="@+id/activity_register_xieyi"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="《七彩云协议》"
+                    android:text="《用户服务协议》"
+                    android:textColor="@color/chunhongse"
+                    android:textSize="@dimen/x30" />
+
+                <TextView
+                    android:id="@+id/textView269"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="和"
+                    android:textSize="@dimen/x30" />
+
+                <TextView
+                    android:id="@+id/activity_register_yinsizhengce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:textColor="@color/chunhongse"
                     android:textSize="@dimen/x30"
-                    android:textColor="@color/chunhongse" />
+                    android:gravity="center"
+                    android:text="《隐私政策》" />
 
 
             </LinearLayout>
