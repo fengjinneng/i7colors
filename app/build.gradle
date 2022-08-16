@@ -65,7 +65,7 @@ android {
         release {
             keyAlias 'i7colors'
             keyPassword 'pass@i7'
-            storeFile file('C:/Users/ThinkPad/Desktop/i7colors_app/i7colors.keystore.jks')
+            storeFile file('i7colors.keystore.jks')
             storePassword 'pass@i7'
         }
     }
@@ -156,8 +156,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     //万能recylerviewadapter
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.42'
-
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.7'
     //导航+viewPager
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 

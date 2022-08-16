@@ -3,9 +3,16 @@
 buildscript {
     
     repositories {
+        maven { url 'https://jitpack.io' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google'}
+        maven { url 'http://maven.aliyun.com/repository/public'}
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         google()
-        jcenter()
-        maven { url 'https://dl.bintray.com/umsdk/release' }
+        mavenCentral()
+        //加这个 建议加载最后否则会有影响
+        maven { url "http://mvn.mob.com/android" }
+//        maven { url 'https://dl.bintray.com/umsdk/release' }
+
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.2'
@@ -13,7 +20,8 @@ buildscript {
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
 
-        classpath "com.mob.sdk:MobSDK:2018.0319.1724"
+        classpath 'com.mob.sdk:MobSDK:+'
+
 //        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
 
 //        UMKEY   5cd38537570df39ed3000a4a
@@ -24,11 +32,14 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://jitpack.io' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google'}
+        maven { url 'http://maven.aliyun.com/repository/public'}
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         google()
-        jcenter()
-        maven { url "https://jitpack.io"
-
-        }
+        mavenCentral()
+        //加这个 建议加载最后否则会有影响
+        maven { url "http://mvn.mob.com/android" }
         maven {
             url 'http://maven.aliyun.com/nexus/content/repositories/releases/'
         }

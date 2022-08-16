@@ -17,8 +17,10 @@ import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bigkoo.convenientbanner.holder.Holder;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.blankj.utilcode.util.ActivityUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.githang.statusbar.StatusBarCompat;
+import com.mob.MobSDK;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -96,7 +98,8 @@ public class GuideActivity extends AppCompatActivity implements View.OnClickList
                         ToastUtils.showShort("请勾选同意用户协议和隐私政策！");
                         return;
                     }
-
+                    MobSDK.submitPolicyGrantResult(true);
+                    SPUtils.getInstance().put("isAgreePolicy",true);
                     ActivityUtils.startActivity(MainActivity.class);
                     finish();
                 }

@@ -18,6 +18,18 @@ public class CompanyIntroduceBean implements Parcelable {
 
     private String companyName;
 
+    private String description;
+
+
+
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public String getZhuying() {
         return zhuying;
@@ -83,6 +95,24 @@ public class CompanyIntroduceBean implements Parcelable {
         this.companyName = companyName;
     }
 
+    public CompanyIntroduceBean() {
+    }
+
+    @Override
+    public String toString() {
+        return "CompanyIntroduceBean{" +
+                "zhuying='" + zhuying + '\'' +
+                ", contact='" + contact + '\'' +
+                ", phone='" + phone + '\'' +
+                ", introduce='" + introduce + '\'' +
+                ", address='" + address + '\'' +
+                ", lat='" + lat + '\'' +
+                ", Lng='" + Lng + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -98,9 +128,7 @@ public class CompanyIntroduceBean implements Parcelable {
         dest.writeString(this.lat);
         dest.writeString(this.Lng);
         dest.writeString(this.companyName);
-    }
-
-    public CompanyIntroduceBean() {
+        dest.writeString(this.description);
     }
 
     protected CompanyIntroduceBean(Parcel in) {
@@ -112,9 +140,10 @@ public class CompanyIntroduceBean implements Parcelable {
         this.lat = in.readString();
         this.Lng = in.readString();
         this.companyName = in.readString();
+        this.description = in.readString();
     }
 
-    public static final Parcelable.Creator<CompanyIntroduceBean> CREATOR = new Parcelable.Creator<CompanyIntroduceBean>() {
+    public static final Creator<CompanyIntroduceBean> CREATOR = new Creator<CompanyIntroduceBean>() {
         @Override
         public CompanyIntroduceBean createFromParcel(Parcel source) {
             return new CompanyIntroduceBean(source);
@@ -125,18 +154,4 @@ public class CompanyIntroduceBean implements Parcelable {
             return new CompanyIntroduceBean[size];
         }
     };
-
-    @Override
-    public String toString() {
-        return "CompanyIntroduceBean{" +
-                "zhuying='" + zhuying + '\'' +
-                ", contact='" + contact + '\'' +
-                ", phone='" + phone + '\'' +
-                ", introduce='" + introduce + '\'' +
-                ", address='" + address + '\'' +
-                ", lat='" + lat + '\'' +
-                ", Lng='" + Lng + '\'' +
-                ", companyName='" + companyName + '\'' +
-                '}';
-    }
 }
